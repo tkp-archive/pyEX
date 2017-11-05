@@ -13,7 +13,7 @@ setup(
     description='Rest API to IEX',
     long_description=long_description,
     url='https://github.com/timkpaine/pyEX',
-    download_url='https://github.com/timkpaine/pyEX/archive/v0.0.4.tar.gz',
+    download_url='https://github.com/timkpaine/pyEX/archive/v0.0.1.tar.gz',
     author='Tim Paine',
     author_email='timothy.k.paine@gmail.com',
     license='LGPL',
