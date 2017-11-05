@@ -1,5 +1,12 @@
 # pyEX
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
+[![Version](https://img.shields.io/badge/version-0.0.1-lightgrey.svg)](https://img.shields.io/badge/version-0.0.1-lightgrey.svg)
+[![Build Status](https://travis-ci.org/timkpaine/pyEX.svg?branch=master)](https://travis-ci.org/timkpaine/pyEX)
+[![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/master/graph/badge.svg)](https://codecov.io/gh/timkpaine/pyEX)
+[![Waffle.io](https://badge.waffle.io/timkpaine/pyEX.png?label=ready&title=Ready)](https://waffle.io/timkpaine/pyEX?utm_source=badge)
+[![BCH compliance](https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master)](https://bettercodehub.com/)
+[![Beerpay](https://beerpay.io/timkpaine/pyEX/badge.svg?style=flat)](https://beerpay.io/timkpaine/pyEX)
+
 
 ### Attribution
 If you redistribute our API data:
