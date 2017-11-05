@@ -6,7 +6,7 @@ from io import BytesIO
 
 
 _URL_PREFIX = 'https://api.iextrading.com/1.0/'
-_TIMEFRAME_CHART = ['', '5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
+_TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 
@@ -148,12 +148,16 @@ def marketNewsDF(count=10):
     return pd.DataFrame(marketNews(count))
 
 
-def chart(symbol, timeframe=''):
+def chart(symbol, timeframe='1m'):
     if timeframe not in _TIMEFRAME_CHART:
         raise Exception('Range must be in %s' % str(_TIMEFRAME_CHART))
     if timeframe:
         return _getJson('stock/' + symbol + '/chart' + '/' + timeframe)
     return _getJson('stock/' + symbol + '/chart')
+
+
+def chartDF(symbol, timeframe='1m'):
+    return pd.DataFrame(chart(symbol, timeframe))
 
 
 def logo(symbol):
