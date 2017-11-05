@@ -6,6 +6,8 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
 [![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/master/graph/badge.svg)](https://codecov.io/gh/timkpaine/pyEX)
 [![Waffle.io](https://badge.waffle.io/timkpaine/pyEX.png?label=ready&title=Ready)](https://waffle.io/timkpaine/pyEX?utm_source=badge)
 [![BCH compliance](https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master)](https://bettercodehub.com/)
+[![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/pyEX.svg)]()
 [![Beerpay](https://beerpay.io/timkpaine/pyEX/badge.svg?style=flat)](https://beerpay.io/timkpaine/pyEX)
 
 
