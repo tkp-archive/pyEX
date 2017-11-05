@@ -1,2 +1,4 @@
+IPython
+pillow
 pandas
 
