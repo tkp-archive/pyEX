@@ -202,6 +202,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             spreadDF('test')
 
     def test_volumeByVenueDF(self):
@@ -209,6 +210,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             volumeByVenueDF('test')
 
     def test_yesterdayDF(self):
@@ -223,6 +225,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             marketYesterdayDF()
 
     def test_statsDF(self):
@@ -237,6 +240,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             dividendsDF('test')
 
     def test_newsDF(self):
@@ -244,6 +248,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             newsDF('test')
 
     def test_marketNewsDF(self):
@@ -251,6 +256,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             marketNewsDF()
 
     def test_listDF(self):
@@ -258,7 +264,8 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            listDF('test')
+            mock.return_value.json = MagicMock(return_value=[])
+            listDF()
 
     def test_logoPNG(self):
         from pyEX import logoPNG
