@@ -221,3 +221,7 @@ class TestAPI:
         daily('201505')
         daily(last='5')
         daily(datetime.today())
+
+    def test_markets(self):
+        from pyEX import markets
+        markets()
