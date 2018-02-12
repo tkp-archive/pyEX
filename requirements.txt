@@ -1,4 +1,4 @@
 IPython
 pillow
 pandas
-
+websocket-client
