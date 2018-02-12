@@ -99,11 +99,11 @@ class TestAll:
             marketOhlc()
 
     def test_stats(self):
-        from pyEX import stats
+        from pyEX import stockStats
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            stats('test')
+            stockStats('test')
 
     def test_financials(self):
         from pyEX import financials
@@ -228,11 +228,11 @@ class TestAll:
             marketYesterdayDF()
 
     def test_statsDF(self):
-        from pyEX import statsDF
+        from pyEX import stockStatsDF
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            statsDF('test')
+            stockStatsDF('test')
 
     def test_dividendsDF(self):
         from pyEX import dividendsDF

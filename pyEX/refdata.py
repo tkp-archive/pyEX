@@ -1,8 +1,3 @@
-import requests
-import pandas as pd
-from IPython.display import Image as ImageI
-from PIL import Image as ImageP
-from io import BytesIO
 from .common import _URL_PREFIX, _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df
 
 

@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _URL_PREFIX, _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df
 
 
 def book(symbol):
@@ -81,13 +81,13 @@ def shortInterest():
     raise NotImplementedError()
 
 
-def stats(symbol):
+def stockStats(symbol):
     '''https://iextrading.com/developer/docs/#key-stats'''
     return _getJson('stock/' + symbol + '/stats')
 
 
-def statsDF(symbol):
-    return _df(stats(symbol))
+def stockStatsDF(symbol):
+    return _df(stockStats(symbol))
 
 
 def list(option='mostactive'):
