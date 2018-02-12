@@ -19,3 +19,14 @@ def _getJson(url):
 def _df(resp):
     df = {k: [v] for k, v in resp.items()}
     return pd.DataFrame(df)
+
+
+def _strToList(st):
+    if isinstance(st, str):
+        return [st]
+    return st
+
+
+def _raiseIfNotStr(s):
+    if s is not None and not isinstance(s, str):
+        raise Exception('Cannot use type %s' % str(type(s)))

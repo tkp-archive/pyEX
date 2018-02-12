@@ -225,3 +225,59 @@ class TestAPI:
     def test_markets(self):
         from pyEX import markets
         markets()
+
+    def test_tops(self):
+        from pyEX import tops
+        tops(C)
+        tops([C])
+
+    def test_last(self):
+        from pyEX import last
+        last(C)
+
+    def test_hist(self):
+        from datetime import datetime
+        from pyEX import hist
+        hist()
+        hist('201505')
+        hist(datetime.today())
+
+    def test_deep(self):
+        from pyEX import deep
+        deep(C)
+
+    def test_book2(self):
+        from pyEX import topsBook
+        topsBook(C)
+
+    def test_trades(self):
+        from pyEX import trades
+        trades(C)
+
+    def test_systemEvent():
+        from pyEX import systemEvent
+        systemEvent()
+
+    def test_tradingStatus(self):
+        from pyEX import tradingStatus
+        tradingStatus(C)
+
+    def test_opHaltStatus(self):
+        from pyEX import opHaltStatus
+        opHaltStatus(C)
+
+    def test_ssrStatus(self):
+        from pyEX import ssrStatus
+        ssrStatus(C)
+
+    def test_securityEvent(self):
+        from pyEX import securityEvent
+        securityEvent(C)
+
+    def test_tradeBreak(self):
+        from pyEX import tradeBreak
+        tradeBreak(C)
+
+    def test_auction(self):
+        from pyEX import auction
+        auction(C)
