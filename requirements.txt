@@ -1,5 +1,4 @@
 IPython
 pillow
 pandas
-socketIO-client-2
-websocket-client
+socketIO-client-nexus
