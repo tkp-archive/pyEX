@@ -97,26 +97,26 @@ def opHaltStatusWS(symbols=None, on_data=None):
 def ssrStatusWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#short-sale-price-test-status'''
     symbols = _strToList(symbols)
-    sendinit = {'symbols': symbols, 'channels': ['ssr']}
+    sendinit = ({'symbols': symbols, 'channels': ['ssr']},)
     return _stream(_wsURL('/deep'), sendinit, on_data)
 
 
 def securityEventWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#security-event'''
     symbols = _strToList(symbols)
-    sendinit = {'symbols': symbols, 'channels': ['securityevent']}
+    sendinit = ({'symbols': symbols, 'channels': ['securityevent']},)
     return _stream(_wsURL('/deep'), sendinit, on_data)
 
 
 def tradeBreakWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#trade-break'''
     symbols = _strToList(symbols)
-    sendinit = {'symbols': symbols, 'channels': ['tradebreaks']}
+    sendinit = ({'symbols': symbols, 'channels': ['tradebreaks']},)
     return _stream(_wsURL('/deep'), sendinit, on_data)
 
 
 def auctionWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#auction'''
     symbols = _strToList(symbols)
-    sendinit = {'symbols': symbols, 'channels': ['auction']}
+    sendinit = ({'symbols': symbols, 'channels': ['auction']},)
     return _stream(_wsURL('/deep'), sendinit, on_data)

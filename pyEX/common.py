@@ -71,10 +71,9 @@ class WSClient(object):
         self._Namespace = Namespace
 
     def run(self):
-        self.socketIO = SocketIO(_SIO_URL_PREFIX, _SIO_PORT, verify=False)
+        self.socketIO = SocketIO(_SIO_URL_PREFIX, _SIO_PORT)
         self.namespace = self.socketIO.define(self._Namespace, self.addr)
         if self.sendinit:
-            print(self.sendinit)
             self.namespace.emit(*self.sendinit)
         self.socketIO.wait()
 
