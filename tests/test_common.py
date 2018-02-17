@@ -41,12 +41,12 @@ class TestAll:
         _strToList('test')
 
     def test_raiseIfNotStr(self):
-        from pyEX.common import _raiseIfNotStr
+        from pyEX.common import _raiseIfNotStr, PyEXception
         _raiseIfNotStr('test')
         _raiseIfNotStr(None)
         try:
             _raiseIfNotStr(5)
-        except:
+        except PyEXception:
             pass
 
     def test_wsclient(self):
@@ -61,7 +61,7 @@ class TestAll:
         n.on_disconnect(None)
         n.on_message(None)
 
-        with patch('pyEX.common.SocketIO') as m:
+        with patch('pyEX.common.SocketIO'):
             ws.run()
 
     def test_stream(self):
