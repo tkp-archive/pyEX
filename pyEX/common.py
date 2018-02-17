@@ -1,7 +1,5 @@
 import requests
 import pandas as pd
-import websocket
-import http.client as httplib
 from socketIO_client_nexus import SocketIO, BaseNamespace
 
 
@@ -18,7 +16,7 @@ def _getJson(url):
     resp = requests.get(url)
     if resp.status_code == 200:
         return resp.json()
-    raise Exception('Response %d - ' % resp.status_code, resp.text)
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
 def _wsURL(url):
@@ -38,7 +36,7 @@ def _strToList(st):
 
 def _raiseIfNotStr(s):
     if s is not None and not isinstance(s, str):
-        raise Exception('Cannot use type %s' % str(type(s)))
+        raise PyEXception('Cannot use type %s' % str(type(s)))
 
 
 class WSClient(object):
@@ -81,3 +79,7 @@ class WSClient(object):
 def _stream(url, sendinit=None, on_data=print):
     cl = WSClient(url, sendinit=sendinit, on_data=on_data)
     return cl
+
+
+class PyEXception(Exception):
+    pass

@@ -28,12 +28,28 @@ class TestAll:
             mock.return_value.status_code = 200
             symbols()
 
+    def test_symbolsDF(self):
+        from pyEX.refdata import symbolsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            symbolsDF()
+
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             corporateActions()
+
+    def test_corporateActionsDF(self):
+        from pyEX.refdata import corporateActionsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            corporateActionsDF()
 
     def test_dividends(self):
         from pyEX.refdata import dividends
@@ -42,6 +58,14 @@ class TestAll:
             mock.return_value.status_code = 200
             dividends()
 
+    def test_dividendsDF(self):
+        from pyEX.refdata import dividendsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            dividendsDF()
+
     def test_nextDayExtDate(self):
         from pyEX.refdata import nextDayExtDate
         with patch('requests.get') as mock:
@@ -49,9 +73,25 @@ class TestAll:
             mock.return_value.status_code = 200
             nextDayExtDate()
 
+    def test_nextDayExtDateDF(self):
+        from pyEX.refdata import nextDayExtDateDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            nextDayExtDateDF()
+
     def test_directory(self):
         from pyEX.refdata import directory
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             directory()
+
+    def test_directoryDF(self):
+        from pyEX.refdata import directoryDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            directoryDF()

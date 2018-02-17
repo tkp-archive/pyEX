@@ -9,4 +9,4 @@ def markets():
 
 def marketsDF():
     '''https://iextrading.com/developer/docs/#intraday'''
-    return pd.DataFrame(_getJson('market'))
+    return pd.DataFrame(markets())

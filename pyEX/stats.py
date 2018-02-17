@@ -1,5 +1,6 @@
+import pandas as pd
 from datetime import datetime
-from .common import _getJson
+from .common import _getJson, PyEXception
 
 
 def stats():
@@ -7,14 +8,29 @@ def stats():
     return _getJson('stats/intraday')
 
 
+def statsDF():
+    '''https://iextrading.com/developer/docs/#intraday'''
+    return pd.DataFrame(stats())
+
+
 def recent():
     '''https://iextrading.com/developer/docs/#recent'''
     return _getJson('stats/recent')
 
 
+def recentDF():
+    '''https://iextrading.com/developer/docs/#recent'''
+    return pd.DataFrame(recent())
+
+
 def records():
     '''https://iextrading.com/developer/docs/#records'''
     return _getJson('stats/records')
+
+
+def recordsDF():
+    '''https://iextrading.com/developer/docs/#records'''
+    return pd.DataFrame(records())
 
 
 def summary(date=None):
@@ -25,8 +41,13 @@ def summary(date=None):
         elif isinstance(date, datetime):
             return _getJson('stats/historical?date=' + date.strftime('%Y%m'))
         else:
-            raise Exception("Can't handle type : %s" % str(type(date)))
+            raise PyEXception("Can't handle type : %s" % str(type(date)))
     return _getJson('stats/historical')
+
+
+def summaryDF(date=None):
+    '''https://iextrading.com/developer/docs/#historical-summary'''
+    return pd.DataFrame(summary(date))
 
 
 def daily(date=None, last=''):
@@ -38,7 +59,13 @@ def daily(date=None, last=''):
         elif isinstance(date, datetime):
             return _getJson('stats/historical/daily?date=' + date.strftime('%Y%m%d'))
         else:
-            raise Exception("Can't handle type : %s" % str(type(date)))
+            raise PyEXception("Can't handle type : %s" % str(type(date)))
     elif last:
         return _getJson('stats/historical/daily?last=' + last)
     return _getJson('stats/historical/daily')
+
+
+def dailyDF(date=None, last=''):
+    '''https://iextrading.com/developer/docs/#historical-daily'''
+    '''https://iextrading.com/developer/docs/#historical-summary'''
+    return pd.DataFrame(daily(date, last))
