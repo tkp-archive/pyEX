@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..common import _getJson, _strToList, _raiseIfNotStr
+from ..common import _getJson, _strToList, _raiseIfNotStr, _strOrDate
 
 
 def tops(symbols=None):
@@ -22,12 +22,9 @@ def hist(date=None):
     '''https://iextrading.com/developer/docs/#hist'''
     if date is None:
         return _getJson('hist')
-    elif isinstance(date, datetime):
-        return _getJson('hist?date=' + date.strftime('%Y%m%d'))
-    elif isinstance(date, str):
-        return _getJson('hist?date=' + date)
     else:
-        raise Exception("Can't handle type : %s" % str(type(date)))
+        date = _strOrDate(date)
+        return _getJson('hist?date=' + date)
 
 
 def deep(symbol=None):

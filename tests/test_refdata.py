@@ -42,6 +42,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             corporateActions()
+            corporateActions('20170202')
 
     def test_corporateActionsDF(self):
         from pyEX.refdata import corporateActionsDF
@@ -57,6 +58,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             dividends()
+            dividends('20170202')
 
     def test_dividendsDF(self):
         from pyEX.refdata import dividendsDF
@@ -72,6 +74,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             nextDayExtDate()
+            nextDayExtDate('20170202')
 
     def test_nextDayExtDateDF(self):
         from pyEX.refdata import nextDayExtDateDF
@@ -87,6 +90,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             directory()
+            directory('20170202')
 
     def test_directoryDF(self):
         from pyEX.refdata import directoryDF

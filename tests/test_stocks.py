@@ -414,21 +414,6 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             thresholdDF('test')
 
-    def test_marketThreshold(self):
-        from pyEX import marketThreshold
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            marketThreshold()
-
-    def test_marketThresholdDF(self):
-        from pyEX import marketThresholdDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            marketThresholdDF()
-
     def test_shortInterest(self):
         from pyEX import shortInterest
         with patch('requests.get') as mock:

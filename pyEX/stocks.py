@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df, _raiseIfNotStr, PyEXception
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df, _raiseIfNotStr, PyEXception, _strOrDate
 
 
 def book(symbol):
@@ -17,7 +17,7 @@ def bookDF(symbol):
     return pd.DataFrame(book(symbol))
 
 
-def chart(symbol, timeframe='1m'):
+def chart(symbol, timeframe='1m', date=None):
     '''
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
@@ -27,6 +27,9 @@ def chart(symbol, timeframe='1m'):
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
         return _getJson('stock/' + symbol + '/chart' + '/' + timeframe)
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/' + symbol + '/chart' + '/date/' + date)
     return _getJson('stock/' + symbol + '/chart')
 
 
@@ -106,46 +109,44 @@ def financialsDF(symbol):
     return pd.DataFrame(financials(symbol))
 
 
-def threshold(symbol):
+def threshold(date=None):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/financials')
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/market/threshold-securities/' + date)
+    return _getJson('stock/market/threshold-securities')
 
 
-def thresholdDF(symbol):
+def thresholdDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    return pd.DataFrame(threshold(symbol))
+    return pd.DataFrame(threshold(date))
 
 
-def marketThreshold():
-    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    return _getJson('stock/market/financials')
-
-
-def marketThresholdDF():
-    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    return pd.DataFrame(marketThreshold())
-
-
-def shortInterest(symbol):
+def shortInterest(symbol, date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/financials')
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/' + symbol + '/short-interest/' + date)
+    return _getJson('stock/' + symbol + '/short-interest')
 
 
-def shortInterestDF(symbol):
+def shortInterestDF(symbol, date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return pd.DataFrame(shortInterest(symbol))
+    return pd.DataFrame(shortInterest(symbol, date))
 
 
-def marketShortInterest():
+def marketShortInterest(date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return _getJson('stock/market/financials')
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/market/short-interest/' + date)
+    return _getJson('stock/market/short-interest')
 
 
-def marketShortInterestDF():
+def marketShortInterestDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return pd.DataFrame(marketShortInterest())
+    return pd.DataFrame(marketShortInterest(date))
 
 
 def stockStats(symbol):

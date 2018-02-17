@@ -1,5 +1,5 @@
 import pandas as pd
-from .common import _getJson
+from .common import _getJson, _strOrDate
 
 
 def symbols():
@@ -12,41 +12,53 @@ def symbolsDF():
     return pd.DataFrame(symbols())
 
 
-def corporateActions():
+def corporateActions(date=None):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('ref-data/daily-list/corporate-actions/' + date)
     return _getJson('ref-data/daily-list/corporate-actions')
 
 
-def corporateActionsDF():
+def corporateActionsDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
-    return pd.DataFrame(corporateActions())
+    return pd.DataFrame(corporateActions(date))
 
 
-def dividends():
+def dividends(date=None):
     '''https://iextrading.com/developer/docs/#iex-dividends'''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('ref-data/daily-list/dividends/' + date)
     return _getJson('ref-data/daily-list/dividends')
 
 
-def dividendsDF():
+def dividendsDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-dividends'''
-    return pd.DataFrame(dividends())
+    return pd.DataFrame(dividends(date))
 
 
-def nextDayExtDate():
+def nextDayExtDate(date=None):
     '''https://iextrading.com/developer/docs/#iex-next-day-ex-date'''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('ref-data/daily-list/next-day-ex-date/' + date)
     return _getJson('ref-data/daily-list/next-day-ex-date')
 
 
-def nextDayExtDateDF():
+def nextDayExtDateDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-next-day-ex-date'''
-    return pd.DataFrame(nextDayExtDate())
+    return pd.DataFrame(nextDayExtDate(date))
 
 
-def directory():
+def directory(date=None):
     '''https://iextrading.com/developer/docs/#iex-listed-symbol-directory'''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('ref-data/daily-list/symbol-directory/' + date)
     return _getJson('ref-data/daily-list/symbol-directory')
 
 
-def directoryDF():
+def directoryDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-listed-symbol-directory'''
-    return pd.DataFrame(directory())
+    return pd.DataFrame(directory(date))

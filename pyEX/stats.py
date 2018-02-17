@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from .common import _getJson, PyEXception
+from .common import _getJson, PyEXception, _strOrDate
 
 
 def stats():
@@ -54,12 +54,8 @@ def daily(date=None, last=''):
     '''https://iextrading.com/developer/docs/#historical-daily'''
     '''https://iextrading.com/developer/docs/#historical-summary'''
     if date:
-        if isinstance(date, str):
-            return _getJson('stats/historical/daily?date=' + date)
-        elif isinstance(date, datetime):
-            return _getJson('stats/historical/daily?date=' + date.strftime('%Y%m%d'))
-        else:
-            raise PyEXception("Can't handle type : %s" % str(type(date)))
+        date = _strOrDate(date)
+        return _getJson('stats/historical/daily?date=' + date)
     elif last:
         return _getJson('stats/historical/daily?last=' + last)
     return _getJson('stats/historical/daily')
