@@ -51,7 +51,18 @@ class TestAll:
 
     def test_wsclient(self):
         from pyEX.common import WSClient
-        WSClient('ws://test')
+        ws = WSClient('test')
+
+        assert ws.addr == 'test'
+        assert ws.sendinit is None
+
+        n = ws._Namespace(MagicMock(), MagicMock())
+        n.on_connect(None)
+        n.on_disconnect(None)
+        n.on_message(None)
+
+        with patch('pyEX.common.SocketIO') as m:
+            ws.run()
 
     def test_stream(self):
         from pyEX.common import _stream
