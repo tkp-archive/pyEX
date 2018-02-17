@@ -23,9 +23,9 @@ def chart(symbol, timeframe='1m'):
     https://iextrading.com/developer/docs/#time-series
     '''
     _raiseIfNotStr(symbol)
-    if timeframe not in _TIMEFRAME_CHART:
-        raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
     if timeframe:
+        if timeframe not in _TIMEFRAME_CHART:
+            raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
         return _getJson('stock/' + symbol + '/chart' + '/' + timeframe)
     return _getJson('stock/' + symbol + '/chart')
 
@@ -298,3 +298,4 @@ def volumeByVenue(symbol):
 def volumeByVenueDF(symbol):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
     return pd.DataFrame(volumeByVenue(symbol))
+    

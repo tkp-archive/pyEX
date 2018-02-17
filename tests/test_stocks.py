@@ -320,10 +320,16 @@ class TestAll:
 
     def test_chart(self):
         from pyEX import chart
+        from pyEX.common import PyEXception
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             chart('test')
+            try:
+                chart('test', '5')
+                assert False
+            except PyEXception:
+                pass
 
     def test_chartDF(self):
         from pyEX import chartDF
