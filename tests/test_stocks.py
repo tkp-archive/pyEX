@@ -344,6 +344,7 @@ class TestAll:
             except PyEXception:
                 pass
             chart('test', None)
+            chart('test', None, '20150707')
 
     def test_chartDF(self):
         from pyEX import chartDF
@@ -404,7 +405,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            threshold('test')
+            threshold('20170707')
 
     def test_thresholdDF(self):
         from pyEX import thresholdDF
@@ -420,6 +421,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             shortInterest('test')
+            shortInterest('test', '20170707')
 
     def test_shortInterestDF(self):
         from pyEX import shortInterestDF
@@ -435,6 +437,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             marketShortInterest()
+            marketShortInterest('20170707')
 
     def test_marketShortInterestDF(self):
         from pyEX import marketShortInterestDF
