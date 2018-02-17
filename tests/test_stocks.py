@@ -405,6 +405,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            threshold()
             threshold('20170707')
 
     def test_thresholdDF(self):
