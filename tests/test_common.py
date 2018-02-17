@@ -47,6 +47,17 @@ class TestAll:
         from pyEX.common import _strToList
         _strToList('test')
 
+    def test_strOrDate(self):
+        from pyEX.common import _strOrDate, PyEXception
+        from datetime import datetime
+        _strOrDate('test')
+        _strOrDate(datetime.now())
+        try:
+            _strOrDate(5)
+            assert False
+        except PyEXception:
+            pass
+
     def test_raiseIfNotStr(self):
         from pyEX.common import _raiseIfNotStr, PyEXception
         _raiseIfNotStr('test')

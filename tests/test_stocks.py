@@ -259,10 +259,17 @@ class TestAll:
 
     def test_dividends(self):
         from pyEX import dividends
+        from pyEX.common import PyEXception
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             dividends('test')
+
+            try:
+                dividends('test', 'test')
+                assert False
+            except PyEXception:
+                pass
 
     def test_dividendsDF(self):
         from pyEX import dividendsDF
@@ -274,10 +281,16 @@ class TestAll:
 
     def test_splits(self):
         from pyEX import splits
+        from pyEX.common import PyEXception
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             splits('test')
+            try:
+                splits('test', 'test')
+                assert False
+            except PyEXception:
+                pass
 
     def test_splitsDF(self):
         from pyEX import splitsDF
@@ -348,11 +361,18 @@ class TestAll:
 
     def test_list(self):
         from pyEX import list
+        from pyEX.common import PyEXception
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.json = MagicMock(return_value=[])
             mock.return_value.status_code = 200
             list()
+
+            try:
+                list('test')
+                assert False
+            except PyEXception:
+                pass
 
     def test_listDF(self):
         from pyEX import listDF
@@ -377,3 +397,63 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.text = 'test'
             logoNotebook('test')
+
+    def test_threshold(self):
+        from pyEX import threshold
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            threshold('test')
+
+    def test_thresholdDF(self):
+        from pyEX import thresholdDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            thresholdDF('test')
+
+    def test_marketThreshold(self):
+        from pyEX import marketThreshold
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            marketThreshold()
+
+    def test_marketThresholdDF(self):
+        from pyEX import marketThresholdDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            marketThresholdDF()
+
+    def test_shortInterest(self):
+        from pyEX import shortInterest
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            shortInterest('test')
+
+    def test_shortInterestDF(self):
+        from pyEX import shortInterestDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            shortInterestDF('test')
+
+    def test_marketShortInterest(self):
+        from pyEX import marketShortInterest
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            marketShortInterest()
+
+    def test_marketShortInterestDF(self):
+        from pyEX import marketShortInterestDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            marketShortInterestDF()

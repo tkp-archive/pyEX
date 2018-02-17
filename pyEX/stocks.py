@@ -106,24 +106,46 @@ def financialsDF(symbol):
     return pd.DataFrame(financials(symbol))
 
 
-def threshhold():
+def threshold(symbol):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    raise NotImplementedError()
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/financials')
 
 
-def threshholdDF():
+def thresholdDF(symbol):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    return pd.DataFrame(threshhold())
+    return pd.DataFrame(threshold(symbol))
 
 
-def shortInterest():
+def marketThreshold():
+    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
+    return _getJson('stock/market/financials')
+
+
+def marketThresholdDF():
+    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
+    return pd.DataFrame(marketThreshold())
+
+
+def shortInterest(symbol):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    raise NotImplementedError()
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/financials')
 
 
-def shortInterestDF():
+def shortInterestDF(symbol):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return pd.DataFrame(shortInterest())
+    return pd.DataFrame(shortInterest(symbol))
+
+
+def marketShortInterest():
+    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
+    return _getJson('stock/market/financials')
+
+
+def marketShortInterestDF():
+    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
+    return pd.DataFrame(marketShortInterest())
 
 
 def stockStats(symbol):
@@ -298,4 +320,3 @@ def volumeByVenue(symbol):
 def volumeByVenueDF(symbol):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
     return pd.DataFrame(volumeByVenue(symbol))
-    

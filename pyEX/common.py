@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
 
 
@@ -32,6 +33,14 @@ def _strToList(st):
     if isinstance(st, str):
         return [st]
     return st
+
+
+def _strOrDate(st):
+    if isinstance(st, str):
+        return st
+    elif isinstance(st, datetime):
+        return st.strftime('%Y%m%d')
+    raise PyEXception('Not a date: %s', str(st))
 
 
 def _raiseIfNotStr(s):
