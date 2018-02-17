@@ -22,11 +22,18 @@ class TestAll:
         # teardown_class() after any methods in this class
 
     def test_getJson(self):
-        from pyEX.common import _getJson
+        from pyEX.common import _getJson, PyEXception
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             _getJson('')
+
+            mock.return_value.status_code = 404
+            try:
+                _getJson('')
+                assert False
+            except PyEXception:
+                pass
 
     def test_wsURL(self):
         from pyEX.common import _wsURL
@@ -52,6 +59,7 @@ class TestAll:
     def test_wsclient(self):
         from pyEX.common import WSClient
         ws = WSClient('test')
+        ws = WSClient('test', None, print, print, print)
 
         assert ws.addr == 'test'
         assert ws.sendinit is None
@@ -62,6 +70,7 @@ class TestAll:
         n.on_message(None)
 
         with patch('pyEX.common.SocketIO'):
+            ws.sendinit = 'test'
             ws.run()
 
     def test_stream(self):
