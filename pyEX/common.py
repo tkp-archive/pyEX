@@ -60,9 +60,6 @@ class WSClient(object):
 
         on_data = on_data or print
 
-        def on_message(ws, message):
-            on_data(message)
-
         class Namespace(BaseNamespace):
             def on_connect(self, *data):
                 if on_open:

@@ -343,6 +343,7 @@ class TestAll:
                 assert False
             except PyEXception:
                 pass
+            chart('test', None)
 
     def test_chartDF(self):
         from pyEX import chartDF
