@@ -14,7 +14,7 @@ def book(symbol):
 
 def bookDF(symbol):
     '''https://iextrading.com/developer/docs/#book'''
-    return pd.DataFrame(book(symbol))
+    return _df(book(symbol))
 
 
 def chart(symbol, timeframe='1m', date=None):
