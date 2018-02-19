@@ -239,7 +239,7 @@ class TestAPI:
         from datetime import datetime
         from pyEX import hist
         hist()
-        hist('201505')
+        hist('20170515')
         hist(datetime.today())
 
     def test_deep(self):
@@ -254,7 +254,7 @@ class TestAPI:
         from pyEX import trades
         trades(C)
 
-    def test_systemEvent():
+    def test_systemEvent(self):
         from pyEX import systemEvent
         systemEvent()
 
