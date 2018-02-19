@@ -150,6 +150,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
             bookDF('test')
 
     def test_ohlc(self):

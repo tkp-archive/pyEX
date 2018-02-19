@@ -14,7 +14,7 @@ def book(symbol):
 
 def bookDF(symbol):
     '''https://iextrading.com/developer/docs/#book'''
-    return _df(book(symbol))
+    return pd.io.json.json_normalize(book(symbol))
 
 
 def chart(symbol, timeframe='1m', date=None):
