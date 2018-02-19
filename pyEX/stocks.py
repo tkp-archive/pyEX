@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _df, _raiseIfNotStr, PyEXception, _strOrDate
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate
 
 
 def book(symbol):
@@ -49,7 +49,7 @@ def company(symbol):
 
 def companyDF(symbol):
     '''https://iextrading.com/developer/docs/#company'''
-    return _df(company(symbol))
+    return pd.io.json.json_normalize(company(symbol))
 
 
 def delayedQuote(symbol):
@@ -157,7 +157,7 @@ def stockStats(symbol):
 
 def stockStatsDF(symbol):
     '''https://iextrading.com/developer/docs/#key-stats'''
-    return _df(stockStats(symbol))
+    return pd.io.json.json_normalize(stockStats(symbol))
 
 
 def list(option='mostactive'):
@@ -253,7 +253,7 @@ def yesterday(symbol):
 
 def yesterdayDF(symbol):
     '''https://iextrading.com/developer/docs/#previous'''
-    return _df(yesterday(symbol))
+    return pd.io.json.json_normalize(yesterday(symbol))
 
 
 def marketYesterday():
@@ -285,7 +285,7 @@ def quote(symbol):
 
 def quoteDF(symbol):
     '''https://iextrading.com/developer/docs/#quote'''
-    return _df(quote(symbol))
+    return pd.io.json.json_normalize(quote(symbol))
 
 
 def relevant(symbol):

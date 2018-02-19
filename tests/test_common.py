@@ -39,10 +39,6 @@ class TestAll:
         from pyEX.common import _wsURL
         _wsURL('test')
 
-    def test_df(self):
-        from pyEX.common import _df
-        _df({'A': 'B'})
-
     def test_strToList(self):
         from pyEX.common import _strToList
         _strToList('test')

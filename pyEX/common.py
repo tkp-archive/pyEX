@@ -24,11 +24,6 @@ def _wsURL(url):
         return '/1.0/' + url
 
 
-def _df(resp):
-    df = {k: [v] for k, v in resp.items()}
-    return pd.DataFrame(df)
-
-
 def _strToList(st):
     if isinstance(st, str):
         return [st]

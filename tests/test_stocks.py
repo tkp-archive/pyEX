@@ -33,6 +33,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
             companyDF('test')
 
     def test_quote(self):
@@ -47,6 +48,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
             quoteDF('test')
 
     def test_price(self):
@@ -121,6 +123,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
             yesterdayDF('test')
 
     def test_marketYesterday(self):
@@ -195,6 +198,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
             stockStatsDF('test')
 
     def test_financials(self):
@@ -312,7 +316,6 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
             mock.return_value.json = MagicMock(return_value=[])
             newsDF('test')
 
