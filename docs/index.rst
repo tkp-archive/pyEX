@@ -8,7 +8,7 @@ pyEX
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
 
 
-|build-status| |issues| |waffle| |codecov| |gitter| |bch| |pypiv| |pypil| |docs|
+|build-status| |issues| |waffle| |codecov| |bch| |pypiv| |pypil| |docs|
 
 
 .. toctree::
@@ -38,11 +38,6 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
     :alt: Codecov
     :scale: 100%
     :target: https://codecov.io/gh/timkpaine/pyEX
-
-.. |gitter| image:: https://img.shields.io/gitter/room/nwjs/nw.js.svg
-    :alt: Gitter
-    :scale: 100%
-    :target: https://gitter.im/knowledge_lab/Lobby
 
 .. |bch| image:: https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master
     :alt: BCH
