@@ -7,7 +7,7 @@ From Pip
 
 .. code:: bash
 
-    pip install knowledgelab
+    pip install pyEX
 
 From Source
 ============
@@ -21,18 +21,3 @@ or
 .. code:: bash
 
     make install
-
-
-Jupyter Extensions
-==================
-To install the server extensions:
-
-.. code:: bash
-
-    jupyter serverextension enable --py knowledgelab
-
-To install the JupyterLab extensions:
-
-.. code:: bash
-
-    jupyter labextension install knowledgelab
