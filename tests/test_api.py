@@ -27,9 +27,17 @@ class TestAPI:
         from pyEX.refdata import symbols
         symbols()
 
+    def test_symbolsDF(self):
+        from pyEX.refdata import symbolsDF
+        symbolsDF()
+
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions
         corporateActions()
+
+    def test_corporateActionsDF(self):
+        from pyEX.refdata import corporateActionsDF
+        corporateActionsDF()
 
     def test_dividends(self):
         from pyEX.refdata import dividends
@@ -39,9 +47,17 @@ class TestAPI:
         from pyEX.refdata import nextDayExtDate
         nextDayExtDate()
 
+    def test_nextDayExtDateDF(self):
+        from pyEX.refdata import nextDayExtDateDF
+        nextDayExtDateDF()
+
     def test_directory(self):
         from pyEX.refdata import directory
         directory()
+
+    def test_directoryDF(self):
+        from pyEX.refdata import directoryDF
+        directoryDF()
 
     def test_company(self):
         from pyEX import company
@@ -55,6 +71,10 @@ class TestAPI:
         from pyEX import price
         price(C)
 
+    def test_priceDF(self):
+        from pyEX import priceDF
+        priceDF(C)
+
     def test_spread(self):
         from pyEX import spread
         spread(C)
@@ -67,6 +87,10 @@ class TestAPI:
         from pyEX import delayedQuote
         delayedQuote(C)
 
+    def test_delayedQuoteDF(self):
+        from pyEX import delayedQuoteDF
+        delayedQuoteDF(C)
+
     def test_yesterday(self):
         from pyEX import yesterday
         yesterday(C)
@@ -78,6 +102,10 @@ class TestAPI:
     def test_book(self):
         from pyEX import book
         book(C)
+
+    def test_bookDF(self):
+        from pyEX import bookDF
+        bookDF(C)
 
     def test_ohlc(self):
         from pyEX import ohlc
@@ -95,17 +123,33 @@ class TestAPI:
         from pyEX import financials
         financials(C)
 
+    def test_financialsDF(self):
+        from pyEX import financialsDF
+        financialsDF(C)
+
     def test_earnings(self):
         from pyEX import earnings
         earnings(C)
+    
+    def test_earningsDF(self):
+        from pyEX import earningsDF
+        earningsDF(C)
 
     def test_peers(self):
         from pyEX import peers
         peers(C)
 
+    def test_peersDF(self):
+        from pyEX import peersDF
+        peersDF(C)
+
     def test_relevant(self):
         from pyEX import relevant
         relevant(C)
+
+    def test_relevantDF(self):
+        from pyEX import relevantDF
+        relevantDF(C)
 
     def test_dividends2(self):
         from pyEX import dividends
@@ -114,6 +158,10 @@ class TestAPI:
     def test_splits(self):
         from pyEX import splits
         splits(C)
+
+    def test_splitsDF(self):
+        from pyEX import splitsDF
+        splitsDF(C)
 
     def test_news(self):
         from pyEX import news
@@ -126,6 +174,10 @@ class TestAPI:
     def test_chart(self):
         from pyEX import chart
         chart(C)
+
+    def test_chartDF(self):
+        from pyEX import chartDF
+        chartDF(C)
 
     def test_logo(symbol):
         from pyEX import logo
@@ -199,13 +251,25 @@ class TestAPI:
         from pyEX.stats import stats
         stats()
 
+    def test_statsDF(self):
+        from pyEX.stats import statsDF
+        statsDF()
+
     def test_recent(self):
         from pyEX.stats import recent
-        recent()
+        #recent()
+
+    def test_recentDF(self):
+        from pyEX.stats import recentDF
+        #recentDF()
 
     def test_records(self):
         from pyEX.stats import records
         records()
+
+    def test_recordsDF(self):
+        from pyEX.stats import recordsDF
+        recordsDF()
 
     def test_summary(self):
         from datetime import datetime
@@ -238,9 +302,10 @@ class TestAPI:
     def test_hist(self):
         from datetime import datetime
         from pyEX import hist
-        hist()
-        hist('20170515')
-        hist(datetime.today())
+        #FIXME
+        #hist()
+        #hist('20170515')
+        #hist(datetime.today())
 
     def test_deep(self):
         from pyEX import deep
@@ -281,3 +346,8 @@ class TestAPI:
     def test_auction(self):
         from pyEX import auction
         auction(C)
+
+    def test_auctionDF(self):
+        from pyEX import auctionDF
+        auctionDF(C)
+

@@ -60,7 +60,7 @@ def delayedQuote(symbol):
 
 def delayedQuoteDF(symbol):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
-    return pd.DataFrame(delayedQuote(symbol))
+    return pd.io.json.json_normalize(delayedQuote(symbol))
 
 
 def dividends(symbol, timeframe='ytd'):
@@ -274,7 +274,7 @@ def price(symbol):
 
 def priceDF(symbol):
     '''https://iextrading.com/developer/docs/#price'''
-    return pd.DataFrame(price(symbol))
+    return pd.io.json.json_normalize({'price': price(symbol)})
 
 
 def quote(symbol):
