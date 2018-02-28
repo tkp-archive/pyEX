@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import ujson
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
 
@@ -43,8 +44,17 @@ def _raiseIfNotStr(s):
         raise PyEXception('Cannot use type %s' % str(type(s)))
 
 
+def _tryJson(data, raw=True):
+    if raw:
+        return data
+    try:
+        return ujson.loads(data)
+    except ValueError:
+        return data
+
+
 class WSClient(object):
-    def __init__(self, addr, sendinit=None, on_data=None, on_open=None, on_close=None):
+    def __init__(self, addr, sendinit=None, on_data=None, on_open=None, on_close=None, raw=True):
         '''
            addr: path to sio
            sendinit: tuple to emit
@@ -58,14 +68,14 @@ class WSClient(object):
         class Namespace(BaseNamespace):
             def on_connect(self, *data):
                 if on_open:
-                    on_open(data)
+                    on_open(_tryJson(data, raw))
 
             def on_disconnect(self, *data):
                 if on_close:
-                    on_close(data)
+                    on_close(_tryJson(data, raw))
 
             def on_message(self, data):
-                on_data(data)
+                on_data(_tryJson(data, raw))
 
         self._Namespace = Namespace
 
