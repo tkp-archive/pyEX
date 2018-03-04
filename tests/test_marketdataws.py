@@ -44,6 +44,7 @@ class TestAll:
         with patch('pyEX.marketdata.ws._stream'):
             deepWS()
             deepWS('test')
+            deepWS('test', 'ssr')
             deepWS('test', DeepChannels.SSR)
             try:
                 deepWS('test', 'test')
