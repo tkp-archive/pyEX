@@ -21,6 +21,10 @@ class TestAll:
         pass
         # teardown_class() after any methods in this class
 
+    def test_channels(self):
+        from pyEX import DeepChannels
+        DeepChannels.options()
+
     def test_tops(self):
         from pyEX import topsWS
         with patch('pyEX.marketdata.ws._stream'):
@@ -35,10 +39,27 @@ class TestAll:
             lastWS('test')
 
     def test_deep(self):
-        from pyEX import deepWS
+        from pyEX import deepWS, PyEXception
+        from pyEX.marketdata.ws import DeepChannels
         with patch('pyEX.marketdata.ws._stream'):
             deepWS()
             deepWS('test')
+            deepWS('test', DeepChannels.SSR)
+            try:
+                deepWS('test', 'test')
+                assert False
+            except PyEXception:
+                pass
+            try:
+                deepWS('test', ['test'])
+                assert False
+            except PyEXception:
+                pass
+            try:
+                deepWS('test', [DeepChannels.SSR, 'test'])
+                assert False
+            except PyEXception:
+                pass
 
     def test_book(self):
         from pyEX import bookWS

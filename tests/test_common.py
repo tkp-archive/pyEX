@@ -35,6 +35,12 @@ class TestAll:
             except PyEXception:
                 pass
 
+    def test_tryJson(self):
+        from pyEX.common import _tryJson
+        assert _tryJson('test') == 'test'
+        assert _tryJson('{"test":"test"}', raw=False) == {'test': 'test'}
+        assert _tryJson('test', raw=False) == 'test'
+
     def test_wsURL(self):
         from pyEX.common import _wsURL
         _wsURL('test')
