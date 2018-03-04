@@ -295,53 +295,104 @@ class TestAPI:
         tops(C)
         tops([C])
 
+    def test_topsDF(self):
+        from pyEX import topsDF
+        topsDF(C)
+        topsDF([C])
+
     def test_last(self):
         from pyEX import last
         last(C)
 
+    def test_lastDF(self):
+        from pyEX import lastDF
+        lastDF(C)
+
     def test_hist(self):
         from datetime import datetime
         from pyEX import hist
-        #FIXME
-        #hist()
-        #hist('20170515')
-        #hist(datetime.today())
+        hist()
+        hist('20170515')
+        hist(datetime.today())
+
+    def test_histDF(self):
+        from datetime import datetime
+        from pyEX import histDF
+        histDF()
+        histDF('20170515')
+        histDF(datetime.today())
 
     def test_deep(self):
         from pyEX import deep
         deep(C)
 
+    def test_deepDF(self):
+        from pyEX import deepDF
+        deepDF(C)
+
     def test_book2(self):
         from pyEX import topsBook
         topsBook(C)
+
+    def test_book2DF(self):
+        from pyEX import topsBookDF
+        topsBookDF(C)
 
     def test_trades(self):
         from pyEX import trades
         trades(C)
 
+    def test_tradesDF(self):
+        from pyEX import tradesDF
+        tradesDF(C)
+
     def test_systemEvent(self):
         from pyEX import systemEvent
         systemEvent()
+
+    def test_systemEventDF(self):
+        from pyEX import systemEventDF
+        systemEventDF()
 
     def test_tradingStatus(self):
         from pyEX import tradingStatus
         tradingStatus(C)
 
+    def test_tradingStatusDF(self):
+        from pyEX import tradingStatusDF
+        tradingStatusDF(C)
+
     def test_opHaltStatus(self):
         from pyEX import opHaltStatus
         opHaltStatus(C)
+
+    def test_opHaltStatusDF(self):
+        from pyEX import opHaltStatusDF
+        opHaltStatusDF(C)
 
     def test_ssrStatus(self):
         from pyEX import ssrStatus
         ssrStatus(C)
 
+    def test_ssrStatusDF(self):
+        from pyEX import ssrStatusDF
+        ssrStatusDF(C)
+
     def test_securityEvent(self):
         from pyEX import securityEvent
         securityEvent(C)
 
+    def test_securityEventDF(self):
+        from pyEX import securityEventDF
+        securityEventDF(C)
+
     def test_tradeBreak(self):
         from pyEX import tradeBreak
         tradeBreak(C)
+
+    def test_tradeBreakDF(self):
+        from pyEX import tradeBreakDF
+        tradeBreakDF(C)
 
     def test_auction(self):
         from pyEX import auction
@@ -350,4 +401,3 @@ class TestAPI:
     def test_auctionDF(self):
         from pyEX import auctionDF
         auctionDF(C)
-
