@@ -84,7 +84,7 @@ def earnings(symbol):
 
 def earningsDF(symbol):
     '''https://iextrading.com/developer/docs/#earnings'''
-    return pd.DataFrame(earnings(symbol))
+    return pd.io.json.json_normalize(earnings(symbol), 'earnings', 'symbol')
 
 
 def spread(symbol):
@@ -106,7 +106,9 @@ def financials(symbol):
 
 def financialsDF(symbol):
     '''https://iextrading.com/developer/docs/#financials'''
-    return pd.DataFrame(financials(symbol))
+    df = pd.io.json.json_normalize(financials(symbol), 'financials', 'symbol')
+    df.set_index('reportDate', inplace=True)
+    return df
 
 
 def threshold(date=None):
