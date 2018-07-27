@@ -33,8 +33,6 @@ If you redistribute our API data:
         def book(symbol):
     ```
 
-- [bookDF](https://iextrading.com/developer/docs/#book)
-    
     ```python3
         def bookDF(symbol):
     ```
@@ -44,9 +42,6 @@ If you redistribute our API data:
     ```python3
         def chart(symbol, timeframe='1m', date=None):
     ```
-
-
-- [chartDF](https://iextrading.com/developer/docs/#chart)
     
     ```python3
         def chartDF(symbol, timeframe='1m'):
@@ -58,8 +53,6 @@ If you redistribute our API data:
         def company(symbol):
     ```
 
-- [companyDF](https://iextrading.com/developer/docs/#company)
-    
     ```python3
         def companyDF(symbol):
     ```
@@ -70,8 +63,6 @@ If you redistribute our API data:
         def delayedQuote(symbol):
     ```
 
-- [delayedQuoteDF](https://iextrading.com/developer/docs/#delayed-quote)
-    
     ```python3
         def delayedQuoteDF(symbol):
     ```
@@ -81,9 +72,6 @@ If you redistribute our API data:
     ```python3
         def dividends(symbol, timeframe='ytd'):
     ```
-
-
-- [dividendsDF](https://iextrading.com/developer/docs/#dividends)
 
     ```python3
         def dividendsDF(symbol, timeframe='ytd'):
@@ -95,8 +83,6 @@ If you redistribute our API data:
         def earnings(symbol):
     ```
 
-- [earningsDF](https://iextrading.com/developer/docs/#earnings)
-    
     ```python3
         def earningsDF(symbol):
     ```
@@ -106,8 +92,6 @@ If you redistribute our API data:
     ```python3
         def spread(symbol):
     ```
-
-- [spreadDF](https://iextrading.com/developer/docs/#effective-spread)
 
     ```python3
         def spreadDF(symbol):
@@ -119,8 +103,6 @@ If you redistribute our API data:
         def financials(symbol):
     ```
 
-- [financialsDF](https://iextrading.com/developer/docs/#financials)
-
     ```python3
         def financialsDF(symbol):
     ```
@@ -130,8 +112,6 @@ If you redistribute our API data:
     ```python3
         def threshold(date=None):
     ```
-
-- [thresholdDF](https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list)
 
     ```python3
         def thresholdDF(date=None):
@@ -143,8 +123,6 @@ If you redistribute our API data:
         def shortInterest(symbol, date=None):
     ```
 
-- [shortInterestDF](https://iextrading.com/developer/docs/#iex-short-interest-list)
-
     ```python3
         def shortInterestDF(symbol, date=None):
     ```
@@ -154,8 +132,6 @@ If you redistribute our API data:
     ```python3
         def marketShortInterest(date=None):
     ```
-
-- [marketShortInterestDF](https://iextrading.com/developer/docs/#iex-short-interest-list)
 
     ```python3
         def marketShortInterestDF(date=None):
@@ -167,7 +143,6 @@ If you redistribute our API data:
         def stockStats(symbol):
     ```
 
-- [stockStatsDF](https://iextrading.com/developer/docs/#key-stats)
     ```python3
         def stockStatsDF(symbol):
     ```
@@ -177,8 +152,6 @@ If you redistribute our API data:
     ```python3
         def list(option='mostactive'):
     ```
-
-- [listDF](https://iextrading.com/developer/docs/#list)
 
     ```python3
         def listDF(option='mostactive'):
@@ -190,13 +163,9 @@ If you redistribute our API data:
         def logo(symbol):
     ```
 
-- [logoPNG](https://iextrading.com/developer/docs/#logo)
-
     ```python3
         def logoPNG(symbol):
     ```
-
-- [logoNotebook](https://iextrading.com/developer/docs/#logo)
 
     ```python3
         def logoNotebook(symbol):
@@ -208,8 +177,6 @@ If you redistribute our API data:
         def news(symbol, count=10):
     ```
 
-- [newsDF](https://iextrading.com/developer/docs/#news)
-
     ```python3
         def newsDF(symbol, count=10):
     ```
@@ -219,8 +186,6 @@ If you redistribute our API data:
     ```python3
         def marketNews(count=10):
     ```
-
-- [marketNewsDF](https://iextrading.com/developer/docs/#news)
 
     ```python3
         def marketNewsDF(count=10):
@@ -232,8 +197,6 @@ If you redistribute our API data:
         def ohlc(symbol):
     ```
 
-- [ohlcDF](https://iextrading.com/developer/docs/#ohlc)
-
     ```python3
         def ohlcDF(symbol):
     ```
@@ -243,8 +206,6 @@ If you redistribute our API data:
     ```python3
         def marketOhlc():
     ```
-
-- [marketOhlcDF](https://iextrading.com/developer/docs/#ohlc)
 
     ```python3
         def marketOhlcDF():
@@ -256,8 +217,6 @@ If you redistribute our API data:
         def peers(symbol):
     ```
 
-- [peersDF](https://iextrading.com/developer/docs/#peers)
-
     ```python3
         def peersDF(symbol):
     ```
@@ -267,8 +226,6 @@ If you redistribute our API data:
     ```python3
         def yesterday(symbol):
     ```
-
-- [yesterdayDF](https://iextrading.com/developer/docs/#previous)
 
     ```python3
         def yesterdayDF(symbol):
@@ -280,8 +237,6 @@ If you redistribute our API data:
         def marketYesterday():
     ```
 
-- [marketYesterdayDF](https://iextrading.com/developer/docs/#previous)
-
     ```python3
         def marketYesterdayDF():
     ```
@@ -290,8 +245,6 @@ If you redistribute our API data:
     ```python3
         def price(symbol):
     ```
-
-- [priceDF](https://iextrading.com/developer/docs/#price)
 
     ```python3
         def priceDF(symbol):
@@ -303,8 +256,6 @@ If you redistribute our API data:
         def quote(symbol):
     ```
 
-- [quoteDF](https://iextrading.com/developer/docs/#quote)
-
     ```python3
         def quoteDF(symbol):
     ```
@@ -314,8 +265,6 @@ If you redistribute our API data:
     ```python3
         def relevant(symbol):
     ```
-
-- [relevantDF](https://iextrading.com/developer/docs/#relevant)
 
     ```python3
         def relevantDF(symbol):
@@ -327,8 +276,6 @@ If you redistribute our API data:
         def splits(symbol, timeframe='ytd'):
     ```
 
-- [splitsDF](https://iextrading.com/developer/docs/#splits)
-
     ```python3
         def splitsDF(symbol, timeframe='ytd'):
     ```
@@ -339,8 +286,109 @@ If you redistribute our API data:
         def volumeByVenue(symbol):
     ```
 
-- [volumeByVenueDF](https://iextrading.com/developer/docs/#volume-by-venue)
-
     ```python3
         def volumeByVenueDF(symbol):
     ```
+
+#### Reference
+
+- [symbols](https://iextrading.com/developer/docs/#symbols)
+
+    ```python3
+        def symbols():
+    ```
+
+    ```python3
+        def symbolsDF():
+    ```
+
+- [corporateActions](https://iextrading.com/developer/docs/#iex-corporate-actions)
+    ```python3
+        def corporateActions(date=None):
+    ```
+
+
+    ```python3
+        def corporateActionsDF(date=None):
+    ```
+
+- [dividends](https://iextrading.com/developer/docs/#iex-dividends)
+    ```python3
+        def dividends(date=None):
+    ```
+
+    ```python3
+        def dividendsDF(date=None):
+    ```
+
+- [nextDayExtDate](https://iextrading.com/developer/docs/#iex-next-day-ex-date)
+    ```python3
+        def nextDayExtDate(date=None):
+    ```
+
+    ```python3
+        def nextDayExtDateDF(date=None):
+    ```
+
+- [directory](https://iextrading.com/developer/docs/#iex-listed-symbol-directory)
+    ```python3
+        def directory(date=None):
+    ```
+
+    ```python3
+        def directoryDF(date=None):
+    ```
+
+
+#### Market Data
+
+#### Stats
+
+- [stats](https://iextrading.com/developer/docs/#intraday)
+    ```python3
+        def stats():
+    ```
+
+    ```python3
+        def statsDF():
+    ```
+
+- [recent](https://iextrading.com/developer/docs/#recent)
+    ```python3
+        def recent():
+    ```
+
+    ```python3
+        def recentDF():
+    ```
+
+- [records](https://iextrading.com/developer/docs/#records)
+    ```python3
+        def records():
+    ```
+
+    ```python3
+        def recordsDF():
+    ```
+
+- [summary](https://iextrading.com/developer/docs/#historical-summary)
+    ```python3
+        def summary(date=None):
+    ```
+
+    ```python3
+        def summaryDF(date=None):
+    ```
+
+- [daily](https://iextrading.com/developer/docs/#historical-daily)
+    ```python3
+        def daily(date=None, last=''):
+    ```
+
+    ```python3
+        def dailyDF(date=None, last=''):
+    ```
+
+#### Markets
+
+
