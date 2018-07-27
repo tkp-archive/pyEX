@@ -20,6 +20,7 @@ If you redistribute our API data:
 
 
 ### Getting Started
+[Read The Docs!](pyEX.readthedocs.io)
 
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
 
