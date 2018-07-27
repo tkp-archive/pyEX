@@ -20,7 +20,8 @@ If you redistribute our API data:
 
 
 ### Getting Started
-![](https://raw.githubusercontent.com/timkpaine/jupyterlab_templates/master/docs/img/example1.gif)
+
+![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
 
 
 ### Methods
