@@ -342,6 +342,183 @@ If you redistribute our API data:
 
 
 #### Market Data
+- [tops](https://iextrading.com/developer/docs/#tops)
+    
+    ```python3
+        def tops(symbols=None):
+    ```
+    
+    ```python3
+        def topsDF(symbols=None):
+    ```
+    
+    ```python3
+        def topsWS(symbols=None, on_data=None):
+    ```
+
+- [last](https://iextrading.com/developer/docs/#last)
+    
+    ```python3
+        def last(symbols=None):
+    ```
+    
+    ```python3
+        def lastDF(symbols=None):
+    ```
+    
+    ```python3
+        def lastWS(symbols=None, on_data=None):
+    ```
+
+- [hist](https://iextrading.com/developer/docs/#hist)
+    
+    ```python3
+        def hist(date=None):
+    ```
+    
+    ```python3
+        def histDF(date=None):
+    ```
+
+- [deep](https://iextrading.com/developer/docs/#deep)
+    
+    ```python3
+        def deep(symbol=None):
+    ```
+    
+    ```python3
+        def deepDF(symbol=None):
+    ```
+    
+    ```python3
+        def deepWS(symbols=None, channels=None, on_data=None):
+    ```
+
+- [book](https://iextrading.com/developer/docs/#book55)
+    
+    ```python3
+        def book(symbol=None):
+    ```
+    
+    ```python3
+        def bookDF(symbol=None):
+    ```
+    
+    ```python3
+        def bookWS(symbols=None, on_data=None):
+    ```
+
+- [trades](https://iextrading.com/developer/docs/#trades)
+    
+    ```python3
+        def trades(symbol=None):
+    ```
+    
+    ```python3
+        def tradesDF(symbol=None):
+    ```
+    
+    ```python3
+        def tradesWS(symbols=None, on_data=None):
+    ```
+
+- [systemEvent](https://iextrading.com/developer/docs/#system-event)
+    
+    ```python3
+        def systemEvent():
+    ```
+    
+    ```python3
+        def systemEventDF():
+    ```
+    
+    ```python3
+        def systemEventWS(on_data=None):
+    ```
+
+- [tradingStatus](https://iextrading.com/developer/docs/#trading-status)
+    
+    ```python3
+        def tradingStatus(symbol=None):
+    ```
+    
+    ```python3
+        def tradingStatusDF(symbol=None):
+    ```
+    
+    ```python3
+        def tradingStatusWS(symbols=None, on_data=None):
+    ```
+
+- [opHaltStatus](https://iextrading.com/developer/docs/#operational-halt-status)
+    
+    ```python3
+        def opHaltStatus(symbol=None):
+    ```
+    
+    ```python3
+        def opHaltStatusDF(symbol=None):
+    ```
+    
+    ```python3
+        def opHaltStatusWS(symbols=None, on_data=None):
+    ```
+
+- [ssr](https://iextrading.com/developer/docs/#short-sale-price-test-status)
+    
+    ```python3
+        def ssrStatus(symbol=None):
+    ```
+    
+    ```python3
+        def ssrStatusDF(symbol=None):
+    ```
+
+    ```python3
+        def ssrStatusWS(symbols=None, on_data=None):
+    ```
+
+- [securityEvent](https://iextrading.com/developer/docs/#security-event)
+
+    ```python3
+        def securityEvent(symbol=None):
+    ```
+
+    ```python3
+        def securityEventDF(symbol=None):
+    ```
+
+    ```python3
+        def securityEventWS(symbols=None, on_data=None):
+    ```
+
+- [tradeBreak](https://iextrading.com/developer/docs/#trade-break)
+
+    ```python3
+        def tradeBreak(symbol=None):
+    ```
+
+    ```python3
+        def tradeBreakDF(symbol=None):
+    ```
+
+    ```python3
+        def tradeBreakWS(symbols=None, on_data=None):
+    ```
+
+- [auction](https://iextrading.com/developer/docs/#auction)
+
+    ```python3
+        def auction(symbol=None):
+    ```
+    
+    ```python3
+        def auctionDF(symbol=None):
+    ```
+    
+    ```python3
+        def auctionWS(symbols=None, on_data=None):
+    ```
 
 #### Stats
 
