@@ -569,4 +569,13 @@ If you redistribute our API data:
 
 #### Markets
 
+- [markets](https://iextrading.com/developer/docs/#intraday)
+
+    ```python3
+        def markets():
+    ```
+
+    ```python3
+        def marketsDF():
+    ```
 
