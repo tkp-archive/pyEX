@@ -16,7 +16,7 @@ setup(
     download_url='https://github.com/timkpaine/pyEX/archive/v0.0.7.tar.gz',
     author='Tim Paine',
     author_email='timothy.k.paine@gmail.com',
-    license='LGPL',
+    license='Apache 2.0',
 
     classifiers=[
         'Development Status :: 3 - Alpha',
