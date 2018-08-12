@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex
 
 
 def book(symbol):
@@ -38,7 +38,9 @@ def chartDF(symbol, timeframe='1m'):
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
     '''
-    return pd.DataFrame(chart(symbol, timeframe))
+    df = pd.DataFrame(chart(symbol, timeframe))
+    _reindex(df, 'date')
+    return df
 
 
 def company(symbol):
@@ -49,7 +51,9 @@ def company(symbol):
 
 def companyDF(symbol):
     '''https://iextrading.com/developer/docs/#company'''
-    return pd.io.json.json_normalize(company(symbol))
+    df = pd.io.json.json_normalize(company(symbol))
+    _reindex(df, 'symbol')
+    return df
 
 
 def delayedQuote(symbol):
@@ -60,7 +64,9 @@ def delayedQuote(symbol):
 
 def delayedQuoteDF(symbol):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
-    return pd.io.json.json_normalize(delayedQuote(symbol))
+    df = pd.io.json.json_normalize(delayedQuote(symbol))
+    _reindex(df, 'symbol')
+    return df
 
 
 def dividends(symbol, timeframe='ytd'):
@@ -73,7 +79,9 @@ def dividends(symbol, timeframe='ytd'):
 
 def dividendsDF(symbol, timeframe='ytd'):
     '''https://iextrading.com/developer/docs/#dividends'''
-    return pd.DataFrame(dividends(symbol, timeframe))
+    df = pd.DataFrame(dividends(symbol, timeframe))
+    _reindex(df, 'exDate')
+    return df
 
 
 def earnings(symbol):
@@ -84,7 +92,9 @@ def earnings(symbol):
 
 def earningsDF(symbol):
     '''https://iextrading.com/developer/docs/#earnings'''
-    return pd.io.json.json_normalize(earnings(symbol), 'earnings', 'symbol')
+    df = pd.io.json.json_normalize(earnings(symbol), 'earnings', 'symbol')
+    _reindex(df, 'EPSReportDate')
+    return df
 
 
 def spread(symbol):
@@ -107,7 +117,7 @@ def financials(symbol):
 def financialsDF(symbol):
     '''https://iextrading.com/developer/docs/#financials'''
     df = pd.io.json.json_normalize(financials(symbol), 'financials', 'symbol')
-    df.set_index('reportDate', inplace=True)
+    _reindex(df, 'reportDate')
     return df
 
 
@@ -202,7 +212,9 @@ def news(symbol, count=10):
 
 def newsDF(symbol, count=10):
     '''https://iextrading.com/developer/docs/#news'''
-    return pd.DataFrame(news(symbol, count))
+    df = pd.DataFrame(news(symbol, count))
+    _reindex(df, 'datetime')
+    return df
 
 
 def marketNews(count=10):
@@ -244,7 +256,10 @@ def peers(symbol):
 
 def peersDF(symbol):
     '''https://iextrading.com/developer/docs/#peers'''
-    return pd.DataFrame(peers(symbol))
+    df = pd.DataFrame(peers(symbol), columns=['symbol'])
+    _reindex(df, 'symbol')
+    df['symbol'] = df.index
+    return df
 
 
 def yesterday(symbol):
@@ -287,7 +302,9 @@ def quote(symbol):
 
 def quoteDF(symbol):
     '''https://iextrading.com/developer/docs/#quote'''
-    return pd.io.json.json_normalize(quote(symbol))
+    df = pd.io.json.json_normalize(quote(symbol))
+    _reindex(df, 'symbol')
+    return df
 
 
 def relevant(symbol):

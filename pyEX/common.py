@@ -94,3 +94,7 @@ def _stream(url, sendinit=None, on_data=print):
 
 class PyEXception(Exception):
     pass
+
+
+def _reindex(df, col):
+    df.set_index(col, inplace=True)
