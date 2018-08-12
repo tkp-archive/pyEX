@@ -21,6 +21,8 @@ If you redistribute our API data:
 
 ### Getting Started
 [Read The Docs!](https://pyEX.readthedocs.io)
+[Demo Notebook](https://github.com/timkpaine/pyEX/blob/master/all.ipynb)
+
 
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
 
