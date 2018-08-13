@@ -33,7 +33,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
+            mock.return_value.json = MagicMock(return_value={'test': [4], 'symbol': ['test']})
             companyDF('test')
 
     def test_quote(self):
@@ -48,7 +48,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
+            mock.return_value.json = MagicMock(return_value={'test': [4], 'symbol': ['test']})
             quoteDF('test')
 
     def test_price(self):
@@ -108,7 +108,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value=[{'symbol': 'test'}])
             delayedQuoteDF('test')
 
     def test_yesterday(self):
@@ -228,7 +228,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value={'earnings': [{'EPSReportDate': 'test'}], 'symbol': 'test'})
             earningsDF('test')
 
     def test_peers(self):
@@ -280,7 +280,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
             dividendsDF('test')
 
     def test_splits(self):
@@ -316,7 +316,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value=[{'datetime': 'test'}])
             newsDF('test')
 
     def test_marketNews(self):
@@ -354,7 +354,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value=[{'date': 'test'}])
             chartDF('test')
 
     def test_logo(symbol):

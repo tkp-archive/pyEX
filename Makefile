@@ -25,6 +25,9 @@ docs:  ## make documentation
 install:  ## install to site-packages
 	python3 setup.py install
 
+dist:  ## dist to pypi
+	python3 setup.py sdist upload -r pypi
+
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
 help:
@@ -33,4 +36,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: clean test tests help annotate annotate_l docs
+.PHONY: clean test tests help annotate annotate_l docs dist
