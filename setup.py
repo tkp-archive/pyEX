@@ -9,11 +9,11 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='pyEX',
-    version='0.0.8',
+    version='0.0.9',
     description='Rest API to IEX',
     long_description=long_description,
     url='https://github.com/timkpaine/pyEX',
-    download_url='https://github.com/timkpaine/pyEX/archive/v0.0.8.tar.gz',
+    download_url='https://github.com/timkpaine/pyEX/archive/v0.0.9.tar.gz',
     author='Tim Paine',
     author_email='timothy.k.paine@gmail.com',
     license='Apache 2.0',

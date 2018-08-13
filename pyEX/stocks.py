@@ -169,7 +169,9 @@ def stockStats(symbol):
 
 def stockStatsDF(symbol):
     '''https://iextrading.com/developer/docs/#key-stats'''
-    return pd.io.json.json_normalize(stockStats(symbol))
+    df = pd.io.json.json_normalize(stockStats(symbol))
+    _reindex(df, 'symbol')
+    return df
 
 
 def list(option='mostactive'):
