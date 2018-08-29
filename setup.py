@@ -7,6 +7,9 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
+    requires = f.read().split()
+
 setup(
     name='pyEX',
     version='0.0.11',
@@ -32,4 +35,5 @@ setup(
 
     keywords='finance data',
     packages=find_packages(exclude=[]),
+    install_requires=requires
 )
