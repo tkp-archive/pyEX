@@ -305,6 +305,21 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
             collectionsDF('sector', 'test')
 
+    def test_crypto(self):
+        from pyEX import crypto
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            crypto()
+
+    def test_cryptoDF(self):
+        from pyEX import cryptoDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
+            cryptoDF()
+
     def test_splits(self):
         from pyEX import splits
         from pyEX.common import PyEXception

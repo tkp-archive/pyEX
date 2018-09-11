@@ -69,6 +69,17 @@ def collectionsDF(tag, query):
     return df
 
 
+def crypto():
+    '''https://iextrading.com/developer/docs/#collections'''
+    return _getJson('stock/market/crypto/')
+
+
+def cryptoDF():
+    '''https://iextrading.com/developer/docs/#collections'''
+    df = pd.DataFrame(crypto())
+    return df
+
+
 def delayedQuote(symbol):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
     _raiseIfNotStr(symbol)

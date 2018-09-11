@@ -71,6 +71,16 @@ If you redistribute our API data:
         def collectionsDF(tag, query):
     ```
 
+- [crypto](https://iextrading.com/developer/docs/#crypto)
+    
+    ```python3  
+        def crypto():
+    ```
+    
+    ```python3  
+        def cryptoDF():
+    ```
+
 - [delayedQuote](https://iextrading.com/developer/docs/#delayed-quote)
 
     ```python3

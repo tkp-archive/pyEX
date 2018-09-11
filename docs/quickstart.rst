@@ -49,6 +49,16 @@ Stocks
 
           def collectionsDF(tag, query):
 
+-  `crypto <https://iextrading.com/developer/docs/#crypto>`__
+
+   .. code:: python3
+
+          def crypto():
+
+   .. code:: python3
+
+          def cryptoDF():
+
 -  `delayedQuote <https://iextrading.com/developer/docs/#delayed-quote>`__
 
    .. code:: python3
