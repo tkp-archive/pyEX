@@ -16,10 +16,12 @@ _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
+_PYEX_PROXIES = None
+
 
 def _getJson(url):
     url = _URL_PREFIX + url
-    resp = requests.get(urlparse(url).geturl())
+    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -102,3 +104,8 @@ class PyEXception(Exception):
 
 def _reindex(df, col):
     df.set_index(col, inplace=True)
+
+
+def setProxy(proxies=None):
+    global _PYEX_PROXIES
+    _PYEX_PROXIES = proxies
