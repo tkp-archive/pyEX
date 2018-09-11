@@ -309,6 +309,16 @@ Stocks
 
           def relevantDF(symbol):
 
+-  `sectorPerformance <https://iextrading.com/developer/docs/#sector-performance>`__
+
+   .. code:: python3
+
+          def sectorPerformance():
+
+   .. code:: python3
+
+          def sectorPerformanceDF():
+
 -  `splits <https://iextrading.com/developer/docs/#splits>`__
 
    .. code:: python3

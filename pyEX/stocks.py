@@ -401,6 +401,16 @@ def relevantDF(symbol):
     return pd.DataFrame(relevant(symbol))
 
 
+def sectorPerformance():
+    '''https://iextrading.com/developer/docs/#sector-performance'''
+    return _getJson('stock/market/sector-performance')
+
+
+def sectorPerformanceDF():
+    '''https://iextrading.com/developer/docs/#sector-performance'''
+    return pd.DataFrame(sectorPerformance())
+
+
 def splits(symbol, timeframe='ytd'):
     '''https://iextrading.com/developer/docs/#splits'''
     _raiseIfNotStr(symbol)

@@ -318,6 +318,16 @@ If you redistribute our API data:
         def quoteDF(symbol):
     ```
 
+- [sectorPerformance](https://iextrading.com/developer/docs/#sector-performance)
+
+    ```python3
+        def sectorPerformance():
+    ```
+
+    ```python3
+        def sectorPerformanceDF():
+    ```
+
 - [relevant](https://iextrading.com/developer/docs/#relevant)
 
     ```python3
@@ -327,6 +337,7 @@ If you redistribute our API data:
     ```python3
         def relevantDF(symbol):
     ```
+
 
 - [splits](https://iextrading.com/developer/docs/#splits)
 

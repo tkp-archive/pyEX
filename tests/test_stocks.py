@@ -246,6 +246,21 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             peersDF('test')
 
+    def test_sectorPerformance(self):
+        from pyEX import sectorPerformance
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            sectorPerformance()
+
+    def test_sectorPerformanceDF(self):
+        from pyEX import sectorPerformanceDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            sectorPerformanceDF()
+
     def test_relevant(self):
         from pyEX import relevant
         with patch('requests.get') as mock:
