@@ -167,3 +167,16 @@ def auction(symbol=None):
 def auctionDF(symbol=None):
     '''https://iextrading.com/developer/docs/#auction'''
     return pd.io.json.json_normalize(auction(symbol))
+
+
+def officialPrice(symbol=None):
+    '''https://iextrading.com/developer/docs/#official-price'''
+    _raiseIfNotStr(symbol)
+    if symbol:
+        return _getJson('deep/official-price?symbols=' + symbol)
+    return _getJson('deep/official-price')
+
+
+def officialPriceDF(symbol=None):
+    '''https://iextrading.com/developer/docs/#official-price'''
+    return pd.io.json.json_normalize(officialPrice(symbol))

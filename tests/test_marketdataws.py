@@ -114,3 +114,9 @@ class TestAll:
         with patch('pyEX.marketdata.ws._stream'):
             auctionWS()
             auctionWS('test')
+
+    def test_officialPrice(self):
+        from pyEX import officialPriceWS
+        with patch('pyEX.marketdata.ws._stream'):
+            officialPriceWS()
+            officialPriceWS('test')

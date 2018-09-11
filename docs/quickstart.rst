@@ -561,6 +561,21 @@ Market Data
 
           def auctionWS(symbols=None, on_data=None):
 
+-  `officialPrice <https://iextrading.com/developer/docs/#official-price>`__
+
+   .. code:: python3
+
+          def officialPrice(symbol=None):
+
+   .. code:: python3
+
+          def officialPriceDF(symbol=None):
+
+   .. code:: python3
+
+          def officialPriceWS(symbols=None, on_data=None):
+
+
 Stats
 ^^^^^
 

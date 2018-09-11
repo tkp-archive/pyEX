@@ -588,6 +588,22 @@ If you redistribute our API data:
         def auctionWS(symbols=None, on_data=None):
     ```
 
+
+- [officialPrice](https://iextrading.com/developer/docs/#official-price)
+
+    ```python3
+        def officialPrice(symbol=None):
+    ```
+    
+    ```python3
+        def officialPriceDF(symbol=None):
+    ```
+    
+    ```python3
+        def officialPriceWS(symbols=None, on_data=None):
+    ```
+
+
 #### Stats
 
 - [stats](https://iextrading.com/developer/docs/#intraday)

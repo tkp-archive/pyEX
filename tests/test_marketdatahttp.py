@@ -245,3 +245,20 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             auctionDF()
             auctionDF('test')
+
+    def test_officialPrice(self):
+        from pyEX import officialPrice
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            officialPrice()
+            officialPrice('test')
+
+    def test_officialPriceDF(self):
+        from pyEX import officialPriceDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            officialPriceDF()
+            officialPriceDF('test')
