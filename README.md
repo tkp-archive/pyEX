@@ -111,6 +111,17 @@ If you redistribute our API data:
         def earningsDF(symbol):
     ```
 
+- [earningsToday](https://iextrading.com/developer/docs/#earnings-today)
+
+    ```python3
+        def earningsToday(symbol):
+    ```
+
+    ```python3
+        def earningsTodayDF(symbol):
+    ```
+
+
 - [spread](https://iextrading.com/developer/docs/#effective-spread)
 
     ```python3
@@ -130,6 +141,19 @@ If you redistribute our API data:
     ```python3
         def financialsDF(symbol):
     ```
+
+- [ipos](https://iextrading.com/developer/docs/#ipo-calendar)
+
+    ```python3
+        def ipoToday():
+        def ipoUpcoming():
+    ```
+
+    ```python3
+        def ipoTodayDF():
+        def ipoUpcomingDF():
+    ```
+
 
 - [threshold](https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list)
 

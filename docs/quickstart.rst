@@ -89,6 +89,17 @@ Stocks
 
           def earningsDF(symbol):
 
+
+-  `earningsToday <https://iextrading.com/developer/docs/#earnings-today>`__
+
+   .. code:: python3
+
+          def earningsToday():
+
+   .. code:: python3
+
+          def earningsTodayDF():
+
 -  `spread <https://iextrading.com/developer/docs/#effective-spread>`__
 
    .. code:: python3
@@ -108,6 +119,24 @@ Stocks
    .. code:: python3
 
           def financialsDF(symbol):
+
+-  `ipos <https://iextrading.com/developer/docs/#ipo-calendar>`__
+
+   .. code:: python3
+
+          def ipoToday():
+
+   .. code:: python3
+
+          def ipoTodayDF():
+
+   .. code:: python3
+
+          def ipoUpcoming():
+
+   .. code:: python3
+
+          def ipoUpcomingDF():
 
 -  `threshold <https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list>`__
 
