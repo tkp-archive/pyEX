@@ -1,9 +1,12 @@
 import requests
-import pandas as pd
 import ujson
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
 
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 _URL_PREFIX = 'https://api.iextrading.com/1.0/'
 _SIO_URL_PREFIX = 'https://ws-api.iextrading.com'
@@ -11,11 +14,12 @@ _SIO_PORT = 443
 _TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
+_COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 
 def _getJson(url):
     url = _URL_PREFIX + url
-    resp = requests.get(url)
+    resp = requests.get(urlparse(url).geturl())
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)

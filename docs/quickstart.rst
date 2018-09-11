@@ -38,6 +38,17 @@ Stocks
 
           def companyDF(symbol):
 
+
+-  `collections <https://iextrading.com/developer/docs/#collections>`__
+
+   .. code:: python3
+
+          def collections(tag, query):
+
+   .. code:: python3
+
+          def collectionsDF(tag, query):
+
 -  `delayedQuote <https://iextrading.com/developer/docs/#delayed-quote>`__
 
    .. code:: python3

@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex
 
 
 def book(symbol):
@@ -53,6 +53,19 @@ def companyDF(symbol):
     '''https://iextrading.com/developer/docs/#company'''
     df = pd.io.json.json_normalize(company(symbol))
     _reindex(df, 'symbol')
+    return df
+
+
+def collections(tag, collectionName):
+    '''https://iextrading.com/developer/docs/#collections'''
+    if tag not in _COLLECTION_TAGS:
+        raise PyEXception('Tag must be in %s' % str(_COLLECTION_TAGS))
+    return _getJson('stock/market/collection/' + tag + '?collectionName=' + collectionName)
+
+
+def collectionsDF(tag, query):
+    '''https://iextrading.com/developer/docs/#collections'''
+    df = pd.DataFrame(collections(tag, query))
     return df
 
 

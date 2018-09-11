@@ -61,6 +61,16 @@ If you redistribute our API data:
         def companyDF(symbol):
     ```
 
+- [collections](https://iextrading.com/developer/docs/#collections)
+    
+    ```python3  
+        def collections(tag, query):
+    ```
+    
+    ```python3  
+        def collectionsDF(tag, query):
+    ```
+
 - [delayedQuote](https://iextrading.com/developer/docs/#delayed-quote)
 
     ```python3
