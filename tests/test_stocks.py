@@ -283,6 +283,28 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
             dividendsDF('test')
 
+    def test_collections(self):
+        from pyEX import collections
+        from pyEX.common import PyEXception
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            collections('sector', 'test')
+
+            try:
+                collections('test', 'test')
+                assert False
+            except PyEXception:
+                pass
+
+    def test_collectionsDF(self):
+        from pyEX import collectionsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
+            collectionsDF('sector', 'test')
+
     def test_splits(self):
         from pyEX import splits
         from pyEX.common import PyEXception
