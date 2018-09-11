@@ -126,7 +126,7 @@ def earningsToday():
     return _getJson('stock/market/today-earnings')
 
 
-def earningsToadyDF():
+def earningsTodayDF():
     '''https://iextrading.com/developer/docs/#earnings-today'''
     x = earningsToday()
     z = []
