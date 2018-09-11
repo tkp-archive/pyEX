@@ -195,6 +195,16 @@ If you redistribute our API data:
         def stockStatsDF(symbol):
     ```
 
+- [largestTrades](https://iextrading.com/developer/docs/#largest-trades)
+
+    ```python3
+        def largestTrades(symbol):
+    ```
+
+    ```python3
+        def largestTradesDF(symbol):
+    ```
+
 - [list](https://iextrading.com/developer/docs/#list)
 
     ```python3

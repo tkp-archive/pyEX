@@ -178,6 +178,16 @@ Stocks
 
           def stockStatsDF(symbol):
 
+-  `largestTrades <https://iextrading.com/developer/docs/#largest-trades>`__
+
+   .. code:: python3
+
+          def largestTrades(symbol):
+
+   .. code:: python3
+
+          def largestTradesDF(symbol):
+
 -  `list <https://iextrading.com/developer/docs/#list>`__
 
    .. code:: python3

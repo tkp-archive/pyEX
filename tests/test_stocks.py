@@ -424,6 +424,22 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             listDF()
 
+    def test_largestTrades(self):
+        from pyEX import largestTrades
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.status_code = 200
+            largestTrades('aapl')
+
+    def test_largestTradesDF(self):
+        from pyEX import largestTradesDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[{'time': 'test'}])
+            largestTradesDF('aapl')
+
     def test_logoPNG(self):
         from pyEX import logoPNG
         with patch('requests.get') as mock:

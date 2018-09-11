@@ -242,6 +242,19 @@ def stockStatsDF(symbol):
     return df
 
 
+def largestTrades(symbol):
+    '''https://iextrading.com/developer/docs/#largest-trades'''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/largest-trades')
+
+
+def largestTradesDF(symbol):
+    '''https://iextrading.com/developer/docs/#largest-trades'''
+    df = pd.DataFrame(largestTrades(symbol))
+    _reindex(df, 'time')
+    return df
+
+
 def list(option='mostactive'):
     '''https://iextrading.com/developer/docs/#list'''
     if option not in _LIST_OPTIONS:
