@@ -487,3 +487,20 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
             marketShortInterestDF()
+
+    def test_ipo(self):
+        from pyEX import ipoToday, ipoUpcoming
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            ipoToday()
+            ipoUpcoming()
+
+    def test_ipoDF(self):
+        from pyEX import ipoTodayDF, ipoUpcomingDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value={'rawData': [{'symbol': 'test'}]})
+            ipoTodayDF()
+            ipoUpcomingDF()
