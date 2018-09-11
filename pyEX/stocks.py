@@ -121,6 +121,26 @@ def earningsDF(symbol):
     return df
 
 
+def earningsToday():
+    '''https://iextrading.com/developer/docs/#earnings-today'''
+    return _getJson('stock/market/today-earnings')
+
+
+def earningsToadyDF():
+    '''https://iextrading.com/developer/docs/#earnings-today'''
+    x = earningsToday()
+    z = []
+    for k in x:
+        ds = x[k]
+        for d in ds:
+            d['when'] = k
+            z.extend(ds)
+    df = pd.io.json.json_normalize(z)
+    df.drop_duplicates(inplace=True)
+    _reindex(df, 'symbol')
+    return df
+
+
 def spread(symbol):
     '''https://iextrading.com/developer/docs/#effective-spread'''
     _raiseIfNotStr(symbol)
