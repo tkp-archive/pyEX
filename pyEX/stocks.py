@@ -14,7 +14,29 @@ def book(symbol):
 
 def bookDF(symbol):
     '''https://iextrading.com/developer/docs/#book'''
-    return pd.io.json.json_normalize(book(symbol))
+    x = book(symbol)
+    quote = x['quote']
+    asks = x['asks']
+    bids = x['bids']
+    trades = x['trades']
+
+    df1 = pd.io.json.json_normalize(quote)
+    df1['type'] = 'quote'
+
+    df2 = pd.io.json.json_normalize(asks)
+    df2['symbol'] = quote['symbol']
+    df2['type'] = 'ask'
+
+    df3 = pd.io.json.json_normalize(bids)
+    df3['symbol'] = quote['symbol']
+    df3['type'] = 'bid'
+
+    df4 = pd.io.json.json_normalize(trades)
+    df4['symbol'] = quote['symbol']
+    df3['type'] = 'trade'
+
+    df = pd.concat([df1, df2, df3, df4], sort=True)
+    return df
 
 
 def chart(symbol, timeframe='1m', date=None):
@@ -66,6 +88,7 @@ def collections(tag, collectionName):
 def collectionsDF(tag, query):
     '''https://iextrading.com/developer/docs/#collections'''
     df = pd.DataFrame(collections(tag, query))
+    _reindex(df, 'symbol')
     return df
 
 
@@ -77,6 +100,7 @@ def crypto():
 def cryptoDF():
     '''https://iextrading.com/developer/docs/#collections'''
     df = pd.DataFrame(crypto())
+    _reindex(df, 'symbol')
     return df
 
 
@@ -149,7 +173,9 @@ def spread(symbol):
 
 def spreadDF(symbol):
     '''https://iextrading.com/developer/docs/#effective-spread'''
-    return pd.DataFrame(spread(symbol))
+    df = pd.DataFrame(spread(symbol))
+    _reindex(df, 'venue')
+    return df
 
 
 def financials(symbol):
@@ -174,6 +200,7 @@ def ipoTodayDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoToday()
     df = pd.io.json.json_normalize(val, 'rawData')
+    _reindex(df, 'symbol')
     return df
 
 
@@ -186,6 +213,7 @@ def ipoUpcomingDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoUpcoming()
     df = pd.io.json.json_normalize(val, 'rawData')
+    _reindex(df, 'symbol')
     return df
 
 
@@ -264,7 +292,9 @@ def list(option='mostactive'):
 
 def listDF(option='mostactive'):
     '''https://iextrading.com/developer/docs/#list'''
-    return pd.DataFrame(list(option))
+    df = pd.DataFrame(list(option))
+    _reindex(df, 'symbol')
+    return df
 
 
 def logo(symbol):
@@ -307,7 +337,9 @@ def marketNews(count=10):
 
 def marketNewsDF(count=10):
     '''https://iextrading.com/developer/docs/#news'''
-    return pd.DataFrame(marketNews(count))
+    df = pd.DataFrame(marketNews(count))
+    _reindex(df, 'datetime')
+    return df
 
 
 def ohlc(symbol):
@@ -318,7 +350,7 @@ def ohlc(symbol):
 
 def ohlcDF(symbol):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    return pd.DataFrame(ohlc(symbol))
+    return pd.io.json.json_normalize(ohlc(symbol))
 
 
 def marketOhlc():
@@ -328,7 +360,14 @@ def marketOhlc():
 
 def marketOhlcDF():
     '''https://iextrading.com/developer/docs/#ohlc'''
-    return pd.DataFrame(marketOhlc())
+    x = marketOhlc()
+    data = []
+    for key in x:
+        data.append(x[key])
+        data[-1]['symbol'] = key
+    df = pd.io.json.json_normalize(data)
+    _reindex(df, 'symbol')
+    return df
 
 
 def peers(symbol):
@@ -353,7 +392,9 @@ def yesterday(symbol):
 
 def yesterdayDF(symbol):
     '''https://iextrading.com/developer/docs/#previous'''
-    return pd.io.json.json_normalize(yesterday(symbol))
+    df = pd.io.json.json_normalize(yesterday(symbol))
+    _reindex(df, 'symbol')
+    return df
 
 
 def marketYesterday():
@@ -363,7 +404,14 @@ def marketYesterday():
 
 def marketYesterdayDF():
     '''https://iextrading.com/developer/docs/#previous'''
-    return pd.DataFrame(marketYesterday())
+    x = marketYesterday()
+    data = []
+    for key in x:
+        data.append(x[key])
+        data[-1]['symbol'] = key
+    df = pd.DataFrame(data)
+    _reindex(df, 'symbol')
+    return df
 
 
 def price(symbol):
@@ -408,7 +456,9 @@ def sectorPerformance():
 
 def sectorPerformanceDF():
     '''https://iextrading.com/developer/docs/#sector-performance'''
-    return pd.DataFrame(sectorPerformance())
+    df = pd.DataFrame(sectorPerformance())
+    _reindex(df, 'name')
+    return df
 
 
 def splits(symbol, timeframe='ytd'):
@@ -421,7 +471,9 @@ def splits(symbol, timeframe='ytd'):
 
 def splitsDF(symbol, timeframe='ytd'):
     '''https://iextrading.com/developer/docs/#splits'''
-    return pd.DataFrame(splits(symbol, timeframe))
+    df = pd.DataFrame(splits(symbol, timeframe))
+    _reindex(df, 'exDate')
+    return df
 
 
 def volumeByVenue(symbol):
@@ -432,4 +484,6 @@ def volumeByVenue(symbol):
 
 def volumeByVenueDF(symbol):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
-    return pd.DataFrame(volumeByVenue(symbol))
+    df = pd.DataFrame(volumeByVenue(symbol))
+    _reindex(df, 'venue')
+    return df

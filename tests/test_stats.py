@@ -45,11 +45,7 @@ class TestAll:
 
     def test_recentDF(self):
         from pyEX.stats import recentDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            recentDF()
+        recentDF()
 
     def test_records(self):
         from pyEX.stats import records

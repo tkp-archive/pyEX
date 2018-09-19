@@ -1,5 +1,5 @@
 import pandas as pd
-from .common import _getJson, _strOrDate
+from .common import _getJson, _strOrDate, _reindex
 
 
 def symbols():
@@ -9,7 +9,9 @@ def symbols():
 
 def symbolsDF():
     '''https://iextrading.com/developer/docs/#symbols'''
-    return pd.DataFrame(symbols())
+    df = pd.DataFrame(symbols())
+    _reindex(df, 'symbol')
+    return df
 
 
 def corporateActions(date=None):

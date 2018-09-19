@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from .common import _getJson, PyEXception, _strOrDate
+from .common import _getJson, PyEXception, _strOrDate, _reindex
 
 
 def stats():
@@ -20,7 +20,9 @@ def recent():
 
 def recentDF():
     '''https://iextrading.com/developer/docs/#recent'''
-    return pd.DataFrame(recent())
+    df = pd.DataFrame(recent())
+    _reindex(df, 'date')
+    return df
 
 
 def records():

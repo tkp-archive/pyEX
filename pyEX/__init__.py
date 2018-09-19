@@ -1,4 +1,3 @@
-from __future__ import print_function
 from .stocks import *
 from .refdata import symbols, symbolsDF, corporateActions, corporateActionsDF, dividends as dividendsRef, dividendsDF as dividendsRefDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF
 from .stats import *

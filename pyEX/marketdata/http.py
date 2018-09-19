@@ -1,5 +1,5 @@
 import pandas as pd
-from ..common import _getJson, _strToList, _raiseIfNotStr, _strOrDate
+from ..common import _getJson, _strToList, _raiseIfNotStr, _strOrDate, _reindex
 
 
 def tops(symbols=None):
@@ -12,7 +12,9 @@ def tops(symbols=None):
 
 def topsDF(symbols=None):
     '''https://iextrading.com/developer/docs/#tops'''
-    return pd.io.json.json_normalize(tops(symbols))
+    df = pd.io.json.json_normalize(tops(symbols))
+    _reindex(df, 'symbol')
+    return df
 
 
 def last(symbols=None):
@@ -25,7 +27,9 @@ def last(symbols=None):
 
 def lastDF(symbols=None):
     '''https://iextrading.com/developer/docs/#last'''
-    return pd.io.json.json_normalize(last(symbols))
+    df = pd.io.json.json_normalize(last(symbols))
+    _reindex(df, 'symbol')
+    return df
 
 
 def hist(date=None):
@@ -39,7 +43,16 @@ def hist(date=None):
 
 def histDF(date=None):
     '''https://iextrading.com/developer/docs/#hist'''
-    return pd.io.json.json_normalize(hist(date))
+    x = hist(date)
+    data = []
+    for key in x:
+        dat = x[key]
+        for item in dat:
+            item['date'] = key
+            data.append(item)
+    df = pd.DataFrame(data)
+    _reindex(df, 'date')
+    return df
 
 
 def deep(symbol=None):
@@ -65,7 +78,14 @@ def book(symbol=None):
 
 def bookDF(symbol=None):
     '''https://iextrading.com/developer/docs/#book51'''
-    return pd.io.json.json_normalize(book(symbol))
+    x = book(symbol)
+    data = []
+    for key in x:
+        d = x[key]
+        d['symbol'] = key
+        data.append(d)
+    df = pd.io.json.json_normalize(data)
+    return df
 
 
 def trades(symbol=None):
@@ -78,7 +98,15 @@ def trades(symbol=None):
 
 def tradesDF(symbol=None):
     '''https://iextrading.com/developer/docs/#trades'''
-    return pd.io.json.json_normalize(trades(symbol))
+    x = trades(symbol)
+    data = []
+    for key in x:
+        dat = x[key]
+        for d in dat:
+            d['symbol'] = key
+            data.append(d)
+    df = pd.DataFrame(data)
+    return df
 
 
 def systemEvent():
@@ -101,7 +129,14 @@ def tradingStatus(symbol=None):
 
 def tradingStatusDF(symbol=None):
     '''https://iextrading.com/developer/docs/#trading-status'''
-    return pd.io.json.json_normalize(tradingStatus(symbol))
+    x = tradingStatus(symbol)
+    data = []
+    for key in x:
+        d = x[key]
+        d['symbol'] = key
+        data.append(d)
+    df = pd.DataFrame(data)
+    return df
 
 
 def opHaltStatus(symbol=None):
@@ -114,7 +149,14 @@ def opHaltStatus(symbol=None):
 
 def opHaltStatusDF(symbol=None):
     '''https://iextrading.com/developer/docs/#operational-halt-status'''
-    return pd.io.json.json_normalize(opHaltStatus(symbol))
+    x = opHaltStatus(symbol)
+    data = []
+    for key in x:
+        d = x[key]
+        d['symbol'] = key
+        data.append(d)
+    df = pd.DataFrame(data)
+    return df
 
 
 def ssrStatus(symbol=None):
@@ -127,7 +169,14 @@ def ssrStatus(symbol=None):
 
 def ssrStatusDF(symbol=None):
     '''https://iextrading.com/developer/docs/#short-sale-price-test-status'''
-    return pd.io.json.json_normalize(ssrStatus(symbol))
+    x = ssrStatus(symbol)
+    data = []
+    for key in x:
+        d = x[key]
+        d['symbol'] = key
+        data.append(d)
+    df = pd.DataFrame(data)
+    return df
 
 
 def securityEvent(symbol=None):
@@ -140,7 +189,14 @@ def securityEvent(symbol=None):
 
 def securityEventDF(symbol=None):
     '''https://iextrading.com/developer/docs/#security-event'''
-    return pd.io.json.json_normalize(securityEvent(symbol))
+    x = securityEvent(symbol)
+    data = []
+    for key in x:
+        d = x[key]
+        d['symbol'] = key
+        data.append(d)
+    df = pd.DataFrame(data)
+    return df
 
 
 def tradeBreak(symbol=None):

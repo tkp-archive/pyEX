@@ -1,3 +1,4 @@
+from __future__ import print_function
 import requests
 import ujson
 from datetime import datetime

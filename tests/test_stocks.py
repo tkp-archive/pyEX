@@ -1,5 +1,6 @@
 # for Coverage
 from mock import patch, MagicMock
+SYMBOL = 'aapl'
 
 
 class TestAll:
@@ -68,18 +69,11 @@ class TestAll:
 
     def test_spread(self):
         from pyEX import spread
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            spread('test')
+        spread(SYMBOL)
 
     def test_spreadDF(self):
         from pyEX import spreadDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            spreadDF('test')
+        spreadDF(SYMBOL)
 
     def test_volumeByVenue(self):
         from pyEX import volumeByVenue
@@ -90,11 +84,7 @@ class TestAll:
 
     def test_volumeByVenueDF(self):
         from pyEX import volumeByVenueDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            volumeByVenueDF('test')
+        volumeByVenueDF(SYMBOL)
 
     def test_delayedQuote(self):
         from pyEX import delayedQuote
@@ -113,18 +103,11 @@ class TestAll:
 
     def test_yesterday(self):
         from pyEX import yesterday
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            yesterday('test')
+        yesterday(SYMBOL)
 
     def test_yesterdayDF(self):
         from pyEX import yesterdayDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
-            yesterdayDF('test')
+        yesterdayDF(SYMBOL)
 
     def test_marketYesterday(self):
         from pyEX import marketYesterday
@@ -135,11 +118,7 @@ class TestAll:
 
     def test_marketYesterdayDF(self):
         from pyEX import marketYesterdayDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            marketYesterdayDF()
+        marketYesterdayDF()
 
     def test_book(self):
         from pyEX import book
@@ -150,11 +129,7 @@ class TestAll:
 
     def test_bookDF(self):
         from pyEX import bookDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value={'test': {'test2': 4}})
-            bookDF('test')
+        bookDF(SYMBOL)
 
     def test_ohlc(self):
         from pyEX import ohlc
@@ -180,11 +155,7 @@ class TestAll:
 
     def test_marketOhlcDF(self):
         from pyEX import marketOhlcDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            marketOhlcDF()
+        marketOhlcDF()
 
     def test_stats(self):
         from pyEX import stockStats
@@ -248,18 +219,11 @@ class TestAll:
 
     def test_sectorPerformance(self):
         from pyEX import sectorPerformance
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            sectorPerformance()
+        sectorPerformance()
 
     def test_sectorPerformanceDF(self):
         from pyEX import sectorPerformanceDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            sectorPerformanceDF()
+        sectorPerformanceDF()
 
     def test_relevant(self):
         from pyEX import relevant
@@ -314,11 +278,7 @@ class TestAll:
 
     def test_collectionsDF(self):
         from pyEX import collectionsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
-            collectionsDF('sector', 'test')
+        collectionsDF('sector', 'Health Care')
 
     def test_crypto(self):
         from pyEX import crypto
@@ -329,32 +289,21 @@ class TestAll:
 
     def test_cryptoDF(self):
         from pyEX import cryptoDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
-            cryptoDF()
+        cryptoDF()
 
     def test_splits(self):
         from pyEX import splits
         from pyEX.common import PyEXception
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            splits('test')
-            try:
-                splits('test', 'test')
-                assert False
-            except PyEXception:
-                pass
+        splits(SYMBOL)
+        try:
+            splits('test', 'test')
+            assert False
+        except PyEXception:
+            pass
 
     def test_splitsDF(self):
         from pyEX import splitsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            splitsDF('test')
+        splitsDF(SYMBOL, '5y')
 
     def test_news(self):
         from pyEX import news
@@ -380,11 +329,7 @@ class TestAll:
 
     def test_marketNewsDF(self):
         from pyEX import marketNewsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            marketNewsDF()
+        marketNewsDF()
 
     def test_chart(self):
         from pyEX import chart
@@ -433,11 +378,7 @@ class TestAll:
 
     def test_listDF(self):
         from pyEX import listDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            listDF()
+        listDF()
 
     def test_largestTrades(self):
         from pyEX import largestTrades

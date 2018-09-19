@@ -1,5 +1,6 @@
 # for Coverage
 from mock import patch, MagicMock
+SYMBOL = 'aapl'
 
 
 class TestAll:
@@ -32,13 +33,7 @@ class TestAll:
 
     def test_topsDF(self):
         from pyEX import topsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            topsDF()
-            topsDF('test')
-            topsDF(['test'])
+        topsDF()
 
     def test_last(self):
         from pyEX import last
@@ -50,12 +45,7 @@ class TestAll:
 
     def test_lastDF(self):
         from pyEX import lastDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            lastDF()
-            lastDF('test')
+        lastDF()
 
     def test_hist(self):
         from datetime import datetime
@@ -68,15 +58,8 @@ class TestAll:
             hist(datetime.today())
 
     def test_histDF(self):
-        from datetime import datetime
         from pyEX import histDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            histDF()
-            histDF('201505')
-            histDF(datetime.today())
+        histDF()
 
     def test_deep(self):
         from pyEX import deep
