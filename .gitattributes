@@ -1,1 +1,3 @@
 notebooks/* linguist-documentation
+all.ipynb linguist-documentation
+pyEX.ipynb linguist-documentation
