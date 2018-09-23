@@ -56,12 +56,12 @@ def chart(symbol, timeframe='1m', date=None):
     return _getJson('stock/' + symbol + '/chart')
 
 
-def chartDF(symbol, timeframe='1m'):
+def chartDF(symbol, timeframe='1m', date=None):
     '''
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
     '''
-    df = pd.DataFrame(chart(symbol, timeframe))
+    df = pd.DataFrame(chart(symbol, timeframe, date))
     _toDatetime(df)
     if timeframe != '1d':
         _reindex(df, 'date')
