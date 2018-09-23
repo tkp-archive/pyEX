@@ -414,7 +414,7 @@ def peersDF(symbol):
     df = pd.DataFrame(peers(symbol), columns=['symbol'])
     _toDatetime(df)
     _reindex(df, 'symbol')
-    df['symbol'] = df.index
+    df['peer'] = df.index
     return df
 
 
