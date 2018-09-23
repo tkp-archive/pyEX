@@ -20,7 +20,32 @@ _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 _PYEX_PROXIES = None
 
-_STANDARD_DATE_FIELDS = ['date', 'EPSReportDate', 'fiscalEndDate', 'exDate', 'declaredDate', 'paymentDate', 'recordDate', 'reportDate', 'datetime', 'expectedDate', 'DailyListTimestamp']
+_STANDARD_DATE_FIELDS = ['date',
+                         'EPSReportDate',
+                         'fiscalEndDate',
+                         'exDate',
+                         'declaredDate',
+                         'paymentDate',
+                         'recordDate',
+                         'reportDate',
+                         'datetime',
+                         'expectedDate',
+                         'latestTime',
+                         'DailyListTimestamp',
+                         'RecordUpdateTime']
+
+_STANDARD_TIME_FIELDS = ['closeTime',
+                         'close.time',
+                         'delayedPriceTime',
+                         'extendedPriceTime',
+                         'iexLastUpdated',
+                         'latestTime',
+                         'openTime',
+                         'open.time'
+                         'processedTime',
+                         'time',
+                         'timestamp',
+                         'lastUpdated']
 
 
 def _getJson(url):
@@ -116,8 +141,14 @@ def setProxy(proxies=None):
     _PYEX_PROXIES = proxies
 
 
-def _toDatetime(df, cols=None):
+def _toDatetime(df, cols=None, tcols=None):
     cols = cols or _STANDARD_DATE_FIELDS
+    tcols = tcols = _STANDARD_TIME_FIELDS
+
     for col in cols:
         if col in df:
             df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
+
+    for tcol in tcols:
+        if tcol in df:
+            df[tcol] = pd.to_datetime(df[tcol], unit='ms')
