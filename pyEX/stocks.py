@@ -3,7 +3,7 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime
 
 
 def book(symbol):
@@ -15,10 +15,10 @@ def book(symbol):
 def bookDF(symbol):
     '''https://iextrading.com/developer/docs/#book'''
     x = book(symbol)
-    quote = x['quote']
-    asks = x['asks']
-    bids = x['bids']
-    trades = x['trades']
+    quote = x.get('quote', [])
+    asks = x.get('asks', [])
+    bids = x.get('bids', [])
+    trades = x.get('trades', [])
 
     df1 = pd.io.json.json_normalize(quote)
     df1['type'] = 'quote'
@@ -36,6 +36,7 @@ def bookDF(symbol):
     df3['type'] = 'trade'
 
     df = pd.concat([df1, df2, df3, df4], sort=True)
+    _toDatetime(df)
     return df
 
 
@@ -61,7 +62,11 @@ def chartDF(symbol, timeframe='1m'):
     https://iextrading.com/developer/docs/#time-series
     '''
     df = pd.DataFrame(chart(symbol, timeframe))
-    _reindex(df, 'date')
+    _toDatetime(df)
+    if timeframe != '1d':
+        _reindex(df, 'date')
+    else:
+        df.set_index(['date', 'minute'], inplace=True)
     return df
 
 
@@ -74,6 +79,7 @@ def company(symbol):
 def companyDF(symbol):
     '''https://iextrading.com/developer/docs/#company'''
     df = pd.io.json.json_normalize(company(symbol))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -88,6 +94,7 @@ def collections(tag, collectionName):
 def collectionsDF(tag, query):
     '''https://iextrading.com/developer/docs/#collections'''
     df = pd.DataFrame(collections(tag, query))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -100,6 +107,7 @@ def crypto():
 def cryptoDF():
     '''https://iextrading.com/developer/docs/#collections'''
     df = pd.DataFrame(crypto())
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -113,6 +121,7 @@ def delayedQuote(symbol):
 def delayedQuoteDF(symbol):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
     df = pd.io.json.json_normalize(delayedQuote(symbol))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -128,6 +137,7 @@ def dividends(symbol, timeframe='ytd'):
 def dividendsDF(symbol, timeframe='ytd'):
     '''https://iextrading.com/developer/docs/#dividends'''
     df = pd.DataFrame(dividends(symbol, timeframe))
+    _toDatetime(df)
     _reindex(df, 'exDate')
     return df
 
@@ -141,6 +151,7 @@ def earnings(symbol):
 def earningsDF(symbol):
     '''https://iextrading.com/developer/docs/#earnings'''
     df = pd.io.json.json_normalize(earnings(symbol), 'earnings', 'symbol')
+    _toDatetime(df)
     _reindex(df, 'EPSReportDate')
     return df
 
@@ -160,7 +171,11 @@ def earningsTodayDF():
             d['when'] = k
             z.extend(ds)
     df = pd.io.json.json_normalize(z)
-    df.drop_duplicates(inplace=True)
+
+    if not df.empty:
+        df.drop_duplicates(inplace=True)
+
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -174,6 +189,7 @@ def spread(symbol):
 def spreadDF(symbol):
     '''https://iextrading.com/developer/docs/#effective-spread'''
     df = pd.DataFrame(spread(symbol))
+    _toDatetime(df)
     _reindex(df, 'venue')
     return df
 
@@ -187,6 +203,7 @@ def financials(symbol):
 def financialsDF(symbol):
     '''https://iextrading.com/developer/docs/#financials'''
     df = pd.io.json.json_normalize(financials(symbol), 'financials', 'symbol')
+    _toDatetime(df)
     _reindex(df, 'reportDate')
     return df
 
@@ -200,6 +217,7 @@ def ipoTodayDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoToday()
     df = pd.io.json.json_normalize(val, 'rawData')
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -213,6 +231,7 @@ def ipoUpcomingDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoUpcoming()
     df = pd.io.json.json_normalize(val, 'rawData')
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -227,7 +246,9 @@ def threshold(date=None):
 
 def thresholdDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    return pd.DataFrame(threshold(date))
+    df = pd.DataFrame(threshold(date))
+    _toDatetime(df)
+    return df
 
 
 def shortInterest(symbol, date=None):
@@ -241,7 +262,9 @@ def shortInterest(symbol, date=None):
 
 def shortInterestDF(symbol, date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return pd.DataFrame(shortInterest(symbol, date))
+    df = pd.DataFrame(shortInterest(symbol, date))
+    _toDatetime(df)
+    return df
 
 
 def marketShortInterest(date=None):
@@ -254,7 +277,9 @@ def marketShortInterest(date=None):
 
 def marketShortInterestDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    return pd.DataFrame(marketShortInterest(date))
+    df = pd.DataFrame(marketShortInterest(date))
+    _toDatetime(df)
+    return df
 
 
 def stockStats(symbol):
@@ -266,6 +291,7 @@ def stockStats(symbol):
 def stockStatsDF(symbol):
     '''https://iextrading.com/developer/docs/#key-stats'''
     df = pd.io.json.json_normalize(stockStats(symbol))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -279,6 +305,7 @@ def largestTrades(symbol):
 def largestTradesDF(symbol):
     '''https://iextrading.com/developer/docs/#largest-trades'''
     df = pd.DataFrame(largestTrades(symbol))
+    _toDatetime(df)
     _reindex(df, 'time')
     return df
 
@@ -293,6 +320,7 @@ def list(option='mostactive'):
 def listDF(option='mostactive'):
     '''https://iextrading.com/developer/docs/#list'''
     df = pd.DataFrame(list(option))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -326,6 +354,7 @@ def news(symbol, count=10):
 def newsDF(symbol, count=10):
     '''https://iextrading.com/developer/docs/#news'''
     df = pd.DataFrame(news(symbol, count))
+    _toDatetime(df)
     _reindex(df, 'datetime')
     return df
 
@@ -338,6 +367,7 @@ def marketNews(count=10):
 def marketNewsDF(count=10):
     '''https://iextrading.com/developer/docs/#news'''
     df = pd.DataFrame(marketNews(count))
+    _toDatetime(df)
     _reindex(df, 'datetime')
     return df
 
@@ -350,7 +380,9 @@ def ohlc(symbol):
 
 def ohlcDF(symbol):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    return pd.io.json.json_normalize(ohlc(symbol))
+    df = pd.io.json.json_normalize(ohlc(symbol))
+    _toDatetime(df)
+    return df
 
 
 def marketOhlc():
@@ -366,6 +398,7 @@ def marketOhlcDF():
         data.append(x[key])
         data[-1]['symbol'] = key
     df = pd.io.json.json_normalize(data)
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -379,6 +412,7 @@ def peers(symbol):
 def peersDF(symbol):
     '''https://iextrading.com/developer/docs/#peers'''
     df = pd.DataFrame(peers(symbol), columns=['symbol'])
+    _toDatetime(df)
     _reindex(df, 'symbol')
     df['symbol'] = df.index
     return df
@@ -393,6 +427,7 @@ def yesterday(symbol):
 def yesterdayDF(symbol):
     '''https://iextrading.com/developer/docs/#previous'''
     df = pd.io.json.json_normalize(yesterday(symbol))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -410,6 +445,7 @@ def marketYesterdayDF():
         data.append(x[key])
         data[-1]['symbol'] = key
     df = pd.DataFrame(data)
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -422,7 +458,9 @@ def price(symbol):
 
 def priceDF(symbol):
     '''https://iextrading.com/developer/docs/#price'''
-    return pd.io.json.json_normalize({'price': price(symbol)})
+    df = pd.io.json.json_normalize({'price': price(symbol)})
+    _toDatetime(df)
+    return df
 
 
 def quote(symbol):
@@ -434,6 +472,7 @@ def quote(symbol):
 def quoteDF(symbol):
     '''https://iextrading.com/developer/docs/#quote'''
     df = pd.io.json.json_normalize(quote(symbol))
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -446,7 +485,9 @@ def relevant(symbol):
 
 def relevantDF(symbol):
     '''https://iextrading.com/developer/docs/#relevant'''
-    return pd.DataFrame(relevant(symbol))
+    df = pd.DataFrame(relevant(symbol))
+    _toDatetime(df)
+    return df
 
 
 def sectorPerformance():
@@ -457,6 +498,7 @@ def sectorPerformance():
 def sectorPerformanceDF():
     '''https://iextrading.com/developer/docs/#sector-performance'''
     df = pd.DataFrame(sectorPerformance())
+    _toDatetime(df)
     _reindex(df, 'name')
     return df
 
@@ -472,6 +514,7 @@ def splits(symbol, timeframe='ytd'):
 def splitsDF(symbol, timeframe='ytd'):
     '''https://iextrading.com/developer/docs/#splits'''
     df = pd.DataFrame(splits(symbol, timeframe))
+    _toDatetime(df)
     _reindex(df, 'exDate')
     return df
 
@@ -485,5 +528,6 @@ def volumeByVenue(symbol):
 def volumeByVenueDF(symbol):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
     df = pd.DataFrame(volumeByVenue(symbol))
+    _toDatetime(df)
     _reindex(df, 'venue')
     return df

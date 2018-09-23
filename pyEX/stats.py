@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from .common import _getJson, PyEXception, _strOrDate, _reindex
+from .common import _getJson, PyEXception, _strOrDate, _reindex, _toDatetime
 
 
 def stats():
@@ -10,7 +10,9 @@ def stats():
 
 def statsDF():
     '''https://iextrading.com/developer/docs/#intraday'''
-    return pd.DataFrame(stats())
+    df = pd.DataFrame(stats())
+    _toDatetime(df)
+    return df
 
 
 def recent():
@@ -21,6 +23,7 @@ def recent():
 def recentDF():
     '''https://iextrading.com/developer/docs/#recent'''
     df = pd.DataFrame(recent())
+    _toDatetime(df)
     _reindex(df, 'date')
     return df
 
@@ -32,7 +35,9 @@ def records():
 
 def recordsDF():
     '''https://iextrading.com/developer/docs/#records'''
-    return pd.DataFrame(records())
+    df = pd.DataFrame(records())
+    _toDatetime(df)
+    return df
 
 
 def summary(date=None):
@@ -49,7 +54,9 @@ def summary(date=None):
 
 def summaryDF(date=None):
     '''https://iextrading.com/developer/docs/#historical-summary'''
-    return pd.DataFrame(summary(date))
+    df = pd.DataFrame(summary(date))
+    _toDatetime(df)
+    return df
 
 
 def daily(date=None, last=''):
@@ -66,4 +73,6 @@ def daily(date=None, last=''):
 def dailyDF(date=None, last=''):
     '''https://iextrading.com/developer/docs/#historical-daily'''
     '''https://iextrading.com/developer/docs/#historical-summary'''
-    return pd.DataFrame(daily(date, last))
+    df = pd.DataFrame(daily(date, last))
+    _toDatetime(df)
+    return df

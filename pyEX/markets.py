@@ -1,5 +1,5 @@
 import pandas as pd
-from .common import _getJson
+from .common import _getJson, _toDatetime
 
 
 def markets():
@@ -9,4 +9,6 @@ def markets():
 
 def marketsDF():
     '''https://iextrading.com/developer/docs/#intraday'''
-    return pd.DataFrame(markets())
+    df = pd.DataFrame(markets())
+    _toDatetime(df)
+    return df

@@ -1,5 +1,5 @@
 import pandas as pd
-from .common import _getJson, _strOrDate, _reindex
+from .common import _getJson, _strOrDate, _reindex, _toDatetime
 
 
 def symbols():
@@ -10,6 +10,7 @@ def symbols():
 def symbolsDF():
     '''https://iextrading.com/developer/docs/#symbols'''
     df = pd.DataFrame(symbols())
+    _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
@@ -24,7 +25,9 @@ def corporateActions(date=None):
 
 def corporateActionsDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
-    return pd.DataFrame(corporateActions(date))
+    df = pd.DataFrame(corporateActions(date))
+    _toDatetime(df)
+    return df
 
 
 def dividends(date=None):
@@ -37,7 +40,9 @@ def dividends(date=None):
 
 def dividendsDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-dividends'''
-    return pd.DataFrame(dividends(date))
+    df = pd.DataFrame(dividends(date))
+    _toDatetime(df)
+    return df
 
 
 def nextDayExtDate(date=None):
@@ -50,7 +55,9 @@ def nextDayExtDate(date=None):
 
 def nextDayExtDateDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-next-day-ex-date'''
-    return pd.DataFrame(nextDayExtDate(date))
+    df = pd.DataFrame(nextDayExtDate(date))
+    _toDatetime(df)
+    return df
 
 
 def directory(date=None):
@@ -63,4 +70,6 @@ def directory(date=None):
 
 def directoryDF(date=None):
     '''https://iextrading.com/developer/docs/#iex-listed-symbol-directory'''
-    return pd.DataFrame(directory(date))
+    df = pd.DataFrame(directory(date))
+    _toDatetime(df)
+    return df

@@ -1,6 +1,7 @@
 from __future__ import print_function
 import requests
 import ujson
+import pandas as pd
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
 
@@ -18,6 +19,8 @@ _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 _PYEX_PROXIES = None
+
+_STANDARD_DATE_FIELDS = ['date', 'EPSReportDate', 'fiscalEndDate', 'exDate', 'declaredDate', 'paymentDate', 'recordDate', 'reportDate', 'datetime', 'expectedDate', 'DailyListTimestamp']
 
 
 def _getJson(url):
@@ -104,9 +107,17 @@ class PyEXception(Exception):
 
 
 def _reindex(df, col):
-    df.set_index(col, inplace=True)
+    if col in df.columns:
+        df.set_index(col, inplace=True)
 
 
 def setProxy(proxies=None):
     global _PYEX_PROXIES
     _PYEX_PROXIES = proxies
+
+
+def _toDatetime(df, cols=None):
+    cols = cols or _STANDARD_DATE_FIELDS
+    for col in cols:
+        if col in df:
+            df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
