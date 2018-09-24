@@ -12,11 +12,11 @@ with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
 
 setup(
     name='pyEX',
-    version='0.1.2',
+    version='0.1.3',
     description='Rest API to IEX',
     long_description=long_description,
     url='https://github.com/timkpaine/pyEX',
-    download_url='https://github.com/timkpaine/pyEX/archive/v0.1.2.tar.gz',
+    download_url='https://github.com/timkpaine/pyEX/archive/v0.1.3.tar.gz',
     author='Tim Paine',
     author_email='timothy.k.paine@gmail.com',
     license='Apache 2.0',
