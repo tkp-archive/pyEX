@@ -205,9 +205,13 @@ def financials(symbol):
 
 def financialsDF(symbol):
     '''https://iextrading.com/developer/docs/#financials'''
-    df = pd.io.json.json_normalize(financials(symbol), 'financials', 'symbol')
-    _toDatetime(df)
-    _reindex(df, 'reportDate')
+    f = financials(symbol)
+    if f:
+        df = pd.io.json.json_normalize(f, 'financials', 'symbol')
+        _toDatetime(df)
+        _reindex(df, 'reportDate')
+    else:
+        df = pd.DataFrame()
     return df
 
 

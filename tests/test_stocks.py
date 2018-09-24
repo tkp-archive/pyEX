@@ -196,11 +196,7 @@ class TestAll:
 
     def test_earningsDF(self):
         from pyEX import earningsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value={'earnings': [{'EPSReportDate': 'test'}], 'symbol': 'test'})
-            earningsDF('test')
+        earningsDF(SYMBOL)
 
     def test_peers(self):
         from pyEX import peers
@@ -256,11 +252,7 @@ class TestAll:
 
     def test_dividendsDF(self):
         from pyEX import dividendsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'exDate': 'test'}])
-            dividendsDF('test')
+        dividendsDF(SYMBOL)
 
     def test_collections(self):
         from pyEX import collections
@@ -314,11 +306,7 @@ class TestAll:
 
     def test_newsDF(self):
         from pyEX import newsDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'datetime': 'test'}])
-            newsDF('test')
+        newsDF(SYMBOL)
 
     def test_marketNews(self):
         from pyEX import marketNews
@@ -348,11 +336,7 @@ class TestAll:
 
     def test_chartDF(self):
         from pyEX import chartDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'date': 'test'}])
-            chartDF('test')
+        chartDF(SYMBOL)
 
     def test_logo(symbol):
         from pyEX import logo
@@ -390,11 +374,7 @@ class TestAll:
 
     def test_largestTradesDF(self):
         from pyEX import largestTradesDF
-        with patch('requests.get') as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[{'time': 'test'}])
-            largestTradesDF('aapl')
+        largestTradesDF(SYMBOL)
 
     def test_logoPNG(self):
         from pyEX import logoPNG
