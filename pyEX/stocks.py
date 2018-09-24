@@ -66,7 +66,10 @@ def chartDF(symbol, timeframe='1m', date=None):
     if timeframe is not None and timeframe != '1d':
         _reindex(df, 'date')
     else:
-        df.set_index(['date', 'minute'], inplace=True)
+        if not df.empty:
+            df.set_index(['date', 'minute'], inplace=True)
+        else:
+            return pd.DataFrame()
     return df
 
 
