@@ -153,9 +153,13 @@ def earnings(symbol):
 
 def earningsDF(symbol):
     '''https://iextrading.com/developer/docs/#earnings'''
-    df = pd.io.json.json_normalize(earnings(symbol), 'earnings', 'symbol')
-    _toDatetime(df)
-    _reindex(df, 'EPSReportDate')
+    e = earnings(symbol)
+    if e:
+        df = pd.io.json.json_normalize(e, 'earnings', 'symbol')
+        _toDatetime(df)
+        _reindex(df, 'EPSReportDate')
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -223,9 +227,12 @@ def ipoToday():
 def ipoTodayDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoToday()
-    df = pd.io.json.json_normalize(val, 'rawData')
-    _toDatetime(df)
-    _reindex(df, 'symbol')
+    if val:
+        df = pd.io.json.json_normalize(val, 'rawData')
+        _toDatetime(df)
+        _reindex(df, 'symbol')
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -237,9 +244,12 @@ def ipoUpcoming():
 def ipoUpcomingDF():
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
     val = ipoUpcoming()
-    df = pd.io.json.json_normalize(val, 'rawData')
-    _toDatetime(df)
-    _reindex(df, 'symbol')
+    if val:
+        df = pd.io.json.json_normalize(val, 'rawData')
+        _toDatetime(df)
+        _reindex(df, 'symbol')
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -297,9 +307,13 @@ def stockStats(symbol):
 
 def stockStatsDF(symbol):
     '''https://iextrading.com/developer/docs/#key-stats'''
-    df = pd.io.json.json_normalize(stockStats(symbol))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
+    s = stockStats(symbol)
+    if s:
+        df = pd.io.json.json_normalize(s)
+        _toDatetime(df)
+        _reindex(df, 'symbol')
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -387,8 +401,12 @@ def ohlc(symbol):
 
 def ohlcDF(symbol):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    df = pd.io.json.json_normalize(ohlc(symbol))
-    _toDatetime(df)
+    o = ohlc(symbol)
+    if o:
+        df = pd.io.json.json_normalize(o)
+        _toDatetime(df)
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -433,9 +451,13 @@ def yesterday(symbol):
 
 def yesterdayDF(symbol):
     '''https://iextrading.com/developer/docs/#previous'''
-    df = pd.io.json.json_normalize(yesterday(symbol))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
+    y = yesterday(symbol)
+    if y:
+        df = pd.io.json.json_normalize(y)
+        _toDatetime(df)
+        _reindex(df, 'symbol')
+    else:
+        df = pd.DataFrame()
     return df
 
 
@@ -478,9 +500,13 @@ def quote(symbol):
 
 def quoteDF(symbol):
     '''https://iextrading.com/developer/docs/#quote'''
-    df = pd.io.json.json_normalize(quote(symbol))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
+    q = quote(symbol)
+    if q:
+        df = pd.io.json.json_normalize(q)
+        _toDatetime(df)
+        _reindex(df, 'symbol')
+    else:
+        df = pd.DataFrame()
     return df
 
 
