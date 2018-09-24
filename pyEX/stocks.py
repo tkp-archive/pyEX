@@ -63,7 +63,7 @@ def chartDF(symbol, timeframe='1m', date=None):
     '''
     df = pd.DataFrame(chart(symbol, timeframe, date))
     _toDatetime(df)
-    if timeframe != '1d':
+    if timeframe is not None and timeframe != '1d':
         _reindex(df, 'date')
     else:
         df.set_index(['date', 'minute'], inplace=True)
