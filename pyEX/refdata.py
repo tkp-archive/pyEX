@@ -15,6 +15,11 @@ def symbolsDF():
     return df
 
 
+def symbolsList():
+    '''https://iextrading.com/developer/docs/#symbols'''
+    return symbolsDF().index.tolist()
+
+
 def corporateActions(date=None):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
     if date:

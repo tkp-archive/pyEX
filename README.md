@@ -30,6 +30,28 @@ If you redistribute our API data:
 ### Methods
 
 #### Stocks
+- [Bulk requests](https://iextrading.com/developer/docs/#batch-requests)
+
+    This is your best bet for getting bulk data, it is as performant as the IEX api allows.
+
+    ```python3
+        def bulkBatch(symbols, types=None, _range='1m', last=10):
+    ```
+
+    ```python3
+        def bulkBatchDF(symbols, types=None, _range='1m', last=10):
+    ```
+
+
+- [batch](https://iextrading.com/developer/docs/#batch-requests)
+
+    ```python3
+        def batch(symbols, types=None, _range='1m', last=10):
+    ```
+
+    ```python3
+        def batchDF(symbols, types=None, _range='1m', last=10):
+    ```
 
 - [book](https://iextrading.com/developer/docs/#book)
 
@@ -371,6 +393,10 @@ If you redistribute our API data:
         def symbolsDF():
     ```
 
+    ```python3
+        def symbolsList():
+    ```
+
 - [corporateActions](https://iextrading.com/developer/docs/#iex-corporate-actions)
     ```python3
         def corporateActions(date=None):
@@ -607,6 +633,7 @@ If you redistribute our API data:
 #### Stats
 
 - [stats](https://iextrading.com/developer/docs/#intraday)
+
     ```python3
         def stats():
     ```
@@ -616,6 +643,7 @@ If you redistribute our API data:
     ```
 
 - [recent](https://iextrading.com/developer/docs/#recent)
+
     ```python3
         def recent():
     ```
@@ -625,6 +653,7 @@ If you redistribute our API data:
     ```
 
 - [records](https://iextrading.com/developer/docs/#records)
+
     ```python3
         def records():
     ```
@@ -634,6 +663,7 @@ If you redistribute our API data:
     ```
 
 - [summary](https://iextrading.com/developer/docs/#historical-summary)
+
     ```python3
         def summary(date=None):
     ```
@@ -643,6 +673,7 @@ If you redistribute our API data:
     ```
 
 - [daily](https://iextrading.com/developer/docs/#historical-daily)
+
     ```python3
         def daily(date=None, last=''):
     ```

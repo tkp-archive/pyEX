@@ -1,12 +1,15 @@
 import requests
 import pandas as pd
-from IPython.display import Image as ImageI
-from PIL import Image as ImageP
 from io import BytesIO
+from IPython.display import Image as ImageI
+from multiprocessing.pool import ThreadPool
+from PIL import Image as ImageP
 from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
 
 
-def batch(symbols, types=None, range='1m', last=10):
+def batch(symbols, types=None, _range='1m', last=10):
+    types = types or _BATCH_TYPES
+
     if not isinstance(symbols, [].__class__):
         if not isinstance(symbols, str):
             raise PyEXception('batch expects string or list of strings for symbols argument')
@@ -14,23 +17,21 @@ def batch(symbols, types=None, range='1m', last=10):
     if isinstance(types, str):
         types = [types]
 
-    if range not in _TIMEFRAME_CHART:
+    if _range not in _TIMEFRAME_CHART:
         raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
 
-    types = types or _BATCH_TYPES
-
     if isinstance(symbols, str):
-        route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), range, last)
+        route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), _range, last)
         return _getJson(route)
 
     if len(symbols) > 100:
         raise PyEXception('IEX will only handle up to 100 symbols at a time!')
-    route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), range, last)
+    route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), _range, last)
     return _getJson(route)
 
 
-def batchDF(symbols, types=None, range='1m', last=10):
-    x = batch(symbols, types, range, last)
+def batchDF(symbols, types=None, _range='1m', last=10):
+    x = batch(symbols, types, _range, last)
 
     _m = {
         'book': _bookToDF,
@@ -53,6 +54,34 @@ def batchDF(symbols, types=None, range='1m', last=10):
             for field in x[symbol].keys():
                 x[symbol][field] = _m[field](x[symbol][field])
     return x
+
+
+def bulkBatch(symbols, types=None, _range='1m', last=10):
+    types = types or _BATCH_TYPES
+    args = []
+    empty_data = []
+    list_orig = empty_data.__class__
+
+    for i in range(0, len(symbols), 99):
+        args.append((symbols[i:i+100], types, _range, last))
+
+    pool = ThreadPool(20)
+    rets = pool.starmap(batch, args)
+
+    ret = {}
+    for i, d in enumerate(rets):
+        symbols_subset = args[i][0]
+        if len(d) != len(symbols_subset):
+            empty_data.extend(list_orig(set(symbols_subset) - set(d.keys())))
+        ret.update(d)
+
+    for k in empty_data:
+        if k not in ret:
+            if isinstance(types, str):
+                ret[k] = pd.DataFrame()
+            else:
+                ret[k] = {x: pd.DataFrame() for x in types}
+    return ret
 
 
 def book(symbol):

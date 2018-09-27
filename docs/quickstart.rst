@@ -8,6 +8,17 @@ Overview
 Stocks
 ^^^^^^
 
+-  `batch <https://iextrading.com/developer/docs/#batch-requests>`__
+
+   .. code:: python3
+
+          def batch(symbols, types=None, _range='1m', last=10):
+
+   .. code:: python3
+
+          def batchDF(symbols, types=None, _range='1m', last=10):
+
+
 -  `book <https://iextrading.com/developer/docs/#book>`__
 
    .. code:: python3
@@ -352,6 +363,11 @@ Reference
 
           def symbolsDF():
 
+    .. code:: python3
+
+          def symbolsList():
+
+
 -  `corporateActions <https://iextrading.com/developer/docs/#iex-corporate-actions>`__
    ``python3       def corporateActions(date=None):``
 
@@ -580,35 +596,49 @@ Stats
 ^^^^^
 
 -  `stats <https://iextrading.com/developer/docs/#intraday>`__
-   ``python3       def stats():``
+   .. code:: python3
+
+          def stats():
 
    .. code:: python3
 
           def statsDF():
 
 -  `recent <https://iextrading.com/developer/docs/#recent>`__
-   ``python3       def recent():``
+
+   .. code:: python3
+          
+          def recent():
 
    .. code:: python3
 
           def recentDF():
 
 -  `records <https://iextrading.com/developer/docs/#records>`__
-   ``python3       def records():``
+
+   .. code:: python3
+
+          def records():
 
    .. code:: python3
 
           def recordsDF():
 
 -  `summary <https://iextrading.com/developer/docs/#historical-summary>`__
-   ``python3       def summary(date=None):``
+
+   .. code:: python3
+
+          def summary(date=None):
 
    .. code:: python3
 
           def summaryDF(date=None):
 
 -  `daily <https://iextrading.com/developer/docs/#historical-daily>`__
-   ``python3       def daily(date=None, last=''):``
+
+   .. code:: python3
+
+          def daily(date=None, last=''):
 
    .. code:: python3
 
