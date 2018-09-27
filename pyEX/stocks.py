@@ -23,6 +23,8 @@ def batch(symbols, types=None, range='1m', last=10):
         route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), range, last)
         return _getJson(route)
 
+    if len(symbols) > 100:
+        raise PyEXception('IEX will only handle up to 100 symbols at a time!')
     route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), range, last)
     return _getJson(route)
 
