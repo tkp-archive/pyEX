@@ -79,6 +79,35 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
     for k in empty_data:
         if k not in ret:
             if isinstance(types, str):
+                ret[k] = {}
+            else:
+                ret[k] = {x: {} for x in types}
+    return ret
+
+
+def bulkBatchDF(symbols, types=None, _range='1m', last=10):
+    types = types or _BATCH_TYPES
+    args = []
+    empty_data = []
+    list_orig = empty_data.__class__
+
+    for i in range(0, len(symbols), 99):
+        args.append((symbols[i:i+100], types, _range, last))
+
+    pool = ThreadPool(20)
+    rets = pool.starmap(batchDF, args)
+    pool.close()
+
+    ret = {}
+    for i, d in enumerate(rets):
+        symbols_subset = args[i][0]
+        if len(d) != len(symbols_subset):
+            empty_data.extend(list_orig(set(symbols_subset) - set(d.keys())))
+        ret.update(d)
+
+    for k in empty_data:
+        if k not in ret:
+            if isinstance(types, str):
                 ret[k] = pd.DataFrame()
             else:
                 ret[k] = {x: pd.DataFrame() for x in types}

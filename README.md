@@ -27,7 +27,11 @@ If you redistribute our API data:
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
 
 
+
+
 ### Methods
+[Notebook](https://github.com/timkpaine/pyEX/blob/master/all.ipynb)
+
 
 #### Stocks
 - [Bulk requests](https://iextrading.com/developer/docs/#batch-requests)
