@@ -33,27 +33,23 @@ def batch(symbols, types=None, _range='1m', last=10):
 def batchDF(symbols, types=None, _range='1m', last=10):
     x = batch(symbols, types, _range, last)
 
-    _m = {
-        'book': _bookToDF,
-        'chart': _chartToDF,
-        'company': _companyToDF,
-        'dividends': _dividendsToDF,
-        'earnings': _earningsToDF,
-        'financials': _financialsToDF,
-        'stats': _statsToDF,
-        'news': _newsToDF,
-        'peers': _peersToDF,
-        'splits': _splitsToDF,
-    }
+    ret = {}
 
     if isinstance(symbols, str):
         for field in x.keys():
-            x[field] = _m[field](x[field])
+            ret[field] = _MAPPING[field](x[field])
     else:
         for symbol in x.keys():
             for field in x[symbol].keys():
-                x[symbol][field] = _m[field](x[symbol][field])
-    return x
+                if field not in ret:
+                    ret[field] = pd.DataFrame()
+
+                dat = x[symbol][field]
+                dat = _MAPPING[field](dat)
+                dat['KEY'] = symbol
+
+                ret[field] = pd.concat([ret[field], dat], sort=True)
+    return ret
 
 
 def bulkBatch(symbols, types=None, _range='1m', last=10):
@@ -61,6 +57,9 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
     args = []
     empty_data = []
     list_orig = empty_data.__class__
+
+    if not isinstance(symbols, list_orig):
+        raise PyEXception('Symbols must be of type list')
 
     for i in range(0, len(symbols), 99):
         args.append((symbols[i:i+99], types, _range, last))
@@ -70,6 +69,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
     pool.close()
 
     ret = {}
+
     for i, d in enumerate(rets):
         symbols_subset = args[i][0]
         if len(d) != len(symbols_subset):
@@ -86,31 +86,18 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
 
 
 def bulkBatchDF(symbols, types=None, _range='1m', last=10):
-    types = types or _BATCH_TYPES
-    args = []
-    empty_data = []
-    list_orig = empty_data.__class__
-
-    for i in range(0, len(symbols), 99):
-        args.append((symbols[i:i+99], types, _range, last))
-
-    pool = ThreadPool(20)
-    rets = pool.starmap(batchDF, args)
-    pool.close()
-
+    dat = bulkBatch(symbols, types, _range, last)
     ret = {}
-    for i, d in enumerate(rets):
-        symbols_subset = args[i][0]
-        if len(d) != len(symbols_subset):
-            empty_data.extend(list_orig(set(symbols_subset) - set(d.keys())))
-        ret.update(d)
+    for symbol in dat:
+        for field in dat[symbol]:
+            if field not in ret:
+                ret[field] = pd.DataFrame()
 
-    for k in empty_data:
-        if k not in ret:
-            if isinstance(types, str):
-                ret[k] = pd.DataFrame()
-            else:
-                ret[k] = {x: pd.DataFrame() for x in types}
+            d = dat[symbol][field]
+            d = _MAPPING[field](d)
+            d['KEY'] = symbol
+            ret[field] = pd.concat([ret[field], d], sort=True)
+
     return ret
 
 
@@ -730,3 +717,16 @@ def volumeByVenueDF(symbol):
     _toDatetime(df)
     _reindex(df, 'venue')
     return df
+
+_MAPPING = {
+    'book': _bookToDF,
+    'chart': _chartToDF,
+    'company': _companyToDF,
+    'dividends': _dividendsToDF,
+    'earnings': _earningsToDF,
+    'financials': _financialsToDF,
+    'stats': _statsToDF,
+    'news': _newsToDF,
+    'peers': _peersToDF,
+    'splits': _splitsToDF,
+}
