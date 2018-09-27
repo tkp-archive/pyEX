@@ -63,7 +63,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
     list_orig = empty_data.__class__
 
     for i in range(0, len(symbols), 99):
-        args.append((symbols[i:i+100], types, _range, last))
+        args.append((symbols[i:i+99], types, _range, last))
 
     pool = ThreadPool(20)
     rets = pool.starmap(batch, args)
@@ -92,7 +92,7 @@ def bulkBatchDF(symbols, types=None, _range='1m', last=10):
     list_orig = empty_data.__class__
 
     for i in range(0, len(symbols), 99):
-        args.append((symbols[i:i+100], types, _range, last))
+        args.append((symbols[i:i+99], types, _range, last))
 
     pool = ThreadPool(20)
     rets = pool.starmap(batchDF, args)

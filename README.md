@@ -326,6 +326,7 @@ If you redistribute our API data:
     ```
 
 - [price](https://iextrading.com/developer/docs/#price)
+
     ```python3
         def price(symbol):
     ```
@@ -402,6 +403,7 @@ If you redistribute our API data:
     ```
 
 - [corporateActions](https://iextrading.com/developer/docs/#iex-corporate-actions)
+
     ```python3
         def corporateActions(date=None):
     ```
@@ -412,6 +414,7 @@ If you redistribute our API data:
     ```
 
 - [dividends](https://iextrading.com/developer/docs/#iex-dividends)
+
     ```python3
         def dividends(date=None):
     ```
@@ -421,6 +424,7 @@ If you redistribute our API data:
     ```
 
 - [nextDayExtDate](https://iextrading.com/developer/docs/#iex-next-day-ex-date)
+
     ```python3
         def nextDayExtDate(date=None):
     ```
@@ -430,6 +434,7 @@ If you redistribute our API data:
     ```
 
 - [directory](https://iextrading.com/developer/docs/#iex-listed-symbol-directory)
+
     ```python3
         def directory(date=None):
     ```

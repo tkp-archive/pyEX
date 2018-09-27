@@ -368,29 +368,41 @@ Reference
           def symbolsList():
 
 
--  `corporateActions <https://iextrading.com/developer/docs/#iex-corporate-actions>`__
-   ``python3       def corporateActions(date=None):``
+-  `corporateActions <https://iextrading.com/developer/docs/#iex-corporate-actions>`_
+
+   .. code:: python3
+
+          def corporateActions(date=None):
 
    .. code:: python3
 
           def corporateActionsDF(date=None):
 
 -  `dividends <https://iextrading.com/developer/docs/#iex-dividends>`__
-   ``python3       def dividends(date=None):``
+
+   .. code:: python3
+
+          def dividends(date=None):
 
    .. code:: python3
 
           def dividendsDF(date=None):
 
 -  `nextDayExtDate <https://iextrading.com/developer/docs/#iex-next-day-ex-date>`__
-   ``python3       def nextDayExtDate(date=None):``
+
+   .. code:: python3
+
+          def nextDayExtDate(date=None):
 
    .. code:: python3
 
           def nextDayExtDateDF(date=None):
 
 -  `directory <https://iextrading.com/developer/docs/#iex-listed-symbol-directory>`__
-   ``python3       def directory(date=None):``
+
+   .. code:: python3
+
+          def directory(date=None):
 
    .. code:: python3
 
@@ -596,6 +608,7 @@ Stats
 ^^^^^
 
 -  `stats <https://iextrading.com/developer/docs/#intraday>`__
+
    .. code:: python3
 
           def stats():
