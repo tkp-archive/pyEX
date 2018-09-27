@@ -3,7 +3,54 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from PIL import Image as ImageP
 from io import BytesIO
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime
+from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
+
+
+def batch(symbols, types=None, range='1m', last=10):
+    if not isinstance(symbols, [].__class__):
+        if not isinstance(symbols, str):
+            raise PyEXception('batch expects string or list of strings for symbols argument')
+
+    if isinstance(types, str):
+        types = [types]
+
+    if range not in _TIMEFRAME_CHART:
+        raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
+
+    types = types or _BATCH_TYPES
+
+    if isinstance(symbols, str):
+        route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), range, last)
+        return _getJson(route)
+
+    route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), range, last)
+    return _getJson(route)
+
+
+def batchDF(symbols, types=None, range='1m', last=10):
+    x = batch(symbols, types, range, last)
+
+    _m = {
+        'book': _bookToDF,
+        'chart': _chartToDF,
+        'company': _companyToDF,
+        'dividends': _dividendsToDF,
+        'earnings': _earningsToDF,
+        'financials': _financialsToDF,
+        'stats': _statsToDF,
+        'news': _newsToDF,
+        'peers': _peersToDF,
+        'splits': _splitsToDF,
+    }
+
+    if isinstance(symbols, str):
+        for field in x.keys():
+            x[field] = _m[field](x[field])
+    else:
+        for symbol in x.keys():
+            for field in x[symbol].keys():
+                x[symbol][field] = _m[field](x[symbol][field])
+    return x
 
 
 def book(symbol):
@@ -12,13 +59,11 @@ def book(symbol):
     return _getJson('stock/' + symbol + '/book')
 
 
-def bookDF(symbol):
-    '''https://iextrading.com/developer/docs/#book'''
-    x = book(symbol)
-    quote = x.get('quote', [])
-    asks = x.get('asks', [])
-    bids = x.get('bids', [])
-    trades = x.get('trades', [])
+def _bookToDF(b):
+    quote = b.get('quote', [])
+    asks = b.get('asks', [])
+    bids = b.get('bids', [])
+    trades = b.get('trades', [])
 
     df1 = pd.io.json.json_normalize(quote)
     df1['type'] = 'quote'
@@ -40,6 +85,13 @@ def bookDF(symbol):
     return df
 
 
+def bookDF(symbol):
+    '''https://iextrading.com/developer/docs/#book'''
+    x = book(symbol)
+    df = _bookToDF(x)
+    return df
+
+
 def chart(symbol, timeframe='1m', date=None):
     '''
     https://iextrading.com/developer/docs/#chart
@@ -56,12 +108,20 @@ def chart(symbol, timeframe='1m', date=None):
     return _getJson('stock/' + symbol + '/chart')
 
 
+def _chartToDF(c):
+    df = pd.DataFrame(c)
+    _toDatetime(df)
+    _reindex(df, 'date')
+    return df
+
+
 def chartDF(symbol, timeframe='1m', date=None):
     '''
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
     '''
-    df = pd.DataFrame(chart(symbol, timeframe, date))
+    c = chart(symbol, timeframe, date)
+    df = pd.DataFrame(c)
     _toDatetime(df)
     if timeframe is not None and timeframe != '1d':
         _reindex(df, 'date')
@@ -79,11 +139,17 @@ def company(symbol):
     return _getJson('stock/' + symbol + '/company')
 
 
-def companyDF(symbol):
-    '''https://iextrading.com/developer/docs/#company'''
-    df = pd.io.json.json_normalize(company(symbol))
+def _companyToDF(c):
+    df = pd.io.json.json_normalize(c)
     _toDatetime(df)
     _reindex(df, 'symbol')
+    return df
+
+
+def companyDF(symbol):
+    '''https://iextrading.com/developer/docs/#company'''
+    c = company(symbol)
+    df = _companyToDF(c)
     return df
 
 
@@ -137,11 +203,17 @@ def dividends(symbol, timeframe='ytd'):
     return _getJson('stock/' + symbol + '/dividends/' + timeframe)
 
 
-def dividendsDF(symbol, timeframe='ytd'):
-    '''https://iextrading.com/developer/docs/#dividends'''
-    df = pd.DataFrame(dividends(symbol, timeframe))
+def _dividendsToDF(d):
+    df = pd.DataFrame(d)
     _toDatetime(df)
     _reindex(df, 'exDate')
+    return df
+
+
+def dividendsDF(symbol, timeframe='ytd'):
+    '''https://iextrading.com/developer/docs/#dividends'''
+    d = dividends(symbol, timeframe)
+    df = _dividendsToDF(d)
     return df
 
 
@@ -151,15 +223,20 @@ def earnings(symbol):
     return _getJson('stock/' + symbol + '/earnings')
 
 
-def earningsDF(symbol):
-    '''https://iextrading.com/developer/docs/#earnings'''
-    e = earnings(symbol)
+def _earningsToDF(e):
     if e:
         df = pd.io.json.json_normalize(e, 'earnings', 'symbol')
         _toDatetime(df)
         _reindex(df, 'EPSReportDate')
     else:
         df = pd.DataFrame()
+    return df
+
+
+def earningsDF(symbol):
+    '''https://iextrading.com/developer/docs/#earnings'''
+    e = earnings(symbol)
+    df = _earningsToDF(e)
     return df
 
 
@@ -207,15 +284,20 @@ def financials(symbol):
     return _getJson('stock/' + symbol + '/financials')
 
 
-def financialsDF(symbol):
-    '''https://iextrading.com/developer/docs/#financials'''
-    f = financials(symbol)
+def _financialsToDF(f):
     if f:
         df = pd.io.json.json_normalize(f, 'financials', 'symbol')
         _toDatetime(df)
         _reindex(df, 'reportDate')
     else:
         df = pd.DataFrame()
+    return df
+
+
+def financialsDF(symbol):
+    '''https://iextrading.com/developer/docs/#financials'''
+    f = financials(symbol)
+    df = _financialsToDF(f)
     return df
 
 
@@ -305,15 +387,20 @@ def stockStats(symbol):
     return _getJson('stock/' + symbol + '/stats')
 
 
-def stockStatsDF(symbol):
-    '''https://iextrading.com/developer/docs/#key-stats'''
-    s = stockStats(symbol)
+def _statsToDF(s):
     if s:
         df = pd.io.json.json_normalize(s)
         _toDatetime(df)
         _reindex(df, 'symbol')
     else:
         df = pd.DataFrame()
+    return df
+
+
+def stockStatsDF(symbol):
+    '''https://iextrading.com/developer/docs/#key-stats'''
+    s = stockStats(symbol)
+    df = _statsToDF(s)
     return df
 
 
@@ -372,11 +459,17 @@ def news(symbol, count=10):
     return _getJson('stock/' + symbol + '/news/last/' + str(count))
 
 
-def newsDF(symbol, count=10):
-    '''https://iextrading.com/developer/docs/#news'''
-    df = pd.DataFrame(news(symbol, count))
+def _newsToDF(n):
+    df = pd.DataFrame(n)
     _toDatetime(df)
     _reindex(df, 'datetime')
+    return df
+
+
+def newsDF(symbol, count=10):
+    '''https://iextrading.com/developer/docs/#news'''
+    n = news(symbol, count)
+    df = _newsToDF(n)
     return df
 
 
@@ -434,12 +527,18 @@ def peers(symbol):
     return _getJson('stock/' + symbol + '/peers')
 
 
-def peersDF(symbol):
-    '''https://iextrading.com/developer/docs/#peers'''
-    df = pd.DataFrame(peers(symbol), columns=['symbol'])
+def _peersToDF(p):
+    df = pd.DataFrame(p, columns=['symbol'])
     _toDatetime(df)
     _reindex(df, 'symbol')
     df['peer'] = df.index
+    return df
+
+
+def peersDF(symbol):
+    '''https://iextrading.com/developer/docs/#peers'''
+    p = peers(symbol)
+    df = _peersToDF(p)
     return df
 
 
@@ -544,11 +643,17 @@ def splits(symbol, timeframe='ytd'):
     return _getJson('stock/' + symbol + '/splits/' + timeframe)
 
 
-def splitsDF(symbol, timeframe='ytd'):
-    '''https://iextrading.com/developer/docs/#splits'''
-    df = pd.DataFrame(splits(symbol, timeframe))
+def _splitsToDF(s):
+    df = pd.DataFrame(s)
     _toDatetime(df)
     _reindex(df, 'exDate')
+    return df
+
+
+def splitsDF(symbol, timeframe='ytd'):
+    '''https://iextrading.com/developer/docs/#splits'''
+    s = splits(symbol, timeframe)
+    df = _splitsToDF(s)
     return df
 
 

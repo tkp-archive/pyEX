@@ -20,6 +20,28 @@ _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 _PYEX_PROXIES = None
 
+# Limit 10
+_BATCH_TYPES = [
+    'book',
+    'chart',
+    'company',
+    'dividends',
+    'earnings',
+    # 'effective-spread',
+    # 'delayed-quote',
+    'financials',
+    'stats',
+    # 'largest-trades',
+    'news',
+    'peers',
+    # 'previous',
+    # 'price',
+    # 'quote',
+    # 'relevant',
+    'splits',
+    # 'volume-by-venue',
+]
+
 _STANDARD_DATE_FIELDS = ['date',
                          'EPSReportDate',
                          'fiscalEndDate',
