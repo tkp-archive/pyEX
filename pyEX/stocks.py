@@ -67,6 +67,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
 
     pool = ThreadPool(20)
     rets = pool.starmap(batch, args)
+    pool.close()
 
     ret = {}
     for i, d in enumerate(rets):
