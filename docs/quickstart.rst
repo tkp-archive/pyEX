@@ -294,7 +294,10 @@ Stocks
           def marketYesterdayDF():
 
 -  `price <https://iextrading.com/developer/docs/#price>`__
-   ``python3       def price(symbol):``
+
+   .. code:: python3
+
+          def price(symbol):
 
    .. code:: python3
 
