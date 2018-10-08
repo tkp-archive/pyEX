@@ -1,6 +1,6 @@
 from __future__ import print_function
 import requests
-import ujson
+import json
 import pandas as pd
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
@@ -105,7 +105,7 @@ def _tryJson(data, raw=True):
     if raw:
         return data
     try:
-        return ujson.loads(data)
+        return json.loads(data)
     except ValueError:
         return data
 
