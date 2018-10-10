@@ -1,3 +1,4 @@
+import itertools
 import requests
 import pandas as pd
 from io import BytesIO
@@ -8,6 +9,7 @@ from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLE
 
 
 def batch(symbols, types=None, _range='1m', last=10):
+    '''fetch a large number of fields at the same time'''
     types = types or _BATCH_TYPES
 
     if not isinstance(symbols, [].__class__):
@@ -31,6 +33,7 @@ def batch(symbols, types=None, _range='1m', last=10):
 
 
 def batchDF(symbols, types=None, _range='1m', last=10):
+    '''fetch a large number of fields at the same time'''
     x = batch(symbols, types, _range, last)
 
     ret = {}
@@ -53,6 +56,7 @@ def batchDF(symbols, types=None, _range='1m', last=10):
 
 
 def bulkBatch(symbols, types=None, _range='1m', last=10):
+    '''fetch a large number of fields for multiple symbols all at the same time'''
     types = types or _BATCH_TYPES
     args = []
     empty_data = []
@@ -86,6 +90,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
 
 
 def bulkBatchDF(symbols, types=None, _range='1m', last=10):
+    '''fetch a large number of fields for multiple symbols all at the same time'''
     dat = bulkBatch(symbols, types, _range, last)
     ret = {}
     for symbol in dat:
@@ -178,6 +183,32 @@ def chartDF(symbol, timeframe='1m', date=None):
             df.set_index(['date', 'minute'], inplace=True)
         else:
             return pd.DataFrame()
+    return df
+
+
+def batchMinuteBars(symbol, dates):
+    '''fetch many dates worth of minute-bars for a given symbol'''
+    _raiseIfNotStr(symbol)
+    dates = [_strOrDate(date) for date in dates]
+    list_orig = dates.__class__
+
+    args = []
+    for date in dates:
+        args.append((symbol, '1d', date))
+
+    pool = ThreadPool(20)
+    rets = pool.starmap(chart, args)
+    pool.close()
+
+    return list_orig(itertools.chain(*rets))
+
+
+def batchMinuteBarsDF(symbol, dates):
+    '''fetch many dates worth of minute-bars for a given symbol'''
+    data = batchMinuteBars(symbol, dates)
+    df = pd.DataFrame(data)
+    _toDatetime(df)
+    df.set_index(['date', 'minute'], inplace=True)
     return df
 
 
