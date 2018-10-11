@@ -186,7 +186,7 @@ def chartDF(symbol, timeframe='1m', date=None):
     return df
 
 
-def batchMinuteBars(symbol, dates):
+def bulkMinuteBars(symbol, dates):
     '''fetch many dates worth of minute-bars for a given symbol'''
     _raiseIfNotStr(symbol)
     dates = [_strOrDate(date) for date in dates]
@@ -203,10 +203,12 @@ def batchMinuteBars(symbol, dates):
     return list_orig(itertools.chain(*rets))
 
 
-def batchMinuteBarsDF(symbol, dates):
+def bulkMinuteBarsDF(symbol, dates):
     '''fetch many dates worth of minute-bars for a given symbol'''
-    data = batchMinuteBars(symbol, dates)
+    data = bulkMinuteBars(symbol, dates)
     df = pd.DataFrame(data)
+    if df.empty:
+        return df
     _toDatetime(df)
     df.set_index(['date', 'minute'], inplace=True)
     return df
