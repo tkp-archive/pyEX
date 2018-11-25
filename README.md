@@ -18,6 +18,8 @@ If you redistribute our API data:
 - Additionally, if you display our TOPS price data, cite “IEX Real-Time Price” near the price.
 
 
+### Version 2 API
+[There is a new IEX API being developed](https://github.com/iexg/IEX-API/issues/557), so all development efforts will focus on that in the near term. 
 
 ### Getting Started
 
