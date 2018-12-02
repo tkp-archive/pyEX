@@ -38,7 +38,7 @@ If you redistribute our API data:
     spy = [x for x in pandas.read_html('https://etfdailynews.com/etf/spy/', attrs={'id': 'etfs-that-own'})[0].Symbol.values.tolist() if isinstance(x, str)]
 
     # bulk fetch 6m of data
-    pyEX.bulkBatchDF(spy, ['chart'], _range='6m')
+    pyEX.bulkBatchDF(spy, ['chart'], _range='6m')['chart']
 ```
 
 
