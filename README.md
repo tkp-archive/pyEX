@@ -31,7 +31,7 @@ If you redistribute our API data:
 
 
 
-### 6 Months of spy data in 2 lines:
+### 6 Months of spy data in a dataframe in 2 lines:
 
 ```python
     # fetch spy from website, clean for some bad formatted symbols
