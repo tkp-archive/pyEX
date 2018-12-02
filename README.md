@@ -31,6 +31,16 @@ If you redistribute our API data:
 
 
 
+### 6 Months of spy data in 2 lines:
+
+```python
+    # fetch spy from website, clean for some bad formatted symbols
+    spy = [x for x in pd.read_html('https://etfdailynews.com/etf/spy/', attrs={'id': 'etfs-that-own'})[0].Symbol.values.tolist() if isinstance(x, str)]
+
+    # bulk fetch 6m of data
+    p.bulkBatchDF(spy, ['chart'], _range='6m')
+```
+
 
 ### Methods
 [Notebook](https://github.com/timkpaine/pyEX/blob/master/all.ipynb)
