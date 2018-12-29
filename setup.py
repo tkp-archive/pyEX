@@ -35,5 +35,6 @@ setup(
 
     keywords='finance data',
     packages=find_packages(exclude=[]),
-    install_requires=requires
+    install_requires=requires,
+    extras_require={'dev': requires + ['pylint']}
 )
