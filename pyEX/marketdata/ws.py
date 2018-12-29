@@ -1,6 +1,5 @@
 from enum import Enum
-from datetime import datetime
-from ..common import _getJson, _strToList, _raiseIfNotStr, _stream, _wsURL, PyEXception
+from ..common import _strToList, _stream, _wsURL, PyEXception
 
 
 class DeepChannels(Enum):

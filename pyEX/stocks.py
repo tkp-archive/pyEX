@@ -751,6 +751,7 @@ def volumeByVenueDF(symbol, token='', version=''):
     _reindex(df, 'venue')
     return df
 
+
 _MAPPING = {
     'book': _bookToDF,
     'chart': _chartToDF,
