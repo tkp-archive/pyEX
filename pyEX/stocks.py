@@ -8,7 +8,7 @@ from PIL import Image as ImageP
 from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
 
 
-def batch(symbols, types=None, _range='1m', last=10):
+def batch(symbols, types=None, _range='1m', last=10, token='', version=''):
     '''fetch a large number of fields at the same time'''
     types = types or _BATCH_TYPES
 
@@ -24,17 +24,17 @@ def batch(symbols, types=None, _range='1m', last=10):
 
     if isinstance(symbols, str):
         route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), _range, last)
-        return _getJson(route)
+        return _getJson(route, token, version)
 
     if len(symbols) > 100:
         raise PyEXception('IEX will only handle up to 100 symbols at a time!')
     route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), _range, last)
-    return _getJson(route)
+    return _getJson(route, token, version)
 
 
-def batchDF(symbols, types=None, _range='1m', last=10):
+def batchDF(symbols, types=None, _range='1m', last=10, token='', version=''):
     '''fetch a large number of fields at the same time'''
-    x = batch(symbols, types, _range, last)
+    x = batch(symbols, types, _range, last, token, version)
 
     ret = {}
 
@@ -55,7 +55,7 @@ def batchDF(symbols, types=None, _range='1m', last=10):
     return ret
 
 
-def bulkBatch(symbols, types=None, _range='1m', last=10):
+def bulkBatch(symbols, types=None, _range='1m', last=10, token='', version=''):
     '''fetch a large number of fields for multiple symbols all at the same time'''
     types = types or _BATCH_TYPES
     args = []
@@ -66,7 +66,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
         raise PyEXception('Symbols must be of type list')
 
     for i in range(0, len(symbols), 99):
-        args.append((symbols[i:i+99], types, _range, last))
+        args.append((symbols[i:i+99], types, _range, last, token, version))
 
     pool = ThreadPool(20)
     rets = pool.starmap(batch, args)
@@ -89,9 +89,9 @@ def bulkBatch(symbols, types=None, _range='1m', last=10):
     return ret
 
 
-def bulkBatchDF(symbols, types=None, _range='1m', last=10):
+def bulkBatchDF(symbols, types=None, _range='1m', last=10, token='', version=''):
     '''fetch a large number of fields for multiple symbols all at the same time'''
-    dat = bulkBatch(symbols, types, _range, last)
+    dat = bulkBatch(symbols, types, _range, last, token, version)
     ret = {}
     for symbol in dat:
         for field in dat[symbol]:
@@ -106,10 +106,10 @@ def bulkBatchDF(symbols, types=None, _range='1m', last=10):
     return ret
 
 
-def book(symbol):
+def book(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#book'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/book')
+    return _getJson('stock/' + symbol + '/book', token, version)
 
 
 def _bookToDF(b):
@@ -138,14 +138,14 @@ def _bookToDF(b):
     return df
 
 
-def bookDF(symbol):
+def bookDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#book'''
-    x = book(symbol)
+    x = book(symbol, token, version)
     df = _bookToDF(x)
     return df
 
 
-def chart(symbol, timeframe='1m', date=None):
+def chart(symbol, timeframe='1m', date=None, token='', version=''):
     '''
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
@@ -154,11 +154,11 @@ def chart(symbol, timeframe='1m', date=None):
     if timeframe is not None and timeframe != '1d':
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
-        return _getJson('stock/' + symbol + '/chart' + '/' + timeframe)
+        return _getJson('stock/' + symbol + '/chart' + '/' + timeframe, token, version)
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/' + symbol + '/chart' + '/date/' + date)
-    return _getJson('stock/' + symbol + '/chart')
+        return _getJson('stock/' + symbol + '/chart' + '/date/' + date, token, version)
+    return _getJson('stock/' + symbol + '/chart', token, version)
 
 
 def _chartToDF(c):
@@ -168,12 +168,12 @@ def _chartToDF(c):
     return df
 
 
-def chartDF(symbol, timeframe='1m', date=None):
+def chartDF(symbol, timeframe='1m', date=None, token='', version=''):
     '''
     https://iextrading.com/developer/docs/#chart
     https://iextrading.com/developer/docs/#time-series
     '''
-    c = chart(symbol, timeframe, date)
+    c = chart(symbol, timeframe, date, token, version)
     df = pd.DataFrame(c)
     _toDatetime(df)
     if timeframe is not None and timeframe != '1d':
@@ -186,7 +186,7 @@ def chartDF(symbol, timeframe='1m', date=None):
     return df
 
 
-def bulkMinuteBars(symbol, dates):
+def bulkMinuteBars(symbol, dates, token='', version=''):
     '''fetch many dates worth of minute-bars for a given symbol'''
     _raiseIfNotStr(symbol)
     dates = [_strOrDate(date) for date in dates]
@@ -194,7 +194,7 @@ def bulkMinuteBars(symbol, dates):
 
     args = []
     for date in dates:
-        args.append((symbol, '1d', date))
+        args.append((symbol, '1d', date, token, version))
 
     pool = ThreadPool(20)
     rets = pool.starmap(chart, args)
@@ -203,9 +203,9 @@ def bulkMinuteBars(symbol, dates):
     return list_orig(itertools.chain(*rets))
 
 
-def bulkMinuteBarsDF(symbol, dates):
+def bulkMinuteBarsDF(symbol, dates, token='', version=''):
     '''fetch many dates worth of minute-bars for a given symbol'''
-    data = bulkMinuteBars(symbol, dates)
+    data = bulkMinuteBars(symbol, dates, token, version)
     df = pd.DataFrame(data)
     if df.empty:
         return df
@@ -214,74 +214,74 @@ def bulkMinuteBarsDF(symbol, dates):
     return df
 
 
-def company(symbol):
+def company(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#company'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/company')
+    return _getJson('stock/' + symbol + '/company', token, version)
 
 
-def _companyToDF(c):
+def _companyToDF(c, token='', version=''):
     df = pd.io.json.json_normalize(c)
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def companyDF(symbol):
+def companyDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#company'''
-    c = company(symbol)
+    c = company(symbol, token, version)
     df = _companyToDF(c)
     return df
 
 
-def collections(tag, collectionName):
+def collections(tag, collectionName, token='', version=''):
     '''https://iextrading.com/developer/docs/#collections'''
     if tag not in _COLLECTION_TAGS:
         raise PyEXception('Tag must be in %s' % str(_COLLECTION_TAGS))
-    return _getJson('stock/market/collection/' + tag + '?collectionName=' + collectionName)
+    return _getJson('stock/market/collection/' + tag + '?collectionName=' + collectionName, token, version)
 
 
-def collectionsDF(tag, query):
+def collectionsDF(tag, query, token='', version=''):
     '''https://iextrading.com/developer/docs/#collections'''
-    df = pd.DataFrame(collections(tag, query))
+    df = pd.DataFrame(collections(tag, query, token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def crypto():
+def crypto(token='', version=''):
     '''https://iextrading.com/developer/docs/#collections'''
-    return _getJson('stock/market/crypto/')
+    return _getJson('stock/market/crypto/', token, version)
 
 
-def cryptoDF():
+def cryptoDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#collections'''
-    df = pd.DataFrame(crypto())
+    df = pd.DataFrame(crypto(token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def delayedQuote(symbol):
+def delayedQuote(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/delayed-quote')
+    return _getJson('stock/' + symbol + '/delayed-quote', token, version)
 
 
-def delayedQuoteDF(symbol):
+def delayedQuoteDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#delayed-quote'''
-    df = pd.io.json.json_normalize(delayedQuote(symbol))
+    df = pd.io.json.json_normalize(delayedQuote(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def dividends(symbol, timeframe='ytd'):
+def dividends(symbol, timeframe='ytd', token='', version=''):
     '''https://iextrading.com/developer/docs/#dividends'''
     _raiseIfNotStr(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception('Range must be in %s' % str(_TIMEFRAME_DIVSPLIT))
-    return _getJson('stock/' + symbol + '/dividends/' + timeframe)
+    return _getJson('stock/' + symbol + '/dividends/' + timeframe, token, version)
 
 
 def _dividendsToDF(d):
@@ -291,17 +291,17 @@ def _dividendsToDF(d):
     return df
 
 
-def dividendsDF(symbol, timeframe='ytd'):
+def dividendsDF(symbol, timeframe='ytd', token='', version=''):
     '''https://iextrading.com/developer/docs/#dividends'''
-    d = dividends(symbol, timeframe)
+    d = dividends(symbol, timeframe, token, version)
     df = _dividendsToDF(d)
     return df
 
 
-def earnings(symbol):
+def earnings(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#earnings'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/earnings')
+    return _getJson('stock/' + symbol + '/earnings', token, version)
 
 
 def _earningsToDF(e):
@@ -314,21 +314,21 @@ def _earningsToDF(e):
     return df
 
 
-def earningsDF(symbol):
+def earningsDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#earnings'''
-    e = earnings(symbol)
+    e = earnings(symbol, token, version)
     df = _earningsToDF(e)
     return df
 
 
-def earningsToday():
+def earningsToday(token='', version=''):
     '''https://iextrading.com/developer/docs/#earnings-today'''
-    return _getJson('stock/market/today-earnings')
+    return _getJson('stock/market/today-earnings', token, version)
 
 
-def earningsTodayDF():
+def earningsTodayDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#earnings-today'''
-    x = earningsToday()
+    x = earningsToday(token, version)
     z = []
     for k in x:
         ds = x[k]
@@ -345,24 +345,24 @@ def earningsTodayDF():
     return df
 
 
-def spread(symbol):
+def spread(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#effective-spread'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/effective-spread')
+    return _getJson('stock/' + symbol + '/effective-spread', token, version)
 
 
-def spreadDF(symbol):
+def spreadDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#effective-spread'''
-    df = pd.DataFrame(spread(symbol))
+    df = pd.DataFrame(spread(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'venue')
     return df
 
 
-def financials(symbol):
+def financials(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#financials'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/financials')
+    return _getJson('stock/' + symbol + '/financials', token, version)
 
 
 def _financialsToDF(f):
@@ -375,21 +375,21 @@ def _financialsToDF(f):
     return df
 
 
-def financialsDF(symbol):
+def financialsDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#financials'''
-    f = financials(symbol)
+    f = financials(symbol, token, version)
     df = _financialsToDF(f)
     return df
 
 
-def ipoToday():
+def ipoToday(token='', version=''):
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
-    return _getJson('stock/market/today-ipos')
+    return _getJson('stock/market/today-ipos', token, version)
 
 
-def ipoTodayDF():
+def ipoTodayDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
-    val = ipoToday()
+    val = ipoToday(token, version)
     if val:
         df = pd.io.json.json_normalize(val, 'rawData')
         _toDatetime(df)
@@ -399,14 +399,14 @@ def ipoTodayDF():
     return df
 
 
-def ipoUpcoming():
+def ipoUpcoming(token='', version=''):
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
-    return _getJson('stock/market/upcoming-ipos')
+    return _getJson('stock/market/upcoming-ipos', token, version)
 
 
-def ipoUpcomingDF():
+def ipoUpcomingDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#ipo-calendar'''
-    val = ipoUpcoming()
+    val = ipoUpcoming(token, version)
     if val:
         df = pd.io.json.json_normalize(val, 'rawData')
         _toDatetime(df)
@@ -416,56 +416,56 @@ def ipoUpcomingDF():
     return df
 
 
-def threshold(date=None):
+def threshold(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/market/threshold-securities/' + date)
-    return _getJson('stock/market/threshold-securities')
+        return _getJson('stock/market/threshold-securities/' + date, token, version)
+    return _getJson('stock/market/threshold-securities', token, version)
 
 
-def thresholdDF(date=None):
+def thresholdDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    df = pd.DataFrame(threshold(date))
+    df = pd.DataFrame(threshold(date, token, version))
     _toDatetime(df)
     return df
 
 
-def shortInterest(symbol, date=None):
+def shortInterest(symbol, date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
     _raiseIfNotStr(symbol)
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/' + symbol + '/short-interest/' + date)
-    return _getJson('stock/' + symbol + '/short-interest')
+        return _getJson('stock/' + symbol + '/short-interest/' + date, token, version)
+    return _getJson('stock/' + symbol + '/short-interest', token, version)
 
 
-def shortInterestDF(symbol, date=None):
+def shortInterestDF(symbol, date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    df = pd.DataFrame(shortInterest(symbol, date))
+    df = pd.DataFrame(shortInterest(symbol, date, token, version))
     _toDatetime(df)
     return df
 
 
-def marketShortInterest(date=None):
+def marketShortInterest(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/market/short-interest/' + date)
-    return _getJson('stock/market/short-interest')
+        return _getJson('stock/market/short-interest/' + date, token, version)
+    return _getJson('stock/market/short-interest', token, version)
 
 
-def marketShortInterestDF(date=None):
+def marketShortInterestDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    df = pd.DataFrame(marketShortInterest(date))
+    df = pd.DataFrame(marketShortInterest(date, token, version))
     _toDatetime(df)
     return df
 
 
-def stockStats(symbol):
+def stockStats(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#key-stats'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/stats')
+    return _getJson('stock/' + symbol + '/stats', token, version)
 
 
 def _statsToDF(s):
@@ -478,66 +478,66 @@ def _statsToDF(s):
     return df
 
 
-def stockStatsDF(symbol):
+def stockStatsDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#key-stats'''
-    s = stockStats(symbol)
+    s = stockStats(symbol, token, version)
     df = _statsToDF(s)
     return df
 
 
-def largestTrades(symbol):
+def largestTrades(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#largest-trades'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/largest-trades')
+    return _getJson('stock/' + symbol + '/largest-trades', token, version)
 
 
-def largestTradesDF(symbol):
+def largestTradesDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#largest-trades'''
-    df = pd.DataFrame(largestTrades(symbol))
+    df = pd.DataFrame(largestTrades(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'time')
     return df
 
 
-def list(option='mostactive'):
+def list(option='mostactive', token='', version=''):
     '''https://iextrading.com/developer/docs/#list'''
     if option not in _LIST_OPTIONS:
         raise PyEXception('Option must be in %s' % str(_LIST_OPTIONS))
-    return _getJson('stock/market/list/' + option)
+    return _getJson('stock/market/list/' + option, token, version)
 
 
-def listDF(option='mostactive'):
+def listDF(option='mostactive', token='', version=''):
     '''https://iextrading.com/developer/docs/#list'''
-    df = pd.DataFrame(list(option))
+    df = pd.DataFrame(list(option, token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def logo(symbol):
+def logo(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#logo'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/logo')
+    return _getJson('stock/' + symbol + '/logo', token, version)
 
 
-def logoPNG(symbol):
+def logoPNG(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#logo'''
     _raiseIfNotStr(symbol)
-    response = requests.get(logo(symbol)['url'])
+    response = requests.get(logo(symbol, token, version)['url'])
     return ImageP.open(BytesIO(response.content))
 
 
-def logoNotebook(symbol):
+def logoNotebook(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#logo'''
     _raiseIfNotStr(symbol)
-    url = logo(symbol)['url']
+    url = logo(symbol, token, version)['url']
     return ImageI(url=url)
 
 
-def news(symbol, count=10):
+def news(symbol, count=10, token='', version=''):
     '''https://iextrading.com/developer/docs/#news'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/news/last/' + str(count))
+    return _getJson('stock/' + symbol + '/news/last/' + str(count), token, version)
 
 
 def _newsToDF(n):
@@ -547,35 +547,35 @@ def _newsToDF(n):
     return df
 
 
-def newsDF(symbol, count=10):
+def newsDF(symbol, count=10, token='', version=''):
     '''https://iextrading.com/developer/docs/#news'''
-    n = news(symbol, count)
+    n = news(symbol, count, token, version)
     df = _newsToDF(n)
     return df
 
 
-def marketNews(count=10):
+def marketNews(count=10, token='', version=''):
     '''https://iextrading.com/developer/docs/#news'''
-    return _getJson('stock/market/news/last/' + str(count))
+    return _getJson('stock/market/news/last/' + str(count), token, version)
 
 
-def marketNewsDF(count=10):
+def marketNewsDF(count=10, token='', version=''):
     '''https://iextrading.com/developer/docs/#news'''
-    df = pd.DataFrame(marketNews(count))
+    df = pd.DataFrame(marketNews(count, token, version))
     _toDatetime(df)
     _reindex(df, 'datetime')
     return df
 
 
-def ohlc(symbol):
+def ohlc(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#ohlc'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/ohlc')
+    return _getJson('stock/' + symbol + '/ohlc', token, version)
 
 
-def ohlcDF(symbol):
+def ohlcDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    o = ohlc(symbol)
+    o = ohlc(symbol, token, version)
     if o:
         df = pd.io.json.json_normalize(o)
         _toDatetime(df)
@@ -584,14 +584,14 @@ def ohlcDF(symbol):
     return df
 
 
-def marketOhlc():
+def marketOhlc(token='', version=''):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    return _getJson('stock/market/ohlc')
+    return _getJson('stock/market/ohlc', token, version)
 
 
-def marketOhlcDF():
+def marketOhlcDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#ohlc'''
-    x = marketOhlc()
+    x = marketOhlc(token, version)
     data = []
     for key in x:
         data.append(x[key])
@@ -602,10 +602,10 @@ def marketOhlcDF():
     return df
 
 
-def peers(symbol):
+def peers(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#peers'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/peers')
+    return _getJson('stock/' + symbol + '/peers', token, version)
 
 
 def _peersToDF(p):
@@ -616,22 +616,22 @@ def _peersToDF(p):
     return df
 
 
-def peersDF(symbol):
+def peersDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#peers'''
-    p = peers(symbol)
+    p = peers(symbol, token, version)
     df = _peersToDF(p)
     return df
 
 
-def yesterday(symbol):
+def yesterday(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#previous'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/previous')
+    return _getJson('stock/' + symbol + '/previous', token, version)
 
 
-def yesterdayDF(symbol):
+def yesterdayDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#previous'''
-    y = yesterday(symbol)
+    y = yesterday(symbol, token, version)
     if y:
         df = pd.io.json.json_normalize(y)
         _toDatetime(df)
@@ -641,14 +641,14 @@ def yesterdayDF(symbol):
     return df
 
 
-def marketYesterday():
+def marketYesterday(token='', version=''):
     '''https://iextrading.com/developer/docs/#previous'''
-    return _getJson('stock/market/previous')
+    return _getJson('stock/market/previous', token, version)
 
 
-def marketYesterdayDF():
+def marketYesterdayDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#previous'''
-    x = marketYesterday()
+    x = marketYesterday(token, version)
     data = []
     for key in x:
         data.append(x[key])
@@ -659,28 +659,28 @@ def marketYesterdayDF():
     return df
 
 
-def price(symbol):
+def price(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#price'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/price')
+    return _getJson('stock/' + symbol + '/price', token, version)
 
 
-def priceDF(symbol):
+def priceDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#price'''
-    df = pd.io.json.json_normalize({'price': price(symbol)})
+    df = pd.io.json.json_normalize({'price': price(symbol, token, version)})
     _toDatetime(df)
     return df
 
 
-def quote(symbol):
+def quote(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#quote'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/quote')
+    return _getJson('stock/' + symbol + '/quote', token, version)
 
 
-def quoteDF(symbol):
+def quoteDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#quote'''
-    q = quote(symbol)
+    q = quote(symbol, token, version)
     if q:
         df = pd.io.json.json_normalize(q)
         _toDatetime(df)
@@ -690,38 +690,38 @@ def quoteDF(symbol):
     return df
 
 
-def relevant(symbol):
+def relevant(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#relevant'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/relevant')
+    return _getJson('stock/' + symbol + '/relevant', token, version)
 
 
-def relevantDF(symbol):
+def relevantDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#relevant'''
-    df = pd.DataFrame(relevant(symbol))
+    df = pd.DataFrame(relevant(symbol, token, version))
     _toDatetime(df)
     return df
 
 
-def sectorPerformance():
+def sectorPerformance(token='', version=''):
     '''https://iextrading.com/developer/docs/#sector-performance'''
-    return _getJson('stock/market/sector-performance')
+    return _getJson('stock/market/sector-performance', token, version)
 
 
-def sectorPerformanceDF():
+def sectorPerformanceDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#sector-performance'''
-    df = pd.DataFrame(sectorPerformance())
+    df = pd.DataFrame(sectorPerformance(token, version))
     _toDatetime(df)
     _reindex(df, 'name')
     return df
 
 
-def splits(symbol, timeframe='ytd'):
+def splits(symbol, timeframe='ytd', token='', version=''):
     '''https://iextrading.com/developer/docs/#splits'''
     _raiseIfNotStr(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception('Range must be in %s' % str(_TIMEFRAME_DIVSPLIT))
-    return _getJson('stock/' + symbol + '/splits/' + timeframe)
+    return _getJson('stock/' + symbol + '/splits/' + timeframe, token, version)
 
 
 def _splitsToDF(s):
@@ -731,22 +731,22 @@ def _splitsToDF(s):
     return df
 
 
-def splitsDF(symbol, timeframe='ytd'):
+def splitsDF(symbol, timeframe='ytd', token='', version=''):
     '''https://iextrading.com/developer/docs/#splits'''
-    s = splits(symbol, timeframe)
+    s = splits(symbol, timeframe, token, version)
     df = _splitsToDF(s)
     return df
 
 
-def volumeByVenue(symbol):
+def volumeByVenue(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/volume-by-venue')
+    return _getJson('stock/' + symbol + '/volume-by-venue', token, version)
 
 
-def volumeByVenueDF(symbol):
+def volumeByVenueDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#volume-by-venue'''
-    df = pd.DataFrame(volumeByVenue(symbol))
+    df = pd.DataFrame(volumeByVenue(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'venue')
     return df

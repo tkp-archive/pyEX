@@ -3,24 +3,6 @@ from mock import patch, MagicMock
 
 
 class TestAll:
-    def setup(self):
-        pass
-        # setup() before each test method
-
-    def teardown(self):
-        pass
-        # teardown() after each test method
-
-    @classmethod
-    def setup_class(cls):
-        pass
-        # setup_class() before any methods in this class
-
-    @classmethod
-    def teardown_class(cls):
-        pass
-        # teardown_class() after any methods in this class
-
     def test_getJson(self):
         from pyEX.common import _getJson, PyEXception
         with patch('requests.get') as mock:
@@ -31,6 +13,20 @@ class TestAll:
             mock.return_value.status_code = 404
             try:
                 _getJson('')
+                assert False
+            except PyEXception:
+                pass
+
+    def test_getJson2(self):
+        from pyEX.common import _getJson, PyEXception
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            _getJson('', 'test', 'test')
+
+            mock.return_value.status_code = 404
+            try:
+                _getJson('', 'test', 'test')
                 assert False
             except PyEXception:
                 pass

@@ -2,79 +2,79 @@ import pandas as pd
 from .common import _getJson, _strOrDate, _reindex, _toDatetime
 
 
-def symbols():
+def symbols(token='', version=''):
     '''https://iextrading.com/developer/docs/#symbols'''
-    return _getJson('ref-data/symbols')
+    return _getJson('ref-data/symbols', token, version)
 
 
-def symbolsDF():
+def symbolsDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#symbols'''
-    df = pd.DataFrame(symbols())
+    df = pd.DataFrame(symbols(token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
-def symbolsList():
+def symbolsList(token='', version=''):
     '''https://iextrading.com/developer/docs/#symbols'''
-    return symbolsDF().index.tolist()
+    return symbolsDF(token, version).index.tolist()
 
 
-def corporateActions(date=None):
+def corporateActions(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
     if date:
         date = _strOrDate(date)
-        return _getJson('ref-data/daily-list/corporate-actions/' + date)
-    return _getJson('ref-data/daily-list/corporate-actions')
+        return _getJson('ref-data/daily-list/corporate-actions/' + date, token, version)
+    return _getJson('ref-data/daily-list/corporate-actions', token, version)
 
 
-def corporateActionsDF(date=None):
+def corporateActionsDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-corporate-actions'''
-    df = pd.DataFrame(corporateActions(date))
+    df = pd.DataFrame(corporateActions(date, token, version))
     _toDatetime(df)
     return df
 
 
-def dividends(date=None):
+def dividends(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-dividends'''
     if date:
         date = _strOrDate(date)
-        return _getJson('ref-data/daily-list/dividends/' + date)
-    return _getJson('ref-data/daily-list/dividends')
+        return _getJson('ref-data/daily-list/dividends/' + date, token, version)
+    return _getJson('ref-data/daily-list/dividends', token, version)
 
 
-def dividendsDF(date=None):
+def dividendsDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-dividends'''
-    df = pd.DataFrame(dividends(date))
+    df = pd.DataFrame(dividends(date, token, version))
     _toDatetime(df)
     return df
 
 
-def nextDayExtDate(date=None):
+def nextDayExtDate(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-next-day-ex-date'''
     if date:
         date = _strOrDate(date)
-        return _getJson('ref-data/daily-list/next-day-ex-date/' + date)
-    return _getJson('ref-data/daily-list/next-day-ex-date')
+        return _getJson('ref-data/daily-list/next-day-ex-date/' + date, token, version)
+    return _getJson('ref-data/daily-list/next-day-ex-date', token, version)
 
 
-def nextDayExtDateDF(date=None):
+def nextDayExtDateDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-next-day-ex-date'''
-    df = pd.DataFrame(nextDayExtDate(date))
+    df = pd.DataFrame(nextDayExtDate(date, token, version))
     _toDatetime(df)
     return df
 
 
-def directory(date=None):
+def directory(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-listed-symbol-directory'''
     if date:
         date = _strOrDate(date)
-        return _getJson('ref-data/daily-list/symbol-directory/' + date)
-    return _getJson('ref-data/daily-list/symbol-directory')
+        return _getJson('ref-data/daily-list/symbol-directory/' + date, token, version)
+    return _getJson('ref-data/daily-list/symbol-directory', token, version)
 
 
-def directoryDF(date=None):
+def directoryDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#iex-listed-symbol-directory'''
-    df = pd.DataFrame(directory(date))
+    df = pd.DataFrame(directory(date, token, version))
     _toDatetime(df)
     return df

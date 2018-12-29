@@ -1,3 +1,4 @@
+from .client import *
 from .stocks import *
 from .refdata import symbols, symbolsDF, symbolsList, corporateActions, corporateActionsDF, dividends as dividendsRef, dividendsDF as dividendsRefDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF
 from .stats import *

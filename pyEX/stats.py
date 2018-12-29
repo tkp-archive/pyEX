@@ -3,76 +3,76 @@ from datetime import datetime
 from .common import _getJson, PyEXception, _strOrDate, _reindex, _toDatetime
 
 
-def stats():
+def stats(token='', version=''):
     '''https://iextrading.com/developer/docs/#intraday'''
-    return _getJson('stats/intraday')
+    return _getJson('stats/intraday', token, version)
 
 
-def statsDF():
+def statsDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#intraday'''
-    df = pd.DataFrame(stats())
+    df = pd.DataFrame(stats(token, version))
     _toDatetime(df)
     return df
 
 
-def recent():
+def recent(token='', version=''):
     '''https://iextrading.com/developer/docs/#recent'''
-    return _getJson('stats/recent')
+    return _getJson('stats/recent', token, version)
 
 
-def recentDF():
+def recentDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#recent'''
-    df = pd.DataFrame(recent())
+    df = pd.DataFrame(recent(token, version))
     _toDatetime(df)
     _reindex(df, 'date')
     return df
 
 
-def records():
+def records(token='', version=''):
     '''https://iextrading.com/developer/docs/#records'''
-    return _getJson('stats/records')
+    return _getJson('stats/records', token, version)
 
 
-def recordsDF():
+def recordsDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#records'''
-    df = pd.DataFrame(records())
+    df = pd.DataFrame(records(token, version))
     _toDatetime(df)
     return df
 
 
-def summary(date=None):
+def summary(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#historical-summary'''
     if date:
         if isinstance(date, str):
-            return _getJson('stats/historical?date=' + date)
+            return _getJson('stats/historical?date=' + date, token, version)
         elif isinstance(date, datetime):
-            return _getJson('stats/historical?date=' + date.strftime('%Y%m'))
+            return _getJson('stats/historical?date=' + date.strftime('%Y%m'), token, version)
         else:
-            raise PyEXception("Can't handle type : %s" % str(type(date)))
-    return _getJson('stats/historical')
+            raise PyEXception("Can't handle type : %s" % str(type(date)), token, version)
+    return _getJson('stats/historical', token, version)
 
 
-def summaryDF(date=None):
+def summaryDF(date=None, token='', version=''):
     '''https://iextrading.com/developer/docs/#historical-summary'''
-    df = pd.DataFrame(summary(date))
+    df = pd.DataFrame(summary(date, token, version))
     _toDatetime(df)
     return df
 
 
-def daily(date=None, last=''):
+def daily(date=None, last='', token='', version=''):
     '''https://iextrading.com/developer/docs/#historical-daily'''
     '''https://iextrading.com/developer/docs/#historical-summary'''
     if date:
         date = _strOrDate(date)
-        return _getJson('stats/historical/daily?date=' + date)
+        return _getJson('stats/historical/daily?date=' + date, token, version)
     elif last:
-        return _getJson('stats/historical/daily?last=' + last)
-    return _getJson('stats/historical/daily')
+        return _getJson('stats/historical/daily?last=' + last, token, version)
+    return _getJson('stats/historical/daily', token, version)
 
 
-def dailyDF(date=None, last=''):
+def dailyDF(date=None, last='', token='', version=''):
     '''https://iextrading.com/developer/docs/#historical-daily'''
     '''https://iextrading.com/developer/docs/#historical-summary'''
-    df = pd.DataFrame(daily(date, last))
+    df = pd.DataFrame(daily(date, last, token, version))
     _toDatetime(df)
     return df

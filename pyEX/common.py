@@ -4,6 +4,7 @@ import json
 import pandas as pd
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
+from six import string_types
 
 try:
     from urllib.parse import urlparse
@@ -11,12 +12,17 @@ except ImportError:
     from urlparse import urlparse
 
 _URL_PREFIX = 'https://api.iextrading.com/1.0/'
+_URL_PREFIX2 = 'https://cloud.iexapis.com/{version}/'
+
 _SIO_URL_PREFIX = 'https://ws-api.iextrading.com'
 _SIO_PORT = 443
+
 _TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
+
+_USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
 
 _PYEX_PROXIES = None
 
@@ -70,9 +76,25 @@ _STANDARD_TIME_FIELDS = ['closeTime',
                          'lastUpdated']
 
 
-def _getJson(url):
+def _getJson(url, token='', version=''):
+    '''for backwards compat, accepting token and version but ignoring'''
+    if token:
+        return _getJsonIEXCloud(url, token, version)
+    return _getJsonOrig(url)
+
+
+def _getJsonOrig(url):
     url = _URL_PREFIX + url
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _getJsonIEXCloud(url, token='', version='beta'):
+    '''for iex cloud'''
+    url = _URL_PREFIX2.format(version=version) + url
+    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -83,13 +105,13 @@ def _wsURL(url):
 
 
 def _strToList(st):
-    if isinstance(st, str):
+    if isinstance(st, string_types):
         return [st]
     return st
 
 
 def _strOrDate(st):
-    if isinstance(st, str):
+    if isinstance(st, string_types):
         return st
     elif isinstance(st, datetime):
         return st.strftime('%Y%m%d')
@@ -97,7 +119,7 @@ def _strOrDate(st):
 
 
 def _raiseIfNotStr(s):
-    if s is not None and not isinstance(s, str):
+    if s is not None and not isinstance(s, string_types):
         raise PyEXception('Cannot use type %s' % str(type(s)))
 
 
