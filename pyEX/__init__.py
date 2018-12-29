@@ -1,9 +1,9 @@
-from .client import *  # noqa
-from .stocks import *  # noqa
-from .refdata import symbols, symbolsDF, symbolsList, corporateActions, corporateActionsDF, dividends as dividendsRef, dividendsDF as dividendsRefDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF  # noqa
-from .stats import *  # noqa
-from .markets import *  # noqa
-from .marketdata.http import tops, topsDF, last, lastDF, hist, histDF, deep, deepDF, book as topsBook, bookDF as topsBookDF, trades, tradesDF, systemEvent, systemEventDF, tradingStatus, tradingStatusDF, opHaltStatus, opHaltStatusDF, ssrStatus, ssrStatusDF, securityEvent, securityEventDF, tradeBreak, tradeBreakDF, auction, auctionDF, officialPrice, officialPriceDF  # noqa
-from .marketdata.ws import *  # noqa
+from .client import *  # noqa: F401,F403
+from .stocks import *  # noqa: F401,F403
+from .refdata import symbols, symbolsDF, symbolsList, corporateActions, corporateActionsDF, dividends as dividendsRef, dividendsDF as dividendsRefDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF  # noqa: F401, E501
+from .stats import *  # noqa: F401,F403
+from .markets import *  # noqa: F401,F403
+from .marketdata.http import tops, topsDF, last, lastDF, hist, histDF, deep, deepDF, book as topsBook, bookDF as topsBookDF, trades, tradesDF, systemEvent, systemEventDF, tradingStatus, tradingStatusDF, opHaltStatus, opHaltStatusDF, ssrStatus, ssrStatusDF, securityEvent, securityEventDF, tradeBreak, tradeBreakDF, auction, auctionDF, officialPrice, officialPriceDF  # noqa: F401, E501
+from .marketdata.ws import *  # noqa: F401,F403
 
 __version__ = '0.1.6'
