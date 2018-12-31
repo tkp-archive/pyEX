@@ -1,11 +1,11 @@
 tests: ## Clean and Make unit tests
-	python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find pyEX -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
+	python3 -m nose2 -v tests --with-coverage --coverage=pyEX
 
 test: lint ## run the tests for travis CI
-	@ python3 -m nose -v tests -I 'test_api.py' --with-coverage --cover-erase --cover-package=`find pyEX -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
+	@ python3 -m nose2 -v tests --with-coverage --coverage=pyEX
 
 testall: ## run the tests including those that hit the actual api
-	@ python3 -m nose -v tests --with-coverage --cover-erase --cover-package=`find pyEX -name "*.py" | sed "s=\./==g" | sed "s=/=.=g" | sed "s/\.py//g" | tr '\n' ',' | rev | cut -c2- | rev`
+	@ python3 -m nose2 -v tests --with-coverage --coverage=pyEX
 
 lint: ## run linter
 	pylint pyEX || echo
