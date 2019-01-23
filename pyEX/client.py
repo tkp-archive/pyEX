@@ -11,11 +11,11 @@ class Client(object):
         self._version = version
 
     def account(self):
-        return _getJson('account/metadata', self._version)
+        return _getJson('account/metadata', self._token, self._version)
 
     def usage(self, type=None):
         if type:
             if type not in _USAGE_TYPES:
                 raise PyEXception('type not recognized: {}'.format(type))
             return _getJson('account/usage/{type}'.format(type=type), self._token, self._version)
-        return _getJson('account/usage', self._token, self._version)
+        return _getJson('account/usage/messages', self._token, self._version)
