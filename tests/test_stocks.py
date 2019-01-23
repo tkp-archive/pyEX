@@ -442,3 +442,39 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value={'rawData': [{'symbol': 'test'}]})
             ipoTodayDF()
             ipoUpcomingDF()
+
+    def test_balancesheet(self):
+        from pyEX import balanceSheet
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            balanceSheet(SYMBOL)
+
+    def test_balancesheetDF(self):
+        from pyEX import Client
+        c = Client()
+        c.balanceSheetDF(SYMBOL)
+
+    def test_cashflow(self):
+        from pyEX import cashFlow
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            cashFlow(SYMBOL)
+
+    def test_cashflowDF(self):
+        from pyEX import Client
+        c = Client()
+        c.cashFlowDF(SYMBOL)
+
+    def test_income(self):
+        from pyEX import incomeStatement
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            incomeStatement(SYMBOL)
+
+    def test_incomeDF(self):
+        from pyEX import Client
+        c = Client()
+        c.incomeStatementDF(SYMBOL)

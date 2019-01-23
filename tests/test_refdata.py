@@ -23,14 +23,17 @@ class TestAll:
 
     def test_symbols(self):
         from pyEX.refdata import symbols
+        from pyEX.refdata import iexSymbols
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             symbols()
+            iexSymbols()
 
     def test_symbolsDF(self):
-        from pyEX.refdata import symbolsDF
+        from pyEX.refdata import symbolsDF, iexSymbolsDF
         symbolsDF()
+        iexSymbolsDF()
 
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions

@@ -8,6 +8,25 @@ from PIL import Image as ImageP
 from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
 
 
+def balanceSheet(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#balance-sheet
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/balance-sheet', token, version)
+
+
+def balanceSheetDF(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#balance-sheet
+    '''
+    val = balanceSheet(symbol, token, version)
+    df = pd.io.json.json_normalize(val, 'balancesheet', 'symbol')
+    _toDatetime(df)
+    _reindex(df, 'reportDate')
+    return df
+
+
 def batch(symbols, types=None, _range='1m', last=10, token='', version=''):
     '''fetch a large number of fields at the same time'''
     types = types or _BATCH_TYPES
@@ -142,6 +161,25 @@ def bookDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#book'''
     x = book(symbol, token, version)
     df = _bookToDF(x)
+    return df
+
+
+def cashFlow(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#cash-flow
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/cash-flow', token, version)
+
+
+def cashFlowDF(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#cash-flow
+    '''
+    val = cashFlow(symbol, token, version)
+    df = pd.io.json.json_normalize(val, 'cashflow', 'symbol')
+    _toDatetime(df)
+    _reindex(df, 'reportDate')
     return df
 
 
@@ -379,6 +417,25 @@ def financialsDF(symbol, token='', version=''):
     '''https://iextrading.com/developer/docs/#financials'''
     f = financials(symbol, token, version)
     df = _financialsToDF(f)
+    return df
+
+
+def incomeStatement(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#income-statement
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/income', token, version)
+
+
+def incomeStatementDF(symbol, token='', version=''):
+    '''
+    https://iexcloud.io/docs/api/#income-statement
+    '''
+    val = incomeStatement(symbol, token, version)
+    df = pd.io.json.json_normalize(val, 'income', 'symbol')
+    _toDatetime(df)
+    _reindex(df, 'reportDate')
     return df
 
 

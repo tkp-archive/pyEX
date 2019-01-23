@@ -7,6 +7,11 @@ def symbols(token='', version=''):
     return _getJson('ref-data/symbols', token, version)
 
 
+def iexSymbols(token='', version=''):
+    '''https://iexcloud.io/docs/api/#iex-symbols'''
+    return _getJson('ref-data/iex/symbols', token, version)
+
+
 def symbolsDF(token='', version=''):
     '''https://iextrading.com/developer/docs/#symbols'''
     df = pd.DataFrame(symbols(token, version))
@@ -15,9 +20,22 @@ def symbolsDF(token='', version=''):
     return df
 
 
+def iexSymbolsDF(token='', version=''):
+    '''https://iexcloud.io/docs/api/#iex-symbols'''
+    df = pd.DataFrame(iexSymbols(token, version))
+    _toDatetime(df)
+    _reindex(df, 'symbol')
+    return df
+
+
 def symbolsList(token='', version=''):
     '''https://iextrading.com/developer/docs/#symbols'''
     return symbolsDF(token, version).index.tolist()
+
+
+def iexSymbolsList(token='', version=''):
+    '''https://iexcloud.io/docs/api/#iex-symbols'''
+    return iexSymbolsDF(token, version).index.tolist()
 
 
 def corporateActions(date=None, token='', version=''):
