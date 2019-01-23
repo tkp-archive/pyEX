@@ -31,9 +31,11 @@ class TestAll:
             iexSymbols()
 
     def test_symbolsDF(self):
-        from pyEX.refdata import symbolsDF, iexSymbolsDF
+        from pyEX.refdata import symbolsDF
+        from pyEX import Client
+        c = Client()
         symbolsDF()
-        iexSymbolsDF()
+        c.iexSymbolsDF()
 
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions

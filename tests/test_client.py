@@ -1,20 +1,12 @@
 # for Coverage
 from mock import patch, MagicMock
-
 C = 'AAPL'
 
 
 class TestClient:
     def test_client(self):
         from pyEX import Client
-        from pyEX import PyEXception
         c = Client('test')
-
-        try:
-            c = Client()
-            assert False
-        except PyEXception:
-            pass
 
     def test_account(self):
         from pyEX import Client
