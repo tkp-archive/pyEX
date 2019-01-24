@@ -12,6 +12,8 @@ from .stocks import balanceSheet, balanceSheetDF, batch, batchDF, bulkBatch, bul
     largestTrades, largestTradesDF, list, listDF, logo, logoPNG, logoNotebook, news, newsDF, marketNews, marketNewsDF, ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
     peers, peersDF, yesterday, yesterdayDF, marketYesterday, marketYesterdayDF, price, priceDF, quote, quoteDF, relevant, relevantDF, sectorPerformance, \
     sectorPerformanceDF, splits, splitsDF, volumeByVenue, volumeByVenueDF
+from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
+
 
 _INCLUDE_FUNCTIONS = [
     # Refdata
@@ -123,6 +125,11 @@ _INCLUDE_FUNCTIONS = [
     ('splitsDF', splitsDF),
     ('volumeByVenue', volumeByVenue),
     ('volumeByVenueDF', volumeByVenueDF),
+    # SSE Streaming
+    ('topsSSE', topsSSE),
+    ('lastSSE', lastSSE),
+    ('deepSSE', deepSSE),
+    ('tradesSSE', tradesSSE),
 ]
 
 
@@ -136,8 +143,8 @@ class Client(object):
         for name, method in _INCLUDE_FUNCTIONS:
             setattr(self, name, partial(self.bind, meth=method))
 
-    def bind(self, *args, meth=None):
-        return meth(token=self._token, version=self._version, *args)
+    def bind(self, *args, meth=None, **kwargs):
+        return meth(token=self._token, version=self._version, *args, **kwargs)
 
     def account(self):
         return _getJson('account/metadata', self._token, self._version)

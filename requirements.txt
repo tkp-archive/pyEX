@@ -3,3 +3,4 @@ Pillow>=5.3.0
 pandas>=0.22
 requests>=2.21.0
 socketIO-client-nexus>=0.7.6
+sseclient>=0.0.22

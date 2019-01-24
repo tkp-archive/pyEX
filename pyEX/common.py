@@ -1,9 +1,13 @@
 from __future__ import print_function
 import requests
-import json
+try:
+    import ujson as json
+except ImportError:
+    import json
 import pandas as pd
 from datetime import datetime
 from socketIO_client_nexus import SocketIO, BaseNamespace
+from sseclient import SSEClient
 from six import string_types
 
 try:
@@ -17,13 +21,15 @@ _URL_PREFIX2 = 'https://cloud.iexapis.com/{version}/'
 _SIO_URL_PREFIX = 'https://ws-api.iextrading.com'
 _SIO_PORT = 443
 
+_SSE_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}'
+_SSE_DEEP_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}'
+
 _TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 _USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
-
 _PYEX_PROXIES = None
 
 # Limit 10
@@ -76,6 +82,10 @@ _STANDARD_TIME_FIELDS = ['closeTime',
                          'lastUpdated']
 
 
+class PyEXception(Exception):
+    pass
+
+
 def _getJson(url, token='', version=''):
     '''for backwards compat, accepting token and version but ignoring'''
     if token:
@@ -94,7 +104,6 @@ def _getJsonOrig(url):
 def _getJsonIEXCloud(url, token='', version='beta'):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
-    print(url)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
@@ -109,6 +118,11 @@ def _strToList(st):
     if isinstance(st, string_types):
         return [st]
     return st
+
+
+def _strCommaSeparatedString(st):
+    l = _strToList(st)
+    return ','.join(l)
 
 
 def _strOrDate(st):
@@ -172,8 +186,18 @@ def _stream(url, sendinit=None, on_data=print):
     return cl
 
 
-class PyEXception(Exception):
-    pass
+def _streamSSE(url, on_data=print, accrue=False):
+    messages = SSEClient(url)
+    if accrue:
+        ret = []
+
+    for msg in messages:
+        data = msg.data
+        on_data(json.loads(data))
+        if accrue:
+            ret.append(msg)
+
+    return ret
 
 
 def _reindex(df, col):
