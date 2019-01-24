@@ -121,8 +121,7 @@ def _strToList(st):
 
 
 def _strCommaSeparatedString(st):
-    l = _strToList(st)
-    return ','.join(l)
+    return ','.join(_strToList(st))
 
 
 def _strOrDate(st):
