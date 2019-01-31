@@ -186,9 +186,7 @@ def run_apidoc(_):
                            '-o',
                            cur_dir,
                            pyEX_dir,
-                           '--force',
-                           '--tocfile',
-                           'api'])
+                           '--force'])
 
 
 def setup(app):
