@@ -22,6 +22,7 @@ clean: ## clean the repository
 	find . -name "*.pyc" | xargs rm -rf 
 	rm -rf .coverage cover htmlcov logs build dist *.egg-info
 	make -C ./docs clean
+	rm -rf ./docs/*.*.rst  # generated
 
 docs:  ## make documentation
 	make -C ./docs html
