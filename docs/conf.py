@@ -175,6 +175,7 @@ def run_apidoc(_):
     import os.path
     import subprocess
     cur_dir = os.path.abspath(os.path.dirname(__file__))
+    pyEX_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'pyEX'))
     cmd_path = 'sphinx-apidoc'
     if hasattr(sys, 'real_prefix'):  # Check to see if we are in a virtualenv
         # If we are, assemble the path manually
@@ -184,7 +185,7 @@ def run_apidoc(_):
                            '-M',
                            '-o',
                            cur_dir,
-                           '../pyEX',
+                           pyEX_dir,
                            '--force',
                            '--tocfile',
                            'api'])
