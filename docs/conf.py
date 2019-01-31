@@ -32,10 +32,7 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.coverage',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon']
+extensions = ['sphinx.ext.coverage', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -170,3 +167,28 @@ texinfo_documents = [
      author, 'pyEX', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+
+def run_apidoc(_):
+    import sys
+    import os
+    import os.path
+    import subprocess
+    cur_dir = os.path.abspath(os.path.dirname(__file__))
+    cmd_path = 'sphinx-apidoc'
+    if hasattr(sys, 'real_prefix'):  # Check to see if we are in a virtualenv
+        # If we are, assemble the path manually
+        cmd_path = os.path.abspath(os.path.join(sys.prefix, 'bin', 'sphinx-apidoc'))
+    subprocess.check_call([cmd_path,
+                           '-E',
+                           '-M',
+                           '-o',
+                           cur_dir,
+                           '../pyEX',
+                           '--force',
+                           '--tocfile',
+                           'api'])
+
+
+def setup(app):
+    app.connect('builder-inited', run_apidoc)
