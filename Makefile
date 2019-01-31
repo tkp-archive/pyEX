@@ -25,6 +25,7 @@ clean: ## clean the repository
 
 docs:  ## make documentation
 	make -C ./docs html
+	open ./docs/_build/html/index.html
 
 install:  ## install to site-packages
 	python3 setup.py install
