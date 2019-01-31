@@ -111,7 +111,7 @@ def _getJsonIEXCloud(url, token='', version='beta'):
 
 
 def _wsURL(url):
-        return '/1.0/' + url
+    return '/1.0/' + url
 
 
 def _strToList(st):
