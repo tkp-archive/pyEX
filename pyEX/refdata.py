@@ -108,7 +108,7 @@ def iexSymbolsList(token='', version=''):
     return iexSymbolsDF(token, version).index.tolist()
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def corporateActions(date=None, token='', version=''):
     '''
 
@@ -126,7 +126,7 @@ def corporateActions(date=None, token='', version=''):
     return _getJson('ref-data/daily-list/corporate-actions', token, version)
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def corporateActionsDF(date=None, token='', version=''):
     '''
 
@@ -143,7 +143,7 @@ def corporateActionsDF(date=None, token='', version=''):
     return df
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def dividends(date=None, token='', version=''):
     '''
 
@@ -161,7 +161,7 @@ def dividends(date=None, token='', version=''):
     return _getJson('ref-data/daily-list/dividends', token, version)
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def dividendsDF(date=None, token='', version=''):
     '''
 
@@ -178,7 +178,7 @@ def dividendsDF(date=None, token='', version=''):
     return df
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def nextDayExtDate(date=None, token='', version=''):
     '''
 
@@ -196,7 +196,7 @@ def nextDayExtDate(date=None, token='', version=''):
     return _getJson('ref-data/daily-list/next-day-ex-date', token, version)
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def nextDayExtDateDF(date=None, token='', version=''):
     '''
 
@@ -213,7 +213,7 @@ def nextDayExtDateDF(date=None, token='', version=''):
     return df
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def directory(date=None, token='', version=''):
     '''
 
@@ -231,7 +231,7 @@ def directory(date=None, token='', version=''):
     return _getJson('ref-data/daily-list/symbol-directory', token, version)
 
 
-@deprecated(reason='Deprecated: IEX Cloud status unkown')
+@deprecated(details='Deprecated: IEX Cloud status unkown')
 def directoryDF(date=None, token='', version=''):
     '''
 
