@@ -1,6 +1,7 @@
 import itertools
 import requests
 import pandas as pd
+from deprecation import deprecated
 from io import BytesIO
 from IPython.display import Image as ImageI
 from multiprocessing.pool import ThreadPool
@@ -1739,6 +1740,130 @@ def volumeByVenueDF(symbol, token='', version=''):
     return df
 
 
+def threshold(date=None, token='', version=''):
+    '''The following are IEX-listed securities that have an aggregate fail to deliver position for five consecutive settlement days at a registered clearing agency, totaling 10,000 shares or more and equal to at least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”). 
+    The report data will be published to the IEX website daily at 8:30 p.m. ET with data for that trading day.
+
+    https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
+
+    Args:
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/market/threshold-securities/' + date, token, version)
+    return _getJson('stock/market/threshold-securities', token, version)
+
+
+def thresholdDF(date=None, token='', version=''):
+    '''The following are IEX-listed securities that have an aggregate fail to deliver position for five consecutive settlement days at a registered clearing agency, totaling 10,000 shares or more and equal to at least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”). 
+    The report data will be published to the IEX website daily at 8:30 p.m. ET with data for that trading day.
+
+    https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
+
+    Args:
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.DataFrame(threshold(date, token, version))
+    _toDatetime(df)
+    return df
+
+
+def shortInterest(symbol, date=None, token='', version=''):
+    '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
+
+    The report data will be published daily at 4:00pm ET.
+
+    https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
+
+    Args:
+        symbol (string); Ticker to request
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/' + symbol + '/short-interest/' + date, token, version)
+    return _getJson('stock/' + symbol + '/short-interest', token, version)
+
+
+def shortInterestDF(symbol, date=None, token='', version=''):
+    '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
+
+    The report data will be published daily at 4:00pm ET.
+
+    https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
+
+    Args:
+        symbol (string); Ticker to request
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.DataFrame(shortInterest(symbol, date, token, version))
+    _toDatetime(df)
+    return df
+
+
+def marketShortInterest(date=None, token='', version=''):
+    '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
+
+    The report data will be published daily at 4:00pm ET.
+
+    https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
+
+    Args:
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/market/short-interest/' + date, token, version)
+    return _getJson('stock/market/short-interest', token, version)
+
+
+def marketShortInterestDF(date=None, token='', version=''):
+    '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
+
+    The report data will be published daily at 4:00pm ET.
+
+    https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
+
+    Args:
+        date (datetime); Effective Datetime
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.DataFrame(marketShortInterest(date, token, version))
+    _toDatetime(df)
+    return df
+
+
 _MAPPING = {
     'book': _bookToDF,
     'chart': _chartToDF,
@@ -1751,51 +1876,3 @@ _MAPPING = {
     'peers': _peersToDF,
     'splits': _splitsToDF,
 }
-
-
-# these are no longer listed on the IEX Cloud api
-
-def threshold(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    if date:
-        date = _strOrDate(date)
-        return _getJson('stock/market/threshold-securities/' + date, token, version)
-    return _getJson('stock/market/threshold-securities', token, version)
-
-
-def thresholdDF(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-regulation-sho-threshold-securities-list'''
-    df = pd.DataFrame(threshold(date, token, version))
-    _toDatetime(df)
-    return df
-
-
-def shortInterest(symbol, date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    _raiseIfNotStr(symbol)
-    if date:
-        date = _strOrDate(date)
-        return _getJson('stock/' + symbol + '/short-interest/' + date, token, version)
-    return _getJson('stock/' + symbol + '/short-interest', token, version)
-
-
-def shortInterestDF(symbol, date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    df = pd.DataFrame(shortInterest(symbol, date, token, version))
-    _toDatetime(df)
-    return df
-
-
-def marketShortInterest(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    if date:
-        date = _strOrDate(date)
-        return _getJson('stock/market/short-interest/' + date, token, version)
-    return _getJson('stock/market/short-interest', token, version)
-
-
-def marketShortInterestDF(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#iex-short-interest-list'''
-    df = pd.DataFrame(marketShortInterest(date, token, version))
-    _toDatetime(df)
-    return df

@@ -4,24 +4,56 @@ from .common import _getJson, PyEXception, _strOrDate, _reindex, _toDatetime
 
 
 def stats(token='', version=''):
-    '''https://iextrading.com/developer/docs/#intraday'''
+    '''https://iexcloud.io/docs/api/#stats-intraday
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     return _getJson('stats/intraday', token, version)
 
 
 def statsDF(token='', version=''):
-    '''https://iextrading.com/developer/docs/#intraday'''
+    '''https://iexcloud.io/docs/api/#stats-intraday
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(stats(token, version))
     _toDatetime(df)
     return df
 
 
 def recent(token='', version=''):
-    '''https://iextrading.com/developer/docs/#recent'''
+    '''https://iexcloud.io/docs/api/#stats-recent
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     return _getJson('stats/recent', token, version)
 
 
 def recentDF(token='', version=''):
-    '''https://iextrading.com/developer/docs/#recent'''
+    '''https://iexcloud.io/docs/api/#stats-recent
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(recent(token, version))
     _toDatetime(df)
     _reindex(df, 'date')
@@ -29,19 +61,43 @@ def recentDF(token='', version=''):
 
 
 def records(token='', version=''):
-    '''https://iextrading.com/developer/docs/#records'''
+    '''https://iexcloud.io/docs/api/#stats-records
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     return _getJson('stats/records', token, version)
 
 
 def recordsDF(token='', version=''):
-    '''https://iextrading.com/developer/docs/#records'''
+    '''https://iexcloud.io/docs/api/#stats-records
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(records(token, version))
     _toDatetime(df)
     return df
 
 
 def summary(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#historical-summary'''
+    '''https://iexcloud.io/docs/api/#stats-historical-summary
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     if date:
         if isinstance(date, str):
             return _getJson('stats/historical?date=' + date, token, version)
@@ -53,15 +109,30 @@ def summary(date=None, token='', version=''):
 
 
 def summaryDF(date=None, token='', version=''):
-    '''https://iextrading.com/developer/docs/#historical-summary'''
+    '''https://iexcloud.io/docs/api/#stats-historical-summary
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(summary(date, token, version))
     _toDatetime(df)
     return df
 
 
 def daily(date=None, last='', token='', version=''):
-    '''https://iextrading.com/developer/docs/#historical-daily'''
-    '''https://iextrading.com/developer/docs/#historical-summary'''
+    '''https://iexcloud.io/docs/api/#stats-historical-daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     if date:
         date = _strOrDate(date)
         return _getJson('stats/historical/daily?date=' + date, token, version)
@@ -71,8 +142,15 @@ def daily(date=None, last='', token='', version=''):
 
 
 def dailyDF(date=None, last='', token='', version=''):
-    '''https://iextrading.com/developer/docs/#historical-daily'''
-    '''https://iextrading.com/developer/docs/#historical-summary'''
+    '''https://iexcloud.io/docs/api/#stats-historical-daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(daily(date, last, token, version))
     _toDatetime(df)
     return df

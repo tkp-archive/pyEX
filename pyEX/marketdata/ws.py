@@ -1,3 +1,4 @@
+from deprecation import deprecated
 from enum import Enum
 from ..common import _strToList, _stream, _wsURL, PyEXception
 
@@ -19,6 +20,7 @@ class DeepChannels(Enum):
         return list(map(lambda c: c.value, DeepChannels))
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def topsWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#tops'''
     symbols = _strToList(symbols)
@@ -28,6 +30,7 @@ def topsWS(symbols=None, on_data=None):
     return _stream(_wsURL('tops'), on_data=on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def lastWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#last'''
     symbols = _strToList(symbols)
@@ -37,6 +40,7 @@ def lastWS(symbols=None, on_data=None):
     return _stream(_wsURL('last'), on_data=on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def deepWS(symbols=None, channels=None, on_data=None):
     '''https://iextrading.com/developer/docs/#deep'''
     symbols = _strToList(symbols)
@@ -59,6 +63,7 @@ def deepWS(symbols=None, channels=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def bookWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#book51'''
     symbols = _strToList(symbols)
@@ -66,6 +71,7 @@ def bookWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def tradesWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#trades'''
     symbols = _strToList(symbols)
@@ -73,12 +79,14 @@ def tradesWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def systemEventWS(on_data=None):
     '''https://iextrading.com/developer/docs/#system-event'''
     sendinit = ({'channels': ['systemevent']},)
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def tradingStatusWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#trading-status'''
     symbols = _strToList(symbols)
@@ -86,6 +94,7 @@ def tradingStatusWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def opHaltStatusWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#operational-halt-status'''
     symbols = _strToList(symbols)
@@ -93,6 +102,7 @@ def opHaltStatusWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def ssrStatusWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#short-sale-price-test-status'''
     symbols = _strToList(symbols)
@@ -100,6 +110,7 @@ def ssrStatusWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def securityEventWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#security-event'''
     symbols = _strToList(symbols)
@@ -107,6 +118,7 @@ def securityEventWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def tradeBreakWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#trade-break'''
     symbols = _strToList(symbols)
@@ -114,6 +126,7 @@ def tradeBreakWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def auctionWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#auction'''
     symbols = _strToList(symbols)
@@ -121,6 +134,7 @@ def auctionWS(symbols=None, on_data=None):
     return _stream(_wsURL('deep'), sendinit, on_data)
 
 
+@deprecated(reason='Deprecated: Use SSE for IEX Cloud')
 def officialPriceWS(symbols=None, on_data=None):
     '''https://iextrading.com/developer/docs/#official-price'''
     symbols = _strToList(symbols)
