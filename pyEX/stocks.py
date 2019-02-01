@@ -9,16 +9,38 @@ from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLE
 
 
 def balanceSheet(symbol, token='', version=''):
-    '''
+    '''Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
+
     https://iexcloud.io/docs/api/#balance-sheet
+    Updates at 8am, 9am UTC daily
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/balance-sheet', token, version)
 
 
 def balanceSheetDF(symbol, token='', version=''):
-    '''
+    '''Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
+
     https://iexcloud.io/docs/api/#balance-sheet
+    Updates at 8am, 9am UTC daily
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
     '''
     val = balanceSheet(symbol, token, version)
     df = pd.io.json.json_normalize(val, 'balancesheet', 'symbol')
@@ -27,33 +49,63 @@ def balanceSheetDF(symbol, token='', version=''):
     return df
 
 
-def batch(symbols, types=None, _range='1m', last=10, token='', version=''):
-    '''fetch a large number of fields at the same time'''
-    types = types or _BATCH_TYPES
+def batch(symbols, fields=None, range_='1m', last=10, token='', version=''):
+    '''Batch several data requests into one invocation
+
+    https://iexcloud.io/docs/api/#batch-requests
+
+
+    Args:
+        symbols (list); List of tickers to request
+        fields (list); List of fields to request
+        range_ (string); Date range for chart
+        last (int);
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: results in json
+    '''
+    fields = fields or _BATCH_TYPES
 
     if not isinstance(symbols, [].__class__):
         if not isinstance(symbols, str):
             raise PyEXception('batch expects string or list of strings for symbols argument')
 
-    if isinstance(types, str):
-        types = [types]
+    if isinstance(fields, str):
+        fields = [fields]
 
-    if _range not in _TIMEFRAME_CHART:
+    if range_ not in _TIMEFRAME_CHART:
         raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
 
     if isinstance(symbols, str):
-        route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(types), _range, last)
+        route = 'stock/{}/batch?types={}&range={}&last={}'.format(symbols, ','.join(fields), range_, last)
         return _getJson(route, token, version)
 
     if len(symbols) > 100:
         raise PyEXception('IEX will only handle up to 100 symbols at a time!')
-    route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(types), _range, last)
+    route = 'stock/market/batch?symbols={}&types={}&range={}&last={}'.format(','.join(symbols), ','.join(fields), range_, last)
     return _getJson(route, token, version)
 
 
-def batchDF(symbols, types=None, _range='1m', last=10, token='', version=''):
-    '''fetch a large number of fields at the same time'''
-    x = batch(symbols, types, _range, last, token, version)
+def batchDF(symbols, fields=None, range_='1m', last=10, token='', version=''):
+    '''Batch several data requests into one invocation
+
+    https://iexcloud.io/docs/api/#batch-requests
+
+
+    Args:
+        symbols (list); List of tickers to request
+        fields (list); List of fields to request
+        range_ (string); Date range for chart
+        last (int);
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: results in json
+    '''
+    x = batch(symbols, fields, range_, last, token, version)
 
     ret = {}
 
@@ -68,15 +120,30 @@ def batchDF(symbols, types=None, _range='1m', last=10, token='', version=''):
 
                 dat = x[symbol][field]
                 dat = _MAPPING[field](dat)
-                dat['KEY'] = symbol
+                dat['symbol'] = symbol
 
                 ret[field] = pd.concat([ret[field], dat], sort=True)
     return ret
 
 
-def bulkBatch(symbols, types=None, _range='1m', last=10, token='', version=''):
-    '''fetch a large number of fields for multiple symbols all at the same time'''
-    types = types or _BATCH_TYPES
+def bulkBatch(symbols, fields=None, range_='1m', last=10, token='', version=''):
+    '''Optimized batch to fetch as much as possible at once
+
+    https://iexcloud.io/docs/api/#batch-requests
+
+
+    Args:
+        symbols (list); List of tickers to request
+        fields (list); List of fields to request
+        range_ (string); Date range for chart
+        last (int);
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: results in json
+    '''
+    fields = fields or _BATCH_TYPES
     args = []
     empty_data = []
     list_orig = empty_data.__class__
@@ -85,7 +152,7 @@ def bulkBatch(symbols, types=None, _range='1m', last=10, token='', version=''):
         raise PyEXception('Symbols must be of type list')
 
     for i in range(0, len(symbols), 99):
-        args.append((symbols[i:i+99], types, _range, last, token, version))
+        args.append((symbols[i:i+99], fields, range_, last, token, version))
 
     pool = ThreadPool(20)
     rets = pool.starmap(batch, args)
@@ -101,16 +168,31 @@ def bulkBatch(symbols, types=None, _range='1m', last=10, token='', version=''):
 
     for k in empty_data:
         if k not in ret:
-            if isinstance(types, str):
+            if isinstance(fields, str):
                 ret[k] = {}
             else:
-                ret[k] = {x: {} for x in types}
+                ret[k] = {x: {} for x in fields}
     return ret
 
 
-def bulkBatchDF(symbols, types=None, _range='1m', last=10, token='', version=''):
-    '''fetch a large number of fields for multiple symbols all at the same time'''
-    dat = bulkBatch(symbols, types, _range, last, token, version)
+def bulkBatchDF(symbols, fields=None, range_='1m', last=10, token='', version=''):
+    '''Optimized batch to fetch as much as possible at once
+
+    https://iexcloud.io/docs/api/#batch-requests
+
+
+    Args:
+        symbols (list); List of tickers to request
+        fields (list); List of fields to request
+        range_ (string); Date range for chart
+        last (int);
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: results in json
+    '''
+    dat = bulkBatch(symbols, fields, range_, last, token, version)
     ret = {}
     for symbol in dat:
         for field in dat[symbol]:
@@ -119,19 +201,32 @@ def bulkBatchDF(symbols, types=None, _range='1m', last=10, token='', version='')
 
             d = dat[symbol][field]
             d = _MAPPING[field](d)
-            d['KEY'] = symbol
+            d['symbol'] = symbol
             ret[field] = pd.concat([ret[field], d], sort=True)
 
     return ret
 
 
 def book(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#book'''
+    '''Book data
+
+    https://iextrading.com/developer/docs/#book
+    realtime during Investors Exchange market hours
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/book', token, version)
 
 
 def _bookToDF(b):
+    '''internal'''
     quote = b.get('quote', [])
     asks = b.get('asks', [])
     bids = b.get('bids', [])
@@ -158,23 +253,57 @@ def _bookToDF(b):
 
 
 def bookDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#book'''
+    '''Book data
+
+    https://iextrading.com/developer/docs/#book
+    realtime during Investors Exchange market hours
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     x = book(symbol, token, version)
     df = _bookToDF(x)
     return df
 
 
 def cashFlow(symbol, token='', version=''):
-    '''
+    '''Pulls cash flow data. Available quarterly (4 quarters) or annually (4 years).
+
     https://iexcloud.io/docs/api/#cash-flow
+    Updates at 8am, 9am UTC daily
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/cash-flow', token, version)
 
 
 def cashFlowDF(symbol, token='', version=''):
-    '''
+    '''Pulls cash flow data. Available quarterly (4 quarters) or annually (4 years).
+
     https://iexcloud.io/docs/api/#cash-flow
+    Updates at 8am, 9am UTC daily
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
     '''
     val = cashFlow(symbol, token, version)
     df = pd.io.json.json_normalize(val, 'cashflow', 'symbol')
@@ -184,9 +313,24 @@ def cashFlowDF(symbol, token='', version=''):
 
 
 def chart(symbol, timeframe='1m', date=None, token='', version=''):
-    '''
-    https://iextrading.com/developer/docs/#chart
-    https://iextrading.com/developer/docs/#time-series
+    '''Historical price/volume data, daily and intraday
+
+    https://iexcloud.io/docs/api/#historical-prices
+    Data Schedule
+    1d: -9:30-4pm ET Mon-Fri on regular market trading days
+        -9:30-1pm ET on early close trading days
+    All others:
+        -Prior trading day available after 4am ET Tue-Sat
+
+    Args:
+        symbol (string); Ticker to request
+        timeframe (string); Timeframe to request e.g. 1m
+        date (datetime): date, if requesting intraday
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
     '''
     _raiseIfNotStr(symbol)
     if timeframe is not None and timeframe != '1d':
@@ -200,6 +344,7 @@ def chart(symbol, timeframe='1m', date=None, token='', version=''):
 
 
 def _chartToDF(c):
+    '''internal'''
     df = pd.DataFrame(c)
     _toDatetime(df)
     _reindex(df, 'date')
@@ -207,9 +352,24 @@ def _chartToDF(c):
 
 
 def chartDF(symbol, timeframe='1m', date=None, token='', version=''):
-    '''
-    https://iextrading.com/developer/docs/#chart
-    https://iextrading.com/developer/docs/#time-series
+    '''Historical price/volume data, daily and intraday
+
+    https://iexcloud.io/docs/api/#historical-prices
+    Data Schedule
+    1d: -9:30-4pm ET Mon-Fri on regular market trading days
+        -9:30-1pm ET on early close trading days
+    All others:
+        -Prior trading day available after 4am ET Tue-Sat
+
+    Args:
+        symbol (string); Ticker to request
+        timeframe (string); Timeframe to request e.g. 1m
+        date (datetime): date, if requesting intraday
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
     '''
     c = chart(symbol, timeframe, date, token, version)
     df = pd.DataFrame(c)
@@ -252,13 +412,67 @@ def bulkMinuteBarsDF(symbol, dates, token='', version=''):
     return df
 
 
+def collections(tag, collectionName, token='', version=''):
+    '''Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
+
+
+    https://iexcloud.io/docs/api/#collections
+
+    Args:
+        tag (string);  Sector, Tag, or List
+        collectionName (string);  Associated name for tag
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    if tag not in _COLLECTION_TAGS:
+        raise PyEXception('Tag must be in %s' % str(_COLLECTION_TAGS))
+    return _getJson('stock/market/collection/' + tag + '?collectionName=' + collectionName, token, version)
+
+
+def collectionsDF(tag, query, token='', version=''):
+    '''Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
+
+
+    https://iexcloud.io/docs/api/#collections
+
+    Args:
+        tag (string);  Sector, Tag, or List
+        collectionName (string);  Associated name for tag
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.DataFrame(collections(tag, query, token, version))
+    _toDatetime(df)
+    _reindex(df, 'symbol')
+    return df
+
+
 def company(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#company'''
+    '''Company reference data
+
+    https://iexcloud.io/docs/api/#company
+    Updates at 4am and 5am UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/company', token, version)
 
 
 def _companyToDF(c, token='', version=''):
+    '''internal'''
     df = pd.io.json.json_normalize(c)
     _toDatetime(df)
     _reindex(df, 'symbol')
@@ -266,34 +480,51 @@ def _companyToDF(c, token='', version=''):
 
 
 def companyDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#company'''
+    '''Company reference data
+
+    https://iexcloud.io/docs/api/#company
+    Updates at 4am and 5am UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     c = company(symbol, token, version)
     df = _companyToDF(c)
     return df
 
 
-def collections(tag, collectionName, token='', version=''):
-    '''https://iextrading.com/developer/docs/#collections'''
-    if tag not in _COLLECTION_TAGS:
-        raise PyEXception('Tag must be in %s' % str(_COLLECTION_TAGS))
-    return _getJson('stock/market/collection/' + tag + '?collectionName=' + collectionName, token, version)
-
-
-def collectionsDF(tag, query, token='', version=''):
-    '''https://iextrading.com/developer/docs/#collections'''
-    df = pd.DataFrame(collections(tag, query, token, version))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
-    return df
-
-
 def crypto(token='', version=''):
-    '''https://iextrading.com/developer/docs/#collections'''
+    '''This will return an array of quotes for all Cryptocurrencies supported by the IEX API. Each element is a standard quote object with four additional keys.
+
+    https://iexcloud.io/docs/api/#crypto
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     return _getJson('stock/market/crypto/', token, version)
 
 
 def cryptoDF(token='', version=''):
-    '''https://iextrading.com/developer/docs/#collections'''
+    '''This will return an array of quotes for all Cryptocurrencies supported by the IEX API. Each element is a standard quote object with four additional keys.
+
+    https://iexcloud.io/docs/api/#crypto
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(crypto(token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
@@ -301,13 +532,39 @@ def cryptoDF(token='', version=''):
 
 
 def delayedQuote(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#delayed-quote'''
+    '''This returns the 15 minute delayed market quote.
+
+    https://iexcloud.io/docs/api/#delayed-quote
+    15min delayed
+    4:30am - 8pm ET M-F when market is open
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/delayed-quote', token, version)
 
 
 def delayedQuoteDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#delayed-quote'''
+    '''This returns the 15 minute delayed market quote.
+
+    https://iexcloud.io/docs/api/#delayed-quote
+    15min delayed
+    4:30am - 8pm ET M-F when market is open
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.io.json.json_normalize(delayedQuote(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'symbol')
@@ -315,7 +572,19 @@ def delayedQuoteDF(symbol, token='', version=''):
 
 
 def dividends(symbol, timeframe='ytd', token='', version=''):
-    '''https://iextrading.com/developer/docs/#dividends'''
+    '''Dividend history
+
+    https://iexcloud.io/docs/api/#dividends
+    Updated at 9am UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception('Range must be in %s' % str(_TIMEFRAME_DIVSPLIT))
@@ -323,6 +592,7 @@ def dividends(symbol, timeframe='ytd', token='', version=''):
 
 
 def _dividendsToDF(d):
+    '''internal'''
     df = pd.DataFrame(d)
     _toDatetime(df)
     _reindex(df, 'exDate')
@@ -330,19 +600,44 @@ def _dividendsToDF(d):
 
 
 def dividendsDF(symbol, timeframe='ytd', token='', version=''):
-    '''https://iextrading.com/developer/docs/#dividends'''
+    '''Dividend history
+
+    https://iexcloud.io/docs/api/#dividends
+    Updated at 9am UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     d = dividends(symbol, timeframe, token, version)
     df = _dividendsToDF(d)
     return df
 
 
 def earnings(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#earnings'''
+    '''Earnings data for a given company including the actual EPS, consensus, and fiscal period. Earnings are available quarterly (last 4 quarters) and annually (last 4 years).
+
+    https://iexcloud.io/docs/api/#earnings
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/earnings', token, version)
 
 
 def _earningsToDF(e):
+    '''internal'''
     if e:
         df = pd.io.json.json_normalize(e, 'earnings', 'symbol')
         _toDatetime(df)
@@ -353,19 +648,57 @@ def _earningsToDF(e):
 
 
 def earningsDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#earnings'''
+    '''Earnings data for a given company including the actual EPS, consensus, and fiscal period. Earnings are available quarterly (last 4 quarters) and annually (last 4 years).
+
+    https://iexcloud.io/docs/api/#earnings
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     e = earnings(symbol, token, version)
     df = _earningsToDF(e)
     return df
 
 
 def earningsToday(token='', version=''):
-    '''https://iextrading.com/developer/docs/#earnings-today'''
+    '''Returns earnings that will be reported today as two arrays: before the open bto and after market close amc.
+    Each array contains an object with all keys from earnings, a quote object, and a headline key.
+
+    https://iexcloud.io/docs/api/#earnings-today
+    Updates at 9am, 11am, 12pm UTC daily
+
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     return _getJson('stock/market/today-earnings', token, version)
 
 
 def earningsTodayDF(token='', version=''):
-    '''https://iextrading.com/developer/docs/#earnings-today'''
+    '''Returns earnings that will be reported today as two arrays: before the open bto and after market close amc.
+    Each array contains an object with all keys from earnings, a quote object, and a headline key.
+
+    https://iexcloud.io/docs/api/#earnings-today
+    Updates at 9am, 11am, 12pm UTC daily
+
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     x = earningsToday(token, version)
     z = []
     for k in x:
@@ -384,26 +717,131 @@ def earningsTodayDF(token='', version=''):
 
 
 def spread(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#effective-spread'''
+    '''This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
+    Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
+    Lower effectiveSpread and higher priceImprovement values are generally considered optimal.
+
+    Effective spread is designed to measure marketable orders executed in relation to the market center’s
+    quoted spread and takes into account hidden and midpoint liquidity available at each market center.
+    Effective Spread is calculated by using eligible trade prices recorded to the consolidated tape and
+    comparing those trade prices to the National Best Bid and Offer (“NBBO”) at the time of the execution.
+
+    View the data disclaimer at the bottom of the stocks app for more information about how these values are calculated.
+
+
+    https://iexcloud.io/docs/api/#earnings-today
+    8am ET M-F
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/effective-spread', token, version)
 
 
 def spreadDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#effective-spread'''
+    '''This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
+    Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
+    Lower effectiveSpread and higher priceImprovement values are generally considered optimal.
+
+    Effective spread is designed to measure marketable orders executed in relation to the market center’s
+    quoted spread and takes into account hidden and midpoint liquidity available at each market center.
+    Effective Spread is calculated by using eligible trade prices recorded to the consolidated tape and
+    comparing those trade prices to the National Best Bid and Offer (“NBBO”) at the time of the execution.
+
+    View the data disclaimer at the bottom of the stocks app for more information about how these values are calculated.
+
+
+    https://iexcloud.io/docs/api/#earnings-today
+    8am ET M-F
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     df = pd.DataFrame(spread(symbol, token, version))
     _toDatetime(df)
     _reindex(df, 'venue')
     return df
 
 
+def estimates(symbol, token='', version=''):
+    '''Provides the latest consensus estimate for the next fiscal period
+
+    https://iexcloud.io/docs/api/#estimates
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/estimates', token, version)
+
+
+def _estimatesToDF(f):
+    '''internal'''
+    if f:
+        df = pd.io.json.json_normalize(f, 'estimates', 'symbol')
+        _toDatetime(df)
+        _reindex(df, 'fiscalEndDate')
+    else:
+        df = pd.DataFrame()
+    return df
+
+
+def estimatesDF(symbol, token='', version=''):
+    '''Provides the latest consensus estimate for the next fiscal period
+
+    https://iexcloud.io/docs/api/#estimates
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    f = estimates(symbol, token, version)
+    df = _estimatesToDF(f)
+    return df
+
+
 def financials(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#financials'''
+    '''Pulls income statement, balance sheet, and cash flow data from the four most recent reported quarters.
+
+    https://iexcloud.io/docs/api/#financials
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/financials', token, version)
 
 
 def _financialsToDF(f):
+    '''internal'''
     if f:
         df = pd.io.json.json_normalize(f, 'financials', 'symbol')
         _toDatetime(df)
@@ -414,23 +852,55 @@ def _financialsToDF(f):
 
 
 def financialsDF(symbol, token='', version=''):
-    '''https://iextrading.com/developer/docs/#financials'''
+    '''Pulls income statement, balance sheet, and cash flow data from the four most recent reported quarters.
+
+    https://iexcloud.io/docs/api/#financials
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
     f = financials(symbol, token, version)
     df = _financialsToDF(f)
     return df
 
 
 def incomeStatement(symbol, token='', version=''):
-    '''
+    '''Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
+
     https://iexcloud.io/docs/api/#income-statement
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/income', token, version)
 
 
 def incomeStatementDF(symbol, token='', version=''):
-    '''
+    '''Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
+
     https://iexcloud.io/docs/api/#income-statement
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
     '''
     val = incomeStatement(symbol, token, version)
     df = pd.io.json.json_normalize(val, 'income', 'symbol')
