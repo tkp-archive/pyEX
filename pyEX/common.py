@@ -94,6 +94,7 @@ def _getJson(url, token='', version=''):
 
 
 def _getJsonOrig(url):
+    '''internal'''
     url = _URL_PREFIX + url
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES)
     if resp.status_code == 200:
@@ -111,20 +112,24 @@ def _getJsonIEXCloud(url, token='', version='beta'):
 
 
 def _wsURL(url):
+    '''internal'''
     return '/1.0/' + url
 
 
 def _strToList(st):
+    '''internal'''
     if isinstance(st, string_types):
         return [st]
     return st
 
 
 def _strCommaSeparatedString(st):
+    '''internal'''
     return ','.join(_strToList(st))
 
 
 def _strOrDate(st):
+    '''internal'''
     if isinstance(st, string_types):
         return st
     elif isinstance(st, datetime):
@@ -133,11 +138,13 @@ def _strOrDate(st):
 
 
 def _raiseIfNotStr(s):
+    '''internal'''
     if s is not None and not isinstance(s, string_types):
         raise PyEXception('Cannot use type %s' % str(type(s)))
 
 
 def _tryJson(data, raw=True):
+    '''internal'''
     if raw:
         return data
     try:
@@ -181,11 +188,13 @@ class WSClient(object):
 
 
 def _stream(url, sendinit=None, on_data=print):
+    '''internal'''
     cl = WSClient(url, sendinit=sendinit, on_data=on_data)
     return cl
 
 
 def _streamSSE(url, on_data=print, accrue=False):
+    '''internal'''
     messages = SSEClient(url)
     if accrue:
         ret = []
@@ -200,16 +209,13 @@ def _streamSSE(url, on_data=print, accrue=False):
 
 
 def _reindex(df, col):
+    '''internal'''
     if col in df.columns:
         df.set_index(col, inplace=True)
 
 
-def setProxy(proxies=None):
-    global _PYEX_PROXIES
-    _PYEX_PROXIES = proxies
-
-
 def _toDatetime(df, cols=None, tcols=None):
+    '''internal'''
     cols = cols or _STANDARD_DATE_FIELDS
     tcols = tcols = _STANDARD_TIME_FIELDS
 
@@ -220,3 +226,13 @@ def _toDatetime(df, cols=None, tcols=None):
     for tcol in tcols:
         if tcol in df:
             df[tcol] = pd.to_datetime(df[tcol], unit='ms', errors='coerce')
+
+
+def setProxy(proxies=None):
+    '''Set proxies argument for requests
+
+    Args:
+        proxies (dict): Proxies to set
+    '''
+    global _PYEX_PROXIES
+    _PYEX_PROXIES = proxies
