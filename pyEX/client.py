@@ -136,6 +136,14 @@ _INCLUDE_FUNCTIONS = [
 
 
 class Client(object):
+    '''IEX Cloud Client
+
+    Client has access to all methods provided as standalone, but in an authenticated way
+
+    Args:
+        api_token (string): api token (can pickup from IEX_TOKEN environment variable)
+        verson (string): api version to use (defaults to beta)
+    '''
     def __init__(self, api_token=None, version='beta'):
         self._token = api_token or os.environ.get('IEX_TOKEN', '')
         if not self._token:
