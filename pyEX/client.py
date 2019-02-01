@@ -7,8 +7,8 @@ from .markets import markets, marketsDF
 from .stats import stats, statsDF, recent, recentDF, records, recordsDF, summary, summaryDF, daily, dailyDF
 from .stocks import balanceSheet, balanceSheetDF, batch, batchDF, bulkBatch, bulkBatchDF, book, bookDF, cashFlow, cashFlowDF, chart, chartDF, \
     bulkMinuteBars, bulkMinuteBarsDF, company, companyDF, collections, collectionsDF, crypto, cryptoDF, delayedQuote, delayedQuoteDF, dividends, dividendsDF, \
-    earnings, earningsDF, earningsToday, earningsTodayDF, spread, spreadDF, financials, financialsDF, incomeStatement, incomeStatementDF, ipoToday, ipoTodayDF, \
-    ipoUpcoming, ipoUpcomingDF, threshold, thresholdDF, shortInterest, shortInterestDF, marketShortInterest, marketShortInterestDF, stockStats, stockStatsDF, \
+    earnings, earningsDF, earningsToday, earningsTodayDF, estimates, estimatesDF, spread, spreadDF, financials, financialsDF, incomeStatement, incomeStatementDF, ipoToday, ipoTodayDF, \
+    ipoUpcoming, ipoUpcomingDF, threshold, thresholdDF, shortInterest, shortInterestDF, marketShortInterest, marketShortInterestDF, keyStats, keyStatsDF, \
     largestTrades, largestTradesDF, list, listDF, logo, logoPNG, logoNotebook, news, newsDF, marketNews, marketNewsDF, ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
     peers, peersDF, yesterday, yesterdayDF, marketYesterday, marketYesterdayDF, price, priceDF, quote, quoteDF, relevant, relevantDF, sectorPerformance, \
     sectorPerformanceDF, splits, splitsDF, volumeByVenue, volumeByVenueDF
@@ -90,8 +90,10 @@ _INCLUDE_FUNCTIONS = [
     ('shortInterestDF', shortInterestDF),
     ('marketShortInterest', marketShortInterest),
     ('marketShortInterestDF', marketShortInterestDF),
-    ('stockStats', stockStats),
-    ('stockStatsDF', stockStatsDF),
+    ('estimates', estimates),
+    ('estimatesDF', estimatesDF),
+    ('keyStats', keyStats),
+    ('keyStatsDF', keyStatsDF),
     ('largestTrades', largestTrades),
     ('largestTradesDF', largestTradesDF),
     ('list', list),
