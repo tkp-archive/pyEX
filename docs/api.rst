@@ -1,7 +1,8 @@
-pyEX
+API
 ====
 
 .. toctree::
    :maxdepth: 4
 
-   pyEX
+   api/pyEX
+   api/pyEX.marketdata.rst

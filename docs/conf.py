@@ -17,9 +17,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import sys
+import os
+import os.path
+import subprocess
+import sphinx_rtd_theme
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sphinx_rtd_theme
 
 
@@ -170,11 +173,7 @@ texinfo_documents = [
 
 
 def run_apidoc(_):
-    import sys
-    import os
-    import os.path
-    import subprocess
-    cur_dir = os.path.abspath(os.path.dirname(__file__))
+    out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'api'))
     pyEX_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'pyEX'))
     cmd_path = 'sphinx-apidoc'
     if hasattr(sys, 'real_prefix'):  # Check to see if we are in a virtualenv
@@ -184,7 +183,7 @@ def run_apidoc(_):
                            '-E',
                            '-M',
                            '-o',
-                           cur_dir,
+                           out_dir,
                            pyEX_dir,
                            '--force'])
 
