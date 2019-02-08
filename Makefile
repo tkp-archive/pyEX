@@ -10,6 +10,7 @@ testall: ## run the tests including those that hit the actual api
 lint: ## run linter
 	pylint pyEX || echo
 	flake8 pyEX || echo
+	echo "done"
 
 annotate: ## MyPy type annotation check
 	mypy -s pyEX
