@@ -1,4 +1,5 @@
 # for Coverage
+import os
 import time
 from mock import patch, MagicMock
 SYMBOL = 'aapl'
@@ -436,6 +437,8 @@ class TestAll:
             balanceSheet(SYMBOL)
 
     def test_balancesheetDF(self):
+        if not os.getenv('IEX_TOKEN', None):
+            return 0
         from pyEX import Client
         c = Client()
         c.balanceSheetDF(SYMBOL)
@@ -448,6 +451,8 @@ class TestAll:
             cashFlow(SYMBOL)
 
     def test_cashflowDF(self):
+        if not os.getenv('IEX_TOKEN', None):
+            return 0
         from pyEX import Client
         c = Client()
         c.cashFlowDF(SYMBOL)
@@ -460,6 +465,8 @@ class TestAll:
             incomeStatement(SYMBOL)
 
     def test_incomeDF(self):
+        if not os.getenv('IEX_TOKEN', None):
+            return 0
         from pyEX import Client
         c = Client()
         c.incomeStatementDF(SYMBOL)
