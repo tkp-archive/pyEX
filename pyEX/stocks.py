@@ -1,12 +1,33 @@
 import itertools
 import requests
 import pandas as pd
-from deprecation import deprecated
 from io import BytesIO
 from IPython.display import Image as ImageI
 from multiprocessing.pool import ThreadPool
 from PIL import Image as ImageP
 from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
+
+
+def build_auth_url(url, token=None):
+    """build_auth_url
+
+    Helper for constructing authenticated IEX urls
+    using an ``IEX Publishable Token`` with a valid
+    `IEX Account <https://iexcloud.io/cloud-login#/register/>`__
+
+    This will return a string with the token as a query
+    parameter on the HTTP url
+
+    :param url: initial url to make authenticated
+    :param token: optional - string ``IEX Publishable Token``
+        (defaults to ``IEX_TOKEN`` environment variable or
+        ``None``)
+    """
+    if token:
+        return (
+            f'{url}?token={token}')
+    else:
+        return url
 
 
 def balanceSheet(symbol, token='', version=''):
@@ -1503,21 +1524,23 @@ def marketYesterdayDF(token='', version=''):
 
 
 def price(symbol, token='', version=''):
-    '''Price of ticker
+    """price
+
+    Price of ticker
 
     https://iexcloud.io/docs/api/#price
     4:30am-8pm ET Mon-Fri
 
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        dict: result
-    '''
+    :param symbol: symbol (string); Ticker to request
+    :param token: token (string); Access token
+    :param version: version (string); API version
+    :return: dict result
+    """
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/price', token, version)
+    url = build_auth_url(
+        url=f'stock/{symbol}/price',
+        token=token)
+    return _getJson(url, None, version)
 
 
 def priceDF(symbol, token='', version=''):
@@ -1741,8 +1764,13 @@ def volumeByVenueDF(symbol, token='', version=''):
 
 
 def threshold(date=None, token='', version=''):
-    '''The following are IEX-listed securities that have an aggregate fail to deliver position for five consecutive settlement days at a registered clearing agency, totaling 10,000 shares or more and equal to at least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”). 
-    The report data will be published to the IEX website daily at 8:30 p.m. ET with data for that trading day.
+    '''The following are IEX-listed securities that have an
+    aggregate fail to deliver position for five consecutive
+    settlement days at a registered clearing agency,
+    totaling 10,000 shares or more and equal to at
+    least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”).
+    The report data will be published to the IEX
+    website daily at 8:30 p.m. ET with data for that trading day.
 
     https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
 
@@ -1761,8 +1789,13 @@ def threshold(date=None, token='', version=''):
 
 
 def thresholdDF(date=None, token='', version=''):
-    '''The following are IEX-listed securities that have an aggregate fail to deliver position for five consecutive settlement days at a registered clearing agency, totaling 10,000 shares or more and equal to at least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”). 
-    The report data will be published to the IEX website daily at 8:30 p.m. ET with data for that trading day.
+    '''The following are IEX-listed securities that have
+    an aggregate fail to deliver position for five consecutive
+    settlement days at a registered clearing agency, totaling
+    10,000 shares or more and equal to at least 0.5% of the
+    issuer’s total shares outstanding (i.e., “threshold securities”).
+    The report data will be published to the IEX website daily at
+    8:30 p.m. ET with data for that trading day.
 
     https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
 
