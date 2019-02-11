@@ -353,7 +353,8 @@ def securityEventDF(symbol=None, token='', version=''):
 def ssrStatus(symbol=None, token='', version=''):
     '''In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
-    IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities. After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
+    IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities.
+     After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
 
     The IEX Trading System will process orders based on the latest short sale price test restriction status.
 
@@ -376,7 +377,8 @@ def ssrStatus(symbol=None, token='', version=''):
 def ssrStatusDF(symbol=None, token='', version=''):
     '''In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
-    IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities. After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
+    IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities.
+     After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
 
     The IEX Trading System will process orders based on the latest short sale price test restriction status.
 
@@ -521,9 +523,14 @@ def tradeBreakDF(symbol=None, token='', version=''):
 
 
 def tradingStatus(symbol=None, token='', version=''):
-    '''The Trading status message is used to indicate the current trading status of a security. For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons. For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
+    '''The Trading status message is used to indicate the current trading status of a security.
+     For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
+     For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
 
-    IEX disseminates a full pre-market spin of Trading status messages indicating the trading status of all securities. In the spin, IEX will send out a Trading status message with “T” (Trading) for all securities that are eligible for trading at the start of the Pre-Market Session. If a security is absent from the dissemination, firms should assume that the security is being treated as operationally halted in the IEX Trading System.
+    IEX disseminates a full pre-market spin of Trading status messages indicating the trading status of all securities.
+     In the spin, IEX will send out a Trading status message with “T” (Trading) for all securities that are eligible for trading at the start of the Pre-Market Session.
+     If a security is absent from the dissemination, firms should assume that the security is being treated as operationally halted in the IEX Trading System.
+
 
     After the pre-market spin, IEX will use the Trading status message to relay changes in trading status for an individual security. Messages will be sent when a security is:
 
@@ -550,9 +557,13 @@ def tradingStatus(symbol=None, token='', version=''):
 
 
 def tradingStatusDF(symbol=None, token='', version=''):
-    '''The Trading status message is used to indicate the current trading status of a security. For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons. For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
+    '''The Trading status message is used to indicate the current trading status of a security.
+     For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
+     For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
 
-    IEX disseminates a full pre-market spin of Trading status messages indicating the trading status of all securities. In the spin, IEX will send out a Trading status message with “T” (Trading) for all securities that are eligible for trading at the start of the Pre-Market Session. If a security is absent from the dissemination, firms should assume that the security is being treated as operationally halted in the IEX Trading System.
+    IEX disseminates a full pre-market spin of Trading status messages indicating the trading status of all securities.
+     In the spin, IEX will send out a Trading status message with “T” (Trading) for all securities that are eligible for trading at the start of the Pre-Market Session.
+     If a security is absent from the dissemination, firms should assume that the security is being treated as operationally halted in the IEX Trading System.
 
     After the pre-market spin, IEX will use the Trading status message to relay changes in trading status for an individual security. Messages will be sent when a security is:
 

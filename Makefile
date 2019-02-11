@@ -8,7 +8,7 @@ testall: ## run the tests including those that hit the actual api
 	@ python3 -m nose2 -v tests --with-coverage --coverage=pyEX
 
 lint: ## run linter
-	pylint pyEX || echo
+	# pylint pyEX || echo
 	flake8 pyEX 
 
 annotate: ## MyPy type annotation check

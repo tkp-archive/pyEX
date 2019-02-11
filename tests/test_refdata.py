@@ -24,18 +24,45 @@ class TestAll:
     def test_symbols(self):
         from pyEX.refdata import symbols
         from pyEX.refdata import iexSymbols
+        from pyEX.refdata import mutualFundSymbols
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             symbols()
             iexSymbols()
+            mutualFundSymbols()
 
     def test_symbolsDF(self):
         from pyEX.refdata import symbolsDF
         from pyEX import Client
-        c = Client()
-        symbolsDF()
-        c.iexSymbolsDF()
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            c = Client()
+            symbolsDF()
+            c.iexSymbolsDF()
+            c.mutualFundSymbolsDF()
+
+    def test_calendar(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            c = Client()
+            c.calendar()
+            c.holidays()
+
+    def test_calendarDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            c = Client()
+            c.calendarDF()
+            c.holidaysDF()
 
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions

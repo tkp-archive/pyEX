@@ -15,7 +15,11 @@ class TestAll:
 
     def test_topsDF(self):
         from pyEX import topsDF
-        topsDF()
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            topsDF()
 
     def test_last(self):
         from pyEX import last
@@ -27,7 +31,11 @@ class TestAll:
 
     def test_lastDF(self):
         from pyEX import lastDF
-        lastDF()
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            lastDF()
 
     def test_hist(self):
         from datetime import datetime
@@ -41,7 +49,10 @@ class TestAll:
 
     def test_histDF(self):
         from pyEX import histDF
-        histDF()
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            histDF()
 
     def test_deep(self):
         from pyEX import deep

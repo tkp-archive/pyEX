@@ -2,7 +2,10 @@ import os
 from functools import partial
 from .common import PyEXception, _getJson, _USAGE_TYPES
 from .refdata import symbols, iexSymbols, symbolsDF, iexSymbolsDF, \
-    symbolsList, iexSymbolsList, corporateActions, corporateActionsDF, dividends as refDividends, dividendsDF as refDividendsDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF
+    symbolsList, iexSymbolsList, corporateActions, corporateActionsDF, dividends as refDividends, dividendsDF as refDividendsDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF, \
+    calendar, calendarDF, holidays, holidaysDF, \
+    mutualFundSymbols, mutualFundSymbolsDF, mutualFundSymbolsList, \
+    otcSymbols, otcSymbolsDF, otcSymbolsList
 from .markets import markets, marketsDF
 from .stats import stats, statsDF, recent, recentDF, records, recordsDF, summary, summaryDF, daily, dailyDF
 from .stocks import balanceSheet, balanceSheetDF, batch, batchDF, bulkBatch, bulkBatchDF, book, bookDF, cashFlow, cashFlowDF, chart, chartDF, \
@@ -19,10 +22,16 @@ _INCLUDE_FUNCTIONS = [
     # Refdata
     ('symbols', symbols),
     ('iexSymbols', iexSymbols),
+    ('mutualFundSymbols', mutualFundSymbols),
+    ('otcSymbols', otcSymbols),
     ('symbolsDF', symbolsDF),
     ('iexSymbolsDF', iexSymbolsDF),
+    ('mutualFundSymbolsDF', mutualFundSymbolsDF),
+    ('otcSymbolsDF', otcSymbolsDF),
     ('symbolsList', symbolsList),
     ('iexSymbolsList', iexSymbolsList),
+    ('mutualFundSymbolsList', mutualFundSymbolsList),
+    ('otcSymbolsList', otcSymbolsList),
     ('corporateActions', corporateActions),
     ('corporateActionsDF', corporateActionsDF),
     ('refDividends', refDividends),
@@ -31,6 +40,10 @@ _INCLUDE_FUNCTIONS = [
     ('nextDayExtDateDF', nextDayExtDateDF),
     ('directory', directory),
     ('directoryDF', directoryDF),
+    ('calendar', calendar),
+    ('calendarDF', calendarDF),
+    ('holidays', holidays),
+    ('holidaysDF', holidaysDF),
     # Markets
     ('markets', markets),
     ('marketsDF', marketsDF),

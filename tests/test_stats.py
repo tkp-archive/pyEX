@@ -25,15 +25,6 @@ class TestAll:
             mock.return_value.status_code = 200
             recent()
 
-    def test_recentDF(self):
-        from pyEX.stats import recentDF
-        from pyEX import PyEXception
-        try:
-            # flaky
-            recentDF()
-        except PyEXception:
-            pass
-
     def test_records(self):
         from pyEX.stats import records
         with patch('requests.get') as mock:
