@@ -235,6 +235,22 @@ class TestAll:
 
             earningsDF(SYMBOL)
 
+    def test_earningsToday(self):
+        from pyEX import earningsToday
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            earningsToday()
+
+    def test_earningsTodayDF(self):
+        from pyEX import earningsTodayDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            earningsTodayDF()
+
     def test_peers(self):
         from pyEX import peers
         with patch('requests.get') as mock:
