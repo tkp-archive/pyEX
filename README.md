@@ -9,7 +9,7 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
 [![BCH compliance](https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master)](https://bettercodehub.com/)
 [![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
-[![Docs](https://img.shields.io/readthedocs/pyEX.svg)](https://pyEX.readthedocs.io)
+[![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
 
 ## Attribution

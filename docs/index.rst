@@ -53,7 +53,7 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
     :scale: 100%
     :target: https://pypi.python.org/pypi/pyEX
 
-.. |docs| image:: https://img.shields.io/readthedocs/pyEX.svg
+.. |docs| image:: https://readthedocs.org/projects/pyex/badge/?version=latest
+    :target: https://pyex.readthedocs.io/en/latest/?badge=latest
     :alt: Docs
     :scale: 100%
-    :target: http://pyEX.readthedocs.io/en/latest/
