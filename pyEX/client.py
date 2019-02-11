@@ -1,21 +1,64 @@
 import os
 from functools import partial
 from .common import PyEXception, _getJson, _USAGE_TYPES
-from .refdata import symbols, iexSymbols, symbolsDF, iexSymbolsDF, \
-    symbolsList, iexSymbolsList, corporateActions, corporateActionsDF, dividends as refDividends, dividendsDF as refDividendsDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF, \
+
+from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, \
+    symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, \
+    symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, \
+    corporateActions, corporateActionsDF, \
+    dividends as refDividends, dividendsDF as refDividendsDF, \
+    nextDayExtDate, nextDayExtDateDF, \
+    directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
-    mutualFundSymbols, mutualFundSymbolsDF, mutualFundSymbolsList, \
-    otcSymbols, otcSymbolsDF, otcSymbolsList, \
     exchanges, exchangesDF
+
 from .markets import markets, marketsDF
-from .stats import stats, statsDF, recent, recentDF, records, recordsDF, summary, summaryDF, daily, dailyDF
-from .stocks import balanceSheet, balanceSheetDF, batch, batchDF, bulkBatch, bulkBatchDF, book, bookDF, cashFlow, cashFlowDF, chart, chartDF, \
-    bulkMinuteBars, bulkMinuteBarsDF, company, companyDF, collections, collectionsDF, crypto, cryptoDF, delayedQuote, delayedQuoteDF, dividends, dividendsDF, \
-    earnings, earningsDF, earningsToday, earningsTodayDF, estimates, estimatesDF, spread, spreadDF, financials, financialsDF, incomeStatement, incomeStatementDF, ipoToday, ipoTodayDF, \
-    ipoUpcoming, ipoUpcomingDF, threshold, thresholdDF, shortInterest, shortInterestDF, marketShortInterest, marketShortInterestDF, keyStats, keyStatsDF, \
-    largestTrades, largestTradesDF, list, listDF, logo, logoPNG, logoNotebook, news, newsDF, marketNews, marketNewsDF, ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
-    peers, peersDF, yesterday, yesterdayDF, marketYesterday, marketYesterdayDF, price, priceDF, quote, quoteDF, relevant, relevantDF, sectorPerformance, \
-    sectorPerformanceDF, splits, splitsDF, volumeByVenue, volumeByVenueDF
+
+from .stats import stats, statsDF, \
+    recent, recentDF, \
+    records, recordsDF, \
+    summary, summaryDF, \
+    daily, dailyDF
+
+from .stocks import balanceSheet, balanceSheetDF, \
+    batch, batchDF, bulkBatch, bulkBatchDF, \
+    book, bookDF, \
+    bulkMinuteBars, bulkMinuteBarsDF, \
+    cashFlow, cashFlowDF, \
+    chart, chartDF, \
+    company, companyDF, \
+    collections, collectionsDF, \
+    crypto, cryptoDF, \
+    delayedQuote, delayedQuoteDF, \
+    dividends, dividendsDF, \
+    earnings, earningsDF, \
+    earningsToday, earningsTodayDF, \
+    estimates, estimatesDF, \
+    financials, financialsDF, \
+    incomeStatement, incomeStatementDF, \
+    ipoToday, ipoTodayDF, \
+    ipoUpcoming, ipoUpcomingDF, \
+    marketShortInterest, marketShortInterestDF, \
+    marketVolume, marketVolumeDF, \
+    keyStats, keyStatsDF, \
+    largestTrades, largestTradesDF, \
+    list, listDF, \
+    logo, logoPNG, logoNotebook, \
+    news, newsDF, marketNews, marketNewsDF, \
+    ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
+    peers, peersDF, \
+    marketYesterday, marketYesterdayDF, \
+    price, priceDF, \
+    quote, quoteDF, \
+    relevant, relevantDF, \
+    sectorPerformance, sectorPerformanceDF, \
+    shortInterest, shortInterestDF, \
+    splits, splitsDF, \
+    spread, spreadDF, \
+    threshold, thresholdDF, \
+    volumeByVenue, volumeByVenueDF, \
+    yesterday, yesterdayDF
+
 from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
 
 
@@ -104,6 +147,8 @@ _INCLUDE_FUNCTIONS = [
     ('thresholdDF', thresholdDF),
     ('shortInterest', shortInterest),
     ('shortInterestDF', shortInterestDF),
+    ('marketVolume', marketVolume),
+    ('marketVolumeDF', marketVolumeDF),
     ('marketShortInterest', marketShortInterest),
     ('marketShortInterestDF', marketShortInterestDF),
     ('estimates', estimates),

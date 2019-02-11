@@ -364,12 +364,17 @@ class TestAll:
     def test_splits(self):
         from pyEX import splits
         from pyEX.common import PyEXception
-        splits(SYMBOL)
-        try:
-            splits('test', 'test')
-            assert False
-        except PyEXception:
-            pass
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            splits(SYMBOL)
+            try:
+                splits('test', 'test')
+                assert False
+            except PyEXception:
+                pass
 
     def test_splitsDF(self):
         from pyEX import splitsDF
@@ -615,3 +620,25 @@ class TestAll:
 
             c = Client()
             c.incomeStatementDF(SYMBOL)
+
+    def test_estimates(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.estimates(SYMBOL)
+            c.estimatesDF(SYMBOL)
+
+    def test_marketVolume(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.marketVolume()
+            c.marketVolumeDF()
