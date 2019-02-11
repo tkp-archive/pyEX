@@ -5,7 +5,8 @@ from .refdata import symbols, iexSymbols, symbolsDF, iexSymbolsDF, \
     symbolsList, iexSymbolsList, corporateActions, corporateActionsDF, dividends as refDividends, dividendsDF as refDividendsDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
     mutualFundSymbols, mutualFundSymbolsDF, mutualFundSymbolsList, \
-    otcSymbols, otcSymbolsDF, otcSymbolsList
+    otcSymbols, otcSymbolsDF, otcSymbolsList, \
+    exchanges, exchangesDF
 from .markets import markets, marketsDF
 from .stats import stats, statsDF, recent, recentDF, records, recordsDF, summary, summaryDF, daily, dailyDF
 from .stocks import balanceSheet, balanceSheetDF, batch, batchDF, bulkBatch, bulkBatchDF, book, bookDF, cashFlow, cashFlowDF, chart, chartDF, \
@@ -44,6 +45,8 @@ _INCLUDE_FUNCTIONS = [
     ('calendarDF', calendarDF),
     ('holidays', holidays),
     ('holidaysDF', holidaysDF),
+    ('exchanges', exchanges),
+    ('exchangesDF', exchangesDF),
     # Markets
     ('markets', markets),
     ('marketsDF', marketsDF),

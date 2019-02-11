@@ -45,6 +45,18 @@ class TestAll:
         from pyEX.common import _strToList
         _strToList('test')
 
+    def test_strCommaSeparatedString(self):
+        from pyEX.common import _strCommaSeparatedString
+        assert _strCommaSeparatedString(['test', 'test2']) == 'test,test2'
+        assert _strCommaSeparatedString('test,test2') == 'test,test2'
+
+    def test_setProxy(self):
+        import pyEX.common as pc
+        pc.setProxy('test')
+        print(pc._PYEX_PROXIES)
+        assert pc._PYEX_PROXIES == 'test'
+        pc.setProxy(None)
+
     def test_strOrDate(self):
         from pyEX.common import _strOrDate, PyEXception
         from datetime import datetime

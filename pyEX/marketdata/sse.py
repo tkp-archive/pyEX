@@ -1,5 +1,5 @@
 from enum import Enum
-from ..common import _strCommaSeparatedString, _streamSSE, _SSE_URL_PREFIX, _SSE_DEEP_URL_PREFIX, PyEXception
+from ..common import _strCommaSeparatedString, _streamSSE, _SSE_URL_PREFIX, _SSE_URL_PREFIX_ALL, _SSE_DEEP_URL_PREFIX, PyEXception
 
 
 class DeepChannelsSSE(Enum):
@@ -20,10 +20,12 @@ class DeepChannelsSSE(Enum):
 
 
 def _runSSE(method='', symbols=None, on_data=None, token='', version=''):
-    symbols = _strCommaSeparatedString(symbols)
+    if method == '':
+        raise PyEXception('method cannot be blank!')
     if symbols:
+        symbols = _strCommaSeparatedString(symbols)
         return _streamSSE(_SSE_URL_PREFIX.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
-    return _streamSSE(_SSE_URL_PREFIX.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
+    return _streamSSE(_SSE_URL_PREFIX_ALL.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
 
 
 def topsSSE(symbols=None, on_data=None, token='', version=''):
