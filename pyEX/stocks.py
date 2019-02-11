@@ -1873,5 +1873,5 @@ _MAPPING = {
     'stats': _statsToDF,
     'news': _newsToDF,
     'peers': _peersToDF,
-    'splits': _splitsToDF,
+    'splits': _splitsToDF
 }
