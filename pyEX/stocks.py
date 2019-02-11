@@ -66,7 +66,7 @@ def batch(symbols, fields=None, range_='1m', last=10, token='', version=''):
     Returns:
         dict: results in json
     '''
-    fields = fields or _BATCH_TYPES
+    fields = fields or _BATCH_TYPES[:10]  # limit 10
 
     if not isinstance(symbols, [].__class__):
         if not isinstance(symbols, str):

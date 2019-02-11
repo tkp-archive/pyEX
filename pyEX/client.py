@@ -1,5 +1,5 @@
 import os
-from functools import partial
+from functools import partial, wraps
 from .common import PyEXception, _getJson, _USAGE_TYPES
 from .refdata import symbols, iexSymbols, symbolsDF, iexSymbolsDF, \
     symbolsList, iexSymbolsList, corporateActions, corporateActionsDF, dividends as refDividends, dividendsDF as refDividendsDF, nextDayExtDate, nextDayExtDateDF, directory, directoryDF, \
@@ -168,6 +168,7 @@ class Client(object):
         self._version = version
         for name, method in _INCLUDE_FUNCTIONS:
             setattr(self, name, partial(self.bind, meth=method))
+            getattr(self, name).__doc__ = method.__doc__
 
     def bind(self, *args, meth=None, **kwargs):
         return meth(token=self._token, version=self._version, *args, **kwargs)
