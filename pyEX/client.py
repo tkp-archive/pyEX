@@ -49,6 +49,7 @@ from .stocks import balanceSheet, balanceSheetDF, \
     peers, peersDF, \
     marketYesterday, marketYesterdayDF, \
     price, priceDF, \
+    priceTarget, priceTargetDF, \
     quote, quoteDF, \
     relevant, relevantDF, \
     sectorPerformance, sectorPerformanceDF, \
@@ -178,6 +179,8 @@ _INCLUDE_FUNCTIONS = [
     ('marketYesterdayDF', marketYesterdayDF),
     ('price', price),
     ('priceDF', priceDF),
+    ('priceTarget', priceTarget),
+    ('priceTargetDF', priceTargetDF),
     ('quote', quote),
     ('quoteDF', quoteDF),
     ('relevant', relevant),

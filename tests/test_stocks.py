@@ -53,6 +53,21 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             priceDF('test')
 
+    def test_priceTarget(self):
+        from pyEX import priceTarget
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            priceTarget('test')
+
+    def test_priceTargetDF(self):
+        from pyEX import priceTargetDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            priceTargetDF('test')
+
     def test_spread(self):
         from pyEX import spread
         with patch('requests.get') as mock:
