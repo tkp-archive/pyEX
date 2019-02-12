@@ -1,6 +1,7 @@
 import itertools
 import requests
 import pandas as pd
+import numpy as np
 from io import BytesIO
 from IPython.display import Image as ImageI
 from multiprocessing.pool import ThreadPool
@@ -309,6 +310,7 @@ def cashFlowDF(symbol, token='', version=''):
     df = pd.io.json.json_normalize(val, 'cashflow', 'symbol')
     _toDatetime(df)
     _reindex(df, 'reportDate')
+    df.replace(to_replace=[None], value=np.nan, inplace=True)
     return df
 
 
