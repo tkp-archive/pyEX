@@ -7,4 +7,4 @@ from .marketdata.http import tops, topsDF, last, lastDF, hist, histDF, deep, dee
 from .marketdata.ws import *  # noqa: F401,F403
 from .marketdata.sse import *  # noqa: F401,F403
 
-__version__ = '0.1.9'
+__version__ = '0.1.10'
