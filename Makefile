@@ -1,11 +1,8 @@
 tests: ## Clean and Make unit tests
-	python3 -m nose2 -v tests --with-coverage --coverage=pyEX
+	python3 -m pytest tests --cov=pyEX
 
 test: lint ## run the tests for travis CI
-	@ python3 -m nose2 -v tests --with-coverage --coverage=pyEX --fail-fast
-
-testall: ## run the tests including those that hit the actual api
-	@ python3 -m nose2 -v tests --with-coverage --coverage=pyEX
+	@ python3 -m pytest tests --cov=pyEX
 
 lint: ## run linter
 	# pylint pyEX || echo
