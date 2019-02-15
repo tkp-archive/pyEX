@@ -500,39 +500,6 @@ def companyDF(symbol, token='', version=''):
     return df
 
 
-def crypto(token='', version=''):
-    '''This will return an array of quotes for all Cryptocurrencies supported by the IEX API. Each element is a standard quote object with four additional keys.
-
-    https://iexcloud.io/docs/api/#crypto
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        dict: result
-    '''
-    return _getJson('stock/market/crypto/', token, version)
-
-
-def cryptoDF(token='', version=''):
-    '''This will return an array of quotes for all Cryptocurrencies supported by the IEX API. Each element is a standard quote object with four additional keys.
-
-    https://iexcloud.io/docs/api/#crypto
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        DataFrame: result
-    '''
-    df = pd.DataFrame(crypto(token, version))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
-    return df
-
-
 def delayedQuote(symbol, token='', version=''):
     '''This returns the 15 minute delayed market quote.
 

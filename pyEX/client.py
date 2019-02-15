@@ -28,7 +28,6 @@ from .stocks import balanceSheet, balanceSheetDF, \
     chart, chartDF, \
     company, companyDF, \
     collections, collectionsDF, \
-    crypto, cryptoDF, \
     delayedQuote, delayedQuoteDF, \
     dividends, dividendsDF, \
     earnings, earningsDF, \
@@ -59,6 +58,9 @@ from .stocks import balanceSheet, balanceSheetDF, \
     threshold, thresholdDF, \
     volumeByVenue, volumeByVenueDF, \
     yesterday, yesterdayDF
+
+from .alternative import crypto, cryptoDF, \
+    sentiment, sentimentDF
 
 from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
 
@@ -124,8 +126,6 @@ _INCLUDE_FUNCTIONS = [
     ('companyDF', companyDF),
     ('collections', collections),
     ('collectionsDF', collectionsDF),
-    ('crypto', crypto),
-    ('cryptoDF', cryptoDF),
     ('delayedQuote', delayedQuote),
     ('delayedQuoteDF', delayedQuoteDF),
     ('dividends', dividends),
@@ -196,6 +196,11 @@ _INCLUDE_FUNCTIONS = [
     ('lastSSE', lastSSE),
     ('deepSSE', deepSSE),
     ('tradesSSE', tradesSSE),
+    # Alternative
+    ('crypto', crypto),
+    ('cryptoDF', cryptoDF),
+    ('sentiment', sentiment),
+    ('sentimentDF', sentimentDF),
 ]
 
 
