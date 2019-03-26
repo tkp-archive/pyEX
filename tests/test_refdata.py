@@ -22,7 +22,7 @@ class TestAll:
         # teardown_class() after any methods in this class
 
     def test_symbols(self):
-        from pyEX.refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols
+        from pyEX.refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
@@ -30,6 +30,9 @@ class TestAll:
             iexSymbols()
             mutualFundSymbols()
             otcSymbols()
+            internationalSymbols()
+            internationalSymbols('GB')
+            internationalSymbols(exchange='test')
 
     def test_symbolsDF(self):
         from pyEX.refdata import symbolsDF
@@ -43,10 +46,17 @@ class TestAll:
             c.iexSymbolsDF()
             c.mutualFundSymbolsDF()
             c.otcSymbolsDF()
+            c.internationalSymbolsDF()
+            c.internationalSymbolsDF('GB')
+            c.internationalSymbolsDF(exchange='test')
+
             c.symbolsList()
             c.iexSymbolsList()
             c.mutualFundSymbolsList()
             c.otcSymbolsList()
+            c.internationalSymbolsList()
+            c.internationalSymbolsList('GB')
+            c.internationalSymbolsList(exchange='test')
 
     def test_calendar(self):
         from pyEX import Client

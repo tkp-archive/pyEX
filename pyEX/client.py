@@ -2,9 +2,9 @@ import os
 from functools import partial
 from .common import PyEXception, _getJson, _USAGE_TYPES
 
-from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, \
-    symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, \
-    symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, \
+from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, \
+    symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, internationalSymbolsDF, \
+    symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, internationalSymbolsList, \
     corporateActions, corporateActionsDF, \
     dividends as refDividends, dividendsDF as refDividendsDF, \
     nextDayExtDate, nextDayExtDateDF, \
@@ -71,14 +71,17 @@ _INCLUDE_FUNCTIONS = [
     ('iexSymbols', iexSymbols),
     ('mutualFundSymbols', mutualFundSymbols),
     ('otcSymbols', otcSymbols),
+    ('internationalSymbols', internationalSymbols),
     ('symbolsDF', symbolsDF),
     ('iexSymbolsDF', iexSymbolsDF),
     ('mutualFundSymbolsDF', mutualFundSymbolsDF),
     ('otcSymbolsDF', otcSymbolsDF),
+    ('internationalSymbolsDF', internationalSymbolsDF),
     ('symbolsList', symbolsList),
     ('iexSymbolsList', iexSymbolsList),
     ('mutualFundSymbolsList', mutualFundSymbolsList),
     ('otcSymbolsList', otcSymbolsList),
+    ('internationalSymbolsList', internationalSymbolsList),
     ('corporateActions', corporateActions),
     ('corporateActionsDF', corporateActionsDF),
     ('refDividends', refDividends),

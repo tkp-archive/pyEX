@@ -5,7 +5,6 @@ test: lint ## run the tests for travis CI
 	@ python3 -m pytest -v tests --cov=pyEX
 
 lint: ## run linter
-	# pylint pyEX || echo
 	flake8 pyEX 
 
 annotate: ## MyPy type annotation check
