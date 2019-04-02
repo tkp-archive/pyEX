@@ -8,7 +8,7 @@ pyEX
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
 
 
-|build-status| |issues| |waffle| |codecov| |bch| |pypiv| |pypil| |docs|
+|build-status| |issues| |codecov| |bch| |pypiv| |pypil| |docs|
 
 
 .. toctree::
@@ -27,11 +27,6 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
     :alt: Issues
     :scale: 100%
     :target: https://img.shields.io/github/issues/timkpaine/pyEX.svg
-
-.. |waffle| image:: https://badge.waffle.io/timkpaine/pyEX.svg?label=ready&title=Ready
-    :alt: Waffle
-    :scale: 100%
-    :target: http://waffle.io/timkpaine/pyEX
 
 .. |codecov| image:: https://codecov.io/gh/timkpaine/pyEX/branch/master/graph/badge.svg
     :alt: Codecov
