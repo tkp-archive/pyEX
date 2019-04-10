@@ -18,6 +18,9 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
    installation
    api
 
+.. WARNING:: For API documentation, see the API section on the left
+
+
 .. |build-status| image:: https://travis-ci.org/timkpaine/pyEX.svg?branch=master
     :alt: Build Status
     :scale: 100%

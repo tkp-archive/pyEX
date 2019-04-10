@@ -101,6 +101,7 @@ ENV/
 .mypy_cache/
 
 .DS_Store
+docs/api
 
 .autoversion
 keys.sh
