@@ -27,6 +27,15 @@ docs:  ## make documentation
 install:  ## install to site-packages
 	python3 setup.py install
 
+micro:  ## steps before dist, defaults to previous tag + one micro
+	. scripts/deploy.sh MICRO
+
+minor:  ## steps before dist, defaults to previous tag + one micro
+	. scripts/deploy.sh MINOR
+
+major:  ## steps before dist, defaults to previous tag + one micro
+	. scripts/deploy.sh MAJOR
+
 dist:  ## dist to pypi
 	python3 setup.py sdist upload -r pypi
 
