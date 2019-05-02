@@ -75,7 +75,19 @@ from .alternative import crypto, cryptoDF, \
     ceoCompensation, ceoCompensationDF
 
 from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
-
+from .marketdata.http import tops, topsDF, \
+    last, lastDF, \
+    deep, deepDF, \
+    trades, tradesDF, \
+    auction, auctionDF, \
+    book as deepBook, bookDF as deepBookDF, \
+    opHaltStatus, opHaltStatusDF, \
+    officialPrice, officialPriceDF, \
+    securityEvent, securityEventDF, \
+    ssrStatus, ssrStatusDF, \
+    systemEvent, systemEventDF, \
+    tradeBreak, tradeBreakDF, \
+    tradingStatus, tradingStatusDF
 
 _INCLUDE_FUNCTIONS = [
     # Refdata
@@ -240,6 +252,33 @@ _INCLUDE_FUNCTIONS = [
     ('lastSSE', lastSSE),
     ('deepSSE', deepSSE),
     ('tradesSSE', tradesSSE),
+    # TOPS
+    ('tops', tops),
+    ('topsDF', topsDF),
+    ('last', last),
+    ('lastDF', lastDF),
+    ('deep', deep),
+    ('deepDF', deepDF),
+    ('auction', auction),
+    ('auctionDF', auctionDF),
+    ('bookDeep', deepBook),
+    ('bookDeepDF', deepBookDF),
+    ('officialPrice', officialPrice),
+    ('officialPriceDF', officialPriceDF),
+    ('opHaltStatus', opHaltStatus),
+    ('opHaltStatusDF', opHaltStatusDF),
+    ('securityEvent', securityEvent),
+    ('securityEventDF', securityEventDF),
+    ('ssrStatus', ssrStatus),
+    ('ssrStatusDF', ssrStatusDF),
+    ('systemEvent', systemEvent),
+    ('systemEventDF', systemEventDF),
+    ('trades', trades),
+    ('tradesDF', tradesDF),
+    ('tradeBreak', tradeBreak),
+    ('tradeBreakDF', tradeBreakDF),
+    ('tradingStatus', tradingStatus),
+    ('tradingStatusDF', tradingStatusDF),
     # Alternative
     ('crypto', crypto),
     ('cryptoDF', cryptoDF),
