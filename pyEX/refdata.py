@@ -96,6 +96,7 @@ def sectorsDF(token='', version=''):
     '''
     return pd.DataFrame(sectors())
 
+
 def tags(token='', version=''):
     '''Returns an array of tags.
 
