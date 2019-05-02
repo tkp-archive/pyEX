@@ -136,8 +136,8 @@ _INCLUDE_FUNCTIONS = [
     ('markets', markets),
     ('marketsDF', marketsDF),
     # Stats
-    ('stats', stats),
-    ('statsDF', statsDF),
+    ('systemStats', stats),
+    ('systemStatsDF', statsDF),
     ('recent', recent),
     ('recentDF', recentDF),
     ('records', records),
