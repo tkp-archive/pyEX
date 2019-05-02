@@ -995,6 +995,163 @@ def insiderRosterDF(symbol, token='', version=''):
     return df
 
 
+def insiderSummary(symbol, token='', version=''):
+    '''Returns aggregated insiders summary data for the last 6 months.
+
+    https://iexcloud.io/docs/api/#insider-summary
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/insider-summary', token, version)
+
+
+def insiderSummaryDF(symbol, token='', version=''):
+    '''Returns aggregated insiders summary data for the last 6 months.
+
+    https://iexcloud.io/docs/api/#insider-summary
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = insiderSummary(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    return df
+
+
+def insiderTransactions(symbol, token='', version=''):
+    '''Returns insider transactions.
+
+    https://iexcloud.io/docs/api/#insider-transactions
+    Updates at UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/insider-transactions', token, version)
+
+
+def insiderTransactionsDF(symbol, token='', version=''):
+    '''Returns insider transactions.
+
+    https://iexcloud.io/docs/api/#insider-transactions
+    Updates at UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = insiderSummary(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    return df
+
+
+def institutionalOwnership(symbol, token='', version=''):
+    '''Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
+
+    https://iexcloud.io/docs/api/#institutional-ownership
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/institutional-ownership', token, version)
+
+
+def institutionalOwnershipDF(symbol, token='', version=''):
+    '''Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
+
+    https://iexcloud.io/docs/api/#institutional-ownership
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = insiderSummary(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    return df
+
+
+def intraday(symbol, token='', version=''):
+    '''This endpoint will return aggregated intraday prices in one minute buckets
+
+    https://iexcloud.io/docs/api/#intraday-prices
+    9:30-4pm ET Mon-Fri on regular market trading days
+    9:30-1pm ET on early close trading days
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/intraday-prices', token, version)
+
+
+def intradayDF(symbol, token='', version=''):
+    '''This endpoint will return aggregated intraday prices in one minute buckets
+
+    https://iexcloud.io/docs/api/#intraday-prices
+    9:30-4pm ET Mon-Fri on regular market trading days
+    9:30-1pm ET on early close trading days
+
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = intraday(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    _reindex(df, 'minute')
+    return df
+
+
 def ipoToday(token='', version=''):
     '''This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
@@ -1454,6 +1611,68 @@ def marketOhlcDF(token='', version=''):
     df = pd.io.json.json_normalize(data)
     _toDatetime(df)
     _reindex(df, 'symbol')
+    return df
+
+
+def optionExpirations(symbol, token='', version=''):
+    '''Returns end of day options data
+
+    https://iexcloud.io/docs/api/#options
+    9:30am-5pm ET Mon-Fri
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/options', token, version)
+
+
+def options(symbol, expiration, side='', token='', version=''):
+    '''Returns end of day options data
+
+    https://iexcloud.io/docs/api/#options
+    9:30am-5pm ET Mon-Fri
+
+    Args:
+        symbol (string); Ticker to request
+        expiration (string); Expiration date
+        side (string); Side (optional)
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    if side:
+        return _getJson('stock/{symbol}/options/{expiration}/{side}'.format(symbol=symbol, expiration=expiration, side=side), token, version)
+    return _getJson('stock/{symbol}/options/{expiration}/'.format(symbol=symbol, expiration=expiration, side=side), token, version)
+
+
+def optionsDF(symbol, expiration, side='', token='', version=''):
+    '''Returns end of day options data
+
+    https://iexcloud.io/docs/api/#options
+    9:30am-5pm ET Mon-Fri
+
+    Args:
+        symbol (string); Ticker to request
+        expiration (string); Expiration date
+        side (string); Side (optional)
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    p = options(symbol, expiration, side, token, version)
+    df = pd.DataFrame(p)
+    _toDatetime(df)
     return df
 
 

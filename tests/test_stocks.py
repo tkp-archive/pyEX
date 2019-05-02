@@ -689,3 +689,95 @@ class TestAll:
 
             c = Client()
             c.insiderRosterDF(SYMBOL)
+
+    def test_insiderSummary(self):
+        from pyEX import insiderSummary
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            insiderSummary(SYMBOL)
+
+    def test_insiderSummaryDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.insiderSummaryDF(SYMBOL)
+
+    def test_insiderTransactions(self):
+        from pyEX import insiderTransactions
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            insiderTransactions(SYMBOL)
+
+    def test_insiderTransactionsDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.insiderTransactionsDF(SYMBOL)
+
+    def test_institutionalOwnership(self):
+        from pyEX import institutionalOwnership
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            institutionalOwnership(SYMBOL)
+
+    def test_institutionalOwnershipDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.institutionalOwnershipDF(SYMBOL)
+
+    def test_intraday(self):
+        from pyEX import intraday
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            intraday(SYMBOL)
+
+    def test_intradayDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.intradayDF(SYMBOL)
+
+    def test_optionExpirations(self):
+        from pyEX import optionExpirations
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            optionExpirations(SYMBOL)
+
+    def test_options(self):
+        from pyEX import options
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            options(SYMBOL, 'test')
+
+    def test_optionsDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.optionsDF(SYMBOL, 'test')

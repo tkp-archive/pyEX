@@ -2,9 +2,9 @@ import os
 from functools import partial
 from .common import PyEXception, _getJson, _USAGE_TYPES
 
-from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, \
-    symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, internationalSymbolsDF, \
-    symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, internationalSymbolsList, \
+from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, fxSymbols, optionsSymbols, \
+    symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, internationalSymbolsDF, fxSymbolsDF, optionsSymbolsDF, \
+    symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, internationalSymbolsList, fxSymbolsList, optionsSymbolsList, \
     corporateActions, corporateActionsDF, \
     dividends as refDividends, dividendsDF as refDividendsDF, \
     nextDayExtDate, nextDayExtDateDF, \
@@ -41,6 +41,10 @@ from .stocks import advancedStats, advancedStatsDF, \
     fundOwnership, fundOwnershipDF, \
     incomeStatement, incomeStatementDF, \
     insiderRoster, insiderRosterDF, \
+    insiderSummary, insiderSummaryDF, \
+    insiderTransactions, insiderTransactionsDF, \
+    institutionalOwnership, institutionalOwnershipDF, \
+    intraday, intradayDF, \
     ipoToday, ipoTodayDF, \
     ipoUpcoming, ipoUpcomingDF, \
     marketShortInterest, marketShortInterestDF, \
@@ -51,6 +55,7 @@ from .stocks import advancedStats, advancedStatsDF, \
     logo, logoPNG, logoNotebook, \
     news, newsDF, marketNews, marketNewsDF, \
     ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
+    optionExpirations, options, optionsDF, \
     peers, peersDF, \
     marketYesterday, marketYesterdayDF, \
     price, priceDF, \
@@ -79,16 +84,22 @@ _INCLUDE_FUNCTIONS = [
     ('mutualFundSymbols', mutualFundSymbols),
     ('otcSymbols', otcSymbols),
     ('internationalSymbols', internationalSymbols),
+    ('fxSymbols', fxSymbols),
+    ('optionsSymbols', optionsSymbols),
     ('symbolsDF', symbolsDF),
     ('iexSymbolsDF', iexSymbolsDF),
     ('mutualFundSymbolsDF', mutualFundSymbolsDF),
     ('otcSymbolsDF', otcSymbolsDF),
     ('internationalSymbolsDF', internationalSymbolsDF),
+    ('fxSymbolsDF', fxSymbolsDF),
+    ('optionsSymbolsDF', optionsSymbolsDF),
     ('symbolsList', symbolsList),
     ('iexSymbolsList', iexSymbolsList),
     ('mutualFundSymbolsList', mutualFundSymbolsList),
     ('otcSymbolsList', otcSymbolsList),
     ('internationalSymbolsList', internationalSymbolsList),
+    ('fxSymbolsList', fxSymbolsList),
+    ('optionsSymbolsList', optionsSymbolsList),
     ('corporateActions', corporateActions),
     ('corporateActionsDF', corporateActionsDF),
     ('refDividends', refDividends),
@@ -162,6 +173,14 @@ _INCLUDE_FUNCTIONS = [
     ('incomeStatementDF', incomeStatementDF),
     ('insiderRoster', insiderRoster),
     ('insiderRosterDF', insiderRosterDF),
+    ('insiderSummary', insiderSummary),
+    ('insiderSummaryDF', insiderSummaryDF),
+    ('insiderTransactions', insiderTransactions),
+    ('insiderTransactionsDF', insiderTransactionsDF),
+    ('institutionalOwnership', institutionalOwnership),
+    ('institutionalOwnershipDF', institutionalOwnershipDF),
+    ('intraday', intraday),
+    ('intradayDF', intradayDF),
     ('ipoToday', ipoToday),
     ('ipoTodayDF', ipoTodayDF),
     ('ipoUpcoming', ipoUpcoming),
@@ -193,6 +212,9 @@ _INCLUDE_FUNCTIONS = [
     ('ohlcDF', ohlcDF),
     ('marketOhlc', marketOhlc),
     ('marketOhlcDF', marketOhlcDF),
+    ('optionExpirations', optionExpirations),
+    ('options', options),
+    ('optionsDF', optionsDF),
     ('peers', peers),
     ('peersDF', peersDF),
     ('yesterday', yesterday),

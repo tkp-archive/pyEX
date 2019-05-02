@@ -297,6 +297,38 @@ def internationalSymbols(region='', exchange='', token='', version=''):
     return _getJson('ref-data/region/us/symbols', token, version)
 
 
+def fxSymbols(token='', version=''):
+    '''This call returns a list of supported currencies and currency pairs.
+
+    https://iexcloud.io/docs/api/#fx-symbols
+    7am, 9am, UTC daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    return _getJson('ref-data/fx/symbols', token, version)
+
+
+def optionsSymbols(token='', version=''):
+    '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
+
+    https://iexcloud.io/docs/api/#options-symbols
+    9:30am ET Tue-Sat
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    return _getJson('ref-data/options/symbols', token, version)
+
+
 def symbolsDF(token='', version=''):
     '''This call returns an array of symbols that IEX Cloud supports for API calls.
 
@@ -395,6 +427,43 @@ def internationalSymbolsDF(region='', exchange='', token='', version=''):
     return df
 
 
+def fxSymbolsDF(token='', version=''):
+    '''This call returns a list of supported currencies and currency pairs.
+
+    https://iexcloud.io/docs/api/#fx-symbols
+    7am, 9am, UTC daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.DataFrame(fxSymbols(token, version))
+    _toDatetime(df)
+    _reindex(df, 'symbol')
+    return df
+
+
+def optionsSymbolsDF(token='', version=''):
+    '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
+
+    https://iexcloud.io/docs/api/#options-symbols
+    9:30am ET Tue-Sat
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    df = pd.io.json.json_normalize(optionsSymbols(token, version))
+    _toDatetime(df)
+    return df
+
+
 def symbolsList(token='', version=''):
     '''This call returns an array of symbols that IEX Cloud supports for API calls.
 
@@ -476,6 +545,38 @@ def internationalSymbolsList(region='', exchange='', token='', version=''):
         list: result
     '''
     return internationalSymbolsDF(region, exchange, token, version).index.tolist()
+
+
+def fxSymbolsList(token='', version=''):
+    '''This call returns a list of supported currencies and currency pairs.
+
+    https://iexcloud.io/docs/api/#fx-symbols
+    7am, 9am, UTC daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        list: result
+    '''
+    return fxSymbolsDF(token, version).index.tolist()
+
+
+def optionsSymbolsList(token='', version=''):
+    '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
+
+    https://iexcloud.io/docs/api/#options-symbols
+    9:30am ET Tue-Sat
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        list: result
+    '''
+    return optionsSymbolsDF(token, version).index.tolist()
 
 
 @deprecated(details='Deprecated: IEX Cloud status unkown')
