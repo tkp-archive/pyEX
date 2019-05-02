@@ -234,6 +234,22 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[{'financials': [{'reportDate': 1}], 'symbol': 'aapl'}])
             financialsDF('test')
 
+
+    def test_fundOwnership(self):
+        from pyEX import fundOwnership
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            fundOwnership('test')
+
+    def test_fundOwnershipDF(self):
+        from pyEX import fundOwnershipDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            fundOwnershipDF('test')
+
     def test_earnings(self):
         from pyEX import earnings
         with patch('requests.get') as mock:

@@ -877,6 +877,47 @@ def financialsDF(symbol, token='', version=''):
     return df
 
 
+def fundOwnership(symbol, token='', version=''):
+    '''Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
+       pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
+
+    https://iexcloud.io/docs/api/#fund-ownership
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/fund-ownership', token, version)
+
+
+def fundOwnershipDF(symbol, token='', version=''):
+    '''Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
+       pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
+
+    https://iexcloud.io/docs/api/#fund-ownership
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+
+        DataFrame: result
+    '''
+    val = fundOwnership(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    return df
+
+
 def incomeStatement(symbol, token='', version=''):
     '''Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
 

@@ -38,6 +38,7 @@ from .stocks import advancedStats, advancedStatsDF, \
     earningsToday, earningsTodayDF, \
     estimates, estimatesDF, \
     financials, financialsDF, \
+    fundOwnership, fundOwnershipDF, \
     incomeStatement, incomeStatementDF, \
     ipoToday, ipoTodayDF, \
     ipoUpcoming, ipoUpcomingDF, \
@@ -154,6 +155,8 @@ _INCLUDE_FUNCTIONS = [
     ('spreadDF', spreadDF),
     ('financials', financials),
     ('financialsDF', financialsDF),
+    ('fundOwnership', fundOwnership),
+    ('fundOwnershipDF', fundOwnershipDF),
     ('incomeStatement', incomeStatement),
     ('incomeStatementDF', incomeStatementDF),
     ('ipoToday', ipoToday),
