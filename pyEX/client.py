@@ -11,7 +11,9 @@ from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, interna
     directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
     exchanges, exchangesDF, \
-    internationalExchanges, internationalExchangesDF
+    internationalExchanges, internationalExchangesDF, \
+    sectors, sectorsDF, \
+    tags, tagsDF
 
 from .markets import markets, marketsDF
 
@@ -21,7 +23,8 @@ from .stats import stats, statsDF, \
     summary, summaryDF, \
     daily, dailyDF
 
-from .stocks import balanceSheet, balanceSheetDF, \
+from .stocks import advancedStats, advancedStatsDF, \
+    balanceSheet, balanceSheetDF, \
     batch, batchDF, bulkBatch, bulkBatchDF, \
     book, bookDF, \
     bulkMinuteBars, bulkMinuteBarsDF, \
@@ -61,7 +64,8 @@ from .stocks import balanceSheet, balanceSheetDF, \
     yesterday, yesterdayDF
 
 from .alternative import crypto, cryptoDF, \
-    sentiment, sentimentDF
+    sentiment, sentimentDF, \
+    ceoCompensation, ceoCompensationDF
 
 from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
 
@@ -99,6 +103,10 @@ _INCLUDE_FUNCTIONS = [
     ('exchangesDF', exchangesDF),
     ('internationalExchanges', internationalExchanges),
     ('internationalExchangesDF', internationalExchangesDF),
+    ('sectors', sectors),
+    ('sectorsDF', sectorsDF),
+    ('tags', tags),
+    ('tagsDF', tagsDF),
     # Markets
     ('markets', markets),
     ('marketsDF', marketsDF),
@@ -114,6 +122,8 @@ _INCLUDE_FUNCTIONS = [
     ('daily', daily),
     ('dailyDF', dailyDF),
     # Stocks
+    ('advancedStats', advancedStats),
+    ('advancedStatsDF', advancedStatsDF),
     ('balanceSheet', balanceSheet),
     ('balanceSheetDF', balanceSheetDF),
     ('batch', batch),
@@ -207,6 +217,8 @@ _INCLUDE_FUNCTIONS = [
     ('cryptoDF', cryptoDF),
     ('sentiment', sentiment),
     ('sentimentDF', sentimentDF),
+    ('ceoCompensation', ceoCompensation),
+    ('ceoCompensationDF', ceoCompensationDF),
 ]
 
 

@@ -80,3 +80,41 @@ def sentimentDF(symbol, type='daily', date=None, token='', version=''):
     df = pd.DataFrame(ret)
     _toDatetime(df)
     return df
+
+
+def ceoCompensation(symbol, token='', version=''):
+    '''This endpoint provides CEO compensation for a company by symbol.
+
+    https://iexcloud.io/docs/api/#ceo-compensation
+    1am daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/{symbol}/ceo-compensation'.format(symbol=symbol), token, version)
+
+
+def ceoCompensationDF(symbol, token='', version=''):
+    '''This endpoint provides CEO compensation for a company by symbol.
+
+    https://iexcloud.io/docs/api/#ceo-compensation
+    1am daily
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    ret = ceoCompensation(symbol, token, version)
+    df = pd.io.json.json_normalize(ret)
+    _toDatetime(df)
+    return df
