@@ -234,7 +234,6 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[{'financials': [{'reportDate': 1}], 'symbol': 'aapl'}])
             financialsDF('test')
 
-
     def test_fundOwnership(self):
         from pyEX import fundOwnership
         with patch('requests.get') as mock:
@@ -673,3 +672,20 @@ class TestAll:
             c = Client()
             c.marketVolume()
             c.marketVolumeDF()
+
+    def test_insiderRoster(self):
+        from pyEX import insiderRoster
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            insiderRoster(SYMBOL)
+
+    def test_insiderRosterDF(self):
+        from pyEX import Client
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+
+            c = Client()
+            c.insiderRosterDF(SYMBOL)

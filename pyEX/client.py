@@ -40,6 +40,7 @@ from .stocks import advancedStats, advancedStatsDF, \
     financials, financialsDF, \
     fundOwnership, fundOwnershipDF, \
     incomeStatement, incomeStatementDF, \
+    insiderRoster, insiderRosterDF, \
     ipoToday, ipoTodayDF, \
     ipoUpcoming, ipoUpcomingDF, \
     marketShortInterest, marketShortInterestDF, \
@@ -159,6 +160,8 @@ _INCLUDE_FUNCTIONS = [
     ('fundOwnershipDF', fundOwnershipDF),
     ('incomeStatement', incomeStatement),
     ('incomeStatementDF', incomeStatementDF),
+    ('insiderRoster', insiderRoster),
+    ('insiderRosterDF', insiderRosterDF),
     ('ipoToday', ipoToday),
     ('ipoTodayDF', ipoTodayDF),
     ('ipoUpcoming', ipoUpcoming),

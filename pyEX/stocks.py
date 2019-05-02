@@ -957,6 +957,44 @@ def incomeStatementDF(symbol, token='', version=''):
     return df
 
 
+def insiderRoster(symbol, token='', version=''):
+    '''Returns the top 10 insiders, with the most recent information.
+
+    https://iexcloud.io/docs/api/#insider-roster
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/insider-roster', token, version)
+
+
+def insiderRosterDF(symbol, token='', version=''):
+    '''Returns the top 10 insiders, with the most recent information.
+
+    https://iexcloud.io/docs/api/#insider-roster
+    Updates at 5am, 6am ET every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = insiderRoster(symbol, token, version)
+    df = pd.DataFrame(val)
+    _toDatetime(df)
+    return df
+
+
 def ipoToday(token='', version=''):
     '''This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
