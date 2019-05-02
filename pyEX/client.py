@@ -10,7 +10,8 @@ from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, interna
     nextDayExtDate, nextDayExtDateDF, \
     directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
-    exchanges, exchangesDF
+    exchanges, exchangesDF, \
+    internationalExchanges, internationalExchangesDF
 
 from .markets import markets, marketsDF
 
@@ -96,6 +97,8 @@ _INCLUDE_FUNCTIONS = [
     ('holidaysDF', holidaysDF),
     ('exchanges', exchanges),
     ('exchangesDF', exchangesDF),
+    ('internationalExchanges', internationalExchanges),
+    ('internationalExchangesDF', internationalExchangesDF),
     # Markets
     ('markets', markets),
     ('marketsDF', marketsDF),

@@ -9,6 +9,44 @@ from PIL import Image as ImageP
 from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
 
 
+def advancedStats(symbol, token='', version=''):
+    '''Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
+
+    https://iexcloud.io/docs/api/#advanced-stats
+    4am, 5am ET
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/advanced-stats', token, version)
+
+
+def advancedStatsDF(symbol, token='', version=''):
+    '''Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
+
+    https://iexcloud.io/docs/api/#advanced-stats
+    4am, 5am ET
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    val = advancedStats(symbol, token, version)
+    df = pd.io.json.json_normalize(val)
+    _toDatetime(df)
+    return df
+
+
 def balanceSheet(symbol, token='', version=''):
     '''Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
 

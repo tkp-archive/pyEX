@@ -141,3 +141,35 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
             directoryDF()
+
+    def test_sectors(self):
+        from pyEX.refdata import sectors
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            sectors()
+
+    def test_sectorsDF(self):
+        from pyEX.refdata import sectorsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            sectorsDF()
+
+    def test_exchanges(self):
+        from pyEX.refdata import exchanges, internationalExchanges
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            exchanges()
+            internationalExchanges()
+
+    def test_exchangesDF(self):
+        from pyEX.refdata import exchangesDF, internationalExchangesDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            exchangesDF()
+            internationalExchangesDF()

@@ -35,6 +35,68 @@ def exchangesDF(token='', version=''):
     return pd.DataFrame(exchanges())
 
 
+def internationalExchanges(token='', version=''):
+    '''Returns an array of exchanges.
+
+    https://iexcloud.io/docs/api/#international-exchanges
+    8am, 9am, 12pm, 1pm UTC daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    return _getJson('ref-data/exchanges', token, version)
+
+
+def internationalExchangesDF(token='', version=''):
+    '''Returns an array of U.S. exchanges.
+
+    https://iexcloud.io/docs/api/#international-exchanges
+    8am, 9am, 12pm, 1pm UTC daily
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    return pd.DataFrame(internationalExchanges())
+
+
+def sectors(token='', version=''):
+    '''Returns an array of sectors.
+
+    https://iexcloud.io/docs/api/#sectors
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    return _getJson('ref-data/sectors', token, version)
+
+
+def sectorsDF(token='', version=''):
+    '''Returns an array of sectors.
+
+    https://iexcloud.io/docs/api/#sectors
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    return pd.DataFrame(sectors())
+
+
 def calendar(type='holiday', direction='next', last=1, startDate=None, token='', version=''):
     '''This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.
 
