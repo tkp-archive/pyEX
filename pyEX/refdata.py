@@ -96,6 +96,35 @@ def sectorsDF(token='', version=''):
     '''
     return pd.DataFrame(sectors())
 
+def tags(token='', version=''):
+    '''Returns an array of tags.
+
+    https://iexcloud.io/docs/api/#tags
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        dict: result
+    '''
+    return _getJson('ref-data/tags', token, version)
+
+
+def tagsDF(token='', version=''):
+    '''Returns an array of tags.
+
+    https://iexcloud.io/docs/api/#tags
+
+    Args:
+        token (string); Access token
+        version (string); API version
+
+    Returns:
+        DataFrame: result
+    '''
+    return pd.DataFrame(tags())
+
 
 def calendar(type='holiday', direction='next', last=1, startDate=None, token='', version=''):
     '''This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.

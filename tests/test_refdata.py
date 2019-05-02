@@ -173,3 +173,18 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             exchangesDF()
             internationalExchangesDF()
+
+    def test_tags(self):
+        from pyEX.refdata import tags
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            tags()
+
+    def test_tagsDF(self):
+        from pyEX.refdata import tagsDF
+        with patch('requests.get') as mock:
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            tagsDF()
