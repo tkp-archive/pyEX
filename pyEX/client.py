@@ -89,6 +89,8 @@ from .marketdata.http import tops, topsDF, \
     tradeBreak, tradeBreakDF, \
     tradingStatus, tradingStatusDF
 
+from .points import points, pointsDF
+
 _INCLUDE_FUNCTIONS = [
     # Refdata
     ('symbols', symbols),
@@ -286,6 +288,9 @@ _INCLUDE_FUNCTIONS = [
     ('sentimentDF', sentimentDF),
     ('ceoCompensation', ceoCompensation),
     ('ceoCompensationDF', ceoCompensationDF),
+    # Data Points
+    ('points', points),
+    ('pointsDF', pointsDF)
 ]
 
 

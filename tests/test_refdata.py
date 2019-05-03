@@ -33,6 +33,7 @@ class TestAll:
             internationalSymbols()
             internationalSymbols('GB')
             internationalSymbols(exchange='test')
+            mock.return_value.json = MagicMock(return_value={'currencies': [], 'pairs': []})
             fxSymbols()
 
     def test_symbolsDF(self):
@@ -50,7 +51,6 @@ class TestAll:
             c.internationalSymbolsDF()
             c.internationalSymbolsDF('GB')
             c.internationalSymbolsDF(exchange='test')
-            c.fxSymbolsDF()
 
             c.symbolsList()
             c.iexSymbolsList()
@@ -59,6 +59,9 @@ class TestAll:
             c.internationalSymbolsList()
             c.internationalSymbolsList('GB')
             c.internationalSymbolsList(exchange='test')
+
+            mock.return_value.json = MagicMock(return_value={'currencies': [], 'pairs': []})
+            c.fxSymbolsDF()
             c.fxSymbolsList()
 
     def test_calendar(self):
