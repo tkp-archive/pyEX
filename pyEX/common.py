@@ -17,6 +17,7 @@ except ImportError:
 
 _URL_PREFIX = 'https://api.iextrading.com/1.0/'
 _URL_PREFIX2 = 'https://cloud.iexapis.com/{version}/'
+_URL_PREFIX2_SANDBOX = 'https://sandbox.iexapis.com/{version}/'
 
 _SIO_URL_PREFIX = 'https://ws-api.iextrading.com'
 _SIO_PORT = 443
@@ -91,6 +92,8 @@ class PyEXception(Exception):
 def _getJson(url, token='', version=''):
     '''for backwards compat, accepting token and version but ignoring'''
     if token:
+        if version == 'sandbox':
+            return _getJsonIEXCloudSandbox(url, token, version)
         return _getJsonIEXCloud(url, token, version)
     return _getJsonOrig(url)
 
@@ -107,6 +110,15 @@ def _getJsonOrig(url):
 def _getJsonIEXCloud(url, token='', version='beta'):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
+    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _getJsonIEXCloudSandbox(url, token='', version='beta'):
+    '''for iex cloud'''
+    url = _URL_PREFIX2_SANDBOX.format(version='beta') + url
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()

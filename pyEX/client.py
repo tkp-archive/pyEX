@@ -296,7 +296,8 @@ class Client(object):
 
     Args:
         api_token (string): api token (can pickup from IEX_TOKEN environment variable)
-        verson (string): api version to use (defaults to beta)
+        version (string): api version to use (defaults to beta)
+                          set version to 'sandbox' to run against the IEX sandbox
     '''
     def __init__(self, api_token=None, version='beta'):
         self._token = api_token or os.environ.get('IEX_TOKEN', '')

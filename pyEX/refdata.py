@@ -32,7 +32,7 @@ def exchangesDF(token='', version=''):
     Returns:
         DataFrame: result
     '''
-    return pd.DataFrame(exchanges())
+    return pd.DataFrame(exchanges(token, version))
 
 
 def internationalExchanges(token='', version=''):
@@ -64,7 +64,7 @@ def internationalExchangesDF(token='', version=''):
     Returns:
         DataFrame: result
     '''
-    return pd.DataFrame(internationalExchanges())
+    return pd.DataFrame(internationalExchanges(token, version))
 
 
 def sectors(token='', version=''):
@@ -94,7 +94,7 @@ def sectorsDF(token='', version=''):
     Returns:
         DataFrame: result
     '''
-    return pd.DataFrame(sectors())
+    return pd.DataFrame(sectors(token, version))
 
 
 def tags(token='', version=''):
@@ -124,7 +124,7 @@ def tagsDF(token='', version=''):
     Returns:
         DataFrame: result
     '''
-    return pd.DataFrame(tags())
+    return pd.DataFrame(tags(token, version))
 
 
 def calendar(type='holiday', direction='next', last=1, startDate=None, token='', version=''):
@@ -438,12 +438,13 @@ def fxSymbolsDF(token='', version=''):
         version (string); API version
 
     Returns:
-        DataFrame: result
+        [DataFrame]: results
     '''
-    df = pd.DataFrame(fxSymbols(token, version))
-    _toDatetime(df)
-    _reindex(df, 'symbol')
-    return df
+    fx = fxSymbols(token, version)
+    df1 = pd.DataFrame(fx['currencies'])
+    df2 = pd.DataFrame(fx['pairs'])
+    _reindex(df1, 'code')
+    return [df1, df2]
 
 
 def optionsSymbolsDF(token='', version=''):
@@ -460,7 +461,8 @@ def optionsSymbolsDF(token='', version=''):
         DataFrame: result
     '''
     df = pd.io.json.json_normalize(optionsSymbols(token, version))
-    _toDatetime(df)
+    df = df.T
+    df.columns = ['expirations']
     return df
 
 
@@ -560,7 +562,13 @@ def fxSymbolsList(token='', version=''):
     Returns:
         list: result
     '''
-    return fxSymbolsDF(token, version).index.tolist()
+    fx = fxSymbols(token, version)
+    ret = [[], []]
+    for c in fx['currencies']:
+        ret[0].append(c['code'])
+    for p in fx['pairs']:
+        ret[1].append(p['fromCurrency'] + p['toCurrency'])
+    return ret
 
 
 def optionsSymbolsList(token='', version=''):

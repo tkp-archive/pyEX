@@ -75,7 +75,7 @@ def sentimentDF(symbol, type='daily', date=None, token='', version=''):
         DataFrame: result
     '''
     ret = sentiment(symbol, type, date, token, version)
-    if type == 'daiy':
+    if type == 'daily':
         ret = [ret]
     df = pd.DataFrame(ret)
     _toDatetime(df)
