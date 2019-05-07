@@ -6,6 +6,8 @@ from jinja2 import Environment, BaseLoader
 abspath = os.path.abspath
 join = os.path.join
 
+GENERATED_HEADER = '# # # # GENERATED FILE -- DO NOT MODIFY # # # #\n'
+
 
 def main(version, repourl):
     SCRIPT_DIR = os.path.dirname(__file__)
@@ -26,6 +28,7 @@ def main(version, repourl):
     # write out setup.py
     with open(SETUP_OUT, "w") as fp:
         template = Environment(loader=BaseLoader).from_string(setup_in)
+        fp.write(GENERATED_HEADER)
         fp.write(template.render(
             VERSION=version,
             REPO_URL=repourl
@@ -34,6 +37,7 @@ def main(version, repourl):
     # write out _version.py
     with open(VERSION_OUT, "w") as fp:
         template = Environment(loader=BaseLoader).from_string("VERSION = 'v{{VERSION}}'")
+        fp.write(GENERATED_HEADER)
         fp.write(template.render(
             VERSION=version
             ) + '\n')
@@ -41,6 +45,7 @@ def main(version, repourl):
     # write out docs/conf.py
     with open(DOCS_CONF_OUT, "w") as fp:
         template = Environment(loader=BaseLoader).from_string(docs_conf_in)
+        fp.write(GENERATED_HEADER)
         fp.write(template.render(
             VERSION=version
             ) + '\n')
