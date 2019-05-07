@@ -69,7 +69,11 @@ _STANDARD_DATE_FIELDS = ['date',
                          'expectedDate',
                          'latestTime',
                          'DailyListTimestamp',
-                         'RecordUpdateTime']
+                         'RecordUpdateTime',
+                         'settlementDate',
+                         'lastUpdated',
+                         'processedTime',
+                         'expirationDate']
 
 _STANDARD_TIME_FIELDS = ['closeTime',
                          'close.time',
@@ -78,11 +82,13 @@ _STANDARD_TIME_FIELDS = ['closeTime',
                          'iexLastUpdated',
                          'latestTime',
                          'openTime',
-                         'open.time'
+                         'open.time',
                          'processedTime',
                          'time',
                          'timestamp',
-                         'lastUpdated']
+                         'lastUpdated',
+                         'reportDate',
+                         'report_date']
 
 
 class PyEXception(Exception):
@@ -230,16 +236,16 @@ def _reindex(df, col):
 
 def _toDatetime(df, cols=None, tcols=None):
     '''internal'''
-    cols = cols or _STANDARD_DATE_FIELDS
-    tcols = tcols = _STANDARD_TIME_FIELDS
+    cols = cols if cols is not None else _STANDARD_DATE_FIELDS
+    tcols = tcols if tcols is not None else _STANDARD_TIME_FIELDS
 
     for col in cols:
-        if col in df:
-            df[col] = pd.to_datetime(df[col], infer_datetime_format=True, errors='coerce')
+        if col in df.columns:
+            df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
 
     for tcol in tcols:
-        if tcol in df:
-            df[tcol] = pd.to_datetime(df[tcol], unit='ms', errors='coerce')
+        if tcol in df.columns:
+            df[tcol] = pd.to_datetime(df[tcol], unit='ms')
 
 
 def setProxy(proxies=None):
