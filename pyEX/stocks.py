@@ -991,7 +991,7 @@ def insiderRosterDF(symbol, token='', version=''):
     '''
     val = insiderRoster(symbol, token, version)
     df = pd.DataFrame(val)
-    _toDatetime(df)
+    _toDatetime(df, cols=[], tcols=['reportDate'])
     return df
 
 
@@ -1103,9 +1103,9 @@ def institutionalOwnershipDF(symbol, token='', version=''):
     Returns:
         DataFrame: result
     '''
-    val = insiderSummary(symbol, token, version)
+    val = institutionalOwnership(symbol, token, version)
     df = pd.DataFrame(val)
-    _toDatetime(df)
+    _toDatetime(df, cols=[], tcols=['reportDate'])
     return df
 
 
@@ -1446,7 +1446,9 @@ def marketVolumeDF(token='', version=''):
     Returns:
         DataFrame: result
     '''
-    return pd.DataFrame(marketVolume())
+    df = pd.DataFrame(marketVolume())
+    _toDatetime(df, cols=[], tcols=['lastUpdated'])
+    return df
 
 
 def news(symbol, count=10, token='', version=''):
@@ -1471,7 +1473,7 @@ def news(symbol, count=10, token='', version=''):
 def _newsToDF(n):
     '''internal'''
     df = pd.DataFrame(n)
-    _toDatetime(df)
+    _toDatetime(df, cols=[], tcols=['datetime'])
     _reindex(df, 'datetime')
     return df
 
@@ -1987,7 +1989,7 @@ def sectorPerformanceDF(token='', version=''):
         DataFrame: result
     '''
     df = pd.DataFrame(sectorPerformance(token, version))
-    _toDatetime(df)
+    _toDatetime(df, cols=[], tcols=['lastUpdated'])
     _reindex(df, 'name')
     return df
 
