@@ -95,12 +95,12 @@ class PyEXception(Exception):
     pass
 
 
-def _getJson(url, token='', version=''):
+def _getJson(url, token='', version='', filter=''):
     '''for backwards compat, accepting token and version but ignoring'''
     if token:
         if version == 'sandbox':
-            return _getJsonIEXCloudSandbox(url, token, version)
-        return _getJsonIEXCloud(url, token, version)
+            return _getJsonIEXCloudSandbox(url, token, version, filter)
+        return _getJsonIEXCloud(url, token, version, filter)
     return _getJsonOrig(url)
 
 
@@ -113,9 +113,11 @@ def _getJsonOrig(url):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloud(url, token='', version='beta'):
+def _getJsonIEXCloud(url, token='', version='beta', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
+    if filter:
+        url += '?filter={filter}'.format(filter=filter)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
