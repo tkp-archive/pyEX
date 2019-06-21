@@ -16,6 +16,7 @@ setup(
     version='0.1.14',
     description='Rest API to IEX',
     long_description=long_description,
+    long_description_content_type="markdown",
     url='https://github.com/timkpaine/pyEX',
     download_url='https://github.com/timkpaine/pyEX/archive/v0.1.14.tar.gz',
     author='Tim Paine',
