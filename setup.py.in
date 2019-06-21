@@ -15,7 +15,7 @@ setup(
     version='{{VERSION}}',
     description='Rest API to IEX',
     long_description=long_description,
-    long_description_content_type="markdown",
+    long_description_content_type="text/markdown",
     url='{{REPO_URL}}',
     download_url='{{REPO_URL}}/archive/v{{VERSION}}.tar.gz',
     author='Tim Paine',
