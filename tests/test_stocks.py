@@ -83,8 +83,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-
-        spreadDF(SYMBOL)
+            spreadDF(SYMBOL)
 
     def test_volumeByVenue(self):
         from pyEX import volumeByVenue
@@ -99,8 +98,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-
-        volumeByVenueDF(SYMBOL)
+            volumeByVenueDF(SYMBOL)
 
     def test_delayedQuote(self):
         from pyEX import delayedQuote
