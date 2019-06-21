@@ -25,7 +25,7 @@ docs:  ## make documentation
 	open ./docs/_build/html/index.html
 
 install:  ## install to site-packages
-	python3 setup.py install
+	pip3 install .
 
 micro:  ## steps before dist, defaults to previous tag + one micro
 	. scripts/deploy.sh MICRO

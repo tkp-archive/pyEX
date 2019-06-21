@@ -9,3 +9,19 @@ from .marketdata.ws import *  # noqa: F401,F403
 from .marketdata.sse import *  # noqa: F401,F403
 from .points import *  # noqa: F401,F403
 from ._version import VERSION as __version__  # noqa: F401
+
+
+try:
+    from .caching import *  # noqa: F401,F403
+except ImportError:
+    pass
+
+try:
+    from .studies import *  # noqa: F401,F403
+except ImportError:
+    pass
+
+try:
+    from .zipline import *  # noqa: F401,F403
+except ImportError:
+    pass

@@ -35,6 +35,7 @@ setup(
     ],
 
     keywords='finance data',
+    zip_safe=False,
     packages=find_packages(exclude=[]),
     install_requires=requires,
     extras_require={'dev': requires + ['pytest', 'pytest-cov', 'pylint', 'flake8']}
