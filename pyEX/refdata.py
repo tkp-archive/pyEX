@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 from deprecation import deprecated
 from .common import _getJson, _strOrDate, _reindex, _toDatetime

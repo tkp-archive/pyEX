@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 from datetime import datetime
 from .common import _getJson, PyEXception, _strOrDate, _reindex, _toDatetime

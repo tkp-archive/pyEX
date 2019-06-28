@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from functools import partial, wraps
 from .common import PyEXception, _getJson, _USAGE_TYPES
@@ -314,7 +315,10 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
 
-    def bind(self, *args, meth=None, **kwargs):
+    def bind(self, *args, **kwargs):
+        meth = kwargs.pop('meth')
+        if not meth:
+            raise PyEXception('Must provide method!')
         return meth(token=self._token, version=self._version, *args, **kwargs)
 
     def account(self):

@@ -1,5 +1,5 @@
 tests: ## Clean and Make unit tests
-	python3 -m pytest -v tests --cov=pyEX
+	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v tests --cov=pyEX
 
 test: lint ## run the tests for travis CI
 	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v tests --cov=pyEX
