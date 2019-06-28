@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
+import os
 import requests
 try:
     import ujson as json
@@ -97,6 +99,7 @@ class PyEXception(Exception):
 
 def _getJson(url, token='', version='', filter=''):
     '''for backwards compat, accepting token and version but ignoring'''
+    token = token or os.environ.get('IEX_TOKEN')
     if token:
         if version == 'sandbox':
             return _getJsonIEXCloudSandbox(url, token, version, filter)
@@ -105,12 +108,7 @@ def _getJson(url, token='', version='', filter=''):
 
 
 def _getJsonOrig(url):
-    '''internal'''
-    url = _URL_PREFIX + url
-    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES)
-    if resp.status_code == 200:
-        return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
 
 
 def _getJsonIEXCloud(url, token='', version='beta', filter=''):
