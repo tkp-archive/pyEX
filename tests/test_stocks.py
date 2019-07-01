@@ -530,7 +530,7 @@ class TestAll:
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.text = 'test'
+            mock.return_value.json.return_value = {'url': 'test'}
             logoNotebook('test')
 
     def test_threshold(self):
