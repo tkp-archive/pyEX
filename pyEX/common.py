@@ -122,9 +122,11 @@ def _getJsonIEXCloud(url, token='', version='beta', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloudSandbox(url, token='', version='beta'):
+def _getJsonIEXCloudSandbox(url, token='', version='beta', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2_SANDBOX.format(version='beta') + url
+    if filter:
+        url += '?filter={filter}'.format(filter=filter)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
