@@ -451,7 +451,7 @@ def internationalSymbolsDF(region='', exchange='', token='', version='', filter=
     return df
 
 
-def fxSymbolsDF(token='', version='', filter=''):
+def fxSymbolsDF(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -460,12 +460,11 @@ def fxSymbolsDF(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         [DataFrame]: results
     '''
-    fx = fxSymbols(token, version, filter)
+    fx = fxSymbols(token, version)
     df1 = pd.DataFrame(fx['currencies'])
     df2 = pd.DataFrame(fx['pairs'])
     _reindex(df1, 'code')
