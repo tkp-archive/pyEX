@@ -315,7 +315,7 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     return _getJson('ref-data/region/us/symbols', token, version, filter)
 
 
-def fxSymbols(token='', version='', filter=''):
+def fxSymbols(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -324,12 +324,11 @@ def fxSymbols(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
     '''
-    return _getJson('ref-data/fx/symbols', token, version, filter)
+    return _getJson('ref-data/fx/symbols', token, version)
 
 
 def optionsSymbols(token='', version='', filter=''):
@@ -452,7 +451,7 @@ def internationalSymbolsDF(region='', exchange='', token='', version='', filter=
     return df
 
 
-def fxSymbolsDF(token='', version='', filter=''):
+def fxSymbolsDF(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -461,12 +460,11 @@ def fxSymbolsDF(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         [DataFrame]: results
     '''
-    fx = fxSymbols(token, version, filter)
+    fx = fxSymbols(token, version)
     df1 = pd.DataFrame(fx['currencies'])
     df2 = pd.DataFrame(fx['pairs'])
     _reindex(df1, 'code')
@@ -493,7 +491,7 @@ def optionsSymbolsDF(token='', version='', filter=''):
     return df
 
 
-def symbolsList(token='', version='', filter=''):
+def symbolsList(token='', version=''):
     '''This call returns an array of symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#symbols
@@ -502,15 +500,14 @@ def symbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    return symbolsDF(token, version, filter).index.tolist()
+    return [x['symbol'] for x in symbols(token, version, filter='symbol')]
 
 
-def iexSymbolsList(token='', version='', filter=''):
+def iexSymbolsList(token='', version=''):
     '''This call returns an array of symbols the Investors Exchange supports for trading.
     This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
 
@@ -520,15 +517,14 @@ def iexSymbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    return iexSymbolsDF(token, version, filter).index.tolist()
+    return [x['symbol'] for x in iexSymbols(token, version, filter='symbol')]
 
 
-def mutualFundSymbolsList(token='', version='', filter=''):
+def mutualFundSymbolsList(token='', version=''):
     '''This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#mutual-fund-symbols
@@ -537,15 +533,14 @@ def mutualFundSymbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         List: result
     '''
-    return mutualFundSymbolsDF(token, version, filter).index.tolist()
+    return [x['symbol'] for x in mutualFundSymbols(token, version, filter='symbol')]
 
 
-def otcSymbolsList(token='', version='', filter=''):
+def otcSymbolsList(token='', version=''):
     '''This call returns an array of OTC symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#otc-symbols
@@ -554,15 +549,14 @@ def otcSymbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    return otcSymbolsDF(token, version, filter).index.tolist()
+    return [x['symbol'] for x in otcSymbols(token, version, filter='symbol')]
 
 
-def internationalSymbolsList(region='', exchange='', token='', version='', filter=''):
+def internationalSymbolsList(region='', exchange='', token='', version=''):
     '''This call returns an array of international symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#international-symbols
@@ -573,15 +567,14 @@ def internationalSymbolsList(region='', exchange='', token='', version='', filte
         exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    return internationalSymbolsDF(region, exchange, token, version, filter).index.tolist()
+    return [x['symbol'] for x in internationalSymbols(region, exchange, token, version, filter='symbol')]
 
 
-def fxSymbolsList(token='', version='', filter=''):
+def fxSymbolsList(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -590,12 +583,11 @@ def fxSymbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    fx = fxSymbols(token, version, filter)
+    fx = fxSymbols(token, version)
     ret = [[], []]
     for c in fx['currencies']:
         ret[0].append(c['code'])
@@ -604,7 +596,7 @@ def fxSymbolsList(token='', version='', filter=''):
     return ret
 
 
-def optionsSymbolsList(token='', version='', filter=''):
+def optionsSymbolsList(token='', version=''):
     '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
     https://iexcloud.io/docs/api/#options-symbols
@@ -613,12 +605,11 @@ def optionsSymbolsList(token='', version='', filter=''):
     Args:
         token (string); Access token
         version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         list: result
     '''
-    return optionsSymbolsDF(token, version, filter).index.tolist()
+    return [x['symbol'] for x in optionsSymbols(token, version, filter='symbol')]
 
 
 @deprecated(details='Deprecated: IEX Cloud status unkown')
