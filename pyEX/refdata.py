@@ -311,7 +311,7 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     if region:
         return _getJson('ref-data/region/{region}/symbols'.format(region=region), token, version, filter)
     elif exchange:
-        return _getJson('ref-data/exchange/{exchange}/exchange'.format(exchange=exchange), token, version, filter)
+        return _getJson('ref-data/exchange/{exchange}/symbols'.format(exchange=exchange), token, version, filter)
     return _getJson('ref-data/region/us/symbols', token, version, filter)
 
 
