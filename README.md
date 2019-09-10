@@ -26,10 +26,10 @@ If you redistribute our API data:
 # Getting Started
 
 - [Read The Docs!](https://pyEX.readthedocs.io)
-- [Demo Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/all.ipynb)
-- [Streaming Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/ws.ipynb)
-- [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/client.ipynb)
-- [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/sse.ipynb)
+- [Demo Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/examples/all.ipynb)
+- [Streaming Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/examples/ws.ipynb)
+- [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/client.ipynb)
+- [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/sse.ipynb)
 
 
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
