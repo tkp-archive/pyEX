@@ -28,7 +28,7 @@ _SSE_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/{channel}?symbols={sy
 _SSE_URL_PREFIX_ALL = 'https://cloud-sse.iexapis.com/{version}/{channel}?token={token}'
 _SSE_DEEP_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}'
 
-_TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1d']
+_TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1mm', '5d', '5dm', '1d']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', 'next']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
