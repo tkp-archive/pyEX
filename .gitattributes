@@ -1,3 +1,3 @@
-notebooks/* linguist-documentation
+examples/* linguist-documentation
 all.ipynb linguist-documentation
 pyex.ipynb linguist-documentation
