@@ -27,6 +27,9 @@ docs:  ## make documentation
 install:  ## install to site-packages
 	pip3 install .
 
+dev:
+	pip3 install .[dev]
+
 micro:  ## steps before dist, defaults to previous tag + one micro
 	. scripts/deploy.sh MICRO
 
