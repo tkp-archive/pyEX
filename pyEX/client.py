@@ -92,6 +92,9 @@ from .marketdata.http import tops, topsDF, \
 
 from .points import points, pointsDF
 
+from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF
+from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF, cryptoQuote, cryptoQuoteDF
+
 _INCLUDE_FUNCTIONS = [
     # Refdata
     ('symbols', symbols),
@@ -291,7 +294,28 @@ _INCLUDE_FUNCTIONS = [
     ('ceoCompensationDF', ceoCompensationDF),
     # Data Points
     ('points', points),
-    ('pointsDF', pointsDF)
+    ('pointsDF', pointsDF),
+    # FX
+    ('latestFX', latestFX),
+    ('latestFXDF', latestFXDF),
+    ('convertFX', convertFX),
+    ('convertFXDF', convertFXDF),
+    ('historicalFX', historicalFX),
+    ('historicalFXDF', historicalFXDF),
+    # Crypto
+    ('cryptoBook', cryptoBook),
+    ('cryptoBookDF', cryptoBookDF),
+    ('cryptoQuote', cryptoQuote),
+    ('cryptoQuoteDF', cryptoQuoteDF),
+    ('cryptoPrice', cryptoPrice),
+    ('cryptoPriceDF', cryptoPriceDF),
+
+]
+
+_INCLUDE_POINTS = [
+    # Rates
+    # Commodities
+    # Economic
 ]
 
 
