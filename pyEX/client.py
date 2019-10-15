@@ -93,7 +93,13 @@ from .marketdata.http import tops, topsDF, \
 from .points import points, pointsDF
 
 from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF
+from .marketdata.fx import fxSSE
 from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF, cryptoQuote, cryptoQuoteDF
+from .marketdata.cryptocurrency import cryptoBookSSE, cryptoEventsSSE, cryptoQuotesSSE
+from .commodities import CommoditiesPoints
+from .rates import RatesPoints
+from .economic import EconomicPoints
+
 
 _INCLUDE_FUNCTIONS = [
     # Refdata
@@ -302,6 +308,8 @@ _INCLUDE_FUNCTIONS = [
     ('convertFXDF', convertFXDF),
     ('historicalFX', historicalFX),
     ('historicalFXDF', historicalFXDF),
+    # FXSSE
+    ('fxSSE', fxSSE),
     # Crypto
     ('cryptoBook', cryptoBook),
     ('cryptoBookDF', cryptoBookDF),
@@ -309,13 +317,50 @@ _INCLUDE_FUNCTIONS = [
     ('cryptoQuoteDF', cryptoQuoteDF),
     ('cryptoPrice', cryptoPrice),
     ('cryptoPriceDF', cryptoPriceDF),
-
+    # CryptoSSE
+    ('cryptoBookSSE', cryptoBookSSE),
+    ('cryptoEventsSSE', cryptoEventsSSE),
+    ('cryptoQuotesSSE', cryptoQuotesSSE),
 ]
 
 _INCLUDE_POINTS = [
     # Rates
+    ('thirtyYear', RatesPoints.THIRTY.value),
+    ('twentyYear', RatesPoints.TWENTY.value),
+    ('tenYear', RatesPoints.TEN.value),
+    ('fiveYear', RatesPoints.FIVE.value),
+    ('twoYear', RatesPoints.TWO.value),
+    ('oneYear', RatesPoints.ONE.value),
+    ('sixMonths', RatesPoints.SIXMONTH.value),
+    ('threeMonths', RatesPoints.THREEMONTH.value),
+    ('oneMonth', RatesPoints.ONEMONTH.value),
     # Commodities
+    ('wti', CommoditiesPoints.WTI.value),
+    ('brent', CommoditiesPoints.BRENT.value),
+    ('natgas', CommoditiesPoints.NATGAS.value),
+    ('heatoil', CommoditiesPoints.HEATOIL.value),
+    ('jet', CommoditiesPoints.JET.value),
+    ('diesel', CommoditiesPoints.DIESEL.value),
+    ('gasreg', CommoditiesPoints.GASREG.value),
+    ('gasmid', CommoditiesPoints.GASMID.value),
+    ('gasprm', CommoditiesPoints.GASPRM.value),
+    ('propane', CommoditiesPoints.PROPANE.value),
     # Economic
+    ('us30', EconomicPoints.US30.value),
+    ('us15', EconomicPoints.US15.value),
+    ('us5', EconomicPoints.US5.value),
+    ('fedfunds', EconomicPoints.FEDFUNDS.value),
+    ('creditcard', EconomicPoints.CREDITCARD.value),
+    ('cdnj', EconomicPoints.CDNJ.value),
+    ('cdj', EconomicPoints.CDJ.value),
+    ('gdp', EconomicPoints.GDP.value),
+    ('indpro', EconomicPoints.INDPRO.value),
+    ('cpi', EconomicPoints.CPI.value),
+    ('payroll', EconomicPoints.PAYROLL.value),
+    ('housing', EconomicPoints.HOUSING.value),
+    ('unemployment', EconomicPoints.UNEMPLOYMENT.value),
+    ('vehicles', EconomicPoints.VEHICLES.value),
+    ('recession_prob', EconomicPoints.RECESSION_PROB.value),
 ]
 
 
@@ -338,6 +383,12 @@ class Client(object):
         for name, method in _INCLUDE_FUNCTIONS:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
+
+        for name, key in _INCLUDE_POINTS:
+            setattr(self, name, wraps(points)(partial(self.bind, meth=method, key=key)))
+            setattr(self, name + 'DF', wraps(pointsDF)(partial(self.bind, meth=method, key=key)))
+            getattr(self, name).__doc__ = points.__doc__
+            getattr(self, name + 'DF').__doc__ = pointsDF.__doc__
 
     def bind(self, *args, **kwargs):
         meth = kwargs.pop('meth')
