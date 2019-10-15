@@ -331,8 +331,8 @@ _INCLUDE_POINTS = [
     ('fiveYear', RatesPoints.FIVE.value),
     ('twoYear', RatesPoints.TWO.value),
     ('oneYear', RatesPoints.ONE.value),
-    ('sixMonths', RatesPoints.SIXMONTH.value),
-    ('threeMonths', RatesPoints.THREEMONTH.value),
+    ('sixMonth', RatesPoints.SIXMONTH.value),
+    ('threeMonth', RatesPoints.THREEMONTH.value),
     ('oneMonth', RatesPoints.ONEMONTH.value),
     # Commodities
     ('wti', CommoditiesPoints.WTI.value),
@@ -385,10 +385,8 @@ class Client(object):
             getattr(self, name).__doc__ = method.__doc__
 
         for name, key in _INCLUDE_POINTS:
-            setattr(self, name, wraps(points)(partial(self.bind, meth=method, key=key)))
-            setattr(self, name + 'DF', wraps(pointsDF)(partial(self.bind, meth=method, key=key)))
+            setattr(self, name, wraps(points)(partial(self.bind, meth=points, key=key)))
             getattr(self, name).__doc__ = points.__doc__
-            getattr(self, name + 'DF').__doc__ = pointsDF.__doc__
 
     def bind(self, *args, **kwargs):
         meth = kwargs.pop('meth')
