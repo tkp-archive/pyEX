@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from functools import partial, wraps
-from .common import PyEXception, _getJson, _USAGE_TYPES
+from .common import PyEXception, _interval, _getJson, _USAGE_TYPES
 
 from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, fxSymbols, optionsSymbols, \
     symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, internationalSymbolsDF, fxSymbolsDF, optionsSymbolsDF, \
@@ -373,19 +373,26 @@ class Client(object):
         api_token (string): api token (can pickup from IEX_TOKEN environment variable)
         version (string): api version to use (defaults to beta)
                           set version to 'sandbox' to run against the IEX sandbox
+        api_limit (int): cache calls in this interval
     '''
-    def __init__(self, api_token=None, version='beta'):
+    def __init__(self,
+                 api_token=None,
+                 version='beta',
+                 api_limit=5):
         self._token = api_token or os.environ.get('IEX_TOKEN', '')
         if not self._token:
             raise PyEXception('API Token missing or not in environment (IEX_TOKEN)')
 
         self._version = version
+        self._api_limit = api_limit
         for name, method in _INCLUDE_FUNCTIONS:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
 
         for name, key in _INCLUDE_POINTS:
-            setattr(self, name, wraps(points)(partial(self.bind, meth=points, key=key)))
+            p = partial(self.bind, meth=points, key=key)
+            p.__name__ = key
+            setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
             getattr(self, name).__doc__ = points.__doc__
 
     def bind(self, *args, **kwargs):

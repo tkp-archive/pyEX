@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from .common import _getJson
+from .common import _expire, _getJson
 
 
 def latestFX(symbols=None, token='', version='', filter=''):
@@ -88,6 +88,7 @@ def convertFXDF(symbols=None, amount=None, token='', version='', filter=''):
     return pd.DataFrame(convertFX(symbols, token, version, filter))
 
 
+@_expire(hour=1)
 def historicalFX(symbols=None, token='', version='', filter=''):
     '''This endpoint returns a daily value for the desired currency pair.
 

@@ -5,7 +5,8 @@ from mock import patch, MagicMock
 class TestAll:
     def test_getJson(self):
         from pyEX.common import _getJson, PyEXception
-        with patch('requests.get') as mock:
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             _getJson('')
@@ -19,7 +20,8 @@ class TestAll:
 
     def test_getJson2(self):
         from pyEX.common import _getJson, PyEXception
-        with patch('requests.get') as mock:
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             _getJson('', 'test', 'test')

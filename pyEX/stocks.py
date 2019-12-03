@@ -7,9 +7,10 @@ from io import BytesIO
 from IPython.display import Image as ImageI
 from multiprocessing.pool import ThreadPool
 from PIL import Image as ImageP
-from .common import _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
+from .common import _expire, _TIMEFRAME_CHART, _TIMEFRAME_DIVSPLIT, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _BATCH_TYPES
 
 
+@_expire(hour=4)
 def advancedStats(symbol, token='', version='', filter=''):
     '''Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
 
@@ -50,6 +51,7 @@ def advancedStatsDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def balanceSheet(symbol, token='', version='', filter=''):
     '''Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
 
@@ -321,6 +323,7 @@ def bookDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def cashFlow(symbol, token='', version='', filter=''):
     '''Pulls cash flow data. Available quarterly (4 quarters) or annually (4 years).
 
@@ -365,6 +368,7 @@ def cashFlowDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=4)
 def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     '''Historical price/volume data, daily and intraday
 
@@ -405,6 +409,7 @@ def _chartToDF(c):
     return df
 
 
+@_expire(second=0)
 def chartDF(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     '''Historical price/volume data, daily and intraday
 
@@ -467,6 +472,7 @@ def bulkMinuteBarsDF(symbol, dates, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=0)
 def collections(tag, collectionName, token='', version='', filter=''):
     '''Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
 
@@ -510,6 +516,7 @@ def collectionsDF(tag, query, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=4)
 def company(symbol, token='', version='', filter=''):
     '''Company reference data
 
@@ -557,6 +564,7 @@ def companyDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(second=0)
 def delayedQuote(symbol, token='', version='', filter=''):
     '''This returns the 15 minute delayed market quote.
 
@@ -599,6 +607,7 @@ def delayedQuoteDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=9)
 def dividends(symbol, timeframe='ytd', token='', version='', filter=''):
     '''Dividend history
 
@@ -648,6 +657,7 @@ def dividendsDF(symbol, timeframe='ytd', token='', version='', filter=''):
     return df
 
 
+@_expire(hour=9)
 def earnings(symbol, token='', version='', filter=''):
     '''Earnings data for a given company including the actual EPS, consensus, and fiscal period. Earnings are available quarterly (last 4 quarters) and annually (last 4 years).
 
@@ -698,6 +708,7 @@ def earningsDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(minute=0)
 def earningsToday(token='', version='', filter=''):
     '''Returns earnings that will be reported today as two arrays: before the open bto and after market close amc.
     Each array contains an object with all keys from earnings, a quote object, and a headline key.
@@ -750,6 +761,7 @@ def earningsTodayDF(token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def spread(symbol, token='', version='', filter=''):
     '''This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
     Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
@@ -860,6 +872,7 @@ def estimatesDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def financials(symbol, token='', version='', filter=''):
     '''Pulls income statement, balance sheet, and cash flow data from the four most recent reported quarters.
 
@@ -910,6 +923,7 @@ def financialsDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=5)
 def fundOwnership(symbol, token='', version='', filter=''):
     '''Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
        pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
@@ -953,6 +967,7 @@ def fundOwnershipDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def incomeStatement(symbol, token='', version='', filter=''):
     '''Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
 
@@ -994,6 +1009,7 @@ def incomeStatementDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=5)
 def insiderRoster(symbol, token='', version='', filter=''):
     '''Returns the top 10 insiders, with the most recent information.
 
@@ -1034,6 +1050,7 @@ def insiderRosterDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=5)
 def insiderSummary(symbol, token='', version='', filter=''):
     '''Returns aggregated insiders summary data for the last 6 months.
 
@@ -1074,6 +1091,7 @@ def insiderSummaryDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=5)
 def insiderTransactions(symbol, token='', version='', filter=''):
     '''Returns insider transactions.
 
@@ -1114,6 +1132,7 @@ def insiderTransactionsDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=5)
 def institutionalOwnership(symbol, token='', version='', filter=''):
     '''Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
 
@@ -1199,6 +1218,7 @@ def intradayDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=10)
 def ipoToday(token='', version='', filter=''):
     '''This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
@@ -1242,6 +1262,7 @@ def ipoTodayDF(token='', version='', filter=''):
     return df
 
 
+@_expire(hour=10)
 def ipoUpcoming(token='', version='', filter=''):
     '''This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
@@ -1285,6 +1306,7 @@ def ipoUpcomingDF(token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def keyStats(symbol, token='', version='', filter=''):
     '''Key Stats about company
 
@@ -1418,6 +1440,7 @@ def listDF(option='mostactive', token='', version='', filter=''):
     return df
 
 
+@_expire(hour=0)
 def logo(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -1437,6 +1460,7 @@ def logo(symbol, token='', version='', filter=''):
     return _getJson('stock/' + symbol + '/logo', token, version, filter)
 
 
+@_expire(hour=0)
 def logoPNG(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -1457,6 +1481,7 @@ def logoPNG(symbol, token='', version='', filter=''):
     return ImageP.open(BytesIO(response.content))
 
 
+@_expire(hour=0)
 def logoNotebook(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -1751,6 +1776,7 @@ def optionsDF(symbol, expiration, side='', token='', version='', filter=''):
     return df
 
 
+@_expire(hour=8)
 def peers(symbol, token='', version='', filter=''):
     '''Peers of ticker
 
@@ -1799,6 +1825,7 @@ def peersDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=4)
 def yesterday(symbol, token='', version='', filter=''):
     '''This returns previous day adjusted price data for one or more stocks
 
@@ -1843,6 +1870,7 @@ def yesterdayDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=4)
 def marketYesterday(token='', version='', filter=''):
     '''This returns previous day adjusted price data for whole market
 
@@ -2011,6 +2039,7 @@ def quoteDF(symbol, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=4)
 def relevant(symbol, token='', version='', filter=''):
     '''Same as peers
 
@@ -2083,6 +2112,7 @@ def sectorPerformanceDF(token='', version='', filter=''):
     return df
 
 
+@_expire(hour=9)
 def splits(symbol, timeframe='ytd', token='', version='', filter=''):
     '''Stock split history
 
@@ -2217,6 +2247,7 @@ def thresholdDF(date=None, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=16)
 def shortInterest(symbol, date=None, token='', version='', filter=''):
     '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 
@@ -2263,6 +2294,7 @@ def shortInterestDF(symbol, date=None, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=16)
 def marketShortInterest(date=None, token='', version='', filter=''):
     '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 
