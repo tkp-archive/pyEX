@@ -587,7 +587,8 @@ class TestAll:
     def test_logoNotebook(self):
         from pyEX import logoNotebook
         with patch('requests.get') as mock, \
-             patch('pickle.dump'):
+             patch('pickle.dump'), \
+             patch('os.fspath'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json.return_value = {'url': 'test'}
