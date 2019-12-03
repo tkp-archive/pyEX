@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import os
+import os.path
+import pandas as pd
 import requests
+import tempfile
 try:
     import ujson as json
 except ImportError:
     import json
-import pandas as pd
 from datetime import datetime
+from six import string_types
 from socketIO_client_nexus import SocketIO, BaseNamespace
 from sseclient import SSEClient
-from six import string_types
+from temporalcache import expire, interval
 
 try:
     from urllib.parse import urlparse
@@ -35,6 +38,7 @@ _COLLECTION_TAGS = ['sector', 'tag', 'list']
 
 _USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
 _PYEX_PROXIES = None
+_PYEX_CACHE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), "pyEX"))
 
 # Limit 10
 _BATCH_TYPES = [
@@ -258,3 +262,23 @@ def setProxy(proxies=None):
     '''
     global _PYEX_PROXIES
     _PYEX_PROXIES = proxies
+
+
+def _expire(**temporal_args):
+    if not os.path.exists(_PYEX_CACHE_FOLDER):
+        os.makedirs(_PYEX_CACHE_FOLDER)
+
+    def _wrapper(foo):
+        temporal_args['persistent'] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+        return expire(**temporal_args)(foo)
+    return _wrapper
+
+
+def _interval(**temporal_args):
+    if not os.path.exists(_PYEX_CACHE_FOLDER):
+        os.makedirs(_PYEX_CACHE_FOLDER)
+
+    def _wrapper(foo):
+        temporal_args['persistent'] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+        return interval(**temporal_args)(foo)
+    return _wrapper

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from datetime import datetime
-from .common import _getJson, PyEXception, _strOrDate, _reindex, _toDatetime
+from .common import _expire, _getJson, PyEXception, _strOrDate, _reindex, _toDatetime
 
 
 def stats(token='', version='', filter=''):
@@ -95,6 +95,7 @@ def recordsDF(token='', version='', filter=''):
     return df
 
 
+@_expire(hour=0)
 def summary(date=None, token='', version='', filter=''):
     '''https://iexcloud.io/docs/api/#stats-historical-summary
 
@@ -132,6 +133,7 @@ def summaryDF(date=None, token='', version='', filter=''):
     return df
 
 
+@_expire(hour=0)
 def daily(date=None, last='', token='', version='', filter=''):
     '''https://iexcloud.io/docs/api/#stats-historical-daily
 

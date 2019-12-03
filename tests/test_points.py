@@ -10,7 +10,8 @@ class TestPoints:
 
     def test_points(self):
         from pyEX import points
-        with patch('requests.get') as mock:
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             points()
@@ -19,7 +20,8 @@ class TestPoints:
 
     def test_pointsDF(self):
         from pyEX import pointsDF
-        with patch('requests.get') as mock:
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])

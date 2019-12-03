@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from deprecation import deprecated
-from .common import _getJson, _strOrDate, _reindex, _toDatetime
+from .common import _expire, _getJson, _strOrDate, _reindex, _toDatetime
 
 
+@_expire(hour=8)
 def exchanges(token='', version='', filter=''):
     '''Returns an array of U.S. exchanges.
 
@@ -38,6 +39,7 @@ def exchangesDF(token='', version='', filter=''):
     return pd.DataFrame(exchanges(token, version, filter))
 
 
+@_expire(hour=8)
 def internationalExchanges(token='', version='', filter=''):
     '''Returns an array of exchanges.
 
@@ -72,6 +74,7 @@ def internationalExchangesDF(token='', version='', filter=''):
     return pd.DataFrame(internationalExchanges(token, version, filter))
 
 
+@_expire(hour=8)
 def sectors(token='', version='', filter=''):
     '''Returns an array of sectors.
 
@@ -104,6 +107,7 @@ def sectorsDF(token='', version='', filter=''):
     return pd.DataFrame(sectors(token, version, filter))
 
 
+@_expire(hour=8)
 def tags(token='', version='', filter=''):
     '''Returns an array of tags.
 
@@ -136,6 +140,7 @@ def tagsDF(token='', version='', filter=''):
     return pd.DataFrame(tags(token, version, filter))
 
 
+@_expire(hour=8)
 def calendar(type='holiday', direction='next', last=1, startDate=None, token='', version='', filter=''):
     '''This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.
 
@@ -183,6 +188,7 @@ def calendarDF(type='holiday', direction='next', last=1, startDate=None, token='
     return dat
 
 
+@_expire(hour=8)
 def holidays(direction='next', last=1, startDate=None, token='', version='', filter=''):
     '''This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.
 
@@ -223,6 +229,7 @@ def holidaysDF(direction='next', last=1, startDate=None, token='', version='', f
     return calendarDF('holiday', direction, last, startDate, token, version, filter)
 
 
+@_expire(hour=8)
 def symbols(token='', version='', filter=''):
     '''This call returns an array of symbols that IEX Cloud supports for API calls.
 
@@ -240,6 +247,7 @@ def symbols(token='', version='', filter=''):
     return _getJson('ref-data/symbols', token, version, filter)
 
 
+@_expire(hour=8)
 def iexSymbols(token='', version='', filter=''):
     '''This call returns an array of symbols the Investors Exchange supports for trading.
     This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
@@ -258,6 +266,7 @@ def iexSymbols(token='', version='', filter=''):
     return _getJson('ref-data/iex/symbols', token, version, filter)
 
 
+@_expire(hour=8)
 def mutualFundSymbols(token='', version='', filter=''):
     '''This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
 
@@ -275,6 +284,7 @@ def mutualFundSymbols(token='', version='', filter=''):
     return _getJson('ref-data/mutual-fund/symbols', token, version, filter)
 
 
+@_expire(hour=8)
 def otcSymbols(token='', version='', filter=''):
     '''This call returns an array of OTC symbols that IEX Cloud supports for API calls.
 
@@ -292,6 +302,7 @@ def otcSymbols(token='', version='', filter=''):
     return _getJson('ref-data/otc/symbols', token, version, filter)
 
 
+@_expire(hour=8)
 def internationalSymbols(region='', exchange='', token='', version='', filter=''):
     '''This call returns an array of international symbols that IEX Cloud supports for API calls.
 
@@ -315,6 +326,7 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     return _getJson('ref-data/region/us/symbols', token, version, filter)
 
 
+@_expire(hour=8)
 def fxSymbols(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
@@ -331,6 +343,7 @@ def fxSymbols(token='', version=''):
     return _getJson('ref-data/fx/symbols', token, version)
 
 
+@_expire(hour=8)
 def optionsSymbols(token='', version='', filter=''):
     '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
