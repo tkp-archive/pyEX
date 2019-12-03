@@ -1,8 +1,6 @@
 # pyEX
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
 
-# Now supporting IEX Cloud
-
 [![Build Status](https://travis-ci.org/timkpaine/pyEX.svg?branch=master)](https://travis-ci.org/timkpaine/pyEX)
 [![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/master/graph/badge.svg)](https://codecov.io/gh/timkpaine/pyEX)
 [![BCH compliance](https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master)](https://bettercodehub.com/)
