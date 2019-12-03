@@ -5,4 +5,4 @@ pandas>=0.22
 requests>=2.21.0
 socketIO-client-nexus>=0.7.6
 sseclient>=0.0.22
-temporal-cache>=0.0.4
+temporal-cache>=0.0.5
