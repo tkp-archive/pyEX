@@ -8,6 +8,8 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
+## Referral
+Please subscribe to IEX Cloud using [my referral code](https://iexcloud.io/s/6332a3c3 ).
 
 ## Attribution
 If you redistribute our API data:
