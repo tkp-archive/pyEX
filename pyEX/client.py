@@ -101,6 +101,17 @@ from .rates import RatesPoints
 from .economic import EconomicPoints
 
 
+try:
+    from .studies import peerCorrelation, bollinger, dema, ema, sar, sma
+
+except ImportError:
+    peerCorrelation = None
+    bollinger = None
+    dema = None
+    ema = None
+    sar = None
+    sma = None
+
 _INCLUDE_FUNCTIONS = [
     # Refdata
     ('symbols', symbols),
@@ -363,6 +374,15 @@ _INCLUDE_POINTS = [
     ('recession_prob', EconomicPoints.RECESSION_PROB.value),
 ]
 
+_INCLUDE_STUDIES = [
+    ('peerCorrelation', peerCorrelation),
+    ('bollinger', bollinger),
+    ('dema', dema),
+    ('ema', ema),
+    ('sar', sar),
+    ('sma', sma),
+]
+
 
 class Client(object):
     '''IEX Cloud Client
@@ -394,6 +414,10 @@ class Client(object):
             p.__name__ = key
             setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
             getattr(self, name).__doc__ = points.__doc__
+
+        for name, method in _INCLUDE_STUDIES:
+            if method:
+                setattr(self, name, method.__get__(self, self.__class__))
 
     def bind(self, *args, **kwargs):
         meth = kwargs.pop('meth')
