@@ -25,7 +25,7 @@ install:
 
 script:
   - make lint
-  - make test
+  - make tests
 
 after_success:
     - codecov --token 7c3b60a8-46be-4bb2-b5ea-67e26b45ecbc
