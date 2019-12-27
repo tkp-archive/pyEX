@@ -1,5 +1,5 @@
 tests: ## Make unit tests
-	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v tests --cov=pyEX
+	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v pyEX/tests --cov=pyEX
 
 lint: ## run linter
 	flake8 pyEX 
@@ -29,15 +29,6 @@ install:  ## install to site-packages
 
 dev:
 	pip3 install .[dev]
-
-micro:  ## steps before dist, defaults to previous tag + one micro
-	. scripts/deploy.sh MICRO
-
-minor:  ## steps before dist, defaults to previous tag + one micro
-	. scripts/deploy.sh MINOR
-
-major:  ## steps before dist, defaults to previous tag + one micro
-	. scripts/deploy.sh MAJOR
 
 dist:  ## dist to pypi
 	rm -rf dist build
