@@ -391,13 +391,13 @@ class Client(object):
 
     Args:
         api_token (string): api token (can pickup from IEX_TOKEN environment variable)
-        version (string): api version to use (defaults to beta)
+        version (string): api version to use (defaults to v1)
                           set version to 'sandbox' to run against the IEX sandbox
         api_limit (int): cache calls in this interval
     '''
     def __init__(self,
                  api_token=None,
-                 version='beta',
+                 version='v1',
                  api_limit=5):
         self._token = api_token or os.environ.get('IEX_TOKEN', '')
         if not self._token:

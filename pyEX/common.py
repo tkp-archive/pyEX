@@ -115,7 +115,7 @@ def _getJsonOrig(url):
     raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
 
 
-def _getJsonIEXCloud(url, token='', version='beta', filter=''):
+def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
     if filter:
@@ -126,9 +126,9 @@ def _getJsonIEXCloud(url, token='', version='beta', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloudSandbox(url, token='', version='beta', filter=''):
+def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     '''for iex cloud'''
-    url = _URL_PREFIX2_SANDBOX.format(version='beta') + url
+    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
     if filter:
         url += '?filter={filter}'.format(filter=filter)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
