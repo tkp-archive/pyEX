@@ -50,14 +50,14 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'pyEX'
-copyright = '2018, Tim Paine'
+copyright = '2020, Tim Paine'
 author = 'Tim Paine'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-_version_py = os.path.join('..', '..', 'jupyterlab_celltests', '_version.py')
+_version_py = os.path.join('..', '..', 'pyEX', '_version.py')
 version_ns = {}
 
 with open(_version_py, mode='r') as version_file:
