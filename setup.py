@@ -21,8 +21,25 @@ version = get_version(pjoin(here, name, '_version.py'))
 with open(pjoin(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-with open(pjoin(here, 'requirements.txt'), encoding='utf-8') as f:
-    requires = f.read().split()
+requires = [
+    'deprecation>=2.0.6',
+    'ipython>=7.2.0',
+    'Pillow>=5.3.0',
+    'pandas>=0.22',
+    'requests>=2.21.0',
+    'socketIO-client-nexus>=0.7.6',
+    'sseclient>=0.0.22',
+    'temporal-cache>=0.0.5',
+]
+
+requires_dev = [
+    'flake8>=3.7.8',
+    'mock',
+    'pytest>=4.3.0',
+    'pytest-cov>=2.6.1',
+    'Sphinx>=1.8.4',
+    'sphinx-markdown-builder>=0.5.2',
+] + requires
 
 setup(
     name=name,
@@ -47,5 +64,7 @@ setup(
     zip_safe=False,
     packages=find_packages(exclude=[]),
     install_requires=requires,
-    extras_require={'dev': requires + ['pytest', 'pytest-cov', 'pylint', 'flake8', 'codecov', 'bumpversion', 'mock']}
+    extras_require={
+        'dev': requires_dev,
+    },
 )
