@@ -13,11 +13,9 @@ Please subscribe to IEX Cloud using [my referral code](https://iexcloud.io/s/633
 
 # Getting Started
 
-- [Demo Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/examples/all.ipynb)
-- [Streaming Notebook - IEX](https://github.com/timkpaine/pyEX/blob/master/examples/ws.ipynb)
 - [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/client.ipynb)
-- [Read The Docs!](https://pyEX.readthedocs.io)
 - [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/sse.ipynb)
+- [Read The Docs!](https://pyEX.readthedocs.io)
 
 `pyEX` supports the IEX Cloud api through 2 interfaces. The first is a simple function call, passing in the api version and token as arguments
 
