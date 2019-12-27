@@ -2,7 +2,7 @@ pyEX
 ====
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
    installation
@@ -140,6 +140,14 @@ Demo
 
 |image6|
 
+Full API
+--------
+
+Please see the `readthedocs <https://pyEX.readthedocs.io>`__ for a full
+API spec
+
+|image7|
+
 Attribution
 -----------
 
@@ -160,4 +168,5 @@ Attribution
 .. |Docs| image:: https://readthedocs.org/projects/pyex/badge/?version=latest
    :target: https://pyex.readthedocs.io/en/latest/?badge=latest
 .. |image6| image:: https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif
+.. |image7| image:: https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/rtd.png
 
