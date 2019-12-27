@@ -9,7 +9,7 @@ from .marketdata.http import tops, topsDF, last, lastDF, hist, histDF, deep, dee
 from .marketdata.sse import *  # noqa: F401,F403
 from .points import *  # noqa: F401,F403
 from .cryptocurrency import *  # noqa: F401, F403
-from ._version import VERSION as __version__  # noqa: F401
+from ._version import __version__  # noqa: F401
 
 
 try:
