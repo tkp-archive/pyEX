@@ -110,6 +110,11 @@ date
 ## Demo
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
 
+## Full API
+Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
+
+![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/rtd.png)
+
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)
