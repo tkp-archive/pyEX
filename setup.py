@@ -31,9 +31,8 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/timkpaine/pyEX',
-    download_url='https://github.com/timkpaine/pyEX/archive/v0.1.17.tar.gz',
     author='Tim Paine',
-    author_email='timothy.k.paine@gmail.com',
+    author_email='t.paine154@gmail.com',
     license='Apache 2.0',
 
     classifiers=[

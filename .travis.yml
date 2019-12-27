@@ -19,12 +19,13 @@ addons:
     packages:
       - python
       - graphviz
-      - python2
 
 install: 
   - python3 -m pip install -e .[dev]
 
-script: make test
+script:
+  - make lint
+  - make test
 
 after_success:
     - codecov --token 7c3b60a8-46be-4bb2-b5ea-67e26b45ecbc
