@@ -22,4 +22,7 @@ class TestEconomic:
             c.housing()
             c.unemployment()
             c.vehicles()
-            c.recession_prob()
+            c.recessionProb()
+            c.initialClaims()
+            c.institutionalMoney()
+            c.retailMoney()

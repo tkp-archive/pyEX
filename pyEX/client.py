@@ -112,6 +112,8 @@ except ImportError:
     sar = None
     sma = None
 
+DEFAULT_API_LIMIT = 5
+
 _INCLUDE_FUNCTIONS = [
     # Refdata
     ('symbols', symbols),
@@ -371,7 +373,11 @@ _INCLUDE_POINTS = [
     ('housing', EconomicPoints.HOUSING.value),
     ('unemployment', EconomicPoints.UNEMPLOYMENT.value),
     ('vehicles', EconomicPoints.VEHICLES.value),
-    ('recession_prob', EconomicPoints.RECESSION_PROB.value),
+    ('recessionProb', EconomicPoints.RECESSION_PROB.value),
+    ('initialClaims', EconomicPoints.INITIALCLAIMS.value),
+    ('institutionalMoney', EconomicPoints.INSTITUTIONALMONEY.value),
+    ('retailMoney', EconomicPoints.RETAILMONEY.value),
+
 ]
 
 _INCLUDE_STUDIES = [
@@ -395,16 +401,20 @@ class Client(object):
                           set version to 'sandbox' to run against the IEX sandbox
         api_limit (int): cache calls in this interval
     '''
+    _api_limit = DEFAULT_API_LIMIT
+
     def __init__(self,
                  api_token=None,
                  version='v1',
-                 api_limit=5):
+                 api_limit=DEFAULT_API_LIMIT):
         self._token = api_token or os.environ.get('IEX_TOKEN', '')
         if not self._token:
             raise PyEXception('API Token missing or not in environment (IEX_TOKEN)')
 
         self._version = version
         self._api_limit = api_limit
+
+        # rebind
         for name, method in _INCLUDE_FUNCTIONS:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
@@ -434,3 +444,20 @@ class Client(object):
                 raise PyEXception('type not recognized: {}'.format(type))
             return _getJson('account/usage/{type}'.format(type=type), self._token, self._version)
         return _getJson('account/usage/messages', self._token, self._version)
+
+
+#############################
+# for autodoc
+for name, method in _INCLUDE_FUNCTIONS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+
+for name, key in _INCLUDE_POINTS:
+    p = partial(Client.bind, meth=points, key=key)
+    p.__name__ = key
+    setattr(Client, name, wraps(points)(p))
+    getattr(Client, name).__doc__ = points.__doc__
+
+for name, method in _INCLUDE_STUDIES:
+    if method:
+        setattr(Client, name, method)

@@ -4,9 +4,8 @@ API
 .. toctree::
    :maxdepth: 4
 
-Client
-------
-.. autoclass:: pyEX.Client
+   client
+
 
 Alternative
 --------------------------------
@@ -16,8 +15,7 @@ Alternative
 
 Commodities
 --------------------------------
-.. automodule:: pyEX.commodities
-    :members:
+.. autoclass:: pyEX.commodities.CommoditiesPoints
     :noindex:
 
 Crypto
@@ -28,8 +26,7 @@ Crypto
 
 Economic
 --------------------------------
-.. automodule:: pyEX.economic
-    :members:
+.. autoclass:: pyEX.economic.EconomicPoints
     :noindex:
 
 FX
@@ -52,8 +49,7 @@ Points
 
 Rates
 --------------------------------
-.. automodule:: pyEX.rates
-    :members:
+.. autoclass:: pyEX.rates.RatesPoints
     :noindex:
 
 Reference Data
