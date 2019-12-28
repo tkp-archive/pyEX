@@ -434,8 +434,8 @@ class TestAll:
 
             cryptoDF()
 
-    def test_splits(self):
-        from pyEX import splits
+    def test_stockSplits(self):
+        from pyEX import stockSplits
         from pyEX.common import PyEXception
         with patch('requests.get') as mock, \
              patch('pickle.dump'):
@@ -443,22 +443,22 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            splits(SYMBOL)
+            stockSplits(SYMBOL)
             try:
-                splits('test', 'test')
+                stockSplits('test', 'test')
                 assert False
             except PyEXception:
                 pass
 
-    def test_splitsDF(self):
-        from pyEX import splitsDF
+    def test_stockSplitsDF(self):
+        from pyEX import stockSplitsDF
         with patch('requests.get') as mock, \
              patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            splitsDF(SYMBOL, '5y')
+            stockSplitsDF(SYMBOL, '5y')
 
     def test_news(self):
         from pyEX import news
@@ -869,3 +869,217 @@ class TestAll:
 
             c = Client()
             c.optionsDF(SYMBOL, 'test')
+
+    def test_bonusIssue(self):
+        from pyEX import bonusIssue
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            bonusIssue()
+            bonusIssue(SYMBOL)
+            bonusIssue(SYMBOL, 'test')
+
+    def test_bonusIssueDF(self):
+        from pyEX import bonusIssueDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            bonusIssueDF()
+            bonusIssueDF(SYMBOL)
+            bonusIssueDF(SYMBOL, 'test')
+
+    def test_distribution(self):
+        from pyEX import distribution
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            distribution()
+            distribution(SYMBOL)
+            distribution(SYMBOL, 'test')
+
+    def test_distributionDF(self):
+        from pyEX import distributionDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            distributionDF()
+            distributionDF(SYMBOL)
+            distributionDF(SYMBOL, 'test')
+
+    def test_returnOfCapital(self):
+        from pyEX import returnOfCapital
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            returnOfCapital()
+            returnOfCapital(SYMBOL)
+            returnOfCapital(SYMBOL, 'test')
+
+    def test_returnOfCapitalDF(self):
+        from pyEX import returnOfCapitalDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            returnOfCapitalDF()
+            returnOfCapitalDF(SYMBOL)
+            returnOfCapitalDF(SYMBOL, 'test')
+
+    def test_rightsIssue(self):
+        from pyEX import rightsIssue
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            rightsIssue()
+            rightsIssue(SYMBOL)
+            rightsIssue(SYMBOL, 'test')
+
+    def test_rightsIssueDF(self):
+        from pyEX import rightsIssueDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            rightsIssueDF()
+            rightsIssueDF(SYMBOL)
+            rightsIssueDF(SYMBOL, 'test')
+
+    def test_rightToPurchase(self):
+        from pyEX import rightToPurchase
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            rightToPurchase()
+            rightToPurchase(SYMBOL)
+            rightToPurchase(SYMBOL, 'test')
+
+    def test_rightToPurchaseDF(self):
+        from pyEX import rightToPurchaseDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            rightToPurchaseDF()
+            rightToPurchaseDF(SYMBOL)
+            rightToPurchaseDF(SYMBOL, 'test')
+
+    def test_securityReclassification(self):
+        from pyEX import securityReclassification
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            securityReclassification()
+            securityReclassification(SYMBOL)
+            securityReclassification(SYMBOL, 'test')
+
+    def test_securityReclassificationDF(self):
+        from pyEX import securityReclassificationDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            securityReclassificationDF()
+            securityReclassificationDF(SYMBOL)
+            securityReclassificationDF(SYMBOL, 'test')
+
+    def test_securitySwap(self):
+        from pyEX import securitySwap
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            securitySwap()
+            securitySwap(SYMBOL)
+            securitySwap(SYMBOL, 'test')
+
+    def test_securitySwapDF(self):
+        from pyEX import securitySwapDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            securitySwapDF()
+            securitySwapDF(SYMBOL)
+            securitySwapDF(SYMBOL, 'test')
+
+    def test_spinoff(self):
+        from pyEX import spinoff
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            spinoff()
+            spinoff(SYMBOL)
+            spinoff(SYMBOL, 'test')
+
+    def test_spinoffDF(self):
+        from pyEX import spinoffDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            spinoffDF()
+            spinoffDF(SYMBOL)
+            spinoffDF(SYMBOL, 'test')
+
+    def test_splits(self):
+        from pyEX import splits
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            splits()
+            splits(SYMBOL)
+            splits(SYMBOL, 'test')
+
+    def test_splitsDF(self):
+        from pyEX import splitsDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            splitsDF()
+            splitsDF(SYMBOL)
+            splitsDF(SYMBOL, 'test')
+
+    def test_upcomingEvents(self):
+        from pyEX import upcomingEvents, upcomingEarnings, upcomingDividends, upcomingSplits, upcomingIPOs
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            upcomingEvents()
+            upcomingEarnings()
+            upcomingDividends()
+            upcomingSplits()
+            upcomingIPOs()
+            upcomingEvents(SYMBOL)
+            upcomingEarnings(SYMBOL)
+            upcomingDividends(SYMBOL)
+            upcomingSplits(SYMBOL)
+            upcomingIPOs(SYMBOL)
+
+    def test_upcomingEventsDF(self):
+        from pyEX import upcomingEventsDF, upcomingEarningsDF, upcomingDividendsDF, upcomingSplitsDF, upcomingIPOsDF
+        with patch('requests.get') as mock, \
+             patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            upcomingEventsDF()
+            upcomingEarningsDF()
+            upcomingDividendsDF()
+            upcomingSplitsDF()
+            upcomingIPOsDF()
+            upcomingEventsDF(SYMBOL)
+            upcomingEarningsDF(SYMBOL)
+            upcomingDividendsDF(SYMBOL)
+            upcomingSplitsDF(SYMBOL)
+            upcomingIPOsDF(SYMBOL)

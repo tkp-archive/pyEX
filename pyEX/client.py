@@ -28,12 +28,14 @@ from .stocks import advancedStats, advancedStatsDF, \
     balanceSheet, balanceSheetDF, \
     batch, batchDF, bulkBatch, bulkBatchDF, \
     book, bookDF, \
+    bonusIssue, bonusIssueDF, \
     bulkMinuteBars, bulkMinuteBarsDF, \
     cashFlow, cashFlowDF, \
     chart, chartDF, \
     company, companyDF, \
     collections, collectionsDF, \
     delayedQuote, delayedQuoteDF, \
+    distribution, distributionDF, \
     dividends, dividendsDF, \
     earnings, earningsDF, \
     earningsToday, earningsTodayDF, \
@@ -63,11 +65,23 @@ from .stocks import advancedStats, advancedStatsDF, \
     priceTarget, priceTargetDF, \
     quote, quoteDF, \
     relevant, relevantDF, \
+    returnOfCapital, returnOfCapitalDF, \
+    rightsIssue, rightsIssueDF, \
+    rightToPurchase, rightToPurchaseDF, \
     sectorPerformance, sectorPerformanceDF, \
+    securityReclassification, securityReclassificationDF, \
+    securitySwap, securitySwapDF, \
     shortInterest, shortInterestDF, \
     splits, splitsDF, \
+    spinoff, spinoffDF, \
     spread, spreadDF, \
+    stockSplits, stockSplitsDF, \
     threshold, thresholdDF, \
+    upcomingEvents, upcomingEventsDF, \
+    upcomingEarnings, upcomingEarningsDF, \
+    upcomingDividends, upcomingDividendsDF, \
+    upcomingSplits, upcomingSplitsDF, \
+    upcomingIPOs, upcomingIPOsDF, \
     volumeByVenue, volumeByVenueDF, \
     yesterday, yesterdayDF
 
@@ -178,6 +192,8 @@ _INCLUDE_FUNCTIONS = [
     ('balanceSheetDF', balanceSheetDF),
     ('batch', batch),
     ('batchDF', batchDF),
+    ('bonusIssue', bonusIssue),
+    ('bonusIssueDF', bonusIssueDF),
     ('bulkBatch', bulkBatch),
     ('bulkBatchDF', bulkBatchDF),
     ('book', book),
@@ -194,6 +210,8 @@ _INCLUDE_FUNCTIONS = [
     ('collectionsDF', collectionsDF),
     ('delayedQuote', delayedQuote),
     ('delayedQuoteDF', delayedQuoteDF),
+    ('distribution', distribution),
+    ('distributionDF', distributionDF),
     ('dividends', dividends),
     ('dividendsDF', dividendsDF),
     ('earnings', earnings),
@@ -266,10 +284,34 @@ _INCLUDE_FUNCTIONS = [
     ('quoteDF', quoteDF),
     ('relevant', relevant),
     ('relevantDF', relevantDF),
+    ('returnOfCapital', returnOfCapital),
+    ('returnOfCapitalDF', returnOfCapitalDF),
+    ('rightsIssue', rightsIssue),
+    ('rightsIssueDF', rightsIssueDF),
+    ('rightToPurchase', rightToPurchase),
+    ('rightToPurchaseDF', rightToPurchaseDF),
     ('sectorPerformance', sectorPerformance),
     ('sectorPerformanceDF', sectorPerformanceDF),
+    ('securityReclassification', securityReclassification),
+    ('securityReclassificationDF', securityReclassificationDF),
+    ('securitySwap', securitySwap),
+    ('securitySwapDF', securitySwapDF),
+    ('spinoff', spinoff),
+    ('spinoffDF', spinoffDF),
     ('splits', splits),
     ('splitsDF', splitsDF),
+    ('stockSplits', stockSplits),
+    ('stockSplitsDF', stockSplitsDF),
+    ('upcomingEvents', upcomingEvents),
+    ('upcomingEventsDF', upcomingEventsDF),
+    ('upcomingEarnings', upcomingEarnings),
+    ('upcomingEarningsDF', upcomingEarningsDF),
+    ('upcomingDividends', upcomingDividends),
+    ('upcomingDividendsDF', upcomingDividendsDF),
+    ('upcomingSplits', upcomingSplits),
+    ('upcomingSplitsDF', upcomingSplitsDF),
+    ('upcomingIPOs', upcomingIPOs),
+    ('upcomingIPOsDF', upcomingIPOsDF),
     ('volumeByVenue', volumeByVenue),
     ('volumeByVenueDF', volumeByVenueDF),
     # SSE Streaming
