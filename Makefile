@@ -2,10 +2,10 @@ tests: ## Make unit tests
 	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v pyEX/tests --cov=pyEX
 
 lint: ## run linter
-	flake8 pyEX 
+	python3 -m flake8 pyEX 
 
 fix:  ## run autopep8/tslint fix
-	autopep8 --in-place -r -a -a pyEX/
+	python3 -m autopep8 --in-place -r -a -a pyEX/
 
 annotate: ## MyPy type annotation check
 	mypy -s pyEX
