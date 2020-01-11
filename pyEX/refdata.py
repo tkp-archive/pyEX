@@ -281,7 +281,7 @@ def mutualFundSymbols(token='', version='', filter=''):
     Returns:
         dict: result
     '''
-    return _getJson('ref-data/mutual-fund/symbols', token, version, filter)
+    return _getJson('ref-data/mutual-funds/symbols', token, version, filter)
 
 
 @_expire(hour=8)
