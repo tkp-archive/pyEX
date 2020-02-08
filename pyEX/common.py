@@ -119,7 +119,7 @@ def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
     if filter:
-        url += '?filter={filter}'.format(filter=filter)
+        url += '?{filter}'.format(filter=filter)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
@@ -130,7 +130,7 @@ def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
     if filter:
-        url += '?filter={filter}'.format(filter=filter)
+        url += '?{filter}'.format(filter=filter)
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
     if resp.status_code == 200:
         return resp.json()
