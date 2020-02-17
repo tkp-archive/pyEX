@@ -1,5 +1,5 @@
 tests: ## Make unit tests
-	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3.7 -m pytest -v pyEX/tests --cov=pyEX
+	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3.7 -m pytest -v pyEX --cov=pyEX --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
 lint: ## run linter
 	python3.7 -m flake8 pyEX 
