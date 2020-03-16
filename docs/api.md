@@ -1,90 +1,122 @@
-API
-====
 
-.. toctree::
-   :maxdepth: 4
-
-   client
+## Client
 
 
-Alternative
---------------------------------
+```eval_rst
+.. autoclass:: pyEX.Client
+    :noindex:
+    :members:
+```
+
+
+## Alternative
+
+```eval_rst
 .. automodule:: pyEX.alternative
     :members:
     :noindex:
+```
 
-Commodities
---------------------------------
+## Commodities
+
+```eval_rst
 .. autoclass:: pyEX.commodities.CommoditiesPoints
     :noindex:
+```
 
-Crypto
---------------------------------
+## Crypto
+
+```eval_rst
 .. automodule:: pyEX.crypto
     :members:
     :noindex:
+```
 
-Economic
---------------------------------
+## Economic
+
+```eval_rst
 .. autoclass:: pyEX.economic.EconomicPoints
     :noindex:
+```
 
-FX
---------------------------------
+## FX
+
+```eval_rst
 .. automodule:: pyEX.fx
     :members:
     :noindex:
+```
 
-Markets
---------------------------------
+## Markets
+
+```eval_rst
 .. automodule:: pyEX.markets
     :members:
     :noindex:
+```
 
-Points
---------------------------------
+## Points
+
+```eval_rst
 .. automodule:: pyEX.points
     :members:
     :noindex:
+```
 
-Rates
---------------------------------
+## Rates
+
+```eval_rst
 .. autoclass:: pyEX.rates.RatesPoints
     :noindex:
+```
 
-Reference Data
---------------------------------
+## Reference Data
+
+```eval_rst
 .. automodule:: pyEX.refdata
     :members:
     :noindex:
+```
 
-Stats
---------------------------------
+## Stats
+
+```eval_rst
 .. automodule:: pyEX.stats
     :members:
     :noindex:
+```
 
-Stocks
---------------------------------
+## Stocks
+
+```eval_rst
 .. automodule:: pyEX.stocks
     :members:
     :noindex:
-Streaming
----------------------
+```
 
-SSE
-~~~~~~~~~~~~~~~~~~~~~~
+## Streaming
+
+
+### SSE
+
+```eval_rst
 .. automodule:: pyEX.marketdata.sse
     :members:
     :noindex:
+```
 
-Crypto
-~~~~~~~~~~~~~~~~~~~~~~
+### Crypto
+
+```eval_rst
 .. automodule:: pyEX.marketdata.cryptocurrency
     :members:
     :noindex:
-FX
-~~~~~~~~~~~~~~~~~~~~~~
+```
+
+### FX
+
+```eval_rst
 .. automodule:: pyEX.marketdata.fx
     :members:
     :noindex:
+```

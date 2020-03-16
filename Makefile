@@ -1,11 +1,11 @@
 tests: ## Make unit tests
-	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3 -m pytest -v pyEX/tests --cov=pyEX
+	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3.7 -m pytest -v pyEX --cov=pyEX --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
 lint: ## run linter
-	python3 -m flake8 pyEX 
+	python3.7 -m flake8 pyEX 
 
 fix:  ## run autopep8/tslint fix
-	python3 -m autopep8 --in-place -r -a -a pyEX/
+	python3.7 -m autopep8 --in-place -r -a -a pyEX/
 
 annotate: ## MyPy type annotation check
 	mypy -s pyEX
@@ -32,8 +32,8 @@ dev:
 
 dist:  ## dist to pypi
 	rm -rf dist build
-	python3 setup.py sdist
-	python3 setup.py bdist_wheel
+	python3.7 setup.py sdist
+	python3.7 setup.py bdist_wheel
 	twine check dist/* && twine upload dist/*
 
 # Thanks to Francoise at marmelab.com for this

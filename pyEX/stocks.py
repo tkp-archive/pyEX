@@ -2774,8 +2774,8 @@ def upcomingEvents(symbol='', refid='', token='', version='', filter=''):
     '''
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson('stock/' + symbol + '/upcoming-events' + symbol, token, version, filter)
-    return _getJson('stock/market/upcoming-events' + symbol, token, version, filter)
+        return _getJson('stock/' + symbol + '/upcoming-events', token, version, filter)
+    return _getJson('stock/market/upcoming-events', token, version, filter)
 
 
 def upcomingEventsDF(symbol='', token='', version='', filter=''):
@@ -2792,7 +2792,7 @@ def upcomingEventsDF(symbol='', token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    return pd.io.json.json_normalize(upcomingEvents(symbol, token, version, filter))
+    return pd.io.json.json_normalize(upcomingEvents(symbol=symbol, token=token, version=version, filter=filter))
 
 
 def upcomingEarnings(symbol='', refid='', token='', version='', filter=''):
@@ -2812,8 +2812,8 @@ def upcomingEarnings(symbol='', refid='', token='', version='', filter=''):
     '''
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson('stock/' + symbol + '/upcoming-earnings' + symbol, token, version, filter)
-    return _getJson('stock/market/upcoming-earnings' + symbol, token, version, filter)
+        return _getJson('stock/' + symbol + '/upcoming-earnings', token, version, filter)
+    return _getJson('stock/market/upcoming-earnings', token, version, filter)
 
 
 def upcomingEarningsDF(symbol='', token='', version='', filter=''):
@@ -2830,7 +2830,7 @@ def upcomingEarningsDF(symbol='', token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    return pd.io.json.json_normalize(upcomingEarnings(symbol, token, version, filter))
+    return pd.io.json.json_normalize(upcomingEarnings(symbol=symbol, token=token, version=version, filter=filter))
 
 
 def upcomingDividends(symbol='', refid='', token='', version='', filter=''):
@@ -2850,8 +2850,8 @@ def upcomingDividends(symbol='', refid='', token='', version='', filter=''):
     '''
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson('stock/' + symbol + '/upcoming-dividends' + symbol, token, version, filter)
-    return _getJson('stock/market/upcoming-dividends' + symbol, token, version, filter)
+        return _getJson('stock/' + symbol + '/upcoming-dividends', token, version, filter)
+    return _getJson('stock/market/upcoming-dividends', token, version, filter)
 
 
 def upcomingDividendsDF(symbol='', token='', version='', filter=''):
@@ -2868,7 +2868,7 @@ def upcomingDividendsDF(symbol='', token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    return pd.io.json.json_normalize(upcomingDividends(symbol, token, version, filter))
+    return pd.io.json.json_normalize(upcomingDividends(symbol=symbol, token=token, version=version, filter=filter))
 
 
 def upcomingSplits(symbol='', refid='', token='', version='', filter=''):
@@ -2888,8 +2888,8 @@ def upcomingSplits(symbol='', refid='', token='', version='', filter=''):
     '''
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson('stock/' + symbol + '/upcoming-splits' + symbol, token, version, filter)
-    return _getJson('stock/market/upcoming-splits' + symbol, token, version, filter)
+        return _getJson('stock/' + symbol + '/upcoming-splits', token, version, filter)
+    return _getJson('stock/market/upcoming-splits', token, version, filter)
 
 
 def upcomingSplitsDF(symbol='', token='', version='', filter=''):
@@ -2906,7 +2906,7 @@ def upcomingSplitsDF(symbol='', token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    return pd.io.json.json_normalize(upcomingSplits(symbol, token, version, filter))
+    return pd.io.json.json_normalize(upcomingSplits(symbol=symbol, token=token, version=version, filter=filter))
 
 
 def upcomingIPOs(symbol='', refid='', token='', version='', filter=''):
@@ -2926,8 +2926,8 @@ def upcomingIPOs(symbol='', refid='', token='', version='', filter=''):
     '''
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson('stock/' + symbol + '/upcoming-ipos' + symbol, token, version, filter)
-    return _getJson('stock/market/upcoming-ipos' + symbol, token, version, filter)
+        return _getJson('stock/' + symbol + '/upcoming-ipos', token, version, filter)
+    return _getJson('stock/market/upcoming-ipos', token, version, filter)
 
 
 def upcomingIPOsDF(symbol='', token='', version='', filter=''):
@@ -2944,4 +2944,4 @@ def upcomingIPOsDF(symbol='', token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    return pd.io.json.json_normalize(upcomingIPOs(symbol, token, version, filter))
+    return pd.io.json.json_normalize(upcomingIPOs(symbol=symbol, token=token, version=version, filter=filter))
