@@ -159,7 +159,7 @@ def batchDF(symbols, fields=None, range_='1m', last=10, token='', version='', fi
 
     if isinstance(symbols, str):
         for field in x.keys():
-            ret[field] = _MAPPING[field](x[field])
+            ret[field] = _MAPPING.get(field, pd.io.json.json_normalize)(x[field])
     else:
         for symbol in x.keys():
             for field in x[symbol].keys():
@@ -167,7 +167,7 @@ def batchDF(symbols, fields=None, range_='1m', last=10, token='', version='', fi
                     ret[field] = pd.DataFrame()
 
                 dat = x[symbol][field]
-                dat = _MAPPING[field](dat)
+                dat = _MAPPING.get(field, pd.io.json.json_normalize)(dat)
                 dat['symbol'] = symbol
 
                 ret[field] = pd.concat([ret[field], dat], sort=True)
