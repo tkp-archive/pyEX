@@ -33,6 +33,8 @@ requires = [
 ]
 
 requires_dev = [
+    'autopep8>=1.4.1',
+    'bump2version>=1.0.0',
     'flake8>=3.7.8',
     'mock',
     'pytest>=4.3.0',
