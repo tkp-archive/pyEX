@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from deprecation import deprecated
-from .common import _getJson, _toDatetime
+from ..common import _getJson, _toDatetime
 
 
 @deprecated(details='Deprecated: IEX Cloud status unkown')

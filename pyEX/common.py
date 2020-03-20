@@ -35,6 +35,24 @@ _TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1mm', '5d', '5dm
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', 'next']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
+_DATE_RANGES = ['today',
+                'yesterday',
+                'ytd',
+                'last-week',
+                'last-month',
+                'last-quarter',
+                'd',
+                'w',
+                'm',
+                'q',
+                'y',
+                'tomorrow',
+                'this-week',
+                'this-month',
+                'this-quarter',
+                'next-week',
+                'next-month',
+                'next-quarter']
 
 _USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
 _PYEX_PROXIES = None
@@ -79,7 +97,9 @@ _STANDARD_DATE_FIELDS = ['date',
                          'settlementDate',
                          'lastUpdated',
                          'processedTime',
-                         'expirationDate']
+                         'expirationDate',
+                         'startDate',
+                         'endDate']
 
 _STANDARD_TIME_FIELDS = ['closeTime',
                          'close.time',
@@ -118,9 +138,10 @@ def _getJsonOrig(url):
 def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
+    params = {'token': token}
     if filter:
-        url += '?filter={filter}'.format(filter=filter)
-    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
+        params.update({'filter': filter})
+    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -129,9 +150,10 @@ def _getJsonIEXCloud(url, token='', version='v1', filter=''):
 def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
+    params = {'token': token}
     if filter:
-        url += '?filter={filter}'.format(filter=filter)
-    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params={'token': token})
+        params.update({'filter': filter})
+    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -161,6 +183,13 @@ def _strOrDate(st):
     elif isinstance(st, datetime):
         return st.strftime('%Y%m%d')
     raise PyEXception('Not a date: %s', str(st))
+
+
+def _dateRange(st):
+    '''internal'''
+    if st not in _DATE_RANGES:
+        raise PyEXception('Must be a valid date range: got {}'.format(st))
+    return st
 
 
 def _raiseIfNotStr(s):
@@ -247,11 +276,19 @@ def _toDatetime(df, cols=None, tcols=None):
 
     for col in cols:
         if col in df.columns:
-            df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
+            try:
+                df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
+            except BaseException:
+                # skip error
+                continue
 
     for tcol in tcols:
         if tcol in df.columns:
-            df[tcol] = pd.to_datetime(df[tcol], unit='ms')
+            try:
+                df[tcol] = pd.to_datetime(df[tcol], unit='ms')
+            except BaseException:
+                # skip error
+                continue
 
 
 def setProxy(proxies=None):

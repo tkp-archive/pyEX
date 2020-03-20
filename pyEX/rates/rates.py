@@ -31,4 +31,5 @@ class RatesPoints(Enum):
     @staticmethod
     @lru_cache(1)
     def options():
+        '''Return a list of the available rates points options'''
         return list(map(lambda c: c.value, RatesPoints))

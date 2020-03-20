@@ -50,4 +50,5 @@ class EconomicPoints(Enum):
     @staticmethod
     @lru_cache(1)
     def options():
+        '''Return a list of the available economic points options'''
         return list(map(lambda c: c.value, EconomicPoints))
