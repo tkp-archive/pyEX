@@ -2,12 +2,94 @@
 import os
 from functools import partial, wraps
 from .common import PyEXception, _interval, _getJson, _USAGE_TYPES
-
+from .alternative import crypto, cryptoDF, \
+    sentiment, sentimentDF, \
+    ceoCompensation, ceoCompensationDF
+from .commodities import CommoditiesPoints
+from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF, cryptoQuote, cryptoQuoteDF
+from .economic import EconomicPoints
+from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF
+from .markets import markets, marketsDF
+from .marketdata.cryptocurrency import cryptoBookSSE, cryptoEventsSSE, cryptoQuotesSSE
+from .marketdata.fx import fxSSE
+from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
+from .marketdata.http import tops, topsDF, \
+    last, lastDF, \
+    deep, deepDF, \
+    trades, tradesDF, \
+    auction, auctionDF, \
+    book as deepBook, bookDF as deepBookDF, \
+    opHaltStatus, opHaltStatusDF, \
+    officialPrice, officialPriceDF, \
+    securityEvent, securityEventDF, \
+    ssrStatus, ssrStatusDF, \
+    systemEvent, systemEventDF, \
+    tradeBreak, tradeBreakDF, \
+    tradingStatus, tradingStatusDF
+from .points import points, pointsDF
+from .premium import (accountingQualityAndRiskMatrix, accountingQualityAndRiskMatrixDF,
+                      analystDays, analystDaysDF,
+                      boardOfDirectorsMeeting, boardOfDirectorsMeetingDF,
+                      brain30DaySentiment, brain30DaySentimentDF,
+                      brain7DaySentiment, brain7DaySentimentDF,
+                      brain21DayMLReturnRanking, brain21DayMLReturnRankingDF,
+                      brain10DayMLReturnRanking, brain10DayMLReturnRankingDF,
+                      brain5DayMLReturnRanking, brain5DayMLReturnRankingDF,
+                      brain3DayMLReturnRanking, brain3DayMLReturnRankingDF,
+                      brain2DayMLReturnRanking, brain2DayMLReturnRankingDF,
+                      brainLanguageMetricsOnCompanyFilingsAll, brainLanguageMetricsOnCompanyFilingsAllDF,
+                      brainLanguageMetricsOnCompanyFilings, brainLanguageMetricsOnCompanyFilingsDF,
+                      brainLanguageMetricsOnCompanyFilingsDifferenceAll, brainLanguageMetricsOnCompanyFilingsDifferenceAllDF,
+                      brainLanguageMetricsOnCompanyFilingsDifference, brainLanguageMetricsOnCompanyFilingsDifferenceDF,
+                      businessUpdates, businessUpdatesDF,
+                      buybacks, buybacksDF,
+                      cam1, cam1DF,
+                      capitalMarketsDay, capitalMarketsDayDF,
+                      companyTravel, companyTravelDF,
+                      directorAndOfficerChanges, directorAndOfficerChangesDF,
+                      esgCFPBComplaints, esgCFPBComplaintsDF,
+                      esgCPSCRecalls, esgCPSCRecallsDF,
+                      esgDOLVisaApplications, esgDOLVisaApplicationsDF,
+                      esgEPAEnforcements, esgEPAEnforcementsDF,
+                      esgEPAMilestones, esgEPAMilestonesDF,
+                      esgFECIndividualCampaingContributions, esgFECIndividualCampaingContributionsDF,
+                      esgOSHAInspections, esgOSHAInspectionsDF,
+                      esgSenateLobbying, esgSenateLobbyingDF,
+                      esgUSASpending, esgUSASpendingDF,
+                      esgUSPTOPatentApplications, esgUSPTOPatentApplicationsDF,
+                      esgUSPTOPatentGrants, esgUSPTOPatentGrantsDF,
+                      fdaAdvisoryCommitteeMeetings, fdaAdvisoryCommitteeMeetingsDF,
+                      filingDueDates, filingDueDatesDF,
+                      fiscalQuarterEnd, fiscalQuarterEndDF,
+                      forum, forumDF,
+                      generalConference, generalConferenceDF,
+                      holidaysWSH, holidaysWSHDF,
+                      indexChanges, indexChangesDF,
+                      iposWSH, iposWSHDF,
+                      kScore, kScoreDF,
+                      legalActions, legalActionsDF,
+                      mergersAndAcquisitions, mergersAndAcquisitionsDF,
+                      nonTimelyFilings, nonTimelyFilingsDF,
+                      precisionAlphaPriceDynamics, precisionAlphaPriceDynamicsDF,
+                      productEventsDF, productEvents,
+                      researchAndDevelopmentDays, researchAndDevelopmentDaysDF,
+                      sameStoreSales, sameStoreSalesDF,
+                      secondaryOfferings, secondaryOfferingsDF,
+                      seminars, seminarsDF,
+                      shareholderMeetings, shareholderMeetingsDF,
+                      similarityIndex, similarityIndexDF,
+                      summitMeetings, summitMeetingsDF,
+                      tacticalModel1, tacticalModel1DF,
+                      tradeShows, tradeShowsDF,
+                      witchingHours, witchingHoursDF,
+                      valuEngineStockResearchReport,
+                      workshops, workshopsDF)
+from .rates import RatesPoints
 from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, fxSymbols, optionsSymbols, \
     symbolsDF, iexSymbolsDF, mutualFundSymbolsDF, otcSymbolsDF, internationalSymbolsDF, fxSymbolsDF, optionsSymbolsDF, \
     symbolsList, iexSymbolsList, mutualFundSymbolsList, otcSymbolsList, internationalSymbolsList, fxSymbolsList, optionsSymbolsList, \
     corporateActions, corporateActionsDF, \
-    dividends as refDividends, dividendsDF as refDividendsDF, \
+    refDividends, refDividendsDF, \
     nextDayExtDate, nextDayExtDateDF, \
     directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
@@ -15,15 +97,11 @@ from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, interna
     internationalExchanges, internationalExchangesDF, \
     sectors, sectorsDF, \
     tags, tagsDF
-
-from .markets import markets, marketsDF
-
 from .stats import stats, statsDF, \
     recent, recentDF, \
     records, recordsDF, \
     summary, summaryDF, \
     daily, dailyDF
-
 from .stocks import advancedStats, advancedStatsDF, \
     balanceSheet, balanceSheetDF, \
     batch, batchDF, bulkBatch, bulkBatchDF, \
@@ -58,7 +136,6 @@ from .stocks import advancedStats, advancedStatsDF, \
     logo, logoPNG, logoNotebook, \
     news, newsDF, marketNews, marketNewsDF, \
     ohlc, ohlcDF, marketOhlc, marketOhlcDF, \
-    optionExpirations, options, optionsDF, \
     peers, peersDF, \
     marketYesterday, marketYesterdayDF, \
     price, priceDF, \
@@ -76,7 +153,10 @@ from .stocks import advancedStats, advancedStatsDF, \
     spinoff, spinoffDF, \
     spread, spreadDF, \
     stockSplits, stockSplitsDF, \
+    tenQ, tenK, \
     threshold, thresholdDF, \
+    timeSeriesInventory, timeSeries, \
+    timeSeriesInventoryDF, timeSeriesDF, \
     upcomingEvents, upcomingEventsDF, \
     upcomingEarnings, upcomingEarningsDF, \
     upcomingDividends, upcomingDividendsDF, \
@@ -84,36 +164,7 @@ from .stocks import advancedStats, advancedStatsDF, \
     upcomingIPOs, upcomingIPOsDF, \
     volumeByVenue, volumeByVenueDF, \
     yesterday, yesterdayDF
-
-from .alternative import crypto, cryptoDF, \
-    sentiment, sentimentDF, \
-    ceoCompensation, ceoCompensationDF
-
-from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
-from .marketdata.http import tops, topsDF, \
-    last, lastDF, \
-    deep, deepDF, \
-    trades, tradesDF, \
-    auction, auctionDF, \
-    book as deepBook, bookDF as deepBookDF, \
-    opHaltStatus, opHaltStatusDF, \
-    officialPrice, officialPriceDF, \
-    securityEvent, securityEventDF, \
-    ssrStatus, ssrStatusDF, \
-    systemEvent, systemEventDF, \
-    tradeBreak, tradeBreakDF, \
-    tradingStatus, tradingStatusDF
-
-from .points import points, pointsDF
-
-from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF
-from .marketdata.fx import fxSSE
-from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF, cryptoQuote, cryptoQuoteDF
-from .marketdata.cryptocurrency import cryptoBookSSE, cryptoEventsSSE, cryptoQuotesSSE
-from .commodities import CommoditiesPoints
-from .rates import RatesPoints
-from .economic import EconomicPoints
-
+from .options import optionExpirations, options, optionsDF
 
 try:
     from .studies import peerCorrelation, bollinger, dema, ema, sar, sma
@@ -302,6 +353,12 @@ _INCLUDE_FUNCTIONS = [
     ('splitsDF', splitsDF),
     ('stockSplits', stockSplits),
     ('stockSplitsDF', stockSplitsDF),
+    ('tenQ', tenQ),
+    ('tenK', tenK),
+    ('timeSeriesInventory', timeSeriesInventory),
+    ('timeSeriesInventoryDF', timeSeriesInventoryDF),
+    ('timeSeries', timeSeries),
+    ('timeSeriesDF', timeSeriesDF),
     ('upcomingEvents', upcomingEvents),
     ('upcomingEventsDF', upcomingEventsDF),
     ('upcomingEarnings', upcomingEarnings),
@@ -376,6 +433,128 @@ _INCLUDE_FUNCTIONS = [
     ('cryptoBookSSE', cryptoBookSSE),
     ('cryptoEventsSSE', cryptoEventsSSE),
     ('cryptoQuotesSSE', cryptoQuotesSSE),
+    # Premium
+    #     Wall Street Horizon
+    ('analystDays', analystDays),
+    ('analystDaysDF', analystDaysDF),
+    ('boardOfDirectorsMeeting', boardOfDirectorsMeeting),
+    ('boardOfDirectorsMeetingDF', boardOfDirectorsMeetingDF),
+    ('businessUpdates', businessUpdates),
+    ('businessUpdatesDF', businessUpdatesDF),
+    ('buybacks', buybacks),
+    ('buybacksDF', buybacksDF),
+    ('capitalMarketsDay', capitalMarketsDay),
+    ('capitalMarketsDayDF', capitalMarketsDayDF),
+    ('companyTravel', companyTravel),
+    ('companyTravelDF', companyTravelDF),
+    ('filingDueDates', filingDueDates),
+    ('filingDueDatesDF', filingDueDatesDF),
+    ('fiscalQuarterEnd', fiscalQuarterEnd),
+    ('fiscalQuarterEndDF', fiscalQuarterEndDF),
+    ('forum', forum),
+    ('forumDF', forumDF),
+    ('generalConference', generalConference),
+    ('generalConferenceDF', generalConferenceDF),
+    ('fdaAdvisoryCommitteeMeetings', fdaAdvisoryCommitteeMeetings),
+    ('fdaAdvisoryCommitteeMeetingsDF', fdaAdvisoryCommitteeMeetingsDF),
+    ('holidaysWSH', holidaysWSH),
+    ('holidaysWSHDF', holidaysWSHDF),
+    ('indexChanges', indexChanges),
+    ('indexChangesDF', indexChangesDF),
+    ('iposWSH', iposWSH),
+    ('iposWSHDF', iposWSHDF),
+    ('legalActions', legalActions),
+    ('legalActionsDF', legalActionsDF),
+    ('mergersAndAcquisitions', mergersAndAcquisitions),
+    ('mergersAndAcquisitionsDF', mergersAndAcquisitionsDF),
+    ('productEventsDF', productEventsDF),
+    ('productEvents', productEvents),
+    ('researchAndDevelopmentDays', researchAndDevelopmentDays),
+    ('researchAndDevelopmentDaysDF', researchAndDevelopmentDaysDF),
+    ('sameStoreSales', sameStoreSales),
+    ('sameStoreSalesDF', sameStoreSalesDF),
+    ('secondaryOfferings', secondaryOfferings),
+    ('secondaryOfferingsDF', secondaryOfferingsDF),
+    ('seminars', seminars),
+    ('seminarsDF', seminarsDF),
+    ('shareholderMeetings', shareholderMeetings),
+    ('shareholderMeetingsDF', shareholderMeetingsDF),
+    ('summitMeetings', summitMeetings),
+    ('summitMeetingsDF', summitMeetingsDF),
+    ('tradeShows', tradeShows),
+    ('tradeShowsDF', tradeShowsDF),
+    ('witchingHours', witchingHours),
+    ('witchingHoursDF', witchingHoursDF),
+    ('workshops', workshops),
+    ('workshopsDF', workshopsDF),
+    #     Fraud Factors
+    ('nonTimelyFilings', nonTimelyFilings),
+    ('nonTimelyFilingsDF', nonTimelyFilingsDF),
+    ('similarityIndex', similarityIndex),
+    ('similarityIndexDF', similarityIndexDF),
+    #     Extract Alpha
+    ('cam1', cam1),
+    ('cam1DF', cam1DF),
+    ('esgCFPBComplaints', esgCFPBComplaints),
+    ('esgCFPBComplaintsDF', esgCFPBComplaintsDF),
+    ('esgCPSCRecalls', esgCPSCRecalls),
+    ('esgCPSCRecallsDF', esgCPSCRecallsDF),
+    ('esgDOLVisaApplications', esgDOLVisaApplications),
+    ('esgDOLVisaApplicationsDF', esgDOLVisaApplicationsDF),
+    ('esgEPAEnforcements', esgEPAEnforcements),
+    ('esgEPAEnforcementsDF', esgEPAEnforcementsDF),
+    ('esgEPAMilestones', esgEPAMilestones),
+    ('esgEPAMilestonesDF', esgEPAMilestonesDF),
+    ('esgFECIndividualCampaingContributions', esgFECIndividualCampaingContributions),
+    ('esgFECIndividualCampaingContributionsDF', esgFECIndividualCampaingContributionsDF),
+    ('esgOSHAInspections', esgOSHAInspections),
+    ('esgOSHAInspectionsDF', esgOSHAInspectionsDF),
+    ('esgSenateLobbying', esgSenateLobbying),
+    ('esgSenateLobbyingDF', esgSenateLobbyingDF),
+    ('esgUSASpending', esgUSASpending),
+    ('esgUSASpendingDF', esgUSASpendingDF),
+    ('esgUSPTOPatentApplications', esgUSPTOPatentApplications),
+    ('esgUSPTOPatentApplicationsDF', esgUSPTOPatentApplicationsDF),
+    ('esgUSPTOPatentGrants', esgUSPTOPatentGrants),
+    ('esgUSPTOPatentGrantsDF', esgUSPTOPatentGrantsDF),
+    ('tacticalModel1', tacticalModel1),
+    ('tacticalModel1DF', tacticalModel1DF),
+    #     Precision Alpha
+    ('precisionAlphaPriceDynamics', precisionAlphaPriceDynamics),
+    ('precisionAlphaPriceDynamicsDF', precisionAlphaPriceDynamicsDF),
+    #     BRAIN Company
+    ('brain30DaySentiment', brain30DaySentiment),
+    ('brain30DaySentimentDF', brain30DaySentimentDF),
+    ('brain7DaySentiment', brain7DaySentiment),
+    ('brain7DaySentimentDF', brain7DaySentimentDF),
+    ('brain21DayMLReturnRanking', brain21DayMLReturnRanking),
+    ('brain21DayMLReturnRankingDF', brain21DayMLReturnRankingDF),
+    ('brain10DayMLReturnRanking', brain10DayMLReturnRanking),
+    ('brain10DayMLReturnRankingDF', brain10DayMLReturnRankingDF),
+    ('brain5DayMLReturnRanking', brain5DayMLReturnRanking),
+    ('brain5DayMLReturnRankingDF', brain5DayMLReturnRankingDF),
+    ('brain3DayMLReturnRanking', brain3DayMLReturnRanking),
+    ('brain3DayMLReturnRankingDF', brain3DayMLReturnRankingDF),
+    ('brain2DayMLReturnRanking', brain2DayMLReturnRanking),
+    ('brain2DayMLReturnRankingDF', brain2DayMLReturnRankingDF),
+    ('brainLanguageMetricsOnCompanyFilingsAll', brainLanguageMetricsOnCompanyFilingsAll),
+    ('brainLanguageMetricsOnCompanyFilingsAllDF', brainLanguageMetricsOnCompanyFilingsAllDF),
+    ('brainLanguageMetricsOnCompanyFilings', brainLanguageMetricsOnCompanyFilings),
+    ('brainLanguageMetricsOnCompanyFilingsDF', brainLanguageMetricsOnCompanyFilingsDF),
+    ('brainLanguageMetricsOnCompanyFilingsDifferenceAll', brainLanguageMetricsOnCompanyFilingsDifferenceAll),
+    ('brainLanguageMetricsOnCompanyFilingsDifferenceAllDF', brainLanguageMetricsOnCompanyFilingsDifferenceAllDF),
+    ('brainLanguageMetricsOnCompanyFilingsDifference', brainLanguageMetricsOnCompanyFilingsDifference),
+    ('brainLanguageMetricsOnCompanyFilingsDifferenceDF', brainLanguageMetricsOnCompanyFilingsDifferenceDF),
+    #     Kavout
+    ('kScore', kScore),
+    ('kScoreDF', kScoreDF),
+    #     Audit Analytics
+    ('accountingQualityAndRiskMatrix', accountingQualityAndRiskMatrix),
+    ('accountingQualityAndRiskMatrixDF', accountingQualityAndRiskMatrixDF),
+    ('directorAndOfficerChanges', directorAndOfficerChanges),
+    ('directorAndOfficerChangesDF', directorAndOfficerChangesDF),
+    #     ValuEngine
+    ('valuEngineStockResearchReport', valuEngineStockResearchReport),
 ]
 
 _INCLUDE_POINTS = [

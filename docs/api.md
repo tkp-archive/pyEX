@@ -94,6 +94,15 @@
     :noindex:
 ```
 
+
+## Premium
+
+```eval_rst
+.. automodule:: pyEX.premium
+    :members:
+    :noindex:
+```
+
 ## Streaming
 
 

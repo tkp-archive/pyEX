@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from .common import _expire, _getJson
+from ..common import _expire, _getJson
 
 
 def latestFX(symbols=None, token='', version='', filter=''):
