@@ -17,7 +17,7 @@ from .marketdata.http import (tops, topsDF, last, lastDF, deep, deepDF,  # noqa:
                               opHaltStatus, opHaltStatusDF, officialPrice, officialPriceDF,  # noqa: F401
                               securityEvent, securityEventDF, ssrStatus, ssrStatusDF,  # noqa: F401
                               systemEvent, systemEventDF, tradeBreak, tradeBreakDF,  # noqa: F401
-                              tradingStatus, tradingStatusDF)  # noqa: F401
+                              tradingStatus, tradingStatusDF, hist, histDF)  # noqa: F401
 from .points import points, pointsDF  # noqa: F401
 from .rates import RatesPoints  # noqa: F401
 from .refdata import (symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, fxSymbols, optionsSymbols,  # noqa: F401
