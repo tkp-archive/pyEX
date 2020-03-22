@@ -107,22 +107,22 @@ class TestAll:
             corporateActionsDF()
 
     def test_dividends(self):
-        from pyEX.refdata import dividends
+        from pyEX.refdata import refDividends
         with patch('requests.get') as mock, \
                 patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            dividends()
-            dividends('20170202')
+            refDividends()
+            refDividends('20170202')
 
     def test_dividendsDF(self):
-        from pyEX.refdata import dividendsDF
+        from pyEX.refdata import refDividendsDF
         with patch('requests.get') as mock, \
                 patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            dividendsDF()
+            refDividendsDF()
 
     def test_nextDayExtDate(self):
         from pyEX.refdata import nextDayExtDate

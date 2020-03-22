@@ -72,21 +72,21 @@ class TestAll:
             deepDF('test')
 
     def test_book(self):
-        from pyEX import topsBook
+        from pyEX import deepBook
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            topsBook()
-            topsBook('test')
+            deepBook()
+            deepBook('test')
 
     def test_bookDF(self):
-        from pyEX import topsBookDF
+        from pyEX import deepBookDF
         with patch('requests.get') as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            topsBookDF()
-            topsBookDF('test')
+            deepBookDF()
+            deepBookDF('test')
 
     def test_trades(self):
         from pyEX import trades
