@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from ..common import _expire, _getJson, _raiseIfNotStr, _reindex, _toDatetime
+from ..common import _expire, _getJson, _raiseIfNotStr, _reindex, _toDatetime, _EST, _UTC
 
 
-@_expire(hour=4)
+@_expire(hour=4, tz=_EST)
 def advancedStats(symbol, token='', version='', filter=''):
     '''Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
 
@@ -39,6 +39,47 @@ def advancedStatsDF(symbol, token='', version='', filter=''):
         DataFrame: result
     '''
     val = advancedStats(symbol, token, version, filter)
+    df = pd.io.json.json_normalize(val)
+    _toDatetime(df)
+    return df
+
+
+@_expire(hour=9, tz=_UTC)
+def analystRecommendations(symbol, token='', version='', filter=''):
+    '''Pulls data from the last four months.
+
+    https://iexcloud.io/docs/api/#analyst-recommendations
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        dict: result
+    '''
+    _raiseIfNotStr(symbol)
+    return _getJson('stock/' + symbol + '/recommendation-trends', token, version, filter)
+
+
+def analystRecommendationsDF(symbol, token='', version='', filter=''):
+    '''Pulls data from the last four months.
+
+    https://iexcloud.io/docs/api/#analyst-recommendations
+    Updates at 9am, 11am, 12pm UTC every day
+
+    Args:
+        symbol (string); Ticker to request
+        token (string); Access token
+        version (string); API version
+        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        DataFrame: result
+    '''
+    val = analystRecommendations(symbol, token, version, filter)
     df = pd.io.json.json_normalize(val)
     _toDatetime(df)
     return df
@@ -94,7 +135,7 @@ def estimatesDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=5)
+@_expire(hour=5, tz=_EST)
 def fundOwnership(symbol, token='', version='', filter=''):
     '''Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
        pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
@@ -138,7 +179,7 @@ def fundOwnershipDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=5)
+@_expire(hour=5, tz=_EST)
 def institutionalOwnership(symbol, token='', version='', filter=''):
     '''Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
 
@@ -179,7 +220,7 @@ def institutionalOwnershipDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_EST)
 def keyStats(symbol, token='', version='', filter=''):
     '''Key Stats about company
 

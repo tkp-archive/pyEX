@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 from ...stocks import timeSeries, timeSeriesDF
-from ...common import _expire
+from ...common import _expire, _UTC
 
 
-@_expire(hour=10, minute=30)
+@_expire(hour=10, minute=30, tz=_UTC)
 def _base(id, symbol='', **kwargs):
     '''internal'''
     kwargs['id'] = id
@@ -12,7 +12,7 @@ def _base(id, symbol='', **kwargs):
     return timeSeries(**kwargs)
 
 
-@_expire(hour=10, minute=30)
+@_expire(hour=10, minute=30, tz=_UTC)
 def _baseDF(id, symbol='', **kwargs):
     '''internal'''
     kwargs['id'] = id

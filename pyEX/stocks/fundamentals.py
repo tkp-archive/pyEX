@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
-from ..common import _expire, _TIMEFRAME_DIVSPLIT, _getJson, _raiseIfNotStr, PyEXception, _reindex, _toDatetime
+from ..common import _expire, _TIMEFRAME_DIVSPLIT, _getJson, _raiseIfNotStr, PyEXception, _reindex, _toDatetime, _UTC
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def balanceSheet(symbol, token='', version='', filter=''):
     '''Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
 
@@ -48,7 +48,7 @@ def balanceSheetDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def cashFlow(symbol, token='', version='', filter=''):
     '''Pulls cash flow data. Available quarterly (4 quarters) or annually (4 years).
 
@@ -93,7 +93,7 @@ def cashFlowDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=9)
+@_expire(hour=9, tz=_UTC)
 def dividends(symbol, timeframe='ytd', token='', version='', filter=''):
     '''Dividend history
 
@@ -143,7 +143,7 @@ def dividendsDF(symbol, timeframe='ytd', token='', version='', filter=''):
     return df
 
 
-@_expire(hour=9)
+@_expire(hour=9, tz=_UTC)
 def earnings(symbol, token='', version='', filter=''):
     '''Earnings data for a given company including the actual EPS, consensus, and fiscal period. Earnings are available quarterly (last 4 quarters) and annually (last 4 years).
 
@@ -194,7 +194,7 @@ def earningsDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def financials(symbol, token='', version='', filter=''):
     '''Pulls income statement, balance sheet, and cash flow data from the four most recent reported quarters.
 
@@ -245,7 +245,7 @@ def financialsDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def incomeStatement(symbol, token='', version='', filter=''):
     '''Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
 
@@ -287,7 +287,7 @@ def incomeStatementDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=9)
+@_expire(hour=9, tz=_UTC)
 def stockSplits(symbol, timeframe='ytd', token='', version='', filter=''):
     '''Stock split history
 

@@ -103,6 +103,7 @@ from .stats import stats, statsDF, \
     summary, summaryDF, \
     daily, dailyDF
 from .stocks import advancedStats, advancedStatsDF, \
+    analystRecommendations, analystRecommendationsDF, \
     balanceSheet, balanceSheetDF, \
     batch, batchDF, bulkBatch, bulkBatchDF, \
     book, bookDF, \
@@ -239,6 +240,8 @@ _INCLUDE_FUNCTIONS = [
     # Stocks
     ('advancedStats', advancedStats),
     ('advancedStatsDF', advancedStatsDF),
+    ('analystRecommendations', analystRecommendations),
+    ('analystRecommendationsDF', analystRecommendationsDF),
     ('balanceSheet', balanceSheet),
     ('balanceSheetDF', balanceSheetDF),
     ('batch', batch),

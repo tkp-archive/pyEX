@@ -23,7 +23,8 @@ from .prices import (book, bookDF, chart, chartDF, delayedQuote, delayedQuoteDF,
 from .profiles import (company, companyDF, insiderRoster, insiderRosterDF, insiderSummary,  # noqa: F401
                        insiderSummaryDF, insiderTransactions, insiderTransactionsDF,  # noqa: F401
                        logo, logoPNG, logoNotebook, peers, peersDF, relevant, relevantDF)  # noqa: F401
-from .research import (advancedStats, advancedStatsDF, estimates, estimatesDF, fundOwnership,  # noqa: F401
+from .research import (advancedStats, advancedStatsDF, analystRecommendations, analystRecommendationsDF,  # noqa: F401
+                       estimates, estimatesDF, fundOwnership,  # noqa: F401
                        fundOwnershipDF, institutionalOwnership, institutionalOwnershipDF,  # noqa: F401
                        keyStats, keyStatsDF, priceTarget, priceTargetDF)  # noqa: F401
 

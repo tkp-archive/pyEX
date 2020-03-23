@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from ..common import _expire, _getJson, _reindex, _toDatetime
+from ..common import _expire, _getJson, _reindex, _toDatetime, _UTC
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def symbols(token='', version='', filter=''):
     '''This call returns an array of symbols that IEX Cloud supports for API calls.
 
@@ -21,7 +21,7 @@ def symbols(token='', version='', filter=''):
     return _getJson('ref-data/symbols', token, version, filter)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def iexSymbols(token='', version='', filter=''):
     '''This call returns an array of symbols the Investors Exchange supports for trading.
     This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
@@ -40,7 +40,7 @@ def iexSymbols(token='', version='', filter=''):
     return _getJson('ref-data/iex/symbols', token, version, filter)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def mutualFundSymbols(token='', version='', filter=''):
     '''This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
 
@@ -58,7 +58,7 @@ def mutualFundSymbols(token='', version='', filter=''):
     return _getJson('ref-data/mutual-funds/symbols', token, version, filter)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def otcSymbols(token='', version='', filter=''):
     '''This call returns an array of OTC symbols that IEX Cloud supports for API calls.
 
@@ -76,7 +76,7 @@ def otcSymbols(token='', version='', filter=''):
     return _getJson('ref-data/otc/symbols', token, version, filter)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def internationalSymbols(region='', exchange='', token='', version='', filter=''):
     '''This call returns an array of international symbols that IEX Cloud supports for API calls.
 
@@ -100,7 +100,7 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     return _getJson('ref-data/region/us/symbols', token, version, filter)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def fxSymbols(token='', version=''):
     '''This call returns a list of supported currencies and currency pairs.
 
@@ -117,7 +117,7 @@ def fxSymbols(token='', version=''):
     return _getJson('ref-data/fx/symbols', token, version)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def optionsSymbols(token='', version='', filter=''):
     '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
