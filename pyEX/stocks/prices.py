@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from ..common import _expire, _TIMEFRAME_CHART, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime
+from ..common import _expire, _TIMEFRAME_CHART, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _EST
 
 
 def book(symbol, token='', version='', filter=''):
@@ -69,7 +69,7 @@ def bookDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=4)
+@_expire(hour=4, tz=_EST)
 def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     '''Historical price/volume data, daily and intraday
 
@@ -316,7 +316,7 @@ def ohlcDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=4)
+@_expire(hour=4, tz=_EST)
 def yesterday(symbol, token='', version='', filter=''):
     '''This returns previous day adjusted price data for one or more stocks
 
@@ -446,7 +446,7 @@ def quoteDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_EST)
 def spread(symbol, token='', version='', filter=''):
     '''This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
     Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.

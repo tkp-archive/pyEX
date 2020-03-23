@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from ..common import _expire, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime
+from ..common import _expire, _LIST_OPTIONS, _COLLECTION_TAGS, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _UTC, _EST
 
 
 @_expire(hour=0)
@@ -100,7 +100,7 @@ def earningsTodayDF(token='', version='', filter=''):
     return df
 
 
-@_expire(hour=10)
+@_expire(hour=10, tz=_UTC)
 def ipoToday(token='', version='', filter=''):
     '''This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
@@ -309,7 +309,7 @@ def marketOhlcDF(token='', version='', filter=''):
     return df
 
 
-@_expire(hour=4)
+@_expire(hour=4, tz=_UTC)
 def marketYesterday(token='', version='', filter=''):
     '''This returns previous day adjusted price data for whole market
 
@@ -391,7 +391,7 @@ def sectorPerformanceDF(token='', version='', filter=''):
     return df
 
 
-@_expire(hour=16)
+@_expire(hour=16, tz=_EST)
 def marketShortInterest(date=None, token='', version='', filter=''):
     '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 

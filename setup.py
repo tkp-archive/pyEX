@@ -26,10 +26,11 @@ requires = [
     'ipython>=7.2.0',
     'Pillow>=5.3.0',
     'pandas>=0.22',
+    'pytz>=2019.1',
     'requests>=2.21.0',
     'socketIO-client-nexus>=0.7.6',
     'sseclient>=0.0.22',
-    'temporal-cache>=0.0.5',
+    'temporal-cache>=0.1.0',
 ]
 
 requires_dev = [

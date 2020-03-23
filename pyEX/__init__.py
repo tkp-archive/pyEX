@@ -34,6 +34,7 @@ from .refdata import (symbols, iexSymbols, mutualFundSymbols, otcSymbols, intern
     tags, tagsDF)  # noqa: F401
 from .stats import stats, statsDF, recent, recentDF, records, recordsDF, summary, summaryDF, daily, dailyDF  # noqa: F401
 from .stocks import (advancedStats, advancedStatsDF,  # noqa: F401
+    analystRecommendations, analystRecommendationsDF,  # noqa: F401
     balanceSheet, balanceSheetDF,  # noqa: F401
     batch, batchDF, bulkBatch, bulkBatchDF,  # noqa: F401
     book, bookDF,  # noqa: F401

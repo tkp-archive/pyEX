@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
-from ..common import _expire, _getJson, _raiseIfNotStr, _strOrDate, _toDatetime
+from ..common import _expire, _getJson, _raiseIfNotStr, _strOrDate, _toDatetime, _EST
 
 
 def threshold(date=None, token='', version='', filter=''):
@@ -44,7 +44,7 @@ def thresholdDF(date=None, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=16)
+@_expire(hour=16, tz=_EST)
 def shortInterest(symbol, date=None, token='', version='', filter=''):
     '''The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 

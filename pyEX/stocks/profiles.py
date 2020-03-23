@@ -4,10 +4,10 @@ import pandas as pd
 from IPython.display import Image as ImageI
 from io import BytesIO
 from PIL import Image as ImageP
-from ..common import _expire, _getJson, _raiseIfNotStr, _reindex, _toDatetime
+from ..common import _expire, _getJson, _raiseIfNotStr, _reindex, _toDatetime, _UTC
 
 
-@_expire(hour=4)
+@_expire(hour=4, tz=_UTC)
 def company(symbol, token='', version='', filter=''):
     '''Company reference data
 
@@ -55,7 +55,7 @@ def companyDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=5)
+@_expire(hour=5, tz=_UTC)
 def insiderRoster(symbol, token='', version='', filter=''):
     '''Returns the top 10 insiders, with the most recent information.
 
@@ -96,7 +96,7 @@ def insiderRosterDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=5)
+@_expire(hour=5, tz=_UTC)
 def insiderSummary(symbol, token='', version='', filter=''):
     '''Returns aggregated insiders summary data for the last 6 months.
 
@@ -137,7 +137,7 @@ def insiderSummaryDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=5)
+@_expire(hour=5, tz=_UTC)
 def insiderTransactions(symbol, token='', version='', filter=''):
     '''Returns insider transactions.
 
@@ -178,7 +178,7 @@ def insiderTransactionsDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=0)
+@_expire(hour=0, tz=_UTC)
 def logo(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -198,7 +198,7 @@ def logo(symbol, token='', version='', filter=''):
     return _getJson('stock/' + symbol + '/logo', token, version, filter)
 
 
-@_expire(hour=0)
+@_expire(hour=0, tz=_UTC)
 def logoPNG(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -219,7 +219,7 @@ def logoPNG(symbol, token='', version='', filter=''):
     return ImageP.open(BytesIO(response.content))
 
 
-@_expire(hour=0)
+@_expire(hour=0, tz=_UTC)
 def logoNotebook(symbol, token='', version='', filter=''):
     '''This is a helper function, but the google APIs url is standardized.
 
@@ -240,7 +240,7 @@ def logoNotebook(symbol, token='', version='', filter=''):
     return ImageI(url=url)
 
 
-@_expire(hour=8)
+@_expire(hour=8, tz=_UTC)
 def peers(symbol, token='', version='', filter=''):
     '''Peers of ticker
 
@@ -289,7 +289,7 @@ def peersDF(symbol, token='', version='', filter=''):
     return df
 
 
-@_expire(hour=4)
+@_expire(hour=8, tz=_UTC)
 def relevant(symbol, token='', version='', filter=''):
     '''Same as peers
 

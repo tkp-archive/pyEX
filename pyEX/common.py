@@ -3,6 +3,7 @@ from __future__ import print_function
 import os
 import os.path
 import pandas as pd
+import pytz
 import requests
 import tempfile
 try:
@@ -57,6 +58,8 @@ _DATE_RANGES = ['today',
 _USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
 _PYEX_PROXIES = None
 _PYEX_CACHE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), "pyEX"))
+_UTC = pytz.UTC
+_EST = pytz.timezone('EST')
 
 # Limit 10
 _BATCH_TYPES = [
