@@ -30,7 +30,7 @@ requires = [
     'requests>=2.21.0',
     'socketIO-client-nexus>=0.7.6',
     'sseclient>=0.0.22',
-    'temporal-cache>=0.1.0',
+    'temporal-cache>=0.1.1',
 ]
 
 requires_dev = [
