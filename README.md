@@ -2,7 +2,7 @@
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
 
 [![Build Status](https://dev.azure.com/tpaine154/pyEX/_apis/build/status/timkpaine.pyEX?branchName=master)](https://dev.azure.com/tpaine154/pyEX/_build/latest?definitionId=3&branchName=master)
-[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
+[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3/master)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
 [![BCH compliance](https://bettercodehub.com/edge/badge/timkpaine/pyEX?branch=master)](https://bettercodehub.com/)
 [![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
