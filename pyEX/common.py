@@ -124,6 +124,10 @@ class PyEXception(Exception):
     pass
 
 
+class PyEXStopSSE(Exception):
+    pass
+
+
 def _getJson(url, token='', version='', filter=''):
     '''for backwards compat, accepting token and version but ignoring'''
     token = token or os.environ.get('IEX_TOKEN')
@@ -259,10 +263,19 @@ def _streamSSE(url, on_data=print, accrue=False):
 
     for msg in messages:
         data = msg.data
-        on_data(json.loads(data))
-        if accrue:
-            ret.append(msg)
 
+        try:
+            on_data(json.loads(data))
+            if accrue:
+                ret.append(msg)
+        except PyEXStopSSE:
+            # stop listening and return
+            return ret
+        except (json.JSONDecodeError, KeyboardInterrupt):
+            raise
+        except Exception:
+            # continue listening
+            pass
     return ret
 
 
