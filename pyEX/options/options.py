@@ -43,7 +43,7 @@ def options(symbol, expiration, side='', token='', version='', filter=''):
     _raiseIfNotStr(symbol)
     if side:
         return _getJson('stock/{symbol}/options/{expiration}/{side}'.format(symbol=symbol, expiration=expiration, side=side), token, version, filter)
-    return _getJson('stock/{symbol}/options/{expiration}/'.format(symbol=symbol, expiration=expiration, side=side), token, version, filter)
+    return _getJson('stock/{symbol}/options/{expiration}/'.format(symbol=symbol, expiration=expiration), token, version, filter)
 
 
 def optionsDF(symbol, expiration, side='', token='', version='', filter=''):

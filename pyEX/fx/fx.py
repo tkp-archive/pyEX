@@ -63,8 +63,8 @@ def convertFX(symbols=None, amount=None, token='', version='', filter=''):
     amount = amount or ''
     if symbols:
         if isinstance(symbols, str):
-            return _getJson('/fx/convert?symbols={symbols}&amount='.format(symbols=symbols, amount=amount), token, version, filter)
-        return _getJson('/fx/convert?symbols={symbols}&amount='.format(symbols=','.join(symbols), amount=amount), token, version, filter)
+            return _getJson('/fx/convert?symbols={symbols}&amount={amount}'.format(symbols=symbols, amount=amount), token, version, filter)
+        return _getJson('/fx/convert?symbols={symbols}&amount={amount}'.format(symbols=','.join(symbols), amount=amount), token, version, filter)
     return _getJson('/fx/convert?amount={amount}'.format(amount=amount), token, version, filter)
 
 
