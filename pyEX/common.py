@@ -284,8 +284,12 @@ def _streamSSE(url, on_data=print, accrue=False):
 
 def _reindex(df, col):
     '''internal'''
-    if col in df.columns:
-        df.set_index(col, inplace=True)
+    if isinstance(col, list):
+        if all([c in df.columns for c in col]):
+            df.set_index(col, inplace=True)
+    else:
+        if col in df.columns:
+            df.set_index(col, inplace=True)
 
 
 def _toDatetime(df, cols=None, tcols=None):
