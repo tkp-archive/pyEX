@@ -683,7 +683,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.balanceSheetDF(SYMBOL)
 
     def test_cashflow(self):
@@ -702,7 +702,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.cashFlowDF(SYMBOL)
 
     def test_income(self):
@@ -721,7 +721,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.incomeStatementDF(SYMBOL)
 
     def test_estimates(self):
@@ -732,7 +732,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.estimates(SYMBOL)
             c.estimatesDF(SYMBOL)
 
@@ -744,7 +744,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.marketVolume()
             c.marketVolumeDF()
 
@@ -764,7 +764,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.insiderRosterDF(SYMBOL)
 
     def test_insiderSummary(self):
@@ -783,7 +783,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.insiderSummaryDF(SYMBOL)
 
     def test_insiderTransactions(self):
@@ -802,7 +802,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.insiderTransactionsDF(SYMBOL)
 
     def test_institutionalOwnership(self):
@@ -821,7 +821,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.institutionalOwnershipDF(SYMBOL)
 
     def test_intraday(self):
@@ -840,7 +840,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.intradayDF(SYMBOL)
 
     def test_optionExpirations(self):
@@ -867,7 +867,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.optionsDF(SYMBOL, 'test')
 
     def test_bonusIssue(self):

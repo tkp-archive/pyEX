@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from enum import Enum
-from ..common import _strCommaSeparatedString, _streamSSE, _SSE_URL_PREFIX, _SSE_URL_PREFIX_ALL, _SSE_DEEP_URL_PREFIX, PyEXception
+from ..common import _strCommaSeparatedString, _streamSSE, _SSE_URL_PREFIX, _SSE_URL_PREFIX_ALL, _SSE_DEEP_URL_PREFIX, _SSE_URL_PREFIX_SANDBOX, _SSE_URL_PREFIX_ALL_SANDBOX, _SSE_DEEP_URL_PREFIX_SANDBOX, PyEXception
 
 
 class DeepChannelsSSE(Enum):
@@ -25,7 +25,11 @@ def _runSSE(method='', symbols=None, on_data=None, token='', version=''):
         raise PyEXception('method cannot be blank!')
     if symbols:
         symbols = _strCommaSeparatedString(symbols)
+        if version == 'sandbox':
+            return _streamSSE(_SSE_URL_PREFIX_SANDBOX.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
         return _streamSSE(_SSE_URL_PREFIX.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
+    if version == 'sandbox':
+        return _streamSSE(_SSE_URL_PREFIX_ALL_SANDBOX.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
     return _streamSSE(_SSE_URL_PREFIX_ALL.format(channel=method, symbols=symbols, token=token, version=version), on_data=on_data)
 
 
@@ -95,6 +99,9 @@ def deepSSE(symbols=None, channels=None, on_data=None, token='', version=''):
                 raise PyEXception('Channel not recognized: %s', c)
 
     channels = _strCommaSeparatedString(channels)
+
+    if version == 'sandbox':
+        return _streamSSE(_SSE_DEEP_URL_PREFIX_SANDBOX.format(symbols=symbols, channels=channels, token=token, version=version), on_data)
     return _streamSSE(_SSE_DEEP_URL_PREFIX.format(symbols=symbols, channels=channels, token=token, version=version), on_data)
 
 
@@ -111,6 +118,8 @@ def tradesSSE(symbols=None, on_data=None, token='', version=''):
 
     '''
     symbols = _strCommaSeparatedString(symbols)
+    if version == 'sandbox':
+        return _streamSSE(_SSE_DEEP_URL_PREFIX_SANDBOX.format(symbols=symbols, channels='trades', token=token, version=version), on_data)
     return _streamSSE(_SSE_DEEP_URL_PREFIX.format(symbols=symbols, channels='trades', token=token, version=version), on_data)
 
 

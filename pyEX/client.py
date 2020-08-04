@@ -635,6 +635,12 @@ class Client(object):
         if not self._token:
             raise PyEXception('API Token missing or not in environment (IEX_TOKEN)')
 
+        if version not in ('beta', 'v1', 'sandbox'):
+            raise PyEXception('Unrecognized api version: {}'.format(version))
+
+        if self._token.startswith('T') and version != 'sandbox':
+            raise PyEXception('Using test key but attempting to connect to non-sandbox environment')
+
         self._version = version
         self._api_limit = api_limit
 

@@ -107,3 +107,4 @@ docs/api
 keys.sh
 *.ipyhistory
 docs/modules.rst
+python_junit.xml
