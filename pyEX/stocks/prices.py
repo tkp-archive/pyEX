@@ -97,6 +97,9 @@ def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
             raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
         return _getJson('stock/{}/chart/{}'.format(symbol, timeframe), token, version, filter)
     elif timeframe == '1d':
+        if date:
+            date = _strOrDate(date)
+            return _getJson('stock/{}/intraday-prices?exactDate={}'.format(symbol, date), token, version, filter)
         return _getJson('stock/{}/intraday-prices'.format(symbol), token, version, filter)
 
     if date:
