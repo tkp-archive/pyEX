@@ -95,11 +95,14 @@ def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     if timeframe is not None and timeframe != '1d':
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
-        return _getJson('stock/' + symbol + '/chart' + '/' + timeframe, token, version, filter)
+        return _getJson('stock/{}/chart/{}'.format(symbol, timeframe), token, version, filter)
+    elif timeframe == '1d':
+        return _getJson('stock/{}/intraday-prices'.format(symbol), token, version, filter)
+
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/' + symbol + '/chart' + '/date/' + date, token, version, filter)
-    return _getJson('stock/' + symbol + '/chart', token, version, filter)
+        return _getJson('stock/{}/chart/date/{}'.format(symbol, date), token, version, filter)
+    return _getJson('stock/{}/chart'.format(symbol), token, version, filter)
 
 
 def _chartToDF(c):
