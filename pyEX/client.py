@@ -638,7 +638,7 @@ class Client(object):
         if version not in ('beta', 'v1', 'sandbox'):
             raise PyEXception('Unrecognized api version: {}'.format(version))
 
-        if api_token.startswith('T') and version != 'sandbox':
+        if self._token.startswith('T') and version != 'sandbox':
             raise PyEXception('Using test key but attempting to connect to non-sandbox environment')
 
         self._version = version
