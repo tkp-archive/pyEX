@@ -838,7 +838,7 @@ class TestAll:
                 patch('pickle.dump'):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
+            mock.return_value.json = MagicMock(return_value=[{'date': '1', 'minute': '1'}])
 
             c = Client(version='sandbox')
             c.intradayDF(SYMBOL)
