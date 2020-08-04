@@ -45,7 +45,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            c = Client()
+            c = Client(version='sandbox')
             symbolsDF()
             c.iexSymbolsDF()
             c.mutualFundSymbolsDF()
@@ -73,7 +73,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            c = Client()
+            c = Client(version='sandbox')
             c.calendar()
             c.holidays()
 
@@ -84,7 +84,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            c = Client()
+            c = Client(version='sandbox')
             c.calendarDF()
             c.holidaysDF()
 

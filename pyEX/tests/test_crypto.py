@@ -16,7 +16,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.cryptoBookDF(SYMBOL)
 
     def test_pricecrypto(self):
@@ -27,7 +27,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.cryptoPriceDF(SYMBOL)
 
     def test_quotecrypto(self):
@@ -38,5 +38,5 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.cryptoQuoteDF(SYMBOL)

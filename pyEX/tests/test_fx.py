@@ -16,7 +16,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.latestFXDF()
             c.latestFXDF(SYMBOL)
 
@@ -28,7 +28,7 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.convertFXDF()
             c.convertFXDF(SYMBOL)
             c.convertFXDF(SYMBOL, amount=1.0)
@@ -41,6 +41,6 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            c = Client()
+            c = Client(version='sandbox')
             c.historicalFXDF()
             c.historicalFXDF(SYMBOL)
