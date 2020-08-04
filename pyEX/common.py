@@ -35,7 +35,7 @@ _SSE_URL_PREFIX_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/{channel}?symbols=
 _SSE_URL_PREFIX_ALL_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/{channel}?token={token}'
 _SSE_DEEP_URL_PREFIX_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/deep?symbols={symbols}&channels={channels}&token={token}'
 
-_TIMEFRAME_CHART = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1mm', '5d', '5dm', '1d']
+_TIMEFRAME_CHART = ['max', '5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1mm', '5d', '5dm', '1d', 'dynamic']
 _TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', 'next']
 _LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
 _COLLECTION_TAGS = ['sector', 'tag', 'list']
@@ -284,8 +284,12 @@ def _streamSSE(url, on_data=print, accrue=False):
 
 def _reindex(df, col):
     '''internal'''
-    if col in df.columns:
-        df.set_index(col, inplace=True)
+    if isinstance(col, list):
+        if all([c in df.columns for c in col]):
+            df.set_index(col, inplace=True)
+    else:
+        if col in df.columns:
+            df.set_index(col, inplace=True)
 
 
 def _toDatetime(df, cols=None, tcols=None):

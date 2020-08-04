@@ -172,7 +172,7 @@ def insiderTransactionsDF(symbol, token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    val = insiderSummary(symbol, token, version, filter)
+    val = insiderTransactions(symbol, token, version, filter)
     df = pd.DataFrame(val)
     _toDatetime(df)
     return df

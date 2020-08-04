@@ -95,11 +95,17 @@ def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     if timeframe is not None and timeframe != '1d':
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
-        return _getJson('stock/' + symbol + '/chart' + '/' + timeframe, token, version, filter)
+        return _getJson('stock/{}/chart/{}'.format(symbol, timeframe), token, version, filter)
+    elif timeframe == '1d':
+        if date:
+            date = _strOrDate(date)
+            return _getJson('stock/{}/intraday-prices?exactDate={}'.format(symbol, date), token, version, filter)
+        return _getJson('stock/{}/intraday-prices'.format(symbol), token, version, filter)
+
     if date:
         date = _strOrDate(date)
-        return _getJson('stock/' + symbol + '/chart' + '/date/' + date, token, version, filter)
-    return _getJson('stock/' + symbol + '/chart', token, version, filter)
+        return _getJson('stock/{}/chart/date/{}'.format(symbol, date), token, version, filter)
+    return _getJson('stock/{}/chart'.format(symbol), token, version, filter)
 
 
 def _chartToDF(c):
@@ -188,7 +194,7 @@ def delayedQuoteDF(symbol, token='', version='', filter=''):
     return df
 
 
-def intraday(symbol, token='', version='', filter=''):
+def intraday(symbol, date='', token='', version='', filter=''):
     '''This endpoint will return aggregated intraday prices in one minute buckets
 
     https://iexcloud.io/docs/api/#intraday-prices
@@ -198,6 +204,7 @@ def intraday(symbol, token='', version='', filter=''):
 
     Args:
         symbol (string); Ticker to request
+        date (string): Formatted as YYYYMMDD. This can be used for batch calls when range is 1d or date. Currently supporting trailing 30 calendar days of minute bar data.
         token (string); Access token
         version (string); API version
         filter (string); filters: https://iexcloud.io/docs/api/#filter-results
@@ -206,10 +213,13 @@ def intraday(symbol, token='', version='', filter=''):
         dict: result
     '''
     _raiseIfNotStr(symbol)
-    return _getJson('stock/' + symbol + '/intraday-prices', token, version, filter)
+    if date:
+        date = _strOrDate(date)
+        return _getJson('stock/{}/intraday-prices?exactDate={}'.format(symbol, date), token, version, filter)
+    return _getJson('stock/{}/intraday-prices'.format(symbol), token, version, filter)
 
 
-def intradayDF(symbol, token='', version='', filter=''):
+def intradayDF(symbol, date='', token='', version='', filter=''):
     '''This endpoint will return aggregated intraday prices in one minute buckets
 
     https://iexcloud.io/docs/api/#intraday-prices
@@ -226,10 +236,10 @@ def intradayDF(symbol, token='', version='', filter=''):
     Returns:
         DataFrame: result
     '''
-    val = intraday(symbol, token, version, filter)
+    val = intraday(symbol, date, token, version, filter)
     df = pd.DataFrame(val)
     _toDatetime(df)
-    _reindex(df, 'minute')
+    df.set_index(['date', 'minute'], inplace=True)
     return df
 
 
