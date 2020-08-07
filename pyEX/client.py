@@ -168,7 +168,7 @@ from .stocks import advancedStats, advancedStatsDF, \
 from .options import optionExpirations, options, optionsDF
 
 try:
-    from .studies import peerCorrelation, bollinger, dema, ema, sar, sma
+    from .studies import peerCorrelation, bollinger, dema, ema, sar, sma, rsi
 
 except ImportError:
     peerCorrelation = None
@@ -177,6 +177,8 @@ except ImportError:
     ema = None
     sar = None
     sma = None
+    rsi = None
+
 
 DEFAULT_API_LIMIT = 5
 
@@ -611,6 +613,7 @@ _INCLUDE_STUDIES = [
     ('ema', ema),
     ('sar', sar),
     ('sma', sma),
+    ('rsi', rsi),
 ]
 
 
