@@ -94,7 +94,7 @@ def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
     _raiseIfNotStr(symbol)
     if timeframe is not None and timeframe != '1d':
         if timeframe not in _TIMEFRAME_CHART:
-            raise PyEXception('Range must be in %s' % str(_TIMEFRAME_CHART))
+            raise PyEXception('Range must be in {}'.format(_TIMEFRAME_CHART))
         return _getJson('stock/{}/chart/{}'.format(symbol, timeframe), token, version, filter)
     elif timeframe == '1d':
         if date:

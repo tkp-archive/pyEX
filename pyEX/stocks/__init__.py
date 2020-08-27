@@ -26,7 +26,8 @@ from .profiles import (company, companyDF, insiderRoster, insiderRosterDF, insid
 from .research import (advancedStats, advancedStatsDF, analystRecommendations, analystRecommendationsDF,  # noqa: F401
                        estimates, estimatesDF, fundOwnership,  # noqa: F401
                        fundOwnershipDF, institutionalOwnership, institutionalOwnershipDF,  # noqa: F401
-                       keyStats, keyStatsDF, priceTarget, priceTargetDF)  # noqa: F401
+                       keyStats, keyStatsDF, priceTarget, priceTargetDF,
+                       technicals, technicalsDF)  # noqa: F401
 
 from .stocks import threshold, thresholdDF, shortInterest, shortInterestDF  # noqa: F401
 
