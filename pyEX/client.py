@@ -156,6 +156,7 @@ from .stocks import advancedStats, advancedStatsDF, \
     stockSplits, stockSplitsDF, \
     tenQ, tenK, \
     threshold, thresholdDF, \
+    technicals, technicalsDF, \
     timeSeriesInventory, timeSeries, \
     timeSeriesInventoryDF, timeSeriesDF, \
     upcomingEvents, upcomingEventsDF, \
@@ -360,6 +361,8 @@ _INCLUDE_FUNCTIONS = [
     ('stockSplitsDF', stockSplitsDF),
     ('tenQ', tenQ),
     ('tenK', tenK),
+    ('technicals', technicals),
+    ('technicalsDF', technicalsDF),
     ('timeSeriesInventory', timeSeriesInventory),
     ('timeSeriesInventoryDF', timeSeriesInventoryDF),
     ('timeSeries', timeSeries),

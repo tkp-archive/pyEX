@@ -1050,6 +1050,24 @@ class TestAll:
             splitsDF(SYMBOL)
             splitsDF(SYMBOL, 'test')
 
+    def test_technicals(self):
+        '''test this one for real since its complicated'''
+        from pyEX import Client
+        c = Client(version='sandbox')
+        c.technicals('aapl', 'rsi')
+        c.technicals('aapl', 'rsi', '1m')
+        c.technicals('aapl', 'kvo', '1m', 2, 5)
+        c.technicals('aapl', 'macd', '1m', 12, 26, 9)
+
+    def test_technicalsDF(self):
+        '''test this one for real since its complicated'''
+        from pyEX import Client
+        c = Client(version='sandbox')
+        c.technicalsDF('aapl', 'rsi')
+        c.technicalsDF('aapl', 'rsi', '1m')
+        c.technicalsDF('aapl', 'kvo', '1m', 2, 5)
+        c.technicalsDF('aapl', 'macd', '1m', 12, 26, 9)
+
     def test_upcomingEvents(self):
         from pyEX import upcomingEvents, upcomingEarnings, upcomingDividends, upcomingSplits, upcomingIPOs
         with patch('requests.get') as mock, \
