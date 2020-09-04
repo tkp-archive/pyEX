@@ -2,16 +2,16 @@ tests: ## Make unit tests
 	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python3.7 -m pytest -v pyEX --cov=pyEX --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
 lint: ## run linter
-	python3.7 -m flake8 pyEX 
+	python -m flake8 pyEX 
 
 fix:  ## run autopep8/tslint fix
-	python3.7 -m autopep8 --in-place -r -a -a pyEX/
+	python -m autopep8 --in-place -r -a -a pyEX/
 
 annotate: ## MyPy type annotation check
-	mypy -s pyEX
+	python -m mypy -s pyEX
 
 annotate_l: ## MyPy type annotation check - count only
-	mypy -s pyEX | wc -l 
+	python -m mypy -s pyEX | wc -l 
 
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf 
@@ -25,15 +25,15 @@ docs:  ## make documentation
 	open ./docs/_build/html/index.html
 
 install:  ## install to site-packages
-	pip3 install .
+	python -m pip install .
 
 dev:
-	pip3 install .[dev]
+	python -m pip install .[dev]
 
 dist:  ## dist to pypi
 	rm -rf dist build
-	python3.7 setup.py sdist bdist_wheel
-	twine check dist/* && twine upload dist/*
+	python setup.py sdist bdist_wheel
+	python -m twine check dist/* && twine upload dist/*
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
