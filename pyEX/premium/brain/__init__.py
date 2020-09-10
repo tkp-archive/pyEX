@@ -24,7 +24,7 @@ def _baseDF(id, symbol='', **kwargs):
 def brain30DaySentiment(symbol='', **kwargs):
     '''Brain Company’s Sentiment Indicator monitors the stock sentiment from the last 30 days of public financial news for about 3,500 US stocks. The sentiment scoring technology is based on a combination of various natural language processing techniques. The sentiment score assigned to each stock is a value ranging from -1 (most negative) to +1 (most positive) that is updated daily.
     https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator
-    
+
     Args:
         symbol (str); symbol to use
     '''
