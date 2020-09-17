@@ -28,6 +28,9 @@ def similarityIndex(symbol='', **kwargs):
     Data available from 2001 with coverage of about 23,000 equities
 
     https://iexcloud.io/docs/api/#similiarity-index
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _base(id='PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX', symbol=symbol, **kwargs)
 
@@ -40,6 +43,9 @@ def similarityIndexDF(symbol='', **kwargs):
     Data available from 2001 with coverage of about 23,000 equities
 
     https://iexcloud.io/docs/api/#similiarity-index
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _baseDF(id='PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX', symbol=symbol, **kwargs)
 
@@ -50,6 +56,9 @@ def nonTimelyFilings(symbol='', **kwargs):
     Companies regulated by the SEC are required to file a Non-Timely notification when they are unable to file their annual or quarterly disclosures on time. In most cases, the inability to file annual/quarterly disclosures on time is a red-flag and thus a valuable signal for algorithmic strategies and fundamental investing alike.
     Data available from 1994 with coverage of about 18,000 equities
     https://iexcloud.io/docs/api/#non-timely-filings
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _base(id='PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS', symbol=symbol, **kwargs)
 
@@ -60,5 +69,8 @@ def nonTimelyFilingsDF(symbol='', **kwargs):
     Companies regulated by the SEC are required to file a Non-Timely notification when they are unable to file their annual or quarterly disclosures on time. In most cases, the inability to file annual/quarterly disclosures on time is a red-flag and thus a valuable signal for algorithmic strategies and fundamental investing alike.
     Data available from 1994 with coverage of about 18,000 equities
     https://iexcloud.io/docs/api/#non-timely-filings
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _baseDF(id='PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS', symbol=symbol, **kwargs)

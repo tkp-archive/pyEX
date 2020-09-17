@@ -27,6 +27,9 @@ def cam1(symbol='', **kwargs):
     In historical simulations, high-scoring stocks according to CAM1 outperform low-scoring stocks by 17% per annum with a market-neutral Sharpe ratio of 3.0 before transaction costs. CAM1 is particularly effective in volatile regimes and for mid- and small-cap stocks, and is best used in conjunction with other alpha signals with similar time horizons.
     History available from July 2005
     https://iexcloud.io/docs/api/#cross-asset-model-1
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _base(id='PREMIUM_EXTRACT_ALPHA_CAM', symbol=symbol, **kwargs)
 
@@ -38,6 +41,9 @@ def cam1DF(symbol='', **kwargs):
     In historical simulations, high-scoring stocks according to CAM1 outperform low-scoring stocks by 17% per annum with a market-neutral Sharpe ratio of 3.0 before transaction costs. CAM1 is particularly effective in volatile regimes and for mid- and small-cap stocks, and is best used in conjunction with other alpha signals with similar time horizons.
     History available from July 2005
     https://iexcloud.io/docs/api/#cross-asset-model-1
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_CAM', symbol=symbol, **kwargs)
 
@@ -50,6 +56,9 @@ def esgCFPBComplaints(symbol='', **kwargs):
     The database generally updates daily, and contains certain information for each complaint, including the source of the complaint, the date of submission, and the company the complaint was sent to for response. The database also includes information about the actions taken by the company in response to the complaint, such as, whether the company’s response was timely and how the company responded. If the consumer opts to share it and after we take steps to remove personal information, we publish the consumer’s description of what happened. Companies also have the option to select a public response. Complaints referred to other regulators, such as complaints about depository institutions with less than $10 billion in assets, are not published in the Consumer Complaint Database.
     History available from 2011
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '1'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -62,6 +71,9 @@ def esgCFPBComplaintsDF(symbol='', **kwargs):
     The database generally updates daily, and contains certain information for each complaint, including the source of the complaint, the date of submission, and the company the complaint was sent to for response. The database also includes information about the actions taken by the company in response to the complaint, such as, whether the company’s response was timely and how the company responded. If the consumer opts to share it and after we take steps to remove personal information, we publish the consumer’s description of what happened. Companies also have the option to select a public response. Complaints referred to other regulators, such as complaints about depository institutions with less than $10 billion in assets, are not published in the Consumer Complaint Database.
     History available from 2011
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '1'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -74,6 +86,9 @@ def esgCPSCRecalls(symbol='', **kwargs):
     Future versions may include consumers’ reports on product safety-related incidents.
     History available from 1974
     https://iexcloud.io/docs/api/#esg-cpsc-recalls
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '5'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -86,6 +101,9 @@ def esgCPSCRecallsDF(symbol='', **kwargs):
     The database generally updates daily, and contains certain information for each complaint, including the source of the complaint, the date of submission, and the company the complaint was sent to for response. The database also includes information about the actions taken by the company in response to the complaint, such as, whether the company’s response was timely and how the company responded. If the consumer opts to share it and after we take steps to remove personal information, we publish the consumer’s description of what happened. Companies also have the option to select a public response. Complaints referred to other regulators, such as complaints about depository institutions with less than $10 billion in assets, are not published in the Consumer Complaint Database.
     History available from 2011
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '5'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -99,6 +117,9 @@ def esgDOLVisaApplications(symbol='', **kwargs):
     Note that because of the different data structures available by year and across application type (H1B and PERM), the density of many of these fields will vary substantially across the dataset.
     History available from 1999
     https://iexcloud.io/docs/api/#esg-dol-visa-applications
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '8'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -112,6 +133,9 @@ def esgDOLVisaApplicationsDF(symbol='', **kwargs):
     Note that because of the different data structures available by year and across application type (H1B and PERM), the density of many of these fields will vary substantially across the dataset.
     History available from 1999
     https://iexcloud.io/docs/api/#esg-dol-visa-applications
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '8'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -125,6 +149,9 @@ def esgEPAEnforcements(symbol='', **kwargs):
     Data is organized around two concepts: the enforcement case and a resulting settlement(s) (enforcement conclusion). Enforcement case data describe the enforcement action from initiation through to its conclusion. If multiple defendants, facilities, and/or violations are cited in the case, then a single case may result in multiple settlements. These case conclusions describe what has been ordered and/or agreed upon to be performed to address violations identified by the case complaint.
     History available from 1975
     https://iexcloud.io/docs/api/#esg-epa-enforcements
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '2'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -138,6 +165,9 @@ def esgEPAEnforcementsDF(symbol='', **kwargs):
     Data is organized around two concepts: the enforcement case and a resulting settlement(s) (enforcement conclusion). Enforcement case data describe the enforcement action from initiation through to its conclusion. If multiple defendants, facilities, and/or violations are cited in the case, then a single case may result in multiple settlements. These case conclusions describe what has been ordered and/or agreed upon to be performed to address violations identified by the case complaint.
     History available from 1975
     https://iexcloud.io/docs/api/#esg-epa-enforcements
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '2'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -148,6 +178,9 @@ def esgEPAMilestones(symbol='', **kwargs):
     '''As described in EPA Enforcements, but including all milestones for an EPA violation event, not just enforcement actions.
     History available from 1975
     https://iexcloud.io/docs/api/#esg-epa-milestones
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '3'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -158,6 +191,9 @@ def esgEPAMilestonesDF(symbol='', **kwargs):
     '''As described in EPA Enforcements, but including all milestones for an EPA violation event, not just enforcement actions.
     History available from 1975
     https://iexcloud.io/docs/api/#esg-epa-milestones
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '3'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -168,6 +204,9 @@ def esgFECIndividualCampaingContributions(symbol='', **kwargs):
     '''Individuals often contribute to political campaigns, and when doing so they are asked to disclose their employer. The individual contributions file contains each campaign contribution from an individual to a federal committee. The files for the current election cycle plus the two most recent election cycles are regularly updated.
     History available from 1997
     https://iexcloud.io/docs/api/#esg-fec-individual-campaign-contributions
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '7'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -178,6 +217,9 @@ def esgFECIndividualCampaingContributionsDF(symbol='', **kwargs):
     '''Individuals often contribute to political campaigns, and when doing so they are asked to disclose their employer. The individual contributions file contains each campaign contribution from an individual to a federal committee. The files for the current election cycle plus the two most recent election cycles are regularly updated.
     History available from 1997
     https://iexcloud.io/docs/api/#esg-fec-individual-campaign-contributions
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '7'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -189,6 +231,9 @@ def esgOSHAInspections(symbol='', **kwargs):
     Future versions may include data on the workplace injuries themselves.
     History available from 1972
     https://iexcloud.io/docs/api/#esg-osha-inspections
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '4'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -200,6 +245,9 @@ def esgOSHAInspectionsDF(symbol='', **kwargs):
     Future versions may include data on the workplace injuries themselves.
     History available from 1972
     https://iexcloud.io/docs/api/#esg-osha-inspections
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '4'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -210,6 +258,9 @@ def esgSenateLobbying(symbol='', **kwargs):
     '''Companies often employ lobbyists to influence legislation in their favor, and lobbying can be a very high ROI activity for a company [Hutchens, Rego, and Sheneman, 2016]. Under the Lobbying Disclosure Act, in-house and outside lobbyists must file quarterly reports describing lobbying activity. These reports disclose the amount spent on lobbying. The lobbying data is compiled using the lobbying disclosure reports filed with the Secretary of the Senate’s Office of Public Records (SOPR). Quarterly reports are due on the 20th day of January, April, July, and October. Lobbying firms are required to provide a good- faith estimate rounded to the nearest $10,000 of all lobbying-related income from their clients in each quarter. Total spending on lobbying activities are reported each quarter, but are not broken down by how much was spent on a particular issue or bill.
     History available from 1999
     https://iexcloud.io/docs/api/#esg-senate-lobbying
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '6'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -220,6 +271,9 @@ def esgSenateLobbyingDF(symbol='', **kwargs):
     '''Companies often employ lobbyists to influence legislation in their favor, and lobbying can be a very high ROI activity for a company [Hutchens, Rego, and Sheneman, 2016]. Under the Lobbying Disclosure Act, in-house and outside lobbyists must file quarterly reports describing lobbying activity. These reports disclose the amount spent on lobbying. The lobbying data is compiled using the lobbying disclosure reports filed with the Secretary of the Senate’s Office of Public Records (SOPR). Quarterly reports are due on the 20th day of January, April, July, and October. Lobbying firms are required to provide a good- faith estimate rounded to the nearest $10,000 of all lobbying-related income from their clients in each quarter. Total spending on lobbying activities are reported each quarter, but are not broken down by how much was spent on a particular issue or bill.
     History available from 1999
     https://iexcloud.io/docs/api/#esg-senate-lobbying
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '6'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -231,6 +285,9 @@ def esgUSASpending(symbol='', **kwargs):
     All the data on prime recipient transactions is submited by the federal agencies making federal contract, grant, loan, and other financial assistance awards. Agencies are required to submit data within 30 days of making the award or after making a modification or amendment to an award. The exception is the Department of Defense which delays its submission by 90 days to protect operations.
     History available from 1995
     https://iexcloud.io/docs/api/#esg-usa-spending
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '9'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -242,6 +299,9 @@ def esgUSASpendingDF(symbol='', **kwargs):
     All the data on prime recipient transactions is submited by the federal agencies making federal contract, grant, loan, and other financial assistance awards. Agencies are required to submit data within 30 days of making the award or after making a modification or amendment to an award. The exception is the Department of Defense which delays its submission by 90 days to protect operations.
     History available from 1995
     https://iexcloud.io/docs/api/#esg-usa-spending
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '9'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -253,6 +313,9 @@ def esgUSPTOPatentApplications(symbol='', **kwargs):
     Future versions may contain more detail on the content of patent applications.
     History available from 2002
     https://iexcloud.io/docs/api/#esg-uspto-patent-applications
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '10'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -264,6 +327,9 @@ def esgUSPTOPatentApplicationsDF(symbol='', **kwargs):
     Future versions may contain more detail on the content of patent applications.
     History available from 2002
     https://iexcloud.io/docs/api/#esg-uspto-patent-applications
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '10'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -276,6 +342,9 @@ def esgUSPTOPatentGrants(symbol='', **kwargs):
     Currently only the first three assignees listed on the patent are included. Future versions may contain more detail on the content of patent grants, including assignees beyond the first three listed on the grant.
     History available from 2002
     https://iexcloud.io/docs/api/#esg-uspto-patent-grants
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '10'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -288,6 +357,9 @@ def esgUSPTOPatentGrantsDF(symbol='', **kwargs):
     Currently only the first three assignees listed on the patent are included. Future versions may contain more detail on the content of patent grants, including assignees beyond the first three listed on the grant.
     History available from 2002
     https://iexcloud.io/docs/api/#esg-uspto-patent-grants
+
+    Args:
+        symbol (str); symbol to use
     '''
     kwargs['subkey'] = '10'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -302,6 +374,9 @@ def tacticalModel1(symbol='', **kwargs):
     TM1 is therefore effective as a tactical overlay which can improve risk-adjusted returns without unduly influencing the underlying strategy. The implementation could be as straightforward as a daily pre-trade screen on position entries and exits prior to the open.
     History available from January 2000
     https://iexcloud.io/docs/api/#tactical-model-1
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _base(id='PREMIUM_EXTRACT_ALPHA_TM', symbol=symbol, **kwargs)
 
@@ -315,5 +390,8 @@ def tacticalModel1DF(symbol='', **kwargs):
     TM1 is therefore effective as a tactical overlay which can improve risk-adjusted returns without unduly influencing the underlying strategy. The implementation could be as straightforward as a daily pre-trade screen on position entries and exits prior to the open.
     History available from January 2000
     https://iexcloud.io/docs/api/#tactical-model-1
+
+    Args:
+        symbol (str); symbol to use
     '''
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_TM', symbol=symbol, **kwargs)
