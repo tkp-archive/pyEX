@@ -34,4 +34,3 @@ def figiDF(figi_=None, token='', version=''):
         DataFrame: result
     '''
     return pd.DataFrame(figi(figi_, token, version))
-
