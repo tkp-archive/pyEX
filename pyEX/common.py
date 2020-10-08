@@ -386,6 +386,13 @@ def _getJson(url, token='', version='', filter=''):
     return _getJsonOrig(url)
 
 
+def _postJson(url, token='', version=''):
+    token = token or os.environ.get('IEX_TOKEN')
+    if version == 'sandbox':
+        return _postJsonIEXCloudSandbox(url, token, version)
+    return _postJsonIEXCloud(url, token, version)
+
+
 def _getJsonOrig(url):
     raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
 
@@ -402,6 +409,16 @@ def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
+def _postJsonIEXCloud(url, token='', version='v1'):
+    '''for iex cloud'''
+    url = _URL_PREFIX2.format(version=version) + url
+    params = {'token': token}
+    resp = requests.post(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
 def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     '''for iex cloud'''
     url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
@@ -409,6 +426,16 @@ def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     if filter:
         params.update({'filter': filter})
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _postJsonIEXCloudSandbox(url, token='', version='v1'):
+    '''for iex cloud'''
+    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
+    params = {'token': token}
+    resp = requests.post(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -599,3 +626,8 @@ def _interval(**temporal_args):
         temporal_args['persistent'] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
         return interval(**temporal_args)(foo)
     return _wrapper
+
+
+def _requireSecret(token):
+    if not token.startswith("sk"):
+        raise PyEXception("Requires secret token!")

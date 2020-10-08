@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 from functools import partial, wraps
-from .common import PyEXception, _interval, _getJson, _USAGE_TYPES
+from .common import PyEXception, _interval
+from .account import messageBudget, metadata, metadataDF, \
+    usage, usageDF
 from .alternative import crypto, cryptoDF, \
     sentiment, sentimentDF, \
     ceoCompensation, ceoCompensationDF
@@ -411,6 +413,12 @@ _INCLUDE_FUNCTIONS = [
     ('tradeBreakDF', tradeBreakDF),
     ('tradingStatus', tradingStatus),
     ('tradingStatusDF', tradingStatusDF),
+    # Account
+    ('messageBudget', messageBudget),
+    ('metadata', metadata),
+    ('metadataDF', metadataDF),
+    ('usage', usage),
+    ('usageDF', usageDF),
     # Alternative
     ('crypto', crypto),
     ('cryptoDF', cryptoDF),
@@ -671,15 +679,8 @@ class Client(object):
             raise PyEXception('Must provide method!')
         return meth(token=self._token, version=self._version, *args, **kwargs)
 
-    def account(self):
-        return _getJson('account/metadata', self._token, self._version)
-
-    def usage(self, type=None):
-        if type:
-            if type not in _USAGE_TYPES:
-                raise PyEXception('type not recognized: {}'.format(type))
-            return _getJson('account/usage/{type}'.format(type=type), self._token, self._version)
-        return _getJson('account/usage/messages', self._token, self._version)
+    def account(self, *args, **kwargs):
+        return self.metadata(*args, **kwargs)
 
 
 #############################

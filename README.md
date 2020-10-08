@@ -1,8 +1,8 @@
 # pyEX
 Python interface to IEX Api (https://iextrading.com/developer/docs/)
 
-[![Build Status](https://dev.azure.com/tpaine154/pyEX/_apis/build/status/timkpaine.pyEX?branchName=master)](https://dev.azure.com/tpaine154/pyEX/_build/latest?definitionId=3&branchName=master)
-[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3/master)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
+[![Build Status](https://dev.azure.com/tpaine154/pyEX/_apis/build/status/timkpaine.pyEX?branchName=main)](https://dev.azure.com/tpaine154/pyEX/_build/latest?definitionId=3&branchName=main)
+[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3/main)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
 [![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
@@ -19,8 +19,8 @@ of from source
 
 `python setup.py install`
 
-- [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/all.ipynb)
-- [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/master/examples/sse.ipynb)
+- [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/all.ipynb)
+- [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/sse.ipynb)
 - [Read The Docs!](https://pyEX.readthedocs.io)
 
 `pyEX` supports the IEX Cloud api through 2 interfaces. The first is a simple function call, passing in the api version and token as arguments
@@ -114,12 +114,12 @@ date
 - [pyEX-zipline](https://github.com/timkpaine/pyEX-zipline): [Zipline](https://github.com/quantopian/zipline) integration for IEX data
 
 ## Demo
-![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/example1.gif)
+![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/example1.gif)
 
 ## Full API
 Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
 
-![](https://raw.githubusercontent.com/timkpaine/pyEX/master/docs/img/rtd.png)
+![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/rtd.png)
 
 Currently, the following methods are implemented:
 
