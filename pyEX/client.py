@@ -96,6 +96,7 @@ from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, interna
     directory, directoryDF, \
     calendar, calendarDF, holidays, holidaysDF, \
     exchanges, exchangesDF, \
+    figi, figiDF, \
     internationalExchanges, internationalExchangesDF, \
     sectors, sectorsDF, \
     tags, tagsDF
@@ -222,6 +223,8 @@ _INCLUDE_FUNCTIONS = [
     ('holidaysDF', holidaysDF),
     ('exchanges', exchanges),
     ('exchangesDF', exchangesDF),
+    ('figi', figi),
+    ('figiDF', figiDF),
     ('internationalExchanges', internationalExchanges),
     ('internationalExchangesDF', internationalExchangesDF),
     ('sectors', sectors),

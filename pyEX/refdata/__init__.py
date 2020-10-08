@@ -6,5 +6,6 @@ from .refdata import (corporateActions, corporateActionsDF,  # noqa: F401
                       nextDayExtDate, nextDayExtDateDF,  # noqa: F401
                       directory, directoryDF)  # noqa: F401
 from .calendar import calendar, calendarDF, holidays, holidaysDF  # noqa: F401
+from .figi import figi, figiDF  # noqa: F401
 from .exchanges import exchanges, exchangesDF, internationalExchanges, internationalExchangesDF  # noqa: F401
 from .sectors import sectors, sectorsDF, tags, tagsDF  # noqa: F401
