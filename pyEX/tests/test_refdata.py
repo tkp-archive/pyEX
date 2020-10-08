@@ -196,6 +196,23 @@ class TestAll:
             exchangesDF()
             internationalExchangesDF()
 
+    def test_figi(self):
+        from pyEX.refdata import figi
+        with patch('requests.get') as mock, \
+                patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            figi('')
+
+    def test_figiDF(self):
+        from pyEX.refdata import figiDF
+        with patch('requests.get') as mock, \
+                patch('pickle.dump'):
+            mock.return_value = MagicMock()
+            mock.return_value.status_code = 200
+            mock.return_value.json = MagicMock(return_value=[])
+            figiDF('')
+
     def test_tags(self):
         from pyEX.refdata import tags
         with patch('requests.get') as mock, \
