@@ -16,7 +16,7 @@ def messageBudget(totalMessages=None, token='', version=''):
     _requireSecret(token)
     if not isinstance(totalMessages, int):
         raise PyEXception("`totalMessages` must be integer, got {}({})".format(type(totalMessages), totalMessages))
-    return _postJson('account/messagebudget?totalMessages={}'.format(totalMessages), token, version)
+    return _postJson('account/messagebudget?totalMessages={}'.format(totalMessages), token=token, version=version)
 
 
 def metadata(token='', version=''):
@@ -63,7 +63,7 @@ def payAsYouGo(allow=False, token='', version=''):
     _requireSecret(token)
     if not isinstance(allow, bool):
         raise PyEXception("`allow` must be bool, got {}({})".format(type(allow), allow))
-    return _postJson('account/messagebudget?allow={}'.format(allow), token, version)
+    return _postJson('account/messagebudget?allow={}'.format(allow), token=token, version=version)
 
 
 def usage(type=None, token='', version=''):

@@ -386,11 +386,18 @@ def _getJson(url, token='', version='', filter=''):
     return _getJsonOrig(url)
 
 
-def _postJson(url, token='', version=''):
+def _postJson(url, data=None, json=None, token='', version='', token_in_params=True):
     token = token or os.environ.get('IEX_TOKEN')
     if version == 'sandbox':
-        return _postJsonIEXCloudSandbox(url, token, version)
-    return _postJsonIEXCloud(url, token, version)
+        return _postJsonIEXCloudSandbox(url, data, json, token, version, token_in_params)
+    return _postJsonIEXCloud(url, data, json, token, version, token_in_params)
+
+
+def _deleteJson(url, token='', version=''):
+    token = token or os.environ.get('IEX_TOKEN')
+    if version == 'sandbox':
+        return _deleteJsonIEXCloudSandbox(url, token, version)
+    return _deleteJsonIEXCloud(url, token, version)
 
 
 def _getJsonOrig(url):
@@ -409,11 +416,24 @@ def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _postJsonIEXCloud(url, token='', version='v1'):
+def _postJsonIEXCloud(url, data=None, json=None, token='', version='v1', token_in_params=True):
+    '''for iex cloud'''
+    url = _URL_PREFIX2.format(version=version) + url
+    if token_in_params:
+        params = {'token': token}
+    else:
+        params = {}
+    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _deleteJsonIEXCloud(url, token='', version='v1'):
     '''for iex cloud'''
     url = _URL_PREFIX2.format(version=version) + url
     params = {'token': token}
-    resp = requests.post(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+    resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -431,11 +451,24 @@ def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _postJsonIEXCloudSandbox(url, token='', version='v1'):
+def _postJsonIEXCloudSandbox(url, data=None, json=None, token='', version='v1', token_in_params=True):
+    '''for iex cloud'''
+    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
+    if token_in_params:
+        params = {'token': token}
+    else:
+        params = {}
+    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _deleteJsonIEXCloudSandbox(url, token='', version='v1'):
     '''for iex cloud'''
     url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
     params = {'token': token}
-    resp = requests.post(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+    resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)

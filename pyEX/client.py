@@ -100,6 +100,7 @@ from .refdata import symbols, iexSymbols, mutualFundSymbols, otcSymbols, interna
     internationalExchanges, internationalExchangesDF, \
     sectors, sectorsDF, \
     tags, tagsDF
+from .rules import schema, create, lookup, pause, resume, delete
 from .stats import stats, statsDF, \
     recent, recentDF, \
     records, recordsDF, \
@@ -187,6 +188,13 @@ except ImportError:
 DEFAULT_API_LIMIT = 5
 
 _INCLUDE_FUNCTIONS = [
+    # Rules
+    ('schema', schema),
+    ('createRule', create),
+    ('lookupRule', lookup),
+    ('pauseRule', pause),
+    ('resumeRule', resume),
+    ('deleteRule', delete),
     # Refdata
     ('symbols', symbols),
     ('iexSymbols', iexSymbols),
