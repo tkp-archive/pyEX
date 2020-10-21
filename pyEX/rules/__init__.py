@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 from ..common import _getJson, _postJson, _deleteJson, _raiseIfNotStr, PyEXception
+from .engine import Rule  # noqa: F401
 
 
 def lookup(lookup='', token='', version=''):
@@ -27,16 +28,15 @@ def schema(token='', version=''):
     return lookup(token=token, version=version)
 
 
-def create(rule, ruleName, ruleSet, type='any', existingId=None):
+def create(rule, ruleName, ruleSet, type='any', existingId=None, token='', version=''):
     '''This endpoint is used to both create and edit rules. Note that rules run be default after being created.
 
     Args:
-        rule (Rule): rule object to create
+        rule (Rule or dict): rule object to create
         ruleName (str): name for rule
         ruleSet (str): Valid US symbol or the string ANYEVENT. If the string ANYEVENT is passed, the rule will be triggered for any symbol in the system. The cool down period for alerts (frequency) is applied on a per symbol basis.
         type (str): Specify either any, where if any condition is true you get an alert, or all, where all conditions must be true to trigger an alert. any is the default value
         existingId (Optional[str]): The id of an existing rule only if you are editing the existing rule
-
 
     conditions	array	Required An array of arrays. Each condition array will consist of three values; left condition, operator, right condition.
 
@@ -52,6 +52,24 @@ def create(rule, ruleName, ruleSet, type='any', existingId=None):
     if type not in ('any', 'all'):
         raise PyEXception('type must be in (any, all). got: {}'.format(type))
 
+    if isinstance(rule, Rule):
+        rule = rule.toJson()
+
+    rule['token'] = token
+    rule['ruleSet'] = ruleSet
+    rule['type'] = type
+    rule['ruleName'] = ruleName
+
+    # Conditions, outputs, and additionalKeys handled by rule object
+    if 'conditions' not in rule:
+        raise PyEXception('rule is missing `conditions` key!')
+    if 'outputs' not in rule:
+        raise PyEXception('rule is missing `outputs` key!')
+
+    if existingId is not None:
+        rule['id'] = existingId
+    return _postJson('rules/create', json=rule, token=token, version=version, token_in_params=False)
+
 
 def pause(ruleId, token='', version=''):
     '''You can control the output of rules by pausing and resume per rule id.
@@ -59,7 +77,7 @@ def pause(ruleId, token='', version=''):
     Args:
         ruleId (str): The id of an existing rule to puase
     '''
-    return _postJson('rules/pause', data={"ruleId": ruleId}, token=token, version=version)
+    return _postJson('rules/pause', json={"ruleId": ruleId, "token": token}, token=token, version=version, token_in_params=False)
 
 
 def resume(ruleId, token='', version=''):
@@ -68,7 +86,7 @@ def resume(ruleId, token='', version=''):
     Args:
         ruleId (str): The id of an existing rule to puase
     '''
-    return _postJson('rules/resume', data={"ruleId": ruleId}, token=token, version=version)
+    return _postJson('rules/resume', json={"ruleId": ruleId, "token": token}, token=token, version=version, token_in_params=False)
 
 
 def delete(ruleId, token='', version=''):

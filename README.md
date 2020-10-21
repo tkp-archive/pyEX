@@ -116,7 +116,29 @@ date
 ## Demo
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/example1.gif)
 
-## Full API
+## Rules Engine
+`pyEX` implements methods for interacting with the [Rules Engine](https://iexcloud.io/docs/api/#rules-engine-beta). 
+
+```python
+rule = {
+        'conditions': [['changePercent','>',500],
+                       ['latestPrice','>',100000]],
+        'outputs': [{'frequency': 60,
+                     'method': 'email',
+                     'to': 'your_email@domain'
+                    }]
+        }
+
+c.createRule(rule, 'MyTestRule', 'AAPL', 'all')  # returns {"id": <ruleID>, "weight": 2}
+c.pauseRule("<ruleID>")
+c.resumeRule("<ruleID>")
+c.deleteRule("<ruleID>")
+```
+
+We also provide helper classes in python for constructing rules such that they abide by the rules schema (dictated in the `schema()` helper function)
+
+## Data
+###  Full API
 Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
 
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/rtd.png)

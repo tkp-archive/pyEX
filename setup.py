@@ -28,6 +28,7 @@ requires = [
     'pandas>=0.22',
     'pytz>=2019.1',
     'requests>=2.21.0',
+    'six',
     'socketIO-client-nexus>=0.7.6',
     'sseclient>=0.0.22',
     'temporal-cache>=0.1.1',
