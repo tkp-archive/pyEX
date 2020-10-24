@@ -64,7 +64,24 @@
     :noindex:
     :members:
 
+.. automodule:: pyEX.marketdata.news
+    :noindex:
+    :members:
+
+.. automodule:: pyEX.marketdata.sentiment
+    :noindex:
+    :members:
+
+
 .. automodule:: pyEX.marketdata.sse
+    :noindex:
+    :members:
+
+.. automodule:: pyEX.marketdata.stock
+    :noindex:
+    :members:
+
+.. automodule:: pyEX.marketdata.ws
     :noindex:
     :members:
 ```
@@ -322,6 +339,10 @@
 .. autofunction:: pyEX.premium.wallstreethorizon.workshops
 
 .. autofunction:: pyEX.premium.wallstreethorizon.workshopsDF
+
+.. autofunction:: pyEX.premium.stocktwits.socialSentiment
+
+.. autofunction:: pyEX.premium.stocktwits.socialSentimentDF
 ```
 
 
