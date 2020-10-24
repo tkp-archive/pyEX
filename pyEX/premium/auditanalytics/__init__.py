@@ -26,7 +26,7 @@ def directorAndOfficerChanges(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#audit-analytics-director-and-officer-changes
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_AUDIT_ANALYTICS_DIRECTOR_OFFICER_CHANGES', symbol=symbol, **kwargs)
 
@@ -37,7 +37,7 @@ def directorAndOfficerChangesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#audit-analytics-director-and-officer-changes
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_AUDIT_ANALYTICS_DIRECTOR_OFFICER_CHANGES', symbol=symbol, **kwargs)
 
@@ -48,7 +48,7 @@ def accountingQualityAndRiskMatrix(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#audit-analytics-accounting-quality-and-risk-matrix
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_AUDIT_ANALYTICS_ACCOUNTING_QUALITY_RISK_MATRIX', symbol=symbol, **kwargs)
 
@@ -59,6 +59,6 @@ def accountingQualityAndRiskMatrixDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#audit-analytics-accounting-quality-and-risk-matrix
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_AUDIT_ANALYTICS_ACCOUNTING_QUALITY_RISK_MATRIX', symbol=symbol, **kwargs)

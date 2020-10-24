@@ -26,7 +26,7 @@ def precisionAlphaPriceDynamics(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#precision-alpha-price-dynamics
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_PRECISION_ALPHA_PRICE_DYNAMICS', symbol=symbol, **kwargs)
 
@@ -37,6 +37,6 @@ def precisionAlphaPriceDynamicsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#precision-alpha-price-dynamics
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_PRECISION_ALPHA_PRICE_DYNAMICS', symbol=symbol, **kwargs)

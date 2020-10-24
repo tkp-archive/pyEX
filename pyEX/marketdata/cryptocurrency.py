@@ -22,10 +22,10 @@ def cryptoBookSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#cryptocurrency-book
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('cryptoBook', symbols, on_data, token, version)
@@ -37,10 +37,10 @@ def cryptoEventsSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#cryptocurrency-events
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('cryptoEvents', symbols, on_data, token, version)
@@ -52,10 +52,10 @@ def cryptoQuotesSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#cryptocurrency-quote
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('cryptoQuotes', symbols, on_data, token, version)

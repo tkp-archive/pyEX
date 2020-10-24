@@ -9,9 +9,9 @@ def crypto(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#crypto
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -25,9 +25,9 @@ def cryptoDF(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#crypto
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -45,12 +45,12 @@ def sentiment(symbol, type='daily', date=None, token='', version='', filter=''):
     Continuous
 
     Args:
-        symbol (string); Ticker to request
-        type (string); 'daily' or 'minute'
-        date (string); date in YYYYMMDD or datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        type (str): 'daily' or 'minute'
+        date (str): date in YYYYMMDD or datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -69,12 +69,12 @@ def sentimentDF(symbol, type='daily', date=None, token='', version='', filter=''
     Continuous
 
     Args:
-        symbol (string); Ticker to request
-        type (string); 'daily' or 'minute'
-        date (string); date in YYYYMMDD or datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        type (str): 'daily' or 'minute'
+        date (str): date in YYYYMMDD or datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -95,10 +95,10 @@ def ceoCompensation(symbol, token='', version='', filter=''):
     1am daily
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -114,10 +114,10 @@ def ceoCompensationDF(symbol, token='', version='', filter=''):
     1am daily
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

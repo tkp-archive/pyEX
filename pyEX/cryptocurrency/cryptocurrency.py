@@ -10,10 +10,10 @@ def cryptoBook(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -28,10 +28,10 @@ def cryptoBookDF(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -46,10 +46,10 @@ def cryptoPrice(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -64,10 +64,10 @@ def cryptoPriceDF(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -83,10 +83,10 @@ def cryptoQuote(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -101,10 +101,10 @@ def cryptoQuoteDF(symbol, token='', version='', filter=''):
     continuous
 
     Args:
-        symbol (string); cryptocurrency ticker
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): cryptocurrency ticker
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

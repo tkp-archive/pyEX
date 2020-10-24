@@ -29,7 +29,7 @@ def cam1(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#cross-asset-model-1
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_EXTRACT_ALPHA_CAM', symbol=symbol, **kwargs)
 
@@ -43,7 +43,7 @@ def cam1DF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#cross-asset-model-1
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_CAM', symbol=symbol, **kwargs)
 
@@ -58,7 +58,7 @@ def esgCFPBComplaints(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '1'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -73,7 +73,7 @@ def esgCFPBComplaintsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '1'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -88,7 +88,7 @@ def esgCPSCRecalls(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-cpsc-recalls
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '5'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -103,7 +103,7 @@ def esgCPSCRecallsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-cfpb-complaints
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '5'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -119,7 +119,7 @@ def esgDOLVisaApplications(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-dol-visa-applications
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '8'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -135,7 +135,7 @@ def esgDOLVisaApplicationsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-dol-visa-applications
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '8'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -151,7 +151,7 @@ def esgEPAEnforcements(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-epa-enforcements
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '2'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -167,7 +167,7 @@ def esgEPAEnforcementsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-epa-enforcements
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '2'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -180,7 +180,7 @@ def esgEPAMilestones(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-epa-milestones
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '3'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -193,7 +193,7 @@ def esgEPAMilestonesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-epa-milestones
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '3'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -206,7 +206,7 @@ def esgFECIndividualCampaingContributions(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-fec-individual-campaign-contributions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '7'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -219,7 +219,7 @@ def esgFECIndividualCampaingContributionsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-fec-individual-campaign-contributions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '7'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -233,7 +233,7 @@ def esgOSHAInspections(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-osha-inspections
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '4'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -247,7 +247,7 @@ def esgOSHAInspectionsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-osha-inspections
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '4'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -260,7 +260,7 @@ def esgSenateLobbying(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-senate-lobbying
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '6'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -273,7 +273,7 @@ def esgSenateLobbyingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-senate-lobbying
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '6'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -287,7 +287,7 @@ def esgUSASpending(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-usa-spending
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '9'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -301,7 +301,7 @@ def esgUSASpendingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-usa-spending
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '9'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -315,7 +315,7 @@ def esgUSPTOPatentApplications(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-uspto-patent-applications
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '10'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -329,7 +329,7 @@ def esgUSPTOPatentApplicationsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-uspto-patent-applications
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '10'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -344,7 +344,7 @@ def esgUSPTOPatentGrants(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-uspto-patent-grants
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '10'
     return _base(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -359,7 +359,7 @@ def esgUSPTOPatentGrantsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#esg-uspto-patent-grants
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     kwargs['subkey'] = '10'
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_ESG', symbol=symbol, **kwargs)
@@ -376,7 +376,7 @@ def tacticalModel1(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#tactical-model-1
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_EXTRACT_ALPHA_TM', symbol=symbol, **kwargs)
 
@@ -392,6 +392,6 @@ def tacticalModel1DF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#tactical-model-1
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_EXTRACT_ALPHA_TM', symbol=symbol, **kwargs)

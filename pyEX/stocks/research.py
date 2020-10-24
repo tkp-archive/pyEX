@@ -12,10 +12,10 @@ def advancedStats(symbol, token='', version='', filter=''):
     4am, 5am ET
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -31,10 +31,10 @@ def advancedStatsDF(symbol, token='', version='', filter=''):
     4am, 5am ET
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -53,10 +53,10 @@ def analystRecommendations(symbol, token='', version='', filter=''):
     Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -72,10 +72,10 @@ def analystRecommendationsDF(symbol, token='', version='', filter=''):
     Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -93,12 +93,12 @@ def estimates(symbol, period='quarter', last=1, token='', version='', filter='')
     Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -126,12 +126,12 @@ def estimatesDF(symbol, period='quarter', last=1, token='', version='', filter='
     Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -150,10 +150,10 @@ def fundOwnership(symbol, token='', version='', filter=''):
     Updates at 5am, 6am ET every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -170,10 +170,10 @@ def fundOwnershipDF(symbol, token='', version='', filter=''):
     Updates at 5am, 6am ET every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
 
@@ -193,10 +193,10 @@ def institutionalOwnership(symbol, token='', version='', filter=''):
     Updates at 5am, 6am ET every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -212,10 +212,10 @@ def institutionalOwnershipDF(symbol, token='', version='', filter=''):
     Updates at 5am, 6am ET every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -234,8 +234,8 @@ def keyStats(symbol, stat='', token='', version='', filter=''):
     8am, 9am ET
 
     Args:
-        symbol (string); Ticker to request
-        stat   (Optiona[str]); specific stat to request, in:
+        symbol (str): Ticker to request
+        stat   (Optiona[str]): specific stat to request, in:
                 companyName
                 marketcap
                 week52high
@@ -266,9 +266,9 @@ def keyStats(symbol, stat='', token='', version='', filter=''):
                 month1ChangePercent
                 day30ChangePercent
                 day5ChangePercent
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -299,8 +299,8 @@ def keyStatsDF(symbol, stat='', token='', version='', filter=''):
     8am, 9am ET
 
     Args:
-        symbol (string); Ticker to request
-        stat   (Optiona[str]); specific stat to request, in:
+        symbol (str): Ticker to request
+        stat   (Optiona[str]): specific stat to request, in:
                 companyName
                 marketcap
                 week52high
@@ -331,9 +331,9 @@ def keyStatsDF(symbol, stat='', token='', version='', filter=''):
                 month1ChangePercent
                 day30ChangePercent
                 day5ChangePercent
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -350,10 +350,10 @@ def priceTarget(symbol, token='', version='', filter=''):
     Updates at 10am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -369,10 +369,10 @@ def priceTargetDF(symbol, token='', version='', filter=''):
     Updates at 10am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -393,8 +393,8 @@ def technicals(symbol, indicator, range='1m', input1=None, input2=None, input3=N
     Data Timing: On Demand
 
     Args:
-        symbol (string); Ticker to request
-        indicator (string); Technical indicator to request, in:
+        symbol (str): Ticker to request
+        indicator (str): Technical indicator to request, in:
             Indicator   Description                              Inputs                       Defaults         Outputs
             -------------------------------------------------------------------------------------------------------------
             abs 	    Vector Absolute Value                               		                            abs
@@ -502,14 +502,14 @@ def technicals(symbol, indicator, range='1m', input1=None, input2=None, input3=N
             wma     	Weighted Moving Average             	period                      	5               wma
             zlema	    Zero-Lag Exponential Moving Average	    period	                        5           	zlema
 
-        range (string); Timeframe to request e.g. 1m
-        input1 (string); input1 to technicals (see docs)
-        input2 (string); input2 to technicals (see docs)
-        input3 (string); input3 to technicals (see docs)
-        input4 (string); input4 to technicals (see docs)
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        range (str): Timeframe to request e.g. 1m
+        input1 (str): input1 to technicals (see docs)
+        input2 (str): input2 to technicals (see docs)
+        input3 (str): input3 to technicals (see docs)
+        input4 (str): input4 to technicals (see docs)
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -579,8 +579,8 @@ def technicalsDF(symbol, indicator, range='1m', input1=None, input2=None, input3
     Data Timing: On Demand
 
     Args:
-        symbol (string); Ticker to request
-        indicator (string); Technical indicator to request, in:
+        symbol (str): Ticker to request
+        indicator (str): Technical indicator to request, in:
             Indicator   Description                              Inputs                       Defaults         Outputs
             -------------------------------------------------------------------------------------------------------------
             abs 	    Vector Absolute Value                               		                            abs
@@ -688,14 +688,14 @@ def technicalsDF(symbol, indicator, range='1m', input1=None, input2=None, input3
             wma     	Weighted Moving Average             	period                      	5               wma
             zlema	    Zero-Lag Exponential Moving Average	    period	                        5           	zlema
 
-        range (string); Timeframe to request e.g. 1m
-        input1 (string); input1 to technicals (see docs)
-        input2 (string); input2 to technicals (see docs)
-        input3 (string); input3 to technicals (see docs)
-        input4 (string); input4 to technicals (see docs)
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        range (str): Timeframe to request e.g. 1m
+        input1 (str): input1 to technicals (see docs)
+        input2 (str): input2 to technicals (see docs)
+        input3 (str): input3 to technicals (see docs)
+        input4 (str): input4 to technicals (see docs)
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result

@@ -10,9 +10,9 @@ def tops(symbols=None, token='', version=''):
     https://iexcloud.io/docs/api/#tops
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -30,9 +30,9 @@ def topsDF(symbols=None, token='', version=''):
     https://iexcloud.io/docs/api/#tops
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -50,9 +50,9 @@ def last(symbols=None, token='', version=''):
     https://iexcloud.io/docs/api/#last
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -70,9 +70,9 @@ def lastDF(symbols=None, token='', version=''):
     https://iexcloud.io/docs/api/#last
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -94,9 +94,9 @@ def deep(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -118,9 +118,9 @@ def deepDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -137,9 +137,9 @@ def auction(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-auction
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -157,9 +157,9 @@ def auctionDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-auction
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -175,9 +175,9 @@ def book(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-book
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -194,9 +194,9 @@ def bookDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-book
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -224,9 +224,9 @@ def opHaltStatus(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-operational-halt-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -249,9 +249,9 @@ def opHaltStatusDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-operational-halt-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -275,9 +275,9 @@ def officialPrice(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-official-price
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -296,9 +296,9 @@ def officialPriceDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-official-price
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -314,9 +314,9 @@ def securityEvent(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-security-event
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -333,9 +333,9 @@ def securityEventDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-security-event
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -362,9 +362,9 @@ def ssrStatus(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-short-sale-price-test-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -386,9 +386,9 @@ def ssrStatusDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-short-sale-price-test-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -412,8 +412,8 @@ def systemEvent(token='', version=''):
     https://iexcloud.io/docs/api/#deep-system-event
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -429,8 +429,8 @@ def systemEventDF(token='', version=''):
     https://iexcloud.io/docs/api/#deep-system-event
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -446,9 +446,9 @@ def trades(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trades
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -465,9 +465,9 @@ def tradesDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trades
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -491,9 +491,9 @@ def tradeBreak(symbol=None, token='', version=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -511,9 +511,9 @@ def tradeBreakDF(symbol=None, token='', version=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -544,9 +544,9 @@ def tradingStatus(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trading-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -577,9 +577,9 @@ def tradingStatusDF(symbol=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trading-status
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result
@@ -600,9 +600,9 @@ def hist(date=None, token='', version=''):
 
 
     Args:
-        date (datetime); Effective date
-        token (string); Access token
-        version (string); API version
+        date (datetime): Effective date
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result

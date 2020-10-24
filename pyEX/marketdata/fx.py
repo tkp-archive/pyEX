@@ -20,10 +20,10 @@ def fxSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#forex-currencies
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('forex', symbols, on_data, token, version)

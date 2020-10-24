@@ -10,10 +10,10 @@ def threshold(date=None, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
 
     Args:
-        date (datetime); Effective Datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -31,10 +31,10 @@ def thresholdDF(date=None, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
 
     Args:
-        date (datetime); Effective Datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -53,11 +53,11 @@ def shortInterest(symbol, date=None, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
 
     Args:
-        symbol (string); Ticker to request
-        date (datetime); Effective Datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -77,11 +77,11 @@ def shortInterestDF(symbol, date=None, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
 
     Args:
-        symbol (string); Ticker to request
-        date (datetime); Effective Datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

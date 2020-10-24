@@ -27,7 +27,7 @@ def analystDays(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#analyst-days
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_ANALYST_DAY', symbol=symbol, **kwargs)
 
@@ -39,7 +39,7 @@ def analystDaysDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#analyst-days
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_ANALYST_DAY', symbol=symbol, **kwargs)
 
@@ -50,7 +50,7 @@ def boardOfDirectorsMeeting(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#analyst-days
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_BOARD_OF_DIRECTORS_MEETING', symbol=symbol, **kwargs)
 
@@ -61,7 +61,7 @@ def boardOfDirectorsMeetingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#board-of-directors-meeting
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_BOARD_OF_DIRECTORS_MEETING', symbol=symbol, **kwargs)
 
@@ -72,7 +72,7 @@ def businessUpdates(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#business-updates
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_BUSINESS_UPDATE', symbol=symbol, **kwargs)
 
@@ -83,7 +83,7 @@ def businessUpdatesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#business-updates
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_BUSINESS_UPDATE', symbol=symbol, **kwargs)
 
@@ -94,7 +94,7 @@ def buybacks(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#buybacks
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_BUYBACK', symbol=symbol, **kwargs)
 
@@ -105,7 +105,7 @@ def buybacksDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#buybacks
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_BUYBACK', symbol=symbol, **kwargs)
 
@@ -116,7 +116,7 @@ def capitalMarketsDay(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#capital-markets-day
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_CAPITAL_MARKETS_DAY', symbol=symbol, **kwargs)
 
@@ -127,7 +127,7 @@ def capitalMarketsDayDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#capital-markets-day
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_CAPITAL_MARKETS_DAY', symbol=symbol, **kwargs)
 
@@ -138,7 +138,7 @@ def companyTravel(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#company-travel
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_COMPANY_TRAVEL', symbol=symbol, **kwargs)
 
@@ -149,7 +149,7 @@ def companyTravelDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#company-travel
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_COMPANY_TRAVEL', symbol=symbol, **kwargs)
 
@@ -160,7 +160,7 @@ def filingDueDates(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#filing-due-dates
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_FILING_DUE_DATE', symbol=symbol, **kwargs)
 
@@ -171,7 +171,7 @@ def filingDueDatesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#filing-due-dates
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_FILING_DUE_DATE', symbol=symbol, **kwargs)
 
@@ -182,7 +182,7 @@ def fiscalQuarterEnd(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#fiscal-quarter-end
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_FISCAL_QUARTER_END_DATE', symbol=symbol, **kwargs)
 
@@ -193,7 +193,7 @@ def fiscalQuarterEndDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#fiscal-quarter-end
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_FISCAL_QUARTER_END_DATE', symbol=symbol, **kwargs)
 
@@ -204,7 +204,7 @@ def forum(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#forum
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_FORUM', symbol=symbol, **kwargs)
 
@@ -215,7 +215,7 @@ def forumDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#forum
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_FORUM', symbol=symbol, **kwargs)
 
@@ -226,7 +226,7 @@ def generalConference(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#general-conference
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_GENERAL_CONFERENCE', symbol=symbol, **kwargs)
 
@@ -237,7 +237,7 @@ def generalConferenceDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#general-conference
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_GENERAL_CONFERENCE', symbol=symbol, **kwargs)
 
@@ -248,7 +248,7 @@ def fdaAdvisoryCommitteeMeetings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#fda-advisory-committee-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_STOCK_SPECIFIC_FDA_ADVISORY_COMMITTEE_MEETING', symbol=symbol, **kwargs)
 
@@ -259,7 +259,7 @@ def fdaAdvisoryCommitteeMeetingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#fda-advisory-committee-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_STOCK_SPECIFIC_FDA_ADVISORY_COMMITTEE_MEETING', symbol=symbol, **kwargs)
 
@@ -270,7 +270,7 @@ def holidaysWSH(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#holidays
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_HOLIDAYS', symbol=symbol, **kwargs)
 
@@ -281,7 +281,7 @@ def holidaysWSHDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#holidays
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_HOLIDAYS', symbol=symbol, **kwargs)
 
@@ -292,7 +292,7 @@ def indexChanges(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#index-changes
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_INDEX_CHANGE', symbol=symbol, **kwargs)
 
@@ -303,7 +303,7 @@ def indexChangesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#index-changes
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_INDEX_CHANGE', symbol=symbol, **kwargs)
 
@@ -314,7 +314,7 @@ def iposWSH(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#ipos
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_INITIAL_PUBLIC_OFFERING', symbol=symbol, **kwargs)
 
@@ -325,7 +325,7 @@ def iposWSHDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#ipos
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_INITIAL_PUBLIC_OFFERING', symbol=symbol, **kwargs)
 
@@ -336,7 +336,7 @@ def legalActions(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#legal-actions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_LEGAL_ACTIONS', symbol=symbol, **kwargs)
 
@@ -347,7 +347,7 @@ def legalActionsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#legal-actions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_LEGAL_ACTIONS', symbol=symbol, **kwargs)
 
@@ -358,7 +358,7 @@ def mergersAndAcquisitions(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#mergers-acquisitions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_MERGER_ACQUISITIONS', symbol=symbol, **kwargs)
 
@@ -369,7 +369,7 @@ def mergersAndAcquisitionsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#mergers-acquisitions
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_MERGER_ACQUISITIONS', symbol=symbol, **kwargs)
 
@@ -380,7 +380,7 @@ def productEvents(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#product-events
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_PRODUCT_EVENTS', symbol=symbol, **kwargs)
 
@@ -391,7 +391,7 @@ def productEventsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#product-events
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_PRODUCT_EVENTS', symbol=symbol, **kwargs)
 
@@ -402,7 +402,7 @@ def researchAndDevelopmentDays(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#research-and-development-days
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_RD_DAY', symbol=symbol, **kwargs)
 
@@ -413,7 +413,7 @@ def researchAndDevelopmentDaysDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#research-and-development-days
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_RD_DAY', symbol=symbol, **kwargs)
 
@@ -424,7 +424,7 @@ def sameStoreSales(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#same-store-sales
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_SAME_STORE_SALES', symbol=symbol, **kwargs)
 
@@ -435,7 +435,7 @@ def sameStoreSalesDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#same-store-sales
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_SAME_STORE_SALES', symbol=symbol, **kwargs)
 
@@ -449,7 +449,7 @@ def secondaryOfferings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#secondary-offerings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_SECONDARY_OFFERING', symbol=symbol, **kwargs)
 
@@ -463,7 +463,7 @@ def secondaryOfferingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#secondary-offerings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_SECONDARY_OFFERING', symbol=symbol, **kwargs)
 
@@ -474,7 +474,7 @@ def seminars(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#seminars
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_SEMINAR', symbol=symbol, **kwargs)
 
@@ -485,7 +485,7 @@ def seminarsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#seminars
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_SEMINAR', symbol=symbol, **kwargs)
 
@@ -496,7 +496,7 @@ def shareholderMeetings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#shareholder-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_SHAREHOLDER_MEETING', symbol=symbol, **kwargs)
 
@@ -507,7 +507,7 @@ def shareholderMeetingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#shareholder-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_SHAREHOLDER_MEETING', symbol=symbol, **kwargs)
 
@@ -518,7 +518,7 @@ def summitMeetings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#summit-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_SUMMIT_MEETING', symbol=symbol, **kwargs)
 
@@ -529,7 +529,7 @@ def summitMeetingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#summit-meetings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_SUMMIT_MEETING', symbol=symbol, **kwargs)
 
@@ -540,7 +540,7 @@ def tradeShows(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#trade-shows
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_TRADE_SHOW', symbol=symbol, **kwargs)
 
@@ -551,7 +551,7 @@ def tradeShowsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#trade-shows
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_TRADE_SHOW', symbol=symbol, **kwargs)
 
@@ -562,7 +562,7 @@ def witchingHours(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#witching-hours
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_WITCHING_HOURS', symbol=symbol, **kwargs)
 
@@ -573,7 +573,7 @@ def witchingHoursDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#witching-hours
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_WITCHING_HOURS', symbol=symbol, **kwargs)
 
@@ -584,7 +584,7 @@ def workshops(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#workshops
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_WALLSTREETHORIZON_WORKSHOP', symbol=symbol, **kwargs)
 
@@ -595,6 +595,6 @@ def workshopsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#workshops
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_WALLSTREETHORIZON_WORKSHOP', symbol=symbol, **kwargs)

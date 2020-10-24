@@ -10,9 +10,9 @@ def sectors(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#sectors
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -26,9 +26,9 @@ def sectorsDF(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#sectors
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -43,9 +43,9 @@ def tags(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#tags
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -59,9 +59,9 @@ def tagsDF(token='', version='', filter=''):
     https://iexcloud.io/docs/api/#tags
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

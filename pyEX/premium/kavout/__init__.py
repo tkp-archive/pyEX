@@ -27,7 +27,7 @@ def kScore(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#k-score-for-us-equities
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_KAVOUT_KSCORE', symbol=symbol, **kwargs)
 
@@ -39,6 +39,6 @@ def kScoreDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#k-score-for-us-equities
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_KAVOUT_KSCORE', symbol=symbol, **kwargs)

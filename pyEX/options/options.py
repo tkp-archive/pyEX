@@ -11,10 +11,10 @@ def optionExpirations(symbol, token='', version='', filter=''):
     9:30am-5pm ET Mon-Fri
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -30,12 +30,12 @@ def options(symbol, expiration, side='', token='', version='', filter=''):
     9:30am-5pm ET Mon-Fri
 
     Args:
-        symbol (string); Ticker to request
-        expiration (string); Expiration date
-        side (string); Side (optional)
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        expiration (str): Expiration date
+        side (str): Side (optional)
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -53,12 +53,12 @@ def optionsDF(symbol, expiration, side='', token='', version='', filter=''):
     9:30am-5pm ET Mon-Fri
 
     Args:
-        symbol (string); Ticker to request
-        expiration (string); Expiration date
-        side (string); Side (optional)
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        expiration (str): Expiration date
+        side (str): Side (optional)
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

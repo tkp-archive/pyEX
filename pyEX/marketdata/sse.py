@@ -40,10 +40,10 @@ def topsSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#tops
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('tops', symbols, on_data, token, version)
@@ -56,10 +56,10 @@ def lastSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#last
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('last', symbols, on_data, token, version)
@@ -76,10 +76,10 @@ def deepSSE(symbols=None, channels=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     symbols = _strCommaSeparatedString(symbols)
@@ -111,10 +111,10 @@ def tradesSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trades
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     symbols = _strCommaSeparatedString(symbols)
@@ -130,10 +130,10 @@ def auctionSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-auction
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('auction', symbols, on_data, token, version)
@@ -145,10 +145,10 @@ def bookSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-book
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('book', symbols, on_data, token, version)
@@ -166,10 +166,10 @@ def opHaltStatusSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-operational-halt-status
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('op-halt-status', symbols, on_data, token, version)
@@ -183,10 +183,10 @@ def officialPriceSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-official-price
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('official-price', symbols, on_data, token, version)
@@ -198,10 +198,10 @@ def securityEventSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-security-event
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('security-event', symbols, on_data, token, version)
@@ -217,10 +217,10 @@ def ssrStatusSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-short-sale-price-test-status
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('ssr-status', symbols, on_data, token, version)
@@ -234,10 +234,10 @@ def systemEventSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-system-event
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('system-event', symbols, on_data, token, version)
@@ -249,10 +249,10 @@ def tradeBreaksSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trades
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('trade-breaks', symbols, on_data, token, version)
@@ -278,10 +278,10 @@ def tradingStatusSSE(symbols=None, on_data=None, token='', version=''):
     https://iexcloud.io/docs/api/#deep-trading-status
 
     Args:
-        symbols (string); Tickers to request
+        symbols (str): Tickers to request
         on_data (function): Callback on data
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     '''
     return _runSSE('trading-status', symbols, on_data, token, version)

@@ -648,8 +648,8 @@ class Client(object):
     Client has access to all methods provided as standalone, but in an authenticated way
 
     Args:
-        api_token (string): api token (can pickup from IEX_TOKEN environment variable)
-        version (string): api version to use (defaults to v1)
+        api_token (str): api token (can pickup from IEX_TOKEN environment variable)
+        version (str): api version to use (defaults to v1)
                           set version to 'sandbox' to run against the IEX sandbox
         api_limit (int): cache calls in this interval
     '''

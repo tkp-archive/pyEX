@@ -11,13 +11,13 @@ def calendar(type='holiday', direction='next', last=1, startDate=None, token='',
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        type (string); "holiday" or "trade"
-        direction (string); "next" or "last"
-        last (int); number to move in direction
-        startDate (date); start date for next or last, YYYYMMDD
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        type (str): "holiday" or "trade"
+        direction (str): "next" or "last"
+        last (int): number to move in direction
+        startDate (date): start date for next or last, YYYYMMDD
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -35,13 +35,13 @@ def calendarDF(type='holiday', direction='next', last=1, startDate=None, token='
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        type (string); "holiday" or "trade"
-        direction (string); "next" or "last"
-        last (int); number to move in direction
-        startDate (date); start date for next or last, YYYYMMDD
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        type (str): "holiday" or "trade"
+        direction (str): "next" or "last"
+        last (int): number to move in direction
+        startDate (date): start date for next or last, YYYYMMDD
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -59,12 +59,12 @@ def holidays(direction='next', last=1, startDate=None, token='', version='', fil
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        direction (string); "next" or "last"
-        last (int); number to move in direction
-        startDate (date); start date for next or last, YYYYMMDD
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        direction (str): "next" or "last"
+        last (int): number to move in direction
+        startDate (date): start date for next or last, YYYYMMDD
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -79,12 +79,12 @@ def holidaysDF(direction='next', last=1, startDate=None, token='', version='', f
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        direction (string); "next" or "last"
-        last (int); number to move in direction
-        startDate (date); start date for next or last, YYYYMMDD
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        direction (str): "next" or "last"
+        last (int): number to move in direction
+        startDate (date): start date for next or last, YYYYMMDD
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result

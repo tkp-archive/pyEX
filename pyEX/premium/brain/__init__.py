@@ -26,7 +26,7 @@ def brain30DaySentiment(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_SENTIMENT_30_DAYS', symbol=symbol, **kwargs)
 
@@ -37,7 +37,7 @@ def brain30DaySentimentDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_SENTIMENT_30_DAYS', symbol=symbol, **kwargs)
 
@@ -48,7 +48,7 @@ def brain7DaySentiment(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_SENTIMENT_7_DAYS', symbol=symbol, **kwargs)
 
@@ -59,7 +59,7 @@ def brain7DaySentimentDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_SENTIMENT_7_DAYS', symbol=symbol, **kwargs)
 
@@ -70,7 +70,7 @@ def brain21DayMLReturnRanking(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_RANKING_21_DAYS', symbol=symbol, **kwargs)
 
@@ -81,7 +81,7 @@ def brain21DayMLReturnRankingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_RANKING_21_DAYS', symbol=symbol, **kwargs)
 
@@ -92,7 +92,7 @@ def brain10DayMLReturnRanking(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_RANKING_10_DAYS', symbol=symbol, **kwargs)
 
@@ -103,7 +103,7 @@ def brain10DayMLReturnRankingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_RANKING_10_DAYS', symbol=symbol, **kwargs)
 
@@ -114,7 +114,7 @@ def brain5DayMLReturnRanking(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_RANKING_5_DAYS', symbol=symbol, **kwargs)
 
@@ -125,7 +125,7 @@ def brain5DayMLReturnRankingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_RANKING_5_DAYS', symbol=symbol, **kwargs)
 
@@ -136,7 +136,7 @@ def brain3DayMLReturnRanking(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_RANKING_3_DAYS', symbol=symbol, **kwargs)
 
@@ -147,7 +147,7 @@ def brain3DayMLReturnRankingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_RANKING_3_DAYS', symbol=symbol, **kwargs)
 
@@ -158,7 +158,7 @@ def brain2DayMLReturnRanking(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_RANKING_2_DAYS', symbol=symbol, **kwargs)
 
@@ -169,7 +169,7 @@ def brain2DayMLReturnRankingDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_RANKING_2_DAYS', symbol=symbol, **kwargs)
 
@@ -180,7 +180,7 @@ def brainLanguageMetricsOnCompanyFilingsAll(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_LANGUAGE_METRICS_ALL', symbol=symbol, **kwargs)
 
@@ -191,7 +191,7 @@ def brainLanguageMetricsOnCompanyFilingsAllDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_LANGUAGE_METRICS_ALL', symbol=symbol, **kwargs)
 
@@ -202,7 +202,7 @@ def brainLanguageMetricsOnCompanyFilings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_LANGUAGE_METRICS_10K', symbol=symbol, **kwargs)
 
@@ -213,7 +213,7 @@ def brainLanguageMetricsOnCompanyFilingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_LANGUAGE_METRICS_10K', symbol=symbol, **kwargs)
 
@@ -224,7 +224,7 @@ def brainLanguageMetricsOnCompanyFilingsDifferenceAll(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-filings-quarterly-and-annual-from-prior-period
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_ALL', symbol=symbol, **kwargs)
 
@@ -235,7 +235,7 @@ def brainLanguageMetricsOnCompanyFilingsDifferenceAllDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-filings-quarterly-and-annual-from-prior-period
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_ALL', symbol=symbol, **kwargs)
 
@@ -246,7 +246,7 @@ def brainLanguageMetricsOnCompanyFilingsDifference(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_10K', symbol=symbol, **kwargs)
 
@@ -257,6 +257,6 @@ def brainLanguageMetricsOnCompanyFilingsDifferenceDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_10K', symbol=symbol, **kwargs)

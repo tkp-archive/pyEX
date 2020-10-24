@@ -11,10 +11,10 @@ def latestFX(symbols=None, token='', version='', filter=''):
     5pm Sun-4pm Fri UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (str): comma seperated list of symbols
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -33,10 +33,10 @@ def latestFXDF(symbols=None, token='', version='', filter=''):
     5pm Sun-4pm Fri UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (str): comma seperated list of symbols
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
 
@@ -52,11 +52,11 @@ def convertFX(symbols=None, amount=None, token='', version='', filter=''):
     5pm Sun-4pm Fri UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
+        symbols (str): comma seperated list of symbols
         amount (float): amount to convert
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -76,11 +76,11 @@ def convertFXDF(symbols=None, amount=None, token='', version='', filter=''):
     5pm Sun-4pm Fri UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
+        symbols (str): comma seperated list of symbols
         amount (float): amount to convert
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
 
@@ -97,15 +97,15 @@ def historicalFX(symbols=None, from_='', to_='', on='', last=0, first=0, token='
     1am Mon-Sat UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
+        symbols (str): comma seperated list of symbols
         from_ (str or datetime): Returns data on or after the given from date. Format YYYY-MM-DD
         to_ (str or datetime): Returns data on or before the given to date. Format YYYY-MM-DD
         on (str or datetime): Returns data on the given date. Format YYYY-MM-DD
         last (int): Returns the latest n number of records in the series
         first (int): Returns the first n number of records in the series
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -139,15 +139,15 @@ def historicalFXDF(symbols=None, from_='', to_='', on='', last=0, first=0, token
     1am Mon-Sat UTC
 
     Args:
-        symbols (string): comma seperated list of symbols
+        symbols (str): comma seperated list of symbols
         from_ (str or datetime): Returns data on or after the given from date. Format YYYY-MM-DD
         to_ (str or datetime): Returns data on or before the given to date. Format YYYY-MM-DD
         on (str or datetime): Returns data on the given date. Format YYYY-MM-DD
         last (int): Returns the latest n number of records in the series
         first (int): Returns the first n number of records in the series
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
 

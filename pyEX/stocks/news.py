@@ -10,11 +10,11 @@ def news(symbol, count=10, token='', version='', filter=''):
     Continuous
 
     Args:
-        symbol (string); Ticker to request
+        symbol (str): Ticker to request
         count (int): limit number of results
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -38,11 +38,11 @@ def newsDF(symbol, count=10, token='', version='', filter=''):
     Continuous
 
     Args:
-        symbol (string); Ticker to request
+        symbol (str): Ticker to request
         count (int): limit number of results
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -60,9 +60,9 @@ def marketNews(count=10, token='', version='', filter=''):
 
     Args:
         count (int): limit number of results
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -78,9 +78,9 @@ def marketNewsDF(count=10, token='', version='', filter=''):
 
     Args:
         count (int): limit number of results
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

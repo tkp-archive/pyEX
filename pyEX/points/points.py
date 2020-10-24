@@ -12,11 +12,11 @@ def points(symbol='market', key='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#data-points
 
     Args:
-        symbol (string); Ticker or market to query
-        key (string); data point to fetch. If empty or none, will return available data points
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker or market to query
+        key (str): data point to fetch. If empty or none, will return available data points
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -36,11 +36,11 @@ def pointsDF(symbol='market', key='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#data-points
 
     Args:
-        symbol (string); Ticker or market to query
-        key (string); data point to fetch. If empty or none, will return available data points
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker or market to query
+        key (str): data point to fetch. If empty or none, will return available data points
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result

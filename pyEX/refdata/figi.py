@@ -9,9 +9,9 @@ def figi(figi_=None, token='', version=''):
     https://iexcloud.io/docs/api/#figi-mapping
 
     Args:
-        figi_ (string); figi to lookup
-        token (string); Access token
-        version (string); API version
+        figi_ (str): figi to lookup
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -26,9 +26,9 @@ def figiDF(figi_=None, token='', version=''):
     https://iexcloud.io/docs/api/#figi-mapping
 
     Args:
-        figi_ (string); figi to lookup
-        token (string); Access token
-        version (string); API version
+        figi_ (str): figi to lookup
+        token (str): Access token
+        version (str): API version
 
     Returns:
         DataFrame: result

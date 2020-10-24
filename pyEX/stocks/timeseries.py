@@ -61,9 +61,9 @@ def timeSeries(id='',
         on (str or datetime): Returns data on the given date. Format YYYY-MM-DD
         last (int): Returns the latest n number of records in the series
         first (int): Returns the first n number of records in the series
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result

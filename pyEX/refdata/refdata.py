@@ -10,9 +10,9 @@ def corporateActions(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -29,9 +29,9 @@ def corporateActionsDF(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -47,9 +47,9 @@ def dividends(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -66,9 +66,9 @@ def dividendsDF(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -84,9 +84,9 @@ def nextDayExtDate(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -103,9 +103,9 @@ def nextDayExtDateDF(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -121,9 +121,9 @@ def directory(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -140,9 +140,9 @@ def directoryDF(date=None, token='', version='', filter=''):
 
     Args:
         date (datetime): Effective date
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result

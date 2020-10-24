@@ -11,9 +11,9 @@ def symbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -30,9 +30,9 @@ def iexSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -48,9 +48,9 @@ def mutualFundSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -66,9 +66,9 @@ def otcSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -84,11 +84,11 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        region (str): region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
+        exchange (str): Case insensitive string of Exchange using IEX Supported Exchanges list
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -108,8 +108,8 @@ def fxSymbols(token='', version=''):
     7am, 9am, UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result
@@ -125,9 +125,9 @@ def optionsSymbols(token='', version='', filter=''):
     9:30am ET Tue-Sat
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -142,9 +142,9 @@ def symbolsDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dataframe: result
@@ -163,9 +163,9 @@ def iexSymbolsDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -183,9 +183,9 @@ def mutualFundSymbolsDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -203,9 +203,9 @@ def otcSymbolsDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -223,11 +223,11 @@ def internationalSymbolsDF(region='', exchange='', token='', version='', filter=
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        region (str): region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
+        exchange (str): Case insensitive string of Exchange using IEX Supported Exchanges list
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -245,8 +245,8 @@ def fxSymbolsDF(token='', version=''):
     7am, 9am, UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         [DataFrame]: results
@@ -265,9 +265,9 @@ def optionsSymbolsDF(token='', version='', filter=''):
     9:30am ET Tue-Sat
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -285,8 +285,8 @@ def symbolsList(token='', version=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result
@@ -302,8 +302,8 @@ def iexSymbolsList(token='', version=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result
@@ -318,8 +318,8 @@ def mutualFundSymbolsList(token='', version=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         List: result
@@ -334,8 +334,8 @@ def otcSymbolsList(token='', version=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result
@@ -350,10 +350,10 @@ def internationalSymbolsList(region='', exchange='', token='', version=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
+        region (str): region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
+        exchange (str): Case insensitive string of Exchange using IEX Supported Exchanges list
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result
@@ -368,8 +368,8 @@ def fxSymbolsList(token='', version=''):
     7am, 9am, UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result
@@ -390,8 +390,8 @@ def optionsSymbolsList(token='', version=''):
     9:30am ET Tue-Sat
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
         list: result

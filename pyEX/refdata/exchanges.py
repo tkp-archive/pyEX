@@ -11,9 +11,9 @@ def exchanges(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -28,9 +28,9 @@ def exchangesDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
@@ -46,9 +46,9 @@ def internationalExchanges(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: result
@@ -63,9 +63,9 @@ def internationalExchangesDF(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: result
