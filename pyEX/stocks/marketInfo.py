@@ -12,11 +12,11 @@ def collections(tag, collectionName, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#collections
 
     Args:
-        tag (string);  Sector, Tag, or List
-        collectionName (string);  Associated name for tag
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        tag (str):  Sector, Tag, or List
+        collectionName (str):  Associated name for tag
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -44,9 +44,9 @@ def earningsToday(token='', version='', filter=''):
 
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -82,9 +82,9 @@ def ipoToday(token='', version='', filter=''):
     10am, 10:30am UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -113,9 +113,9 @@ def ipoUpcoming(token='', version='', filter=''):
     10am, 10:30am UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -143,10 +143,10 @@ def list(option='mostactive', token='', version='', filter=''):
     Updated intraday
 
     Args:
-        option (string); Option to query
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        option (str): Option to query
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -171,9 +171,9 @@ def marketVolume(token='', version='', filter=''):
     7:45am-5:15pm ET Mon-Fri
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -195,9 +195,9 @@ def marketOhlc(token='', version='', filter=''):
     9:30am-5pm ET Mon-Fri
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -226,10 +226,10 @@ def marketYesterday(token='', version='', filter=''):
     Available after 4am ET Tue-Sat
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -257,9 +257,9 @@ def sectorPerformance(token='', version='', filter=''):
     8am-5pm ET Mon-Fri
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -284,10 +284,10 @@ def marketShortInterest(date=None, token='', version='', filter=''):
     https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
 
     Args:
-        date (datetime); Effective Datetime
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -311,11 +311,11 @@ def upcomingEvents(symbol='', refid='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#upcoming-events
 
     Args:
-        symbol (string); Symbol to look up
-        refid (string); Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -338,11 +338,11 @@ def upcomingEarnings(symbol='', refid='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#upcoming-events
 
     Args:
-        symbol (string); Symbol to look up
-        refid (string); Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -365,11 +365,11 @@ def upcomingDividends(symbol='', refid='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#upcoming-events
 
     Args:
-        symbol (string); Symbol to look up
-        refid (string); Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -392,11 +392,11 @@ def upcomingSplits(symbol='', refid='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#upcoming-events
 
     Args:
-        symbol (string); Symbol to look up
-        refid (string); Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -419,11 +419,11 @@ def upcomingIPOs(symbol='', refid='', token='', version='', filter=''):
     https://iexcloud.io/docs/api/#upcoming-events
 
     Args:
-        symbol (string); Symbol to look up
-        refid (string); Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result

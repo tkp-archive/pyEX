@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
+from functools import wraps
 from ..common import _expire, _TIMEFRAME_CHART, _getJson, _raiseIfNotStr, PyEXception, _strOrDate, _reindex, _toDatetime, _EST
 
 
@@ -10,13 +11,13 @@ def book(symbol, token='', version='', filter=''):
     realtime during Investors Exchange market hours
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/book', token, version, filter)
@@ -49,21 +50,8 @@ def _bookToDF(b):
     return df
 
 
+@wraps(book)
 def bookDF(symbol, token='', version='', filter=''):
-    '''Book data
-
-    https://iextrading.com/developer/docs/#book
-    realtime during Investors Exchange market hours
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     x = book(symbol, token, version, filter)
     df = _bookToDF(x)
     return df
@@ -81,15 +69,15 @@ def chart(symbol, timeframe='1m', date=None, token='', version='', filter=''):
         -Prior trading day available after 4am ET Tue-Sat
 
     Args:
-        symbol (string); Ticker to request
-        timeframe (string); Timeframe to request e.g. 1m
+        symbol (str): Ticker to request
+        timeframe (str): Timeframe to request e.g. 1m
         date (datetime): date, if requesting intraday
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     if timeframe is not None and timeframe != '1d':
@@ -116,28 +104,8 @@ def _chartToDF(c):
     return df
 
 
-@_expire(second=0)
+@wraps(chart)
 def chartDF(symbol, timeframe='1m', date=None, token='', version='', filter=''):
-    '''Historical price/volume data, daily and intraday
-
-    https://iexcloud.io/docs/api/#historical-prices
-    Data Schedule
-    1d: -9:30-4pm ET Mon-Fri on regular market trading days
-        -9:30-1pm ET on early close trading days
-    All others:
-        -Prior trading day available after 4am ET Tue-Sat
-
-    Args:
-        symbol (string); Ticker to request
-        timeframe (string); Timeframe to request e.g. 1m
-        date (datetime): date, if requesting intraday
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     c = chart(symbol, timeframe, date, token, version, filter)
     df = pd.DataFrame(c)
     _toDatetime(df)
@@ -160,34 +128,20 @@ def delayedQuote(symbol, token='', version='', filter=''):
     4:30am - 8pm ET M-F when market is open
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/delayed-quote', token, version, filter)
 
 
+@wraps(delayedQuote)
 def delayedQuoteDF(symbol, token='', version='', filter=''):
-    '''This returns the 15 minute delayed market quote.
-
-    https://iexcloud.io/docs/api/#delayed-quote
-    15min delayed
-    4:30am - 8pm ET M-F when market is open
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.io.json.json_normalize(delayedQuote(symbol, token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
@@ -203,14 +157,14 @@ def intraday(symbol, date='', token='', version='', filter=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        date (string): Formatted as YYYYMMDD. This can be used for batch calls when range is 1d or date. Currently supporting trailing 30 calendar days of minute bar data.
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        date (str): Formatted as YYYYMMDD. This can be used for batch calls when range is 1d or date. Currently supporting trailing 30 calendar days of minute bar data.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     if date:
@@ -219,23 +173,8 @@ def intraday(symbol, date='', token='', version='', filter=''):
     return _getJson('stock/{}/intraday-prices'.format(symbol), token, version, filter)
 
 
+@wraps(intraday)
 def intradayDF(symbol, date='', token='', version='', filter=''):
-    '''This endpoint will return aggregated intraday prices in one minute buckets
-
-    https://iexcloud.io/docs/api/#intraday-prices
-    9:30-4pm ET Mon-Fri on regular market trading days
-    9:30-1pm ET on early close trading days
-
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     val = intraday(symbol, date, token, version, filter)
     df = pd.DataFrame(val)
     _toDatetime(df)
@@ -250,33 +189,20 @@ def largestTrades(symbol, token='', version='', filter=''):
     9:30-4pm ET M-F during regular market hours
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/largest-trades', token, version, filter)
 
 
+@wraps(largestTrades)
 def largestTradesDF(symbol, token='', version='', filter=''):
-    '''This returns 15 minute delayed, last sale eligible trades.
-
-    https://iexcloud.io/docs/api/#largest-trades
-    9:30-4pm ET M-F during regular market hours
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(largestTrades(symbol, token, version, filter))
     _toDatetime(df)
     _reindex(df, 'time')
@@ -290,33 +216,20 @@ def ohlc(symbol, token='', version='', filter=''):
     9:30am-5pm ET Mon-Fri
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/ohlc', token, version, filter)
 
 
+@wraps(ohlc)
 def ohlcDF(symbol, token='', version='', filter=''):
-    '''Returns the official open and close for a give symbol.
-
-    https://iexcloud.io/docs/api/#news
-    9:30am-5pm ET Mon-Fri
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     o = ohlc(symbol, token, version, filter)
     if o:
         df = pd.io.json.json_normalize(o)
@@ -334,33 +247,20 @@ def yesterday(symbol, token='', version='', filter=''):
     Available after 4am ET Tue-Sat
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/previous', token, version, filter)
 
 
+@wraps(yesterday)
 def yesterdayDF(symbol, token='', version='', filter=''):
-    '''This returns previous day adjusted price data for one or more stocks
-
-    https://iexcloud.io/docs/api/#previous-day-prices
-    Available after 4am ET Tue-Sat
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     y = yesterday(symbol, token, version, filter)
     if y:
         df = pd.io.json.json_normalize(y)
@@ -378,33 +278,20 @@ def price(symbol, token='', version='', filter=''):
     4:30am-8pm ET Mon-Fri
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/price', token, version, filter)
 
 
+@wraps(price)
 def priceDF(symbol, token='', version='', filter=''):
-    '''Price of ticker
-
-    https://iexcloud.io/docs/api/#price
-    4:30am-8pm ET Mon-Fri
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.io.json.json_normalize({'price': price(symbol, token, version, filter)})
     _toDatetime(df)
     return df
@@ -418,34 +305,20 @@ def quote(symbol, token='', version='', filter=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/quote', token, version, filter)
 
 
+@wraps(quote)
 def quoteDF(symbol, token='', version='', filter=''):
-    '''Get quote for ticker
-
-    https://iexcloud.io/docs/api/#quote
-    4:30am-8pm ET Mon-Fri
-
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     q = quote(symbol, token, version, filter)
     if q:
         df = pd.io.json.json_normalize(q)
@@ -474,43 +347,20 @@ def spread(symbol, token='', version='', filter=''):
     8am ET M-F
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/effective-spread', token, version, filter)
 
 
+@wraps(spread)
 def spreadDF(symbol, token='', version='', filter=''):
-    '''This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
-    Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
-    Lower effectiveSpread and higher priceImprovement values are generally considered optimal.
-
-    Effective spread is designed to measure marketable orders executed in relation to the market center’s
-    quoted spread and takes into account hidden and midpoint liquidity available at each market center.
-    Effective Spread is calculated by using eligible trade prices recorded to the consolidated tape and
-    comparing those trade prices to the National Best Bid and Offer (“NBBO”) at the time of the execution.
-
-    View the data disclaimer at the bottom of the stocks app for more information about how these values are calculated.
-
-
-    https://iexcloud.io/docs/api/#earnings-today
-    8am ET M-F
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(spread(symbol, token, version, filter))
     _toDatetime(df)
     _reindex(df, 'venue')
@@ -526,35 +376,20 @@ def volumeByVenue(symbol, token='', version='', filter=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame: result
     '''
     _raiseIfNotStr(symbol)
     return _getJson('stock/' + symbol + '/volume-by-venue', token, version, filter)
 
 
+@wraps(volumeByVenue)
 def volumeByVenueDF(symbol, token='', version='', filter=''):
-    '''This returns 15 minute delayed and 30 day average consolidated volume percentage of a stock, by market.
-    This call will always return 13 values, and will be sorted in ascending order by current day trading volume percentage.
-
-    https://iexcloud.io/docs/api/#volume-by-venue
-    Updated during regular market hours 9:30am-4pm ET
-
-
-    Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(volumeByVenue(symbol, token, version, filter))
     _toDatetime(df)
     _reindex(df, 'venue')

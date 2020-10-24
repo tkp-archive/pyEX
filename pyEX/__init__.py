@@ -10,16 +10,45 @@ from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF
 from .economic import EconomicPoints  # noqa: F401
 from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF  # noqa: F401
 from .markets import markets, marketsDF  # noqa: F401
-from .marketdata.cryptocurrency import cryptoBookSSE, cryptoEventsSSE, cryptoQuotesSSE  # noqa: F401
+from .marketdata.cryptocurrency import (cryptoBookSSE, cryptoBookSSEAsync,  # noqa: F401
+                                        cryptoEventsSSE, cryptoEventsSSEAsync,  # noqa: F401
+                                        cryptoQuotesSSE, cryptoQuotesSSEAsync)  # noqa: F401
 from .marketdata.fx import fxSSE  # noqa: F401
-from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE  # noqa: F401
-from .marketdata.http import (tops, topsDF, last, lastDF, deep, deepDF,  # noqa: F401
-                              trades, tradesDF, auction, auctionDF,  # noqa: F401
-                              book as deepBook, bookDF as deepBookDF,  # noqa: F401
-                              opHaltStatus, opHaltStatusDF, officialPrice, officialPriceDF,  # noqa: F401
-                              securityEvent, securityEventDF, ssrStatus, ssrStatusDF,  # noqa: F401
-                              systemEvent, systemEventDF, tradeBreak, tradeBreakDF,  # noqa: F401
-                              tradingStatus, tradingStatusDF, hist, histDF)  # noqa: F401
+from .marketdata.news import newsSSE, newsSSEAsync  # noqa: F401
+from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync  # noqa: F401
+from .marketdata.sse import (topsSSE, topsSSEAsync,  # noqa: F401
+                             lastSSE, lastSSEASync,  # noqa: F401
+                             deepSSE, deepSSEAsync,  # noqa: F401
+                             tradesSSE, tradesSSEAsync,  # noqa: F401
+                             auctionSSE, auctionSSEAsync,  # noqa: F401
+                             bookSSE, bookSSEAsync,  # noqa: F401
+                             opHaltStatusSSE, opHaltStatusSSEAsync,  # noqa: F401
+                             officialPriceSSE, officialPriceSSEAsync,  # noqa: F401
+                             securityEventSSE, securityEventSSEAsync,  # noqa: F401
+                             ssrStatusSSE, ssrStatusSSEAsync,  # noqa: F401
+                             systemEventSSE, systemEventSSEAsync,  # noqa: F401
+                             tradeBreaksSSE, tradeBreaksSSEAsync,  # noqa: F401
+                             tradingStatusSSE, tradingStatusSSEAsync)  # noqa: F401
+from .marketdata.stock import (stocksUSNoUTPSSE, stocksUSNoUTPSSEAsync,  # noqa: F401
+                               stocksUSSSE, stocksUSSSEAsync,  # noqa: F401
+                               stocksUS1SecondSSE, stocksUS1SecondSSEAsync,  # noqa: F401
+                               stocksUS5SecondSSE, stocksUS5SecondSSEAsync,  # noqa: F401
+                               stocksUS1MinuteSSE, stocksUS1MinuteSSEAsync)  # noqa: F401
+from .marketdata.http import (tops, topsAsync, topsDF,  # noqa: F401
+                              last, lastAsync, lastDF,  # noqa: F401
+                              deep, deepAsync, deepDF,  # noqa: F401
+                              hist, histAsync, histDF,  # noqa: F401
+                              trades, tradesAsync, tradesDF,  # noqa: F401
+                              auction, auctionAsync, auctionDF,  # noqa: F401
+                              book as deepBook, bookAsync as deepBookAsync, bookDF as deepBookDF,  # noqa: F401
+                              opHaltStatus, opHaltStatusAsync, opHaltStatusDF,  # noqa: F401
+                              officialPrice, officialPriceAsync, officialPriceDF,  # noqa: F401
+                              securityEvent, securityEventAsync, securityEventDF,  # noqa: F401
+                              ssrStatus, ssrStatusAsync, ssrStatusDF,  # noqa: F401
+                              systemEvent, systemEventAsync, systemEventDF,  # noqa: F401
+                              tradeBreak, tradeBreakAsync, tradeBreakDF,  # noqa: F401
+                              tradingStatus, tradingStatusAsync, tradingStatusDF)  # noqa: F401
+from .marketdata.ws import *  # noqa: F401,F403
 from .points import points, pointsDF  # noqa: F401
 from .rates import RatesPoints  # noqa: F401
 from .refdata import (symbols, iexSymbols, mutualFundSymbols, otcSymbols, internationalSymbols, fxSymbols, optionsSymbols,  # noqa: F401

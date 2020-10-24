@@ -41,12 +41,12 @@ All others:
     -Prior trading day available after 4am ET Tue-Sat
 
 Args:
-    symbol (string); Ticker to request
-    timeframe (string); Timeframe to request e.g. 1m
+    symbol (str); Ticker to request
+    timeframe (str); Timeframe to request e.g. 1m
     date (datetime): date, if requesting intraday
-    token (string); Access token
-    version (string); API version
-    filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+    token (str); Access token
+    version (str); API version
+    filter (str); filters: https://iexcloud.io/docs/api/#filter-results
 
 Returns:
     dict: result
@@ -79,8 +79,8 @@ IEX Cloud Client
 Client has access to all methods provided as standalone, but in an authenticated way
 
 Args:
-    api_token (string): api token (can pickup from IEX_TOKEN environment variable)
-    version (string): api version to use (defaults to v1)
+    api_token (str): api token (can pickup from IEX_TOKEN environment variable)
+    version (str): api version to use (defaults to v1)
                       set version to 'sandbox' to run against the IEX sandbox
     api_limit (int): cache calls in this interval
 File:           ~/Programs/projects/iex/pyEX/pyEX/client.py
@@ -142,6 +142,19 @@ c.deleteRule("<ruleID>")
 We also provide helper classes in python for constructing rules such that they abide by the rules schema (dictated in the `schema()` helper function)
 
 ## Data
+`pyEX` provides wrappers around both static and SSE streaming data. For most static data endpoints, we provide both JSON and DataFrame return functions. For market data endpoints, we provide async wrappers as well using `aiohttp` (to install the dependencies,  `pip install pyEX[async]`).
+
+DataFrame functions will have the suffix `DF`, and async functions will have the suffix `Async`. 
+
+SSE streaming data can either be used with callbacks:
+
+`newsSSE('AAPL', on_data=my_function_todo_on_data)`
+
+or via async generators (after installing `pyEX[async]`):
+
+`async for data in newsSSE('AAPL'):`
+
+
 ###  Full API
 Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
 
@@ -348,38 +361,45 @@ Currently, the following methods are implemented:
 - volumeByVenue
 - volumeByVenueDF
 
-### SSE Streaming
-- topsSSE
-- lastSSE
-- deepSSE
-- tradesSSE
-
 ### TOPS
 - tops
+- topsAsync
 - topsDF
 - last
+- lastAsync
 - lastDF
 - deep
+- deepAsync
 - deepDF
 - auction
+- auctionAsync
 - auctionDF
 - bookDeep
+- bookDeepAsync
 - bookDeepDF
 - officialPrice
+- officialPriceAsync
 - officialPriceDF
 - opHaltStatus
+- opHaltStatusAsync
 - opHaltStatusDF
 - securityEvent
+- securityEventAsync
 - securityEventDF
 - ssrStatus
+- ssrStatusAsync
 - ssrStatusDF
 - systemEvent
+- systemEventAsync
 - systemEventDF
 - trades
+- tradesAsync
 - tradesDF
 - tradeBreak
+- tradeBreakAsync
 - tradeBreakDF
 - tradingStatus
+- tradingStatusAsync
 - tradingStatusDF
 
 ### Alternative
@@ -402,9 +422,6 @@ Currently, the following methods are implemented:
 - historicalFX
 - historicalFXDF
 
-### FXSSE
-- fxSSE
-
 ### Crypto
 - cryptoBook
 - cryptoBookDF
@@ -412,11 +429,6 @@ Currently, the following methods are implemented:
 - cryptoQuoteDF
 - cryptoPrice
 - cryptoPriceDF
-
-### CryptoSSE
-- cryptoBookSSE
-- cryptoEventsSSE
-- cryptoQuotesSSE
 
 ### Rates
 - thirtyYear
@@ -461,8 +473,70 @@ Currently, the following methods are implemented:
 - institutionalMoney
 - retailMoney
 
-### Premium
-#### Wall Street Horizon
+## Streaming Data
+
+### SSE Streaming
+- topsSSE
+- topsSSEAsync
+- lastSSE
+- lastSSEASync
+- deepSSE
+- deepSSEAsync
+- tradesSSE
+- tradesSSEAsync
+- auctionSSE
+- auctionSSEAsync
+- bookSSE
+- bookSSEAsync
+- opHaltStatusSSE
+- opHaltStatusSSEAsync
+- officialPriceSSE
+- officialPriceSSEAsync
+- securityEventSSE
+- securityEventSSEAsync
+- ssrStatusSSE
+- ssrStatusSSEAsync
+- systemEventSSE
+- systemEventSSEAsync
+- tradeBreaksSSE
+- tradeBreaksSSEAsync
+- tradingStatusSSE
+- tradingStatusSSEAsync
+
+### Stocks
+- stocksUSNoUTPSSE
+- stocksUSNoUTPSSEsync
+- stocksUSSSE
+- stocksUSSSEsync
+- stocksUS1SecondSSE
+- stocksUS1SecondSSEsync
+- stocksUS5SecondSSE
+- stocksUS5SecondSSEsync
+- stocksUS1MinuteSSE
+- stocksUS1MinuteSSEAsync
+
+### News
+- newsSSE
+- newsSSEAsync
+
+### Sentiment
+- sentimentSSE
+- sentimentSSEAsync
+
+### FX
+- fxSSE
+- fxSSEAsync
+
+### Crypto
+- cryptoBookSSE
+- cryptoBookSSEAsync
+- cryptoEventsSSE
+- cryptoEventsSSEAsync
+- cryptoQuotesSSE
+- cryptoQuotesSSEAsync
+
+## Premium Data
+### Wall Street Horizon
 - analystDays
 - analystDaysDF
 - boardOfDirectorsMeeting
@@ -516,13 +590,13 @@ Currently, the following methods are implemented:
 - workshops
 - workshopsDF
 
-#### Fraud Factors
+### Fraud Factors
 - nonTimelyFilings
 - nonTimelyFilingsDF
 - similarityIndex
 - similarityIndexDF
 
-#### Extract Alpha
+### Extract Alpha
 - cam1
 - cam1DF
 - esgCFPBComplaints
@@ -550,11 +624,11 @@ Currently, the following methods are implemented:
 - tacticalModel1
 - tacticalModel1DF
 
-#### Precision Alpha
+### Precision Alpha
 - precisionAlphaPriceDynamics
 - precisionAlphaPriceDynamicsDF
 
-#### BRAIN Company
+### BRAIN Company
 - brain30DaySentiment
 - brain30DaySentimentDF
 - brain7DaySentiment
@@ -578,18 +652,22 @@ Currently, the following methods are implemented:
 - brainLanguageMetricsOnCompanyFilingsDifference
 - brainLanguageMetricsOnCompanyFilingsDifferenceDF
 
-#### Kavout
+### Kavout
 - kScore
 - kScoreDF
 
-#### Audit Analytics
+### Audit Analytics
 - accountingQualityAndRiskMatrix
 - accountingQualityAndRiskMatrixDF
 - directorAndOfficerChanges
 - directorAndOfficerChangesDF
 
-#### ValuEngine
+### ValuEngine
 - valuEngineStockResearchReport
+
+### StockTwits Sentiment
+- socialSentiment
+- socialSentimentDF
 
 
 

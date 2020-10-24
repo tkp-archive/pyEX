@@ -14,12 +14,12 @@ def balanceSheet(symbol, period='quarter', last=1, token='', version='', filter=
 
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -47,12 +47,12 @@ def cashFlow(symbol, period='quarter', last=1, token='', version='', filter=''):
 
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -80,10 +80,10 @@ def dividends(symbol, timeframe='ytd', token='', version='', filter=''):
     Updated at 9am UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -117,12 +117,12 @@ def earnings(symbol, period='quarter', last=1, field='', token='', version='', f
     Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -160,11 +160,11 @@ def financials(symbol, period='quarter', token='', version='', filter=''):
     Updates at 8am, 9am UTC daily
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -200,12 +200,12 @@ def incomeStatement(symbol, period='quarter', last=1, token='', version='', filt
     Updates at 8am, 9am UTC daily
 
     Args:
-        symbol (string); Ticker to request
-        period (string); Period, either 'annual' or 'quarter'
-        last (int); Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result
@@ -232,10 +232,10 @@ def stockSplits(symbol, timeframe='ytd', token='', version='', filter=''):
     Updated at 9am UTC every day
 
     Args:
-        symbol (string); Ticker to request
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbol (str): Ticker to request
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict or DataFrame: result

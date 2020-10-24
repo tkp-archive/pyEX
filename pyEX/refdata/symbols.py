@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
+from functools import wraps
 from ..common import _expire, _getJson, _reindex, _toDatetime, _UTC
 
 
@@ -11,12 +12,12 @@ def symbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/symbols', token, version, filter)
 
@@ -30,12 +31,12 @@ def iexSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/iex/symbols', token, version, filter)
 
@@ -48,12 +49,12 @@ def mutualFundSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/mutual-funds/symbols', token, version, filter)
 
@@ -66,12 +67,12 @@ def otcSymbols(token='', version='', filter=''):
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/otc/symbols', token, version, filter)
 
@@ -84,14 +85,14 @@ def internationalSymbols(region='', exchange='', token='', version='', filter=''
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        region (str): region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
+        exchange (str): Case insensitive string of Exchange using IEX Supported Exchanges list
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     if region:
         return _getJson('ref-data/region/{region}/symbols'.format(region=region), token, version, filter)
@@ -108,11 +109,11 @@ def fxSymbols(token='', version=''):
     7am, 9am, UTC daily
 
     Args:
-        token (string); Access token
-        version (string); API version
+        token (str): Access token
+        version (str): API version
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/fx/symbols', token, version)
 
@@ -125,132 +126,58 @@ def optionsSymbols(token='', version='', filter=''):
     9:30am ET Tue-Sat
 
     Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
+        dict or DataFrame or list: result
     '''
     return _getJson('ref-data/options/symbols', token, version, filter)
 
 
+@wraps(symbols)
 def symbolsDF(token='', version='', filter=''):
-    '''This call returns an array of symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        dataframe: result
-    '''
     df = pd.DataFrame(symbols(token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
+@wraps(iexSymbols)
 def iexSymbolsDF(token='', version='', filter=''):
-    '''This call returns an array of symbols the Investors Exchange supports for trading.
-    This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
-
-    https://iexcloud.io/docs/api/#iex-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(iexSymbols(token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
+@wraps(mutualFundSymbols)
 def mutualFundSymbolsDF(token='', version='', filter=''):
-    '''This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#mutual-fund-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(mutualFundSymbols(token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
+@wraps(otcSymbols)
 def otcSymbolsDF(token='', version='', filter=''):
-    '''This call returns an array of OTC symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#otc-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(otcSymbols(token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
+@wraps(internationalSymbols)
 def internationalSymbolsDF(region='', exchange='', token='', version='', filter=''):
-    '''This call returns an array of international symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#international-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.DataFrame(internationalSymbols(region, exchange, token, version, filter))
     _toDatetime(df)
     _reindex(df, 'symbol')
     return df
 
 
+@wraps(fxSymbols)
 def fxSymbolsDF(token='', version=''):
-    '''This call returns a list of supported currencies and currency pairs.
-
-    https://iexcloud.io/docs/api/#fx-symbols
-    7am, 9am, UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        [DataFrame]: results
-    '''
     fx = fxSymbols(token, version)
     df1 = pd.DataFrame(fx['currencies'])
     df2 = pd.DataFrame(fx['pairs'])
@@ -258,122 +185,41 @@ def fxSymbolsDF(token='', version=''):
     return [df1, df2]
 
 
+@wraps(optionsSymbols)
 def optionsSymbolsDF(token='', version='', filter=''):
-    '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
-
-    https://iexcloud.io/docs/api/#options-symbols
-    9:30am ET Tue-Sat
-
-    Args:
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        DataFrame: result
-    '''
     df = pd.io.json.json_normalize(optionsSymbols(token, version, filter))
     df = df.T
     df.columns = ['expirations']
     return df
 
 
+@wraps(symbols)
 def symbolsList(token='', version=''):
-    '''This call returns an array of symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     return [x['symbol'] for x in symbols(token, version, filter='symbol')]
 
 
+@wraps(iexSymbols)
 def iexSymbolsList(token='', version=''):
-    '''This call returns an array of symbols the Investors Exchange supports for trading.
-    This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
-
-    https://iexcloud.io/docs/api/#iex-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     return [x['symbol'] for x in iexSymbols(token, version, filter='symbol')]
 
 
+@wraps(mutualFundSymbols)
 def mutualFundSymbolsList(token='', version=''):
-    '''This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#mutual-fund-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        List: result
-    '''
     return [x['symbol'] for x in mutualFundSymbols(token, version, filter='symbol')]
 
 
+@wraps(otcSymbols)
 def otcSymbolsList(token='', version=''):
-    '''This call returns an array of OTC symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#otc-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     return [x['symbol'] for x in otcSymbols(token, version, filter='symbol')]
 
 
+@wraps(internationalSymbols)
 def internationalSymbolsList(region='', exchange='', token='', version=''):
-    '''This call returns an array of international symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#international-symbols
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        region (string); region, 2 letter case insensitive string of country codes using ISO 3166-1 alpha-2
-        exchange (string): Case insensitive string of Exchange using IEX Supported Exchanges list
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     return [x['symbol'] for x in internationalSymbols(region, exchange, token, version, filter='symbol')]
 
 
+@wraps(fxSymbols)
 def fxSymbolsList(token='', version=''):
-    '''This call returns a list of supported currencies and currency pairs.
-
-    https://iexcloud.io/docs/api/#fx-symbols
-    7am, 9am, UTC daily
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     fx = fxSymbols(token, version)
     ret = [[], []]
     for c in fx['currencies']:
@@ -383,17 +229,6 @@ def fxSymbolsList(token='', version=''):
     return ret
 
 
+@wraps(optionsSymbols)
 def optionsSymbolsList(token='', version=''):
-    '''This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
-
-    https://iexcloud.io/docs/api/#options-symbols
-    9:30am ET Tue-Sat
-
-    Args:
-        token (string); Access token
-        version (string); API version
-
-    Returns:
-        list: result
-    '''
     return [x['symbol'] for x in optionsSymbols(token, version, filter='symbol')]

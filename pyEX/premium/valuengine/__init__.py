@@ -8,7 +8,7 @@ def valuEngineStockResearchReport(symbol='', date=None, token='', version=''):
     https://iexcloud.io/docs/api/#valuengine-stock-research-report
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     if not symbol or not date:
         raise PyEXception("symbol and date required")

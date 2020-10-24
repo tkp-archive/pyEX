@@ -31,13 +31,13 @@ def batch(symbols, fields=None, range_='1m', last=10, token='', version='', filt
 
 
     Args:
-        symbols (list); List of tickers to request
-        fields (list); List of fields to request
-        range_ (string); Date range for chart
-        last (int);
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (list): List of tickers to request
+        fields (list): List of fields to request
+        range_ (str): Date range for chart
+        last (int):
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: results in json
@@ -71,13 +71,13 @@ def batchDF(symbols, fields=None, range_='1m', last=10, token='', version='', fi
 
 
     Args:
-        symbols (list); List of tickers to request
-        fields (list); List of fields to request
-        range_ (string); Date range for chart
-        last (int);
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (list): List of tickers to request
+        fields (list): List of fields to request
+        range_ (str): Date range for chart
+        last (int):
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: results in json
@@ -110,13 +110,13 @@ def bulkBatch(symbols, fields=None, range_='1m', last=10, token='', version='', 
 
 
     Args:
-        symbols (list); List of tickers to request
-        fields (list); List of fields to request
-        range_ (string); Date range for chart
-        last (int);
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (list): List of tickers to request
+        fields (list): List of fields to request
+        range_ (str): Date range for chart
+        last (int):
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         dict: results in json
@@ -160,13 +160,13 @@ def bulkBatchDF(symbols, fields=None, range_='1m', last=10, token='', version=''
 
 
     Args:
-        symbols (list); List of tickers to request
-        fields (list); List of fields to request
-        range_ (string); Date range for chart
-        last (int);
-        token (string); Access token
-        version (string); API version
-        filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+        symbols (list): List of tickers to request
+        fields (list): List of fields to request
+        range_ (str): Date range for chart
+        last (int):
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
         DataFrame: results in json

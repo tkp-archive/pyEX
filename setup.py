@@ -34,7 +34,12 @@ requires = [
     'temporal-cache>=0.1.1',
 ]
 
-requires_dev = [
+requires_async = requires + [
+    'aiohttp>=3.2',
+    'aiohttp-sse-client>=0.2.0',
+]
+
+requires_dev = requires_async + [
     'autopep8>=1.4.1',
     'bump2version>=1.0.0',
     'flake8>=3.7.8',
@@ -43,7 +48,7 @@ requires_dev = [
     'pytest-cov>=2.6.1',
     'Sphinx>=1.8.4',
     'sphinx-markdown-builder>=0.5.2',
-] + requires
+]
 
 setup(
     name=name,
@@ -70,5 +75,6 @@ setup(
     install_requires=requires,
     extras_require={
         'dev': requires_dev,
+        'async': requires_async,
     },
 )

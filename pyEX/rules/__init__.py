@@ -10,9 +10,9 @@ def lookup(lookup='', token='', version=''):
     https://iexcloud.io/docs/api/#rules-schema
 
     Args:
-        lookup (string); If a schema object has “isLookup”: true, pass the value key to /stable/rules/lookup/{value}. This returns all valid values for the rightValue of a condition.
-        token (string); Access token
-        version (string); API version
+        lookup (str): If a schema object has “isLookup”: true, pass the value key to /stable/rules/lookup/{value}. This returns all valid values for the rightValue of a condition.
+        token (str): Access token
+        version (str): API version
 
     Returns:
         dict: result

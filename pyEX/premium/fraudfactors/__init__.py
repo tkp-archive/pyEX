@@ -30,7 +30,7 @@ def similarityIndex(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#similiarity-index
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX', symbol=symbol, **kwargs)
 
@@ -45,7 +45,7 @@ def similarityIndexDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#similiarity-index
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX', symbol=symbol, **kwargs)
 
@@ -58,7 +58,7 @@ def nonTimelyFilings(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#non-timely-filings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _base(id='PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS', symbol=symbol, **kwargs)
 
@@ -71,6 +71,6 @@ def nonTimelyFilingsDF(symbol='', **kwargs):
     https://iexcloud.io/docs/api/#non-timely-filings
 
     Args:
-        symbol (str); symbol to use
+        symbol (str): symbol to use
     '''
     return _baseDF(id='PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS', symbol=symbol, **kwargs)

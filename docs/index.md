@@ -41,12 +41,12 @@ All others:
     -Prior trading day available after 4am ET Tue-Sat
 
 Args:
-    symbol (string); Ticker to request
-    timeframe (string); Timeframe to request e.g. 1m
+    symbol (str); Ticker to request
+    timeframe (str); Timeframe to request e.g. 1m
     date (datetime): date, if requesting intraday
-    token (string); Access token
-    version (string); API version
-    filter (string); filters: https://iexcloud.io/docs/api/#filter-results
+    token (str); Access token
+    version (str); API version
+    filter (str); filters: https://iexcloud.io/docs/api/#filter-results
 
 Returns:
     dict: result
@@ -79,8 +79,8 @@ IEX Cloud Client
 Client has access to all methods provided as standalone, but in an authenticated way
 
 Args:
-    api_token (string): api token (can pickup from IEX_TOKEN environment variable)
-    version (string): api version to use (defaults to v1)
+    api_token (str): api token (can pickup from IEX_TOKEN environment variable)
+    version (str): api version to use (defaults to v1)
                       set version to 'sandbox' to run against the IEX sandbox
     api_limit (int): cache calls in this interval
 File:           ~/Programs/projects/iex/pyEX/pyEX/client.py
