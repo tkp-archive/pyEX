@@ -425,7 +425,7 @@ def _getJsonIEXCloudBase(base_url, url, token='', version='v1', filter=''):
 
 def _getJsonIEXCloud(url, token='', version='v1', filter=''):
     '''for iex cloud'''
-    return _getJsonIEXCloud(_URL_PREFIX2, url, token, version, filter)
+    return _getJsonIEXCloudBase(_URL_PREFIX2, url, token, version, filter)
 
 
 async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='v1', filter=''):
