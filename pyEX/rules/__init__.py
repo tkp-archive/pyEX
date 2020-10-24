@@ -96,3 +96,24 @@ def delete(ruleId, token='', version=''):
         ruleId (str): The id of an existing rule to puase
     '''
     return _deleteJson('rules/{}'.format(ruleId), token=token, version=version)
+
+def rule(ruleId, token='', version=''):
+    '''Rule information such as the current rule status and execution statistics.
+
+    Args:
+        ruleId (str): The id of an existing rule to puase
+    '''
+    return _getJson('rules/info/{}'.format(ruleId), token=token, version=version)
+
+def rules(token='', version=''):
+    '''List all rules that are currently on your account. Each rule object returned will include the current rule status and execution statistics.'''
+    return _getJson('rules', token=token, version=version)
+
+
+def output(ruleId, token='', version=''):
+    '''If you choose `logs` as your rule output method, IEX Cloud will save the output objects on our server. You can use this method to retrieve those data objects.
+
+    Args:
+        ruleId (str): The id of an existing rule to puase
+    '''
+    return _getJson('rules/output/{}'.format(ruleId), token=token, version=version)
