@@ -37,6 +37,7 @@ from .marketdata.stock import (stocksUSNoUTPSSE, stocksUSNoUTPSSEAsync,  # noqa:
 from .marketdata.http import (tops, topsAsync, topsDF,  # noqa: F401
                               last, lastAsync, lastDF,  # noqa: F401
                               deep, deepAsync, deepDF,  # noqa: F401
+                              hist, histAsync, histDF,  # noqa: F401
                               trades, tradesAsync, tradesDF,  # noqa: F401
                               auction, auctionAsync, auctionDF,  # noqa: F401
                               book as deepBook, bookAsync as deepBookAsync, bookDF as deepBookDF,  # noqa: F401

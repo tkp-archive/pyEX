@@ -411,7 +411,7 @@ def _getJsonOrig(url):
     raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
 
 
-def _getJsonIEXCloudBase(base_url, url, token='', version='v1', filter=''):
+def _getJsonIEXCloudBase(base_url, url, token='', version='stable', filter=''):
     '''for iex cloud'''
     url = base_url.format(version=version) + url
     params = {'token': token}
@@ -423,12 +423,12 @@ def _getJsonIEXCloudBase(base_url, url, token='', version='v1', filter=''):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloud(url, token='', version='v1', filter=''):
+def _getJsonIEXCloud(url, token='', version='stable', filter=''):
     '''for iex cloud'''
     return _getJsonIEXCloudBase(_URL_PREFIX2, url, token, version, filter)
 
 
-async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='v1', filter=''):
+async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='stable', filter=''):
     '''for iex cloud'''
     import aiohttp
     url = _URL_PREFIX2.format(version=version) + url
@@ -442,12 +442,12 @@ async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='v1', filte
             raise PyEXception('Response %d - ' % resp.status, await resp.text())
 
 
-async def _getJsonIEXCloudAsync(url, token='', version='v1', filter=''):
+async def _getJsonIEXCloudAsync(url, token='', version='stable', filter=''):
     '''for iex cloud'''
     return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
 
 
-def _postJsonIEXCloudBase(base_url, url, data=None, json=None, token='', version='v1', token_in_params=True):
+def _postJsonIEXCloudBase(base_url, url, data=None, json=None, token='', version='stable', token_in_params=True):
     '''for iex cloud'''
     url = base_url.format(version=version) + url
     if token_in_params:
@@ -460,12 +460,12 @@ def _postJsonIEXCloudBase(base_url, url, data=None, json=None, token='', version
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _postJsonIEXCloud(url, data=None, json=None, token='', version='v1', token_in_params=True):
+def _postJsonIEXCloud(url, data=None, json=None, token='', version='stable', token_in_params=True):
     '''for iex cloud'''
     return _postJsonIEXCloudBase(_URL_PREFIX2, data, json, token, version, token_in_params)
 
 
-async def _postJsonIEXCloudAsyncBase(base_url, url, data=None, json=None, token='', version='v1', filter='', token_in_params=True):
+async def _postJsonIEXCloudAsyncBase(base_url, url, data=None, json=None, token='', version='stable', filter='', token_in_params=True):
     '''for iex cloud'''
     import aiohttp
     url = base_url.format(version=version) + url
@@ -481,12 +481,12 @@ async def _postJsonIEXCloudAsyncBase(base_url, url, data=None, json=None, token=
             raise PyEXception('Response %d - ' % resp.status, await resp.text())
 
 
-async def _postJsonIEXCloudAsync(url, data=None, json=None, token='', version='v1', filter='', token_in_params=True):
+async def _postJsonIEXCloudAsync(url, data=None, json=None, token='', version='stable', filter='', token_in_params=True):
     '''for iex cloud'''
     return await _postJsonIEXCloudAsyncBase(_URL_PREFIX2, url, data, json, token, version, filter, token_in_params)
 
 
-def _deleteJsonIEXCloudBase(base_url, url, token='', version='v1'):
+def _deleteJsonIEXCloudBase(base_url, url, token='', version='stable'):
     '''for iex cloud'''
     url = base_url.format(version=version) + url
     params = {'token': token}
@@ -496,12 +496,12 @@ def _deleteJsonIEXCloudBase(base_url, url, token='', version='v1'):
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
 
 
-def _deleteJsonIEXCloud(url, token='', version='v1'):
+def _deleteJsonIEXCloud(url, token='', version='stable'):
     '''for iex cloud'''
     return _deleteJsonIEXCloud(_URL_PREFIX2, url, token, version)
 
 
-async def _deleteJsonIEXCloudAsyncBase(url, token='', version='v1'):
+async def _deleteJsonIEXCloudAsyncBase(url, token='', version='stable'):
     '''for iex cloud'''
     import aiohttp
     url = _URL_PREFIX2.format(version=version) + url
@@ -514,29 +514,29 @@ async def _deleteJsonIEXCloudAsyncBase(url, token='', version='v1'):
             raise PyEXception('Response %d - ' % resp.status, await resp.text())
 
 
-async def _deleteJsonIEXCloudAsync(url, token='', version='v1'):
+async def _deleteJsonIEXCloudAsync(url, token='', version='stable'):
     '''for iex cloud'''
     return await _deleteJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version)
 
 
-def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
+def _getJsonIEXCloudSandbox(url, token='', version='stable', filter=''):
     '''for iex cloud'''
-    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, version, filter)
+    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, 'stable', filter)
 
 
-async def _getJsonIEXCloudSandboxAsync(url, token='', version='v1', filter=''):
+async def _getJsonIEXCloudSandboxAsync(url, token='', version='stable', filter=''):
     '''for iex cloud'''
-    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2_SANDBOX, url, token, version, filter)
+    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2_SANDBOX, url, token, 'stable', filter)
 
 
-def _postJsonIEXCloudSandbox(url, data=None, json=None, token='', version='v1', token_in_params=True):
+def _postJsonIEXCloudSandbox(url, data=None, json=None, token='', version='stable', token_in_params=True):
     '''for iex cloud'''
-    return _postJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, data, json, token, version, token_in_params)
+    return _postJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, data, json, token, 'stable', token_in_params)
 
 
-def _deleteJsonIEXCloudSandbox(url, token='', version='v1'):
+def _deleteJsonIEXCloudSandbox(url, token='', version='stable'):
     '''for iex cloud'''
-    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, version)
+    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, 'stable')
 
 
 def _wsURL(url):

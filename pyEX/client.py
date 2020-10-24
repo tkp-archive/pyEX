@@ -27,6 +27,7 @@ from .marketdata.stock import stocksUSNoUTPSSE, stocksUSNoUTPSSEAsync, \
 from .marketdata.http import tops, topsAsync, topsDF, \
     last, lastAsync, lastDF, \
     deep, deepAsync, deepDF, \
+    hist, histAsync, histDF, \
     trades, tradesAsync, tradesDF, \
     auction, auctionAsync, auctionDF, \
     book as deepBook, bookAsync as deepBookAsync, bookDF as deepBookDF, \
@@ -430,6 +431,9 @@ _INCLUDE_FUNCTIONS = [
     ('deep', deep),
     ('deepAsync', deepAsync),
     ('deepDF', deepDF),
+    ('hist', hist),
+    ('histAsync', histAsync),
+    ('histDF', histDF),
     ('auction', auction),
     ('auctionAsync', auctionAsync),
     ('auctionDF', auctionDF),
