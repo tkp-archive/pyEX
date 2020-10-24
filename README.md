@@ -130,6 +130,10 @@ rule = {
         }
 
 c.createRule(rule, 'MyTestRule', 'AAPL', 'all')  # returns {"id": <ruleID>, "weight": 2}
+
+c.rules()  # list all rules
+c.ruleInfo("<ruleID>")
+c.ruleOutput("<ruleID>")
 c.pauseRule("<ruleID>")
 c.resumeRule("<ruleID>")
 c.deleteRule("<ruleID>")
