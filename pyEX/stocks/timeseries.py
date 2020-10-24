@@ -66,8 +66,7 @@ def timeSeries(id='',
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
     Returns:
-        dict: result
-
+        dict or DataFrame: result
 
     Date Ranges:
         today	Returns data for today
