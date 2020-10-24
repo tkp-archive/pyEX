@@ -97,6 +97,7 @@ def delete(ruleId, token='', version=''):
     '''
     return _deleteJson('rules/{}'.format(ruleId), token=token, version=version)
 
+
 def rule(ruleId, token='', version=''):
     '''Rule information such as the current rule status and execution statistics.
 
@@ -104,6 +105,7 @@ def rule(ruleId, token='', version=''):
         ruleId (str): The id of an existing rule to puase
     '''
     return _getJson('rules/info/{}'.format(ruleId), token=token, version=version)
+
 
 def rules(token='', version=''):
     '''List all rules that are currently on your account. Each rule object returned will include the current rule status and execution statistics.'''
