@@ -12,22 +12,31 @@ from .cryptocurrency import cryptoBook, cryptoBookDF, cryptoPrice, cryptoPriceDF
 from .economic import EconomicPoints
 from .fx import latestFX, latestFXDF, convertFX, convertFXDF, historicalFX, historicalFXDF
 from .markets import markets, marketsDF
-from .marketdata.cryptocurrency import cryptoBookSSE, cryptoEventsSSE, cryptoQuotesSSE
-from .marketdata.fx import fxSSE
+from .marketdata.cryptocurrency import cryptoBookSSE, cryptoBookSSEAsync, \
+    cryptoEventsSSE, cryptoEventsSSEAsync, \
+    cryptoQuotesSSE, cryptoQuotesSSEAsync
+from .marketdata.fx import fxSSE, fxSSEAsync
+from .marketdata.news import newsSSE, newsSSEAsync
+from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync
 from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
-from .marketdata.http import tops, topsDF, \
-    last, lastDF, \
-    deep, deepDF, \
-    trades, tradesDF, \
-    auction, auctionDF, \
-    book as deepBook, bookDF as deepBookDF, \
-    opHaltStatus, opHaltStatusDF, \
-    officialPrice, officialPriceDF, \
-    securityEvent, securityEventDF, \
-    ssrStatus, ssrStatusDF, \
-    systemEvent, systemEventDF, \
-    tradeBreak, tradeBreakDF, \
-    tradingStatus, tradingStatusDF
+from .marketdata.stock import stocksUSNoUTPSSE, stocksUSNoUTPSSEAsync, \
+    stocksUSSSE, stocksUSSSEAsync,  \
+    stocksUS1SecondSSE, stocksUS1SecondSSEAsync, \
+    stocksUS5SecondSSE, stocksUS5SecondSSEAsync, \
+    stocksUS1MinuteSSE, stocksUS1MinuteSSEAsync
+from .marketdata.http import tops, topsAsync, topsDF, \
+    last, lastAsync, lastDF, \
+    deep, deepAsync, deepDF, \
+    trades, tradesAsync, tradesDF, \
+    auction, auctionAsync, auctionDF, \
+    book as deepBook, bookAsync as deepBookAsync, bookDF as deepBookDF, \
+    opHaltStatus, opHaltStatusAsync, opHaltStatusDF, \
+    officialPrice, officialPriceAsync, officialPriceDF, \
+    securityEvent, securityEventAsync, securityEventDF, \
+    ssrStatus, ssrStatusAsync, ssrStatusDF, \
+    systemEvent, systemEventAsync, systemEventDF, \
+    tradeBreak, tradeBreakAsync, tradeBreakDF, \
+    tradingStatus, tradingStatusAsync, tradingStatusDF
 from .points import points, pointsDF
 from .premium import (accountingQualityAndRiskMatrix, accountingQualityAndRiskMatrixDF,
                       analystDays, analystDaysDF,
@@ -400,32 +409,56 @@ _INCLUDE_FUNCTIONS = [
     ('lastSSE', lastSSE),
     ('deepSSE', deepSSE),
     ('tradesSSE', tradesSSE),
+    # Stock SSE
+    ('stocksUSNoUTPSSE,', stocksUSNoUTPSSE),
+    ('stocksUSNoUTPSSEAsync,', stocksUSNoUTPSSEAsync),
+    ('stocksUSSSE,', stocksUSSSE),
+    ('stocksUSSSEAsync,', stocksUSSSEAsync),
+    ('stocksUS1SecondSSE,', stocksUS1SecondSSE),
+    ('stocksUS1SecondSSEAsync,', stocksUS1SecondSSEAsync),
+    ('stocksUS5SecondSSE,', stocksUS5SecondSSE),
+    ('stocksUS5SecondSSEAsync,', stocksUS5SecondSSEAsync),
+    ('stocksUS1MinuteSSE,', stocksUS1MinuteSSE),
+    ('stocksUS1MinuteSSEAsync,', stocksUS1MinuteSSEAsync),
     # TOPS
     ('tops', tops),
+    ('topsAsync', topsAsync),
     ('topsDF', topsDF),
     ('last', last),
+    ('lastAsync', lastAsync),
     ('lastDF', lastDF),
     ('deep', deep),
+    ('deepAsync', deepAsync),
     ('deepDF', deepDF),
     ('auction', auction),
+    ('auctionAsync', auctionAsync),
     ('auctionDF', auctionDF),
     ('bookDeep', deepBook),
+    ('bookDeepAsync', deepBookAsync),
     ('bookDeepDF', deepBookDF),
     ('officialPrice', officialPrice),
+    ('officialPriceAsync', officialPriceAsync),
     ('officialPriceDF', officialPriceDF),
     ('opHaltStatus', opHaltStatus),
+    ('opHaltStatusAsync', opHaltStatusAsync),
     ('opHaltStatusDF', opHaltStatusDF),
     ('securityEvent', securityEvent),
+    ('securityEventAsync', securityEventAsync),
     ('securityEventDF', securityEventDF),
     ('ssrStatus', ssrStatus),
+    ('ssrStatusAsync', ssrStatusAsync),
     ('ssrStatusDF', ssrStatusDF),
     ('systemEvent', systemEvent),
+    ('systemEventAsync', systemEventAsync),
     ('systemEventDF', systemEventDF),
     ('trades', trades),
+    ('tradesAsync', tradesAsync),
     ('tradesDF', tradesDF),
     ('tradeBreak', tradeBreak),
+    ('tradeBreakAsync', tradeBreakAsync),
     ('tradeBreakDF', tradeBreakDF),
     ('tradingStatus', tradingStatus),
+    ('tradingStatusAsync', tradingStatusAsync),
     ('tradingStatusDF', tradingStatusDF),
     # Account
     ('messageBudget', messageBudget),
@@ -452,6 +485,13 @@ _INCLUDE_FUNCTIONS = [
     ('historicalFXDF', historicalFXDF),
     # FXSSE
     ('fxSSE', fxSSE),
+    ('fxSSEAsync', fxSSEAsync),
+    # NewsSSE
+    ('newsSSE', newsSSE),
+    ('newsSSEAsync', newsSSEAsync),
+    # SentimentSSE
+    ('sentimentSSE', sentimentSSE),
+    ('sentimentSSEAsync', sentimentSSEAsync),
     # Crypto
     ('cryptoBook', cryptoBook),
     ('cryptoBookDF', cryptoBookDF),
@@ -461,8 +501,11 @@ _INCLUDE_FUNCTIONS = [
     ('cryptoPriceDF', cryptoPriceDF),
     # CryptoSSE
     ('cryptoBookSSE', cryptoBookSSE),
+    ('cryptoBookSSEAsync', cryptoBookSSEAsync),
     ('cryptoEventsSSE', cryptoEventsSSE),
+    ('cryptoEventsSSEAsync', cryptoEventsSSEAsync),
     ('cryptoQuotesSSE', cryptoQuotesSSE),
+    ('cryptoQuotesSSEAsync', cryptoQuotesSSEAsync),
     # Premium
     #     Wall Street Horizon
     ('analystDays', analystDays),

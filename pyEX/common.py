@@ -6,10 +6,7 @@ import pandas as pd
 import pytz
 import requests
 import tempfile
-try:
-    import ujson as json
-except ImportError:
-    import json
+import json
 from datetime import datetime
 from six import string_types
 from socketIO_client_nexus import SocketIO, BaseNamespace
@@ -386,6 +383,16 @@ def _getJson(url, token='', version='', filter=''):
     return _getJsonOrig(url)
 
 
+async def _getJsonAsync(url, token='', version='', filter=''):
+    '''for backwards compat, accepting token and version but ignoring'''
+    token = token or os.environ.get('IEX_TOKEN')
+    if token:
+        if version == 'sandbox':
+            return await _getJsonIEXCloudSandboxAsync(url, token, version, filter)
+        return await _getJsonIEXCloudAsync(url, token, version, filter)
+    return _getJsonOrig(url)
+
+
 def _postJson(url, data=None, json=None, token='', version='', token_in_params=True):
     token = token or os.environ.get('IEX_TOKEN')
     if version == 'sandbox':
@@ -404,13 +411,50 @@ def _getJsonOrig(url):
     raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
 
 
-def _getJsonIEXCloud(url, token='', version='v1', filter=''):
+def _getJsonIEXCloudBase(base_url, url, token='', version='v1', filter=''):
     '''for iex cloud'''
-    url = _URL_PREFIX2.format(version=version) + url
+    url = base_url.format(version=version) + url
     params = {'token': token}
     if filter:
         params.update({'filter': filter})
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+    if resp.status_code == 200:
+        return resp.json()
+    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+
+def _getJsonIEXCloud(url, token='', version='v1', filter=''):
+    '''for iex cloud'''
+    return _getJsonIEXCloud(_URL_PREFIX2, url, token, version, filter)
+
+
+async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='v1', filter=''):
+    '''for iex cloud'''
+    import aiohttp
+    url = _URL_PREFIX2.format(version=version) + url
+    params = {'token': token}
+    if filter:
+        params.update({'filter': filter})
+    async with aiohttp.ClientSession() as session:
+        async with session.get(urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params) as resp:
+            if resp.status == 200:
+                return await resp.json()
+            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+
+
+async def _getJsonIEXCloudAsync(url, token='', version='v1', filter=''):
+    '''for iex cloud'''
+    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
+
+
+def _postJsonIEXCloudBase(base_url, url, data=None, json=None, token='', version='v1', token_in_params=True):
+    '''for iex cloud'''
+    url = base_url.format(version=version) + url
+    if token_in_params:
+        params = {'token': token}
+    else:
+        params = {}
+    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -418,12 +462,35 @@ def _getJsonIEXCloud(url, token='', version='v1', filter=''):
 
 def _postJsonIEXCloud(url, data=None, json=None, token='', version='v1', token_in_params=True):
     '''for iex cloud'''
-    url = _URL_PREFIX2.format(version=version) + url
+    return _postJsonIEXCloudBase(_URL_PREFIX2, data, json, token, version, token_in_params)
+
+
+async def _postJsonIEXCloudAsyncBase(base_url, url, data=None, json=None, token='', version='v1', filter='', token_in_params=True):
+    '''for iex cloud'''
+    import aiohttp
+    url = base_url.format(version=version) + url
     if token_in_params:
         params = {'token': token}
     else:
         params = {}
-    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
+
+    async with aiohttp.ClientSession() as session:
+        async with session.post(urlparse(url).geturl(), data=data, json=json, proxy=_PYEX_PROXIES, params=params) as resp:
+            if resp.status == 200:
+                return await resp.json()
+            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+
+
+async def _postJsonIEXCloudAsync(url, data=None, json=None, token='', version='v1', filter='', token_in_params=True):
+    '''for iex cloud'''
+    return await _postJsonIEXCloudAsyncBase(_URL_PREFIX2, url, data, json, token, version, filter, token_in_params)
+
+
+def _deleteJsonIEXCloudBase(base_url, url, token='', version='v1'):
+    '''for iex cloud'''
+    url = base_url.format(version=version) + url
+    params = {'token': token}
+    resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
     raise PyEXception('Response %d - ' % resp.status_code, resp.text)
@@ -431,47 +498,45 @@ def _postJsonIEXCloud(url, data=None, json=None, token='', version='v1', token_i
 
 def _deleteJsonIEXCloud(url, token='', version='v1'):
     '''for iex cloud'''
+    return _deleteJsonIEXCloud(_URL_PREFIX2, url, token, version)
+
+
+async def _deleteJsonIEXCloudAsyncBase(url, token='', version='v1'):
+    '''for iex cloud'''
+    import aiohttp
     url = _URL_PREFIX2.format(version=version) + url
     params = {'token': token}
-    resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
-    if resp.status_code == 200:
-        return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+
+    async with aiohttp.ClientSession() as session:
+        async with session.delete(urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params) as resp:
+            if resp.status == 200:
+                return await resp.json()
+            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+
+
+async def _deleteJsonIEXCloudAsync(url, token='', version='v1'):
+    '''for iex cloud'''
+    return await _deleteJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version)
 
 
 def _getJsonIEXCloudSandbox(url, token='', version='v1', filter=''):
     '''for iex cloud'''
-    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
-    params = {'token': token}
-    if filter:
-        params.update({'filter': filter})
-    resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
-    if resp.status_code == 200:
-        return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, version, filter)
+
+
+async def _getJsonIEXCloudSandboxAsync(url, token='', version='v1', filter=''):
+    '''for iex cloud'''
+    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2_SANDBOX, url, token, version, filter)
 
 
 def _postJsonIEXCloudSandbox(url, data=None, json=None, token='', version='v1', token_in_params=True):
     '''for iex cloud'''
-    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
-    if token_in_params:
-        params = {'token': token}
-    else:
-        params = {}
-    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
-    if resp.status_code == 200:
-        return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    return _postJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, data, json, token, version, token_in_params)
 
 
 def _deleteJsonIEXCloudSandbox(url, token='', version='v1'):
     '''for iex cloud'''
-    url = _URL_PREFIX2_SANDBOX.format(version='v1') + url
-    params = {'token': token}
-    resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
-    if resp.status_code == 200:
-        return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, version)
 
 
 def _wsURL(url):
@@ -594,9 +659,28 @@ def _streamSSE(url, on_data=print, accrue=False):
         except (json.JSONDecodeError, KeyboardInterrupt):
             raise
         except Exception:
-            # continue listening
-            pass
+            raise
     return ret
+
+
+async def _streamSSEAsync(url, accrue=False):
+    '''internal'''
+    from aiohttp_sse_client import client as sse_client
+
+    async with sse_client.EventSource(url) as event_source:
+        try:
+            async for event in event_source:
+                yield json.loads(event.data)
+
+        except (json.JSONDecodeError, KeyboardInterrupt):
+            raise
+        except ConnectionError:
+            raise PyEXception("Could not connect to SSE Stream")
+        except PyEXStopSSE:
+            return
+        except Exception:
+            raise
+    return
 
 
 def _reindex(df, col):

@@ -19,9 +19,7 @@ def stats(token='', version='', filter=''):
     return _getJson('stats/intraday', token, version, filter)
 
 
-wraps(stats)
-
-
+@wraps(stats)
 def statsDF(token='', version='', filters=''):
     df = pd.DataFrame(stats(token, version, filter))
     _toDatetime(df)
@@ -42,9 +40,7 @@ def recent(token='', version='', filter=''):
     return _getJson('stats/recent', token, version, filter)
 
 
-wraps(recent)
-
-
+@wraps(recent)
 def recentDF(token='', version='', filter=''):
     df = pd.DataFrame(recent(token, version, filter))
     _toDatetime(df)
@@ -66,9 +62,7 @@ def records(token='', version='', filter=''):
     return _getJson('stats/records', token, version, filter)
 
 
-wraps(records)
-
-
+@wraps(records)
 def recordsDF(token='', version='', filter=''):
     df = pd.DataFrame(records(token, version, filter))
     _toDatetime(df)
@@ -98,9 +92,7 @@ def summary(date=None, token='', version='', filter=''):
     return _getJson('stats/historical', token, version, filter)
 
 
-wraps(summary)
-
-
+@wraps(summary)
 def summaryDF(date=None, token='', version='', filter=''):
     df = pd.DataFrame(summary(date, token, version, filter))
     _toDatetime(df)
@@ -129,9 +121,7 @@ def daily(date=None, last='', token='', version='', filter=''):
     return _getJson('stats/historical/daily', token, version, filter)
 
 
-wraps(daily)
-
-
+@wraps(daily)
 def dailyDF(date=None, last='', token='', version='', filter=''):
     df = pd.DataFrame(daily(date, last, token, version, filter))
     _toDatetime(df)
