@@ -1,5 +1,5 @@
 # pyEX
-Python interface to IEX Api (https://iextrading.com/developer/docs/)
+Python interface to IEX Cloud (https://iexcloud.io/docs/api/)
 
 [![Build Status](https://dev.azure.com/tpaine154/pyEX/_apis/build/status/timkpaine.pyEX?branchName=main)](https://dev.azure.com/tpaine154/pyEX/_build/latest?definitionId=3&branchName=main)
 [![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3/main)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
@@ -11,6 +11,7 @@ Python interface to IEX Api (https://iextrading.com/developer/docs/)
 Please subscribe to IEX Cloud using [my referral code](https://iexcloud.io/s/6332a3c3 ).
 
 # Getting Started
+## Install
 Install from pip
 
 `pip install pyEX`
@@ -19,9 +20,16 @@ of from source
 
 `python setup.py install`
 
+### Extensions
+- `pyEX[async]`: `asyncio` integration for streaming APIs
+- `pyEX[studies]`: Technical indicators and other calculations
+
+## Demos + Docs
 - [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/all.ipynb)
 - [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/sse.ipynb)
 - [Read The Docs!](https://pyEX.readthedocs.io)
+
+## Overview
 
 `pyEX` supports the IEX Cloud api through 2 interfaces. The first is a simple function call, passing in the api version and token as arguments
 
