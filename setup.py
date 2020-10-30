@@ -40,9 +40,10 @@ requires_async = requires + [
 ]
 
 requires_dev = requires_async + [
-    'autopep8>=1.4.1',
+    'black>=20.',
     'bump2version>=1.0.0',
     'flake8>=3.7.8',
+    'flake8-black>=0.2.1',
     'mock',
     'pytest>=4.3.0',
     'pytest-cov>=2.6.1',

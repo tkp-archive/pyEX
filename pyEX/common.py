@@ -18,137 +18,163 @@ try:
 except ImportError:
     from urlparse import urlparse
 
-_URL_PREFIX = 'https://api.iextrading.com/1.0/'
-_URL_PREFIX2 = 'https://cloud.iexapis.com/{version}/'
-_URL_PREFIX2_SANDBOX = 'https://sandbox.iexapis.com/{version}/'
+_URL_PREFIX = "https://api.iextrading.com/1.0/"
+_URL_PREFIX2 = "https://cloud.iexapis.com/{version}/"
+_URL_PREFIX2_SANDBOX = "https://sandbox.iexapis.com/{version}/"
 
-_SIO_URL_PREFIX = 'https://ws-api.iextrading.com'
+_SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
 
-_SSE_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}'
-_SSE_URL_PREFIX_ALL = 'https://cloud-sse.iexapis.com/{version}/{channel}?token={token}'
-_SSE_DEEP_URL_PREFIX = 'https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}'
-_SSE_URL_PREFIX_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/{channel}?symbols={symbols}&token={token}'
-_SSE_URL_PREFIX_ALL_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/{channel}?token={token}'
-_SSE_DEEP_URL_PREFIX_SANDBOX = 'https://sandbox-sse.iexapis.com/v1/deep?symbols={symbols}&channels={channels}&token={token}'
+_SSE_URL_PREFIX = (
+    "https://cloud-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
+)
+_SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
+_SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_URL_PREFIX_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/v1/{channel}?symbols={symbols}&token={token}"
+)
+_SSE_URL_PREFIX_ALL_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/v1/{channel}?token={token}"
+)
+_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/v1/deep?symbols={symbols}&channels={channels}&token={token}"
 
-_TIMEFRAME_CHART = ['max', '5y', '2y', '1y', 'ytd', '6m', '3m', '1m', '1mm', '5d', '5dm', '1d', 'dynamic']
-_TIMEFRAME_DIVSPLIT = ['5y', '2y', '1y', 'ytd', '6m', '3m', '1m', 'next']
-_LIST_OPTIONS = ['mostactive', 'gainers', 'losers', 'iexvolume', 'iexpercent']
-_COLLECTION_TAGS = ['sector', 'tag', 'list']
-_DATE_RANGES = ['today',
-                'yesterday',
-                'ytd',
-                'last-week',
-                'last-month',
-                'last-quarter',
-                'd',
-                'w',
-                'm',
-                'q',
-                'y',
-                'tomorrow',
-                'this-week',
-                'this-month',
-                'this-quarter',
-                'next-week',
-                'next-month',
-                'next-quarter']
-_KEY_STATS = [
-    'companyName',
-    'marketcap',
-    'week52high',
-    'week52low',
-    'week52change',
-    'sharesOutstanding',
-    'float',
-    'avg10Volume',
-    'avg30Volume',
-    'day200MovingAvg',
-    'day50MovingAvg',
-    'employees',
-    'ttmEPS',
-    'ttmDividendRate',
-    'dividendYield',
-    'nextDividendDate',
-    'exDividendDate',
-    'nextEarningsDate',
-    'peRatio',
-    'beta',
-    'maxChangePercent',
-    'year5ChangePercent',
-    'year2ChangePercent',
-    'year1ChangePercent',
-    'ytdChangePercent',
-    'month6ChangePercent',
-    'month3ChangePercent',
-    'month1ChangePercent',
-    'day30ChangePercent',
-    'day5ChangePercent',
+_TIMEFRAME_CHART = [
+    "max",
+    "5y",
+    "2y",
+    "1y",
+    "ytd",
+    "6m",
+    "3m",
+    "1m",
+    "1mm",
+    "5d",
+    "5dm",
+    "1d",
+    "dynamic",
 ]
-_USAGE_TYPES = ['messages', 'rules', 'rule-records', 'alerts', 'alert-records']
+_TIMEFRAME_DIVSPLIT = ["5y", "2y", "1y", "ytd", "6m", "3m", "1m", "next"]
+_LIST_OPTIONS = ["mostactive", "gainers", "losers", "iexvolume", "iexpercent"]
+_COLLECTION_TAGS = ["sector", "tag", "list"]
+_DATE_RANGES = [
+    "today",
+    "yesterday",
+    "ytd",
+    "last-week",
+    "last-month",
+    "last-quarter",
+    "d",
+    "w",
+    "m",
+    "q",
+    "y",
+    "tomorrow",
+    "this-week",
+    "this-month",
+    "this-quarter",
+    "next-week",
+    "next-month",
+    "next-quarter",
+]
+_KEY_STATS = [
+    "companyName",
+    "marketcap",
+    "week52high",
+    "week52low",
+    "week52change",
+    "sharesOutstanding",
+    "float",
+    "avg10Volume",
+    "avg30Volume",
+    "day200MovingAvg",
+    "day50MovingAvg",
+    "employees",
+    "ttmEPS",
+    "ttmDividendRate",
+    "dividendYield",
+    "nextDividendDate",
+    "exDividendDate",
+    "nextEarningsDate",
+    "peRatio",
+    "beta",
+    "maxChangePercent",
+    "year5ChangePercent",
+    "year2ChangePercent",
+    "year1ChangePercent",
+    "ytdChangePercent",
+    "month6ChangePercent",
+    "month3ChangePercent",
+    "month1ChangePercent",
+    "day30ChangePercent",
+    "day5ChangePercent",
+]
+_USAGE_TYPES = ["messages", "rules", "rule-records", "alerts", "alert-records"]
 _PYEX_PROXIES = None
 _PYEX_CACHE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), "pyEX"))
 _UTC = pytz.UTC
-_EST = pytz.timezone('EST')
+_EST = pytz.timezone("EST")
 
 # Limit 10
 _BATCH_TYPES = [
-    'book',
-    'chart',
-    'company',
-    'dividends',
-    'earnings',
-    'financials',
-    'stats',
-    'news',
-    'peers',
-    'splits',
+    "book",
+    "chart",
+    "company",
+    "dividends",
+    "earnings",
+    "financials",
+    "stats",
+    "news",
+    "peers",
+    "splits",
     # limit 10
-    'effective-spread',
-    'delayed-quote',
-    'largest-trades',
-    'previous',
-    'price',
-    'quote',
-    'relevant',
-    'volume-by-venue',
+    "effective-spread",
+    "delayed-quote",
+    "largest-trades",
+    "previous",
+    "price",
+    "quote",
+    "relevant",
+    "volume-by-venue",
 ]
 
-_STANDARD_DATE_FIELDS = ['date',
-                         'EPSReportDate',
-                         'fiscalEndDate',
-                         'exDate',
-                         'declaredDate',
-                         'paymentDate',
-                         'recordDate',
-                         'reportDate',
-                         'datetime',
-                         'expectedDate',
-                         'latestTime',
-                         'DailyListTimestamp',
-                         'RecordUpdateTime',
-                         'settlementDate',
-                         'lastUpdated',
-                         'processedTime',
-                         'expirationDate',
-                         'startDate',
-                         'endDate']
+_STANDARD_DATE_FIELDS = [
+    "date",
+    "EPSReportDate",
+    "fiscalEndDate",
+    "exDate",
+    "declaredDate",
+    "paymentDate",
+    "recordDate",
+    "reportDate",
+    "datetime",
+    "expectedDate",
+    "latestTime",
+    "DailyListTimestamp",
+    "RecordUpdateTime",
+    "settlementDate",
+    "lastUpdated",
+    "processedTime",
+    "expirationDate",
+    "startDate",
+    "endDate",
+]
 
-_STANDARD_TIME_FIELDS = ['closeTime',
-                         'close.time',
-                         'delayedPriceTime',
-                         'extendedPriceTime',
-                         'iexLastUpdated',
-                         'latestTime',
-                         'openTime',
-                         'open.time',
-                         'processedTime',
-                         'time',
-                         'timestamp',
-                         'lastUpdated',
-                         'reportDate',
-                         'report_date']
+_STANDARD_TIME_FIELDS = [
+    "closeTime",
+    "close.time",
+    "delayedPriceTime",
+    "extendedPriceTime",
+    "iexLastUpdated",
+    "latestTime",
+    "openTime",
+    "open.time",
+    "processedTime",
+    "time",
+    "timestamp",
+    "lastUpdated",
+    "reportDate",
+    "report_date",
+]
 
 _INDICATORS = [
     "abs",
@@ -273,7 +299,11 @@ _INDICATOR_RETURNS = {
     "atan": ("atan",),
     "atr": ("atr",),
     "avgprice": ("avgprice",),
-    "bbands": ("bbands_lower", "bbands_middle", "bbands_upper",),
+    "bbands": (
+        "bbands_lower",
+        "bbands_middle",
+        "bbands_upper",
+    ),
     "bop": ("bop",),
     "cci": ("cci",),
     "ceil": ("ceil",),
@@ -285,16 +315,25 @@ _INDICATOR_RETURNS = {
     "cvi": ("cvi",),
     "decay": ("decay",),
     "dema": ("dema",),
-    "di": ("plus_di", "minus_di",),
+    "di": (
+        "plus_di",
+        "minus_di",
+    ),
     "div": ("div",),
-    "dm": ("plus_dm", "minus_dm",),
+    "dm": (
+        "plus_dm",
+        "minus_dm",
+    ),
     "dpo": ("dop",),
     "dx": ("dx",),
     "edecay": ("edecay",),
     "ema": ("ema",),
     "emv": ("emv",),
     "exp": ("exp",),
-    "fisher": ("fisher", "fisher_signal",),
+    "fisher": (
+        "fisher",
+        "fisher_signal",
+    ),
     "floor": ("floor",),
     "fosc": ("fosc",),
     "hma": ("hma",),
@@ -306,7 +345,11 @@ _INDICATOR_RETURNS = {
     "linregslope": ("linregslope",),
     "ln": ("ln",),
     "log10": ("log10",),
-    "macd": ("macd", "macd_signal", "macd_histogram",),
+    "macd": (
+        "macd",
+        "macd_signal",
+        "macd_histogram",
+    ),
     "marketfi": ("marketfi",),
     "mass": ("mass",),
     "max": ("max",),
@@ -315,7 +358,10 @@ _INDICATOR_RETURNS = {
     "mfi": ("mfi",),
     "min": ("min",),
     "mom": ("mom",),
-    "msw": ("msw_sine", "msw_lead",),
+    "msw": (
+        "msw_sine",
+        "msw_lead",
+    ),
     "mul": ("mul",),
     "natr": ("matr",),
     "nvi": ("nvi",),
@@ -334,7 +380,10 @@ _INDICATOR_RETURNS = {
     "sqrt": ("sqrt",),
     "stddev": ("stddev",),
     "stderr": ("stderr",),
-    "stoch": ("stock_k", "stock_d",),
+    "stoch": (
+        "stock_k",
+        "stock_d",
+    ),
     "stochrsi": ("stochrsi",),
     "sub": ("sub",),
     "sum": ("sum",),
@@ -373,216 +422,278 @@ class PyEXStopSSE(Exception):
     pass
 
 
-def _getJson(url, token='', version='', filter=''):
-    '''for backwards compat, accepting token and version but ignoring'''
-    token = token or os.environ.get('IEX_TOKEN')
+def _getJson(url, token="", version="", filter=""):
+    """for backwards compat, accepting token and version but ignoring"""
+    token = token or os.environ.get("IEX_TOKEN")
     if token:
-        if version == 'sandbox':
+        if version == "sandbox":
             return _getJsonIEXCloudSandbox(url, token, version, filter)
         return _getJsonIEXCloud(url, token, version, filter)
     return _getJsonOrig(url)
 
 
-async def _getJsonAsync(url, token='', version='', filter=''):
-    '''for backwards compat, accepting token and version but ignoring'''
-    token = token or os.environ.get('IEX_TOKEN')
+async def _getJsonAsync(url, token="", version="", filter=""):
+    """for backwards compat, accepting token and version but ignoring"""
+    token = token or os.environ.get("IEX_TOKEN")
     if token:
-        if version == 'sandbox':
+        if version == "sandbox":
             return await _getJsonIEXCloudSandboxAsync(url, token, version, filter)
         return await _getJsonIEXCloudAsync(url, token, version, filter)
     return _getJsonOrig(url)
 
 
-def _postJson(url, data=None, json=None, token='', version='', token_in_params=True):
-    token = token or os.environ.get('IEX_TOKEN')
-    if version == 'sandbox':
-        return _postJsonIEXCloudSandbox(url, data, json, token, version, token_in_params)
+def _postJson(url, data=None, json=None, token="", version="", token_in_params=True):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _postJsonIEXCloudSandbox(
+            url, data, json, token, version, token_in_params
+        )
     return _postJsonIEXCloud(url, data, json, token, version, token_in_params)
 
 
-def _deleteJson(url, token='', version=''):
-    token = token or os.environ.get('IEX_TOKEN')
-    if version == 'sandbox':
+def _deleteJson(url, token="", version=""):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
         return _deleteJsonIEXCloudSandbox(url, token, version)
     return _deleteJsonIEXCloud(url, token, version)
 
 
 def _getJsonOrig(url):
-    raise PyEXception('Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io')
+    raise PyEXception(
+        "Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io"
+    )
 
 
-def _getJsonIEXCloudBase(base_url, url, token='', version='stable', filter=''):
-    '''for iex cloud'''
+def _getJsonIEXCloudBase(base_url, url, token="", version="stable", filter=""):
+    """for iex cloud"""
     url = base_url.format(version=version) + url
-    params = {'token': token}
+    params = {"token": token}
     if filter:
-        params.update({'filter': filter})
+        params.update({"filter": filter})
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloud(url, token='', version='stable', filter=''):
-    '''for iex cloud'''
+def _getJsonIEXCloud(url, token="", version="stable", filter=""):
+    """for iex cloud"""
     return _getJsonIEXCloudBase(_URL_PREFIX2, url, token, version, filter)
 
 
-async def _getJsonIEXCloudAsyncBase(base_url, url, token='', version='stable', filter=''):
-    '''for iex cloud'''
+async def _getJsonIEXCloudAsyncBase(
+    base_url, url, token="", version="stable", filter=""
+):
+    """for iex cloud"""
     import aiohttp
+
     url = _URL_PREFIX2.format(version=version) + url
-    params = {'token': token}
+    params = {"token": token}
     if filter:
-        params.update({'filter': filter})
+        params.update({"filter": filter})
     async with aiohttp.ClientSession() as session:
-        async with session.get(urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params) as resp:
+        async with session.get(
+            urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
+        ) as resp:
             if resp.status == 200:
                 return await resp.json()
-            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+            raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _getJsonIEXCloudAsync(url, token='', version='stable', filter=''):
-    '''for iex cloud'''
+async def _getJsonIEXCloudAsync(url, token="", version="stable", filter=""):
+    """for iex cloud"""
     return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
 
 
-def _postJsonIEXCloudBase(base_url, url, data=None, json=None, token='', version='stable', token_in_params=True):
-    '''for iex cloud'''
+def _postJsonIEXCloudBase(
+    base_url,
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+):
+    """for iex cloud"""
     url = base_url.format(version=version) + url
     if token_in_params:
-        params = {'token': token}
+        params = {"token": token}
     else:
         params = {}
-    resp = requests.post(urlparse(url).geturl(), data=data, json=json, proxies=_PYEX_PROXIES, params=params)
+    resp = requests.post(
+        urlparse(url).geturl(),
+        data=data,
+        json=json,
+        proxies=_PYEX_PROXIES,
+        params=params,
+    )
     if resp.status_code == 200:
         return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _postJsonIEXCloud(url, data=None, json=None, token='', version='stable', token_in_params=True):
-    '''for iex cloud'''
-    return _postJsonIEXCloudBase(_URL_PREFIX2, data, json, token, version, token_in_params)
+def _postJsonIEXCloud(
+    url, data=None, json=None, token="", version="stable", token_in_params=True
+):
+    """for iex cloud"""
+    return _postJsonIEXCloudBase(
+        _URL_PREFIX2, data, json, token, version, token_in_params
+    )
 
 
-async def _postJsonIEXCloudAsyncBase(base_url, url, data=None, json=None, token='', version='stable', filter='', token_in_params=True):
-    '''for iex cloud'''
+async def _postJsonIEXCloudAsyncBase(
+    base_url,
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    filter="",
+    token_in_params=True,
+):
+    """for iex cloud"""
     import aiohttp
+
     url = base_url.format(version=version) + url
     if token_in_params:
-        params = {'token': token}
+        params = {"token": token}
     else:
         params = {}
 
     async with aiohttp.ClientSession() as session:
-        async with session.post(urlparse(url).geturl(), data=data, json=json, proxy=_PYEX_PROXIES, params=params) as resp:
+        async with session.post(
+            urlparse(url).geturl(),
+            data=data,
+            json=json,
+            proxy=_PYEX_PROXIES,
+            params=params,
+        ) as resp:
             if resp.status == 200:
                 return await resp.json()
-            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+            raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _postJsonIEXCloudAsync(url, data=None, json=None, token='', version='stable', filter='', token_in_params=True):
-    '''for iex cloud'''
-    return await _postJsonIEXCloudAsyncBase(_URL_PREFIX2, url, data, json, token, version, filter, token_in_params)
+async def _postJsonIEXCloudAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    filter="",
+    token_in_params=True,
+):
+    """for iex cloud"""
+    return await _postJsonIEXCloudAsyncBase(
+        _URL_PREFIX2, url, data, json, token, version, filter, token_in_params
+    )
 
 
-def _deleteJsonIEXCloudBase(base_url, url, token='', version='stable'):
-    '''for iex cloud'''
+def _deleteJsonIEXCloudBase(base_url, url, token="", version="stable"):
+    """for iex cloud"""
     url = base_url.format(version=version) + url
-    params = {'token': token}
+    params = {"token": token}
     resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
     if resp.status_code == 200:
         return resp.json()
-    raise PyEXception('Response %d - ' % resp.status_code, resp.text)
+    raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _deleteJsonIEXCloud(url, token='', version='stable'):
-    '''for iex cloud'''
+def _deleteJsonIEXCloud(url, token="", version="stable"):
+    """for iex cloud"""
     return _deleteJsonIEXCloud(_URL_PREFIX2, url, token, version)
 
 
-async def _deleteJsonIEXCloudAsyncBase(url, token='', version='stable'):
-    '''for iex cloud'''
+async def _deleteJsonIEXCloudAsyncBase(url, token="", version="stable"):
+    """for iex cloud"""
     import aiohttp
+
     url = _URL_PREFIX2.format(version=version) + url
-    params = {'token': token}
+    params = {"token": token}
 
     async with aiohttp.ClientSession() as session:
-        async with session.delete(urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params) as resp:
+        async with session.delete(
+            urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
+        ) as resp:
             if resp.status == 200:
                 return await resp.json()
-            raise PyEXception('Response %d - ' % resp.status, await resp.text())
+            raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _deleteJsonIEXCloudAsync(url, token='', version='stable'):
-    '''for iex cloud'''
+async def _deleteJsonIEXCloudAsync(url, token="", version="stable"):
+    """for iex cloud"""
     return await _deleteJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version)
 
 
-def _getJsonIEXCloudSandbox(url, token='', version='stable', filter=''):
-    '''for iex cloud'''
-    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, 'stable', filter)
+def _getJsonIEXCloudSandbox(url, token="", version="stable", filter=""):
+    """for iex cloud"""
+    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable", filter)
 
 
-async def _getJsonIEXCloudSandboxAsync(url, token='', version='stable', filter=''):
-    '''for iex cloud'''
-    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2_SANDBOX, url, token, 'stable', filter)
+async def _getJsonIEXCloudSandboxAsync(url, token="", version="stable", filter=""):
+    """for iex cloud"""
+    return await _getJsonIEXCloudAsyncBase(
+        _URL_PREFIX2_SANDBOX, url, token, "stable", filter
+    )
 
 
-def _postJsonIEXCloudSandbox(url, data=None, json=None, token='', version='stable', token_in_params=True):
-    '''for iex cloud'''
-    return _postJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, data, json, token, 'stable', token_in_params)
+def _postJsonIEXCloudSandbox(
+    url, data=None, json=None, token="", version="stable", token_in_params=True
+):
+    """for iex cloud"""
+    return _postJsonIEXCloudBase(
+        _URL_PREFIX2_SANDBOX, url, data, json, token, "stable", token_in_params
+    )
 
 
-def _deleteJsonIEXCloudSandbox(url, token='', version='stable'):
-    '''for iex cloud'''
-    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, 'stable')
+def _deleteJsonIEXCloudSandbox(url, token="", version="stable"):
+    """for iex cloud"""
+    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable")
 
 
 def _wsURL(url):
-    '''internal'''
-    return '/1.0/' + url
+    """internal"""
+    return "/1.0/" + url
 
 
 def _strToList(st):
-    '''internal'''
+    """internal"""
     if isinstance(st, string_types):
         return [st]
     return st
 
 
 def _strCommaSeparatedString(st):
-    '''internal'''
-    return ','.join(_strToList(st))
+    """internal"""
+    return ",".join(_strToList(st))
 
 
 def _strOrDate(st):
-    '''internal'''
+    """internal"""
     if isinstance(st, string_types):
         return st
     elif isinstance(st, datetime):
-        return st.strftime('%Y%m%d')
-    raise PyEXception('Not a date: %s', str(st))
+        return st.strftime("%Y%m%d")
+    raise PyEXception("Not a date: %s", str(st))
 
 
 def _dateRange(st):
-    '''internal'''
+    """internal"""
     if st not in _DATE_RANGES:
-        raise PyEXception('Must be a valid date range: got {}'.format(st))
+        raise PyEXception("Must be a valid date range: got {}".format(st))
     return st
 
 
 def _raiseIfNotStr(s):
-    '''internal'''
+    """internal"""
     if s is not None and not isinstance(s, string_types):
-        raise PyEXception('Cannot use type %s' % str(type(s)))
+        raise PyEXception("Cannot use type %s" % str(type(s)))
 
 
 def _checkPeriodLast(per, last):
-    '''check if period is ok with last'''
+    """check if period is ok with last"""
     if per not in ("quarter", "annual"):
         raise PyEXception("Period must be in {'quarter', 'annual'}")
-    if per == 'quarter':
+    if per == "quarter":
         if last < 1 or last > 12:
             raise PyEXception("Last must be in [1, 12] for period 'quarter'")
     else:
@@ -591,7 +702,7 @@ def _checkPeriodLast(per, last):
 
 
 def _tryJson(data, raw=True):
-    '''internal'''
+    """internal"""
     if raw:
         return data
     try:
@@ -601,12 +712,14 @@ def _tryJson(data, raw=True):
 
 
 class WSClient(object):
-    def __init__(self, addr, sendinit=None, on_data=None, on_open=None, on_close=None, raw=True):
-        '''
-           addr: path to sio
-           sendinit: tuple to emit
-           on_data, on_open, on_close: functions to call
-       '''
+    def __init__(
+        self, addr, sendinit=None, on_data=None, on_open=None, on_close=None, raw=True
+    ):
+        """
+        addr: path to sio
+        sendinit: tuple to emit
+        on_data, on_open, on_close: functions to call
+        """
         self.addr = addr
         self.sendinit = sendinit
 
@@ -635,13 +748,13 @@ class WSClient(object):
 
 
 def _stream(url, sendinit=None, on_data=print):
-    '''internal'''
+    """internal"""
     cl = WSClient(url, sendinit=sendinit, on_data=on_data)
     return cl
 
 
 def _streamSSE(url, on_data=print, accrue=False):
-    '''internal'''
+    """internal"""
     messages = SSEClient(url)
     if accrue:
         ret = []
@@ -664,7 +777,7 @@ def _streamSSE(url, on_data=print, accrue=False):
 
 
 async def _streamSSEAsync(url, accrue=False):
-    '''internal'''
+    """internal"""
     from aiohttp_sse_client import client as sse_client
 
     async with sse_client.EventSource(url) as event_source:
@@ -684,7 +797,7 @@ async def _streamSSEAsync(url, accrue=False):
 
 
 def _reindex(df, col):
-    '''internal'''
+    """internal"""
     if isinstance(col, list):
         if all([c in df.columns for c in col]):
             df.set_index(col, inplace=True)
@@ -694,7 +807,7 @@ def _reindex(df, col):
 
 
 def _toDatetime(df, cols=None, tcols=None):
-    '''internal'''
+    """internal"""
     cols = cols if cols is not None else _STANDARD_DATE_FIELDS
     tcols = tcols if tcols is not None else _STANDARD_TIME_FIELDS
 
@@ -709,18 +822,18 @@ def _toDatetime(df, cols=None, tcols=None):
     for tcol in tcols:
         if tcol in df.columns:
             try:
-                df[tcol] = pd.to_datetime(df[tcol], unit='ms')
+                df[tcol] = pd.to_datetime(df[tcol], unit="ms")
             except BaseException:
                 # skip error
                 continue
 
 
 def setProxy(proxies=None):
-    '''Set proxies argument for requests
+    """Set proxies argument for requests
 
     Args:
         proxies (dict): Proxies to set
-    '''
+    """
     global _PYEX_PROXIES
     _PYEX_PROXIES = proxies
 
@@ -730,8 +843,9 @@ def _expire(**temporal_args):
         os.makedirs(_PYEX_CACHE_FOLDER)
 
     def _wrapper(foo):
-        temporal_args['persistent'] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+        temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
         return expire(**temporal_args)(foo)
+
     return _wrapper
 
 
@@ -740,8 +854,9 @@ def _interval(**temporal_args):
         os.makedirs(_PYEX_CACHE_FOLDER)
 
     def _wrapper(foo):
-        temporal_args['persistent'] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+        temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
         return interval(**temporal_args)(foo)
+
     return _wrapper
 
 

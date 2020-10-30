@@ -4,8 +4,8 @@ import itertools
 from ..common import _expire, _getJson, _strOrDate, _reindex
 
 
-def latestFX(symbols=None, token='', version='', filter=''):
-    '''This endpoint returns real-time foreign currency exchange rates data updated every 250 milliseconds.
+def latestFX(symbols=None, token="", version="", filter=""):
+    """This endpoint returns real-time foreign currency exchange rates data updated every 250 milliseconds.
 
     https://iexcloud.io/docs/api/#latest-currency-rates
     5pm Sun-4pm Fri UTC
@@ -18,16 +18,26 @@ def latestFX(symbols=None, token='', version='', filter=''):
 
     Returns:
         dict: result
-    '''
+    """
     if symbols:
         if isinstance(symbols, str):
-            return _getJson('/fx/latest?symbols={symbols}'.format(symbols=symbols), token, version, filter)
-        return _getJson('/fx/latest?symbols={symbols}'.format(symbols=','.join(symbols)), token, version, filter)
-    return _getJson('/fx/latest', token, version, filter)
+            return _getJson(
+                "/fx/latest?symbols={symbols}".format(symbols=symbols),
+                token,
+                version,
+                filter,
+            )
+        return _getJson(
+            "/fx/latest?symbols={symbols}".format(symbols=",".join(symbols)),
+            token,
+            version,
+            filter,
+        )
+    return _getJson("/fx/latest", token, version, filter)
 
 
-def latestFXDF(symbols=None, token='', version='', filter=''):
-    '''This endpoint returns real-time foreign currency exchange rates data updated every 250 milliseconds.
+def latestFXDF(symbols=None, token="", version="", filter=""):
+    """This endpoint returns real-time foreign currency exchange rates data updated every 250 milliseconds.
 
     https://iexcloud.io/docs/api/#latest-currency-rates
     5pm Sun-4pm Fri UTC
@@ -41,12 +51,12 @@ def latestFXDF(symbols=None, token='', version='', filter=''):
     Returns:
 
         DataFrame: result
-    '''
+    """
     return pd.DataFrame(latestFX(symbols, token, version, filter))
 
 
-def convertFX(symbols=None, amount=None, token='', version='', filter=''):
-    '''This endpoint performs a conversion from one currency to another for a supplied amount of the base currency. If an amount isn’t provided, the latest exchange rate will be provided and the amount will be null.
+def convertFX(symbols=None, amount=None, token="", version="", filter=""):
+    """This endpoint performs a conversion from one currency to another for a supplied amount of the base currency. If an amount isn’t provided, the latest exchange rate will be provided and the amount will be null.
 
     https://iexcloud.io/docs/api/#currency-conversion
     5pm Sun-4pm Fri UTC
@@ -60,17 +70,33 @@ def convertFX(symbols=None, amount=None, token='', version='', filter=''):
 
     Returns:
         dict: result
-    '''
-    amount = amount or ''
+    """
+    amount = amount or ""
     if symbols:
         if isinstance(symbols, str):
-            return _getJson('/fx/convert?symbols={symbols}&amount={amount}'.format(symbols=symbols, amount=amount), token, version, filter)
-        return _getJson('/fx/convert?symbols={symbols}&amount={amount}'.format(symbols=','.join(symbols), amount=amount), token, version, filter)
-    return _getJson('/fx/convert?amount={amount}'.format(amount=amount), token, version, filter)
+            return _getJson(
+                "/fx/convert?symbols={symbols}&amount={amount}".format(
+                    symbols=symbols, amount=amount
+                ),
+                token,
+                version,
+                filter,
+            )
+        return _getJson(
+            "/fx/convert?symbols={symbols}&amount={amount}".format(
+                symbols=",".join(symbols), amount=amount
+            ),
+            token,
+            version,
+            filter,
+        )
+    return _getJson(
+        "/fx/convert?amount={amount}".format(amount=amount), token, version, filter
+    )
 
 
-def convertFXDF(symbols=None, amount=None, token='', version='', filter=''):
-    '''This endpoint performs a conversion from one currency to another for a supplied amount of the base currency. If an amount isn’t provided, the latest exchange rate will be provided and the amount will be null.
+def convertFXDF(symbols=None, amount=None, token="", version="", filter=""):
+    """This endpoint performs a conversion from one currency to another for a supplied amount of the base currency. If an amount isn’t provided, the latest exchange rate will be provided and the amount will be null.
 
     https://iexcloud.io/docs/api/#currency-conversion
     5pm Sun-4pm Fri UTC
@@ -85,13 +111,23 @@ def convertFXDF(symbols=None, amount=None, token='', version='', filter=''):
     Returns:
 
         DataFrame: result
-    '''
+    """
     return pd.DataFrame(convertFX(symbols, token, version, filter))
 
 
 @_expire(hour=1)
-def historicalFX(symbols=None, from_='', to_='', on='', last=0, first=0, token='', version='', filter=''):
-    '''This endpoint returns a daily value for the desired currency pair.
+def historicalFX(
+    symbols=None,
+    from_="",
+    to_="",
+    on="",
+    last=0,
+    first=0,
+    token="",
+    version="",
+    filter="",
+):
+    """This endpoint returns a daily value for the desired currency pair.
 
     https://iexcloud.io/docs/api/#historical-daily
     1am Mon-Sat UTC
@@ -109,31 +145,43 @@ def historicalFX(symbols=None, from_='', to_='', on='', last=0, first=0, token='
 
     Returns:
         dict: result
-    '''
-    base_url = '/fx/historical?'
+    """
+    base_url = "/fx/historical?"
 
     if symbols:
         if isinstance(symbols, str):
-            base_url += 'symbols={symbols}&'.format(symbols=symbols)
+            base_url += "symbols={symbols}&".format(symbols=symbols)
         else:
-            base_url += 'symbols={symbols}&'.format(symbols=','.join(symbols))
+            base_url += "symbols={symbols}&".format(symbols=",".join(symbols))
 
     if from_:
-        base_url += 'from={}&'.format(_strOrDate(from_))
+        base_url += "from={}&".format(_strOrDate(from_))
     if to_:
-        base_url += 'to={}&'.format(_strOrDate(to_))
+        base_url += "to={}&".format(_strOrDate(to_))
     if on:
-        base_url += 'on={}&'.format(_strOrDate(on))
+        base_url += "on={}&".format(_strOrDate(on))
     if last:
-        base_url += 'last={}&'.format(str(last))
+        base_url += "last={}&".format(str(last))
     if first:
-        base_url += 'first={}&'.format(str(first))
+        base_url += "first={}&".format(str(first))
 
-    return list(itertools.chain.from_iterable(_getJson(base_url, token, version, filter)))
+    return list(
+        itertools.chain.from_iterable(_getJson(base_url, token, version, filter))
+    )
 
 
-def historicalFXDF(symbols=None, from_='', to_='', on='', last=0, first=0, token='', version='', filter=''):
-    '''This endpoint returns a daily value for the desired currency pair.
+def historicalFXDF(
+    symbols=None,
+    from_="",
+    to_="",
+    on="",
+    last=0,
+    first=0,
+    token="",
+    version="",
+    filter="",
+):
+    """This endpoint returns a daily value for the desired currency pair.
 
     https://iexcloud.io/docs/api/#historical-daily
     1am Mon-Sat UTC
@@ -152,8 +200,20 @@ def historicalFXDF(symbols=None, from_='', to_='', on='', last=0, first=0, token
     Returns:
 
         DataFrame: result
-    '''
-    df = pd.DataFrame(historicalFX(symbols, from_=from_, to_=to_, on=on, last=last, first=first, token=token, version=version, filter=filter))
-    _reindex(df, ['date', 'symbol'])
+    """
+    df = pd.DataFrame(
+        historicalFX(
+            symbols,
+            from_=from_,
+            to_=to_,
+            on=on,
+            last=last,
+            first=first,
+            token=token,
+            version=version,
+            filter=filter,
+        )
+    )
+    _reindex(df, ["date", "symbol"])
     df.sort_index(inplace=True)
     return df

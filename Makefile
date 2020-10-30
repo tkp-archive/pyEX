@@ -4,8 +4,8 @@ tests: ## Make unit tests
 lint: ## run linter
 	python -m flake8 pyEX 
 
-fix:  ## run autopep8/tslint fix
-	python -m autopep8 --in-place -r -a -a pyEX/
+fix:  ## run black fix
+	python -m black pyEX/
 
 annotate: ## MyPy type annotation check
 	python -m mypy -s pyEX

@@ -5,9 +5,9 @@ from mock import patch
 class TestCommodities:
     def test_all(self):
         from pyEX import Client
-        c = Client('test')
-        with patch('pyEX.common._getJsonIEXCloud'), \
-                patch('pickle.dump'):
+
+        c = Client("test")
+        with patch("pyEX.common._getJsonIEXCloud"), patch("pickle.dump"):
             c.wti()
             c.brent()
             c.natgas()
