@@ -3,7 +3,7 @@ from functools import lru_cache
 
 
 class EconomicPoints(Enum):
-    '''Economic data points
+    """Economic data points
 
     https://iexcloud.io/docs/api/#economic-data
 
@@ -26,29 +26,29 @@ class EconomicPoints(Enum):
         INITIALCLAIMS; Initial claims returned as a number, seasonally adjusted
         RETAILMONEY; Retail money funds returned as billions of dollars, seasonally adjusted
         INSTITUTIONALMONEY; Institutional money funds returned as billions of dollars, seasonally adjusted
-    '''
+    """
 
-    US30 = 'MORTGAGE30US'
-    US15 = 'MORTGAGE15US'
-    US5 = 'MORTGAGE5US'
-    FEDFUNDS = 'FEDFUNDS'
-    CREDITCARD = 'TERMCBCCALLNS'
-    CDNJ = 'MMNRNJ'
-    CDJ = 'MMNRJD'
-    GDP = 'A191RL1Q225SBEA'
-    INDPRO = 'INDPRO'
-    CPI = 'CPIAUCSL'
-    PAYROLL = 'PAYEMS'
-    HOUSING = 'HOUST'
-    UNEMPLOYMENT = 'UNRATE'
-    VEHICLES = 'TOTALSA'
-    RECESSION_PROB = 'RECPROUSM156N'
-    INITIALCLAIMS = 'IC4WSA'
-    RETAILMONEY = 'WRMFSL'
-    INSTITUTIONALMONEY = 'WIMFSL'
+    US30 = "MORTGAGE30US"
+    US15 = "MORTGAGE15US"
+    US5 = "MORTGAGE5US"
+    FEDFUNDS = "FEDFUNDS"
+    CREDITCARD = "TERMCBCCALLNS"
+    CDNJ = "MMNRNJ"
+    CDJ = "MMNRJD"
+    GDP = "A191RL1Q225SBEA"
+    INDPRO = "INDPRO"
+    CPI = "CPIAUCSL"
+    PAYROLL = "PAYEMS"
+    HOUSING = "HOUST"
+    UNEMPLOYMENT = "UNRATE"
+    VEHICLES = "TOTALSA"
+    RECESSION_PROB = "RECPROUSM156N"
+    INITIALCLAIMS = "IC4WSA"
+    RETAILMONEY = "WRMFSL"
+    INSTITUTIONALMONEY = "WIMFSL"
 
     @staticmethod
     @lru_cache(1)
     def options():
-        '''Return a list of the available economic points options'''
+        """Return a list of the available economic points options"""
         return list(map(lambda c: c.value, EconomicPoints))

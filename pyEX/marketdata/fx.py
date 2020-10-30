@@ -4,15 +4,15 @@ from .sse import _runSSE, _runSSEAsync
 
 
 class FXSSE(Enum):
-    FOREX = 'forex'
+    FOREX = "forex"
 
     @staticmethod
     def options():
         return list(map(lambda c: c.value, FXSSE))
 
 
-def fxSSE(symbols=None, on_data=None, token='', version=''):
-    '''This endpoint streams real-time foreign currency exchange rates.
+def fxSSE(symbols=None, on_data=None, token="", version=""):
+    """This endpoint streams real-time foreign currency exchange rates.
 
     https://iexcloud.io/docs/api/#forex-currencies
 
@@ -22,12 +22,12 @@ def fxSSE(symbols=None, on_data=None, token='', version=''):
         token (str): Access token
         version (str): API version
 
-    '''
-    return _runSSE('forex', symbols, on_data, token, version)
+    """
+    return _runSSE("forex", symbols, on_data, token, version)
 
 
-async def fxSSEAsync(symbols=None, token='', version=''):
-    '''This endpoint streams real-time foreign currency exchange rates.
+async def fxSSEAsync(symbols=None, token="", version=""):
+    """This endpoint streams real-time foreign currency exchange rates.
 
     https://iexcloud.io/docs/api/#forex-currencies
 
@@ -35,6 +35,6 @@ async def fxSSEAsync(symbols=None, token='', version=''):
         symbols (str): Tickers to request
         token (str): Access token
         version (str): API version
-    '''
-    async for item in _runSSEAsync('forex', symbols, token, version):
+    """
+    async for item in _runSSEAsync("forex", symbols, token, version):
         yield item
