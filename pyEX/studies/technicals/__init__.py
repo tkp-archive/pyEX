@@ -6,7 +6,7 @@ from .cycle import (
     ht_phasor,
     ht_sine,
     ht_trendmode,
-)  # noqa: F401
+)
 from .math import (
     acos,
     asin,
@@ -34,8 +34,8 @@ from .math import (
     mult,
     sub,
     sum,
-)  # noqa: F401
-from .momentum import adx, adxr, rsi  # noqa: F401
+)
+from .momentum import adx, adxr, rsi
 from .overlap import (
     bollinger,
     dema,
@@ -53,4 +53,4 @@ from .overlap import (
     tema,
     trima,
     wma,
-)  # noqa: F401
+)

@@ -670,6 +670,70 @@ Currently, the following methods are implemented:
 - socialSentimentDF
 
 
+## Studies
+Available via `pyEX[studies]`.
+
+### Technicals
+These are built on [TA-lib](https://ta-lib.org)
+
+#### Cycle
+- ht_dcperiod
+- ht_dcphase
+- ht_phasor
+- ht_sine
+- ht_trendmode
+
+#### Math
+- acos
+- asin
+- atan
+- ceil
+- cos
+- cosh
+- exp
+- floor
+- ln
+- log10
+- sin
+- sinh
+- sqrt
+- tan
+- tanh
+- add
+- div
+- max
+- maxindex
+- min
+- minindex
+- minmax
+- minmaxindex
+- mult
+- sub
+- sum
+
+#### Momentum
+- adx
+- adxr
+- rsi
+
+#### Overlap
+- bollinger
+- dema
+- ema
+- ht_trendline
+- kama
+- mama
+- mavp
+- midpoint
+- midpice
+- sar
+- sarext
+- sma
+- t3
+- tema
+- trima
+- wma
+
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)
