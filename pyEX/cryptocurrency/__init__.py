@@ -5,4 +5,4 @@ from .cryptocurrency import (
     cryptoPriceDF,
     cryptoQuote,
     cryptoQuoteDF,
-)  # noqa: F401
+)

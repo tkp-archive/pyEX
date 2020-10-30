@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-from .common import PyEXception, PyEXStopSSE  # noqa: F401
-from .client import *  # noqa: F401, F403
-from .account import *  # noqa: F401, F403
+from .common import PyEXception, PyEXStopSSE
+from .client import *  # noqa: F403
+from .account import *  # noqa: F403
 from .alternative import (
     crypto,
-    cryptoDF,  # noqa: F401
+    cryptoDF,
     sentiment,
-    sentimentDF,  # noqa: F401
+    sentimentDF,
     ceoCompensation,
     ceoCompensationDF,
-)  # noqa: F401
-from .commodities import CommoditiesPoints  # noqa: F401
+)
+from .commodities import CommoditiesPoints
 from .cryptocurrency import (
     cryptoBook,
     cryptoBookDF,
@@ -18,8 +18,8 @@ from .cryptocurrency import (
     cryptoPriceDF,
     cryptoQuote,
     cryptoQuoteDF,
-)  # noqa: F401
-from .economic import EconomicPoints  # noqa: F401
+)
+from .economic import EconomicPoints
 from .fx import (
     latestFX,
     latestFXDF,
@@ -27,106 +27,106 @@ from .fx import (
     convertFXDF,
     historicalFX,
     historicalFXDF,
-)  # noqa: F401
-from .markets import markets, marketsDF  # noqa: F401
+)
+from .markets import markets, marketsDF
 from .marketdata.cryptocurrency import (
     cryptoBookSSE,
-    cryptoBookSSEAsync,  # noqa: F401
+    cryptoBookSSEAsync,
     cryptoEventsSSE,
-    cryptoEventsSSEAsync,  # noqa: F401
+    cryptoEventsSSEAsync,
     cryptoQuotesSSE,
     cryptoQuotesSSEAsync,
-)  # noqa: F401
-from .marketdata.fx import fxSSE  # noqa: F401
-from .marketdata.news import newsSSE, newsSSEAsync  # noqa: F401
-from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync  # noqa: F401
+)
+from .marketdata.fx import fxSSE
+from .marketdata.news import newsSSE, newsSSEAsync
+from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync
 from .marketdata.sse import (
     topsSSE,
-    topsSSEAsync,  # noqa: F401
+    topsSSEAsync,
     lastSSE,
-    lastSSEASync,  # noqa: F401
+    lastSSEASync,
     deepSSE,
-    deepSSEAsync,  # noqa: F401
+    deepSSEAsync,
     tradesSSE,
-    tradesSSEAsync,  # noqa: F401
+    tradesSSEAsync,
     auctionSSE,
-    auctionSSEAsync,  # noqa: F401
+    auctionSSEAsync,
     bookSSE,
-    bookSSEAsync,  # noqa: F401
+    bookSSEAsync,
     opHaltStatusSSE,
-    opHaltStatusSSEAsync,  # noqa: F401
+    opHaltStatusSSEAsync,
     officialPriceSSE,
-    officialPriceSSEAsync,  # noqa: F401
+    officialPriceSSEAsync,
     securityEventSSE,
-    securityEventSSEAsync,  # noqa: F401
+    securityEventSSEAsync,
     ssrStatusSSE,
-    ssrStatusSSEAsync,  # noqa: F401
+    ssrStatusSSEAsync,
     systemEventSSE,
-    systemEventSSEAsync,  # noqa: F401
+    systemEventSSEAsync,
     tradeBreaksSSE,
-    tradeBreaksSSEAsync,  # noqa: F401
+    tradeBreaksSSEAsync,
     tradingStatusSSE,
     tradingStatusSSEAsync,
-)  # noqa: F401
+)
 from .marketdata.stock import (
     stocksUSNoUTPSSE,
-    stocksUSNoUTPSSEAsync,  # noqa: F401
+    stocksUSNoUTPSSEAsync,
     stocksUSSSE,
-    stocksUSSSEAsync,  # noqa: F401
+    stocksUSSSEAsync,
     stocksUS1SecondSSE,
-    stocksUS1SecondSSEAsync,  # noqa: F401
+    stocksUS1SecondSSEAsync,
     stocksUS5SecondSSE,
-    stocksUS5SecondSSEAsync,  # noqa: F401
+    stocksUS5SecondSSEAsync,
     stocksUS1MinuteSSE,
     stocksUS1MinuteSSEAsync,
-)  # noqa: F401
+)
 from .marketdata.http import (
     tops,
     topsAsync,
-    topsDF,  # noqa: F401
+    topsDF,
     last,
     lastAsync,
-    lastDF,  # noqa: F401
+    lastDF,
     deep,
     deepAsync,
-    deepDF,  # noqa: F401
+    deepDF,
     hist,
     histAsync,
-    histDF,  # noqa: F401
+    histDF,
     trades,
     tradesAsync,
-    tradesDF,  # noqa: F401
+    tradesDF,
     auction,
     auctionAsync,
-    auctionDF,  # noqa: F401
+    auctionDF,
     book as deepBook,
     bookAsync as deepBookAsync,
-    bookDF as deepBookDF,  # noqa: F401
+    bookDF as deepBookDF,
     opHaltStatus,
     opHaltStatusAsync,
-    opHaltStatusDF,  # noqa: F401
+    opHaltStatusDF,
     officialPrice,
     officialPriceAsync,
-    officialPriceDF,  # noqa: F401
+    officialPriceDF,
     securityEvent,
     securityEventAsync,
-    securityEventDF,  # noqa: F401
+    securityEventDF,
     ssrStatus,
     ssrStatusAsync,
-    ssrStatusDF,  # noqa: F401
+    ssrStatusDF,
     systemEvent,
     systemEventAsync,
-    systemEventDF,  # noqa: F401
+    systemEventDF,
     tradeBreak,
     tradeBreakAsync,
-    tradeBreakDF,  # noqa: F401
+    tradeBreakDF,
     tradingStatus,
     tradingStatusAsync,
     tradingStatusDF,
-)  # noqa: F401
-from .marketdata.ws import *  # noqa: F401,F403
-from .points import points, pointsDF  # noqa: F401
-from .rates import RatesPoints  # noqa: F401
+)
+from .marketdata.ws import *  # noqa: F403
+from .points import points, pointsDF
+from .rates import RatesPoints
 from .refdata import (
     symbols,
     iexSymbols,
@@ -134,42 +134,42 @@ from .refdata import (
     otcSymbols,
     internationalSymbols,
     fxSymbols,
-    optionsSymbols,  # noqa: F401
+    optionsSymbols,
     symbolsDF,
     iexSymbolsDF,
     mutualFundSymbolsDF,
     otcSymbolsDF,
     internationalSymbolsDF,
     fxSymbolsDF,
-    optionsSymbolsDF,  # noqa: F401
+    optionsSymbolsDF,
     symbolsList,
     iexSymbolsList,
     mutualFundSymbolsList,
     otcSymbolsList,
     internationalSymbolsList,
     fxSymbolsList,
-    optionsSymbolsList,  # noqa: F401
+    optionsSymbolsList,
     corporateActions,
-    corporateActionsDF,  # noqa: F401
+    corporateActionsDF,
     refDividends,
-    refDividendsDF,  # noqa: F401
+    refDividendsDF,
     nextDayExtDate,
-    nextDayExtDateDF,  # noqa: F401
+    nextDayExtDateDF,
     directory,
-    directoryDF,  # noqa: F401
+    directoryDF,
     calendar,
     calendarDF,
     holidays,
-    holidaysDF,  # noqa: F401
+    holidaysDF,
     exchanges,
-    exchangesDF,  # noqa: F401
+    exchangesDF,
     internationalExchanges,
-    internationalExchangesDF,  # noqa: F401
+    internationalExchangesDF,
     sectors,
-    sectorsDF,  # noqa: F401
+    sectorsDF,
     tags,
     tagsDF,
-)  # noqa: F401
+)
 from .rules import (
     schema,
     create,
@@ -180,7 +180,7 @@ from .rules import (
     rule as ruleInfo,
     rules,
     output as ruleOutput,
-)  # noqa: F401
+)
 from .stats import (
     stats,
     statsDF,
@@ -192,151 +192,151 @@ from .stats import (
     summaryDF,
     daily,
     dailyDF,
-)  # noqa: F401
+)
 from .stocks import (
     advancedStats,
-    advancedStatsDF,  # noqa: F401
+    advancedStatsDF,
     analystRecommendations,
-    analystRecommendationsDF,  # noqa: F401
+    analystRecommendationsDF,
     balanceSheet,
-    balanceSheetDF,  # noqa: F401
+    balanceSheetDF,
     batch,
     batchDF,
     bulkBatch,
-    bulkBatchDF,  # noqa: F401
+    bulkBatchDF,
     book,
-    bookDF,  # noqa: F401
+    bookDF,
     bonusIssue,
-    bonusIssueDF,  # noqa: F401
+    bonusIssueDF,
     bulkMinuteBars,
-    bulkMinuteBarsDF,  # noqa: F401
+    bulkMinuteBarsDF,
     cashFlow,
-    cashFlowDF,  # noqa: F401
+    cashFlowDF,
     chart,
-    chartDF,  # noqa: F401
+    chartDF,
     company,
-    companyDF,  # noqa: F401
+    companyDF,
     collections,
-    collectionsDF,  # noqa: F401
+    collectionsDF,
     delayedQuote,
-    delayedQuoteDF,  # noqa: F401
+    delayedQuoteDF,
     distribution,
-    distributionDF,  # noqa: F401
+    distributionDF,
     dividends,
-    dividendsDF,  # noqa: F401
+    dividendsDF,
     earnings,
-    earningsDF,  # noqa: F401
+    earningsDF,
     earningsToday,
-    earningsTodayDF,  # noqa: F401
+    earningsTodayDF,
     estimates,
-    estimatesDF,  # noqa: F401
+    estimatesDF,
     financials,
-    financialsDF,  # noqa: F401
+    financialsDF,
     fundOwnership,
-    fundOwnershipDF,  # noqa: F401
+    fundOwnershipDF,
     incomeStatement,
-    incomeStatementDF,  # noqa: F401
+    incomeStatementDF,
     insiderRoster,
-    insiderRosterDF,  # noqa: F401
+    insiderRosterDF,
     insiderSummary,
-    insiderSummaryDF,  # noqa: F401
+    insiderSummaryDF,
     insiderTransactions,
-    insiderTransactionsDF,  # noqa: F401
+    insiderTransactionsDF,
     institutionalOwnership,
-    institutionalOwnershipDF,  # noqa: F401
+    institutionalOwnershipDF,
     intraday,
-    intradayDF,  # noqa: F401
+    intradayDF,
     ipoToday,
-    ipoTodayDF,  # noqa: F401
+    ipoTodayDF,
     ipoUpcoming,
-    ipoUpcomingDF,  # noqa: F401
+    ipoUpcomingDF,
     marketShortInterest,
-    marketShortInterestDF,  # noqa: F401
+    marketShortInterestDF,
     marketVolume,
-    marketVolumeDF,  # noqa: F401
+    marketVolumeDF,
     keyStats,
-    keyStatsDF,  # noqa: F401
+    keyStatsDF,
     largestTrades,
-    largestTradesDF,  # noqa: F401
+    largestTradesDF,
     list,
-    listDF,  # noqa: F401
+    listDF,
     logo,
     logoPNG,
-    logoNotebook,  # noqa: F401
+    logoNotebook,
     news,
     newsDF,
     marketNews,
-    marketNewsDF,  # noqa: F401
+    marketNewsDF,
     ohlc,
     ohlcDF,
     marketOhlc,
-    marketOhlcDF,  # noqa: F401
+    marketOhlcDF,
     peers,
-    peersDF,  # noqa: F401
+    peersDF,
     marketYesterday,
-    marketYesterdayDF,  # noqa: F401
+    marketYesterdayDF,
     price,
-    priceDF,  # noqa: F401
+    priceDF,
     priceTarget,
-    priceTargetDF,  # noqa: F401
+    priceTargetDF,
     quote,
-    quoteDF,  # noqa: F401
+    quoteDF,
     relevant,
-    relevantDF,  # noqa: F401
+    relevantDF,
     returnOfCapital,
-    returnOfCapitalDF,  # noqa: F401
+    returnOfCapitalDF,
     rightsIssue,
-    rightsIssueDF,  # noqa: F401
+    rightsIssueDF,
     rightToPurchase,
-    rightToPurchaseDF,  # noqa: F401
+    rightToPurchaseDF,
     sectorPerformance,
-    sectorPerformanceDF,  # noqa: F401
+    sectorPerformanceDF,
     securityReclassification,
-    securityReclassificationDF,  # noqa: F401
+    securityReclassificationDF,
     securitySwap,
-    securitySwapDF,  # noqa: F401
+    securitySwapDF,
     shortInterest,
-    shortInterestDF,  # noqa: F401
+    shortInterestDF,
     splits,
-    splitsDF,  # noqa: F401
+    splitsDF,
     spinoff,
-    spinoffDF,  # noqa: F401
+    spinoffDF,
     spread,
-    spreadDF,  # noqa: F401
+    spreadDF,
     stockSplits,
-    stockSplitsDF,  # noqa: F401
+    stockSplitsDF,
     threshold,
-    thresholdDF,  # noqa: F401
+    thresholdDF,
     upcomingEvents,
-    upcomingEventsDF,  # noqa: F401
+    upcomingEventsDF,
     upcomingEarnings,
-    upcomingEarningsDF,  # noqa: F401
+    upcomingEarningsDF,
     upcomingDividends,
     upcomingDividendsDF,
     upcomingSplits,
-    upcomingSplitsDF,  # noqa: F401
+    upcomingSplitsDF,
     upcomingIPOs,
-    upcomingIPOsDF,  # noqa: F401
+    upcomingIPOsDF,
     volumeByVenue,
-    volumeByVenueDF,  # noqa: F401
+    volumeByVenueDF,
     yesterday,
     yesterdayDF,
-)  # noqa: F401
-from .options import optionExpirations, options, optionsDF  # noqa: F401
-from ._version import __version__  # noqa: F401
+)
+from .options import optionExpirations, options, optionsDF
+from ._version import __version__
 
 
 try:
-    from .caching import *  # noqa: F401,F403
+    from .caching import *  # noqa: F403
 except ImportError:
     pass
 
 try:
-    from .studies import *  # noqa: F401,F403
+    from .studies import *  # noqa: F403
 except ImportError:
     pass
 
 try:
-    from .zipline import *  # noqa: F401,F403
+    from .zipline import *  # noqa: F403
 except ImportError:
     pass

@@ -9,4 +9,4 @@ from .stats import (
     summaryDF,
     daily,
     dailyDF,
-)  # noqa: F401
+)

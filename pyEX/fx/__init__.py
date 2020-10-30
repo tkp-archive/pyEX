@@ -5,4 +5,4 @@ from .fx import (
     convertFXDF,
     historicalFX,
     historicalFXDF,
-)  # noqa: F401
+)

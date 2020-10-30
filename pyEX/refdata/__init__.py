@@ -5,14 +5,14 @@ from .symbols import (
     otcSymbols,
     internationalSymbols,
     fxSymbols,
-    optionsSymbols,  # noqa: F401
+    optionsSymbols,
     symbolsDF,
     iexSymbolsDF,
     mutualFundSymbolsDF,
     otcSymbolsDF,
     internationalSymbolsDF,
     fxSymbolsDF,
-    optionsSymbolsDF,  # noqa: F401
+    optionsSymbolsDF,
     symbolsList,
     iexSymbolsList,
     mutualFundSymbolsList,
@@ -20,23 +20,23 @@ from .symbols import (
     internationalSymbolsList,
     fxSymbolsList,
     optionsSymbolsList,
-)  # noqa: F401
+)
 from .refdata import (
     corporateActions,
-    corporateActionsDF,  # noqa: F401
+    corporateActionsDF,
     dividends as refDividends,
-    dividendsDF as refDividendsDF,  # noqa: F401
+    dividendsDF as refDividendsDF,
     nextDayExtDate,
-    nextDayExtDateDF,  # noqa: F401
+    nextDayExtDateDF,
     directory,
     directoryDF,
-)  # noqa: F401
-from .calendar import calendar, calendarDF, holidays, holidaysDF  # noqa: F401
-from .figi import figi, figiDF  # noqa: F401
+)
+from .calendar import calendar, calendarDF, holidays, holidaysDF
+from .figi import figi, figiDF
 from .exchanges import (
     exchanges,
     exchangesDF,
     internationalExchanges,
     internationalExchangesDF,
-)  # noqa: F401
-from .sectors import sectors, sectorsDF, tags, tagsDF  # noqa: F401
+)
+from .sectors import sectors, sectorsDF, tags, tagsDF

@@ -5,4 +5,4 @@ from .alternative import (
     sentimentDF,
     ceoCompensation,
     ceoCompensationDF,
-)  # noqa: F401
+)
