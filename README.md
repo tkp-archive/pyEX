@@ -109,7 +109,7 @@ date
 - pyEX fully implements the streaming APIs
 
 ## Other enhancements
-- [pyEX-studies](https://github.com/timkpaine/pyEX-studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
+- [pyEX-studies](https://github.com/timkpaine/pyEX/tree/main/pyEX/studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
 - [pyEX-caching](https://github.com/timkpaine/pyEX-caching): persistent, queryable caching for pyEX function calls. Minimize your spend and maximize your performance
 - [pyEX-zipline](https://github.com/timkpaine/pyEX-zipline): [Zipline](https://github.com/quantopian/zipline) integration for IEX data
 
