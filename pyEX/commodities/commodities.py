@@ -3,7 +3,7 @@ from enum import Enum
 
 
 class CommoditiesPoints(Enum):
-    '''Commodities data points
+    """Commodities data points
 
     https://iexcloud.io/docs/api/#commodities
 
@@ -18,20 +18,21 @@ class CommoditiesPoints(Enum):
         GASMID; US Midgrade Conventional Gas Price - in dollars per gallon, not seasonally adjusted
         GASPRM; US Premium Conventional Gas Price - in dollars per gallon, not seasonally adjusted
         PROPANE; Propane Prices Mont Belvieu Texas - in dollars per gallon, not seasonally adjusted
-    '''
-    WTI = 'DCOILWTICO'
-    BRENT = 'DCOILBRENTEU'
-    NATGAS = 'DHHNGSP'
-    HEATOIL = 'DHOILNYH'
-    JET = 'DJFUELUSGULF'
-    DIESEL = 'GASDESW'
-    GASREG = 'GASREGCOVW'
-    GASMID = 'GASMIDCOVW'
-    GASPRM = 'GASPRMCOVW'
-    PROPANE = 'DPROPANEMBTX'
+    """
+
+    WTI = "DCOILWTICO"
+    BRENT = "DCOILBRENTEU"
+    NATGAS = "DHHNGSP"
+    HEATOIL = "DHOILNYH"
+    JET = "DJFUELUSGULF"
+    DIESEL = "GASDESW"
+    GASREG = "GASREGCOVW"
+    GASMID = "GASMIDCOVW"
+    GASPRM = "GASPRMCOVW"
+    PROPANE = "DPROPANEMBTX"
 
     @staticmethod
     @lru_cache(1)
     def options():
-        '''Return a list of the available commodities points options'''
+        """Return a list of the available commodities points options"""
         return list(map(lambda c: c.value, CommoditiesPoints))

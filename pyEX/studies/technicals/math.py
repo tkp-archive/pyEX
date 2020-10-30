@@ -3,8 +3,8 @@ import talib as t
 import pandas as pd
 
 
-def acos(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def acos(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric ACos
     for the given symbol across the given timeframe
 
@@ -16,14 +16,14 @@ def acos(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.ACOS(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'acos': x})
+    return pd.DataFrame({col: df[col].values, "acos": x})
 
 
-def asin(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def asin(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric ASin
     for the given symbol across the given timeframe
 
@@ -35,14 +35,14 @@ def asin(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.ASIN(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'asin': x})
+    return pd.DataFrame({col: df[col].values, "asin": x})
 
 
-def atan(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def atan(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric ATan
     for the given symbol across the given timeframe
 
@@ -54,14 +54,14 @@ def atan(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.ATAN(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'atan': x})
+    return pd.DataFrame({col: df[col].values, "atan": x})
 
 
-def ceil(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def ceil(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Ceil
     for the given symbol across the given timeframe
 
@@ -73,14 +73,14 @@ def ceil(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.CEIL(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'ceil': x})
+    return pd.DataFrame({col: df[col].values, "ceil": x})
 
 
-def cos(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def cos(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric Cos
     for the given symbol across the given timeframe
 
@@ -92,14 +92,14 @@ def cos(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.COS(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'cos': x})
+    return pd.DataFrame({col: df[col].values, "cos": x})
 
 
-def cosh(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def cosh(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric Cosh
     for the given symbol across the given timeframe
 
@@ -111,14 +111,14 @@ def cosh(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.COSH(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'cosh': x})
+    return pd.DataFrame({col: df[col].values, "cosh": x})
 
 
-def exp(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def exp(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Arithmetic Exp
     for the given symbol across the given timeframe
 
@@ -130,14 +130,14 @@ def exp(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.EXP(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'exp': x})
+    return pd.DataFrame({col: df[col].values, "exp": x})
 
 
-def floor(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def floor(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Floor
     for the given symbol across the given timeframe
 
@@ -149,14 +149,14 @@ def floor(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.FLOOR(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'floor': x})
+    return pd.DataFrame({col: df[col].values, "floor": x})
 
 
-def ln(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def ln(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Log Natural
     for the given symbol across the given timeframe
 
@@ -168,14 +168,14 @@ def ln(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.LN(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'ln': x})
+    return pd.DataFrame({col: df[col].values, "ln": x})
 
 
-def log10(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def log10(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Log10
     for the given symbol across the given timeframe
 
@@ -187,14 +187,14 @@ def log10(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.LOG10(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'log10': x})
+    return pd.DataFrame({col: df[col].values, "log10": x})
 
 
-def sin(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def sin(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric SIN
     for the given symbol across the given timeframe
 
@@ -206,14 +206,14 @@ def sin(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.SIN(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'sin': x})
+    return pd.DataFrame({col: df[col].values, "sin": x})
 
 
-def sinh(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def sinh(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric Sinh
     for the given symbol across the given timeframe
 
@@ -225,14 +225,14 @@ def sinh(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.SINH(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'sinh': x})
+    return pd.DataFrame({col: df[col].values, "sinh": x})
 
 
-def sqrt(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def sqrt(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Square Root
     for the given symbol across the given timeframe
 
@@ -244,14 +244,14 @@ def sqrt(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.SQRT(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'sqrt': x})
+    return pd.DataFrame({col: df[col].values, "sqrt": x})
 
 
-def tan(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def tan(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric Tan
     for the given symbol across the given timeframe
 
@@ -263,14 +263,14 @@ def tan(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.TAN(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'tan': x})
+    return pd.DataFrame({col: df[col].values, "tan": x})
 
 
-def tanh(client, symbol, timeframe='6m', col='close'):
-    '''This will return a dataframe of
+def tanh(client, symbol, timeframe="6m", col="close"):
+    """This will return a dataframe of
     Vector Trigonometric Tanh
     for the given symbol across the given timeframe
 
@@ -282,14 +282,14 @@ def tanh(client, symbol, timeframe='6m', col='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.TANH(df[col].values)
-    return pd.DataFrame({col: df[col].values, 'tanh': x})
+    return pd.DataFrame({col: df[col].values, "tanh": x})
 
 
-def add(client, symbol, timeframe='6m', col1='open', col2='close'):
-    '''This will return a dataframe of
+def add(client, symbol, timeframe="6m", col1="open", col2="close"):
+    """This will return a dataframe of
     Vector Arithmetic Add
     for the given symbol across the given timeframe
 
@@ -302,14 +302,14 @@ def add(client, symbol, timeframe='6m', col1='open', col2='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.ADD(df[col1].values, df[col2].values)
-    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, 'add': x})
+    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, "add": x})
 
 
-def div(client, symbol, timeframe='6m', col1='open', col2='close'):
-    '''This will return a dataframe of
+def div(client, symbol, timeframe="6m", col1="open", col2="close"):
+    """This will return a dataframe of
     Vector Arithmetic Div
     for the given symbol across the given timeframe
 
@@ -322,14 +322,14 @@ def div(client, symbol, timeframe='6m', col1='open', col2='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.DIV(df[col1].values, df[col2].values)
-    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, 'div': x})
+    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, "div": x})
 
 
-def max(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def max(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Highest value over a specified period
     for the given symbol across the given timeframe
 
@@ -342,13 +342,13 @@ def max(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     return t.MAX(df[col].values, timeperiod=period)
 
 
-def maxindex(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def maxindex(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Highest value over a specified period
     for the given symbol across the given timeframe
 
@@ -361,14 +361,14 @@ def maxindex(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.MAXINDEX(df[col].values, timeperiod=period)
     return x, df[col].values[x]
 
 
-def min(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def min(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Lowest value over a specified period
     for the given symbol across the given timeframe
 
@@ -381,13 +381,13 @@ def min(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     return t.MIN(df[col].values, timeperiod=period)
 
 
-def minindex(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def minindex(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Lowest value over a specified period
     for the given symbol across the given timeframe
 
@@ -400,14 +400,14 @@ def minindex(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.MININDEX(df[col].values, timeperiod=period)
     return x, df[col].values[x]
 
 
-def minmax(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def minmax(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Lowest and highest values over a specified period
     for the given symbol across the given timeframe
 
@@ -420,13 +420,13 @@ def minmax(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     return t.MINMAX(df[col].values, timeperiod=period)
 
 
-def minmaxindex(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def minmaxindex(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Indexes of lowest and highest values over a specified period
     for the given symbol across the given timeframe
 
@@ -439,14 +439,14 @@ def minmaxindex(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x, y = t.MINMAXINDEX(df[col].values, timeperiod=period)
     return x, df[col].values[x], y, df[col].values[y]
 
 
-def mult(client, symbol, timeframe='6m', col1='open', col2='close'):
-    '''This will return a dataframe of
+def mult(client, symbol, timeframe="6m", col1="open", col2="close"):
+    """This will return a dataframe of
     Vector Arithmetic Add
     for the given symbol across the given timeframe
 
@@ -459,14 +459,14 @@ def mult(client, symbol, timeframe='6m', col1='open', col2='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.MULT(df[col1].values, df[col2].values)
-    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, 'mult': x})
+    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, "mult": x})
 
 
-def sub(client, symbol, timeframe='6m', col1='open', col2='close'):
-    '''This will return a dataframe of
+def sub(client, symbol, timeframe="6m", col1="open", col2="close"):
+    """This will return a dataframe of
     Vector Arithmetic Add
     for the given symbol across the given timeframe
 
@@ -479,14 +479,14 @@ def sub(client, symbol, timeframe='6m', col1='open', col2='close'):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.SUB(df[col1].values, df[col2].values)
-    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, 'sub': x})
+    return pd.DataFrame({col1: df[col1].values, col2: df[col2].values, "sub": x})
 
 
-def sum(client, symbol, timeframe='6m', col='close', period=30):
-    '''This will return a dataframe of
+def sum(client, symbol, timeframe="6m", col="close", period=30):
+    """This will return a dataframe of
     Summation
     for the given symbol across the given timeframe
 
@@ -499,7 +499,7 @@ def sum(client, symbol, timeframe='6m', col='close', period=30):
 
     Returns:
         DataFrame: result
-    '''
+    """
     df = client.chartDF(symbol, timeframe)
     x = t.SUMMATION(df[col].values, timeperiod=period)
-    return pd.DataFrame({col: df[col].values, 'sum': x})
+    return pd.DataFrame({col: df[col].values, "sum": x})

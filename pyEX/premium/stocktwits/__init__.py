@@ -4,13 +4,8 @@ from functools import wraps
 from ...common import _getJson, PyEXception, _toDatetime, _strOrDate, _raiseIfNotStr
 
 
-def socialSentiment(symbol,
-                    type='daily',
-                    date='',
-                    token='',
-                    version='',
-                    filter=''):
-    '''This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
+def socialSentiment(symbol, type="daily", date="", token="", version="", filter=""):
+    """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 
     https://iexcloud.io/docs/api/#social-sentiment
 
@@ -24,16 +19,16 @@ def socialSentiment(symbol,
 
     Returns:
         dict or DataFrame: result
-    '''
+    """
     _raiseIfNotStr(symbol)
 
-    if type not in ('daily', 'minute'):
-        raise PyEXception('`type` must be in (daily, minute). Got: {}'.format(type))
-    base_url = 'stock/{}/sentiment/{}'.format(symbol, type)
+    if type not in ("daily", "minute"):
+        raise PyEXception("`type` must be in (daily, minute). Got: {}".format(type))
+    base_url = "stock/{}/sentiment/{}".format(symbol, type)
 
     if date:
         date = _strOrDate(date)
-        base_url += '/{}'.format(date)
+        base_url += "/{}".format(date)
     return _getJson(base_url, token, version, filter)
 
 

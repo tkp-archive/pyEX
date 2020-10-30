@@ -5,8 +5,8 @@ from ..common import _expire, _getJson
 
 
 @_expire(hour=8)
-def sectors(token='', version='', filter=''):
-    '''Returns an array of sectors.
+def sectors(token="", version="", filter=""):
+    """Returns an array of sectors.
 
     https://iexcloud.io/docs/api/#sectors
 
@@ -17,18 +17,18 @@ def sectors(token='', version='', filter=''):
 
     Returns:
         dict or DataFrame: result
-    '''
-    return _getJson('ref-data/sectors', token, version, filter)
+    """
+    return _getJson("ref-data/sectors", token, version, filter)
 
 
 @wraps(sectors)
-def sectorsDF(token='', version='', filter=''):
+def sectorsDF(token="", version="", filter=""):
     return pd.DataFrame(sectors(token, version, filter))
 
 
 @_expire(hour=8)
-def tags(token='', version='', filter=''):
-    '''Returns an array of tags.
+def tags(token="", version="", filter=""):
+    """Returns an array of tags.
 
     https://iexcloud.io/docs/api/#tags
 
@@ -39,10 +39,10 @@ def tags(token='', version='', filter=''):
 
     Returns:
         dict or DataFrame: result
-    '''
-    return _getJson('ref-data/tags', token, version, filter)
+    """
+    return _getJson("ref-data/tags", token, version, filter)
 
 
 @wraps(tags)
-def tagsDF(token='', version='', filter=''):
+def tagsDF(token="", version="", filter=""):
     return pd.DataFrame(tags(token, version, filter))

@@ -4,40 +4,42 @@ from functools import wraps
 from ..common import _getJson, _dateRange, _strOrDate, _toDatetime
 
 
-def timeSeriesInventory(token='', version=''):
-    '''Get inventory of available time series endpoints
+def timeSeriesInventory(token="", version=""):
+    """Get inventory of available time series endpoints
     Returns:
         result (dict)
-    '''
-    return _getJson('time-series/', token, version)
+    """
+    return _getJson("time-series/", token, version)
 
 
-def timeSeriesInventoryDF(token='', version=''):
-    '''Get inventory of available time series endpoints
+def timeSeriesInventoryDF(token="", version=""):
+    """Get inventory of available time series endpoints
 
     Returns:
         result (DataFrame)
-    '''
+    """
     return pd.io.json.json_normalize(timeSeriesInventory(token=token, version=version))
 
 
-def timeSeries(id='',
-               key='',
-               subkey='',
-               range=None,
-               calendar=False,
-               limit=1,
-               subattribute='',
-               dateField=None,
-               from_=None,
-               to_=None,
-               on=None,
-               last=0,
-               first=0,
-               token='',
-               version='',
-               filter=''):
-    '''This is a meeting where company executives provide information about the company’s performance and its future prospects.
+def timeSeries(
+    id="",
+    key="",
+    subkey="",
+    range=None,
+    calendar=False,
+    limit=1,
+    subattribute="",
+    dateField=None,
+    from_=None,
+    to_=None,
+    on=None,
+    last=0,
+    first=0,
+    token="",
+    version="",
+    filter="",
+):
+    """This is a meeting where company executives provide information about the company’s performance and its future prospects.
     6am , 10am , 2pm , 6pm and 9pm daily
 
     https://iexcloud.io/docs/api/#time-series
@@ -69,62 +71,57 @@ def timeSeries(id='',
         dict or DataFrame: result
 
     Date Ranges:
-        today	Returns data for today
-        yesterday	Returns data for yesterday
-        ytd	Returns data for the current year
-        last-week	Returns data for Sunday-Saturday last week
-        last-month	Returns data for the last month
-        last-quarter	Returns data for the last quarter
-        d	Use the short hand d to return a number of days. Example: 2d returns 2 days.
-        If calendar=true, data is returned from today forward.
-        w	Use the short hand w to return a number of weeks. Example: 2w returns 2 weeks.
-        If calendar=true, data is returned from today forward.
-        m	Use the short hand m to return a number of months. Example: 2m returns 2 months.
-        If calendar=true, data is returned from today forward.
-        q	Use the short hand q to return a number of quarters. Example: 2q returns 2 quarters.
-        If calendar=true, data is returned from today forward.
-        y	Use the short hand y to return a number of years. Example: 2y returns 2 years.
-        If calendar=true, data is returned from today forward.
-        tomorrow	Calendar data for tomorrow. Requires calendar=true
-        this-week	Calendar data for Sunday-Saturday this week. Requires calendar=true
-        this-month	Calendar data for current month. Requires calendar=true
-        this-quarter	Calendar data for current quarter. Requires calendar=true
-        next-week	Calendar data for Sunday-Saturday next week. Requires calendar=true
-        next-month	Calendar data for next month. Requires calendar=true
-        next-quarter	Calendar data for next quarter. Requires calendar=true
-    '''
+        today           Returns data for today
+        yesterday       Returns data for yesterday
+        ytd             Returns data for the current year
+        last-week       Returns data for Sunday-Saturday last week
+        last-month      Returns data for the last month
+        last-quarter    Returns data for the last quarter
+        d               Use the short hand d to return a number of days. Example: 2d returns 2 days. If calendar=true, data is returned from today forward.
+        w               Use the short hand w to return a number of weeks. Example: 2w returns 2 weeks. If calendar=true, data is returned from today forward.
+        m               Use the short hand m to return a number of months. Example: 2m returns 2 months. If calendar=true, data is returned from today forward.
+        q               Use the short hand q to return a number of quarters. Example: 2q returns 2 quarters. If calendar=true, data is returned from today forward.
+        y               Use the short hand y to return a number of years. Example: 2y returns 2 years. If calendar=true, data is returned from today forward.
+        tomorrow        Calendar data for tomorrow. Requires calendar=true
+        this-week       Calendar data for Sunday-Saturday this week. Requires calendar=true
+        this-month      Calendar data for current month. Requires calendar=true
+        this-quarter    Calendar data for current quarter. Requires calendar=true
+        next-week       Calendar data for Sunday-Saturday next week. Requires calendar=true
+        next-month      Calendar data for next month. Requires calendar=true
+        next-quarter    Calendar data for next quarter. Requires calendar=true
+    """
     if not id:
         return timeSeriesInventory(token=token, version=version)
 
-    base_url = 'time-series/{}'.format(id)
+    base_url = "time-series/{}".format(id)
     if key:
-        base_url += '/{}'.format(key)
+        base_url += "/{}".format(key)
     if subkey:
-        base_url += '/{}'.format(subkey)
-    base_url += '?'
+        base_url += "/{}".format(subkey)
+    base_url += "?"
 
     if range:
         range = _dateRange(range)
-        base_url += 'range={}&'.format(range)
+        base_url += "range={}&".format(range)
 
-    base_url += 'calendar={}&'.format(str(calendar))
-    base_url += 'limit={}&'.format(str(limit))
+    base_url += "calendar={}&".format(str(calendar))
+    base_url += "limit={}&".format(str(limit))
 
     if subattribute:
-        base_url += 'subattribute={}&'.format(subattribute)
+        base_url += "subattribute={}&".format(subattribute)
     if dateField:
-        base_url += 'dateField={}&'.format(dateField)
+        base_url += "dateField={}&".format(dateField)
 
     if from_:
-        base_url += 'from={}&'.format(_strOrDate(from_))
+        base_url += "from={}&".format(_strOrDate(from_))
     if to_:
-        base_url += 'to={}&'.format(_strOrDate(to_))
+        base_url += "to={}&".format(_strOrDate(to_))
     if on:
-        base_url += 'on={}&'.format(_strOrDate(on))
+        base_url += "on={}&".format(_strOrDate(on))
     if last:
-        base_url += 'last={}&'.format(str(last))
+        base_url += "last={}&".format(str(last))
     if first:
-        base_url += 'first={}&'.format(str(first))
+        base_url += "first={}&".format(str(first))
 
     return _getJson(base_url, token, version, filter)
 
@@ -138,15 +135,15 @@ def timeSeriesDF(*args, **kwargs):
 
 @wraps(timeSeries)
 def tenQ(symbol, **kwargs):
-    kwargs.pop('id')
-    kwargs.pop('key')
-    kwargs.pop('subkey')
-    return timeSeries(id='REPORTED_FINANCIALS', key=symbol, subkey='10-Q', **kwargs)
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
 
 
 @wraps(timeSeries)
 def tenK(symbol, **kwargs):
-    kwargs.pop('id')
-    kwargs.pop('key')
-    kwargs.pop('subkey')
-    return timeSeries(id='REPORTED_FINANCIALS', key=symbol, subkey='10-Q', **kwargs)
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
