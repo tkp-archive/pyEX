@@ -39,7 +39,9 @@ requires_async = requires + [
     'aiohttp-sse-client>=0.2.0',
 ]
 
-requires_dev = requires_async + [
+requires_studies = [] if os.environ.get('READTHEDOCS') else ['TA-Lib>=0.4.17']
+
+requires_dev = requires_async + requires_studies + [
     'autopep8>=1.4.1',
     'bump2version>=1.0.0',
     'flake8>=3.7.8',
@@ -76,5 +78,6 @@ setup(
     extras_require={
         'dev': requires_dev,
         'async': requires_async,
+        'studies': requires_studies,
     },
 )

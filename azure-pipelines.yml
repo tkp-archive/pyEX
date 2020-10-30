@@ -20,6 +20,15 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
+        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        tar xfzv ta-lib-0.4.0-src.tar.gz
+        cd ta-lib
+        ./configure --prefix=/usr LDFLAGS="-lm" 
+        make
+        sudo make install
+      displayName: "Install system dependencies"
+
+    - script: |
         python -m pip install --upgrade pip
         pip install -e .[dev]
       displayName: 'Install dependencies'
@@ -45,7 +54,7 @@ jobs:
 
 - job: 'Mac'
   pool:
-    vmImage: 'macos-10.14'
+    vmImage: 'macos-latest'
 
   strategy:
     matrix:
@@ -59,6 +68,15 @@ jobs:
       inputs:
         versionSpec: '$(python.version)'
       displayName: 'Use Python $(python.version)'
+
+    - script: |
+        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        tar xfzv ta-lib-0.4.0-src.tar.gz
+        cd ta-lib
+        ./configure
+        make -j2
+        make install
+      displayName: "Install system dependencies"
 
     - script: |
         python -m pip install --upgrade pip
@@ -100,6 +118,16 @@ jobs:
       inputs:
         versionSpec: '$(python.version)'
       displayName: 'Use Python $(python.version)'
+
+    - script: |
+        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp38-cp38-win_amd64.whl
+      displayName: "Install TA-lib"
+      condition: eq(variables['python.version'], '3.8')
+
+    - script: |
+        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
+      displayName: "Install TA-lib"
+      condition: eq(variables['python.version'], '3.7')
 
     - script: |
         which python > python.txt
