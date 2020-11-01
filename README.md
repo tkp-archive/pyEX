@@ -754,11 +754,11 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 
 
 #### Cycle
-- ht_dcperiod
-- ht_dcphase
-- ht_phasor
-- ht_sine
-- ht_trendmode
+- ht_dcperiod: Hilbert Transform - Dominant Cycle Period
+- ht_dcphase: Hilbert Transform - Dominant Cycle Phase
+- ht_phasor: Hilbert Transform - Phasor Components
+- ht_sine: Hilbert Transform - SineWave
+- ht_trendmode: Hilbert Transform - Trend vs Cycle Mode
 
 #### Math
 - acos
@@ -789,31 +789,35 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - sum
 
 #### Momentum
-- adx
-- adxr
-- aroon
-- aroonosc
-- bop
-- cci
-- cmo
-- dx
-- mfi
-- minus_di
-- minus_dm
-- mom
-- plus_di
-- plus_dm
-- roc
-- rocp
-- rocr
-- rocr100
-- rsi
-- stoch
-- stochf
-- stochrsi
-- trix
-- ultosc
-- willr
+- adx: Average Directional Movement Index
+- adxr: Average Directional Movement Index Rating
+- apo: Absolute Price Oscillator
+- aroon: Aroon
+- aroonosc: Aroon Oscillator
+- bop: Balance Of Power
+- cci: Commodity Channel Index
+- cmo: Chande Momentum Oscillator
+- dx: Directional Movement Index
+- macd: Moving Average Convergence/Divergence
+- macdext: 
+- mfi: 
+- minus_di: 
+- minus_dm: 
+- mom: 
+- plus_di: 
+- plus_dm: 
+- ppo: 
+- roc: 
+- rocp: 
+- rocr: 
+- rocr100: 
+- rsi: 
+- stoch: 
+- stochf: 
+- stochrsi: 
+- trix: 
+- ultosc: 
+- willr: 
 
 #### Overlap
 - bollinger
@@ -836,12 +840,22 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 #### Pattern
 
 #### Price
+- avgprice: Average Price
+- medprice: Median Price
+- typprice: Typical Price
+- wclprice: Weighted Close Price
 
 #### Statistic
 
 #### Volatility
+- atr: Average True Range
+- natr: Normalized Average True Range
+- trange: True Range
 
 #### Volume
+- ad: Chaikin A/D Line
+- adosc: Chaikin A/D Oscillator
+- obv: On Balance Volume
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)
