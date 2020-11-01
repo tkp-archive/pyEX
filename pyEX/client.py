@@ -523,6 +523,10 @@ try:
         wma,
         # Pattern
         # Price
+        avgprice,
+        medprice,
+        typprice,
+        wclprice,
         # Statistic
         # Volatility
         # Volume
@@ -607,6 +611,10 @@ except ImportError:
     tema = None
     trima = None
     wma = None
+    avgprice = None
+    medprice = None
+    typprice = None
+    wclprice = None
     ad = None
     adosc = None
     obv = None
@@ -1210,6 +1218,10 @@ _INCLUDE_STUDIES = [
     ("wma", wma),
     # Pattern
     # Price
+    ("avgprice", avgprice),
+    ("medprice", medprice),
+    ("typprice", typprice),
+    ("wclprice", wclprice),
     # Statistic
     # Volatility
     # Volume

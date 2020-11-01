@@ -78,6 +78,12 @@ from .overlap import (
     trima,
     wma,
 )
+from .price import (
+    avgprice,
+    medprice,
+    typprice,
+    wclprice,
+)
 from .volume import (
     ad,
     adosc,
