@@ -146,7 +146,7 @@ def lastSSE(symbols=None, on_data=None, token="", version=""):
     return _runSSE("last", symbols, on_data, token, version)
 
 
-async def lastSSEASync(symbols=None, token="", version=""):
+async def lastSSEAsync(symbols=None, token="", version=""):
     """Last provides trade data for executions on IEX. It is a near real time, intraday API that provides IEX last sale price, size and time.
     Last is ideal for developers that need a lightweight stock quote.
 
@@ -174,6 +174,7 @@ def deepSSE(symbols=None, channels=None, on_data=None, token="", version=""):
 
     Args:
         symbols (str): Tickers to request
+        channels (List[str]): Deep channels to request
         on_data (function): Callback on data
         token (str): Access token
         version (str): API version
@@ -181,7 +182,11 @@ def deepSSE(symbols=None, channels=None, on_data=None, token="", version=""):
     """
     symbols = _strCommaSeparatedString(symbols)
 
+    if not channels:
+        raise PyEXception("Must specify channels for deepSSE endpoint")
+
     channels = channels or []
+
     if isinstance(channels, str):
         if channels not in DeepChannelsSSE.options():
             raise PyEXception("Channel not recognized: %s", type(channels))
@@ -228,13 +233,18 @@ async def deepSSEAsync(symbols=None, channels=None, token="", version=""):
 
     Args:
         symbols (str): Tickers to request
+        channels (List[str]): Deep channels to request
         token (str): Access token
         version (str): API version
 
     """
     symbols = _strCommaSeparatedString(symbols)
 
+    if not channels:
+        raise PyEXception("Must specify channels for deepSSE endpoint")
+
     channels = channels or []
+
     if isinstance(channels, str):
         if channels not in DeepChannelsSSE.options():
             raise PyEXception("Channel not recognized: %s", type(channels))

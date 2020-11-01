@@ -41,7 +41,16 @@ from .marketdata.cryptocurrency import (
 from .marketdata.fx import fxSSE, fxSSEAsync
 from .marketdata.news import newsSSE, newsSSEAsync
 from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync
-from .marketdata.sse import topsSSE, lastSSE, deepSSE, tradesSSE
+from .marketdata.sse import (
+    topsSSE,
+    topsSSEAsync,
+    lastSSE,
+    lastSSEAsync,
+    deepSSE,
+    deepSSEAsync,
+    tradesSSE,
+    tradesSSEAsync,
+)
 from .marketdata.stock import (
     stocksUSNoUTPSSE,
     stocksUSNoUTPSSEAsync,
@@ -647,9 +656,13 @@ _INCLUDE_FUNCTIONS = [
     ("volumeByVenueDF", volumeByVenueDF),
     # SSE Streaming
     ("topsSSE", topsSSE),
+    ("topsSSEAsync", topsSSEAsync),
     ("lastSSE", lastSSE),
+    ("lastSSEAsync", lastSSEAsync),
     ("deepSSE", deepSSE),
+    ("deepSSEAsync", deepSSEAsync),
     ("tradesSSE", tradesSSE),
+    ("tradesSSEAsync", tradesSSEAsync),
     # Stock SSE
     ("stocksUSNoUTPSSE,", stocksUSNoUTPSSE),
     ("stocksUSNoUTPSSEAsync,", stocksUSNoUTPSSEAsync),
