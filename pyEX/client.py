@@ -529,6 +529,9 @@ try:
         wclprice,
         # Statistic
         # Volatility
+        atr,
+        natr,
+        trange,
         # Volume
         ad,
         adosc,
@@ -615,6 +618,9 @@ except ImportError:
     medprice = None
     typprice = None
     wclprice = None
+    atr = None
+    natr = None
+    trange = None
     ad = None
     adosc = None
     obv = None
@@ -1224,6 +1230,9 @@ _INCLUDE_STUDIES = [
     ("wclprice", wclprice),
     # Statistic
     # Volatility
+    ("atr", atr),
+    ("natr", natr),
+    ("trange", trange),
     # Volume
     ("ad", ad),
     ("adosc", adosc),

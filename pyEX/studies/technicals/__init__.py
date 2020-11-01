@@ -84,6 +84,11 @@ from .price import (
     typprice,
     wclprice,
 )
+from .volatility import (
+    atr,
+    natr,
+    trange,
+)
 from .volume import (
     ad,
     adosc,
