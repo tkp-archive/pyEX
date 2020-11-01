@@ -16,13 +16,13 @@ def adx(
     the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
@@ -52,13 +52,13 @@ def adxr(
     the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -75,8 +75,31 @@ def adxr(
     )
 
 
-# APO - Absolute Price Oscillator
-# real = APO(close, fastperiod=12, slowperiod=26, matype=0)
+def apo(
+    client, symbol, timeframe="6m", col="close", fastperiod=12, slowperiod=26, matype=0
+):
+    """This will return a dataframe of Absolute Price Oscillator for the given symbol across the given timeframe
+
+    Args:
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        fastperiod (int): fast period to calculate across
+        slowperiod (int): slow period to calculate across
+        matype (int): moving average type (0-sma)
+
+    Returns:
+        DataFrame: result
+    """
+    df = client.chartDF(symbol, timeframe)
+    apo = t.APO(df[col].values, fastperiod, slowperiod, matype)
+    return pd.DataFrame(
+        {
+            col: df[col].values,
+            "apo": apo,
+        }
+    )
 
 
 def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", period=14):
@@ -85,12 +108,12 @@ def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", perio
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -115,12 +138,12 @@ def aroonosc(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -146,13 +169,13 @@ def bop(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        volumecol (string); column to use to calculate
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        volumecol (string): column to use to calculate
 
     Returns:
         DataFrame: result
@@ -186,13 +209,13 @@ def cci(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -215,11 +238,11 @@ def cmo(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -242,13 +265,13 @@ def dx(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -265,12 +288,84 @@ def dx(
     )
 
 
-# MACD - Moving Average Convergence/Divergence
-# macd, macdsignal, macdhist = MACD(close, fastperiod=12, slowperiod=26, signalperiod=9)
+def macd(
+    client,
+    symbol,
+    timeframe="6m",
+    col="close",
+    fastperiod=12,
+    slowperiod=26,
+    signalperiod=9,
+):
+    """This will return a dataframe of Moving Average Convergence/Divergence for the given symbol across the given timeframe
 
-# MACDEXT - MACD with controllable MA type
-# macd, macdsignal, macdhist = MACDEXT(close, fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0)
-# macd, macdsignal, macdhist = MACDFIX(close, signalperiod=9)
+    Args:
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        fastperiod (int): fast period to calculate across
+        slowperiod (int): slow period to calculate across
+        signalperiod (int): macd signal period
+
+    Returns:
+        DataFrame: result
+    """
+    df = client.chartDF(symbol, timeframe)
+    macd, macdsignal, macdhist = t.MACD(
+        df[col].values, fastperiod, slowperiod, signalperiod
+    )
+    return pd.DataFrame(
+        {
+            col: df[col].values,
+            "macd": macd,
+            "macdsignal": macdsignal,
+            "macdhist": macdhist,
+        }
+    )
+
+
+def macdext(
+    client,
+    symbol,
+    timeframe="6m",
+    col="close",
+    fastperiod=12,
+    fastmatype=0,
+    slowperiod=26,
+    slowmatype=0,
+    signalperiod=9,
+    signalmatype=0,
+):
+    """This will return a dataframe of Moving Average Convergence/Divergence for the given symbol across the given timeframe
+
+    Args:
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        fastperiod (int): fast period to calculate across
+        fastmatype (int): moving average type (0-sma)
+        slowperiod (int): slow period to calculate across
+        slowmatype (int): moving average type (0-sma)
+        signalperiod (int): macd signal period
+        signalmatype (int): moving average type (0-sma)
+
+    Returns:
+        DataFrame: result
+    """
+    df = client.chartDF(symbol, timeframe)
+    macd, macdsignal, macdhist = t.MACDEXT(
+        df[col].values, fastperiod, slowperiod, signalperiod
+    )
+    return pd.DataFrame(
+        {
+            col: df[col].values,
+            "macd": macd,
+            "macdsignal": macdsignal,
+            "macdhist": macdhist,
+        }
+    )
 
 
 def mfi(
@@ -288,13 +383,13 @@ def mfi(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -332,13 +427,13 @@ def minus_di(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -363,12 +458,12 @@ def minus_dm(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -386,11 +481,11 @@ def mom(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -413,13 +508,13 @@ def plus_di(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -442,12 +537,12 @@ def plus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", per
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -459,8 +554,31 @@ def plus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", per
     )
 
 
-# PPO - Percentage Price Oscillator
-# real = PPO(close, fastperiod=12, slowperiod=26, matype=0)
+def ppo(
+    client, symbol, timeframe="6m", col="close", fastperiod=12, slowperiod=26, matype=0
+):
+    """This will return a dataframe of Percentage Price Oscillator for the given symbol across the given timeframe
+
+    Args:
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        fastperiod (int): fast period to calculate across
+        slowperiod (int): slow period to calculate across
+        matype (int): moving average type (0-sma)
+
+    Returns:
+        DataFrame: result
+    """
+    df = client.chartDF(symbol, timeframe)
+    ppo = t.PPO(df[col].values, fastperiod, slowperiod, matype)
+    return pd.DataFrame(
+        {
+            col: df[col].values,
+            "ppo": ppo,
+        }
+    )
 
 
 def roc(client, symbol, timeframe="6m", col="close", period=14):
@@ -469,11 +587,11 @@ def roc(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -488,11 +606,11 @@ def rocp(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -507,11 +625,11 @@ def rocr(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -526,11 +644,11 @@ def rocr100(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -547,11 +665,11 @@ def rsi(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -578,17 +696,17 @@ def stoch(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        fastk_period (int); fastk_period
-        slowk_period (int); slowk_period
-        slowk_matype (int); slowk_matype
-        slowd_period (int); slowd_period
-        slowd_matype (int); slowd_matype
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        fastk_period (int): fastk_period
+        slowk_period (int): slowk_period
+        slowk_matype (int): slowk_matype
+        slowd_period (int): slowd_period
+        slowd_matype (int): slowd_matype
 
     Returns:
         DataFrame: result
@@ -633,17 +751,17 @@ def stochf(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        fastk_period (int); fastk_period
-        slowk_period (int); slowk_period
-        slowk_matype (int); slowk_matype
-        slowd_period (int); slowd_period
-        slowd_matype (int); slowd_matype
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        fastk_period (int): fastk_period
+        slowk_period (int): slowk_period
+        slowk_matype (int): slowk_matype
+        slowd_period (int): slowd_period
+        slowd_matype (int): slowd_matype
 
     Returns:
         DataFrame: result
@@ -690,13 +808,13 @@ def stochrsi(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -719,11 +837,11 @@ def trix(client, symbol, timeframe="6m", col="close", period=14):
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        col (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        col (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -748,13 +866,13 @@ def ultosc(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -792,13 +910,13 @@ def willr(
     for the given symbol across the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
-        highcol (string); column to use to calculate
-        lowcol (string); column to use to calculate
-        closecol (string); column to use to calculate
-        period (int); period to calculate rsi across
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
+        highcol (string): column to use to calculate
+        lowcol (string): column to use to calculate
+        closecol (string): column to use to calculate
+        period (int): period to calculate across
 
     Returns:
         DataFrame: result

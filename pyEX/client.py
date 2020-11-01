@@ -439,16 +439,171 @@ from .stocks import (
 from .options import optionExpirations, options, optionsDF
 
 try:
-    from .studies import peerCorrelation, bollinger, dema, ema, sar, sma, rsi
+    from .studies import (
+        peerCorrelation,
+        # Cycle
+        ht_dcperiod,
+        ht_dcphase,
+        ht_phasor,
+        ht_sine,
+        ht_trendmode,
+        # Math
+        acos,
+        asin,
+        atan,
+        ceil,
+        cos,
+        cosh,
+        exp,
+        floor,
+        ln,
+        log10,
+        sin,
+        sinh,
+        sqrt,
+        tan,
+        tanh,
+        add,
+        div,
+        max,
+        maxindex,
+        min,
+        minindex,
+        minmax,
+        minmaxindex,
+        mult,
+        sub,
+        sum,
+        # Momentum
+        adx,
+        adxr,
+        apo,
+        aroon,
+        aroonosc,
+        bop,
+        cci,
+        cmo,
+        dx,
+        macd,
+        macdext,
+        mfi,
+        minus_di,
+        minus_dm,
+        mom,
+        plus_di,
+        plus_dm,
+        ppo,
+        roc,
+        rocp,
+        rocr,
+        rocr100,
+        rsi,
+        stoch,
+        stochf,
+        stochrsi,
+        trix,
+        ultosc,
+        willr,
+        # Overlap
+        bollinger,
+        dema,
+        ema,
+        ht_trendline,
+        kama,
+        mama,
+        mavp,
+        midpoint,
+        midpice,
+        sar,
+        sarext,
+        sma,
+        t3,
+        tema,
+        trima,
+        wma,
+        # Pattern
+        # Price
+        # Statistic
+        # Volatility
+        # Volume
+    )
 
 except ImportError:
     peerCorrelation = None
+    ht_dcperiod = None
+    ht_dcphase = None
+    ht_phasor = None
+    ht_sine = None
+    ht_trendmode = None
+    acos = None
+    asin = None
+    atan = None
+    ceil = None
+    cos = None
+    cosh = None
+    exp = None
+    floor = None
+    ln = None
+    log10 = None
+    sin = None
+    sinh = None
+    sqrt = None
+    tan = None
+    tanh = None
+    add = None
+    div = None
+    max = None
+    maxindex = None
+    min = None
+    minindex = None
+    minmax = None
+    minmaxindex = None
+    mult = None
+    sub = None
+    sum = None
+    adx = None
+    adxr = None
+    apo = None
+    aroon = None
+    aroonosc = None
+    bop = None
+    cci = None
+    cmo = None
+    dx = None
+    mfi = None
+    minus_di = None
+    minus_dm = None
+    mom = None
+    plus_di = None
+    plus_dm = None
+    ppo = None
+    roc = None
+    rocp = None
+    rocr = None
+    rocr100 = None
+    rsi = None
+    stoch = None
+    stochf = None
+    stochrsi = None
+    trix = None
+    ultosc = None
+    willr = None
     bollinger = None
     dema = None
     ema = None
+    ht_trendline = None
+    kama = None
+    mama = None
+    mavp = None
+    midpoint = None
+    midpice = None
     sar = None
+    sarext = None
     sma = None
-    rsi = None
+    t3 = None
+    tema = None
+    trima = None
+    wma = None
 
 
 DEFAULT_API_LIMIT = 5
@@ -967,12 +1122,91 @@ _INCLUDE_POINTS = [
 
 _INCLUDE_STUDIES = [
     ("peerCorrelation", peerCorrelation),
+    # Cycle
+    ("ht_dcperiod", ht_dcperiod),
+    ("ht_dcphase", ht_dcphase),
+    ("ht_phasor", ht_phasor),
+    ("ht_sine", ht_sine),
+    ("ht_trendmode", ht_trendmode),
+    # Math
+    ("acos", acos),
+    ("asin", asin),
+    ("atan", atan),
+    ("ceil", ceil),
+    ("cos", cos),
+    ("cosh", cosh),
+    ("exp", exp),
+    ("floor", floor),
+    ("ln", ln),
+    ("log10", log10),
+    ("sin", sin),
+    ("sinh", sinh),
+    ("sqrt", sqrt),
+    ("tan", tan),
+    ("tanh", tanh),
+    ("add", add),
+    ("div", div),
+    ("max", max),
+    ("maxindex", maxindex),
+    ("min", min),
+    ("minindex", minindex),
+    ("minmax", minmax),
+    ("minmaxindex", minmaxindex),
+    ("mult", mult),
+    ("sub", sub),
+    ("sum", sum),
+    # Momentum
+    ("adx", adx),
+    ("adxr", adxr),
+    ("apo", apo),
+    ("aroon", aroon),
+    ("aroonosc", aroonosc),
+    ("bop", bop),
+    ("cci", cci),
+    ("cmo", cmo),
+    ("dx", dx),
+    ("macd", macd),
+    ("macdext", macdext),
+    ("mfi", mfi),
+    ("minus_di", minus_di),
+    ("minus_dm", minus_dm),
+    ("mom", mom),
+    ("plus_di", plus_di),
+    ("plus_dm", plus_dm),
+    ("ppo", ppo),
+    ("roc", roc),
+    ("rocp", rocp),
+    ("rocr", rocr),
+    ("rocr100", rocr100),
+    ("rsi", rsi),
+    ("stoch", stoch),
+    ("stochf", stochf),
+    ("stochrsi", stochrsi),
+    ("trix", trix),
+    ("ultosc", ultosc),
+    ("willr", willr),
+    # Overlap
     ("bollinger", bollinger),
     ("dema", dema),
     ("ema", ema),
+    ("ht_trendline", ht_trendline),
+    ("kama", kama),
+    ("mama", mama),
+    ("mavp", mavp),
+    ("midpoint", midpoint),
+    ("midpice", midpice),
     ("sar", sar),
+    ("sarext", sarext),
     ("sma", sma),
-    ("rsi", rsi),
+    ("t3", t3),
+    ("tema", tema),
+    ("trima", trima),
+    ("wma", wma),
+    # Pattern
+    # Price
+    # Statistic
+    # Volatility
+    # Volume
 ]
 
 

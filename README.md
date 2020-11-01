@@ -745,8 +745,13 @@ Currently, the following methods are implemented:
 ## Studies
 Available via `pyEX[studies]`.
 
+
+### Studies
+- peerCorrelation
+
 ### Technicals
 These are built on [TA-lib](https://ta-lib.org). Note that these are different from the technicals available via IEX Cloud's `technicals` endpoint.
+
 
 #### Cycle
 - ht_dcperiod
@@ -786,7 +791,29 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 #### Momentum
 - adx
 - adxr
+- aroon
+- aroonosc
+- bop
+- cci
+- cmo
+- dx
+- mfi
+- minus_di
+- minus_dm
+- mom
+- plus_di
+- plus_dm
+- roc
+- rocp
+- rocr
+- rocr100
 - rsi
+- stoch
+- stochf
+- stochrsi
+- trix
+- ultosc
+- willr
 
 #### Overlap
 - bollinger
@@ -806,6 +833,15 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - trima
 - wma
 
+#### Pattern
+
+#### Price
+
+#### Statistic
+
+#### Volatility
+
+#### Volume
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)
