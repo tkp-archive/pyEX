@@ -81,6 +81,49 @@ def distributionDF(symbol="", refid="", token="", version="", filter=""):
     return pd.DataFrame(distribution(symbol, refid, token, version, filter))
 
 
+def dividends(symbol="", refid="", token="", version="", filter=""):
+    """Obtain up-to-date and detailed information on all new dividend announcements, as well as 12+ years of historical dividend records. This endpoint covers over 39,000 US equities, mutual funds, ADRs, and ETFs.
+    You’ll be provided with:
+        Detailed information on both cash and stock dividends including record, payment, ex, and announce dates
+        Gross and net amounts
+        Details of all currencies in which a dividend can be paid
+        Tax information
+        The ability to keep up with the growing number of complex dividend distributions
+
+    Updated at 5am, 10am, 8pm UTC daily
+
+    https://iexcloud.io/docs/api/#dividends
+
+    Args:
+        symbol (str): Symbol to look up
+        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _raiseIfNotStr(symbol)
+    if refid and symbol:
+        return _getJson(
+            "time-series/advanced_dividends/{}/{}".format(symbol, refid),
+            token,
+            version,
+            filter,
+        )
+    elif symbol:
+        return _getJson(
+            "time-series/advanced_dividends/{}".format(symbol), token, version, filter
+        )
+    return _getJson("time-series/advanced_dividends", token, version, filter)
+
+
+@wraps(dividends)
+def dividendsDF(symbol="", refid="", token="", version="", filter=""):
+    return pd.DataFrame(dividends(symbol, refid, token, version, filter))
+
+
 def returnOfCapital(symbol="", refid="", token="", version="", filter=""):
     """Return of capital up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
