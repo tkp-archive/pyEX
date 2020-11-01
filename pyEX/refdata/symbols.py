@@ -146,6 +146,24 @@ def optionsSymbols(token="", version="", filter=""):
     return _getJson("ref-data/options/symbols", token, version, filter)
 
 
+@_expire(hour=8, tz=_UTC)
+def cryptoSymbols(token="", version="", filter=""):
+    """This provides a full list of supported cryptocurrencies by IEX Cloud.
+
+    https://iexcloud.io/docs/api/#cryptocurrency-symbols
+    8am ET Tue-Sat
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        dict or DataFrame or list: result
+    """
+    return _getJson("ref-data/crypto/symbols", token, version, filter)
+
+
 @wraps(symbols)
 def symbolsDF(token="", version="", filter=""):
     df = pd.DataFrame(symbols(token, version, filter))
@@ -203,6 +221,14 @@ def optionsSymbolsDF(token="", version="", filter=""):
     return df
 
 
+@wraps(cryptoSymbols)
+def cryptoSymbolsDF(token="", version="", filter=""):
+    df = pd.DataFrame(cryptoSymbols(token, version, filter))
+    _toDatetime(df)
+    _reindex(df, "symbol")
+    return df
+
+
 @wraps(symbols)
 def symbolsList(token="", version=""):
     return [x["symbol"] for x in symbols(token, version, filter="symbol")]
@@ -245,3 +271,8 @@ def fxSymbolsList(token="", version=""):
 @wraps(optionsSymbols)
 def optionsSymbolsList(token="", version=""):
     return [x["symbol"] for x in optionsSymbols(token, version, filter="symbol")]
+
+
+@wraps(cryptoSymbols)
+def cryptoSymbolsList(token="", version=""):
+    return [x["symbol"] for x in cryptoSymbols(token, version, filter="symbol")]

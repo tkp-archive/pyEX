@@ -230,6 +230,10 @@
 
 .. autofunction:: pyEX.premium.kavout.kScoreDF
 
+.. autofunction:: pyEX.premium.kavout.kScoreChina
+
+.. autofunction:: pyEX.premium.kavout.kScoreChinaDF
+
 .. autofunction:: pyEX.premium.precisionalpha.precisionAlphaPriceDynamics
 
 .. autofunction:: pyEX.premium.precisionalpha.precisionAlphaPriceDynamicsDF
