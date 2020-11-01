@@ -379,16 +379,16 @@ class TestAll:
             relevantDF("test")
 
     def test_dividends(self):
-        from pyEX import dividends
+        from pyEX import dividendsBasic
         from pyEX.common import PyEXception
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            dividends("test")
+            dividendsBasic("test")
 
             try:
-                dividends("test", "test")
+                dividendsBasic("test", "test")
                 assert False
             except PyEXception:
                 pass
