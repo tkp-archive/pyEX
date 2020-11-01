@@ -44,7 +44,7 @@ from .marketdata.sse import (
     topsSSE,
     topsSSEAsync,
     lastSSE,
-    lastSSEASync,
+    lastSSEAsync,
     deepSSE,
     deepSSEAsync,
     tradesSSE,

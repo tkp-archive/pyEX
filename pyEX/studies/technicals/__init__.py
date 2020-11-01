@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .cycle import (
-    ht_dcperiod,
-    ht_dcphase,
-    ht_phasor,
-    ht_sine,
-    ht_trendmode,
-)
+from .cycle import ht_dcperiod, ht_dcphase, ht_phasor, ht_sine, ht_trendmode
 from .math import (
     acos,
     asin,
