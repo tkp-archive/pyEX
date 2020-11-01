@@ -526,6 +526,9 @@ try:
         # Statistic
         # Volatility
         # Volume
+        ad,
+        adosc,
+        obv,
     )
 
 except ImportError:
@@ -604,6 +607,9 @@ except ImportError:
     tema = None
     trima = None
     wma = None
+    ad = None
+    adosc = None
+    obv = None
 
 
 DEFAULT_API_LIMIT = 5
@@ -1207,6 +1213,9 @@ _INCLUDE_STUDIES = [
     # Statistic
     # Volatility
     # Volume
+    ("ad", ad),
+    ("adosc", adosc),
+    ("obv", obv),
 ]
 
 

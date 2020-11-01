@@ -8,7 +8,7 @@ def adx(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -44,7 +44,7 @@ def adxr(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -102,7 +102,7 @@ def apo(
     )
 
 
-def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", period=14):
+def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of
     Aroon
     for the given symbol across the given timeframe
@@ -130,9 +130,7 @@ def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", perio
     )
 
 
-def aroonosc(
-    client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", period=14
-):
+def aroonosc(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of
     Aroon Oscillator
     for the given symbol across the given timeframe
@@ -160,7 +158,7 @@ def bop(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     volumecol="volume",
 ):
@@ -200,7 +198,7 @@ def cci(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -256,7 +254,7 @@ def dx(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -373,7 +371,7 @@ def mfi(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     volumecol="volume",
     period=14,
@@ -418,7 +416,7 @@ def minus_di(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -450,9 +448,7 @@ def minus_di(
     )
 
 
-def minus_dm(
-    client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", period=14
-):
+def minus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of
     Minus Directional Movement
     for the given symbol across the given timeframe
@@ -499,7 +495,7 @@ def plus_di(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
@@ -531,7 +527,7 @@ def plus_di(
     )
 
 
-def plus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="lowcol", period=14):
+def plus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of
     Plus Directional Movement
     for the given symbol across the given timeframe
@@ -683,7 +679,7 @@ def stoch(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     fastk_period=5,
     slowk_period=3,
@@ -738,7 +734,7 @@ def stochf(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     fastk_period=5,
     slowk_period=3,
@@ -855,7 +851,7 @@ def ultosc(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     timeperiod1=7,
     timeperiod2=14,
@@ -901,7 +897,7 @@ def willr(
     symbol,
     timeframe="6m",
     highcol="high",
-    lowcol="lowcol",
+    lowcol="low",
     closecol="close",
     period=14,
 ):
