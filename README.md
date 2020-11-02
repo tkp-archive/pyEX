@@ -838,6 +838,67 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - wma: Weighted Moving Average
 
 #### Pattern
+- cdl2crows: Two Crows
+- cdl3blackcrows: Three Black Crows
+- cdl3inside: Three Inside Up/Down
+- cdl3linestrike: Three-Line Strike
+- cdl3outside: Three Outside Up/Down
+- cdl3starsinsouth: Three Stars In The South
+- cdl3whitesoldiers: Three Advancing White Soldiers
+- cdlabandonedbaby: Abandoned Baby
+- cdladvanceblock: Advance Block
+- cdlbelthold: Belt-hold
+- cdlbreakaway: Breakaway
+- cdlclosingmarubozu: Closing Marubozu
+- cdlconcealbabyswall: Concealing Baby Swallow
+- cdlcounterattack: Counterattack
+- cdldarkcloudcover: Dark Cloud Cover
+- cdldoji: Doji
+- cdldojistar: Doji Star
+- cdldragonflydoji: Dragonfly Doji
+- cdlengulfing: Engulfing Pattern
+- cdleveningdojistar: Evening Doji Star
+- cdleveningstar: Evening Star
+- cdlgapsidesidewhite: Up/Down-gap side-by-side white lines
+- cdlgravestonedoji: Gravestone Doji
+- cdlhammer: Hammer
+- cdlhangingman: Hanging Man
+- cdlharami: Harami Pattern
+- cdlharamicross: Harami Cross Pattern
+- cdlhighwave: High-Wave Candle
+- cdlhikkake: Hikkake Pattern
+- cdlhikkakemod: Modified Hikkake Pattern
+- cdlhomingpigeon: Homing Pigeon
+- cdlidentical3crows: Identical Three Crows
+- cdlinneck: In-Neck Pattern
+- cdlinvertedhammer: Inverted Hammer
+- cdlkicking: Kicking
+- cdlkickingbylength: Kicking - bull/bear determined by the longer marubozu
+- cdlladderbottom: Ladder Bottom
+- cdllongleggeddoji: Long Legged Doji
+- cdllongline: Long Line Candle
+- cdlmarubozu: Marubozu
+- cdlmatchinglow: Matching Low
+- cdlmathold: Mat Hold
+- cdlmorningdojistar: Morning Doji Star
+- cdlmorningstar: Morning Star
+- cdlonneck: On-Neck Pattern
+- cdlpiercing: Piercing Pattern
+- cdlrickshawman: Rickshaw Man
+- cdlrisefall3methods: Rising/Falling Three Methods
+- cdlseparatinglines: Separating Lines
+- cdlshootingstar: Shooting Star
+- cdlshortline: Short Line Candle
+- cdlspinningtop: Spinning Top
+- cdlstalledpattern: Stalled Pattern
+- cdlsticksandwich: Stick Sandwich
+- cdltakuri: Takuri (Dragonfly Doji with very long lower shadow)
+- cdltasukigap: Tasuki Gap
+- cdlthrusting: Thrusting Pattern
+- cdltristar: Tristar Pattern
+- cdlunique3river: Unique 3 River
+- cdlupsidegap2crows: Upside Gap Two Crows
+- cdlxsidegap3methods: Upside/Downside Gap Three Methods
 
 #### Price
 - avgprice: Average Price
@@ -846,7 +907,15 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - wclprice: Weighted Close Price
 
 #### Statistic
-
+- beta: Beta
+- correl: Pearson's Correlation Coefficient (r)
+- linearreg: Linear Regression
+- linearreg_angle: Linear Regression Angle
+- linearreg_intercept: Linear Regression Intercept
+- linearreg_slope: Linear Regression Slope
+- stddev: Standard Deviation
+- tsf: Time Series Forecast
+- var: Variance
 #### Volatility
 - atr: Average True Range
 - natr: Normalized Average True Range
