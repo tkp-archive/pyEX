@@ -439,16 +439,329 @@ from .stocks import (
 from .options import optionExpirations, options, optionsDF
 
 try:
-    from .studies import peerCorrelation, bollinger, dema, ema, sar, sma, rsi
+    from .studies import (
+        peerCorrelation,
+        # Cycle
+        ht_dcperiod,
+        ht_dcphase,
+        ht_phasor,
+        ht_sine,
+        ht_trendmode,
+        # Math
+        acos,
+        asin,
+        atan,
+        ceil,
+        cos,
+        cosh,
+        exp,
+        floor,
+        ln,
+        log10,
+        sin,
+        sinh,
+        sqrt,
+        tan,
+        tanh,
+        add,
+        div,
+        max,
+        maxindex,
+        min,
+        minindex,
+        minmax,
+        minmaxindex,
+        mult,
+        sub,
+        sum,
+        # Momentum
+        adx,
+        adxr,
+        apo,
+        aroon,
+        aroonosc,
+        bop,
+        cci,
+        cmo,
+        dx,
+        macd,
+        macdext,
+        mfi,
+        minus_di,
+        minus_dm,
+        mom,
+        plus_di,
+        plus_dm,
+        ppo,
+        roc,
+        rocp,
+        rocr,
+        rocr100,
+        rsi,
+        stoch,
+        stochf,
+        stochrsi,
+        trix,
+        ultosc,
+        willr,
+        # Overlap
+        bollinger,
+        dema,
+        ema,
+        ht_trendline,
+        kama,
+        mama,
+        mavp,
+        midpoint,
+        midpice,
+        sar,
+        sarext,
+        sma,
+        t3,
+        tema,
+        trima,
+        wma,
+        # Pattern
+        cdl2crows,
+        cdl3blackcrows,
+        cdl3inside,
+        cdl3linestrike,
+        cdl3outside,
+        cdl3starsinsouth,
+        cdl3whitesoldiers,
+        cdlabandonedbaby,
+        cdladvanceblock,
+        cdlbelthold,
+        cdlbreakaway,
+        cdlclosingmarubozu,
+        cdlconcealbabyswallow,
+        cdlcounterattack,
+        cdldarkcloudcover,
+        cdldoji,
+        cdldojistar,
+        cdldragonflydoji,
+        cdlengulfing,
+        cdleveningdojistar,
+        cdleveningstar,
+        cdlgapsidesidewhite,
+        cdlgravestonedoji,
+        cdlhammer,
+        cdlhangingman,
+        cdlharami,
+        cdlharamicross,
+        cdlhighwave,
+        cdlhikkake,
+        cdlhikkakemod,
+        cdlhomingpigeon,
+        cdlidentical3crows,
+        cdlinneck,
+        cdlinvertedhammer,
+        cdlkicking,
+        cdlkickingbylength,
+        cdlladderbottom,
+        cdllongleggeddoji,
+        cdllongline,
+        cdlmarubozu,
+        cdlmatchinglow,
+        cdlmathold,
+        cdlmorningdojistar,
+        cdlmorningstar,
+        cdlonneck,
+        cdlpiercing,
+        cdlrickshawman,
+        cdlrisefall3methods,
+        cdlseparatinglines,
+        cdlshootingstar,
+        cdlshortline,
+        cdlspinningtop,
+        cdlstalledpattern,
+        cdlsticksandwich,
+        cdltakuri,
+        cdltasukigap,
+        cdlthrusting,
+        cdltristar,
+        cdlunique3river,
+        cdlxsidegap3methods,
+        # Price
+        avgprice,
+        medprice,
+        typprice,
+        wclprice,
+        # Statistic
+        beta,
+        correl,
+        linearreg,
+        linearreg_angle,
+        linearreg_intercept,
+        linearreg_slope,
+        stddev,
+        tsf,
+        var,
+        # Volatility
+        atr,
+        natr,
+        trange,
+        # Volume
+        ad,
+        adosc,
+        obv,
+    )
 
 except ImportError:
     peerCorrelation = None
+    ht_dcperiod = None
+    ht_dcphase = None
+    ht_phasor = None
+    ht_sine = None
+    ht_trendmode = None
+    acos = None
+    asin = None
+    atan = None
+    ceil = None
+    cos = None
+    cosh = None
+    exp = None
+    floor = None
+    ln = None
+    log10 = None
+    sin = None
+    sinh = None
+    sqrt = None
+    tan = None
+    tanh = None
+    add = None
+    div = None
+    max = None
+    maxindex = None
+    min = None
+    minindex = None
+    minmax = None
+    minmaxindex = None
+    mult = None
+    sub = None
+    sum = None
+    adx = None
+    adxr = None
+    apo = None
+    aroon = None
+    aroonosc = None
+    bop = None
+    cci = None
+    cmo = None
+    dx = None
+    mfi = None
+    minus_di = None
+    minus_dm = None
+    mom = None
+    plus_di = None
+    plus_dm = None
+    ppo = None
+    roc = None
+    rocp = None
+    rocr = None
+    rocr100 = None
+    rsi = None
+    stoch = None
+    stochf = None
+    stochrsi = None
+    trix = None
+    ultosc = None
+    willr = None
     bollinger = None
     dema = None
     ema = None
+    ht_trendline = None
+    kama = None
+    mama = None
+    mavp = None
+    midpoint = None
+    midpice = None
     sar = None
+    sarext = None
     sma = None
-    rsi = None
+    t3 = None
+    tema = None
+    trima = None
+    wma = None
+    cdl2crows = None
+    cdl3blackcrows = None
+    cdl3inside = None
+    cdl3linestrike = None
+    cdl3outside = None
+    cdl3starsinsouth = None
+    cdl3whitesoldiers = None
+    cdlabandonedbaby = None
+    cdladvanceblock = None
+    cdlbelthold = None
+    cdlbreakaway = None
+    cdlclosingmarubozu = None
+    cdlconcealbabyswallow = None
+    cdlcounterattack = None
+    cdldarkcloudcover = None
+    cdldoji = None
+    cdldojistar = None
+    cdldragonflydoji = None
+    cdlengulfing = None
+    cdleveningdojistar = None
+    cdleveningstar = None
+    cdlgapsidesidewhite = None
+    cdlgravestonedoji = None
+    cdlhammer = None
+    cdlhangingman = None
+    cdlharami = None
+    cdlharamicross = None
+    cdlhighwave = None
+    cdlhikkake = None
+    cdlhikkakemod = None
+    cdlhomingpigeon = None
+    cdlidentical3crows = None
+    cdlinneck = None
+    cdlinvertedhammer = None
+    cdlkicking = None
+    cdlkickingbylength = None
+    cdlladderbottom = None
+    cdllongleggeddoji = None
+    cdllongline = None
+    cdlmarubozu = None
+    cdlmatchinglow = None
+    cdlmathold = None
+    cdlmorningdojistar = None
+    cdlmorningstar = None
+    cdlonneck = None
+    cdlpiercing = None
+    cdlrickshawman = None
+    cdlrisefall3methods = None
+    cdlseparatinglines = None
+    cdlshootingstar = None
+    cdlshortline = None
+    cdlspinningtop = None
+    cdlstalledpattern = None
+    cdlsticksandwich = None
+    cdltakuri = None
+    cdltasukigap = None
+    cdlthrusting = None
+    cdltristar = None
+    cdlunique3river = None
+    cdlxsidegap3methods = None
+    avgprice = None
+    medprice = None
+    typprice = None
+    wclprice = None
+    beta = None
+    correl = None
+    linearreg = None
+    linearreg_angle = None
+    linearreg_intercept = None
+    linearreg_slope = None
+    stddev = None
+    tsf = None
+    var = None
+    atr = None
+    natr = None
+    trange = None
+    ad = None
+    adosc = None
+    obv = None
 
 
 DEFAULT_API_LIMIT = 5
@@ -967,12 +1280,170 @@ _INCLUDE_POINTS = [
 
 _INCLUDE_STUDIES = [
     ("peerCorrelation", peerCorrelation),
+    # Cycle
+    ("ht_dcperiod", ht_dcperiod),
+    ("ht_dcphase", ht_dcphase),
+    ("ht_phasor", ht_phasor),
+    ("ht_sine", ht_sine),
+    ("ht_trendmode", ht_trendmode),
+    # Math
+    ("acos", acos),
+    ("asin", asin),
+    ("atan", atan),
+    ("ceil", ceil),
+    ("cos", cos),
+    ("cosh", cosh),
+    ("exp", exp),
+    ("floor", floor),
+    ("ln", ln),
+    ("log10", log10),
+    ("sin", sin),
+    ("sinh", sinh),
+    ("sqrt", sqrt),
+    ("tan", tan),
+    ("tanh", tanh),
+    ("add", add),
+    ("div", div),
+    ("max", max),
+    ("maxindex", maxindex),
+    ("min", min),
+    ("minindex", minindex),
+    ("minmax", minmax),
+    ("minmaxindex", minmaxindex),
+    ("mult", mult),
+    ("sub", sub),
+    ("sum", sum),
+    # Momentum
+    ("adx", adx),
+    ("adxr", adxr),
+    ("apo", apo),
+    ("aroon", aroon),
+    ("aroonosc", aroonosc),
+    ("bop", bop),
+    ("cci", cci),
+    ("cmo", cmo),
+    ("dx", dx),
+    ("macd", macd),
+    ("macdext", macdext),
+    ("mfi", mfi),
+    ("minus_di", minus_di),
+    ("minus_dm", minus_dm),
+    ("mom", mom),
+    ("plus_di", plus_di),
+    ("plus_dm", plus_dm),
+    ("ppo", ppo),
+    ("roc", roc),
+    ("rocp", rocp),
+    ("rocr", rocr),
+    ("rocr100", rocr100),
+    ("rsi", rsi),
+    ("stoch", stoch),
+    ("stochf", stochf),
+    ("stochrsi", stochrsi),
+    ("trix", trix),
+    ("ultosc", ultosc),
+    ("willr", willr),
+    # Overlap
     ("bollinger", bollinger),
     ("dema", dema),
     ("ema", ema),
+    ("ht_trendline", ht_trendline),
+    ("kama", kama),
+    ("mama", mama),
+    ("mavp", mavp),
+    ("midpoint", midpoint),
+    ("midpice", midpice),
     ("sar", sar),
+    ("sarext", sarext),
     ("sma", sma),
-    ("rsi", rsi),
+    ("t3", t3),
+    ("tema", tema),
+    ("trima", trima),
+    ("wma", wma),
+    # Pattern
+    ("cdl2crows", cdl2crows),
+    ("cdl3blackcrows", cdl3blackcrows),
+    ("cdl3inside", cdl3inside),
+    ("cdl3linestrike", cdl3linestrike),
+    ("cdl3outside", cdl3outside),
+    ("cdl3starsinsouth", cdl3starsinsouth),
+    ("cdl3whitesoldiers", cdl3whitesoldiers),
+    ("cdlabandonedbaby", cdlabandonedbaby),
+    ("cdladvanceblock", cdladvanceblock),
+    ("cdlbelthold", cdlbelthold),
+    ("cdlbreakaway", cdlbreakaway),
+    ("cdlclosingmarubozu", cdlclosingmarubozu),
+    ("cdlconcealbabyswallow", cdlconcealbabyswallow),
+    ("cdlcounterattack", cdlcounterattack),
+    ("cdldarkcloudcover", cdldarkcloudcover),
+    ("cdldoji", cdldoji),
+    ("cdldojistar", cdldojistar),
+    ("cdldragonflydoji", cdldragonflydoji),
+    ("cdlengulfing", cdlengulfing),
+    ("cdleveningdojistar", cdleveningdojistar),
+    ("cdleveningstar", cdleveningstar),
+    ("cdlgapsidesidewhite", cdlgapsidesidewhite),
+    ("cdlgravestonedoji", cdlgravestonedoji),
+    ("cdlhammer", cdlhammer),
+    ("cdlhangingman", cdlhangingman),
+    ("cdlharami", cdlharami),
+    ("cdlharamicross", cdlharamicross),
+    ("cdlhighwave", cdlhighwave),
+    ("cdlhikkake", cdlhikkake),
+    ("cdlhikkakemod", cdlhikkakemod),
+    ("cdlhomingpigeon", cdlhomingpigeon),
+    ("cdlidentical3crows", cdlidentical3crows),
+    ("cdlinneck", cdlinneck),
+    ("cdlinvertedhammer", cdlinvertedhammer),
+    ("cdlkicking", cdlkicking),
+    ("cdlkickingbylength", cdlkickingbylength),
+    ("cdlladderbottom", cdlladderbottom),
+    ("cdllongleggeddoji", cdllongleggeddoji),
+    ("cdllongline", cdllongline),
+    ("cdlmarubozu", cdlmarubozu),
+    ("cdlmatchinglow", cdlmatchinglow),
+    ("cdlmathold", cdlmathold),
+    ("cdlmorningdojistar", cdlmorningdojistar),
+    ("cdlmorningstar", cdlmorningstar),
+    ("cdlonneck", cdlonneck),
+    ("cdlpiercing", cdlpiercing),
+    ("cdlrickshawman", cdlrickshawman),
+    ("cdlrisefall3methods", cdlrisefall3methods),
+    ("cdlseparatinglines", cdlseparatinglines),
+    ("cdlshootingstar", cdlshootingstar),
+    ("cdlshortline", cdlshortline),
+    ("cdlspinningtop", cdlspinningtop),
+    ("cdlstalledpattern", cdlstalledpattern),
+    ("cdlsticksandwich", cdlsticksandwich),
+    ("cdltakuri", cdltakuri),
+    ("cdltasukigap", cdltasukigap),
+    ("cdlthrusting", cdlthrusting),
+    ("cdltristar", cdltristar),
+    ("cdlunique3river", cdlunique3river),
+    ("cdlxsidegap3methods", cdlxsidegap3methods),
+    # Price
+    ("avgprice", avgprice),
+    ("medprice", medprice),
+    ("typprice", typprice),
+    ("wclprice", wclprice),
+    # Statistic
+    ("beta", beta),
+    ("correl", correl),
+    ("linearreg", linearreg),
+    ("linearreg_angle", linearreg_angle),
+    ("linearreg_intercept", linearreg_intercept),
+    ("linearreg_slope", linearreg_slope),
+    ("stddev", stddev),
+    ("tsf", tsf),
+    ("var", var),
+    # Volatility
+    ("atr", atr),
+    ("natr", natr),
+    ("trange", trange),
+    # Volume
+    ("ad", ad),
+    ("adosc", adosc),
+    ("obv", obv),
 ]
 
 

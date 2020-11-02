@@ -97,7 +97,7 @@ def ht_trendline(client, symbol, timeframe="6m", col="close"):
     return pd.DataFrame(build)
 
 
-def kama(client, symbol, timeframe="6m", col="close", timeperiod=30):
+def kama(client, symbol, timeframe="6m", col="close", period=30):
     """This will return a dataframe of kaufman adaptive moving average
      for the given symbol across the given timeframe
 
@@ -106,7 +106,7 @@ def kama(client, symbol, timeframe="6m", col="close", timeperiod=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        timeperiod (int); time period for kama
+        period (int); time period for kama
 
     Returns:
         DataFrame: result
@@ -114,7 +114,7 @@ def kama(client, symbol, timeframe="6m", col="close", timeperiod=30):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.KAMA(df[col].values, timeperiod=timeperiod)
+    build["kama-{}".format(col)] = t.KAMA(df[col].values, period)
     return pd.DataFrame(build)
 
 
@@ -181,7 +181,7 @@ def mavp(
     return pd.DataFrame(build)
 
 
-def midpoint(client, symbol, timeframe="6m", col="close", timeperiod=14):
+def midpoint(client, symbol, timeframe="6m", col="close", period=14):
     """This will return a dataframe of midpoint over period
      for the given symbol across the given timeframe
 
@@ -190,7 +190,7 @@ def midpoint(client, symbol, timeframe="6m", col="close", timeperiod=14):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        timeperiod (int); time period for kama
+        period (int); time period for kama
 
     Returns:
         DataFrame: result
@@ -198,11 +198,11 @@ def midpoint(client, symbol, timeframe="6m", col="close", timeperiod=14):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.MIDPOINT(df[col].values, timeperiod=timeperiod)
+    build["kama-{}".format(col)] = t.MIDPOINT(df[col].values, period)
     return pd.DataFrame(build)
 
 
-def midpice(client, symbol, timeframe="6m", col="close", timeperiod=14):
+def midpice(client, symbol, timeframe="6m", col="close", period=14):
     """This will return a dataframe of midprice over period
      for the given symbol across the given timeframe
 
@@ -211,7 +211,7 @@ def midpice(client, symbol, timeframe="6m", col="close", timeperiod=14):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        timeperiod (int); time period for kama
+        period (int); time period for kama
 
     Returns:
         DataFrame: result
@@ -219,7 +219,7 @@ def midpice(client, symbol, timeframe="6m", col="close", timeperiod=14):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.MIDPRICE(df[col].values, timeperiod=timeperiod)
+    build["kama-{}".format(col)] = t.MIDPRICE(df[col].values, period)
     return pd.DataFrame(build)
 
 

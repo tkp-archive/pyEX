@@ -745,67 +745,117 @@ Currently, the following methods are implemented:
 ## Studies
 Available via `pyEX[studies]`.
 
+
+### Studies
+- peerCorrelation
+
 ### Technicals
 These are built on [TA-lib](https://ta-lib.org). Note that these are different from the technicals available via IEX Cloud's `technicals` endpoint.
 
+
 #### Cycle
-- ht_dcperiod
-- ht_dcphase
-- ht_phasor
-- ht_sine
-- ht_trendmode
+- ht_dcperiod: Hilbert Transform - Dominant Cycle Period
+- ht_dcphase: Hilbert Transform - Dominant Cycle Phase
+- ht_phasor: Hilbert Transform - Phasor Components
+- ht_sine: Hilbert Transform - SineWave
+- ht_trendmode: Hilbert Transform - Trend vs Cycle Mode
 
 #### Math
-- acos
-- asin
-- atan
-- ceil
-- cos
-- cosh
-- exp
-- floor
-- ln
-- log10
-- sin
-- sinh
-- sqrt
-- tan
-- tanh
-- add
-- div
-- max
-- maxindex
-- min
-- minindex
-- minmax
-- minmaxindex
-- mult
-- sub
-- sum
+- acos: Vector Trigonometric ACos
+- asin: Vector Trigonometric ASin
+- atan: Vector Trigonometric ATan
+- ceil: Vector Ceil
+- cos: Vector Trigonometric Cos
+- cosh: Vector Trigonometric Cosh
+- exp: Vector Arithmetic Exp
+- floor: Vector floor
+- ln: Vector Log natural
+- log10: Vector Log10
+- sin: Vector Trigonometric Sin
+- sinh: Vector Trigonometric Sinh
+- sqrt: Vector Square Root
+- tan: Vector Trigonometric Tan
+- tanh: Vector Trigonometric Tanh
+- add: Vector Arithmetic Add
+- div: Vector Arithmetic Div
+- max: Highest value over a specified period
+- maxindex: Index of highest value over a specified period
+- min: Lowest value over a specified period
+- minindex: Index of lowest value over a specified period
+- minmax: Lowest and highest values over a specified period
+- minmaxindex: Index of lowest and highest values over a specified period
+- mult: Vector Arithmetic Mult
+- sub: Vector Arithmetic Subtraction
+- sum: Summation
 
 #### Momentum
-- adx
-- adxr
-- rsi
+- adx: Average Directional Movement Index
+- adxr: Average Directional Movement Index Rating
+- apo: Absolute Price Oscillator
+- aroon: Aroon
+- aroonosc: Aroon Oscillator
+- bop: Balance Of Power
+- cci: Commodity Channel Index
+- cmo: Chande Momentum Oscillator
+- dx: Directional Movement Index
+- macd: Moving Average Convergence/Divergence
+- macdext: MACD with controllable MA type
+- mfi: Money Flow Index
+- minus_di: Minus Directional Indicator
+- minus_dm: Minus Directional Movement
+- mom: Momentum
+- plus_di: Plus Directional Indicator
+- plus_dm: Plus Directional Movement
+- ppo: Percentage Price Oscillator
+- roc: Rate of change : ((price/prevPrice)-1)*100
+- rocp: Rate of change Percentage: (price-prevPrice)/prevPrice
+- rocr: Rate of change ratio: (price/prevPrice)
+- rocr100: Rate of change ratio 100 scale: (price/prevPrice)*100
+- rsi: Relative Strength Index
+- stoch: Stochastic
+- stochf: Stochastic Fast
+- stochrsi: Stochastic Relative Strength Index
+- trix: 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
+- ultosc: Ultimate Oscillator
+- willr: Williams' %R
 
 #### Overlap
-- bollinger
-- dema
-- ema
-- ht_trendline
-- kama
-- mama
-- mavp
-- midpoint
-- midpice
-- sar
-- sarext
-- sma
-- t3
-- tema
-- trima
-- wma
+- bollinger: Bollinger Bands
+- dema: Double Exponential Moving Average
+- ema: Exponential Moving Aberage
+- ht_trendline: Hilbert Transform - Instantaneous Trendline
+- kama: Kaufman Adaptive Moving Average
+- mama: MESA Adaptive Moving Average
+- mavp: Moving average with variable period
+- midpoint: Midpoint over period
+- midpice: Midpoint price over period
+- sar: Parabolic SAR
+- sarext: Parabolic SAR - Extended
+- sma: Moving Average
+- t3: Triple Exponential Moving Average (T3)
+- tema: Triple Exponential Moving Average
+- trima: Triangular Moving Average
+- wma: Weighted Moving Average
 
+#### Pattern
+
+#### Price
+- avgprice: Average Price
+- medprice: Median Price
+- typprice: Typical Price
+- wclprice: Weighted Close Price
+
+#### Statistic
+
+#### Volatility
+- atr: Average True Range
+- natr: Normalized Average True Range
+- trange: True Range
+
+#### Volume
+- ad: Chaikin A/D Line
+- adosc: Chaikin A/D Oscillator
+- obv: On Balance Volume
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)
