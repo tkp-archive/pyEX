@@ -522,6 +522,66 @@ try:
         trima,
         wma,
         # Pattern
+        cdl2crows,
+        cdl3blackcrows,
+        cdl3inside,
+        cdl3linestrike,
+        cdl3outside,
+        cdl3starsinsouth,
+        cdl3whitesoldiers,
+        cdlabandonedbaby,
+        cdladvanceblock,
+        cdlbelthold,
+        cdlbreakaway,
+        cdlclosingmarubozu,
+        cdlconcealbabyswallow,
+        cdlcounterattack,
+        cdldarkcloudcover,
+        cdldoji,
+        cdldojistar,
+        cdldragonflydoji,
+        cdlengulfing,
+        cdleveningdojistar,
+        cdleveningstar,
+        cdlgapsidesidewhite,
+        cdlgravestonedoji,
+        cdlhammer,
+        cdlhangingman,
+        cdlharami,
+        cdlharamicross,
+        cdlhighwave,
+        cdlhikkake,
+        cdlhikkakemod,
+        cdlhomingpigeon,
+        cdlidentical3crows,
+        cdlinneck,
+        cdlinvertedhammer,
+        cdlkicking,
+        cdlkickingbylength,
+        cdlladderbottom,
+        cdllongleggeddoji,
+        cdllongline,
+        cdlmarubozu,
+        cdlmatchinglow,
+        cdlmathold,
+        cdlmorningdojistar,
+        cdlmorningstar,
+        cdlonneck,
+        cdlpiercing,
+        cdlrickshawman,
+        cdlrisefall3methods,
+        cdlseparatinglines,
+        cdlshootingstar,
+        cdlshortline,
+        cdlspinningtop,
+        cdlstalledpattern,
+        cdlsticksandwich,
+        cdltakuri,
+        cdltasukigap,
+        cdlthrusting,
+        cdltristar,
+        cdlunique3river,
+        cdlxsidegap3methods,
         # Price
         avgprice,
         medprice,
@@ -623,6 +683,66 @@ except ImportError:
     tema = None
     trima = None
     wma = None
+    cdl2crows = None
+    cdl3blackcrows = None
+    cdl3inside = None
+    cdl3linestrike = None
+    cdl3outside = None
+    cdl3starsinsouth = None
+    cdl3whitesoldiers = None
+    cdlabandonedbaby = None
+    cdladvanceblock = None
+    cdlbelthold = None
+    cdlbreakaway = None
+    cdlclosingmarubozu = None
+    cdlconcealbabyswallow = None
+    cdlcounterattack = None
+    cdldarkcloudcover = None
+    cdldoji = None
+    cdldojistar = None
+    cdldragonflydoji = None
+    cdlengulfing = None
+    cdleveningdojistar = None
+    cdleveningstar = None
+    cdlgapsidesidewhite = None
+    cdlgravestonedoji = None
+    cdlhammer = None
+    cdlhangingman = None
+    cdlharami = None
+    cdlharamicross = None
+    cdlhighwave = None
+    cdlhikkake = None
+    cdlhikkakemod = None
+    cdlhomingpigeon = None
+    cdlidentical3crows = None
+    cdlinneck = None
+    cdlinvertedhammer = None
+    cdlkicking = None
+    cdlkickingbylength = None
+    cdlladderbottom = None
+    cdllongleggeddoji = None
+    cdllongline = None
+    cdlmarubozu = None
+    cdlmatchinglow = None
+    cdlmathold = None
+    cdlmorningdojistar = None
+    cdlmorningstar = None
+    cdlonneck = None
+    cdlpiercing = None
+    cdlrickshawman = None
+    cdlrisefall3methods = None
+    cdlseparatinglines = None
+    cdlshootingstar = None
+    cdlshortline = None
+    cdlspinningtop = None
+    cdlstalledpattern = None
+    cdlsticksandwich = None
+    cdltakuri = None
+    cdltasukigap = None
+    cdlthrusting = None
+    cdltristar = None
+    cdlunique3river = None
+    cdlxsidegap3methods = None
     avgprice = None
     medprice = None
     typprice = None
@@ -1241,6 +1361,66 @@ _INCLUDE_STUDIES = [
     ("trima", trima),
     ("wma", wma),
     # Pattern
+    ("cdl2crows", cdl2crows),
+    ("cdl3blackcrows", cdl3blackcrows),
+    ("cdl3inside", cdl3inside),
+    ("cdl3linestrike", cdl3linestrike),
+    ("cdl3outside", cdl3outside),
+    ("cdl3starsinsouth", cdl3starsinsouth),
+    ("cdl3whitesoldiers", cdl3whitesoldiers),
+    ("cdlabandonedbaby", cdlabandonedbaby),
+    ("cdladvanceblock", cdladvanceblock),
+    ("cdlbelthold", cdlbelthold),
+    ("cdlbreakaway", cdlbreakaway),
+    ("cdlclosingmarubozu", cdlclosingmarubozu),
+    ("cdlconcealbabyswallow", cdlconcealbabyswallow),
+    ("cdlcounterattack", cdlcounterattack),
+    ("cdldarkcloudcover", cdldarkcloudcover),
+    ("cdldoji", cdldoji),
+    ("cdldojistar", cdldojistar),
+    ("cdldragonflydoji", cdldragonflydoji),
+    ("cdlengulfing", cdlengulfing),
+    ("cdleveningdojistar", cdleveningdojistar),
+    ("cdleveningstar", cdleveningstar),
+    ("cdlgapsidesidewhite", cdlgapsidesidewhite),
+    ("cdlgravestonedoji", cdlgravestonedoji),
+    ("cdlhammer", cdlhammer),
+    ("cdlhangingman", cdlhangingman),
+    ("cdlharami", cdlharami),
+    ("cdlharamicross", cdlharamicross),
+    ("cdlhighwave", cdlhighwave),
+    ("cdlhikkake", cdlhikkake),
+    ("cdlhikkakemod", cdlhikkakemod),
+    ("cdlhomingpigeon", cdlhomingpigeon),
+    ("cdlidentical3crows", cdlidentical3crows),
+    ("cdlinneck", cdlinneck),
+    ("cdlinvertedhammer", cdlinvertedhammer),
+    ("cdlkicking", cdlkicking),
+    ("cdlkickingbylength", cdlkickingbylength),
+    ("cdlladderbottom", cdlladderbottom),
+    ("cdllongleggeddoji", cdllongleggeddoji),
+    ("cdllongline", cdllongline),
+    ("cdlmarubozu", cdlmarubozu),
+    ("cdlmatchinglow", cdlmatchinglow),
+    ("cdlmathold", cdlmathold),
+    ("cdlmorningdojistar", cdlmorningdojistar),
+    ("cdlmorningstar", cdlmorningstar),
+    ("cdlonneck", cdlonneck),
+    ("cdlpiercing", cdlpiercing),
+    ("cdlrickshawman", cdlrickshawman),
+    ("cdlrisefall3methods", cdlrisefall3methods),
+    ("cdlseparatinglines", cdlseparatinglines),
+    ("cdlshootingstar", cdlshootingstar),
+    ("cdlshortline", cdlshortline),
+    ("cdlspinningtop", cdlspinningtop),
+    ("cdlstalledpattern", cdlstalledpattern),
+    ("cdlsticksandwich", cdlsticksandwich),
+    ("cdltakuri", cdltakuri),
+    ("cdltasukigap", cdltasukigap),
+    ("cdlthrusting", cdlthrusting),
+    ("cdltristar", cdltristar),
+    ("cdlunique3river", cdlunique3river),
+    ("cdlxsidegap3methods", cdlxsidegap3methods),
     # Price
     ("avgprice", avgprice),
     ("medprice", medprice),
