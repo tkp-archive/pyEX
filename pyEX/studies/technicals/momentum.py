@@ -94,12 +94,7 @@ def apo(
     """
     df = client.chartDF(symbol, timeframe)
     apo = t.APO(df[col].values, fastperiod, slowperiod, matype)
-    return pd.DataFrame(
-        {
-            col: df[col].values,
-            "apo": apo,
-        }
-    )
+    return pd.DataFrame({col: df[col].values, "apo": apo})
 
 
 def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
@@ -569,12 +564,7 @@ def ppo(
     """
     df = client.chartDF(symbol, timeframe)
     ppo = t.PPO(df[col].values, fastperiod, slowperiod, matype)
-    return pd.DataFrame(
-        {
-            col: df[col].values,
-            "ppo": ppo,
-        }
-    )
+    return pd.DataFrame({col: df[col].values, "ppo": ppo})
 
 
 def roc(client, symbol, timeframe="6m", col="close", period=14):
@@ -784,10 +774,6 @@ def stochf(
     )
 
 
-# STOCHRSI - Stochastic Relative Strength Index
-# fastk, fastd = STOCHRSI(close, timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0)
-
-
 def stochrsi(
     client,
     symbol,
@@ -853,9 +839,9 @@ def ultosc(
     highcol="high",
     lowcol="low",
     closecol="close",
-    timeperiod1=7,
-    timeperiod2=14,
-    timeperiod3=28,
+    period1=7,
+    period2=14,
+    period3=28,
 ):
     """This will return a dataframe of
     Ultimate Oscillator
@@ -868,7 +854,9 @@ def ultosc(
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
-        period (int): period to calculate across
+        period1 (int): period to calculate across
+        period2 (int): period to calculate across
+        period3 (int): period to calculate across
 
     Returns:
         DataFrame: result
@@ -878,9 +866,9 @@ def ultosc(
         df[highcol].values,
         df[lowcol].values,
         df[closecol].values,
-        timeperiod1=timeperiod1,
-        timeperiod2=timeperiod2,
-        timeperiod3=timeperiod3,
+        timeperiod1=period1,
+        timeperiod2=period2,
+        timeperiod3=period3,
     )
     return pd.DataFrame(
         {

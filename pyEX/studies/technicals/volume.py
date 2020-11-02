@@ -89,13 +89,7 @@ def adosc(
     )
 
 
-def obv(
-    client,
-    symbol,
-    timeframe="6m",
-    closecol="close",
-    volumecol="volume",
-):
+def obv(client, symbol, timeframe="6m", closecol="close", volumecol="volume"):
     """This will return a dataframe of On Balance Volume for the given symbol across
     the given timeframe
 
@@ -109,14 +103,7 @@ def obv(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    obv = t.OBV(
-        df[closecol].values,
-        df[volumecol].values,
-    )
+    obv = t.OBV(df[closecol].values, df[volumecol].values)
     return pd.DataFrame(
-        {
-            closecol: df[closecol].values,
-            volumecol: df[volumecol].values,
-            "obv": obv,
-        }
+        {closecol: df[closecol].values, volumecol: df[volumecol].values, "obv": obv}
     )

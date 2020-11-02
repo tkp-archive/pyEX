@@ -528,6 +528,15 @@ try:
         typprice,
         wclprice,
         # Statistic
+        beta,
+        correl,
+        linearreg,
+        linearreg_angle,
+        linearreg_intercept,
+        linearreg_slope,
+        stddev,
+        tsf,
+        var,
         # Volatility
         atr,
         natr,
@@ -618,6 +627,15 @@ except ImportError:
     medprice = None
     typprice = None
     wclprice = None
+    beta = None
+    correl = None
+    linearreg = None
+    linearreg_angle = None
+    linearreg_intercept = None
+    linearreg_slope = None
+    stddev = None
+    tsf = None
+    var = None
     atr = None
     natr = None
     trange = None
@@ -1229,6 +1247,15 @@ _INCLUDE_STUDIES = [
     ("typprice", typprice),
     ("wclprice", wclprice),
     # Statistic
+    ("beta", beta),
+    ("correl", correl),
+    ("linearreg", linearreg),
+    ("linearreg_angle", linearreg_angle),
+    ("linearreg_intercept", linearreg_intercept),
+    ("linearreg_slope", linearreg_slope),
+    ("stddev", stddev),
+    ("tsf", tsf),
+    ("var", var),
     # Volatility
     ("atr", atr),
     ("natr", natr),

@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 from .common import PyEXception, PyEXStopSSE
 from .client import *  # noqa: F403
+
+try:
+    from .studies import *  # noqa: F403
+except ImportError:
+    pass
+
 from .account import *  # noqa: F403
 from .alternative import (
     crypto,
@@ -447,14 +453,8 @@ from .stocks import (
 from .options import optionExpirations, options, optionsDF
 from ._version import __version__
 
-
 try:
     from .caching import *  # noqa: F403
-except ImportError:
-    pass
-
-try:
-    from .studies import *  # noqa: F403
 except ImportError:
     pass
 

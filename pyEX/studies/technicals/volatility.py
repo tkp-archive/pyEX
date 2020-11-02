@@ -11,7 +11,7 @@ def atr(
     highcol="high",
     lowcol="low",
     closecol="close",
-    timeperiod=14,
+    period=14,
 ):
     """This will return a dataframe of average true range for the given symbol across
     the given timeframe
@@ -23,13 +23,13 @@ def atr(
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
-        timeperiod (int): time period to calculate over
+        period (int): time period to calculate over
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    atr = t.ATR(df[highcol].values, df[lowcol].values, df[closecol].values, timeperiod)
+    atr = t.ATR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -47,7 +47,7 @@ def natr(
     highcol="high",
     lowcol="low",
     closecol="close",
-    timeperiod=14,
+    period=14,
 ):
     """This will return a dataframe of normalized average true range for the given symbol across
     the given timeframe
@@ -59,15 +59,13 @@ def natr(
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
-        timeperiod (int): time period to calculate over
+        period (int): time period to calculate over
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    natr = t.NATR(
-        df[highcol].values, df[lowcol].values, df[closecol].values, timeperiod
-    )
+    natr = t.NATR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -79,12 +77,7 @@ def natr(
 
 
 def trange(
-    client,
-    symbol,
-    timeframe="6m",
-    highcol="high",
-    lowcol="low",
-    closecol="close",
+    client, symbol, timeframe="6m", highcol="high", lowcol="low", closecol="close"
 ):
     """This will return a dataframe of true range for the given symbol across
     the given timeframe

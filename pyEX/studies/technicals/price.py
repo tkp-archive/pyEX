@@ -42,13 +42,7 @@ def avgprice(
     )
 
 
-def medprice(
-    client,
-    symbol,
-    timeframe="6m",
-    highcol="high",
-    lowcol="low",
-):
+def medprice(client, symbol, timeframe="6m", highcol="high", lowcol="low"):
     """This will return a dataframe of median price for the given symbol across
     the given timeframe
 
@@ -65,11 +59,7 @@ def medprice(
     df = client.chartDF(symbol, timeframe)
     med = t.MEDPRICE(df[highcol].values, df[lowcol].values)
     return pd.DataFrame(
-        {
-            highcol: df[highcol].values,
-            lowcol: df[lowcol].values,
-            "medprice": med,
-        }
+        {highcol: df[highcol].values, lowcol: df[lowcol].values, "medprice": med}
     )
 
 

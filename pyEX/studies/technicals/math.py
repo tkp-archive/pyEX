@@ -338,13 +338,13 @@ def max(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return t.MAX(df[col].values, timeperiod=period)
+    return t.MAX(df[col].values, period)
 
 
 def maxindex(client, symbol, timeframe="6m", col="close", period=30):
@@ -357,13 +357,13 @@ def maxindex(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.MAXINDEX(df[col].values, timeperiod=period)
+    x = t.MAXINDEX(df[col].values, period)
     return x, df[col].values[x]
 
 
@@ -377,13 +377,13 @@ def min(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return t.MIN(df[col].values, timeperiod=period)
+    return t.MIN(df[col].values, period)
 
 
 def minindex(client, symbol, timeframe="6m", col="close", period=30):
@@ -396,13 +396,13 @@ def minindex(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.MININDEX(df[col].values, timeperiod=period)
+    x = t.MININDEX(df[col].values, period)
     return x, df[col].values[x]
 
 
@@ -416,13 +416,13 @@ def minmax(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return t.MINMAX(df[col].values, timeperiod=period)
+    return t.MINMAX(df[col].values, period)
 
 
 def minmaxindex(client, symbol, timeframe="6m", col="close", period=30):
@@ -435,13 +435,13 @@ def minmaxindex(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x, y = t.MINMAXINDEX(df[col].values, timeperiod=period)
+    x, y = t.MINMAXINDEX(df[col].values, period)
     return x, df[col].values[x], y, df[col].values[y]
 
 
@@ -495,11 +495,11 @@ def sum(client, symbol, timeframe="6m", col="close", period=30):
         symbol (string); Ticker
         timeframe (string); timeframe to use, for pyEX.chart
         col (string); column to use to calculate
-        period (int); timeperiod
+        period (int); period
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.SUMMATION(df[col].values, timeperiod=period)
+    x = t.SUMMATION(df[col].values, period)
     return pd.DataFrame({col: df[col].values, "sum": x})

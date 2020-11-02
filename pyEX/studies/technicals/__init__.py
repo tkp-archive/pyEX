@@ -78,19 +78,17 @@ from .overlap import (
     trima,
     wma,
 )
-from .price import (
-    avgprice,
-    medprice,
-    typprice,
-    wclprice,
+from .price import avgprice, medprice, typprice, wclprice
+from .statistic import (
+    beta,
+    correl,
+    linearreg,
+    linearreg_angle,
+    linearreg_intercept,
+    linearreg_slope,
+    stddev,
+    tsf,
+    var,
 )
-from .volatility import (
-    atr,
-    natr,
-    trange,
-)
-from .volume import (
-    ad,
-    adosc,
-    obv,
-)
+from .volatility import atr, natr, trange
+from .volume import ad, adosc, obv
