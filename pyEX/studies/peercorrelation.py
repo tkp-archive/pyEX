@@ -19,3 +19,20 @@ def peerCorrelation(client, symbol, timeframe="6m"):
     ret.index.name = "symbol"
     ret.columns = ret.columns.tolist()
     return ret
+
+
+def peerCorrelationPlot(client, symbol, timeframe="6m"):
+    """This will plot a dataframe of peer correlations for the given symbol across
+    the given timeframe
+
+    Args:
+        client (pyEX.Client); Client
+        symbol (string); Ticker
+        timeframe (string); timeframe to use, for pyEX.chart
+
+    Returns:
+        DataFrame: result
+    """
+    import seaborn as sns
+
+    return sns.heatmap(peerCorrelation)

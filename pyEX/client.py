@@ -441,6 +441,9 @@ from .options import optionExpirations, options, optionsDF
 try:
     from .studies import (
         peerCorrelation,
+        peerCorrelationPlot,
+        returns,
+        dailyReturns,
         # Cycle
         ht_dcperiod,
         ht_dcphase,
@@ -609,11 +612,16 @@ try:
 
 except ImportError:
     peerCorrelation = None
+    peerCorrelationPlot = None
+    returns = None
+    dailyReturns = None
+
     ht_dcperiod = None
     ht_dcphase = None
     ht_phasor = None
     ht_sine = None
     ht_trendmode = None
+
     acos = None
     asin = None
     atan = None
@@ -640,6 +648,7 @@ except ImportError:
     mult = None
     sub = None
     sum = None
+
     adx = None
     adxr = None
     apo = None
@@ -667,6 +676,7 @@ except ImportError:
     trix = None
     ultosc = None
     willr = None
+
     bollinger = None
     dema = None
     ema = None
@@ -683,6 +693,7 @@ except ImportError:
     tema = None
     trima = None
     wma = None
+
     cdl2crows = None
     cdl3blackcrows = None
     cdl3inside = None
@@ -743,10 +754,12 @@ except ImportError:
     cdltristar = None
     cdlunique3river = None
     cdlxsidegap3methods = None
+
     avgprice = None
     medprice = None
     typprice = None
     wclprice = None
+
     beta = None
     correl = None
     linearreg = None
@@ -756,9 +769,11 @@ except ImportError:
     stddev = None
     tsf = None
     var = None
+
     atr = None
     natr = None
     trange = None
+
     ad = None
     adosc = None
     obv = None
@@ -1280,6 +1295,9 @@ _INCLUDE_POINTS = [
 
 _INCLUDE_STUDIES = [
     ("peerCorrelation", peerCorrelation),
+    ("peerCorrelationPlot", peerCorrelationPlot),
+    ("returns", returns),
+    ("dailyReturns", dailyReturns),
     # Cycle
     ("ht_dcperiod", ht_dcperiod),
     ("ht_dcphase", ht_dcphase),
