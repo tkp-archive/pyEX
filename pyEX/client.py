@@ -658,6 +658,8 @@ except ImportError:
     cci = None
     cmo = None
     dx = None
+    macd = None
+    macdext = None
     mfi = None
     minus_di = None
     minus_dm = None
