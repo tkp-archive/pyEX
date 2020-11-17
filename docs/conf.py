@@ -128,7 +128,7 @@ htmlhelp_basename = 'pyEXdoc'
 
 autodoc_mock_imports = [
     'aiohttp',
-    'aiohttp_sse_client'
+    'aiohttp_sse_client',
     'deprecation',
     'ipython',
     'numpy',
