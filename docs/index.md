@@ -745,67 +745,186 @@ Currently, the following methods are implemented:
 ## Studies
 Available via `pyEX[studies]`.
 
+
+### Studies
+- peerCorrelation
+
 ### Technicals
 These are built on [TA-lib](https://ta-lib.org). Note that these are different from the technicals available via IEX Cloud's `technicals` endpoint.
 
+
 #### Cycle
-- ht_dcperiod
-- ht_dcphase
-- ht_phasor
-- ht_sine
-- ht_trendmode
+- ht_dcperiod: Hilbert Transform - Dominant Cycle Period
+- ht_dcphase: Hilbert Transform - Dominant Cycle Phase
+- ht_phasor: Hilbert Transform - Phasor Components
+- ht_sine: Hilbert Transform - SineWave
+- ht_trendmode: Hilbert Transform - Trend vs Cycle Mode
 
 #### Math
-- acos
-- asin
-- atan
-- ceil
-- cos
-- cosh
-- exp
-- floor
-- ln
-- log10
-- sin
-- sinh
-- sqrt
-- tan
-- tanh
-- add
-- div
-- max
-- maxindex
-- min
-- minindex
-- minmax
-- minmaxindex
-- mult
-- sub
-- sum
+- acos: Vector Trigonometric ACos
+- asin: Vector Trigonometric ASin
+- atan: Vector Trigonometric ATan
+- ceil: Vector Ceil
+- cos: Vector Trigonometric Cos
+- cosh: Vector Trigonometric Cosh
+- exp: Vector Arithmetic Exp
+- floor: Vector floor
+- ln: Vector Log natural
+- log10: Vector Log10
+- sin: Vector Trigonometric Sin
+- sinh: Vector Trigonometric Sinh
+- sqrt: Vector Square Root
+- tan: Vector Trigonometric Tan
+- tanh: Vector Trigonometric Tanh
+- add: Vector Arithmetic Add
+- div: Vector Arithmetic Div
+- max: Highest value over a specified period
+- maxindex: Index of highest value over a specified period
+- min: Lowest value over a specified period
+- minindex: Index of lowest value over a specified period
+- minmax: Lowest and highest values over a specified period
+- minmaxindex: Index of lowest and highest values over a specified period
+- mult: Vector Arithmetic Mult
+- sub: Vector Arithmetic Subtraction
+- sum: Summation
 
 #### Momentum
-- adx
-- adxr
-- rsi
+- adx: Average Directional Movement Index
+- adxr: Average Directional Movement Index Rating
+- apo: Absolute Price Oscillator
+- aroon: Aroon
+- aroonosc: Aroon Oscillator
+- bop: Balance Of Power
+- cci: Commodity Channel Index
+- cmo: Chande Momentum Oscillator
+- dx: Directional Movement Index
+- macd: Moving Average Convergence/Divergence
+- macdext: MACD with controllable MA type
+- mfi: Money Flow Index
+- minus_di: Minus Directional Indicator
+- minus_dm: Minus Directional Movement
+- mom: Momentum
+- plus_di: Plus Directional Indicator
+- plus_dm: Plus Directional Movement
+- ppo: Percentage Price Oscillator
+- roc: Rate of change : ((price/prevPrice)-1)*100
+- rocp: Rate of change Percentage: (price-prevPrice)/prevPrice
+- rocr: Rate of change ratio: (price/prevPrice)
+- rocr100: Rate of change ratio 100 scale: (price/prevPrice)*100
+- rsi: Relative Strength Index
+- stoch: Stochastic
+- stochf: Stochastic Fast
+- stochrsi: Stochastic Relative Strength Index
+- trix: 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
+- ultosc: Ultimate Oscillator
+- willr: Williams' %R
 
 #### Overlap
-- bollinger
-- dema
-- ema
-- ht_trendline
-- kama
-- mama
-- mavp
-- midpoint
-- midpice
-- sar
-- sarext
-- sma
-- t3
-- tema
-- trima
-- wma
+- bollinger: Bollinger Bands
+- dema: Double Exponential Moving Average
+- ema: Exponential Moving Aberage
+- ht_trendline: Hilbert Transform - Instantaneous Trendline
+- kama: Kaufman Adaptive Moving Average
+- mama: MESA Adaptive Moving Average
+- mavp: Moving average with variable period
+- midpoint: Midpoint over period
+- midpice: Midpoint price over period
+- sar: Parabolic SAR
+- sarext: Parabolic SAR - Extended
+- sma: Moving Average
+- t3: Triple Exponential Moving Average (T3)
+- tema: Triple Exponential Moving Average
+- trima: Triangular Moving Average
+- wma: Weighted Moving Average
 
+#### Pattern
+- cdl2crows: Two Crows
+- cdl3blackcrows: Three Black Crows
+- cdl3inside: Three Inside Up/Down
+- cdl3linestrike: Three-Line Strike
+- cdl3outside: Three Outside Up/Down
+- cdl3starsinsouth: Three Stars In The South
+- cdl3whitesoldiers: Three Advancing White Soldiers
+- cdlabandonedbaby: Abandoned Baby
+- cdladvanceblock: Advance Block
+- cdlbelthold: Belt-hold
+- cdlbreakaway: Breakaway
+- cdlclosingmarubozu: Closing Marubozu
+- cdlconcealbabyswall: Concealing Baby Swallow
+- cdlcounterattack: Counterattack
+- cdldarkcloudcover: Dark Cloud Cover
+- cdldoji: Doji
+- cdldojistar: Doji Star
+- cdldragonflydoji: Dragonfly Doji
+- cdlengulfing: Engulfing Pattern
+- cdleveningdojistar: Evening Doji Star
+- cdleveningstar: Evening Star
+- cdlgapsidesidewhite: Up/Down-gap side-by-side white lines
+- cdlgravestonedoji: Gravestone Doji
+- cdlhammer: Hammer
+- cdlhangingman: Hanging Man
+- cdlharami: Harami Pattern
+- cdlharamicross: Harami Cross Pattern
+- cdlhighwave: High-Wave Candle
+- cdlhikkake: Hikkake Pattern
+- cdlhikkakemod: Modified Hikkake Pattern
+- cdlhomingpigeon: Homing Pigeon
+- cdlidentical3crows: Identical Three Crows
+- cdlinneck: In-Neck Pattern
+- cdlinvertedhammer: Inverted Hammer
+- cdlkicking: Kicking
+- cdlkickingbylength: Kicking - bull/bear determined by the longer marubozu
+- cdlladderbottom: Ladder Bottom
+- cdllongleggeddoji: Long Legged Doji
+- cdllongline: Long Line Candle
+- cdlmarubozu: Marubozu
+- cdlmatchinglow: Matching Low
+- cdlmathold: Mat Hold
+- cdlmorningdojistar: Morning Doji Star
+- cdlmorningstar: Morning Star
+- cdlonneck: On-Neck Pattern
+- cdlpiercing: Piercing Pattern
+- cdlrickshawman: Rickshaw Man
+- cdlrisefall3methods: Rising/Falling Three Methods
+- cdlseparatinglines: Separating Lines
+- cdlshootingstar: Shooting Star
+- cdlshortline: Short Line Candle
+- cdlspinningtop: Spinning Top
+- cdlstalledpattern: Stalled Pattern
+- cdlsticksandwich: Stick Sandwich
+- cdltakuri: Takuri (Dragonfly Doji with very long lower shadow)
+- cdltasukigap: Tasuki Gap
+- cdlthrusting: Thrusting Pattern
+- cdltristar: Tristar Pattern
+- cdlunique3river: Unique 3 River
+- cdlupsidegap2crows: Upside Gap Two Crows
+- cdlxsidegap3methods: Upside/Downside Gap Three Methods
+
+#### Price
+- avgprice: Average Price
+- medprice: Median Price
+- typprice: Typical Price
+- wclprice: Weighted Close Price
+
+#### Statistic
+- beta: Beta
+- correl: Pearson's Correlation Coefficient (r)
+- linearreg: Linear Regression
+- linearreg_angle: Linear Regression Angle
+- linearreg_intercept: Linear Regression Intercept
+- linearreg_slope: Linear Regression Slope
+- stddev: Standard Deviation
+- tsf: Time Series Forecast
+- var: Variance
+#### Volatility
+- atr: Average True Range
+- natr: Normalized Average True Range
+- trange: True Range
+
+#### Volume
+- ad: Chaikin A/D Line
+- adosc: Chaikin A/D Oscillator
+- obv: On Balance Volume
 
 ## Attribution
 - [Powered by IEX Cloud](https://iexcloud.io)

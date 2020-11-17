@@ -126,6 +126,21 @@ html_sidebars = {
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'pyEXdoc'
 
+autodoc_mock_imports = [
+    'deprecation',
+    'ipython',
+    'Pillow',
+    'pandas',
+    'pytz',
+    'requests',
+    'six',
+    'socketIO_client_nexus',
+    'sseclient',
+    'temporalcache',
+    'aiohttp',
+    'aiohttp_sse_client'
+    'talib',
+]
 
 # -- Options for LaTeX output ---------------------------------------------
 
