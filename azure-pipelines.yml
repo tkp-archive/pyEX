@@ -20,12 +20,7 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-        tar xfzv ta-lib-0.4.0-src.tar.gz
-        cd ta-lib
-        ./configure --prefix=/usr LDFLAGS="-lm" 
-        make
-        sudo make install
+        python -m pip install libta-lib
       displayName: "Install system dependencies"
 
     - script: |
@@ -70,12 +65,7 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-        tar xfzv ta-lib-0.4.0-src.tar.gz
-        cd ta-lib
-        ./configure
-        make -j2
-        make install
+        python -m pip install libta-lib
       displayName: "Install system dependencies"
 
     - script: |
@@ -120,22 +110,22 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp38-cp38-win_amd64.whl
+      which python > python.txt
+      set /p PYTHON=<python.txt
+      ln -s %PYTHON% %PYTHON%$(python.version)
+      python --version
+      which python$(python.version)
+    displayName: "Which python"
+
+    - script: |
+        python -m pip install libta-lib
       displayName: "Install TA-lib"
       condition: eq(variables['python.version'], '3.8')
 
     - script: |
-        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
+        python -m pip install libta-lib
       displayName: "Install TA-lib"
       condition: eq(variables['python.version'], '3.7')
-
-    - script: |
-        which python > python.txt
-        set /p PYTHON=<python.txt
-        ln -s %PYTHON% %PYTHON%$(python.version)
-        python --version
-        which python$(python.version)
-      displayName: "Which python"
 
     - script: |
         python -m pip install --upgrade pip
