@@ -196,7 +196,6 @@ texinfo_documents = [
 def run_copyreadme(_):
     out = os.path.abspath(os.path.join(os.path.dirname(__file__), 'index.md'))
     readme = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'README.md'))
-    api = os.path.abspath(os.path.join(os.path.dirname(__file__), 'api.md'))
     with open(out, 'w') as fp1:
         with open(readme, 'r') as fp2:
             for line in fp2:
@@ -209,10 +208,34 @@ def run_copyreadme(_):
                 else:
                     fp1.write(line)
 
-        fp1.write("\n\n# API Documentation\n\n")
-        with open(api, 'r') as fp2:
-            fp1.write(fp2.read())
+        fp1.write('''
+        
+```eval_rst
+API Documentation
+==================
 
+
+.. toctree::
+   :maxdepth: 2
+
+   apisrc/client
+   apisrc/alternative
+   apisrc/commodities
+   apisrc/crypto
+   apisrc/econ
+   apisrc/fx
+   apisrc/mktdata
+   apisrc/markets
+   apisrc/options
+   apisrc/points
+   apisrc/premium
+   apisrc/rates
+   apisrc/refdata
+   apisrc/stats
+   apisrc/stocks
+   apisrc/studies
+```
+            ''')
 
 def run_apidoc(_):
     out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'api'))
