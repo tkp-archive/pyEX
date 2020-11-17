@@ -110,11 +110,11 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-      which python > python.txt
-      set /p PYTHON=<python.txt
-      ln -s %PYTHON% %PYTHON%$(python.version)
-      python --version
-      which python$(python.version)
+        which python > python.txt
+        set /p PYTHON=<python.txt
+        ln -s %PYTHON% %PYTHON%$(python.version)
+        python --version
+        which python$(python.version)
     displayName: "Which python"
 
     - script: |
