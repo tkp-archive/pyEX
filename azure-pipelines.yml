@@ -20,7 +20,7 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        python -m pip install libta-lib
+        python -m pip install --pre libta-lib
       displayName: "Install system dependencies"
 
     - script: |
@@ -65,7 +65,7 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        python -m pip install libta-lib
+        python -m pip install --pre libta-lib
       displayName: "Install system dependencies"
 
     - script: |
@@ -123,7 +123,7 @@ jobs:
       condition: eq(variables['python.version'], '3.8')
 
     - script: |
-        python -m pip install libta-lib
+        python -m pip install --pre libta-lib
       displayName: "Install TA-lib"
       condition: eq(variables['python.version'], '3.7')
 
