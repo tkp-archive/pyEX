@@ -120,12 +120,12 @@ jobs:
       displayName: 'Use Python $(python.version)'
 
     - script: |
-        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp38-cp38-win_amd64.whl
+        python -m pip install https://download.lfd.uci.edu/pythonlibs/z4tqcw5k/TA_Lib-0.4.19-cp38-cp38-win_amd64.whl
       displayName: "Install TA-lib"
       condition: eq(variables['python.version'], '3.8')
 
     - script: |
-        python -m pip install https://download.lfd.uci.edu/pythonlibs/z2tqcw5k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
+        python -m pip install https://download.lfd.uci.edu/pythonlibs/z4tqcw5k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
       displayName: "Install TA-lib"
       condition: eq(variables['python.version'], '3.7')
 
