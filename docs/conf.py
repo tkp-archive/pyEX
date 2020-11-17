@@ -127,8 +127,11 @@ html_sidebars = {
 htmlhelp_basename = 'pyEXdoc'
 
 autodoc_mock_imports = [
+    'aiohttp',
+    'aiohttp_sse_client'
     'deprecation',
     'ipython',
+    'numpy',
     'Pillow',
     'pandas',
     'pytz',
@@ -137,8 +140,6 @@ autodoc_mock_imports = [
     'socketIO_client_nexus',
     'sseclient',
     'temporalcache',
-    'aiohttp',
-    'aiohttp_sse_client'
     'talib',
 ]
 
