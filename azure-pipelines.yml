@@ -115,7 +115,7 @@ jobs:
         ln -s %PYTHON% %PYTHON%$(python.version)
         python --version
         which python$(python.version)
-    displayName: "Which python"
+      displayName: "Which python"
 
     - script: |
         python -m pip install libta-lib
