@@ -157,6 +157,8 @@ _STANDARD_DATE_FIELDS = [
     "expirationDate",
     "startDate",
     "endDate",
+    "consensusEndDate",
+    "consensusStartDate",
 ]
 
 _STANDARD_TIME_FIELDS = [
@@ -174,6 +176,13 @@ _STANDARD_TIME_FIELDS = [
     "lastUpdated",
     "reportDate",
     "report_date",
+    "iexOpenTime",
+    "iexCloseTime",
+    "lastTradeTime",
+    "highTime",
+    "lowTime",
+    "latestUpdate",
+    "oddLotDelayedPriceTime",
 ]
 
 _INDICATORS = [
