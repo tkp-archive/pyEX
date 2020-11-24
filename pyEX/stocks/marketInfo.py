@@ -344,9 +344,17 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
     return _getJson("stock/market/upcoming-events", token, version, filter)
 
 
+def _upcomingToDF(upcoming):
+    dfs = {}
+    for k, v in upcoming.items():
+        dfs[k] = pd.DataFrame(v)
+        _toDatetime(dfs[k])
+    return dfs
+
+
 @wraps(upcomingEvents)
 def upcomingEventsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return _upcomingToDF(
         upcomingEvents(symbol=symbol, token=token, version=version, filter=filter)
     )
 
