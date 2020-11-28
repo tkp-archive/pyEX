@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from functools import wraps
-from ..common import _requireSecret, _getJson, _postJson, PyEXception, _USAGE_TYPES
+from ..common import (
+    _requireSecret,
+    _getJson,
+    _postJson,
+    PyEXception,
+    _USAGE_TYPES,
+    json_normalize,
+)
 
 
 def messageBudget(totalMessages=None, token="", version=""):
@@ -90,4 +97,4 @@ def usage(type=None, token="", version=""):
 
 @wraps(usage)
 def usageDF(type=None, token="", version=""):
-    return pd.io.json.json_normalize(usage(type, token, version))
+    return json_normalize(usage(type, token, version))

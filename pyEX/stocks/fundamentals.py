@@ -12,6 +12,7 @@ from ..common import (
     _toDatetime,
     _checkPeriodLast,
     _UTC,
+    json_normalize,
 )
 
 
@@ -47,7 +48,7 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
 @wraps(balanceSheet)
 def balanceSheetDF(symbol, period="quarter", last=1, token="", version="", filter=""):
     val = balanceSheet(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "balancesheet", "symbol")
+    df = json_normalize(val, "balancesheet", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df
@@ -85,7 +86,7 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
 @wraps(cashFlow)
 def cashFlowDF(symbol, period="quarter", last=1, token="", version="", filter=""):
     val = cashFlow(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "cashflow", "symbol")
+    df = json_normalize(val, "cashflow", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     df.replace(to_replace=[None], value=np.nan, inplace=True)
@@ -171,7 +172,7 @@ def earnings(
 def _earningsToDF(e):
     """internal"""
     if e:
-        df = pd.io.json.json_normalize(e, "earnings", "symbol")
+        df = json_normalize(e, "earnings", "symbol")
         _toDatetime(df)
         _reindex(df, "EPSReportDate")
     else:
@@ -215,7 +216,7 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
 def _financialsToDF(f):
     """internal"""
     if f:
-        df = pd.io.json.json_normalize(f, "financials", "symbol")
+        df = json_normalize(f, "financials", "symbol")
         _toDatetime(df)
         _reindex(df, "reportDate")
     else:
@@ -263,7 +264,7 @@ def incomeStatementDF(
     symbol, period="quarter", last=1, token="", version="", filter=""
 ):
     val = incomeStatement(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "income", "symbol")
+    df = json_normalize(val, "income", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df
