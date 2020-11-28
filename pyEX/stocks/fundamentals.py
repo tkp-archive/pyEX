@@ -232,6 +232,48 @@ def financialsDF(symbol, period="quarter", token="", version="", filter=""):
 
 
 @_expire(hour=8, tz=_UTC)
+def fundamentals(symbol, period="quarter", token="", version="", filter=""):
+    """Pulls fundamentals data.
+
+    # TODO not released yet https://iexcloud.io/docs/api/#fundamentals
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _raiseIfNotStr(symbol)
+    _checkPeriodLast(period, 1)
+    return _getJson(
+        "stock/{}/fundamentals?period={}".format(symbol, period), token, version, filter
+    )
+
+
+def _fundamentalsToDF(f):
+    """internal"""
+    if f:
+        df = pd.io.json.json_normalize(f, "fundamentals", "symbol")
+        _toDatetime(df)
+        _reindex(df, "reportDate")
+    else:
+        df = pd.DataFrame()
+    return df
+
+
+@wraps(fundamentals)
+def fundamentalsDF(symbol, period="quarter", token="", version="", filter=""):
+    f = fundamentals(symbol, period, token, version, filter)
+    df = _fundamentalsToDF(f)
+    return df
+
+
+@_expire(hour=8, tz=_UTC)
 def incomeStatement(symbol, period="quarter", last=1, token="", version="", filter=""):
     """Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
 
