@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .common import PyEXception, PyEXStopSSE
+from .common import PyEXception, PyEXStopSSE, overrideSSEUrl, overrideUrl, setProxy
 from .client import *  # noqa: F403
 
 try:

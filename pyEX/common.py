@@ -824,6 +824,18 @@ def setProxy(proxies=None):
     _PYEX_PROXIES = proxies
 
 
+def overrideUrl(url):
+    """Override the default IEX Cloud url"""
+    global _URL_PREFIX2
+    _URL_PREFIX2 = url
+
+
+def overrideSSEUrl(url):
+    """Override the default IEX Cloud SSE url"""
+    global _SSE_URL_PREFIX
+    _SSE_URL_PREFIX = url
+
+
 def _expire(**temporal_args):
     if not os.path.exists(_PYEX_CACHE_FOLDER):
         os.makedirs(_PYEX_CACHE_FOLDER)
