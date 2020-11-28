@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
-import pandas as pd
 from functools import wraps
-from ...common import _getJson, PyEXception, _toDatetime, _strOrDate, _raiseIfNotStr
+from ...common import (
+    _getJson,
+    PyEXception,
+    _toDatetime,
+    _strOrDate,
+    _raiseIfNotStr,
+    json_normalize,
+)
 
 
 def socialSentiment(symbol, type="daily", date="", token="", version="", filter=""):
@@ -34,6 +40,6 @@ def socialSentiment(symbol, type="daily", date="", token="", version="", filter=
 
 @wraps(socialSentiment)
 def socialSentimentDF(*args, **kwargs):
-    df = pd.io.json.json_normalize(socialSentiment(*args, **kwargs))
+    df = json_normalize(socialSentiment(*args, **kwargs))
     _toDatetime(df)
     return df

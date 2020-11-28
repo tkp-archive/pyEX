@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from functools import wraps
-from ..common import _expire, _getJson, _reindex, _toDatetime, _UTC
+from ..common import _expire, _getJson, _reindex, _toDatetime, _UTC, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)
@@ -215,7 +215,7 @@ def fxSymbolsDF(token="", version=""):
 
 @wraps(optionsSymbols)
 def optionsSymbolsDF(token="", version="", filter=""):
-    df = pd.io.json.json_normalize(optionsSymbols(token, version, filter))
+    df = json_normalize(optionsSymbols(token, version, filter))
     df = df.T
     df.columns = ["expirations"]
     return df

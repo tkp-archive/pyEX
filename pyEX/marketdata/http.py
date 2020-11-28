@@ -9,6 +9,7 @@ from ..common import (
     _strOrDate,
     _reindex,
     _toDatetime,
+    json_normalize,
 )
 
 
@@ -44,7 +45,7 @@ async def topsAsync(symbols=None, token="", version=""):
 
 @wraps(tops)
 def topsDF(symbols=None, token="", version=""):
-    df = pd.io.json.json_normalize(tops(symbols, token, version))
+    df = json_normalize(tops(symbols, token, version))
     _toDatetime(df)
     _reindex(df, "symbol")
     return df
@@ -84,7 +85,7 @@ async def lastAsync(symbols=None, token="", version=""):
 
 @wraps(last)
 def lastDF(symbols=None, token="", version=""):
-    df = pd.io.json.json_normalize(last(symbols, token, version))
+    df = json_normalize(last(symbols, token, version))
     _toDatetime(df)
     _reindex(df, "symbol")
     return df
@@ -124,7 +125,7 @@ async def deepAsync(symbol=None, token="", version=""):
 
 @wraps(deep)
 def deepDF(symbol=None, token="", version=""):
-    df = pd.io.json.json_normalize(deep(symbol, token, version))
+    df = json_normalize(deep(symbol, token, version))
     _toDatetime(df)
     return df
 
@@ -159,7 +160,7 @@ async def auctionAsync(symbol=None, token="", version=""):
 
 @wraps(auction)
 def auctionDF(symbol=None, token="", version=""):
-    df = pd.io.json.json_normalize(auction(symbol, token, version))
+    df = json_normalize(auction(symbol, token, version))
     _toDatetime(df)
     return df
 
@@ -199,7 +200,7 @@ def bookDF(symbol=None, token="", version=""):
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = pd.io.json.json_normalize(data)
+    df = json_normalize(data)
     _toDatetime(df)
     return df
 
@@ -285,7 +286,7 @@ async def officialPriceAsync(symbol=None, token="", version=""):
 
 @wraps(officialPrice)
 def officialPriceDF(symbol=None, token="", version=""):
-    df = pd.io.json.json_normalize(officialPrice(symbol, token, version))
+    df = json_normalize(officialPrice(symbol, token, version))
     _toDatetime(df)
     return df
 
@@ -418,7 +419,7 @@ async def systemEventAsync(token="", version=""):
 
 @wraps(systemEvent)
 def systemEventDF(token="", version=""):
-    df = pd.io.json.json_normalize(systemEvent(token, version))
+    df = json_normalize(systemEvent(token, version))
     _toDatetime(df)
     return df
 
@@ -496,7 +497,7 @@ async def tradeBreakAsync(symbol=None, token="", version=""):
 
 @wraps(tradeBreak)
 def tradeBreakDF(symbol=None, token="", version=""):
-    df = pd.io.json.json_normalize(tradeBreak(symbol, token, version))
+    df = json_normalize(tradeBreak(symbol, token, version))
     _toDatetime(df)
     return df
 

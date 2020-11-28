@@ -11,6 +11,7 @@ from ..common import (
     _reindex,
     _toDatetime,
     _EST,
+    json_normalize,
 )
 
 
@@ -40,18 +41,18 @@ def _bookToDF(b):
     bids = b.get("bids", [])
     trades = b.get("trades", [])
 
-    df1 = pd.io.json.json_normalize(quote)
+    df1 = json_normalize(quote)
     df1["type"] = "quote"
 
-    df2 = pd.io.json.json_normalize(asks)
+    df2 = json_normalize(asks)
     df2["symbol"] = quote["symbol"]
     df2["type"] = "ask"
 
-    df3 = pd.io.json.json_normalize(bids)
+    df3 = json_normalize(bids)
     df3["symbol"] = quote["symbol"]
     df3["type"] = "bid"
 
-    df4 = pd.io.json.json_normalize(trades)
+    df4 = json_normalize(trades)
     df4["symbol"] = quote["symbol"]
     df3["type"] = "trade"
 
@@ -163,7 +164,7 @@ def delayedQuote(symbol, token="", version="", filter=""):
 
 @wraps(delayedQuote)
 def delayedQuoteDF(symbol, token="", version="", filter=""):
-    df = pd.io.json.json_normalize(delayedQuote(symbol, token, version, filter))
+    df = json_normalize(delayedQuote(symbol, token, version, filter))
     _toDatetime(df)
     _reindex(df, "symbol")
     return df
@@ -258,7 +259,7 @@ def ohlc(symbol, token="", version="", filter=""):
 def ohlcDF(symbol, token="", version="", filter=""):
     o = ohlc(symbol, token, version, filter)
     if o:
-        df = pd.io.json.json_normalize(o)
+        df = json_normalize(o)
         _toDatetime(df)
     else:
         df = pd.DataFrame()
@@ -289,7 +290,7 @@ def yesterday(symbol, token="", version="", filter=""):
 def yesterdayDF(symbol, token="", version="", filter=""):
     y = yesterday(symbol, token, version, filter)
     if y:
-        df = pd.io.json.json_normalize(y)
+        df = json_normalize(y)
         _toDatetime(df)
         _reindex(df, "symbol")
     else:
@@ -318,7 +319,7 @@ def price(symbol, token="", version="", filter=""):
 
 @wraps(price)
 def priceDF(symbol, token="", version="", filter=""):
-    df = pd.io.json.json_normalize({"price": price(symbol, token, version, filter)})
+    df = json_normalize({"price": price(symbol, token, version, filter)})
     _toDatetime(df)
     return df
 
@@ -347,7 +348,7 @@ def quote(symbol, token="", version="", filter=""):
 def quoteDF(symbol, token="", version="", filter=""):
     q = quote(symbol, token, version, filter)
     if q:
-        df = pd.io.json.json_normalize(q)
+        df = json_normalize(q)
         _toDatetime(df)
         _reindex(df, "symbol")
     else:

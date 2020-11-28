@@ -849,3 +849,9 @@ def _interval(**temporal_args):
 def _requireSecret(token):
     if not token.startswith("sk"):
         raise PyEXception("Requires secret token!")
+
+
+if pd.__version__ > "1.":
+    json_normalize = pd.json_normalize
+else:
+    json_normalize = pd.io.json.json_normalize
