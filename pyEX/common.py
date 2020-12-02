@@ -863,7 +863,10 @@ def _requireSecret(token):
         raise PyEXception("Requires secret token!")
 
 
-if pd.__version__ > "1.":
-    json_normalize = pd.json_normalize
-else:
+try:
+    if pd.__version__ > "1.":
+        json_normalize = pd.json_normalize
+    else:
+        json_normalize = pd.io.json.json_normalize
+except (TypeError, AttributeError):
     json_normalize = pd.io.json.json_normalize
