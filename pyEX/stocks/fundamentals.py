@@ -235,7 +235,7 @@ def financialsDF(symbol, period="quarter", token="", version="", filter=""):
 def fundamentals(symbol, period="quarter", token="", version="", filter=""):
     """Pulls fundamentals data.
 
-    # TODO not released yet https://iexcloud.io/docs/api/#fundamentals
+    https://iexcloud.io/docs/api/#advanced-fundamentals
     Updates at 8am, 9am UTC daily
 
     Args:
