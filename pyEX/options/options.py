@@ -64,5 +64,5 @@ def options(symbol, expiration, side="", token="", version="", filter=""):
 def optionsDF(symbol, expiration, side="", token="", version="", filter=""):
     p = options(symbol, expiration, side, token, version, filter)
     df = pd.DataFrame(p)
-    _toDatetime(df)
+    _toDatetime(df, tcols=["date"])
     return df
