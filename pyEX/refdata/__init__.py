@@ -23,6 +23,8 @@ from .symbols import (
     fxSymbolsList,
     optionsSymbolsList,
     cryptoSymbolsList,
+    isinLookup,
+    isinLookupDF,
 )
 from .refdata import (
     corporateActions,

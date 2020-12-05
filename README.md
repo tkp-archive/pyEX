@@ -468,6 +468,8 @@ Currently, the following methods are implemented:
 - [exchangesDF](https://iexcloud.io/docs/api/#u-s-exchanges)
 - [holidays](https://iexcloud.io/docs/api/#u-s-holidays-and-trading-dates)
 - [holidaysDF](https://iexcloud.io/docs/api/#u-s-holidays-and-trading-dates)
+- [isinLookup](https://iexcloud.io/docs/api/#isin-mapping)
+- [isinLookupDF](https://iexcloud.io/docs/api/#isin-mapping)
 
 ### Other Reference
 - corporateActions
