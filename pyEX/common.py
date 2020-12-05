@@ -138,27 +138,28 @@ _BATCH_TYPES = [
 ]
 
 _STANDARD_DATE_FIELDS = [
-    "date",
-    "EPSReportDate",
-    "fiscalEndDate",
-    "exDate",
-    "declaredDate",
-    "paymentDate",
-    "recordDate",
-    "reportDate",
-    "datetime",
-    "expectedDate",
-    "latestTime",
-    "DailyListTimestamp",
-    "RecordUpdateTime",
-    "settlementDate",
-    "lastUpdated",
-    "processedTime",
-    "expirationDate",
-    "startDate",
-    "endDate",
     "consensusEndDate",
     "consensusStartDate",
+    "DailyListTimestamp",
+    "date",
+    "datetime",
+    "declaredDate",
+    "EPSReportDate",
+    "endDate",
+    "exDate",
+    "expectedDate",
+    "expirationDate",
+    "fiscalEndDate",
+    "latestTime",
+    "lastTradeDate",
+    "lastUpdated",
+    "paymentDate",
+    "processedTime",
+    "recordDate",
+    "RecordUpdateTime",
+    "reportDate",
+    "settlementDate",
+    "startDate",
 ]
 
 _STANDARD_TIME_FIELDS = [
@@ -166,23 +167,24 @@ _STANDARD_TIME_FIELDS = [
     "close.time",
     "delayedPriceTime",
     "extendedPriceTime",
+    "highTime",
+    "iexCloseTime",
     "iexLastUpdated",
+    "iexOpenTime",
+    "lastTradeTime",
+    "lastUpdated",
     "latestTime",
+    "latestUpdate",
+    "lowTime",
+    "oddLotDelayedPriceTime",
     "openTime",
     "open.time",
     "processedTime",
+    "report_date",
+    "reportDate",
     "time",
     "timestamp",
-    "lastUpdated",
-    "reportDate",
-    "report_date",
-    "iexOpenTime",
-    "iexCloseTime",
-    "lastTradeTime",
-    "highTime",
-    "lowTime",
-    "latestUpdate",
-    "oddLotDelayedPriceTime",
+    "updated",
 ]
 
 _INDICATORS = [
@@ -794,8 +796,15 @@ def _reindex(df, col):
 
 def _toDatetime(df, cols=None, tcols=None):
     """internal"""
-    cols = cols if cols is not None else _STANDARD_DATE_FIELDS
-    tcols = tcols if tcols is not None else _STANDARD_TIME_FIELDS
+    if not isinstance(cols, list):
+        cols = [cols]
+    if not isinstance(tcols, list):
+        tcols = [tcols]
+
+    cols = cols + _STANDARD_DATE_FIELDS if cols is not None else _STANDARD_DATE_FIELDS
+    tcols = (
+        tcols + _STANDARD_TIME_FIELDS if tcols is not None else _STANDARD_TIME_FIELDS
+    )
 
     for col in cols:
         if col in df.columns:
