@@ -276,3 +276,25 @@ def optionsSymbolsList(token="", version=""):
 @wraps(cryptoSymbols)
 def cryptoSymbolsList(token="", version=""):
     return [x["symbol"] for x in cryptoSymbols(token, version, filter="symbol")]
+
+
+def isinLookup(isin, token="", version=""):
+    """This call returns an array of symbols that IEX Cloud supports for API calls.
+
+    https://iexcloud.io/docs/api/#isin-mapping
+    8am, 9am, 12pm, 1pm UTC daily
+
+    Args:
+        isin (str): isin to lookup
+        token (str): Access token
+        version (str): API version
+
+    Returns:
+        dict or DataFrame or list: result
+    """
+    return _getJson("ref-data/isin?isin={}".format(isin), token, version)
+
+
+@wraps(isinLookup)
+def isinLookupDF(isin, token="", version=""):
+    return pd.DataFrame(isinLookup(isin=isin, token=token, version=version))
