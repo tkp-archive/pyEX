@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import pandas as pd
 from functools import wraps
-from ..common import _getJson, _dateRange, _strOrDate, _toDatetime
+from ..common import _getJson, _dateRange, _strOrDate, _toDatetime, json_normalize
 
 
 def timeSeriesInventory(token="", version=""):
@@ -18,7 +17,7 @@ def timeSeriesInventoryDF(token="", version=""):
     Returns:
         result (DataFrame)
     """
-    return pd.io.json.json_normalize(timeSeriesInventory(token=token, version=version))
+    return json_normalize(timeSeriesInventory(token=token, version=version))
 
 
 def timeSeries(
@@ -128,7 +127,7 @@ def timeSeries(
 
 @wraps(timeSeries)
 def timeSeriesDF(*args, **kwargs):
-    df = pd.io.json.json_normalize(timeSeries(*args, **kwargs))
+    df = json_normalize(timeSeries(*args, **kwargs))
     _toDatetime(df)
     return df
 

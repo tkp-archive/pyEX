@@ -16,6 +16,7 @@ from ..common import (
     _INDICATORS,
     _TIMEFRAME_CHART,
     _INDICATOR_RETURNS,
+    json_normalize,
 )
 
 
@@ -42,7 +43,7 @@ def advancedStats(symbol, token="", version="", filter=""):
 @wraps(advancedStats)
 def advancedStatsDF(symbol, token="", version="", filter=""):
     val = advancedStats(symbol, token, version, filter)
-    df = pd.io.json.json_normalize(val)
+    df = json_normalize(val)
     _toDatetime(df)
     return df
 
@@ -72,7 +73,7 @@ def analystRecommendations(symbol, token="", version="", filter=""):
 @wraps(analystRecommendations)
 def analystRecommendationsDF(symbol, token="", version="", filter=""):
     val = analystRecommendations(symbol, token, version, filter)
-    df = pd.io.json.json_normalize(val)
+    df = json_normalize(val)
     _toDatetime(df)
     return df
 
@@ -107,7 +108,7 @@ def estimates(symbol, period="quarter", last=1, token="", version="", filter="")
 def _estimatesToDF(f):
     """internal"""
     if f:
-        df = pd.io.json.json_normalize(f, "estimates", "symbol")
+        df = json_normalize(f, "estimates", "symbol")
         _toDatetime(df)
         _reindex(df, "fiscalEndDate")
     else:
@@ -241,7 +242,7 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
 def _statsToDF(s):
     """internal"""
     if s:
-        df = pd.io.json.json_normalize(s)
+        df = json_normalize(s)
         _toDatetime(df)
         _reindex(df, "symbol")
     else:
@@ -277,7 +278,7 @@ def priceTarget(symbol, token="", version="", filter=""):
 
 @wraps(priceTarget)
 def priceTargetDF(symbol, token="", version="", filter=""):
-    df = pd.io.json.json_normalize(priceTarget(symbol, token, version, filter))
+    df = json_normalize(priceTarget(symbol, token, version, filter))
     _toDatetime(df)
     return df
 

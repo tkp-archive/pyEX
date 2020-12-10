@@ -8,6 +8,7 @@ from ..common import (
     _strOrDate,
     _reindex,
     _toDatetime,
+    json_normalize,
 )
 
 
@@ -106,6 +107,6 @@ def ceoCompensation(symbol, token="", version="", filter=""):
 @wraps(ceoCompensation)
 def ceoCompensationDF(symbol, token="", version="", filter=""):
     ret = ceoCompensation(symbol, token, version, filter)
-    df = pd.io.json.json_normalize(ret)
+    df = json_normalize(ret)
     _toDatetime(df)
     return df

@@ -5,7 +5,15 @@ from functools import wraps
 from IPython.display import Image as ImageI
 from io import BytesIO
 from PIL import Image as ImageP
-from ..common import _expire, _getJson, _raiseIfNotStr, _reindex, _toDatetime, _UTC
+from ..common import (
+    _expire,
+    _getJson,
+    _raiseIfNotStr,
+    _reindex,
+    _toDatetime,
+    _UTC,
+    json_normalize,
+)
 
 
 @_expire(hour=4, tz=_UTC)
@@ -30,7 +38,7 @@ def company(symbol, token="", version="", filter=""):
 
 def _companyToDF(c, token="", version="", filter=""):
     """internal"""
-    df = pd.io.json.json_normalize(c)
+    df = json_normalize(c)
     _toDatetime(df)
     _reindex(df, "symbol")
     return df

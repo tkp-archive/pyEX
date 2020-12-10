@@ -10,6 +10,7 @@ from ..common import (
     _strOrDate,
     _toDatetime,
     _BATCH_TYPES,
+    json_normalize,
 )
 from .fundamentals import _dividendsToDF, _earningsToDF, _financialsToDF, _splitsToDF
 from .news import _newsToDF
@@ -104,7 +105,7 @@ def batchDF(
 
     if isinstance(symbols, str):
         for field in x.keys():
-            ret[field] = _MAPPING.get(field, pd.io.json.json_normalize)(x[field])
+            ret[field] = _MAPPING.get(field, json_normalize)(x[field])
     else:
         for symbol in x.keys():
             for field in x[symbol].keys():
@@ -112,7 +113,7 @@ def batchDF(
                     ret[field] = pd.DataFrame()
 
                 dat = x[symbol][field]
-                dat = _MAPPING.get(field, pd.io.json.json_normalize)(dat)
+                dat = _MAPPING.get(field, json_normalize)(dat)
                 dat["symbol"] = symbol
 
                 ret[field] = pd.concat([ret[field], dat], sort=True)

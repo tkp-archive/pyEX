@@ -138,25 +138,28 @@ _BATCH_TYPES = [
 ]
 
 _STANDARD_DATE_FIELDS = [
-    "date",
-    "EPSReportDate",
-    "fiscalEndDate",
-    "exDate",
-    "declaredDate",
-    "paymentDate",
-    "recordDate",
-    "reportDate",
-    "datetime",
-    "expectedDate",
-    "latestTime",
+    "consensusEndDate",
+    "consensusStartDate",
     "DailyListTimestamp",
-    "RecordUpdateTime",
-    "settlementDate",
-    "lastUpdated",
-    "processedTime",
-    "expirationDate",
-    "startDate",
+    "date",
+    "datetime",
+    "declaredDate",
+    "EPSReportDate",
     "endDate",
+    "exDate",
+    "expectedDate",
+    "expirationDate",
+    "fiscalEndDate",
+    "latestTime",
+    "lastTradeDate",
+    "lastUpdated",
+    "paymentDate",
+    "processedTime",
+    "recordDate",
+    "RecordUpdateTime",
+    "reportDate",
+    "settlementDate",
+    "startDate",
 ]
 
 _STANDARD_TIME_FIELDS = [
@@ -164,16 +167,24 @@ _STANDARD_TIME_FIELDS = [
     "close.time",
     "delayedPriceTime",
     "extendedPriceTime",
+    "highTime",
+    "iexCloseTime",
     "iexLastUpdated",
+    "iexOpenTime",
+    "lastTradeTime",
+    "lastUpdated",
     "latestTime",
+    "latestUpdate",
+    "lowTime",
+    "oddLotDelayedPriceTime",
     "openTime",
     "open.time",
     "processedTime",
+    "report_date",
+    "reportDate",
     "time",
     "timestamp",
-    "lastUpdated",
-    "reportDate",
-    "report_date",
+    "updated",
 ]
 
 _INDICATORS = [
@@ -785,8 +796,15 @@ def _reindex(df, col):
 
 def _toDatetime(df, cols=None, tcols=None):
     """internal"""
-    cols = cols if cols is not None else _STANDARD_DATE_FIELDS
-    tcols = tcols if tcols is not None else _STANDARD_TIME_FIELDS
+    if not isinstance(cols, list):
+        cols = [cols]
+    if not isinstance(tcols, list):
+        tcols = [tcols]
+
+    cols = cols + _STANDARD_DATE_FIELDS if cols is not None else _STANDARD_DATE_FIELDS
+    tcols = (
+        tcols + _STANDARD_TIME_FIELDS if tcols is not None else _STANDARD_TIME_FIELDS
+    )
 
     for col in cols:
         if col in df.columns:
@@ -815,6 +833,18 @@ def setProxy(proxies=None):
     _PYEX_PROXIES = proxies
 
 
+def overrideUrl(url):
+    """Override the default IEX Cloud url"""
+    global _URL_PREFIX2
+    _URL_PREFIX2 = url
+
+
+def overrideSSEUrl(url):
+    """Override the default IEX Cloud SSE url"""
+    global _SSE_URL_PREFIX
+    _SSE_URL_PREFIX = url
+
+
 def _expire(**temporal_args):
     if not os.path.exists(_PYEX_CACHE_FOLDER):
         os.makedirs(_PYEX_CACHE_FOLDER)
@@ -840,3 +870,12 @@ def _interval(**temporal_args):
 def _requireSecret(token):
     if not token.startswith("sk"):
         raise PyEXception("Requires secret token!")
+
+
+try:
+    if pd.__version__ > "1.":
+        json_normalize = pd.json_normalize
+    else:
+        json_normalize = pd.io.json.json_normalize
+except (TypeError, AttributeError):
+    json_normalize = pd.io.json.json_normalize

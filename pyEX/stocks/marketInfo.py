@@ -13,6 +13,7 @@ from ..common import (
     _toDatetime,
     _UTC,
     _EST,
+    json_normalize,
 )
 
 
@@ -80,7 +81,7 @@ def earningsTodayDF(token="", version="", filter=""):
         for d in ds:
             d["when"] = k
             z.extend(ds)
-    df = pd.io.json.json_normalize(z)
+    df = json_normalize(z)
 
     if not df.empty:
         df.drop_duplicates(inplace=True)
@@ -113,7 +114,7 @@ def ipoToday(token="", version="", filter=""):
 def ipoTodayDF(token="", version="", filter=""):
     val = ipoToday(token, version, filter)
     if val:
-        df = pd.io.json.json_normalize(val, "rawData")
+        df = json_normalize(val, "rawData")
         _toDatetime(df)
         _reindex(df, "symbol")
     else:
@@ -144,7 +145,7 @@ def ipoUpcoming(token="", version="", filter=""):
 def ipoUpcomingDF(token="", version="", filter=""):
     val = ipoUpcoming(token, version, filter)
     if val:
-        df = pd.io.json.json_normalize(val, "rawData")
+        df = json_normalize(val, "rawData")
         _toDatetime(df)
         _reindex(df, "symbol")
     else:
@@ -229,7 +230,7 @@ def marketOhlcDF(token="", version="", filter=""):
     for key in x:
         data.append(x[key])
         data[-1]["symbol"] = key
-    df = pd.io.json.json_normalize(data)
+    df = json_normalize(data)
     _toDatetime(df)
     _reindex(df, "symbol")
     return df
@@ -344,9 +345,17 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
     return _getJson("stock/market/upcoming-events", token, version, filter)
 
 
+def _upcomingToDF(upcoming):
+    dfs = {}
+    for k, v in upcoming.items():
+        dfs[k] = pd.DataFrame(v)
+        _toDatetime(dfs[k])
+    return dfs
+
+
 @wraps(upcomingEvents)
 def upcomingEventsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return _upcomingToDF(
         upcomingEvents(symbol=symbol, token=token, version=version, filter=filter)
     )
 
@@ -377,7 +386,7 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
 
 @wraps(upcomingEarnings)
 def upcomingEarningsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return json_normalize(
         upcomingEarnings(symbol=symbol, token=token, version=version, filter=filter)
     )
 
@@ -408,7 +417,7 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
 
 @wraps(upcomingDividends)
 def upcomingDividendsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return json_normalize(
         upcomingDividends(symbol=symbol, token=token, version=version, filter=filter)
     )
 
@@ -437,7 +446,7 @@ def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
 
 @wraps(upcomingSplits)
 def upcomingSplitsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return json_normalize(
         upcomingSplits(symbol=symbol, token=token, version=version, filter=filter)
     )
 
@@ -466,6 +475,6 @@ def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
 
 @wraps(upcomingIPOs)
 def upcomingIPOsDF(symbol="", token="", version="", filter=""):
-    return pd.io.json.json_normalize(
+    return json_normalize(
         upcomingIPOs(symbol=symbol, token=token, version=version, filter=filter)
     )

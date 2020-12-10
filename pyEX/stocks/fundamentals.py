@@ -12,6 +12,7 @@ from ..common import (
     _toDatetime,
     _checkPeriodLast,
     _UTC,
+    json_normalize,
 )
 
 
@@ -47,7 +48,7 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
 @wraps(balanceSheet)
 def balanceSheetDF(symbol, period="quarter", last=1, token="", version="", filter=""):
     val = balanceSheet(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "balancesheet", "symbol")
+    df = json_normalize(val, "balancesheet", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df
@@ -85,7 +86,7 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
 @wraps(cashFlow)
 def cashFlowDF(symbol, period="quarter", last=1, token="", version="", filter=""):
     val = cashFlow(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "cashflow", "symbol")
+    df = json_normalize(val, "cashflow", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     df.replace(to_replace=[None], value=np.nan, inplace=True)
@@ -171,7 +172,7 @@ def earnings(
 def _earningsToDF(e):
     """internal"""
     if e:
-        df = pd.io.json.json_normalize(e, "earnings", "symbol")
+        df = json_normalize(e, "earnings", "symbol")
         _toDatetime(df)
         _reindex(df, "EPSReportDate")
     else:
@@ -215,7 +216,7 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
 def _financialsToDF(f):
     """internal"""
     if f:
-        df = pd.io.json.json_normalize(f, "financials", "symbol")
+        df = json_normalize(f, "financials", "symbol")
         _toDatetime(df)
         _reindex(df, "reportDate")
     else:
@@ -227,6 +228,48 @@ def _financialsToDF(f):
 def financialsDF(symbol, period="quarter", token="", version="", filter=""):
     f = financials(symbol, period, token, version, filter)
     df = _financialsToDF(f)
+    return df
+
+
+@_expire(hour=8, tz=_UTC)
+def fundamentals(symbol, period="quarter", token="", version="", filter=""):
+    """Pulls fundamentals data.
+
+    https://iexcloud.io/docs/api/#advanced-fundamentals
+    Updates at 8am, 9am UTC daily
+
+    Args:
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _raiseIfNotStr(symbol)
+    _checkPeriodLast(period, 1)
+    return _getJson(
+        "stock/{}/fundamentals?period={}".format(symbol, period), token, version, filter
+    )
+
+
+def _fundamentalsToDF(f):
+    """internal"""
+    if f:
+        df = pd.io.json.json_normalize(f, "fundamentals", "symbol")
+        _toDatetime(df)
+        _reindex(df, "reportDate")
+    else:
+        df = pd.DataFrame()
+    return df
+
+
+@wraps(fundamentals)
+def fundamentalsDF(symbol, period="quarter", token="", version="", filter=""):
+    f = fundamentals(symbol, period, token, version, filter)
+    df = _fundamentalsToDF(f)
     return df
 
 
@@ -263,7 +306,7 @@ def incomeStatementDF(
     symbol, period="quarter", last=1, token="", version="", filter=""
 ):
     val = incomeStatement(symbol, period, last, token, version, filter)
-    df = pd.io.json.json_normalize(val, "income", "symbol")
+    df = json_normalize(val, "income", "symbol")
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df
