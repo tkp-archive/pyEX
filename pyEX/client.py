@@ -273,6 +273,8 @@ from .refdata import (
     internationalExchangesDF,
     sectors,
     sectorsDF,
+    search,
+    searchDF,
     tags,
     tagsDF,
 )
@@ -843,6 +845,8 @@ _INCLUDE_FUNCTIONS = [
     ("internationalExchangesDF", internationalExchangesDF),
     ("sectors", sectors),
     ("sectorsDF", sectorsDF),
+    ("search", search),
+    ("searchDF", searchDF),
     ("tags", tags),
     ("tagsDF", tagsDF),
     # Markets
