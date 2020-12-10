@@ -45,3 +45,4 @@ from .exchanges import (
     internationalExchangesDF,
 )
 from .sectors import sectors, sectorsDF, tags, tagsDF
+from .search import search, searchDF

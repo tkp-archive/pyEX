@@ -293,6 +293,8 @@ from .refdata import (
     internationalExchangesDF,
     sectors,
     sectorsDF,
+    search,
+    searchDF,
     tags,
     tagsDF,
 )
