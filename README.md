@@ -459,6 +459,8 @@ Currently, the following methods are implemented:
 - [otcSymbolsList](https://iexcloud.io/docs/api/#otc-symbols)
 - [sectors](https://iexcloud.io/docs/api/#sectors)
 - [sectorsDF](https://iexcloud.io/docs/api/#sectors)
+- [search](https://iexcloud.io/docs/api/#search)
+- [searchDF](https://iexcloud.io/docs/api/#search)
 - [symbols](https://iexcloud.io/docs/api/#symbols)
 - [symbolsDF](https://iexcloud.io/docs/api/#symbols)
 - [symbolsList](https://iexcloud.io/docs/api/#symbols)

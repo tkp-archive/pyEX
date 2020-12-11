@@ -70,24 +70,43 @@ def timeSeries(
         dict or DataFrame: result
 
     Date Ranges:
-        today           Returns data for today
-        yesterday       Returns data for yesterday
-        ytd             Returns data for the current year
-        last-week       Returns data for Sunday-Saturday last week
-        last-month      Returns data for the last month
-        last-quarter    Returns data for the last quarter
-        d               Use the short hand d to return a number of days. Example: 2d returns 2 days. If calendar=true, data is returned from today forward.
-        w               Use the short hand w to return a number of weeks. Example: 2w returns 2 weeks. If calendar=true, data is returned from today forward.
-        m               Use the short hand m to return a number of months. Example: 2m returns 2 months. If calendar=true, data is returned from today forward.
-        q               Use the short hand q to return a number of quarters. Example: 2q returns 2 quarters. If calendar=true, data is returned from today forward.
-        y               Use the short hand y to return a number of years. Example: 2y returns 2 years. If calendar=true, data is returned from today forward.
-        tomorrow        Calendar data for tomorrow. Requires calendar=true
-        this-week       Calendar data for Sunday-Saturday this week. Requires calendar=true
-        this-month      Calendar data for current month. Requires calendar=true
-        this-quarter    Calendar data for current quarter. Requires calendar=true
-        next-week       Calendar data for Sunday-Saturday next week. Requires calendar=true
-        next-month      Calendar data for next month. Requires calendar=true
-        next-quarter    Calendar data for next quarter. Requires calendar=true
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | today        | Returns data for today                                                                                                                     |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | yesterday    | Returns data for yesterday                                                                                                                 |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | ytd          | Returns data for the current year                                                                                                          |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | last-week    | Returns data for Sunday-Saturday last week                                                                                                 |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | last-month   | Returns data for the last month                                                                                                            |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | last-quarter | Returns data for the last quarter                                                                                                          |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | d            | Use the short hand d to return a number of days. Example: 2d returns 2 days. If calendar=true, data is returned from today forward.        |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | w            | Use the short hand w to return a number of weeks. Example: 2w returns 2 weeks. If calendar=true, data is returned from today forward.      |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | m            | Use the short hand m to return a number of months. Example: 2m returns 2 months. If calendar=true, data is returned from today forward.    |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | q            | Use the short hand q to return a number of quarters. Example: 2q returns 2 quarters. If calendar=true, data is returned from today forward.|
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | y            | Use the short hand y to return a number of years. Example: 2y returns 2 years. If calendar=true, data is returned from today forward.      |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | tomorrow     | Calendar data for tomorrow. Requires calendar=true                                                                                         |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | this-week    | Calendar data for Sunday-Saturday this week. Requires calendar=true                                                                        |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | this-month   | Calendar data for current month. Requires calendar=true                                                                                    |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | this-quarter | Calendar data for current quarter. Requires calendar=true                                                                                  |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | next-week    | Calendar data for Sunday-Saturday next week. Requires calendar=true                                                                        |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | next-month   | Calendar data for next month. Requires calendar=true                                                                                       |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+        | next-quarter | Calendar data for next quarter. Requires calendar=true                                                                                     |
+        +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
     """
     if not id:
         return timeSeriesInventory(token=token, version=version)
