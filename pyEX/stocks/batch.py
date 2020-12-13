@@ -34,7 +34,7 @@ _MAPPING = {
 
 
 def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filter=""):
-    """Batch several data requests into one invocation
+    """Batch several data requests into one invocation. If no `fields` passed in, will use first ten eligible types defined in pyEX.common._BATCH_TYPES
 
     https://iexcloud.io/docs/api/#batch-requests
 
