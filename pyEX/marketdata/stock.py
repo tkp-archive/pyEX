@@ -20,7 +20,7 @@ def _baseSSE(symbols=None, on_data=None, token="", version="", name=""):
     """https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
-        symbols (str): Tickers to request
+        symbols (str): Tickers to request, if None then firehose
         on_data (function): Callback on data
         token (str): Access token
         version (str): API version
@@ -33,7 +33,7 @@ async def _baseSSEAsync(symbols=None, on_data=None, token="", version="", name="
     """https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
-        symbols (str): Tickers to request
+        symbols (str): Tickers to request, if None then firehose
         on_data (function): Callback on data
         token (str): Access token
         version (str): API version
