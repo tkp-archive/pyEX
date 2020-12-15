@@ -12,6 +12,7 @@ from ..common import (
     _toDatetime,
     _EST,
     json_normalize,
+    _quoteSymbols,
 )
 
 
@@ -31,6 +32,7 @@ def book(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/book", token, version, filter)
 
 
@@ -91,6 +93,7 @@ def chart(symbol, timeframe="1m", date=None, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if timeframe is not None and timeframe != "1d":
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception("Range must be in {}".format(_TIMEFRAME_CHART))
@@ -159,6 +162,7 @@ def delayedQuote(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/delayed-quote", token, version, filter)
 
 
@@ -189,6 +193,7 @@ def intraday(symbol, date="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if date:
         date = _strOrDate(date)
         return _getJson(
@@ -225,6 +230,7 @@ def largestTrades(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/largest-trades", token, version, filter)
 
 
@@ -252,6 +258,7 @@ def ohlc(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/ohlc", token, version, filter)
 
 
@@ -283,6 +290,7 @@ def yesterday(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/previous", token, version, filter)
 
 
@@ -314,6 +322,7 @@ def price(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/price", token, version, filter)
 
 
@@ -341,6 +350,7 @@ def quote(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/quote", token, version, filter)
 
 
@@ -383,6 +393,7 @@ def spread(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/effective-spread", token, version, filter)
 
 
@@ -412,6 +423,7 @@ def volumeByVenue(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/volume-by-venue", token, version, filter)
 
 

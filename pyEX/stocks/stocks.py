@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from functools import wraps
-from ..common import _expire, _getJson, _raiseIfNotStr, _strOrDate, _toDatetime, _EST
+from ..common import (
+    _expire,
+    _getJson,
+    _raiseIfNotStr,
+    _strOrDate,
+    _toDatetime,
+    _EST,
+    _quoteSymbols,
+)
 
 
 def threshold(date=None, token="", version="", filter=""):
@@ -53,6 +61,7 @@ def shortInterest(symbol, date=None, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if date:
         date = _strOrDate(date)
         return _getJson(

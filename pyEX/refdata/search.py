@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from functools import wraps
-from ..common import _interval, _getJson
+from ..common import _interval, _getJson, _quoteSymbols
 
 
 @_interval(hours=24)  # TODO make this smaller?
@@ -19,6 +19,7 @@ def search(fragment, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
+    fragment = _quoteSymbols(fragment)
     return _getJson("search/{}".format(fragment), token, version, filter)
 
 

@@ -13,6 +13,7 @@ from ..common import (
     _checkPeriodLast,
     _UTC,
     json_normalize,
+    _quoteSymbols,
 )
 
 
@@ -36,6 +37,7 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     return _getJson(
         "stock/{}/balance-sheet?period={}&last={}".format(symbol, period, last),
@@ -74,6 +76,7 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     return _getJson(
         "stock/{}/cash-flow?period={}&last={}".format(symbol, period, last),
@@ -110,6 +113,7 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
     return _getJson(
@@ -153,6 +157,7 @@ def earnings(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     if not field:
         return _getJson(
@@ -207,6 +212,7 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, 1)
     return _getJson(
         "stock/{}/financials?period={}".format(symbol, period), token, version, filter
@@ -249,6 +255,7 @@ def fundamentals(symbol, period="quarter", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, 1)
     return _getJson(
         "stock/{}/fundamentals?period={}".format(symbol, period), token, version, filter
@@ -292,6 +299,7 @@ def incomeStatement(symbol, period="quarter", last=1, token="", version="", filt
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     return _getJson(
         "stock/{}/income?period={}&last={}".format(symbol, period, last),
@@ -329,6 +337,7 @@ def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
     return _getJson("stock/" + symbol + "/splits/" + timeframe, token, version, filter)

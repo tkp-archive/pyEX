@@ -14,6 +14,7 @@ from ..common import (
     _UTC,
     _EST,
     json_normalize,
+    _quoteSymbols,
 )
 
 
@@ -340,6 +341,7 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
 
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if symbol:
         return _getJson("stock/" + symbol + "/upcoming-events", token, version, filter)
     return _getJson("stock/market/upcoming-events", token, version, filter)
@@ -377,6 +379,7 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
 
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if symbol:
         return _getJson(
             "stock/" + symbol + "/upcoming-earnings", token, version, filter
@@ -408,6 +411,7 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
 
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if symbol:
         return _getJson(
             "stock/" + symbol + "/upcoming-dividends", token, version, filter
@@ -439,6 +443,7 @@ def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
 
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if symbol:
         return _getJson("stock/" + symbol + "/upcoming-splits", token, version, filter)
     return _getJson("stock/market/upcoming-splits", token, version, filter)
@@ -468,6 +473,7 @@ def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
 
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if symbol:
         return _getJson("stock/" + symbol + "/upcoming-ipos", token, version, filter)
     return _getJson("stock/market/upcoming-ipos", token, version, filter)

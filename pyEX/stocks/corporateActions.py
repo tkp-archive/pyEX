@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 import pandas as pd
-from ..common import _getJson, _raiseIfNotStr
+from ..common import _getJson, _raiseIfNotStr, _quoteSymbols
 
 
 def bonusIssue(symbol="", refid="", token="", version="", filter=""):
@@ -22,6 +22,7 @@ def bonusIssue(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_bonus/{}/{}".format(symbol, refid),
@@ -59,6 +60,7 @@ def distribution(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_distribution/{}/{}".format(symbol, refid),
@@ -105,6 +107,7 @@ def dividends(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_dividends/{}/{}".format(symbol, refid),
@@ -142,6 +145,7 @@ def returnOfCapital(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_return_of_capital/{}/{}".format(symbol, refid),
@@ -182,6 +186,7 @@ def rightsIssue(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_rights/{}/{}".format(symbol, refid),
@@ -219,6 +224,7 @@ def rightToPurchase(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_right_to_purchase/{}/{}".format(symbol, refid),
@@ -259,6 +265,7 @@ def securityReclassification(symbol="", refid="", token="", version="", filter="
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_security_reclassification/{}/{}".format(
@@ -303,6 +310,7 @@ def securitySwap(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_security_swap/{}/{}".format(symbol, refid),
@@ -343,6 +351,7 @@ def spinoff(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_spinoff/{}/{}".format(symbol, refid),
@@ -380,6 +389,7 @@ def splits(symbol="", refid="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if refid and symbol:
         return _getJson(
             "time-series/advanced_splits/{}/{}".format(symbol, refid),

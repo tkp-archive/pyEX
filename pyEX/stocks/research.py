@@ -17,6 +17,7 @@ from ..common import (
     _TIMEFRAME_CHART,
     _INDICATOR_RETURNS,
     json_normalize,
+    _quoteSymbols,
 )
 
 
@@ -37,6 +38,7 @@ def advancedStats(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/advanced-stats", token, version, filter)
 
 
@@ -65,6 +67,7 @@ def analystRecommendations(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson(
         "stock/" + symbol + "/recommendation-trends", token, version, filter
     )
@@ -96,6 +99,7 @@ def estimates(symbol, period="quarter", last=1, token="", version="", filter="")
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     return _getJson(
         "stock/{}/estimates?period={}&last={}".format(symbol, period, last),
@@ -141,6 +145,7 @@ def fundOwnership(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/fund-ownership", token, version, filter)
 
 
@@ -169,6 +174,7 @@ def institutionalOwnership(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson(
         "stock/" + symbol + "/institutional-ownership", token, version, filter
     )
@@ -230,6 +236,7 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if stat:
         if stat not in _KEY_STATS:
             raise PyEXception("Stat must be in {}".format(_KEY_STATS))
@@ -273,6 +280,7 @@ def priceTarget(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/price-target", token, version, filter)
 
 
@@ -428,6 +436,7 @@ def technicals(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     if indicator not in _INDICATORS:
         raise PyEXception("indicator must be in {}".format(_INDICATORS))
 

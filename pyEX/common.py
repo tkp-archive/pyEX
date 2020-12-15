@@ -12,11 +12,8 @@ from six import string_types
 from socketIO_client_nexus import SocketIO, BaseNamespace
 from sseclient import SSEClient
 from temporalcache import expire, interval
+from urllib.parse import urlparse, quote
 
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
 
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX2 = "https://cloud.iexapis.com/{version}/"
@@ -870,6 +867,15 @@ def _interval(**temporal_args):
 def _requireSecret(token):
     if not token.startswith("sk"):
         raise PyEXception("Requires secret token!")
+
+
+def _quoteSymbols(symbols):
+    """urlquote a potentially comma-separate list of symbols"""
+    if isinstance(symbols, list) or "," not in symbols:
+        # comma separated, quote separately
+        return ",".join(quote(symbol) for symbol in symbols.split(","))
+    # not comma separated, just quote
+    return quote(symbols)
 
 
 try:

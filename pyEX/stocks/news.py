@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from functools import wraps
-from ..common import _getJson, _raiseIfNotStr, _reindex, _toDatetime
+from ..common import _getJson, _raiseIfNotStr, _reindex, _toDatetime, _quoteSymbols
 
 
 def news(symbol, count=10, token="", version="", filter=""):
@@ -22,6 +22,7 @@ def news(symbol, count=10, token="", version="", filter=""):
         dict: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson(
         "stock/" + symbol + "/news/last/" + str(count), token, version, filter
     )
