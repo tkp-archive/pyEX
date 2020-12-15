@@ -600,6 +600,12 @@ Currently, the following methods are implemented:
 ### FX
 - fxSSE
 - fxSSEAsync
+- forex1SecondSSE
+- forex1SecondSSEAsync
+- forex5SecondSSE
+- forex5SecondSSEAsync
+- forex1MinuteSSE
+- forex1MinuteSSEAsync
 
 ### Crypto
 - cryptoBookSSE
