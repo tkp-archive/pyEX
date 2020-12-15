@@ -38,7 +38,16 @@ from .marketdata.cryptocurrency import (
     cryptoQuotesSSE,
     cryptoQuotesSSEAsync,
 )
-from .marketdata.fx import fxSSE, fxSSEAsync
+from .marketdata.fx import (
+    fxSSE,
+    fxSSEAsync,
+    forex1SecondSSE,
+    forex1SecondSSEAsync,
+    forex5SecondSSE,
+    forex5SecondSSEAsync,
+    forex1MinuteSSE,
+    forex1MinuteSSEAsync,
+)
 from .marketdata.news import newsSSE, newsSSEAsync
 from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync
 from .marketdata.sse import (
@@ -1093,6 +1102,12 @@ _INCLUDE_FUNCTIONS = [
     # FXSSE
     ("fxSSE", fxSSE),
     ("fxSSEAsync", fxSSEAsync),
+    ("forex1SecondSSE", forex1SecondSSE),
+    ("forex1SecondSSEAsync", forex1SecondSSEAsync),
+    ("forex5SecondSSE", forex5SecondSSE),
+    ("forex5SecondSSEAsync", forex5SecondSSEAsync),
+    ("forex1MinuteSSE", forex1MinuteSSE),
+    ("forex1MinuteSSEAsync", forex1MinuteSSEAsync),
     # NewsSSE
     ("newsSSE", newsSSE),
     ("newsSSEAsync", newsSSEAsync),
