@@ -12,7 +12,6 @@ from ..common import (
     _toDatetime,
     _checkPeriodLast,
     _UTC,
-    json_normalize,
 )
 
 
@@ -42,13 +41,12 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
         token,
         version,
         filter,
-    )
+    ).get("balancesheet", [])
 
 
 @wraps(balanceSheet)
 def balanceSheetDF(symbol, period="quarter", last=1, token="", version="", filter=""):
-    val = balanceSheet(symbol, period, last, token, version, filter)
-    df = json_normalize(val, "balancesheet", "symbol")
+    df = pd.DataFrame(balanceSheet(symbol, period, last, token, version, filter))
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df
@@ -80,13 +78,12 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
         token,
         version,
         filter,
-    )
+    ).get("cashflow", [])
 
 
 @wraps(cashFlow)
 def cashFlowDF(symbol, period="quarter", last=1, token="", version="", filter=""):
-    val = cashFlow(symbol, period, last, token, version, filter)
-    df = json_normalize(val, "cashflow", "symbol")
+    df = pd.DataFrame(cashFlow(symbol, period, last, token, version, filter))
     _toDatetime(df)
     _reindex(df, "reportDate")
     df.replace(to_replace=[None], value=np.nan, inplace=True)
@@ -166,13 +163,13 @@ def earnings(
         token,
         version,
         filter,
-    )
+    ).get("earnings", [])
 
 
 def _earningsToDF(e):
     """internal"""
     if e:
-        df = json_normalize(e, "earnings", "symbol")
+        df = pd.DataFrame(e)
         _toDatetime(df)
         _reindex(df, "EPSReportDate")
     else:
@@ -210,13 +207,13 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
     _checkPeriodLast(period, 1)
     return _getJson(
         "stock/{}/financials?period={}".format(symbol, period), token, version, filter
-    )
+    ).get("financials", [])
 
 
 def _financialsToDF(f):
     """internal"""
     if f:
-        df = json_normalize(f, "financials", "symbol")
+        df = pd.DataFrame(f)
         _toDatetime(df)
         _reindex(df, "reportDate")
     else:
@@ -252,13 +249,13 @@ def fundamentals(symbol, period="quarter", token="", version="", filter=""):
     _checkPeriodLast(period, 1)
     return _getJson(
         "stock/{}/fundamentals?period={}".format(symbol, period), token, version, filter
-    )
+    ).get("fundamentals", [])
 
 
 def _fundamentalsToDF(f):
     """internal"""
     if f:
-        df = pd.io.json.json_normalize(f, "fundamentals", "symbol")
+        df = pd.DataFrame(f)
         _toDatetime(df)
         _reindex(df, "reportDate")
     else:
@@ -298,15 +295,14 @@ def incomeStatement(symbol, period="quarter", last=1, token="", version="", filt
         token,
         version,
         filter,
-    )
+    ).get("income", [])
 
 
 @wraps(incomeStatement)
 def incomeStatementDF(
     symbol, period="quarter", last=1, token="", version="", filter=""
 ):
-    val = incomeStatement(symbol, period, last, token, version, filter)
-    df = json_normalize(val, "income", "symbol")
+    df = pd.DataFrame(incomeStatement(symbol, period, last, token, version, filter))
     _toDatetime(df)
     _reindex(df, "reportDate")
     return df

@@ -39,6 +39,8 @@ from .fundamentals import (
     earningsDF,
     financials,
     financialsDF,
+    fundamentals,
+    fundamentalsDF,
     incomeStatement,
     incomeStatementDF,
     stockSplits,

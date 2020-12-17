@@ -373,6 +373,8 @@ from .stocks import (
     financialsDF,
     fundOwnership,
     fundOwnershipDF,
+    fundamentals,
+    fundamentalsDF,
     incomeStatement,
     incomeStatementDF,
     insiderRoster,
