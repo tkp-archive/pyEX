@@ -37,6 +37,7 @@ def timeSeries(
     token="",
     version="",
     filter="",
+    **extra_params,
 ):
     """This is a meeting where company executives provide information about the company’s performance and its future prospects.
     6am , 10am , 2pm , 6pm and 9pm daily
@@ -122,8 +123,10 @@ def timeSeries(
         range = _dateRange(range)
         base_url += "range={}&".format(range)
 
-    base_url += "calendar={}&".format(str(calendar))
-    base_url += "limit={}&".format(str(limit))
+    # TODO https://github.com/timkpaine/pyEX/issues/164
+    # base_url += "calendar={}&".format(str(calendar))
+    if not last:
+        base_url += "limit={}&".format(str(limit))
 
     if subattribute:
         base_url += "subattribute={}&".format(subattribute)
@@ -140,7 +143,9 @@ def timeSeries(
         base_url += "last={}&".format(str(last))
     if first:
         base_url += "first={}&".format(str(first))
-
+    if extra_params:
+        base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
+    print(base_url)
     return _getJson(base_url, token, version, filter)
 
 
