@@ -145,7 +145,7 @@ def timeSeries(
         base_url += "first={}&".format(str(first))
     if extra_params:
         base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
-    print(base_url)
+
     return _getJson(base_url, token, version, filter)
 
 
