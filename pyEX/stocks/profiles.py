@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import pandas as pd
+from deprecation import deprecated
 from functools import wraps
 from IPython.display import Image as ImageI
 from io import BytesIO
@@ -243,6 +244,7 @@ def peersDF(symbol, token="", version="", filter=""):
 
 
 @_expire(hour=8, tz=_UTC)
+@deprecated(details="Deprecated: IEX Cloud status unkown")
 def relevant(symbol, token="", version="", filter=""):
     """Same as peers
 
@@ -262,6 +264,7 @@ def relevant(symbol, token="", version="", filter=""):
 
 
 @wraps(relevant)
+@deprecated(details="Deprecated: IEX Cloud status unkown")
 def relevantDF(symbol, token="", version="", filter=""):
     df = pd.DataFrame(relevant(symbol, token, version, filter))
     _toDatetime(df)

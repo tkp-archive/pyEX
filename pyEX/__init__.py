@@ -43,7 +43,16 @@ from .marketdata.cryptocurrency import (
     cryptoQuotesSSE,
     cryptoQuotesSSEAsync,
 )
-from .marketdata.fx import fxSSE
+from .marketdata.fx import (
+    fxSSE,
+    fxSSEAsync,
+    forex1SecondSSE,
+    forex1SecondSSEAsync,
+    forex5SecondSSE,
+    forex5SecondSSEAsync,
+    forex1MinuteSSE,
+    forex1MinuteSSEAsync,
+)
 from .marketdata.news import newsSSE, newsSSEAsync
 from .marketdata.sentiment import sentimentSSE, sentimentSSEAsync
 from .marketdata.sse import (
@@ -364,6 +373,8 @@ from .stocks import (
     financialsDF,
     fundOwnership,
     fundOwnershipDF,
+    fundamentals,
+    fundamentalsDF,
     incomeStatement,
     incomeStatementDF,
     insiderRoster,

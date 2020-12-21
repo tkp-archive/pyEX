@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 import pandas as pd
-from ..common import _getJson, _raiseIfNotStr, _quoteSymbols
+from ..common import _raiseIfNotStr, _quoteSymbols, _timeseriesWrapper
+from .timeseries import timeSeries
 
 
-def bonusIssue(symbol="", refid="", token="", version="", filter=""):
+def bonusIssue(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Bonus Issue Obtain up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -18,31 +21,37 @@ def bonusIssue(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_bonus/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_bonus/{}".format(symbol), token, version, filter
-        )
-    return _getJson("time-series/advanced_bonus", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_bonus",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(bonusIssue)
-def bonusIssueDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(bonusIssue(symbol, refid, token, version, filter))
+def bonusIssueDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        bonusIssue(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def distribution(symbol="", refid="", token="", version="", filter=""):
+def distribution(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Distribution Obtain up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -56,34 +65,37 @@ def distribution(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_distribution/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_distribution/{}".format(symbol),
-            token,
-            version,
-            filter,
-        )
-    return _getJson("time-series/advanced_distribution", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_distribution",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(distribution)
-def distributionDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(distribution(symbol, refid, token, version, filter))
+def distributionDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        distribution(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def dividends(symbol="", refid="", token="", version="", filter=""):
+def dividends(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Obtain up-to-date and detailed information on all new dividend announcements, as well as 12+ years of historical dividend records. This endpoint covers over 39,000 US equities, mutual funds, ADRs, and ETFs.
     You’ll be provided with:
         Detailed information on both cash and stock dividends including record, payment, ex, and announce dates
@@ -103,31 +115,37 @@ def dividends(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_dividends/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_dividends/{}".format(symbol), token, version, filter
-        )
-    return _getJson("time-series/advanced_dividends", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_dividends",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(dividends)
-def dividendsDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(dividends(symbol, refid, token, version, filter))
+def dividendsDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        dividends(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def returnOfCapital(symbol="", refid="", token="", version="", filter=""):
+def returnOfCapital(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Return of capital up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -146,29 +164,30 @@ def returnOfCapital(symbol="", refid="", token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_return_of_capital/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_return_of_capital/{}".format(symbol),
-            token,
-            version,
-            filter,
-        )
-    return _getJson("time-series/advanced_return_of_capital", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_return_of_capital",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(returnOfCapital)
-def returnOfCapitalDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(returnOfCapital(symbol, refid, token, version, filter))
+def returnOfCapitalDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        returnOfCapital(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def rightsIssue(symbol="", refid="", token="", version="", filter=""):
+def rightsIssue(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Rights issue up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -182,31 +201,37 @@ def rightsIssue(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_rights/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_rights/{}".format(symbol), token, version, filter
-        )
-    return _getJson("time-series/advanced_rights", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_rights",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(rightsIssue)
-def rightsIssueDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(rightsIssue(symbol, refid, token, version, filter))
+def rightsIssueDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        rightsIssue(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def rightToPurchase(symbol="", refid="", token="", version="", filter=""):
+def rightToPurchase(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Right to purchase up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -220,34 +245,37 @@ def rightToPurchase(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_right_to_purchase/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_right_to_purchase/{}".format(symbol),
-            token,
-            version,
-            filter,
-        )
-    return _getJson("time-series/advanced_right_to_purchase", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_right_to_purchase",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(rightToPurchase)
-def rightToPurchaseDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(rightToPurchase(symbol, refid, token, version, filter))
+def rightToPurchaseDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        rightToPurchase(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def securityReclassification(symbol="", refid="", token="", version="", filter=""):
+def securityReclassification(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Security reclassification up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -261,38 +289,39 @@ def securityReclassification(symbol="", refid="", token="", version="", filter="
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_security_reclassification/{}/{}".format(
-                symbol, refid
-            ),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_security_reclassification/{}".format(symbol),
-            token,
-            version,
-            filter,
-        )
-    return _getJson(
-        "time-series/advanced_security_reclassification", token, version, filter
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_security_reclassification",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
     )
 
 
 @wraps(securityReclassification)
-def securityReclassificationDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(securityReclassification(symbol, refid, token, version, filter))
+def securityReclassificationDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        securityReclassification(
+            symbol, refid, token, version, filter, **timeseries_kwargs
+        )
+    )
 
 
-def securitySwap(symbol="", refid="", token="", version="", filter=""):
+def securitySwap(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
     """Security Swap up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -306,34 +335,35 @@ def securitySwap(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_security_swap/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_security_swap/{}".format(symbol),
-            token,
-            version,
-            filter,
-        )
-    return _getJson("time-series/advanced_security_swap", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_security_swap",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(securitySwap)
-def securitySwapDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(securitySwap(symbol, refid, token, version, filter))
+def securitySwapDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        securitySwap(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def spinoff(symbol="", refid="", token="", version="", filter=""):
+def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
     """Security spinoff up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -347,31 +377,35 @@ def spinoff(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_spinoff/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_spinoff/{}".format(symbol), token, version, filter
-        )
-    return _getJson("time-series/advanced_spinoff", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_spinoff",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(spinoff)
-def spinoffDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(spinoff(symbol, refid, token, version, filter))
+def spinoffDF(
+    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+):
+    return pd.DataFrame(
+        spinoff(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )
 
 
-def splits(symbol="", refid="", token="", version="", filter=""):
+def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
     """Security splits up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -385,25 +419,27 @@ def splits(symbol="", refid="", token="", version="", filter=""):
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
 
+        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if refid and symbol:
-        return _getJson(
-            "time-series/advanced_splits/{}/{}".format(symbol, refid),
-            token,
-            version,
-            filter,
-        )
-    elif symbol:
-        return _getJson(
-            "time-series/advanced_splits/{}".format(symbol), token, version, filter
-        )
-    return _getJson("time-series/advanced_splits", token, version, filter)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="advanced_splits",
+        key=symbol,
+        subkey=refid,
+        token=token,
+        version=version,
+        filter=filter,
+        **timeseries_kwargs
+    )
 
 
 @wraps(splits)
-def splitsDF(symbol="", refid="", token="", version="", filter=""):
-    return pd.DataFrame(splits(symbol, refid, token, version, filter))
+def splitsDF(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
+    return pd.DataFrame(
+        splits(symbol, refid, token, version, filter, **timeseries_kwargs)
+    )

@@ -878,6 +878,15 @@ def _quoteSymbols(symbols):
     return quote(symbols)
 
 
+def _timeseriesWrapper(kwargs, key=True, subkey=True):
+    if key:
+        if "key" in kwargs:
+            raise PyEXception("Cannot pass `key` kwarg to timeseries, already used")
+    if subkey:
+        if "subkey" in kwargs:
+            raise PyEXception("Cannot pass `subkey` kwarg to timeseries, already used")
+
+
 try:
     if pd.__version__ > "1.":
         json_normalize = pd.json_normalize
