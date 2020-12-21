@@ -2,7 +2,7 @@
 from functools import wraps
 import pandas as pd
 from .timeseries import timeSeries
-from ..common import _getJson, _raiseIfNotStr, _timeseriesWrapper
+from ..common import _raiseIfNotStr, _timeseriesWrapper
 
 
 def bonusIssue(
