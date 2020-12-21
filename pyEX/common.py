@@ -873,9 +873,9 @@ def _quoteSymbols(symbols):
     """urlquote a potentially comma-separate list of symbols"""
     if isinstance(symbols, list) or "," not in symbols:
         # comma separated, quote separately
-        return ",".join(quote(symbol) for symbol in symbols.split(","))
+        return ",".join(quote(symbol, safe='') for symbol in symbols.split(","))
     # not comma separated, just quote
-    return quote(symbols)
+    return quote(symbols, safe='')
 
 
 def _timeseriesWrapper(kwargs, key=True, subkey=True):
