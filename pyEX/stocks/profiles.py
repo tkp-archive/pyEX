@@ -14,6 +14,7 @@ from ..common import (
     _toDatetime,
     _UTC,
     json_normalize,
+    _quoteSymbols,
 )
 
 
@@ -34,6 +35,7 @@ def company(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/company", token, version, filter)
 
 
@@ -69,6 +71,7 @@ def insiderRoster(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/insider-roster", token, version, filter)
 
 
@@ -97,6 +100,7 @@ def insiderSummary(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/insider-summary", token, version, filter)
 
 
@@ -125,6 +129,7 @@ def insiderTransactions(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/insider-transactions", token, version, filter)
 
 
@@ -153,6 +158,7 @@ def logo(symbol, token="", version="", filter=""):
         dict: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/logo", token, version, filter)
 
 
@@ -173,6 +179,7 @@ def logoPNG(symbol, token="", version="", filter=""):
         image: result as png
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     response = requests.get(logo(symbol, token, version, filter)["url"])
     return ImageP.open(BytesIO(response.content))
 
@@ -194,6 +201,7 @@ def logoNotebook(symbol, token="", version="", filter=""):
         image: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     url = logo(symbol, token, version, filter)["url"]
     return ImageI(url=url)
 
@@ -215,6 +223,7 @@ def peers(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/peers", token, version, filter)
 
 
@@ -250,6 +259,7 @@ def relevant(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     return _getJson("stock/" + symbol + "/relevant", token, version, filter)
 
 

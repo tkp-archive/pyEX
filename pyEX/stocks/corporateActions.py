@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 import pandas as pd
+from ..common import _raiseIfNotStr, _quoteSymbols, _timeseriesWrapper
 from .timeseries import timeSeries
-from ..common import _raiseIfNotStr, _timeseriesWrapper
 
 
 def bonusIssue(
@@ -27,6 +27,7 @@ def bonusIssue(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_bonus",
@@ -70,6 +71,7 @@ def distribution(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_distribution",
@@ -119,6 +121,7 @@ def dividends(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_dividends",
@@ -160,6 +163,7 @@ def returnOfCapital(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_return_of_capital",
@@ -203,6 +207,7 @@ def rightsIssue(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_rights",
@@ -246,6 +251,7 @@ def rightToPurchase(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_right_to_purchase",
@@ -289,6 +295,7 @@ def securityReclassification(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_security_reclassification",
@@ -334,6 +341,7 @@ def securitySwap(
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_security_swap",
@@ -375,6 +383,7 @@ def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_k
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_spinoff",
@@ -416,6 +425,7 @@ def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kw
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
         id="advanced_splits",

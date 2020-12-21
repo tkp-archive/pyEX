@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
-from ..common import _getJson, _dateRange, _strOrDate, _toDatetime, json_normalize
+from ..common import (
+    _getJson,
+    _dateRange,
+    _strOrDate,
+    _toDatetime,
+    json_normalize,
+    _quoteSymbols,
+)
 
 
 def timeSeriesInventory(token="", version=""):
@@ -114,8 +121,10 @@ def timeSeries(
 
     base_url = "time-series/{}".format(id)
     if key:
+        key = _quoteSymbols(key)
         base_url += "/{}".format(key)
     if subkey:
+        subkey = _quoteSymbols(subkey)
         base_url += "/{}".format(subkey)
     base_url += "?"
 

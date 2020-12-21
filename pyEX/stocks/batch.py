@@ -11,6 +11,7 @@ from ..common import (
     _toDatetime,
     _BATCH_TYPES,
     json_normalize,
+    _quoteSymbols,
 )
 from .fundamentals import _dividendsToDF, _earningsToDF, _financialsToDF, _splitsToDF
 from .news import _newsToDF
@@ -53,11 +54,10 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
     """
     fields = fields or _BATCH_TYPES[:10]  # limit 10
 
-    if not isinstance(symbols, [].__class__):
-        if not isinstance(symbols, str):
-            raise PyEXception(
-                "batch expects string or list of strings for symbols argument"
-            )
+    if not isinstance(symbols, [].__class__) and not isinstance(symbols, str):
+        raise PyEXception(
+            "batch expects string or list of strings for symbols argument"
+        )
 
     if isinstance(fields, str):
         fields = [fields]
@@ -65,16 +65,12 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
     if range_ not in _TIMEFRAME_CHART:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_CHART))
 
-    if isinstance(symbols, str):
-        route = "stock/{}/batch?types={}&range={}&last={}".format(
-            symbols, ",".join(fields), range_, last
-        )
-        return _getJson(route, token, version, filter)
-
-    if len(symbols) > 100:
+    symbols = _quoteSymbols(symbols)
+    if len(symbols.split(",")) > 100:
         raise PyEXception("IEX will only handle up to 100 symbols at a time!")
-    route = "stock/market/batch?symbols={}&types={}&range={}&last={}".format(
-        ",".join(symbols), ",".join(fields), range_, last
+
+    route = "stock/{}/batch?types={}&range={}&last={}".format(
+        symbols, ",".join(fields), range_, last
     )
     return _getJson(route, token, version, filter)
 
