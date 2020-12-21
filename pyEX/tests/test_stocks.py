@@ -267,7 +267,10 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(
-                return_value={"financials": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
+                return_value={
+                    "financials": [{"reportDate": 1, "b": 2}],
+                    "symbol": "aapl",
+                }
             )
             financialsDF("test")
 
@@ -696,7 +699,10 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(
-                return_value={"balancesheet": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
+                return_value={
+                    "balancesheet": [{"reportDate": 1, "b": 2}],
+                    "symbol": "aapl",
+                }
             )
 
             c = Client(version="sandbox")
@@ -720,7 +726,6 @@ class TestAll:
                 return_value={"cashflow": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
             )
 
-
             c = Client(version="sandbox")
             c.cashFlowDF(SYMBOL)
 
@@ -741,7 +746,6 @@ class TestAll:
             mock.return_value.json = MagicMock(
                 return_value={"income": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
             )
-
 
             c = Client(version="sandbox")
             c.incomeStatementDF(SYMBOL)
