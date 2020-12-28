@@ -871,7 +871,7 @@ def _requireSecret(token):
 
 def _quoteSymbols(symbols):
     """urlquote a potentially comma-separate list of symbols"""
-    if isinstance(symbols, list) or "," not in symbols:
+    if isinstance(symbols, list):
         # comma separated, quote separately
         return ",".join(quote(symbol, safe="") for symbol in symbols)
     # not comma separated, just quote
