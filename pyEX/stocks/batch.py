@@ -35,14 +35,14 @@ _MAPPING = {
 
 
 def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filter=""):
-    """Batch several data requests into one invocation. If no `fields` passed in, will use first ten eligible types defined in pyEX.common._BATCH_TYPES
+    """Batch several data requests into one invocation. If no `fields` passed in, will default to `quote`
 
     https://iexcloud.io/docs/api/#batch-requests
 
 
     Args:
-        symbols (list): List of tickers to request
-        fields (list): List of fields to request
+        symbols (str or list): List of tickers to request
+        fields (str or list): List of fields to request
         range_ (str): Date range for chart
         last (int):
         token (str): Access token
@@ -52,15 +52,21 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
     Returns:
         dict: results in json
     """
-    fields = fields or _BATCH_TYPES[:10]  # limit 10
+    fields = fields or "quote"
 
     if not isinstance(symbols, [].__class__) and not isinstance(symbols, str):
         raise PyEXception(
             "batch expects string or list of strings for symbols argument"
         )
 
-    if isinstance(fields, str):
+    if isinstance(fields, str) and "," not in fields:
         fields = [fields]
+    elif isinstance(fields, str):
+        fields = fields.split(",")
+
+    for field in fields:
+        if field not in _BATCH_TYPES:
+            raise PyEXception("Unrecognized batch request field: {}".format(field))
 
     if range_ not in _TIMEFRAME_CHART:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_CHART))
@@ -69,9 +75,15 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
     if len(symbols.split(",")) > 100:
         raise PyEXception("IEX will only handle up to 100 symbols at a time!")
 
-    route = "stock/{}/batch?types={}&range={}&last={}".format(
-        symbols, ",".join(fields), range_, last
-    )
+    if "," not in symbols:
+        route = "stock/{}/batch?types={}&range={}&last={}".format(
+            symbols, ",".join(fields), range_, last
+        )
+    else:
+        route = "stock/market/batch?symbols={}&types={}&range={}&last={}".format(
+            symbols, ",".join(fields), range_, last
+        )
+
     return _getJson(route, token, version, filter)
 
 
@@ -95,14 +107,17 @@ def batchDF(
     Returns:
         DataFrame: results in json
     """
+    symbols = _quoteSymbols(symbols)
     x = batch(symbols, fields, range_, last, token, version, filter)
 
     ret = {}
 
-    if isinstance(symbols, str):
+    if "," not in symbols:
+        # one level json, break down
         for field in x.keys():
             ret[field] = _MAPPING.get(field, json_normalize)(x[field])
     else:
+        # two level json
         for symbol in x.keys():
             for field in x[symbol].keys():
                 if field not in ret:
