@@ -71,7 +71,7 @@ def bookDF(symbol, token="", version="", filter=""):
 
 
 @_expire(hour=4, tz=_EST)
-def chart(symbol, timeframe="1m", date=None, token="", version="", filter=""):
+def chart(symbol, timeframe="1m", date=None, chartByDay=False, token="", version="", filter=""):
     """Historical price/volume data, daily and intraday
 
     https://iexcloud.io/docs/api/#historical-prices
@@ -116,7 +116,7 @@ def chart(symbol, timeframe="1m", date=None, token="", version="", filter=""):
     if date:
         date = _strOrDate(date)
         return _getJson(
-            "stock/{}/chart/date/{}".format(symbol, date), token, version, filter
+            "stock/{}/chart/date/{}{}".format(symbol, date, ('?chartByDay=true' if chartByDay else '')), token, version, filter
         )
     return _getJson("stock/{}/chart".format(symbol), token, version, filter)
 
@@ -130,8 +130,8 @@ def _chartToDF(c):
 
 
 @wraps(chart)
-def chartDF(symbol, timeframe="1m", date=None, token="", version="", filter=""):
-    c = chart(symbol, timeframe, date, token, version, filter)
+def chartDF(symbol, timeframe="1m", date=None, chartByDay=False, token="", version="", filter=""):
+    c = chart(symbol, timeframe, date, chartByDay, token, version, filter)
     df = pd.DataFrame(c)
     _toDatetime(df)
     if timeframe is not None and timeframe != "1d":
