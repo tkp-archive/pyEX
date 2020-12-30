@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
-import pandas as pd
 from functools import wraps
+
+import pandas as pd
+
 from ..common import (
-    _expire,
-    _TIMEFRAME_CHART,
-    _getJson,
-    _raiseIfNotStr,
-    PyEXception,
-    _strOrDate,
-    _reindex,
-    _toDatetime,
     _EST,
-    json_normalize,
+    _TIMEFRAME_CHART,
+    PyEXception,
+    _expire,
+    _getJson,
     _quoteSymbols,
+    _raiseIfNotStr,
+    _reindex,
+    _strOrDate,
+    _toDatetime,
+    json_normalize,
 )
 
 
@@ -70,8 +72,25 @@ def bookDF(symbol, token="", version="", filter=""):
     return df
 
 
-@_expire(hour=4, tz=_EST)
-def chart(symbol, timeframe="1m", date=None, chartByDay=False, token="", version="", filter=""):
+# @_expire(hour=4, tz=_EST)
+def chart(
+    symbol,
+    timeframe="1m",
+    date=None,
+    exactDate=None,
+    last=-1,
+    closeOnly=False,
+    byDay=False,
+    simplify=False,
+    interval=-1,
+    changeFromClose=False,
+    displayPercent=False,
+    sort="desc",
+    includeToday=False,
+    token="",
+    version="",
+    filter="",
+):
     """Historical price/volume data, daily and intraday
 
     https://iexcloud.io/docs/api/#historical-prices
@@ -85,6 +104,17 @@ def chart(symbol, timeframe="1m", date=None, chartByDay=False, token="", version
         symbol (str): Ticker to request
         timeframe (str): Timeframe to request e.g. 1m
         date (datetime): date, if requesting intraday
+        exactDate (str): Same as `date`, takes precedence
+        last (int): If passed, chart data will return the last N elements from the time period defined by the range parameter
+        closeOnly (bool): Will return adjusted data only with keys date, close, and volume.
+        byDay (bool): Used only when range is date to return OHLCV data instead of minute bar data.
+        simplify (bool) If true, runs a polyline simplification using the Douglas-Peucker algorithm. This is useful if plotting sparkline charts.
+        interval (int) If passed, chart data will return every Nth element as defined by chartInterval
+        changeFromClose (bool): If true, changeOverTime and marketChangeOverTime will be relative to previous day close instead of the first value.
+        displayPercent (bool): If set to true, all percentage values will be multiplied by a factor of 100 (Ex: /stock/twtr/chart?displayPercent=true)
+        range (str): Same format as the path parameter. This can be used for batch calls.
+        sort (str): Can be "asc" or "desc" to sort results by date. Defaults to "desc"
+        includeToday (bool): If true, current trading day data is appended
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -94,31 +124,84 @@ def chart(symbol, timeframe="1m", date=None, chartByDay=False, token="", version
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
+
+    base_url = "stock/{}/chart/{}?".format(symbol, timeframe)
+
+    # exactDate takes precedence
+    date = exactDate or date
+    if date:
+        date = _strOrDate(date)
+
     if timeframe is not None and timeframe != "1d":
         if timeframe not in _TIMEFRAME_CHART:
             raise PyEXception("Range must be in {}".format(_TIMEFRAME_CHART))
-        return _getJson(
-            "stock/{}/chart/{}".format(symbol, timeframe), token, version, filter
-        )
     elif timeframe == "1d":
-        if date:
-            date = _strOrDate(date)
-            return _getJson(
-                "stock/{}/intraday-prices?exactDate={}".format(symbol, date),
-                token,
-                version,
-                filter,
-            )
-        return _getJson(
-            "stock/{}/intraday-prices".format(symbol), token, version, filter
+        return intraday(
+            symbol=symbol,
+            date=date,
+            exactDate=exactDate,
+            last=last,
+            simplify=simplify,
+            interval=interval,
+            changeFromClose=changeFromClose,
         )
 
+    # Assemble params
+    params = {}
+
+    # TODO need these?
+    # if date:
+    #     params["exactDate"] = date
+    # if range:
+    #     params["range"] = range
+
+    if last > 0:
+        params["chartLast"] = last
+
+    if closeOnly:
+        params["chartCloseOnly"] = closeOnly
+
+    if byDay:
+        params["chartByDay"] = byDay
+
+    if simplify:
+        params["chartSimplify"] = simplify
+
+    if interval > 0:
+        params["chartInterval"] = interval
+
+    if changeFromClose:
+        params["changeFromClose"] = changeFromClose
+
+    if displayPercent:
+        params["displayPercent"] = displayPercent
+
+    if exactDate:
+        params["exactDate"] = exactDate
+
+    if sort:
+        if sort.lower() not in (
+            "asc",
+            "desc",
+        ):
+            raise PyEXception("Sort must be in (asc, desc), got: {}".format(sort))
+
+        params["sort"] = sort.lower()
+
+    if includeToday:
+        params["includeToday"] = includeToday
+
     if date:
-        date = _strOrDate(date)
-        return _getJson(
-            "stock/{}/chart/date/{}{}".format(symbol, date, ('?chartByDay=true' if chartByDay else '')), token, version, filter
-        )
-    return _getJson("stock/{}/chart".format(symbol), token, version, filter)
+        base_url = "stock/{}/chart/date/{}?".format(symbol, date)
+
+        if params:
+            base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
+        return _getJson(base_url, token, version, filter)
+
+    if params:
+        base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
+
+    return _getJson(base_url, token, version, filter)
 
 
 def _chartToDF(c):
@@ -130,8 +213,42 @@ def _chartToDF(c):
 
 
 @wraps(chart)
-def chartDF(symbol, timeframe="1m", date=None, chartByDay=False, token="", version="", filter=""):
-    c = chart(symbol, timeframe, date, chartByDay, token, version, filter)
+def chartDF(
+    symbol,
+    timeframe="1m",
+    date=None,
+    exactDate=None,
+    last=-1,
+    closeOnly=False,
+    byDay=False,
+    simplify=False,
+    interval=-1,
+    changeFromClose=False,
+    displayPercent=False,
+    sort="desc",
+    includeToday=False,
+    token="",
+    version="",
+    filter="",
+):
+    c = chart(
+        symbol=symbol,
+        timeframe=timeframe,
+        date=date,
+        exactDate=exactDate,
+        last=last,
+        closeOnly=closeOnly,
+        byDay=byDay,
+        simplify=simplify,
+        interval=interval,
+        changeFromClose=changeFromClose,
+        displayPercent=displayPercent,
+        sort=sort,
+        includeToday=includeToday,
+        token=token,
+        version=version,
+        filter=filter,
+    )
     df = pd.DataFrame(c)
     _toDatetime(df)
     if timeframe is not None and timeframe != "1d":
@@ -174,17 +291,38 @@ def delayedQuoteDF(symbol, token="", version="", filter=""):
     return df
 
 
-def intraday(symbol, date="", token="", version="", filter=""):
+def intraday(
+    symbol,
+    date="",
+    exactDate="",
+    last=-1,
+    IEXOnly=False,
+    reset=False,
+    simplify=False,
+    interval=-1,
+    changeFromClose=False,
+    IEXWhenNull=False,
+    token="",
+    version="",
+    filter="",
+):
     """This endpoint will return aggregated intraday prices in one minute buckets
 
     https://iexcloud.io/docs/api/#intraday-prices
     9:30-4pm ET Mon-Fri on regular market trading days
     9:30-1pm ET on early close trading days
 
-
     Args:
         symbol (str): Ticker to request
         date (str): Formatted as YYYYMMDD. This can be used for batch calls when range is 1d or date. Currently supporting trailing 30 calendar days of minute bar data.
+        exactDate (str): Same as `date`, takes precedence
+        last (number): If passed, chart data will return the last N elements
+        IEXOnly (bool): Limits the return of intraday prices to IEX only data.
+        reset (bool): If true, chart will reset at midnight instead of the default behavior of 9:30am ET.
+        simplify (bool): If true, runs a polyline simplification using the Douglas-Peucker algorithm. This is useful if plotting sparkline charts.
+        interval (number): If passed, chart data will return every Nth element as defined by chartInterval
+        changeFromClose (bool): If true, changeOverTime and marketChangeOverTime will be relative to previous day close instead of the first value.
+        IEXWhenNull (bool): By default, all market prefixed fields are 15 minute delayed, meaning the most recent 15 objects will be null. If this parameter is passed as true, all market prefixed fields that are null will be populated with IEX data if available.
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -194,20 +332,77 @@ def intraday(symbol, date="", token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
+
+    # exactDate takes precedence
+    date = exactDate or date
     if date:
         date = _strOrDate(date)
-        return _getJson(
-            "stock/{}/intraday-prices?exactDate={}".format(symbol, date),
-            token,
-            version,
-            filter,
-        )
-    return _getJson("stock/{}/intraday-prices".format(symbol), token, version, filter)
+
+    # Assemble params
+    params = {}
+
+    if date:
+        params["exactDate"] = date
+
+    if last > 0:
+        params["chartLast"] = last
+
+    if IEXOnly:
+        params["chartIEXOnly"] = IEXOnly
+
+    if reset:
+        params["chartReset"] = reset
+
+    if simplify:
+        params["chartSimplify"] = simplify
+
+    if interval > 0:
+        params["chartInterval"] = interval
+
+    if changeFromClose:
+        params["changeFromClose"] = changeFromClose
+
+    if IEXWhenNull:
+        params["chartIEXWhenNull"] = IEXWhenNull
+
+    base_url = "stock/{}/intraday-prices?".format(symbol)
+
+    if params:
+        base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
+    return _getJson(base_url, token, version, filter)
 
 
 @wraps(intraday)
-def intradayDF(symbol, date="", token="", version="", filter=""):
-    val = intraday(symbol, date, token, version, filter)
+def intradayDF(
+    symbol,
+    date="",
+    exactDate="",
+    last=-1,
+    IEXOnly=False,
+    reset=False,
+    simplify=False,
+    interval=-1,
+    changeFromClose=False,
+    IEXWhenNull=False,
+    token="",
+    version="",
+    filter="",
+):
+    val = intraday(
+        symbol=symbol,
+        date=date,
+        exactDate=exactDate,
+        last=last,
+        IEXOnly=IEXOnly,
+        reset=reset,
+        simplify=simplify,
+        interval=interval,
+        changeFromClose=changeFromClose,
+        IEXWhenNull=IEXWhenNull,
+        token=token,
+        version=version,
+        filter=filter,
+    )
     df = pd.DataFrame(val)
     _toDatetime(df)
     df.set_index(["date", "minute"], inplace=True)
@@ -294,6 +489,9 @@ def yesterday(symbol, token="", version="", filter=""):
     return _getJson("stock/" + symbol + "/previous", token, version, filter)
 
 
+previous = yesterday
+
+
 @wraps(yesterday)
 def yesterdayDF(symbol, token="", version="", filter=""):
     y = yesterday(symbol, token, version, filter)
@@ -304,6 +502,9 @@ def yesterdayDF(symbol, token="", version="", filter=""):
     else:
         df = pd.DataFrame()
     return df
+
+
+previousDF = yesterdayDF
 
 
 def price(symbol, token="", version="", filter=""):

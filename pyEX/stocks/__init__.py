@@ -28,13 +28,10 @@ from .corporateActions import (
     splits,
     splitsDF,
 )
+from .fundamentals import balanceSheet, balanceSheetDF, cashFlow, cashFlowDF
+from .fundamentals import dividends as dividendsBasic
+from .fundamentals import dividendsDF as dividendsBasicDF
 from .fundamentals import (
-    balanceSheet,
-    balanceSheetDF,
-    cashFlow,
-    cashFlowDF,
-    dividends as dividendsBasic,
-    dividendsDF as dividendsBasicDF,
     earnings,
     earningsDF,
     financials,
@@ -57,28 +54,30 @@ from .marketInfo import (
     ipoUpcomingDF,
     list,
     listDF,
-    marketVolume,
-    marketVolumeDF,
     marketOhlc,
     marketOhlcDF,
+    marketPrevious,
+    marketPreviousDF,
+    marketShortInterest,
+    marketShortInterestDF,
+    marketVolume,
+    marketVolumeDF,
     marketYesterday,
     marketYesterdayDF,
     sectorPerformance,
     sectorPerformanceDF,
-    marketShortInterest,
-    marketShortInterestDF,
-    upcomingEvents,
-    upcomingEventsDF,
-    upcomingEarnings,
-    upcomingEarningsDF,
     upcomingDividends,
     upcomingDividendsDF,
-    upcomingSplits,
-    upcomingSplitsDF,
+    upcomingEarnings,
+    upcomingEarningsDF,
+    upcomingEvents,
+    upcomingEventsDF,
     upcomingIPOs,
     upcomingIPOsDF,
+    upcomingSplits,
+    upcomingSplitsDF,
 )
-from .news import news, newsDF, marketNews, marketNewsDF
+from .news import marketNews, marketNewsDF, news, newsDF
 from .prices import (
     book,
     bookDF,
@@ -92,8 +91,8 @@ from .prices import (
     largestTradesDF,
     ohlc,
     ohlcDF,
-    yesterday,
-    yesterdayDF,
+    previous,
+    previousDF,
     price,
     priceDF,
     quote,
@@ -102,6 +101,8 @@ from .prices import (
     spreadDF,
     volumeByVenue,
     volumeByVenueDF,
+    yesterday,
+    yesterdayDF,
 )
 from .profiles import (
     company,
@@ -113,8 +114,8 @@ from .profiles import (
     insiderTransactions,
     insiderTransactionsDF,
     logo,
-    logoPNG,
     logoNotebook,
+    logoPNG,
     peers,
     peersDF,
     relevant,
@@ -138,14 +139,12 @@ from .research import (
     technicals,
     technicalsDF,
 )
-
-from .stocks import threshold, thresholdDF, shortInterest, shortInterestDF
-
+from .stocks import shortInterest, shortInterestDF, threshold, thresholdDF
 from .timeseries import (
-    timeSeriesInventory,
-    timeSeries,
-    timeSeriesInventoryDF,
-    timeSeriesDF,
-    tenQ,
     tenK,
+    tenQ,
+    timeSeries,
+    timeSeriesDF,
+    timeSeriesInventory,
+    timeSeriesInventoryDF,
 )

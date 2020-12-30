@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
+
 import pandas as pd
+
 from ..common import (
-    _expire,
-    _LIST_OPTIONS,
     _COLLECTION_TAGS,
-    _getJson,
-    _raiseIfNotStr,
-    PyEXception,
-    _strOrDate,
-    _reindex,
-    _toDatetime,
-    _UTC,
     _EST,
-    json_normalize,
+    _LIST_OPTIONS,
+    _UTC,
+    PyEXception,
+    _expire,
+    _getJson,
     _quoteSymbols,
+    _raiseIfNotStr,
+    _reindex,
+    _strOrDate,
+    _toDatetime,
+    json_normalize,
 )
 
 
@@ -256,6 +258,9 @@ def marketYesterday(token="", version="", filter=""):
     return _getJson("stock/market/previous", token, version, filter)
 
 
+marketPrevious = marketYesterday
+
+
 @wraps(marketYesterday)
 def marketYesterdayDF(token="", version="", filter=""):
     x = marketYesterday(token, version, filter)
@@ -267,6 +272,9 @@ def marketYesterdayDF(token="", version="", filter=""):
     _toDatetime(df)
     _reindex(df, "symbol")
     return df
+
+
+marketPreviousDF = marketYesterdayDF
 
 
 def sectorPerformance(token="", version="", filter=""):
