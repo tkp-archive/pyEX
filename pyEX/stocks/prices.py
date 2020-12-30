@@ -3,9 +3,19 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (_EST, _TIMEFRAME_CHART, PyEXception, _expire, _getJson,
-                      _quoteSymbols, _raiseIfNotStr, _reindex, _strOrDate,
-                      _toDatetime, json_normalize)
+from ..common import (
+    _EST,
+    _TIMEFRAME_CHART,
+    PyEXception,
+    _expire,
+    _getJson,
+    _quoteSymbols,
+    _raiseIfNotStr,
+    _reindex,
+    _strOrDate,
+    _toDatetime,
+    json_normalize,
+)
 
 
 def book(symbol, token="", version="", filter=""):
@@ -234,9 +244,9 @@ def chartDF(
     if timeframe is not None and timeframe != "1d":
         _reindex(df, "date")
     else:
-        if not df.empty and 'date' in df.columns and 'minute' in df.columns:
+        if not df.empty and "date" in df.columns and "minute" in df.columns:
             df.set_index(["date", "minute"], inplace=True)
-        elif not df.empty and 'date' in df.columns:
+        elif not df.empty and "date" in df.columns:
             _reindex(df, "date")
         elif not df.empty:
             # Nothing to do
@@ -390,9 +400,9 @@ def intradayDF(
     )
     df = pd.DataFrame(val)
     _toDatetime(df)
-    if not df.empty and 'date' in df.columns and 'minute' in df.columns:
+    if not df.empty and "date" in df.columns and "minute" in df.columns:
         df.set_index(["date", "minute"], inplace=True)
-    elif not df.empty and 'date' in df.columns:
+    elif not df.empty and "date" in df.columns:
         _reindex(df, "date")
     else:
         df = pd.DataFrame()
