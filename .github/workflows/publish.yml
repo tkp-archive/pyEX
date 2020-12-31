@@ -45,7 +45,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip setuptools wheel twine
+        python -m pip install -U pip setuptools wheel twine
         python -m pip install -e .[dev]
 
     - name: Lint

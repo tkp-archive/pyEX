@@ -49,7 +49,7 @@ dev:
 dist:  ## dist to pypi
 	rm -rf dist build
 	python setup.py sdist bdist_wheel
-	python -m twine check dist/* && twine upload dist/*
+	python -m twine check dist/* && python -m twine upload dist/* --skip-existing
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help

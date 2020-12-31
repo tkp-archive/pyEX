@@ -1,4 +1,5 @@
 # pyEX
+
 Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
 [![Build Status](https://github.com/timkpaine/pyEX/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/timkpaine/pyEX/actions?query=workflow%3A%22Build+Status%22)
@@ -8,10 +9,13 @@ Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
 ## Referral
+
 Please subscribe to IEX Cloud using [my referral code](https://iexcloud.io/s/6332a3c3 ).
 
 # Getting Started
+
 ## Install
+
 Install from pip
 
 `pip install pyEX`
@@ -21,10 +25,12 @@ of from source
 `python setup.py install`
 
 ### Extensions
+
 - `pyEX[async]`: `asyncio` integration for streaming APIs
 - `pyEX[studies]`: Technical indicators and other calculations
 
 ## Demos + Docs
+
 - [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/all.ipynb)
 - [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/sse.ipynb)
 - [Read The Docs!](https://pyEX.readthedocs.io)
@@ -113,19 +119,23 @@ date
 ```
 
 ## Improvements over native API, other libraries, etc
-- pyEX will **transparently cache requests** according to the refresh interval as defined on the IEX Cloud website (and in the docstrings), to avoid wasting credits. It can also cache to disk, or integrate with your own custom caching scheme. 
+
+- pyEX will **transparently cache requests** according to the refresh interval as defined on the IEX Cloud website (and in the docstrings), to avoid wasting credits. It can also cache to disk, or integrate with your own custom caching scheme.
 - pyEX fully implements the streaming APIs
 
 ## Other enhancements
+
 - [pyEX-studies](https://github.com/timkpaine/pyEX/tree/main/pyEX/studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
 - [pyEX-caching](https://github.com/timkpaine/pyEX-caching): persistent, queryable caching for pyEX function calls. Minimize your spend and maximize your performance
 - [pyEX-zipline](https://github.com/timkpaine/pyEX-zipline): [Zipline](https://github.com/quantopian/zipline) integration for IEX data
 
 ## Demo
+
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/example1.gif)
 
 ## Rules Engine
-`pyEX` implements methods for interacting with the [Rules Engine](https://iexcloud.io/docs/api/#rules-engine-beta). 
+
+`pyEX` implements methods for interacting with the [Rules Engine](https://iexcloud.io/docs/api/#rules-engine-beta).
 
 ```python
 rule = {
@@ -150,6 +160,7 @@ c.deleteRule("<ruleID>")
 We also provide helper classes in python for constructing rules such that they abide by the rules schema (dictated in the `schema()` helper function)
 
 ## Methods
+
 - [schema](https://iexcloud.io/docs/api/#rules-schema)
 - [lookup](https://iexcloud.io/docs/api/#lookup-values)
 - [create](https://iexcloud.io/docs/api/#creating-a-rule)
@@ -161,9 +172,10 @@ We also provide helper classes in python for constructing rules such that they a
 - [output](https://iexcloud.io/docs/api/#get-log-output)
 
 ## Data
+
 `pyEX` provides wrappers around both static and SSE streaming data. For most static data endpoints, we provide both JSON and DataFrame return functions. For market data endpoints, we provide async wrappers as well using `aiohttp` (to install the dependencies,  `pip install pyEX[async]`).
 
-DataFrame functions will have the suffix `DF`, and async functions will have the suffix `Async`. 
+DataFrame functions will have the suffix `DF`, and async functions will have the suffix `Async`.
 
 SSE streaming data can either be used with callbacks:
 
@@ -173,8 +185,8 @@ or via async generators (after installing `pyEX[async]`):
 
 `async for data in newsSSE('AAPL'):`
 
+### Full API
 
-###  Full API
 Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
 
 ![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/rtd.png)
@@ -182,14 +194,17 @@ Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
 Currently, the following methods are implemented:
 
 ### Data Points
+
 - [points](https://iexcloud.io/docs/api/#data-points)
 - [pointsDF](https://iexcloud.io/docs/api/#data-points)
 
 ### Markets
+
 - markets
 - marketsDF
 
 ### Account
+
 - [messageBudget](https://iexcloud.io/docs/api/#message-budget)
 - [metadata](https://iexcloud.io/docs/api/#metadata)
 - [metadataDF](https://iexcloud.io/docs/api/#metadata)
@@ -197,10 +212,10 @@ Currently, the following methods are implemented:
 - [usage](https://iexcloud.io/docs/api/#usage)
 - [usageDF](https://iexcloud.io/docs/api/#usage)
 
-
-
 ### Stocks
+
 #### Stock Prices
+
 - [book](https://iexcloud.io/docs/api/#book)
 - [bookDF](https://iexcloud.io/docs/api/#book)
 - [chart](https://iexcloud.io/docs/api/#charts)
@@ -227,6 +242,7 @@ Currently, the following methods are implemented:
 - [volumeByVenueDF](https://iexcloud.io/docs/api/#volume-by-venue)
 
 #### Stock Profiles
+
 - [company](https://iexcloud.io/docs/api/#company)
 - [companyDF](https://iexcloud.io/docs/api/#company)
 - [insiderRoster](https://iexcloud.io/docs/api/#insider-roster)
@@ -241,8 +257,8 @@ Currently, the following methods are implemented:
 - [peers](https://iexcloud.io/docs/api/#peer-groups)
 - [peersDF](https://iexcloud.io/docs/api/#peer-groups)
 
-
 #### Stock Fundamentals
+
 - [balanceSheet](https://iexcloud.io/docs/api/#balance-sheet)
 - [balanceSheetDF](https://iexcloud.io/docs/api/#balance-sheet)
 - [cashFlow](https://iexcloud.io/docs/api/#cash-flow)
@@ -260,8 +276,8 @@ Currently, the following methods are implemented:
 - [stockSplits](https://iexcloud.io/docs/api/#splits-basic)
 - [stockSplitsDF](https://iexcloud.io/docs/api/#splits-basic)
 
-
 #### Stock Research
+
 - [advancedStats](https://iexcloud.io/docs/api/#advanced-stats)
 - [advancedStatsDF](https://iexcloud.io/docs/api/#advanced-stats)
 - [analystRecommendations](https://iexcloud.io/docs/api/#analyst-recommendations)
@@ -279,8 +295,8 @@ Currently, the following methods are implemented:
 - [technicals](https://iexcloud.io/docs/api/#technical-indicators)
 - [technicalsDF](https://iexcloud.io/docs/api/#technical-indicators)
 
-
 #### Corporate Actions
+
 - [bonusIssue](https://iexcloud.io/docs/api/#bonus-issue)
 - [bonusIssueDF](https://iexcloud.io/docs/api/#bonus-issue)
 - [distribution](https://iexcloud.io/docs/api/#distribution)
@@ -302,8 +318,8 @@ Currently, the following methods are implemented:
 - [splits](https://iexcloud.io/docs/api/#splits)
 - [splitsDF](https://iexcloud.io/docs/api/#splits)
 
-
 #### Market Info
+
 - [collections](https://iexcloud.io/docs/api/#collections)
 - [collectionsDF](https://iexcloud.io/docs/api/#collections)
 - [earningsToday](https://iexcloud.io/docs/api/#earnings-today)
@@ -329,20 +345,22 @@ Currently, the following methods are implemented:
 - [upcomingIPOs](https://iexcloud.io/docs/api/#upcoming-events)
 - [upcomingIPOsDF](https://iexcloud.io/docs/api/#upcoming-events)
 
-
 #### News
+
 - [news](https://iexcloud.io/docs/api/#news)
 - [newsDF](https://iexcloud.io/docs/api/#news)
 - [marketNews](https://iexcloud.io/docs/api/#news)
 - [marketNewsDF](https://iexcloud.io/docs/api/#news)
 
 #### Time Series
+
 - [timeSeriesInventory](https://iexcloud.io/docs/api/#time-series)
 - [timeSeriesInventoryDF](https://iexcloud.io/docs/api/#time-series)
 - [timeSeries](https://iexcloud.io/docs/api/#time-series)
 - [timeSeriesDF](https://iexcloud.io/docs/api/#time-series)
 
 #### Bulk
+
 - batch
 - batchDF
 - bulkBatch
@@ -351,6 +369,7 @@ Currently, the following methods are implemented:
 - bulkMinuteBarsDF
 
 #### Old/Unknown/Deprecated
+
 - spread
 - spreadDF
 - shortInterest
@@ -361,6 +380,7 @@ Currently, the following methods are implemented:
 - relevantDF
 
 ### Crypto
+
 - [cryptoBook](https://iexcloud.io/docs/api/#cryptocurrency-book)
 - [cryptoBookDF](https://iexcloud.io/docs/api/#cryptocurrency-book)
 - [cryptoQuote](https://iexcloud.io/docs/api/#cryptocurrency-quote)
@@ -369,6 +389,7 @@ Currently, the following methods are implemented:
 - [cryptoPriceDF](https://iexcloud.io/docs/api/#cryptocurrency-price)
 
 ### FX
+
 - [latestFX](https://iexcloud.io/docs/api/#latest-currency-rates)
 - [latestFXDF](https://iexcloud.io/docs/api/#latest-currency-rates)
 - [convertFX](https://iexcloud.io/docs/api/#currency-conversion)
@@ -376,19 +397,21 @@ Currently, the following methods are implemented:
 - [historicalFX](https://iexcloud.io/docs/api/#historical-daily)
 - [historicalFXDF](https://iexcloud.io/docs/api/#historical-daily)
 
-
 ### EOD Options
+
 - [optionExpirations](https://iexcloud.io/docs/api/#end-of-day-options)
 - [options](https://iexcloud.io/docs/api/#end-of-day-options)
 - [optionsDF](https://iexcloud.io/docs/api/#end-of-day-options)
 
 ### CEO Compensation
+
 - [ceoCompensation](https://iexcloud.io/docs/api/#ceo-compensation)
 - [ceoCompensationDF](https://iexcloud.io/docs/api/#ceo-compensation)
 
 ### Treasuries
 
 #### Daily Treasury Rates
+
 - [thirtyYear](https://iexcloud.io/docs/api/#daily-treasury-rates)
 - [twentyYear](https://iexcloud.io/docs/api/#daily-treasury-rates)
 - [tenYear](https://iexcloud.io/docs/api/#daily-treasury-rates)
@@ -400,6 +423,7 @@ Currently, the following methods are implemented:
 - [oneMonth](https://iexcloud.io/docs/api/#daily-treasury-rates)
 
 ### Commodities
+
 - [wti](https://iexcloud.io/docs/api/#oil-prices)
 - [brent](https://iexcloud.io/docs/api/#oil-prices)
 - [natgas](https://iexcloud.io/docs/api/#natural-gas-price)
@@ -412,6 +436,7 @@ Currently, the following methods are implemented:
 - [propane](https://iexcloud.io/docs/api/#propane-prices)
 
 ### Economic Data
+
 - [cdnj](https://iexcloud.io/docs/api/#cd-rates)
 - [cdj](https://iexcloud.io/docs/api/#cd-rates)
 - [cpi](https://iexcloud.io/docs/api/#consumer-price-index)
@@ -432,6 +457,7 @@ Currently, the following methods are implemented:
 - [recessionProb](https://iexcloud.io/docs/api/#us-recession-probabilities)
 
 ### Reference Data
+
 - [cryptoSymbols](https://iexcloud.io/docs/api/#cryptocurrency-symbols)
 - [cryptoSymbolsDF](https://iexcloud.io/docs/api/#cryptocurrency-symbols)
 - [cryptoSymbolsList](https://iexcloud.io/docs/api/#cryptocurrency-symbols)
@@ -474,6 +500,7 @@ Currently, the following methods are implemented:
 - [isinLookupDF](https://iexcloud.io/docs/api/#isin-mapping)
 
 ### Other Reference
+
 - corporateActions
 - corporateActionsDF
 - refDividends
@@ -486,7 +513,9 @@ Currently, the following methods are implemented:
 - [calendarDF](https://iexcloud.io/docs/api/#calendar)
 
 ### IEX Data
+
 #### TOPS
+
 - [deep](https://iexcloud.io/docs/api/#deep)
 - [deepAsync](https://iexcloud.io/docs/api/#deep)
 - [deepDF](https://iexcloud.io/docs/api/#deep)
@@ -530,6 +559,7 @@ Currently, the following methods are implemented:
 - [topsDF](https://iexcloud.io/docs/api/#tops)
 
 #### Stats
+
 - daily
 - dailyDF
 - summary
@@ -542,6 +572,7 @@ Currently, the following methods are implemented:
 - recordsDF
 
 ### Alternative
+
 - crypto
 - cryptoDF
 - sentiment
@@ -550,6 +581,7 @@ Currently, the following methods are implemented:
 ## Streaming Data
 
 ### SSE Streaming
+
 - [topsSSE](https://iexcloud.io/docs/api/#sse-streaming)
 - [topsSSEAsync](https://iexcloud.io/docs/api/#sse-streaming)
 - [lastSSE](https://iexcloud.io/docs/api/#sse-streaming)
@@ -578,6 +610,7 @@ Currently, the following methods are implemented:
 - [tradingStatusSSEAsync](https://iexcloud.io/docs/api/#sse-streaming)
 
 ### Stocks
+
 - [stocksUSNoUTPSSE](https://iexcloud.io/docs/api/#sse-streaming)
 - [stocksUSNoUTPSSEsync](https://iexcloud.io/docs/api/#sse-streaming)
 - [stocksUSSSE](https://iexcloud.io/docs/api/#sse-streaming)
@@ -590,14 +623,17 @@ Currently, the following methods are implemented:
 - [stocksUS1MinuteSSEAsync](https://iexcloud.io/docs/api/#sse-streaming)
 
 ### News
+
 - [newsSSE](https://iexcloud.io/docs/api/#streaming-news)
 - [newsSSEAsync](https://iexcloud.io/docs/api/#streaming-news)
 
 ### Sentiment
+
 - sentimentSSE
 - sentimentSSEAsync
 
 ### FX
+
 - fxSSE
 - fxSSEAsync
 - forex1SecondSSE
@@ -608,6 +644,7 @@ Currently, the following methods are implemented:
 - forex1MinuteSSEAsync
 
 ### Crypto
+
 - cryptoBookSSE
 - cryptoBookSSEAsync
 - cryptoEventsSSE
@@ -616,7 +653,9 @@ Currently, the following methods are implemented:
 - cryptoQuotesSSEAsync
 
 ## Premium Data
+
 ### Wall Street Horizon
+
 - [analystDays](https://iexcloud.io/docs/api/#analyst-days)
 - [analystDaysDF](https://iexcloud.io/docs/api/#analyst-days)
 - [boardOfDirectorsMeeting](https://iexcloud.io/docs/api/#board-of-directors-meeting)
@@ -671,12 +710,14 @@ Currently, the following methods are implemented:
 - [workshopsDF](https://iexcloud.io/docs/api/#workshops)
 
 ### Fraud Factors
+
 - [similarityIndex](https://iexcloud.io/docs/api/#similiarity-index)
 - [similarityIndexDF](https://iexcloud.io/docs/api/#similiarity-index)
 - [nonTimelyFilings](https://iexcloud.io/docs/api/#non-timely-filings)
 - [nonTimelyFilingsDF](https://iexcloud.io/docs/api/#non-timely-filings)
 
 ### Extract Alpha
+
 - [cam1](https://iexcloud.io/docs/api/#cross-asset-model-1)
 - [cam1DF](https://iexcloud.io/docs/api/#cross-asset-model-1)
 - [esgCFPBComplaints](https://iexcloud.io/docs/api/#esg-cfpb-complaints)
@@ -705,10 +746,12 @@ Currently, the following methods are implemented:
 - [tacticalModel1DF](https://iexcloud.io/docs/api/#tactical-model-1)
 
 ### Precision Alpha
+
 - [precisionAlphaPriceDynamics](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
 - [precisionAlphaPriceDynamicsDF](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
 
 ### BRAIN Company
+
 - [brain30DaySentiment](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
 - [brain30DaySentimentDF](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
 - [brain7DaySentiment](https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator)
@@ -733,37 +776,42 @@ Currently, the following methods are implemented:
 - [brainLanguageMetricsOnCompanyFilingsDifferenceDF](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
 
 ### Kavout
+
 - [kScore](https://iexcloud.io/docs/api/#k-score-for-us-equities)
 - [kScoreDF](https://iexcloud.io/docs/api/#k-score-for-us-equities)
 - [kScoreChina](https://iexcloud.io/docs/api/#k-score-for-china-a-shares)
 - [kScoreChinaDF](https://iexcloud.io/docs/api/#k-score-for-china-a-shares)
 
 ### Audit Analytics
+
 - [accountingQualityAndRiskMatrix](https://iexcloud.io/docs/api/#audit-analytics-accounting-quality-and-risk-matrix)
 - [accountingQualityAndRiskMatrixDF](https://iexcloud.io/docs/api/#audit-analytics-accounting-quality-and-risk-matrix)
 - [directorAndOfficerChanges](https://iexcloud.io/docs/api/#audit-analytics-director-and-officer-changes)
 - [directorAndOfficerChangesDF](https://iexcloud.io/docs/api/#audit-analytics-director-and-officer-changes)
 
 ### ValuEngine
+
 - [valuEngineStockResearchReport](https://iexcloud.io/docs/api/#valuengine-stock-research-report)
 
 ### StockTwits Sentiment
+
 - [socialSentiment](https://iexcloud.io/docs/api/#social-sentiment)
 - [socialSentimentDF](https://iexcloud.io/docs/api/#social-sentiment)
 
-
 ## Studies
+
 Available via `pyEX[studies]`.
 
-
 ### Studies
+
 - peerCorrelation
 
 ### Technicals
+
 These are built on [TA-lib](https://ta-lib.org). Note that these are different from the technicals available via IEX Cloud's `technicals` endpoint.
 
-
 #### Cycle
+
 - ht_dcperiod: Hilbert Transform - Dominant Cycle Period
 - ht_dcphase: Hilbert Transform - Dominant Cycle Phase
 - ht_phasor: Hilbert Transform - Phasor Components
@@ -771,6 +819,7 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - ht_trendmode: Hilbert Transform - Trend vs Cycle Mode
 
 #### Math
+
 - acos: Vector Trigonometric ACos
 - asin: Vector Trigonometric ASin
 - atan: Vector Trigonometric ATan
@@ -799,6 +848,7 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - sum: Summation
 
 #### Momentum
+
 - adx: Average Directional Movement Index
 - adxr: Average Directional Movement Index Rating
 - apo: Absolute Price Oscillator
@@ -830,6 +880,7 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - willr: Williams' %R
 
 #### Overlap
+
 - bollinger: Bollinger Bands
 - dema: Double Exponential Moving Average
 - ema: Exponential Moving Aberage
@@ -848,6 +899,7 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - wma: Weighted Moving Average
 
 #### Pattern
+
 - cdl2crows: Two Crows
 - cdl3blackcrows: Three Black Crows
 - cdl3inside: Three Inside Up/Down
@@ -911,12 +963,14 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - cdlxsidegap3methods: Upside/Downside Gap Three Methods
 
 #### Price
+
 - avgprice: Average Price
 - medprice: Median Price
 - typprice: Typical Price
 - wclprice: Weighted Close Price
 
 #### Statistic
+
 - beta: Beta
 - correl: Pearson's Correlation Coefficient (r)
 - linearreg: Linear Regression
@@ -926,19 +980,24 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - stddev: Standard Deviation
 - tsf: Time Series Forecast
 - var: Variance
+
 #### Volatility
+
 - atr: Average True Range
 - natr: Normalized Average True Range
 - trange: True Range
 
 #### Volume
+
 - ad: Chaikin A/D Line
 - adosc: Chaikin A/D Oscillator
 - obv: On Balance Volume
 
 ## Development
+
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## License
+
 This software is licensed under the Apache 2.0 license. See the
 [LICENSE](LICENSE) and [AUTHORS](AUTHORS) files for details.
