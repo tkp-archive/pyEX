@@ -15,7 +15,7 @@ talib_nix:  ## install talib for *nix
 talib_darwin:  ## install talib for mac
 	wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
 	tar xfzv ta-lib-0.4.0-src.tar.gz
-	cd ta-lib && ./configure && make -j2 &&	make install
+	cd ta-lib && ./configure && make &&	make install
 
 talib_windows_py37:  ## install talib for windows
 	python -m pip install https://download.lfd.uci.edu/pythonlibs/z4tqcw5k/TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl
