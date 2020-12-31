@@ -57,6 +57,10 @@ jobs:
       run: |
         make tests
 
+    - name: Twine check
+      run: |
+        make dist
+
     - name: Upload test results
       uses: actions/upload-artifact@v2
       with:
