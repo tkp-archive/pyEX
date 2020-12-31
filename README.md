@@ -1,5 +1,5 @@
 # pyEX
-Python interface to IEX Cloud (https://iexcloud.io/docs/api/)
+Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
 [![Build Status](https://github.com/timkpaine/pyEX/workflows/Build%20Status/badge.svg)](https://github.com/timkpaine/pyEX/actions?query=workflow%3A%22Build+Status%22)
 [![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/timkpaine/pyEX)
@@ -935,11 +935,6 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - ad: Chaikin A/D Line
 - adosc: Chaikin A/D Oscillator
 - obv: On Balance Volume
-
-## Attribution
-- [Powered by IEX Cloud](https://iexcloud.io)
-- Data provided for free by [IEX](https://iextrading.com/developer).
-- [IEX terms of service](https://iextrading.com/api-exhibit-a)
 
 ## Development
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
