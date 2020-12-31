@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+
+import json
 import os
 import os.path
+import tempfile
+from datetime import datetime
+from urllib.parse import quote, urlparse
+
 import pandas as pd
 import pytz
 import requests
-import tempfile
-import json
-from datetime import datetime
 from six import string_types
-from socketIO_client_nexus import SocketIO, BaseNamespace
+from socketIO_client_nexus import BaseNamespace, SocketIO
 from sseclient import SSEClient
 from temporalcache import expire, interval
-from urllib.parse import urlparse, quote
-
 
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX2 = "https://cloud.iexapis.com/{version}/"
@@ -124,6 +125,7 @@ _BATCH_TYPES = [
     "peers",
     "splits",
     # limit 10
+    "intraday-prices",
     "effective-spread",
     "delayed-quote",
     "largest-trades",
