@@ -1,24 +1,25 @@
-# -*- coding: utf-8 -*-
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 
 from .cycle import ht_dcperiod, ht_dcphase, ht_phasor, ht_sine, ht_trendmode
 from .math import (
     acos,
+    add,
     asin,
     atan,
     ceil,
     cos,
     cosh,
+    div,
     exp,
     floor,
     ln,
     log10,
-    sin,
-    sinh,
-    sqrt,
-    tan,
-    tanh,
-    add,
-    div,
     max,
     maxindex,
     min,
@@ -26,8 +27,13 @@ from .math import (
     minmax,
     minmaxindex,
     mult,
+    sin,
+    sinh,
+    sqrt,
     sub,
     sum,
+    tan,
+    tanh,
 )
 from .momentum import (
     adx,
@@ -68,8 +74,8 @@ from .overlap import (
     kama,
     mama,
     mavp,
-    midpoint,
     midpice,
+    midpoint,
     sar,
     sarext,
     sma,

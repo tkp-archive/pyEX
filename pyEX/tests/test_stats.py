@@ -1,5 +1,13 @@
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
+
 # for Coverage
-from mock import patch, MagicMock
+from mock import MagicMock, patch
 
 
 class TestAll:
@@ -56,6 +64,7 @@ class TestAll:
 
     def test_summary(self):
         from datetime import datetime
+
         from pyEX.common import PyEXception
         from pyEX.stats import summary
 
@@ -73,6 +82,7 @@ class TestAll:
 
     def test_summaryDF(self):
         from datetime import datetime
+
         from pyEX.stats import summaryDF
 
         with patch("requests.get") as mock, patch("pickle.dump"):
@@ -84,8 +94,9 @@ class TestAll:
             summaryDF(datetime.today())
 
     def test_daily(self):
-        from pyEX.common import PyEXception
         from datetime import datetime
+
+        from pyEX.common import PyEXception
         from pyEX.stats import daily
 
         with patch("requests.get") as mock, patch("pickle.dump"):
@@ -103,6 +114,7 @@ class TestAll:
 
     def test_dailyDF(self):
         from datetime import datetime
+
         from pyEX.stats import dailyDF
 
         with patch("requests.get") as mock, patch("pickle.dump"):

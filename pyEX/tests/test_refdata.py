@@ -1,5 +1,13 @@
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
+
 # for Coverage
-from mock import patch, MagicMock
+from mock import MagicMock, patch
 
 
 class TestAll:
@@ -23,12 +31,12 @@ class TestAll:
 
     def test_symbols(self):
         from pyEX.refdata import (
-            symbols,
+            fxSymbols,
             iexSymbols,
+            internationalSymbols,
             mutualFundSymbols,
             otcSymbols,
-            internationalSymbols,
-            fxSymbols,
+            symbols,
         )
 
         with patch("requests.get") as mock, patch("pickle.dump"):
@@ -47,8 +55,8 @@ class TestAll:
             fxSymbols()
 
     def test_symbolsDF(self):
-        from pyEX.refdata import symbolsDF
         from pyEX import Client
+        from pyEX.refdata import symbolsDF
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()

@@ -1,24 +1,31 @@
-# -*- coding: utf-8 -*-
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 import itertools
-import pandas as pd
 from multiprocessing.pool import ThreadPool
+
+import pandas as pd
+
 from ..common import (
+    _BATCH_TYPES,
     _TIMEFRAME_CHART,
-    _getJson,
-    _raiseIfNotStr,
     PyEXception,
+    _getJson,
+    _quoteSymbols,
+    _raiseIfNotStr,
     _strOrDate,
     _toDatetime,
-    _BATCH_TYPES,
     json_normalize,
-    _quoteSymbols,
 )
 from .fundamentals import _dividendsToDF, _earningsToDF, _financialsToDF, _splitsToDF
 from .news import _newsToDF
-from .prices import chart, _bookToDF, _chartToDF
+from .prices import _bookToDF, _chartToDF, chart
 from .profiles import _companyToDF, _peersToDF
 from .research import _statsToDF
-
 
 _MAPPING = {
     "book": _bookToDF,

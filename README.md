@@ -940,3 +940,10 @@ These are built on [TA-lib](https://ta-lib.org). Note that these are different f
 - [Powered by IEX Cloud](https://iexcloud.io)
 - Data provided for free by [IEX](https://iextrading.com/developer).
 - [IEX terms of service](https://iextrading.com/api-exhibit-a)
+
+## Development
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+## License
+This software is licensed under the Apache 2.0 license. See the
+[LICENSE](LICENSE) and [AUTHORS](AUTHORS) files for details.

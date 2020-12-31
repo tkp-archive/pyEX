@@ -1,14 +1,22 @@
-# -*- coding: utf-8 -*-
-import pandas as pd
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 from functools import wraps
+
+import pandas as pd
+
 from ..common import (
+    _EST,
     _expire,
     _getJson,
+    _quoteSymbols,
     _raiseIfNotStr,
     _strOrDate,
     _toDatetime,
-    _EST,
-    _quoteSymbols,
 )
 
 

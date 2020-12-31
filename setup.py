@@ -1,8 +1,17 @@
-from setuptools import setup, find_packages
-from codecs import open
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
+
 import io
 import os
 import os.path
+from codecs import open
+
+from setuptools import find_packages, setup
 
 pjoin = os.path.join
 here = os.path.abspath(os.path.dirname(__file__))
