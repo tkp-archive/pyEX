@@ -26,12 +26,23 @@ jobs:
 
     - name: Install system dependencies
       run: |
-        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-        tar xfzv ta-lib-0.4.0-src.tar.gz
-        cd ta-lib
-        ./configure --prefix=/usr LDFLAGS="-lm" 
-        make
-        sudo make install
+        make talib_nix
+      if: ${{ matrix.os == "ubuntu-latest" }}
+
+    - name: Install system dependencies
+      run: |
+        make talib_mac
+      if: ${{ matrix.os == "macos-latest" }}
+
+    - name: Install system dependencies
+      run: |
+        make talib_windows_py37
+      if: ${{ matrix.os == "windows-latest" && matrix.python-version == 3.7 }}
+
+    - name: Install system dependencies
+      run: |
+        make talib_windows_py38
+      if: ${{ matrix.os == "windows-latest" && matrix.python-version == 3.8 }}
 
     - name: Install dependencies
       run: |
