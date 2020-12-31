@@ -31,7 +31,7 @@ jobs:
 
     - name: Install system dependencies
       run: |
-        make talib_mac
+        make talib_darwin
       if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install system dependencies
