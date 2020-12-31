@@ -1,24 +1,32 @@
-# -*- coding: utf-8 -*-
-import pandas as pd
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 from functools import wraps
-from .prices import _chartToDF
+
+import pandas as pd
+
 from ..common import (
+    _EST,
+    _INDICATOR_RETURNS,
+    _INDICATORS,
+    _KEY_STATS,
+    _TIMEFRAME_CHART,
+    _UTC,
+    PyEXception,
+    _checkPeriodLast,
     _expire,
     _getJson,
+    _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
     _toDatetime,
-    _EST,
-    _UTC,
-    _KEY_STATS,
-    PyEXception,
-    _checkPeriodLast,
-    _INDICATORS,
-    _TIMEFRAME_CHART,
-    _INDICATOR_RETURNS,
     json_normalize,
-    _quoteSymbols,
 )
+from .prices import _chartToDF
 
 
 @_expire(hour=4, tz=_EST)

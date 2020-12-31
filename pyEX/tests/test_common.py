@@ -1,10 +1,18 @@
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
+
 # for Coverage
-from mock import patch, MagicMock
+from mock import MagicMock, patch
 
 
 class TestAll:
     def test_getJson(self):
-        from pyEX.common import _getJson, PyEXception
+        from pyEX.common import PyEXception, _getJson
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()
@@ -19,7 +27,7 @@ class TestAll:
                 pass
 
     def test_getJson2(self):
-        from pyEX.common import _getJson, PyEXception
+        from pyEX.common import PyEXception, _getJson
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()
@@ -65,8 +73,9 @@ class TestAll:
         pc.setProxy(None)
 
     def test_strOrDate(self):
-        from pyEX.common import _strOrDate, PyEXception
         from datetime import datetime
+
+        from pyEX.common import PyEXception, _strOrDate
 
         _strOrDate("test")
         _strOrDate(datetime.now())
@@ -77,7 +86,7 @@ class TestAll:
             pass
 
     def test_raiseIfNotStr(self):
-        from pyEX.common import _raiseIfNotStr, PyEXception
+        from pyEX.common import PyEXception, _raiseIfNotStr
 
         _raiseIfNotStr("test")
         _raiseIfNotStr(None)

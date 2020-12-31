@@ -1,20 +1,28 @@
-# -*- coding: utf-8 -*-
-import requests
-import pandas as pd
-from deprecation import deprecated
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 from functools import wraps
-from IPython.display import Image as ImageI
 from io import BytesIO
+
+import pandas as pd
+import requests
+from deprecation import deprecated
+from IPython.display import Image as ImageI
 from PIL import Image as ImageP
+
 from ..common import (
+    _UTC,
     _expire,
     _getJson,
+    _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
     _toDatetime,
-    _UTC,
     json_normalize,
-    _quoteSymbols,
 )
 
 

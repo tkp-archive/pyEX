@@ -1,7 +1,15 @@
-import six
+# *****************************************************************************
+#
+# Copyright (c) 2020, the pyEX authors.
+#
+# This file is part of the jupyterlab_templates library, distributed under the terms of
+# the Apache License 2.0.  The full license can be found in the LICENSE file.
+#
 import time
-from ..common import PyEXception
 
+import six
+
+from ..common import PyEXception
 
 _DATA_TYPES = ["boolean", "date", "dynamictime", "event", "number", "number", "string"]
 
