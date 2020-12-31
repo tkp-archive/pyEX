@@ -2,7 +2,7 @@
 Python interface to IEX Cloud (https://iexcloud.io/docs/api/)
 
 [![Build Status](https://dev.azure.com/tpaine154/pyEX/_apis/build/status/timkpaine.pyEX?branchName=main)](https://dev.azure.com/tpaine154/pyEX/_build/latest?definitionId=3&branchName=main)
-[![Coverage](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3/main)](https://img.shields.io/azure-devops/coverage/tpaine154/pyEX/3)
+[![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/timkpaine/pyEX)
 [![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)

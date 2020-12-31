@@ -1,9 +1,13 @@
-name: Build Status
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+name: Publish Package
 
-on: [push, pull_request]
+on:
+  release:
+    types: [created]
 
 jobs:
-  build:
+  deploy:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -17,6 +21,7 @@ jobs:
         #   - os: windows-latest
         #     python-version: 3.6
 
+        
     steps:
     - uses: actions/checkout@v2
 
@@ -55,7 +60,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip setuptools wheel twine
         python -m pip install -e .[dev]
 
     - name: Lint
@@ -66,12 +71,9 @@ jobs:
       run: |
         make tests
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v2
-      with:
-        name: pytest-results-${{ matrix.os }}-${{ matrix.python-version }}
-        path: python_junit.xml
-      if: ${{ always() }}
-
-    - name: Upload coverage
-      uses: codecov/codecov-action@v1
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        make dist
