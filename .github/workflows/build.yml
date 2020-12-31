@@ -27,22 +27,22 @@ jobs:
     - name: Install system dependencies
       run: |
         make talib_nix
-      if: ${{ matrix.os == "ubuntu-latest" }}
+      if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: Install system dependencies
       run: |
         make talib_mac
-      if: ${{ matrix.os == "macos-latest" }}
+      if: ${{ matrix.os == 'macos-latest' }}
 
     - name: Install system dependencies
       run: |
         make talib_windows_py37
-      if: ${{ matrix.os == "windows-latest" && matrix.python-version == 3.7 }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.7 }}
 
     - name: Install system dependencies
       run: |
         make talib_windows_py38
-      if: ${{ matrix.os == "windows-latest" && matrix.python-version == 3.8 }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.8 }}
 
     - name: Install dependencies
       run: |
