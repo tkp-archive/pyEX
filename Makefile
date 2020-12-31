@@ -46,10 +46,13 @@ install:  ## install to site-packages
 dev:
 	python -m pip install .[dev]
 
-dist:  ## dist to pypi
+dist:  ## create dists
 	rm -rf dist build
 	python setup.py sdist bdist_wheel
-	python -m twine check dist/* && python -m twine upload dist/* --skip-existing
+	python -m twine check dist/*
+	
+publish: dist  ## dist to pypi
+	python -m twine upload dist/* --skip-existing
 
 # Thanks to Francoise at marmelab.com for this
 .DEFAULT_GOAL := help
