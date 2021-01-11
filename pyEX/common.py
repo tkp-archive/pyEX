@@ -872,9 +872,10 @@ def _interval(**temporal_args):
     return _wrapper
 
 
-def _requireSecret(token):
-    if not token.startswith("sk"):
-        raise PyEXception("Requires secret token!")
+def _requireSecret(token, allowSandbox=True):
+    if token.startswith("sk") or (allowSandbox and token.startswith("Tsk")):
+        return
+    raise PyEXception("Requires secret token!")
 
 
 def _quoteSymbols(symbols):
