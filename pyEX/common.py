@@ -35,12 +35,12 @@ _SSE_URL_PREFIX = (
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
 _SSE_URL_PREFIX_SANDBOX = (
-    "https://sandbox-sse.iexapis.com/v1/{channel}?symbols={symbols}&token={token}"
+    "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
 )
 _SSE_URL_PREFIX_ALL_SANDBOX = (
-    "https://sandbox-sse.iexapis.com/v1/{channel}?token={token}"
+    "https://sandbox-sse.iexapis.com/{version}/{channel}?token={token}"
 )
-_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/v1/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
 
 _TIMEFRAME_CHART = [
     "max",
@@ -497,6 +497,16 @@ async def _getJsonIEXCloudAsync(url, token="", version="stable", filter=""):
     """for iex cloud"""
     return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
 
+def _getJsonIEXCloudSandbox(url, token="", version="stable", filter=""):
+    """for iex cloud"""
+    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable", filter)
+
+
+async def _getJsonIEXCloudSandboxAsync(url, token="", version="stable", filter=""):
+    """for iex cloud"""
+    return await _getJsonIEXCloudAsyncBase(
+        _URL_PREFIX2_SANDBOX, url, token, "stable", filter
+    )
 
 def _postJsonIEXCloudBase(
     base_url,
@@ -580,6 +590,14 @@ async def _postJsonIEXCloudAsync(
         _URL_PREFIX2, url, data, json, token, version, filter, token_in_params
     )
 
+def _postJsonIEXCloudSandbox(
+    url, data=None, json=None, token="", version="stable", token_in_params=True
+):
+    """for iex cloud"""
+    return _postJsonIEXCloudBase(
+        _URL_PREFIX2_SANDBOX, url, data, json, token, "stable", token_in_params
+    )
+
 
 def _deleteJsonIEXCloudBase(base_url, url, token="", version="stable"):
     """for iex cloud"""
@@ -617,27 +635,6 @@ async def _deleteJsonIEXCloudAsync(url, token="", version="stable"):
     return await _deleteJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version)
 
 
-def _getJsonIEXCloudSandbox(url, token="", version="stable", filter=""):
-    """for iex cloud"""
-    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable", filter)
-
-
-async def _getJsonIEXCloudSandboxAsync(url, token="", version="stable", filter=""):
-    """for iex cloud"""
-    return await _getJsonIEXCloudAsyncBase(
-        _URL_PREFIX2_SANDBOX, url, token, "stable", filter
-    )
-
-
-def _postJsonIEXCloudSandbox(
-    url, data=None, json=None, token="", version="stable", token_in_params=True
-):
-    """for iex cloud"""
-    return _postJsonIEXCloudBase(
-        _URL_PREFIX2_SANDBOX, url, data, json, token, "stable", token_in_params
-    )
-
-
 def _deleteJsonIEXCloudSandbox(url, token="", version="stable"):
     """for iex cloud"""
     return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable")
@@ -651,7 +648,7 @@ def _wsURL(url):
 def _strToList(st):
     """internal"""
     if isinstance(st, string_types):
-        return [st]
+        return st.split(",")
     return st
 
 
@@ -749,8 +746,7 @@ def _stream(url, sendinit=None, on_data=print):
 def _streamSSE(url, on_data=print, accrue=False):
     """internal"""
     messages = SSEClient(url)
-    if accrue:
-        ret = []
+    ret = []
 
     for msg in messages:
         data = msg.data
