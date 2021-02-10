@@ -184,4 +184,4 @@ def tenK(symbol, **kwargs):
     kwargs.pop("id")
     kwargs.pop("key")
     kwargs.pop("subkey")
-    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-K", **kwargs)
