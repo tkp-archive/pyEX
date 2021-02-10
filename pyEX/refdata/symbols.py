@@ -293,9 +293,12 @@ def fxSymbolsList(token="", version=""):
 
 @wraps(optionsSymbols)
 def optionsSymbolsList(token="", version=""):
-    return sorted(
-        [x["symbol"] for x in optionsSymbols(token, version, filter="symbol")]
-    )
+    symbols = optionsSymbols(token, version, filter="symbol")
+    ret = []
+    for ticker, dates in symbols.items():
+        for date in dates:
+            ret.append("{}-{}".format(ticker, date))
+    return ret
 
 
 @wraps(cryptoSymbols)
