@@ -110,6 +110,7 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter=""):
 
     Args:
         symbol (str): Ticker to request
+        timeframe (str): timeframe for data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -154,6 +155,7 @@ def earnings(
         symbol (str): Ticker to request
         period (str): Period, either 'annual' or 'quarter'
         last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        field (str): Subfield to fetch
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -170,7 +172,7 @@ def earnings(
             token,
             version,
             filter,
-        )
+        ).get("earnings", [])
     return _getJson(
         "stock/{}/earnings/{}/{}?period={}".format(symbol, last, field, period),
         token,
@@ -333,6 +335,7 @@ def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
 
     Args:
         symbol (str): Ticker to request
+        timeframe (str): timeframe for data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
