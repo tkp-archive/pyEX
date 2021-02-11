@@ -79,7 +79,7 @@ def cryptoQuote(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     return _getJson(
-        "/crypto/{symbol}/price".format(symbol=symbol), token, version, filter
+        "/crypto/{symbol}/quote".format(symbol=symbol), token, version, filter
     )
 
 

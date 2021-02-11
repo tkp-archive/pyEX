@@ -4,7 +4,7 @@ Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
 [![Build Status](https://github.com/timkpaine/pyEX/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/timkpaine/pyEX/actions?query=workflow%3A%22Build+Status%22)
 [![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/timkpaine/pyEX)
-[![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
+[![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://github.com/timkpaine/pyEX)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 

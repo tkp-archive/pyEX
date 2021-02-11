@@ -53,8 +53,7 @@ def timeSeries(
     filter="",
     **extra_params,
 ):
-    """This is a meeting where company executives provide information about the company’s performance and its future prospects.
-    6am , 10am , 2pm , 6pm and 9pm daily
+    """Time series is the most common type of data available, and consists of a collection of data points over a period of time. Time series data is indexed by a single date field, and can be retrieved by any portion of time.
 
     https://iexcloud.io/docs/api/#time-series
 
@@ -185,4 +184,4 @@ def tenK(symbol, **kwargs):
     kwargs.pop("id")
     kwargs.pop("key")
     kwargs.pop("subkey")
-    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-K", **kwargs)
