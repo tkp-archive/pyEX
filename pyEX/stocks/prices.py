@@ -586,8 +586,6 @@ def spread(symbol, token="", version="", filter=""):
 
     View the data disclaimer at the bottom of the stocks app for more information about how these values are calculated.
 
-
-    https://iexcloud.io/docs/api/#earnings-today
     8am ET M-F
 
     Args:
