@@ -446,7 +446,7 @@ def largestTradesDF(symbol, token="", version="", filter=""):
 def ohlc(symbol, token="", version="", filter=""):
     """Returns the official open and close for a give symbol.
 
-    https://iexcloud.io/docs/api/#news
+    https://iexcloud.io/docs/api/#ohlc
     9:30am-5pm ET Mon-Fri
 
     Args:
