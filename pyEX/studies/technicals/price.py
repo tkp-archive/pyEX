@@ -35,7 +35,10 @@ def avgprice(
     """
     df = client.chartDF(symbol, timeframe)
     avg = t.AVGPRICE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -63,7 +66,7 @@ def medprice(client, symbol, timeframe="6m", highcol="high", lowcol="low"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    med = t.MEDPRICE(df[highcol].values, df[lowcol].values)
+    med = t.MEDPRICE(df[highcol].values.astype(float), df[lowcol].values.astype(float))
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "medprice": med}
     )
@@ -93,7 +96,11 @@ def typprice(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    typ = t.TYPPRICE(df[highcol].values, df[lowcol].values, df[closecol].values)
+    typ = t.TYPPRICE(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -128,7 +135,11 @@ def wclprice(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    wcl = t.WCLPRICE(df[highcol].values, df[lowcol].values, df[closecol].values)
+    wcl = t.WCLPRICE(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,

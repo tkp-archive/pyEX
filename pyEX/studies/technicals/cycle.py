@@ -25,7 +25,7 @@ def ht_dcperiod(client, symbol, timeframe="6m", col="close"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.HT_DCPERIOD(df[col].values)
+    x = t.HT_DCPERIOD(df[col].values.astype(float))
     return pd.DataFrame({col: df[col].values, "ht_dcperiod": x})
 
 
@@ -45,7 +45,7 @@ def ht_dcphase(client, symbol, timeframe="6m", col="close"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.HT_DCPHASE(df[col].values)
+    x = t.HT_DCPHASE(df[col].values.astype(float))
     return pd.DataFrame({col: df[col].values, "ht_dcphase": x})
 
 
@@ -65,7 +65,7 @@ def ht_phasor(client, symbol, timeframe="6m", col="close"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x, y = t.HT_PHASOR(df[col].values)
+    x, y = t.HT_PHASOR(df[col].values.astype(float))
     return pd.DataFrame({col: df[col].values, "inphase": x, "quadrature": y})
 
 
@@ -85,7 +85,7 @@ def ht_sine(client, symbol, timeframe="6m", col="close"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x, y = t.HT_SINE(df[col].values)
+    x, y = t.HT_SINE(df[col].values.astype(float))
     return pd.DataFrame({col: df[col].values, "sine": x, "leadsine": y})
 
 
@@ -105,5 +105,5 @@ def ht_trendmode(client, symbol, timeframe="6m", col="close"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.HT_TRENDMODE(df[col].values)
+    x = t.HT_TRENDMODE(df[col].values.astype(float))
     return pd.DataFrame({col: df[col].values, "ht_trendmode": x})

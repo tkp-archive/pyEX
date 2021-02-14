@@ -34,7 +34,12 @@ def adx(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    adx = t.ADX(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    adx = t.ADX(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -70,7 +75,12 @@ def adxr(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    adx = t.ADXR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    adx = t.ADXR(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -99,7 +109,7 @@ def apo(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    apo = t.APO(df[col].values, fastperiod, slowperiod, matype)
+    apo = t.APO(df[col].values.astype(float), fastperiod, slowperiod, matype)
     return pd.DataFrame({col: df[col].values, "apo": apo})
 
 
@@ -120,7 +130,9 @@ def aroon(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=1
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    aroondown, aroonup = t.AROON(df[highcol].values, df[lowcol].values, period)
+    aroondown, aroonup = t.AROON(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -148,7 +160,9 @@ def aroonosc(client, symbol, timeframe="6m", highcol="high", lowcol="low", perio
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.AROONOSC(df[highcol].values, df[lowcol].values, period)
+    x = t.AROONOSC(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "aroonosc": x}
     )
@@ -181,7 +195,10 @@ def bop(
     """
     df = client.chartDF(symbol, timeframe)
     x = t.BOP(
-        df[highcol].values, df[lowcol].values, df[closecol].values, df[volumecol].values
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        df[volumecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -220,7 +237,12 @@ def cci(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.CCI(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    x = t.CCI(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -247,7 +269,9 @@ def cmo(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "cmo": t.CMO(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "cmo": t.CMO(df[col].values.astype(float), period)}
+    )
 
 
 def dx(
@@ -276,7 +300,12 @@ def dx(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.DX(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    x = t.DX(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -312,7 +341,7 @@ def macd(
     """
     df = client.chartDF(symbol, timeframe)
     macd, macdsignal, macdhist = t.MACD(
-        df[col].values, fastperiod, slowperiod, signalperiod
+        df[col].values.astype(float), fastperiod, slowperiod, signalperiod
     )
     return pd.DataFrame(
         {
@@ -355,7 +384,7 @@ def macdext(
     """
     df = client.chartDF(symbol, timeframe)
     macd, macdsignal, macdhist = t.MACDEXT(
-        df[col].values, fastperiod, slowperiod, signalperiod
+        df[col].values.astype(float), fastperiod, slowperiod, signalperiod
     )
     return pd.DataFrame(
         {
@@ -395,10 +424,10 @@ def mfi(
     """
     df = client.chartDF(symbol, timeframe)
     x = t.MFI(
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
-        df[volumecol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        df[volumecol].values.astype(float),
         period,
     )
     return pd.DataFrame(
@@ -438,7 +467,12 @@ def minus_di(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.MINUS_DI(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    x = t.MINUS_DI(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -466,7 +500,9 @@ def minus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="low", perio
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.MINUS_DM(df[highcol].values, df[lowcol].values, period)
+    x = t.MINUS_DM(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "minus_dm": x}
     )
@@ -488,7 +524,9 @@ def mom(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "mom": t.MOM(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "mom": t.MOM(df[col].values.astype(float), period)}
+    )
 
 
 def plus_di(
@@ -517,7 +555,12 @@ def plus_di(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.PLUS_DI(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    x = t.PLUS_DI(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -545,7 +588,9 @@ def plus_dm(client, symbol, timeframe="6m", highcol="high", lowcol="low", period
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.PLUS_DM(df[highcol].values, df[lowcol].values, period)
+    x = t.PLUS_DM(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "plus_dm": x}
     )
@@ -569,7 +614,7 @@ def ppo(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    ppo = t.PPO(df[col].values, fastperiod, slowperiod, matype)
+    ppo = t.PPO(df[col].values.astype(float), fastperiod, slowperiod, matype)
     return pd.DataFrame({col: df[col].values, "ppo": ppo})
 
 
@@ -589,7 +634,9 @@ def roc(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "roc": t.ROC(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "roc": t.ROC(df[col].values.astype(float), period)}
+    )
 
 
 def rocp(client, symbol, timeframe="6m", col="close", period=14):
@@ -608,7 +655,9 @@ def rocp(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "rocp": t.ROCP(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "rocp": t.ROCP(df[col].values.astype(float), period)}
+    )
 
 
 def rocr(client, symbol, timeframe="6m", col="close", period=14):
@@ -627,7 +676,9 @@ def rocr(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "rocr": t.ROCR(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "rocr": t.ROCR(df[col].values.astype(float), period)}
+    )
 
 
 def rocr100(client, symbol, timeframe="6m", col="close", period=14):
@@ -647,7 +698,10 @@ def rocr100(client, symbol, timeframe="6m", col="close", period=14):
     """
     df = client.chartDF(symbol, timeframe)
     return pd.DataFrame(
-        {col: df[col].values, "rocr100": t.ROCR100(df[col].values, period)}
+        {
+            col: df[col].values,
+            "rocr100": t.ROCR100(df[col].values.astype(float), period),
+        }
     )
 
 
@@ -667,7 +721,9 @@ def rsi(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "rsi": t.RSI(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "rsi": t.RSI(df[col].values.astype(float), period)}
+    )
 
 
 def stoch(
@@ -705,9 +761,9 @@ def stoch(
     """
     df = client.chartDF(symbol, timeframe)
     slowk, slowd = t.STOCH(
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         fastk_period=fastk_period,
         slowk_period=slowk_period,
         slowk_matype=slowk_matype,
@@ -760,9 +816,9 @@ def stochf(
     """
     df = client.chartDF(symbol, timeframe)
     fastk, fastd = t.STOCHF(
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         fastk_period=fastk_period,
         slowk_period=slowk_period,
         slowk_matype=slowk_matype,
@@ -809,7 +865,7 @@ def stochrsi(
     """
     df = client.chartDF(symbol, timeframe)
     fastk, fastd = t.STOCHF(
-        df[closecol].values,
+        df[closecol].values.astype(float),
         fastk_period=fastk_period,
         slowk_period=slowk_period,
         slowk_matype=slowk_matype,
@@ -835,7 +891,9 @@ def trix(client, symbol, timeframe="6m", col="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    return pd.DataFrame({col: df[col].values, "trix": t.TRIX(df[col].values, period)})
+    return pd.DataFrame(
+        {col: df[col].values, "trix": t.TRIX(df[col].values.astype(float), period)}
+    )
 
 
 def ultosc(
@@ -869,9 +927,9 @@ def ultosc(
     """
     df = client.chartDF(symbol, timeframe)
     x = t.ULTOSC(
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         timeperiod1=period1,
         timeperiod2=period2,
         timeperiod3=period3,
@@ -912,7 +970,12 @@ def willr(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    x = t.WILLR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    x = t.WILLR(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,

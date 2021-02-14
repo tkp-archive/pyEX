@@ -253,7 +253,6 @@ def marketYesterday(token="", version="", filter=""):
     Available after 4am ET Tue-Sat
 
     Args:
-        symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results

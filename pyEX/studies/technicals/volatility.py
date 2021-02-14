@@ -34,7 +34,12 @@ def atr(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    atr = t.ATR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    atr = t.ATR(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -70,7 +75,12 @@ def natr(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    natr = t.NATR(df[highcol].values, df[lowcol].values, df[closecol].values, period)
+    natr = t.NATR(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        period,
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,
@@ -99,7 +109,11 @@ def trange(
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    trange = t.TRANGE(df[highcol].values, df[lowcol].values, df[closecol].values)
+    trange = t.TRANGE(
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+    )
     return pd.DataFrame(
         {
             highcol: df[highcol].values,

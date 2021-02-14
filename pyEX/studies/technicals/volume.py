@@ -35,7 +35,10 @@ def ad(
     """
     df = client.chartDF(symbol, timeframe)
     ad = t.AD(
-        df[highcol].values, df[lowcol].values, df[closecol].values, df[volumecol].values
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        df[volumecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -77,10 +80,10 @@ def adosc(
     """
     df = client.chartDF(symbol, timeframe)
     adosc = t.ADOSC(
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
-        df[volumecol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
+        df[volumecol].values.astype(float),
         fastperiod,
         slowperiod,
     )
@@ -109,7 +112,7 @@ def obv(client, symbol, timeframe="6m", closecol="close", volumecol="volume"):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    obv = t.OBV(df[closecol].values, df[volumecol].values)
+    obv = t.OBV(df[closecol].values.astype(float), df[volumecol].values.astype(float))
     return pd.DataFrame(
         {closecol: df[closecol].values, volumecol: df[volumecol].values, "obv": obv}
     )
