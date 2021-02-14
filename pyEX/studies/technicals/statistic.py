@@ -25,7 +25,9 @@ def beta(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    beta = t.BETA(df[highcol].values, df[lowcol].values, period)
+    beta = t.BETA(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "beta": beta}
     )
@@ -47,7 +49,9 @@ def correl(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    correl = t.CORREL(df[highcol].values, df[lowcol].values, period)
+    correl = t.CORREL(
+        df[highcol].values.astype(float), df[lowcol].values.astype(float), period
+    )
     return pd.DataFrame(
         {highcol: df[highcol].values, lowcol: df[lowcol].values, "correl": correl}
     )
@@ -68,7 +72,7 @@ def linearreg(client, symbol, timeframe="6m", closecol="close", period=14):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    linearreg = t.LINEARREG(df[closecol].values, period)
+    linearreg = t.LINEARREG(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg": linearreg})
 
 
@@ -87,7 +91,7 @@ def linearreg_angle(client, symbol, timeframe="6m", closecol="close", period=14)
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    linearreg = t.LINEARREG_ANGLE(df[closecol].values, period)
+    linearreg = t.LINEARREG_ANGLE(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg_angle": linearreg})
 
 
@@ -106,7 +110,7 @@ def linearreg_intercept(client, symbol, timeframe="6m", closecol="close", period
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    linearreg = t.LINEARREG_INTERCEPT(df[closecol].values, period)
+    linearreg = t.LINEARREG_INTERCEPT(df[closecol].values.astype(float), period)
     return pd.DataFrame(
         {closecol: df[closecol].values, "lineearreg_intercept": linearreg}
     )
@@ -127,7 +131,7 @@ def linearreg_slope(client, symbol, timeframe="6m", closecol="close", period=14)
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    linearreg = t.LINEARREG_SLOPE(df[closecol].values, period)
+    linearreg = t.LINEARREG_SLOPE(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg_slope": linearreg})
 
 
@@ -147,7 +151,7 @@ def stddev(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1)
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    stddev = t.STDDEV(df[closecol].values, period, nbdev)
+    stddev = t.STDDEV(df[closecol].values.astype(float), period, nbdev)
     return pd.DataFrame({closecol: df[closecol].values, "stddev": stddev})
 
 
@@ -166,7 +170,7 @@ def tsf(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    tsf = t.TSF(df[closecol].values, period)
+    tsf = t.TSF(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "tsf": tsf})
 
 
@@ -186,5 +190,5 @@ def var(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    var = t.VAR(df[closecol].values, period, nbdev)
+    var = t.VAR(df[closecol].values.astype(float), period, nbdev)
     return pd.DataFrame({closecol: df[closecol].values, "var": var})

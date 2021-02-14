@@ -35,7 +35,10 @@ def cdl2crows(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL2CROWS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -74,7 +77,10 @@ def cdl3blackcrows(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3BLACKCROWS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -113,7 +119,10 @@ def cdl3inside(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3INSIDE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -152,7 +161,10 @@ def cdl3linestrike(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3LINESTRIKE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -191,7 +203,10 @@ def cdl3outside(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3OUTSIDE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -230,7 +245,10 @@ def cdl3starsinsouth(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3STARSINSOUTH(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -269,7 +287,10 @@ def cdl3whitesoldiers(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDL3WHITESOLDIERS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -308,7 +329,10 @@ def cdlabandonedbaby(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLABANDONEDBABY(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -347,7 +371,10 @@ def cdladvanceblock(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLADVANCEBLOCK(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -386,7 +413,10 @@ def cdlbelthold(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLBELTHOLD(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -425,7 +455,10 @@ def cdlbreakaway(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLBREAKAWAY(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -464,7 +497,10 @@ def cdlclosingmarubozu(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLCLOSINGMARUBOZU(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -503,7 +539,10 @@ def cdlconcealbabyswallow(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLCONCEALBABYSWALL(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -542,7 +581,10 @@ def cdlcounterattack(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLCOUNTERATTACK(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -583,10 +625,10 @@ def cdldarkcloudcover(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLDARKCLOUDCOVER(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -626,7 +668,10 @@ def cdldoji(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLDOJI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -665,7 +710,10 @@ def cdldojistar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLDOJISTAR(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -704,7 +752,10 @@ def cdldragonflydoji(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLDRAGONFLYDOJI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -743,7 +794,10 @@ def cdlengulfing(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLENGULFING(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -784,10 +838,10 @@ def cdleveningdojistar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLEVENINGDOJISTAR(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -829,10 +883,10 @@ def cdleveningstar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLEVENINGSTAR(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -872,7 +926,10 @@ def cdlgapsidesidewhite(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLGAPSIDESIDEWHITE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -911,7 +968,10 @@ def cdlgravestonedoji(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLGRAVESTONEDOJI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -950,7 +1010,10 @@ def cdlhammer(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHAMMER(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -989,7 +1052,10 @@ def cdlhangingman(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHANGINGMAN(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1028,7 +1094,10 @@ def cdlharami(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHARAMI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1067,7 +1136,10 @@ def cdlharamicross(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHARAMICROSS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1106,7 +1178,10 @@ def cdlhighwave(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHIGHWAVE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1145,7 +1220,10 @@ def cdlhikkake(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHIKKAKE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1184,7 +1262,10 @@ def cdlhikkakemod(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHIKKAKEMOD(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1223,7 +1304,10 @@ def cdlhomingpigeon(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLHOMINGPIGEON(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1262,7 +1346,10 @@ def cdlidentical3crows(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLIDENTICAL3CROWS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1301,7 +1388,10 @@ def cdlinneck(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLINNECK(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1340,7 +1430,10 @@ def cdlinvertedhammer(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLINVERTEDHAMMER(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1379,7 +1472,10 @@ def cdlkicking(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLKICKING(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1418,7 +1514,10 @@ def cdlkickingbylength(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLKICKINGBYLENGTH(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1457,7 +1556,10 @@ def cdlladderbottom(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLLADDERBOTTOM(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1496,7 +1598,10 @@ def cdllongleggeddoji(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLLONGLEGGEDDOJI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1535,7 +1640,10 @@ def cdllongline(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLLONGLINE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1574,7 +1682,10 @@ def cdlmarubozu(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLMARUBOZU(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1613,7 +1724,10 @@ def cdlmatchinglow(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLMATCHINGLOW(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1654,10 +1768,10 @@ def cdlmathold(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLMATHOLD(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -1699,10 +1813,10 @@ def cdlmorningdojistar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLMORNINGDOJISTAR(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -1744,10 +1858,10 @@ def cdlmorningstar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLMORNINGSTAR(
-        df[opencol].values,
-        df[highcol].values,
-        df[lowcol].values,
-        df[closecol].values,
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
         penetration,
     )
     return pd.DataFrame(
@@ -1787,7 +1901,10 @@ def cdlonneck(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLONNECK(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1826,7 +1943,10 @@ def cdlpiercing(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLPIERCING(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1865,7 +1985,10 @@ def cdlrickshawman(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLRICKSHAWMAN(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1904,7 +2027,10 @@ def cdlrisefall3methods(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLRISEFALL3METHODS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1943,7 +2069,10 @@ def cdlseparatinglines(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSEPARATINGLINES(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -1982,7 +2111,10 @@ def cdlshootingstar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSHOOTINGSTAR(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2021,7 +2153,10 @@ def cdlshortline(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSHORTLINE(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2060,7 +2195,10 @@ def cdlspinningtop(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSPINNINGTOP(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2099,7 +2237,10 @@ def cdlstalledpattern(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSTALLEDPATTERN(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2138,7 +2279,10 @@ def cdlsticksandwich(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLSTICKSANDWICH(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2177,7 +2321,10 @@ def cdltakuri(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLTAKURI(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2216,7 +2363,10 @@ def cdltasukigap(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLTASUKIGAP(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2255,7 +2405,10 @@ def cdlthrusting(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLTHRUSTING(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2294,7 +2447,10 @@ def cdltristar(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLTRISTAR(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2333,7 +2489,10 @@ def cdlunique3river(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLUNIQUE3RIVER(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2372,7 +2531,10 @@ def cdlupsidegap2crows(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLUPSIDEGAP2CROWS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {
@@ -2411,7 +2573,10 @@ def cdlxsidegap3methods(
     """
     df = client.chartDF(symbol, timeframe)
     val = t.CDLXSIDEGAP3METHODS(
-        df[opencol].values, df[highcol].values, df[lowcol].values, df[closecol].values
+        df[opencol].values.astype(float),
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
+        df[closecol].values.astype(float),
     )
     return pd.DataFrame(
         {

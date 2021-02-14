@@ -26,7 +26,7 @@ def bollinger(client, symbol, timeframe="6m", col="close", period=2):
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    bb = t.BBANDS(df[col].values, period)
+    bb = t.BBANDS(df[col].values.astype(float), period)
     return pd.DataFrame(
         {col: df[col].values, "upper": bb[0], "middle": bb[1], "lower": bb[2]}
     )
@@ -54,7 +54,7 @@ def dema(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["ema-{}".format(per)] = t.DEMA(df[col].values, per)
+        build["ema-{}".format(per)] = t.DEMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
 
 
@@ -80,7 +80,7 @@ def ema(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["ema-{}".format(per)] = t.EMA(df[col].values, per)
+        build["ema-{}".format(per)] = t.EMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
 
 
@@ -100,7 +100,7 @@ def ht_trendline(client, symbol, timeframe="6m", col="close"):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["ht-{}".format(col)] = t.HT_TRENDLINE(df[col].values)
+    build["ht-{}".format(col)] = t.HT_TRENDLINE(df[col].values.astype(float))
     return pd.DataFrame(build)
 
 
@@ -121,7 +121,7 @@ def kama(client, symbol, timeframe="6m", col="close", period=30):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.KAMA(df[col].values, period)
+    build["kama-{}".format(col)] = t.KAMA(df[col].values.astype(float), period)
     return pd.DataFrame(build)
 
 
@@ -143,7 +143,7 @@ def mama(client, symbol, timeframe="6m", col="close", fastlimit=0, slowlimit=0):
 
     build = {col: df[col].values}
     build["mama-{}".format(col)], build["fama-{}".format(col)] = t.MAMA(
-        df[col].values, fastlimit=fastlimit, slowlimit=slowlimit
+        df[col].values.astype(float), fastlimit=fastlimit, slowlimit=slowlimit
     )
     return pd.DataFrame(build)
 
@@ -183,7 +183,11 @@ def mavp(
     build = {col: df[col].values}
     for per in periods:
         build["mavp-{}".format(per)] = t.MAVP(
-            df[col].values, per, minperiod=minperiod, maxperiod=maxperiod, matype=matype
+            df[col].values.astype(float),
+            per,
+            minperiod=minperiod,
+            maxperiod=maxperiod,
+            matype=matype,
         )
     return pd.DataFrame(build)
 
@@ -205,7 +209,7 @@ def midpoint(client, symbol, timeframe="6m", col="close", period=14):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.MIDPOINT(df[col].values, period)
+    build["kama-{}".format(col)] = t.MIDPOINT(df[col].values.astype(float), period)
     return pd.DataFrame(build)
 
 
@@ -226,7 +230,7 @@ def midpice(client, symbol, timeframe="6m", col="close", period=14):
     df = client.chartDF(symbol, timeframe)
 
     build = {col: df[col].values}
-    build["kama-{}".format(col)] = t.MIDPRICE(df[col].values, period)
+    build["kama-{}".format(col)] = t.MIDPRICE(df[col].values.astype(float), period)
     return pd.DataFrame(build)
 
 
@@ -256,8 +260,8 @@ def sar(
     """
     df = client.chartDF(symbol, timeframe)
     sar = t.SAR(
-        df[highcol].values,
-        df[lowcol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
         acceleration=acceleration,
         maximum=maximum,
     )
@@ -304,8 +308,8 @@ def sarext(
     """
     df = client.chartDF(symbol, timeframe)
     sar = t.SAREXT(
-        df[highcol].values,
-        df[lowcol].values,
+        df[highcol].values.astype(float),
+        df[lowcol].values.astype(float),
         startvalue=startvalue,
         offsetonreverse=offsetonreverse,
         accelerationinitlong=accelerationinitlong,
@@ -342,7 +346,7 @@ def sma(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["sma-{}".format(per)] = t.EMA(df[col].values, per)
+        build["sma-{}".format(per)] = t.EMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
 
 
@@ -369,7 +373,9 @@ def t3(client, symbol, timeframe="6m", col="close", periods=None, vfactor=0):
 
     build = {col: df[col].values}
     for per in periods:
-        build["t3-{}".format(per)] = t.T3(df[col].values, per, vfactor=vfactor)
+        build["t3-{}".format(per)] = t.T3(
+            df[col].values.astype(float), per, vfactor=vfactor
+        )
     return pd.DataFrame(build)
 
 
@@ -395,7 +401,7 @@ def tema(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["sma-{}".format(per)] = t.TEMA(df[col].values, per)
+        build["sma-{}".format(per)] = t.TEMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
 
 
@@ -421,7 +427,7 @@ def trima(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["trima-{}".format(per)] = t.TRIMA(df[col].values, per)
+        build["trima-{}".format(per)] = t.TRIMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
 
 
@@ -447,5 +453,5 @@ def wma(client, symbol, timeframe="6m", col="close", periods=None):
 
     build = {col: df[col].values}
     for per in periods:
-        build["wma-{}".format(per)] = t.WMA(df[col].values, per)
+        build["wma-{}".format(per)] = t.WMA(df[col].values.astype(float), per)
     return pd.DataFrame(build)
