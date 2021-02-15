@@ -841,36 +841,35 @@ def stochrsi(
     symbol,
     timeframe="6m",
     closecol="close",
+    period=14,
     fastk_period=5,
-    slowk_period=3,
-    slowk_matype=0,
-    slowd_period=3,
-    slowd_matype=0,
+    fastd_period=3,
+    fastd_matype=0,
 ):
     """This will return a dataframe of
-    Williams' % R
+    Stochastic Relative Strength Index
     for the given symbol across the given timeframe
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
         timeframe (string): timeframe to use, for pyEX.chart
-        highcol (string): column to use to calculate
-        lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
         period (int): period to calculate across
+        fastk_period (int): fastk_period
+        fastd_period (int): fastd_period
+        fastd_matype (int): moving average type (0-sma)
 
     Returns:
         DataFrame: result
     """
     df = client.chartDF(symbol, timeframe)
-    fastk, fastd = t.STOCHF(
+    fastk, fastd = t.STOCHRSI(
         df[closecol].values.astype(float),
+        timeperiod=period,
         fastk_period=fastk_period,
-        slowk_period=slowk_period,
-        slowk_matype=slowk_matype,
-        slowd_period=slowd_period,
-        slowd_matype=slowd_matype,
+        fastd_period=fastd_period,
+        fastd_matype=fastd_matype,
     )
     return pd.DataFrame({closecol: df[closecol].values, "fastk": fastk, "fastd": fastd})
 
