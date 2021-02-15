@@ -353,7 +353,7 @@ def esgUSPTOPatentGrants(symbol="", **kwargs):
     Args:
         symbol (str): symbol to use
     """
-    kwargs["subkey"] = "10"
+    kwargs["subkey"] = "11"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
 
 
@@ -368,7 +368,7 @@ def esgUSPTOPatentGrantsDF(symbol="", **kwargs):
     Args:
         symbol (str): symbol to use
     """
-    kwargs["subkey"] = "10"
+    kwargs["subkey"] = "11"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
 
 
