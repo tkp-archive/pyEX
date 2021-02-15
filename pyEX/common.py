@@ -34,9 +34,7 @@ _SSE_URL_PREFIX = (
 )
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
-_SSE_URL_PREFIX_SANDBOX = (
-    "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
-)
+_SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
 _SSE_URL_PREFIX_ALL_SANDBOX = (
     "https://sandbox-sse.iexapis.com/{version}/{channel}?token={token}"
 )
@@ -497,6 +495,7 @@ async def _getJsonIEXCloudAsync(url, token="", version="stable", filter=""):
     """for iex cloud"""
     return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
 
+
 def _getJsonIEXCloudSandbox(url, token="", version="stable", filter=""):
     """for iex cloud"""
     return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable", filter)
@@ -507,6 +506,7 @@ async def _getJsonIEXCloudSandboxAsync(url, token="", version="stable", filter="
     return await _getJsonIEXCloudAsyncBase(
         _URL_PREFIX2_SANDBOX, url, token, "stable", filter
     )
+
 
 def _postJsonIEXCloudBase(
     base_url,
@@ -589,6 +589,7 @@ async def _postJsonIEXCloudAsync(
     return await _postJsonIEXCloudAsyncBase(
         _URL_PREFIX2, url, data, json, token, version, filter, token_in_params
     )
+
 
 def _postJsonIEXCloudSandbox(
     url, data=None, json=None, token="", version="stable", token_in_params=True
