@@ -20,6 +20,7 @@ def lookup(lookup="", token="", version=""):
         lookup (str): If a schema object has “isLookup”: true, pass the value key to /stable/rules/lookup/{value}. This returns all valid values for the rightValue of a condition.
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -44,6 +45,9 @@ def create(rule, ruleName, ruleSet, type="any", existingId=None, token="", versi
         ruleSet (str): Valid US symbol or the string ANYEVENT. If the string ANYEVENT is passed, the rule will be triggered for any symbol in the system. The cool down period for alerts (frequency) is applied on a per symbol basis.
         type (str): Specify either any, where if any condition is true you get an alert, or all, where all conditions must be true to trigger an alert. any is the default value
         existingId (Optional[str]): The id of an existing rule only if you are editing the existing rule
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     if type not in ("any", "all"):
         raise PyEXception("type must be in (any, all). got: {}".format(type))
@@ -74,6 +78,9 @@ def pause(ruleId, token="", version=""):
 
     Args:
         ruleId (str): The id of an existing rule to puase
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     return _post(
         "rules/pause",
@@ -89,6 +96,9 @@ def resume(ruleId, token="", version=""):
 
     Args:
         ruleId (str): The id of an existing rule to puase
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     return _post(
         "rules/resume",
@@ -104,6 +114,9 @@ def delete(ruleId, token="", version=""):
 
     Args:
         ruleId (str): The id of an existing rule to puase
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     return _delete("rules/{}".format(ruleId), token=token, version=version)
 
@@ -113,6 +126,9 @@ def rule(ruleId, token="", version=""):
 
     Args:
         ruleId (str): The id of an existing rule to puase
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     return _get("rules/info/{}".format(ruleId), token=token, version=version)
 
@@ -127,5 +143,8 @@ def output(ruleId, token="", version=""):
 
     Args:
         ruleId (str): The id of an existing rule to puase
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
     """
     return _get("rules/output/{}".format(ruleId), token=token, version=version)

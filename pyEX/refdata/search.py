@@ -23,6 +23,7 @@ def search(fragment, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

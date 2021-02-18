@@ -39,6 +39,7 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -77,6 +78,7 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -114,6 +116,7 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -122,9 +125,7 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter=""):
     symbol = _quoteSymbols(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
-    return _get(
-        "stock/" + symbol + "/dividends/" + timeframe, token, version, filter
-    )
+    return _get("stock/" + symbol + "/dividends/" + timeframe, token, version, filter)
 
 
 def _dividendsToDF(d):
@@ -159,6 +160,7 @@ def earnings(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -214,6 +216,7 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -257,6 +260,7 @@ def fundamentals(symbol, period="quarter", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -301,6 +305,7 @@ def incomeStatement(symbol, period="quarter", last=1, token="", version="", filt
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -339,6 +344,7 @@ def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

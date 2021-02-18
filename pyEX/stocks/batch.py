@@ -55,6 +55,7 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: results in json
@@ -110,6 +111,7 @@ def batchDF(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         DataFrame: results in json
@@ -154,6 +156,7 @@ def bulkBatch(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: results in json
@@ -206,6 +209,7 @@ def bulkBatchDF(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         DataFrame: results in json

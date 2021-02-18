@@ -23,13 +23,12 @@ def cryptoBook(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _get(
-        "/crypto/{symbol}/book".format(symbol=symbol), token, version, filter
-    )
+    return _get("/crypto/{symbol}/book".format(symbol=symbol), token, version, filter)
 
 
 @wraps(cryptoBook)
@@ -48,13 +47,12 @@ def cryptoPrice(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _get(
-        "/crypto/{symbol}/price".format(symbol=symbol), token, version, filter
-    )
+    return _get("/crypto/{symbol}/price".format(symbol=symbol), token, version, filter)
 
 
 @wraps(cryptoPrice)
@@ -74,13 +72,12 @@ def cryptoQuote(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _get(
-        "/crypto/{symbol}/quote".format(symbol=symbol), token, version, filter
-    )
+    return _get("/crypto/{symbol}/quote".format(symbol=symbol), token, version, filter)
 
 
 @wraps(cryptoQuote)

@@ -38,6 +38,7 @@ def company(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -74,6 +75,7 @@ def insiderRoster(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -103,6 +105,7 @@ def insiderSummary(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -132,6 +135,7 @@ def insiderTransactions(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -161,6 +165,7 @@ def logo(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -182,6 +187,7 @@ def logoPNG(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         image: result as png
@@ -204,6 +210,7 @@ def logoNotebook(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         image: result
@@ -226,6 +233,7 @@ def peers(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -262,6 +270,7 @@ def relevant(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

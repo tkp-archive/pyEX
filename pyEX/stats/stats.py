@@ -20,6 +20,7 @@ def stats(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -41,6 +42,7 @@ def recent(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -63,6 +65,7 @@ def records(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -86,6 +89,7 @@ def summary(date=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -121,6 +125,7 @@ def daily(date=None, last="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

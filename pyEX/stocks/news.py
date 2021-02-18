@@ -24,6 +24,7 @@ def news(symbol, count=10, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -31,9 +32,7 @@ def news(symbol, count=10, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _get(
-        "stock/" + symbol + "/news/last/" + str(count), token, version, filter
-    )
+    return _get("stock/" + symbol + "/news/last/" + str(count), token, version, filter)
 
 
 def _newsToDF(n):
@@ -62,6 +61,7 @@ def marketNews(count=10, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

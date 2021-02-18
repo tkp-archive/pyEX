@@ -435,7 +435,9 @@ async def _getAsync(url, token="", version="", filter="", format=True):
     return _getOrig(url)
 
 
-def _post(url, data=None, json=None, token="", version="", token_in_params=True, format="json"):
+def _post(
+    url, data=None, json=None, token="", version="", token_in_params=True, format="json"
+):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
         return _postIEXCloudSandbox(
@@ -457,7 +459,9 @@ def _getOrig(url):
     )
 
 
-def _getIEXCloudBase(base_url, url, token="", version="stable", filter="", format="json"):
+def _getIEXCloudBase(
+    base_url, url, token="", version="stable", filter="", format="json"
+):
     """for iex cloud"""
     url = base_url.format(version=version) + url
 
@@ -512,15 +516,21 @@ async def _getIEXCloudAsyncBase(
 
 async def _getIEXCloudAsync(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return await _getIEXCloudAsyncBase(_URL_PREFIX_CLOUD, url, token, version, filter, format)
+    return await _getIEXCloudAsyncBase(
+        _URL_PREFIX_CLOUD, url, token, version, filter, format
+    )
 
 
 def _getIEXCloudSandbox(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return _getIEXCloudBase(_URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", filter, format)
+    return _getIEXCloudBase(
+        _URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", filter, format
+    )
 
 
-async def _getIEXCloudSandboxAsync(url, token="", version="stable", filter="", format="json"):
+async def _getIEXCloudSandboxAsync(
+    url, token="", version="stable", filter="", format="json"
+):
     """for iex cloud"""
     return await _getIEXCloudAsyncBase(
         _URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", filter, format
@@ -563,7 +573,13 @@ def _postIEXCloudBase(
 
 
 def _postIEXCloud(
-    url, data=None, json=None, token="", version="stable", token_in_params=True, format="json"
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
 ):
     """for iex cloud"""
     return _postIEXCloudBase(
@@ -622,16 +638,37 @@ async def _postIEXCloudAsync(
 ):
     """for iex cloud"""
     return await _postIEXCloudAsyncBase(
-        _URL_PREFIX_CLOUD, url, data, json, token, version, filter, token_in_params, format
+        _URL_PREFIX_CLOUD,
+        url,
+        data,
+        json,
+        token,
+        version,
+        filter,
+        token_in_params,
+        format,
     )
 
 
 def _postIEXCloudSandbox(
-    url, data=None, json=None, token="", version="stable", token_in_params=True, format="json"
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
 ):
     """for iex cloud"""
     return _postIEXCloudBase(
-        _URL_PREFIX_CLOUD_SANDBOX, url, data, json, token, "stable", token_in_params, format
+        _URL_PREFIX_CLOUD_SANDBOX,
+        url,
+        data,
+        json,
+        token,
+        "stable",
+        token_in_params,
+        format,
     )
 
 
@@ -681,7 +718,9 @@ async def _deleteIEXCloudAsyncBase(url, token="", version="stable", format="json
 
 async def _deleteIEXCloudAsync(url, token="", version="stable", format="json"):
     """for iex cloud"""
-    return await _deleteIEXCloudAsyncBase(_URL_PREFIX_CLOUD, url, token, version, format)
+    return await _deleteIEXCloudAsyncBase(
+        _URL_PREFIX_CLOUD, url, token, version, format
+    )
 
 
 def _deleteIEXCloudSandbox(url, token="", version="stable", format="json"):
@@ -887,7 +926,9 @@ def overrideUrl(url="", env=""):
     """Override the default IEX Cloud url"""
     global _URL_PREFIX_CLOUD
     if env:
-        _URL_PREFIX_CLOUD = "https://cloud.{env}.iexapis.com/{{version}}/".format(env=env)
+        _URL_PREFIX_CLOUD = "https://cloud.{env}.iexapis.com/{{version}}/".format(
+            env=env
+        )
     elif url:
         _URL_PREFIX_CLOUD = url
     else:
@@ -899,7 +940,9 @@ def overrideSSEUrl(url="", env=""):
     """Override the default IEX Cloud SSE url"""
     global _SSE_URL_PREFIX
     if env:
-        _SSE_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?symbols={{symbols}}&token={{token}}".format(env=env)
+        _SSE_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?symbols={{symbols}}&token={{token}}".format(
+            env=env
+        )
     elif url:
         _SSE_URL_PREFIX = url
     else:

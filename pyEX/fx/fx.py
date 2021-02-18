@@ -23,6 +23,7 @@ def latestFX(symbols=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -55,6 +56,7 @@ def latestFXDF(symbols=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
 
@@ -75,6 +77,7 @@ def convertFX(symbols=None, amount=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -115,6 +118,7 @@ def convertFXDF(symbols=None, amount=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
 
@@ -150,6 +154,7 @@ def historicalFX(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -173,9 +178,7 @@ def historicalFX(
     if first:
         base_url += "first={}&".format(str(first))
 
-    return list(
-        itertools.chain.from_iterable(_get(base_url, token, version, filter))
-    )
+    return list(itertools.chain.from_iterable(_get(base_url, token, version, filter)))
 
 
 def historicalFXDF(
@@ -204,6 +207,7 @@ def historicalFXDF(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
 

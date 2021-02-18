@@ -31,6 +31,7 @@ def tops(symbols=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -69,15 +70,14 @@ def last(symbols=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     symbols = _strToList(symbols)
     if symbols:
-        return _get(
-            "tops/last?symbols=" + ",".join(symbols) + "%2b", token, version
-        )
+        return _get("tops/last?symbols=" + ",".join(symbols) + "%2b", token, version)
     return _get("tops/last", token, version)
 
 
@@ -113,6 +113,7 @@ def deep(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -148,6 +149,7 @@ def auction(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -182,6 +184,7 @@ def book(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -228,6 +231,7 @@ def opHaltStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -242,9 +246,7 @@ def opHaltStatus(symbol=None, token="", version=""):
 async def opHaltStatusAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getAsync(
-            "deep/op-halt-status?symbols=" + symbol, token, version
-        )
+        return await _getAsync("deep/op-halt-status?symbols=" + symbol, token, version)
     return await _getAsync("deep/op-halt-status", token, version)
 
 
@@ -272,6 +274,7 @@ def officialPrice(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -286,9 +289,7 @@ def officialPrice(symbol=None, token="", version=""):
 async def officialPriceAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getAsync(
-            "deep/official-price?symbols=" + symbol, token, version
-        )
+        return await _getAsync("deep/official-price?symbols=" + symbol, token, version)
     return await _getAsync("deep/official-price", token, version)
 
 
@@ -308,6 +309,7 @@ def securityEvent(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -322,9 +324,7 @@ def securityEvent(symbol=None, token="", version=""):
 async def securityEventAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getAsync(
-            "deep/security-event?symbols=" + symbol, token, version
-        )
+        return await _getAsync("deep/security-event?symbols=" + symbol, token, version)
     return await _getAsync("deep/security-event", token, version)
 
 
@@ -355,6 +355,7 @@ def ssrStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -388,6 +389,7 @@ def ssrStatusDF(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         DataFrame: result
@@ -413,6 +415,7 @@ def systemEvent(token="", version=""):
     Args:
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -441,6 +444,7 @@ def trades(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -483,6 +487,7 @@ def tradeBreak(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -497,9 +502,7 @@ def tradeBreak(symbol=None, token="", version=""):
 async def tradeBreakAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getAsync(
-            "deep/trade-breaks?symbols=" + symbol, token, version
-        )
+        return await _getAsync("deep/trade-breaks?symbols=" + symbol, token, version)
     return await _getAsync("deep/trade-breaks", token, version)
 
 
@@ -534,6 +537,7 @@ def tradingStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
@@ -548,9 +552,7 @@ def tradingStatus(symbol=None, token="", version=""):
 async def tradingStatusAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getAsync(
-            "deep/trading-status?symbols=" + symbol, token, version
-        )
+        return await _getAsync("deep/trading-status?symbols=" + symbol, token, version)
     return await _get("deep/trading-status", token, version)
 
 
@@ -573,6 +575,7 @@ def hist(date=None, token="", version=""):
         date (datetime): Effective date
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result

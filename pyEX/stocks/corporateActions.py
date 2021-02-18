@@ -28,6 +28,7 @@ def bonusIssue(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -72,6 +73,7 @@ def distribution(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -122,6 +124,7 @@ def dividends(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -166,6 +169,7 @@ def returnOfCapital(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -208,6 +212,7 @@ def rightsIssue(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -252,6 +257,7 @@ def rightToPurchase(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -296,6 +302,7 @@ def securityReclassification(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -342,6 +349,7 @@ def securitySwap(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -384,6 +392,7 @@ def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_k
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -426,6 +435,7 @@ def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kw
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 

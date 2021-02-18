@@ -23,6 +23,7 @@ def symbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -42,6 +43,7 @@ def iexSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -60,6 +62,7 @@ def mutualFundSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -78,6 +81,7 @@ def otcSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -98,6 +102,7 @@ def internationalSymbols(region="", exchange="", token="", version="", filter=""
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -129,6 +134,7 @@ def fxSymbols(token="", version=""):
     Args:
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -147,6 +153,7 @@ def optionsSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -165,6 +172,7 @@ def cryptoSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
@@ -316,6 +324,7 @@ def isinLookup(isin, token="", version=""):
         isin (str): isin to lookup
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result

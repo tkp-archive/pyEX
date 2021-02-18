@@ -21,6 +21,7 @@ def figi(figi_=None, token="", version=""):
         figi_ (str): figi to lookup
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

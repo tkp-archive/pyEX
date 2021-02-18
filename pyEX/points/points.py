@@ -26,6 +26,7 @@ def points(symbol="market", key="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -38,9 +39,7 @@ def points(symbol="market", key="", token="", version="", filter=""):
             version,
             filter,
         )
-    return _get(
-        "data-points/{symbol}".format(symbol=symbol), token, version, filter
-    )
+    return _get("data-points/{symbol}".format(symbol=symbol), token, version, filter)
 
 
 @wraps(points)

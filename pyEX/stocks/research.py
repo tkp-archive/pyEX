@@ -41,6 +41,7 @@ def advancedStats(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -70,15 +71,14 @@ def analystRecommendations(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _get(
-        "stock/" + symbol + "/recommendation-trends", token, version, filter
-    )
+    return _get("stock/" + symbol + "/recommendation-trends", token, version, filter)
 
 
 @wraps(analystRecommendations)
@@ -102,6 +102,7 @@ def estimates(symbol, period="quarter", last=1, token="", version="", filter="")
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -148,6 +149,7 @@ def fundOwnership(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -177,15 +179,14 @@ def institutionalOwnership(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _get(
-        "stock/" + symbol + "/institutional-ownership", token, version, filter
-    )
+    return _get("stock/" + symbol + "/institutional-ownership", token, version, filter)
 
 
 @wraps(institutionalOwnership)
@@ -239,6 +240,7 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -248,9 +250,7 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
     if stat:
         if stat not in _KEY_STATS:
             raise PyEXception("Stat must be in {}".format(_KEY_STATS))
-        return _get(
-            "stock/{}/stats/{}".format(symbol, stat), token, version, filter
-        )
+        return _get("stock/{}/stats/{}".format(symbol, stat), token, version, filter)
     return _get("stock/{}/stats".format(symbol), token, version, filter)
 
 
@@ -283,6 +283,7 @@ def priceTarget(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -439,6 +440,7 @@ def technicals(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

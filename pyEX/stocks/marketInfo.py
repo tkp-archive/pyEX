@@ -39,6 +39,7 @@ def collections(tag, collectionName, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -74,6 +75,7 @@ def earningsToday(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -112,6 +114,7 @@ def ipoToday(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -143,6 +146,7 @@ def ipoUpcoming(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -174,6 +178,7 @@ def list(option="mostactive", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -201,6 +206,7 @@ def marketVolume(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -225,6 +231,7 @@ def marketOhlc(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -256,6 +263,7 @@ def marketYesterday(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -292,6 +300,7 @@ def sectorPerformance(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -320,6 +329,7 @@ def marketShortInterest(date=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -348,6 +358,7 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -386,6 +397,7 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -394,9 +406,7 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get(
-            "stock/" + symbol + "/upcoming-earnings", token, version, filter
-        )
+        return _get("stock/" + symbol + "/upcoming-earnings", token, version, filter)
     return _get("stock/market/upcoming-earnings", token, version, filter)
 
 
@@ -418,6 +428,7 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -426,9 +437,7 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get(
-            "stock/" + symbol + "/upcoming-dividends", token, version, filter
-        )
+        return _get("stock/" + symbol + "/upcoming-dividends", token, version, filter)
     return _get("stock/market/upcoming-dividends", token, version, filter)
 
 
@@ -450,6 +459,7 @@ def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -480,6 +490,7 @@ def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result

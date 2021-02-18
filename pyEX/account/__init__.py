@@ -9,8 +9,14 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (_USAGE_TYPES, PyEXception, _get, _post, _requireSecret,
-                      json_normalize)
+from ..common import (
+    _USAGE_TYPES,
+    PyEXception,
+    _get,
+    _post,
+    _requireSecret,
+    json_normalize,
+)
 
 
 def messageBudget(totalMessages=None, token="", version="", format="json"):
@@ -76,7 +82,10 @@ def payAsYouGo(allow=False, token="", version="", format="json"):
     if not isinstance(allow, bool):
         raise PyEXception("`allow` must be bool, got {}({})".format(type(allow), allow))
     return _post(
-        "account/messagebudget?allow={}".format(allow), token=token, version=version, format=format
+        "account/messagebudget?allow={}".format(allow),
+        token=token,
+        version=version,
+        format=format,
     )
 
 
@@ -98,7 +107,9 @@ def usage(type=None, token="", version="", format="json"):
     if type is not None and type and type not in _USAGE_TYPES:
         raise PyEXception("Type must be in (None, '') or {}".format(_USAGE_TYPES))
     if type:
-        return _get("account/usage/{}".format(type), token=token, version=version, format=format)
+        return _get(
+            "account/usage/{}".format(type), token=token, version=version, format=format
+        )
     return _get("account/usage", token=token, version=version, format=format)
 
 
