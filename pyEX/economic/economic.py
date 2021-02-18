@@ -8,6 +8,8 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..points import points
+
 
 class EconomicPoints(Enum):
     """Economic data points

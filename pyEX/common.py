@@ -881,6 +881,7 @@ def _reindex(df, col):
     else:
         if col in df.columns:
             df.set_index(col, inplace=True)
+    return df
 
 
 def _toDatetime(df, cols=None, tcols=None):
