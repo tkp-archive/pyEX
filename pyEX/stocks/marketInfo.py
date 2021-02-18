@@ -27,7 +27,7 @@ from ..common import (
 
 
 @_expire(hour=0)
-def collections(tag, collectionName, token="", version="", filter=""):
+def collections(tag, collectionName, token="", version="", filter="", format="json"):
     """Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
 
 
@@ -55,15 +55,12 @@ def collections(tag, collectionName, token="", version="", filter=""):
 
 
 @wraps(collections)
-def collectionsDF(tag, query, token="", version="", filter=""):
-    df = pd.DataFrame(collections(tag, query, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+def collectionsDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(collections(*args, **kwargs))), "symbol")
 
 
 @_expire(minute=0)
-def earningsToday(token="", version="", filter=""):
+def earningsToday(token="", version="", filter="", format="json"):
     """Returns earnings that will be reported today as two arrays: before the open bto and after market close amc.
     Each array contains an object with all keys from earnings, a quote object, and a headline key.
 
@@ -84,8 +81,8 @@ def earningsToday(token="", version="", filter=""):
 
 
 @wraps(earningsToday)
-def earningsTodayDF(token="", version="", filter=""):
-    x = earningsToday(token, version, filter)
+def earningsTodayDF(*args, **kwargs):
+    x = earningsToday(*args, **kwargs)
     z = []
     for k in x:
         ds = x[k]
@@ -96,14 +93,11 @@ def earningsTodayDF(token="", version="", filter=""):
 
     if not df.empty:
         df.drop_duplicates(inplace=True)
-
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+    return _reindex(_toDatetime(df), "symbol")
 
 
 @_expire(hour=10, tz=_UTC)
-def ipoToday(token="", version="", filter=""):
+def ipoToday(token="", version="", filter="", format="json"):
     """This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
 
@@ -123,19 +117,17 @@ def ipoToday(token="", version="", filter=""):
 
 
 @wraps(ipoToday)
-def ipoTodayDF(token="", version="", filter=""):
-    val = ipoToday(token, version, filter)
+def ipoTodayDF(*args, **kwargs):
+    val = ipoToday(*args, **kwargs)
     if val:
-        df = json_normalize(val, "rawData")
-        _toDatetime(df)
-        _reindex(df, "symbol")
+        df = _reindex(_toDatetime(json_normalize(val, "rawData")), "symbol")
     else:
         df = pd.DataFrame()
     return df
 
 
 @_expire(hour=10)
-def ipoUpcoming(token="", version="", filter=""):
+def ipoUpcoming(token="", version="", filter="", format="json"):
     """This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
 
@@ -155,18 +147,16 @@ def ipoUpcoming(token="", version="", filter=""):
 
 
 @wraps(ipoUpcoming)
-def ipoUpcomingDF(token="", version="", filter=""):
-    val = ipoUpcoming(token, version, filter)
+def ipoUpcomingDF(*args, **kwargs):
+    val = ipoUpcoming(*args, **kwargs)
     if val:
-        df = json_normalize(val, "rawData")
-        _toDatetime(df)
-        _reindex(df, "symbol")
+        df = _reindex(_toDatetime(json_normalize(val, "rawData")), "symbol")
     else:
         df = pd.DataFrame()
     return df
 
 
-def list(option="mostactive", token="", version="", filter=""):
+def list(option="mostactive", token="", version="", filter="", format="json"):
     """Returns an array of quotes for the top 10 symbols in a specified list.
 
 
@@ -189,14 +179,11 @@ def list(option="mostactive", token="", version="", filter=""):
 
 
 @wraps(list)
-def listDF(option="mostactive", token="", version="", filter=""):
-    df = pd.DataFrame(list(option, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+def listDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(list(*args, **kwargs))), "symbol")
 
 
-def marketVolume(token="", version="", filter=""):
+def marketVolume(token="", version="", filter="", format="json"):
     """This endpoint returns real time traded volume on U.S. markets.
 
     https://iexcloud.io/docs/api/#market-volume-u-s
@@ -221,7 +208,7 @@ def marketVolumeDF(token="", version="", filter=""):
     return df
 
 
-def marketOhlc(token="", version="", filter=""):
+def marketOhlc(token="", version="", filter="", format="json"):
     """Returns the official open and close for whole market.
 
     https://iexcloud.io/docs/api/#news
@@ -240,20 +227,17 @@ def marketOhlc(token="", version="", filter=""):
 
 
 @wraps(marketOhlc)
-def marketOhlcDF(token="", version="", filter=""):
-    x = marketOhlc(token, version, filter)
+def marketOhlcDF(*args, **kwargs):
+    x = marketOhlc(*args, **kwargs)
     data = []
     for key in x:
         data.append(x[key])
         data[-1]["symbol"] = key
-    df = json_normalize(data)
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+    return _reindex(_toDatetime(json_normalize(data)), "symbol")
 
 
 @_expire(hour=4, tz=_UTC)
-def marketYesterday(token="", version="", filter=""):
+def marketYesterday(token="", version="", filter="", format="json"):
     """This returns previous day adjusted price data for whole market
 
     https://iexcloud.io/docs/api/#previous-day-prices
@@ -275,22 +259,19 @@ marketPrevious = marketYesterday
 
 
 @wraps(marketYesterday)
-def marketYesterdayDF(token="", version="", filter=""):
-    x = marketYesterday(token, version, filter)
+def marketYesterdayDF(*args, **kwargs):
+    x = marketYesterday(*args, **kwargs)
     data = []
     for key in x:
         data.append(x[key])
         data[-1]["symbol"] = key
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+    return _reindex(_toDatetime(pd.DataFrame(data)), "symbol")
 
 
 marketPreviousDF = marketYesterdayDF
 
 
-def sectorPerformance(token="", version="", filter=""):
+def sectorPerformance(token="", version="", filter="", format="json"):
     """This returns an array of each sector and performance for the current trading day. Performance is based on each sector ETF.
 
     https://iexcloud.io/docs/api/#sector-performance
@@ -309,15 +290,19 @@ def sectorPerformance(token="", version="", filter=""):
 
 
 @wraps(sectorPerformance)
-def sectorPerformanceDF(token="", version="", filter=""):
-    df = pd.DataFrame(sectorPerformance(token, version, filter))
-    _toDatetime(df, cols=[], tcols=["lastUpdated"])
-    _reindex(df, "name")
-    return df
+def sectorPerformanceDF(*args, **kwargs):
+    return _reindex(
+        _toDatetime(
+            pd.DataFrame(sectorPerformance(*args, **kwargs)),
+            cols=[],
+            tcols=["lastUpdated"],
+        ),
+        "name",
+    )
 
 
 @_expire(hour=16, tz=_EST)
-def marketShortInterest(date=None, token="", version="", filter=""):
+def marketShortInterest(date=None, token="", version="", filter="", format="json"):
     """The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 
     The report data will be published daily at 4:00pm ET.
@@ -341,13 +326,11 @@ def marketShortInterest(date=None, token="", version="", filter=""):
 
 
 @wraps(marketShortInterest)
-def marketShortInterestDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(marketShortInterest(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def marketShortInterestDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(marketShortInterest(*args, **kwargs)))
 
 
-def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
+def upcomingEvents(symbol="", refid="", token="", version="", filter="", format="json"):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -374,19 +357,18 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
 def _upcomingToDF(upcoming):
     dfs = {}
     for k, v in upcoming.items():
-        dfs[k] = pd.DataFrame(v)
-        _toDatetime(dfs[k])
+        dfs[k] = _toDatetime(pd.DataFrame(v))
     return dfs
 
 
 @wraps(upcomingEvents)
-def upcomingEventsDF(symbol="", token="", version="", filter=""):
-    return _upcomingToDF(
-        upcomingEvents(symbol=symbol, token=token, version=version, filter=filter)
-    )
+def upcomingEventsDF(*args, **kwargs):
+    return _upcomingToDF(upcomingEvents(*args, **kwargs))
 
 
-def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
+def upcomingEarnings(
+    symbol="", refid="", token="", version="", filter="", format="json"
+):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -411,13 +393,13 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
 
 
 @wraps(upcomingEarnings)
-def upcomingEarningsDF(symbol="", token="", version="", filter=""):
-    return json_normalize(
-        upcomingEarnings(symbol=symbol, token=token, version=version, filter=filter)
-    )
+def upcomingEarningsDF(*args, **kwargs):
+    return json_normalize(upcomingEarnings(*args, **kwargs))
 
 
-def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
+def upcomingDividends(
+    symbol="", refid="", token="", version="", filter="", format="json"
+):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -442,13 +424,11 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
 
 
 @wraps(upcomingDividends)
-def upcomingDividendsDF(symbol="", token="", version="", filter=""):
-    return json_normalize(
-        upcomingDividends(symbol=symbol, token=token, version=version, filter=filter)
-    )
+def upcomingDividendsDF(*args, **kwargs):
+    return json_normalize(upcomingDividends(*args, **kwargs))
 
 
-def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
+def upcomingSplits(symbol="", refid="", token="", version="", filter="", format="json"):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -473,13 +453,11 @@ def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
 
 
 @wraps(upcomingSplits)
-def upcomingSplitsDF(symbol="", token="", version="", filter=""):
-    return json_normalize(
-        upcomingSplits(symbol=symbol, token=token, version=version, filter=filter)
-    )
+def upcomingSplitsDF(*args, **kwargs):
+    return json_normalize(upcomingSplits(*args, **kwargs))
 
 
-def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
+def upcomingIPOs(symbol="", refid="", token="", version="", filter="", format="json"):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -504,7 +482,5 @@ def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
 
 
 @wraps(upcomingIPOs)
-def upcomingIPOsDF(symbol="", token="", version="", filter=""):
-    return json_normalize(
-        upcomingIPOs(symbol=symbol, token=token, version=version, filter=filter)
-    )
+def upcomingIPOsDF(*args, **kwargs):
+    return json_normalize(upcomingIPOs(*args, **kwargs))

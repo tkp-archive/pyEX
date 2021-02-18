@@ -17,21 +17,19 @@ from ..common import (
 )
 
 
-def timeSeriesInventory(token="", version=""):
+def timeSeriesInventory(token="", version="", filter="", format=""):
     """Get inventory of available time series endpoints
     Returns:
         result (dict)
     """
-    return _get("time-series/", token, version)
+    return _get(
+        "time-series/", token=token, version=version, filter=filter, format=format
+    )
 
 
-def timeSeriesInventoryDF(token="", version=""):
-    """Get inventory of available time series endpoints
-
-    Returns:
-        result (DataFrame)
-    """
-    return json_normalize(timeSeriesInventory(token=token, version=version))
+@wraps(timeSeriesInventory)
+def timeSeriesInventoryDF(*args, **kwargs):
+    return json_normalize(timeSeriesInventory(*args, **kwargs))
 
 
 def timeSeries(
@@ -51,6 +49,7 @@ def timeSeries(
     token="",
     version="",
     filter="",
+    format="json",
     **extra_params,
 ):
     """Time series is the most common type of data available, and consists of a collection of data points over a period of time. Time series data is indexed by a single date field, and can be retrieved by any portion of time.
@@ -124,7 +123,9 @@ def timeSeries(
         +--------------+--------------------------------------------------------------------------------------------------------------------------------------------+
     """
     if not id:
-        return timeSeriesInventory(token=token, version=version)
+        return timeSeriesInventory(
+            token=token, version=version, filter=filter, format=format
+        )
 
     base_url = "time-series/{}".format(id)
     if key:
@@ -162,14 +163,12 @@ def timeSeries(
     if extra_params:
         base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
 
-    return _get(base_url, token, version, filter)
+    return _get(base_url, token=token, version=version, filter=filter, format=format)
 
 
 @wraps(timeSeries)
 def timeSeriesDF(*args, **kwargs):
-    df = json_normalize(timeSeries(*args, **kwargs))
-    _toDatetime(df)
-    return df
+    return _toDatetime(json_normalize(timeSeries(*args, **kwargs)))
 
 
 @wraps(timeSeries)

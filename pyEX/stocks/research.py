@@ -30,7 +30,7 @@ from .prices import _chartToDF
 
 
 @_expire(hour=4, tz=_EST)
-def advancedStats(symbol, token="", version="", filter=""):
+def advancedStats(symbol, token="", version="", filter="", format="json"):
     """Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
 
     https://iexcloud.io/docs/api/#advanced-stats
@@ -47,20 +47,22 @@ def advancedStats(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/advanced-stats", token, version, filter)
+    return _get(
+        "stock/{symbol}/advanced-stats".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(advancedStats)
-def advancedStatsDF(symbol, token="", version="", filter=""):
-    val = advancedStats(symbol, token, version, filter)
-    df = json_normalize(val)
-    _toDatetime(df)
-    return df
+def advancedStatsDF(*args, **kwargs):
+    return _toDatetime(json_normalize(advancedStats(*args, **kwargs)))
 
 
 @_expire(hour=9, tz=_UTC)
-def analystRecommendations(symbol, token="", version="", filter=""):
+def analystRecommendations(symbol, token="", version="", filter="", format="json"):
     """Pulls data from the last four months.
 
     https://iexcloud.io/docs/api/#analyst-recommendations
@@ -77,19 +79,23 @@ def analystRecommendations(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/recommendation-trends", token, version, filter)
+    return _get(
+        "stock/{symbol}/recommendation-trends".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(analystRecommendations)
-def analystRecommendationsDF(symbol, token="", version="", filter=""):
-    val = analystRecommendations(symbol, token, version, filter)
-    df = json_normalize(val)
-    _toDatetime(df)
-    return df
+def analystRecommendationsDF(*args, **kwargs):
+    return _toDatetime(json_normalize(analystRecommendations(*args, **kwargs)))
 
 
-def estimates(symbol, period="quarter", last=1, token="", version="", filter=""):
+def estimates(
+    symbol, period="quarter", last=1, token="", version="", filter="", format="json"
+):
     """Provides the latest consensus estimate for the next fiscal period
 
     https://iexcloud.io/docs/api/#estimates
@@ -108,36 +114,36 @@ def estimates(symbol, period="quarter", last=1, token="", version="", filter="")
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     return _get(
-        "stock/{}/estimates?period={}&last={}".format(symbol, period, last),
-        token,
-        version,
-        filter,
+        "stock/{}/estimates?period={}&last={}".format(
+            _quoteSymbols(symbol), period, last
+        ),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 def _estimatesToDF(f):
     """internal"""
     if f:
-        df = json_normalize(f, "estimates", "symbol")
-        _toDatetime(df)
-        _reindex(df, "fiscalEndDate")
+        df = _reindex(
+            _toDatetime(json_normalize(f, "estimates", "symbol")), "fiscalEndDate"
+        )
     else:
         df = pd.DataFrame()
     return df
 
 
 @wraps(estimates)
-def estimatesDF(symbol, period="quarter", last=1, token="", version="", filter=""):
-    f = estimates(symbol, period, last, token, version, filter)
-    df = _estimatesToDF(f)
-    return df
+def estimatesDF(*args, **kwargs):
+    return _estimatesToDF(estimates(*args, **kwargs))
 
 
 @_expire(hour=5, tz=_EST)
-def fundOwnership(symbol, token="", version="", filter=""):
+def fundOwnership(symbol, token="", version="", filter="", format="json"):
     """Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
        pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
 
@@ -155,20 +161,22 @@ def fundOwnership(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/fund-ownership", token, version, filter)
+    return _get(
+        "stock/{symbol}/fund-ownership".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(fundOwnership)
-def fundOwnershipDF(symbol, token="", version="", filter=""):
-    val = fundOwnership(symbol, token, version, filter)
-    df = pd.DataFrame(val)
-    _toDatetime(df)
-    return df
+def fundOwnershipDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(fundOwnership(*args, **kwargs)))
 
 
 @_expire(hour=5, tz=_EST)
-def institutionalOwnership(symbol, token="", version="", filter=""):
+def institutionalOwnership(symbol, token="", version="", filter="", format="json"):
     """Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
 
     https://iexcloud.io/docs/api/#institutional-ownership
@@ -185,20 +193,26 @@ def institutionalOwnership(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/institutional-ownership", token, version, filter)
+    return _get(
+        "stock/{symbol}/institutional-ownership".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(institutionalOwnership)
-def institutionalOwnershipDF(symbol, token="", version="", filter=""):
-    val = institutionalOwnership(symbol, token, version, filter)
-    df = pd.DataFrame(val)
-    _toDatetime(df, cols=[], tcols=["reportDate"])
-    return df
+def institutionalOwnershipDF(*args, **kwargs):
+    return _toDatetime(
+        pd.DataFrame(institutionalOwnership(*args, **kwargs)),
+        cols=[],
+        tcols=["reportDate"],
+    )
 
 
 @_expire(hour=8, tz=_EST)
-def keyStats(symbol, stat="", token="", version="", filter=""):
+def keyStats(symbol, stat="", token="", version="", filter="", format="json"):
     """Key Stats about company
 
     https://iexcloud.io/docs/api/#key-stats
@@ -246,33 +260,40 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
     if stat:
         if stat not in _KEY_STATS:
             raise PyEXception("Stat must be in {}".format(_KEY_STATS))
-        return _get("stock/{}/stats/{}".format(symbol, stat), token, version, filter)
-    return _get("stock/{}/stats".format(symbol), token, version, filter)
+        return _get(
+            "stock/{}/stats/{}".format(_quoteSymbols(symbol), stat),
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )
+    return _get(
+        "stock/{}/stats".format(_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 def _statsToDF(s):
     """internal"""
     if s:
-        df = json_normalize(s)
-        _toDatetime(df)
-        _reindex(df, "symbol")
+        df = _reindex(_toDatetime(json_normalize(s)), "symbol")
     else:
         df = pd.DataFrame()
     return df
 
 
 @wraps(keyStats)
-def keyStatsDF(symbol, stat="", token="", version="", filter=""):
-    s = keyStats(symbol, stat, token, version, filter)
-    df = _statsToDF(s)
-    return df
+def keyStatsDF(*args, **kwargs):
+    return _statsToDF(keyStats(*args, **kwargs))
 
 
-def priceTarget(symbol, token="", version="", filter=""):
+def priceTarget(symbol, token="", version="", filter="", format="json"):
     """Provides the latest avg, high, and low analyst price target for a symbol.
 
     https://iexcloud.io/docs/api/#price-target
@@ -289,15 +310,18 @@ def priceTarget(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/price-target", token, version, filter)
+    return _get(
+        "stock/{symbol}/price-target".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(priceTarget)
-def priceTargetDF(symbol, token="", version="", filter=""):
-    df = json_normalize(priceTarget(symbol, token, version, filter))
-    _toDatetime(df)
-    return df
+def priceTargetDF(*args, **kwargs):
+    return _toDatetime(json_normalize(priceTarget(*args, **kwargs)))
 
 
 @_expire(hour=4, tz=_EST)
@@ -312,6 +336,7 @@ def technicals(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     """Technical indicators are available for any historical or intraday range.
 
@@ -583,7 +608,7 @@ def technicals(
         if input3:
             base_url += "&input3={}".format(input3)
 
-    return _get(base_url, token, version, filter)
+    return _get(base_url, token=token, version=version, filter=filter, format=format)
 
 
 @wraps(technicals)
@@ -598,9 +623,20 @@ def technicalsDF(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     json = technicals(
-        symbol, indicator, range, input1, input2, input3, input4, token, version, filter
+        symbol,
+        indicator,
+        range,
+        input1,
+        input2,
+        input3,
+        input4,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
     chart = json["chart"]
     seriess = json["indicator"]

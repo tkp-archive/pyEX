@@ -27,7 +27,7 @@ from ..common import (
 
 
 @_expire(hour=4, tz=_UTC)
-def company(symbol, token="", version="", filter=""):
+def company(symbol, token="", version="", filter="", format="json"):
     """Company reference data
 
     https://iexcloud.io/docs/api/#company
@@ -44,27 +44,22 @@ def company(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/company", token, version, filter)
-
-
-def _companyToDF(c, token="", version="", filter=""):
-    """internal"""
-    df = json_normalize(c)
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+    return _get(
+        "stock/{symbol}/company".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(company)
-def companyDF(symbol, token="", version="", filter=""):
-    c = company(symbol, token, version, filter)
-    df = _companyToDF(c)
-    return df
+def companyDF(*args, **kwargs):
+    return _reindex(_toDatetime(json_normalize(company(*args, **kwargs))), "symbol")
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderRoster(symbol, token="", version="", filter=""):
+def insiderRoster(symbol, token="", version="", filter="", format="json"):
     """Returns the top 10 insiders, with the most recent information.
 
     https://iexcloud.io/docs/api/#insider-roster
@@ -81,20 +76,24 @@ def insiderRoster(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/insider-roster", token, version, filter)
+    return _get(
+        "stock/{symbol}/insider-roster".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(insiderRoster)
-def insiderRosterDF(symbol, token="", version="", filter=""):
-    val = insiderRoster(symbol, token, version, filter)
-    df = pd.DataFrame(val)
-    _toDatetime(df, cols=[], tcols=["reportDate"])
-    return df
+def insiderRosterDF(*args, **kwargs):
+    return _toDatetime(
+        pd.DataFrame(insiderRoster(*args, **kwargs)), cols=[], tcols=["reportDate"]
+    )
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderSummary(symbol, token="", version="", filter=""):
+def insiderSummary(symbol, token="", version="", filter="", format="json"):
     """Returns aggregated insiders summary data for the last 6 months.
 
     https://iexcloud.io/docs/api/#insider-summary
@@ -111,20 +110,22 @@ def insiderSummary(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/insider-summary", token, version, filter)
+    return _get(
+        "stock/{symbol}/insider-summary".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(insiderSummary)
-def insiderSummaryDF(symbol, token="", version="", filter=""):
-    val = insiderSummary(symbol, token, version, filter)
-    df = pd.DataFrame(val)
-    _toDatetime(df)
-    return df
+def insiderSummaryDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(insiderSummary(*args, **kwargs)))
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderTransactions(symbol, token="", version="", filter=""):
+def insiderTransactions(symbol, token="", version="", filter="", format="json"):
     """Returns insider transactions.
 
     https://iexcloud.io/docs/api/#insider-transactions
@@ -141,20 +142,22 @@ def insiderTransactions(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/insider-transactions", token, version, filter)
+    return _get(
+        "stock/{symbol}/insider-transactions".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(insiderTransactions)
-def insiderTransactionsDF(symbol, token="", version="", filter=""):
-    val = insiderTransactions(symbol, token, version, filter)
-    df = pd.DataFrame(val)
-    _toDatetime(df)
-    return df
+def insiderTransactionsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(insiderTransactions(*args, **kwargs)))
 
 
 @_expire(hour=0, tz=_UTC)
-def logo(symbol, token="", version="", filter=""):
+def logo(symbol, token="", version="", filter="", format="json"):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -171,12 +174,17 @@ def logo(symbol, token="", version="", filter=""):
         dict: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/logo", token, version, filter)
+    return _get(
+        "stock/{symbol}/logo".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=0, tz=_UTC)
-def logoPNG(symbol, token="", version="", filter=""):
+def logoPNG(symbol, token="", version=""):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -186,20 +194,25 @@ def logoPNG(symbol, token="", version="", filter=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
 
     Returns:
         image: result as png
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    response = requests.get(logo(symbol, token, version, filter)["url"])
+    response = requests.get(
+        logo(
+            _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )["url"]
+    )
     return ImageP.open(BytesIO(response.content))
 
 
 @_expire(hour=0, tz=_UTC)
-def logoNotebook(symbol, token="", version="", filter=""):
+def logoNotebook(symbol, token="", version=""):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -209,20 +222,17 @@ def logoNotebook(symbol, token="", version="", filter=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
 
     Returns:
         image: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    url = logo(symbol, token, version, filter)["url"]
+    url = logo(_quoteSymbols(symbol), token, version)["url"]
     return ImageI(url=url)
 
 
 @_expire(hour=8, tz=_UTC)
-def peers(symbol, token="", version="", filter=""):
+def peers(symbol, token="", version="", filter="", format="json"):
     """Peers of ticker
 
     https://iexcloud.io/docs/api/#peers
@@ -239,29 +249,27 @@ def peers(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/peers", token, version, filter)
-
-
-def _peersToDF(p):
-    """internal"""
-    df = pd.DataFrame(p, columns=["symbol"])
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    df["peer"] = df.index
-    return df
+    return _get(
+        "stock/{symbol}/peers".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(peers)
-def peersDF(symbol, token="", version="", filter=""):
-    p = peers(symbol, token, version, filter)
-    df = _peersToDF(p)
+def peersDF(*args, **kwargs):
+    df = _reindex(
+        _toDatetime(pd.DataFrame(peers(*args, **kwargs), columns=["symbol"])), "symbol"
+    )
+    df["peer"] = df.index
     return df
 
 
 @_expire(hour=8, tz=_UTC)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def relevant(symbol, token="", version="", filter=""):
+def relevant(symbol, token="", version="", filter="", format="json"):
     """Same as peers
 
     https://iexcloud.io/docs/api/#relevant
@@ -276,13 +284,16 @@ def relevant(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/relevant", token, version, filter)
+    return _get(
+        "stock/{symbol}/relevant".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(relevant)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def relevantDF(symbol, token="", version="", filter=""):
-    df = pd.DataFrame(relevant(symbol, token, version, filter))
-    _toDatetime(df)
-    return df
+def relevantDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(relevant(*args, **kwargs)))

@@ -12,7 +12,7 @@ import pandas as pd
 from ..common import _get, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
 
 
-def news(symbol, count=10, token="", version="", filter=""):
+def news(symbol, count=10, token="", version="", filter="", format="json"):
     """News about company
 
     https://iexcloud.io/docs/api/#news
@@ -37,20 +37,20 @@ def news(symbol, count=10, token="", version="", filter=""):
 
 def _newsToDF(n):
     """internal"""
-    df = pd.DataFrame(n)
-    _toDatetime(df, cols=[], tcols=["datetime"])
-    _reindex(df, "datetime")
-    return df
+    return _reindex(
+        _toDatetime(pd.DataFrame(n), cols=[], tcols=["datetime"]), "datetime"
+    )
 
 
 @wraps(news)
-def newsDF(symbol, count=10, token="", version="", filter=""):
-    n = news(symbol, count, token, version, filter)
-    df = _newsToDF(n)
-    return df
+def newsDF(*args, **kwargs):
+    return _reindex(
+        _toDatetime(pd.DataFrame(news(*args, **kwargs)), cols=[], tcols=["datetime"]),
+        "datetime",
+    )
 
 
-def marketNews(count=10, token="", version="", filter=""):
+def marketNews(count=10, token="", version="", filter="", format="json"):
     """News about market
 
     https://iexcloud.io/docs/api/#news
@@ -67,12 +67,15 @@ def marketNews(count=10, token="", version="", filter=""):
         dict or DataFrame: result
         dict: result
     """
-    return _get("stock/market/news/last/" + str(count), token, version, filter)
+    return _get(
+        "stock/market/news/last/" + str(count),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(marketNews)
-def marketNewsDF(count=10, token="", version="", filter=""):
-    df = pd.DataFrame(marketNews(count, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "datetime")
-    return df
+def marketNewsDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(marketNews(*args, **kwargs))), "datetime")

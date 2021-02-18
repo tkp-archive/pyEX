@@ -13,7 +13,7 @@ import pandas as pd
 from ..common import PyEXception, _expire, _get, _reindex, _strOrDate, _toDatetime
 
 
-def stats(token="", version="", filter=""):
+def stats(token="", version="", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-intraday
 
     Args:
@@ -25,17 +25,17 @@ def stats(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("stats/intraday", token, version, filter)
+    return _get(
+        "stats/intraday", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(stats)
-def statsDF(token="", version="", filters=""):
-    df = pd.DataFrame(stats(token, version, filter))
-    _toDatetime(df)
-    return df
+def statsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(stats(*args, **kwargs)))
 
 
-def recent(token="", version="", filter=""):
+def recent(token="", version="", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-recent
 
     Args:
@@ -47,18 +47,17 @@ def recent(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("stats/recent", token, version, filter)
+    return _get(
+        "stats/recent", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(recent)
-def recentDF(token="", version="", filter=""):
-    df = pd.DataFrame(recent(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "date")
-    return df
+def recentDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(recent(*args, **kwargs))), "date")
 
 
-def records(token="", version="", filter=""):
+def records(token="", version="", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-records
 
     Args:
@@ -70,18 +69,18 @@ def records(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("stats/records", token, version, filter)
+    return _get(
+        "stats/records", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(records)
-def recordsDF(token="", version="", filter=""):
-    df = pd.DataFrame(records(token, version, filter))
-    _toDatetime(df)
-    return df
+def recordsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(records(*args, **kwargs)))
 
 
 @_expire(hour=0)
-def summary(date=None, token="", version="", filter=""):
+def summary(date=None, token="", version="", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-historical-summary
 
     Args:
@@ -96,27 +95,41 @@ def summary(date=None, token="", version="", filter=""):
     """
     if date:
         if isinstance(date, str):
-            return _get("stats/historical?date=" + date, token, version, filter)
+            return _get(
+                "stats/historical?date=" + date,
+                token=token,
+                version=version,
+                filter=filter,
+                format=format,
+            )
         elif isinstance(date, datetime):
             return _get(
-                "stats/historical?date=" + date.strftime("%Y%m"), token, version, filter
+                "stats/historical?date=" + date.strftime("%Y%m"),
+                token=token,
+                version=version,
+                filter=filter,
+                format=format,
             )
         else:
             raise PyEXception(
-                "Can't handle type : %s" % str(type(date)), token, version, filter
+                "Can't handle type : %s" % str(type(date)),
+                token=token,
+                version=version,
+                filter=filter,
+                format=format,
             )
-    return _get("stats/historical", token, version, filter)
+    return _get(
+        "stats/historical", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(summary)
-def summaryDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(summary(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def summaryDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(summary(*args, **kwargs)))
 
 
 @_expire(hour=0)
-def daily(date=None, last="", token="", version="", filter=""):
+def daily(date=None, last="", token="", version="", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-historical-daily
 
     Args:
@@ -132,14 +145,30 @@ def daily(date=None, last="", token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _get("stats/historical/daily?date=" + date, token, version, filter)
+        return _get(
+            "stats/historical/daily?date=" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )
     elif last:
-        return _get("stats/historical/daily?last=" + last, token, version, filter)
-    return _get("stats/historical/daily", token, version, filter)
+        return _get(
+            "stats/historical/daily?last=" + last,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )
+    return _get(
+        "stats/historical/daily",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(daily)
-def dailyDF(date=None, last="", token="", version="", filter=""):
-    df = pd.DataFrame(daily(date, last, token, version, filter))
-    _toDatetime(df)
-    return df
+def dailyDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(daily(*args, **kwargs)))

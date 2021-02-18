@@ -41,7 +41,16 @@ _MAPPING = {
 }
 
 
-def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filter=""):
+def batch(
+    symbols,
+    fields=None,
+    range_="1m",
+    last=10,
+    token="",
+    version="",
+    filter="",
+    format="json",
+):
     """Batch several data requests into one invocation. If no `fields` passed in, will default to `quote`
 
     https://iexcloud.io/docs/api/#batch-requests
@@ -92,11 +101,18 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
             symbols, ",".join(fields), range_, last
         )
 
-    return _get(route, token, version, filter)
+    return _get(route, token=token, version=version, filter=filter, format=format)
 
 
 def batchDF(
-    symbols, fields=None, range_="1m", last=10, token="", version="", filter=""
+    symbols,
+    fields=None,
+    range_="1m",
+    last=10,
+    token="",
+    version="",
+    filter="",
+    format="json",
 ):
     """Batch several data requests into one invocation
 
@@ -117,7 +133,16 @@ def batchDF(
         DataFrame: results in json
     """
     symbols = _quoteSymbols(symbols)
-    x = batch(symbols, fields, range_, last, token, version, filter)
+    x = batch(
+        symbols,
+        fields,
+        range_,
+        last,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
     ret = {}
 
@@ -141,7 +166,14 @@ def batchDF(
 
 
 def bulkBatch(
-    symbols, fields=None, range_="1m", last=10, token="", version="", filter=""
+    symbols,
+    fields=None,
+    range_="1m",
+    last=10,
+    token="",
+    version="",
+    filter="",
+    format="json",
 ):
     """Optimized batch to fetch as much as possible at once
 
@@ -170,7 +202,9 @@ def bulkBatch(
         raise PyEXception("Symbols must be of type list")
 
     for i in range(0, len(symbols), 99):
-        args.append((symbols[i : i + 99], fields, range_, last, token, version, filter))
+        args.append(
+            (symbols[i : i + 99], fields, range_, last, token, version, filter, format)
+        )
 
     pool = ThreadPool(20)
     rets = pool.starmap(batch, args)
@@ -194,7 +228,14 @@ def bulkBatch(
 
 
 def bulkBatchDF(
-    symbols, fields=None, range_="1m", last=10, token="", version="", filter=""
+    symbols,
+    fields=None,
+    range_="1m",
+    last=10,
+    token="",
+    version="",
+    filter="",
+    format="json",
 ):
     """Optimized batch to fetch as much as possible at once
 
@@ -214,7 +255,16 @@ def bulkBatchDF(
     Returns:
         DataFrame: results in json
     """
-    dat = bulkBatch(symbols, fields, range_, last, token, version, filter)
+    dat = bulkBatch(
+        symbols,
+        fields,
+        range_,
+        last,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
     ret = {}
     for symbol in dat:
         for field in dat[symbol]:
@@ -229,7 +279,7 @@ def bulkBatchDF(
     return ret
 
 
-def bulkMinuteBars(symbol, dates, token="", version="", filter=""):
+def bulkMinuteBars(symbol, dates, token="", version="", filter="", format="json"):
     """fetch many dates worth of minute-bars for a given symbol"""
     _raiseIfNotStr(symbol)
     dates = [_strOrDate(date) for date in dates]
@@ -237,7 +287,7 @@ def bulkMinuteBars(symbol, dates, token="", version="", filter=""):
 
     args = []
     for date in dates:
-        args.append((symbol, "1d", date, token, version, filter))
+        args.append((symbol, "1d", date, token, version, filter, format))
 
     pool = ThreadPool(20)
     rets = pool.starmap(chart, args)
@@ -246,9 +296,11 @@ def bulkMinuteBars(symbol, dates, token="", version="", filter=""):
     return list_orig(itertools.chain(*rets))
 
 
-def bulkMinuteBarsDF(symbol, dates, token="", version="", filter=""):
+def bulkMinuteBarsDF(symbol, dates, token="", version="", filter="", format="json"):
     """fetch many dates worth of minute-bars for a given symbol"""
-    data = bulkMinuteBars(symbol, dates, token, version, filter)
+    data = bulkMinuteBars(
+        symbol, dates, token=token, version=version, filter=filter, format=format
+    )
     df = pd.DataFrame(data)
     if df.empty:
         return df
