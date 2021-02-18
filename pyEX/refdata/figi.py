@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr
+from ..common import _get, _raiseIfNotStr
 
 
 def figi(figi_=None, token="", version=""):
@@ -26,7 +26,7 @@ def figi(figi_=None, token="", version=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(figi_)
-    return _getJson("ref-data/figi?figi={}".format(figi_), token, version, None)
+    return _get("ref-data/figi?figi={}".format(figi_), token, version, None)
 
 
 @wraps(figi)

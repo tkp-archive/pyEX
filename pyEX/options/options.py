@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr, _toDatetime
+from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
 def optionExpirations(symbol, token="", version="", filter=""):
@@ -28,7 +28,7 @@ def optionExpirations(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    return _getJson("stock/" + symbol + "/options", token, version, filter)
+    return _get("stock/" + symbol + "/options", token, version, filter)
 
 
 def options(symbol, expiration, side="", token="", version="", filter=""):
@@ -50,7 +50,7 @@ def options(symbol, expiration, side="", token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     if side:
-        return _getJson(
+        return _get(
             "stock/{symbol}/options/{expiration}/{side}".format(
                 symbol=symbol, expiration=expiration, side=side
             ),
@@ -58,7 +58,7 @@ def options(symbol, expiration, side="", token="", version="", filter=""):
             version,
             filter,
         )
-    return _getJson(
+    return _get(
         "stock/{symbol}/options/{expiration}/".format(
             symbol=symbol, expiration=expiration
         ),

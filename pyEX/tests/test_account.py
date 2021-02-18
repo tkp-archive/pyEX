@@ -15,7 +15,7 @@ class TestAccount:
         from pyEX import Client
 
         c = Client("sktest")
-        with patch("pyEX.account._getJson"):
+        with patch("pyEX.account._get"):
             c.account()
             c.metadata()
 
@@ -23,7 +23,7 @@ class TestAccount:
         from pyEX import Client, PyEXception
 
         c = Client("sktest")
-        with patch("pyEX.account._getJson"):
+        with patch("pyEX.account._get"):
             c.usage()
             c.usage("messages")
             try:

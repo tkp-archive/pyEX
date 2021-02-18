@@ -14,7 +14,7 @@ from ..common import (
     _TIMEFRAME_CHART,
     PyEXception,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -41,7 +41,7 @@ def book(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/book", token, version, filter)
+    return _get("stock/" + symbol + "/book", token, version, filter)
 
 
 def _bookToDF(b):
@@ -192,12 +192,12 @@ def chart(
 
         if params:
             base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
-        return _getJson(base_url, token, version, filter)
+        return _get(base_url, token, version, filter)
 
     if params:
         base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
 
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token, version, filter)
 
 
 def _chartToDF(c):
@@ -281,7 +281,7 @@ def delayedQuote(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/delayed-quote", token, version, filter)
+    return _get("stock/" + symbol + "/delayed-quote", token, version, filter)
 
 
 @wraps(delayedQuote)
@@ -370,7 +370,7 @@ def intraday(
 
     if params:
         base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token, version, filter)
 
 
 @wraps(intraday)
@@ -432,7 +432,7 @@ def largestTrades(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/largest-trades", token, version, filter)
+    return _get("stock/" + symbol + "/largest-trades", token, version, filter)
 
 
 @wraps(largestTrades)
@@ -460,7 +460,7 @@ def ohlc(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/ohlc", token, version, filter)
+    return _get("stock/" + symbol + "/ohlc", token, version, filter)
 
 
 @wraps(ohlc)
@@ -492,7 +492,7 @@ def yesterday(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/previous", token, version, filter)
+    return _get("stock/" + symbol + "/previous", token, version, filter)
 
 
 previous = yesterday
@@ -530,7 +530,7 @@ def price(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/price", token, version, filter)
+    return _get("stock/" + symbol + "/price", token, version, filter)
 
 
 @wraps(price)
@@ -558,7 +558,7 @@ def quote(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/quote", token, version, filter)
+    return _get("stock/" + symbol + "/quote", token, version, filter)
 
 
 @wraps(quote)
@@ -599,7 +599,7 @@ def spread(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/effective-spread", token, version, filter)
+    return _get("stock/" + symbol + "/effective-spread", token, version, filter)
 
 
 @wraps(spread)
@@ -629,7 +629,7 @@ def volumeByVenue(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/volume-by-venue", token, version, filter)
+    return _get("stock/" + symbol + "/volume-by-venue", token, version, filter)
 
 
 @wraps(volumeByVenue)

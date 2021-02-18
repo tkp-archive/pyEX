@@ -11,7 +11,7 @@ import pandas as pd
 
 from ..common import (
     _expire,
-    _getJson,
+    _get,
     _raiseIfNotStr,
     _reindex,
     _strOrDate,
@@ -33,7 +33,7 @@ def crypto(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/crypto/", token, version, filter)
+    return _get("stock/market/crypto/", token, version, filter)
 
 
 @wraps(crypto)
@@ -64,7 +64,7 @@ def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "stock/{symbol}/sentiment/{type}/{date}".format(
                 symbol=symbol, type=type, date=date
             ),
@@ -72,7 +72,7 @@ def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
             version,
             filter,
         )
-    return _getJson(
+    return _get(
         "stock/{symbol}/sentiment/{type}/".format(symbol=symbol, type=type),
         token,
         version,
@@ -107,7 +107,7 @@ def ceoCompensation(symbol, token="", version="", filter=""):
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    return _getJson(
+    return _get(
         "stock/{symbol}/ceo-compensation".format(symbol=symbol), token, version, filter
     )
 

@@ -16,7 +16,7 @@ from ..common import (
     _UTC,
     PyEXception,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -45,7 +45,7 @@ def collections(tag, collectionName, token="", version="", filter=""):
     """
     if tag not in _COLLECTION_TAGS:
         raise PyEXception("Tag must be in %s" % str(_COLLECTION_TAGS))
-    return _getJson(
+    return _get(
         "stock/market/collection/" + tag + "?collectionName=" + collectionName,
         token,
         version,
@@ -78,7 +78,7 @@ def earningsToday(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/today-earnings", token, version, filter)
+    return _get("stock/market/today-earnings", token, version, filter)
 
 
 @wraps(earningsToday)
@@ -116,7 +116,7 @@ def ipoToday(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/today-ipos", token, version, filter)
+    return _get("stock/market/today-ipos", token, version, filter)
 
 
 @wraps(ipoToday)
@@ -147,7 +147,7 @@ def ipoUpcoming(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/upcoming-ipos", token, version, filter)
+    return _get("stock/market/upcoming-ipos", token, version, filter)
 
 
 @wraps(ipoUpcoming)
@@ -180,7 +180,7 @@ def list(option="mostactive", token="", version="", filter=""):
     """
     if option not in _LIST_OPTIONS:
         raise PyEXception("Option must be in %s" % str(_LIST_OPTIONS))
-    return _getJson("stock/market/list/" + option, token, version, filter)
+    return _get("stock/market/list/" + option, token, version, filter)
 
 
 @wraps(list)
@@ -205,7 +205,7 @@ def marketVolume(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("market/", token, version, filter)
+    return _get("market/", token, version, filter)
 
 
 @wraps(marketVolume)
@@ -229,7 +229,7 @@ def marketOhlc(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/ohlc", token, version, filter)
+    return _get("stock/market/ohlc", token, version, filter)
 
 
 @wraps(marketOhlc)
@@ -260,7 +260,7 @@ def marketYesterday(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/previous", token, version, filter)
+    return _get("stock/market/previous", token, version, filter)
 
 
 marketPrevious = marketYesterday
@@ -296,7 +296,7 @@ def sectorPerformance(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stock/market/sector-performance", token, version, filter)
+    return _get("stock/market/sector-performance", token, version, filter)
 
 
 @wraps(sectorPerformance)
@@ -326,8 +326,8 @@ def marketShortInterest(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson("stock/market/short-interest/" + date, token, version, filter)
-    return _getJson("stock/market/short-interest", token, version, filter)
+        return _get("stock/market/short-interest/" + date, token, version, filter)
+    return _get("stock/market/short-interest", token, version, filter)
 
 
 @wraps(marketShortInterest)
@@ -356,8 +356,8 @@ def upcomingEvents(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _getJson("stock/" + symbol + "/upcoming-events", token, version, filter)
-    return _getJson("stock/market/upcoming-events", token, version, filter)
+        return _get("stock/" + symbol + "/upcoming-events", token, version, filter)
+    return _get("stock/market/upcoming-events", token, version, filter)
 
 
 def _upcomingToDF(upcoming):
@@ -394,10 +394,10 @@ def upcomingEarnings(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _getJson(
+        return _get(
             "stock/" + symbol + "/upcoming-earnings", token, version, filter
         )
-    return _getJson("stock/market/upcoming-earnings", token, version, filter)
+    return _get("stock/market/upcoming-earnings", token, version, filter)
 
 
 @wraps(upcomingEarnings)
@@ -426,10 +426,10 @@ def upcomingDividends(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _getJson(
+        return _get(
             "stock/" + symbol + "/upcoming-dividends", token, version, filter
         )
-    return _getJson("stock/market/upcoming-dividends", token, version, filter)
+    return _get("stock/market/upcoming-dividends", token, version, filter)
 
 
 @wraps(upcomingDividends)
@@ -458,8 +458,8 @@ def upcomingSplits(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _getJson("stock/" + symbol + "/upcoming-splits", token, version, filter)
-    return _getJson("stock/market/upcoming-splits", token, version, filter)
+        return _get("stock/" + symbol + "/upcoming-splits", token, version, filter)
+    return _get("stock/market/upcoming-splits", token, version, filter)
 
 
 @wraps(upcomingSplits)
@@ -488,8 +488,8 @@ def upcomingIPOs(symbol="", refid="", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _getJson("stock/" + symbol + "/upcoming-ipos", token, version, filter)
-    return _getJson("stock/market/upcoming-ipos", token, version, filter)
+        return _get("stock/" + symbol + "/upcoming-ipos", token, version, filter)
+    return _get("stock/market/upcoming-ipos", token, version, filter)
 
 
 @wraps(upcomingIPOs)

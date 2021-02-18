@@ -12,7 +12,7 @@ import pandas as pd
 from ..common import (
     _EST,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _strOrDate,
@@ -37,10 +37,10 @@ def threshold(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "stock/market/threshold-securities/" + date, token, version, filter
         )
-    return _getJson("stock/market/threshold-securities", token, version, filter)
+    return _get("stock/market/threshold-securities", token, version, filter)
 
 
 @wraps(threshold)
@@ -72,10 +72,10 @@ def shortInterest(symbol, date=None, token="", version="", filter=""):
     symbol = _quoteSymbols(symbol)
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "stock/" + symbol + "/short-interest/" + date, token, version, filter
         )
-    return _getJson("stock/" + symbol + "/short-interest", token, version, filter)
+    return _get("stock/" + symbol + "/short-interest", token, version, filter)
 
 
 @wraps(shortInterest)

@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _getJson
+from ..common import _expire, _get
 
 
 @_expire(hour=8)
@@ -26,7 +26,7 @@ def sectors(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/sectors", token, version, filter)
+    return _get("ref-data/sectors", token, version, filter)
 
 
 @wraps(sectors)
@@ -48,7 +48,7 @@ def tags(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/tags", token, version, filter)
+    return _get("ref-data/tags", token, version, filter)
 
 
 @wraps(tags)

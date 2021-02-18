@@ -16,7 +16,7 @@ from ..common import (
     PyEXception,
     _checkPeriodLast,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -46,7 +46,7 @@ def balanceSheet(symbol, period="quarter", last=1, token="", version="", filter=
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
-    return _getJson(
+    return _get(
         "stock/{}/balance-sheet?period={}&last={}".format(symbol, period, last),
         token,
         version,
@@ -84,7 +84,7 @@ def cashFlow(symbol, period="quarter", last=1, token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
-    return _getJson(
+    return _get(
         "stock/{}/cash-flow?period={}&last={}".format(symbol, period, last),
         token,
         version,
@@ -122,7 +122,7 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter=""):
     symbol = _quoteSymbols(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
-    return _getJson(
+    return _get(
         "stock/" + symbol + "/dividends/" + timeframe, token, version, filter
     )
 
@@ -167,13 +167,13 @@ def earnings(
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
     if not field:
-        return _getJson(
+        return _get(
             "stock/{}/earnings?period={}&last={}".format(symbol, period, last),
             token,
             version,
             filter,
         ).get("earnings", [])
-    return _getJson(
+    return _get(
         "stock/{}/earnings/{}/{}?period={}".format(symbol, last, field, period),
         token,
         version,
@@ -221,7 +221,7 @@ def financials(symbol, period="quarter", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, 1)
-    return _getJson(
+    return _get(
         "stock/{}/financials?period={}".format(symbol, period), token, version, filter
     ).get("financials", [])
 
@@ -264,7 +264,7 @@ def fundamentals(symbol, period="quarter", token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, 1)
-    return _getJson(
+    return _get(
         "stock/{}/fundamentals?period={}".format(symbol, period), token, version, filter
     ).get("fundamentals", [])
 
@@ -308,7 +308,7 @@ def incomeStatement(symbol, period="quarter", last=1, token="", version="", filt
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
-    return _getJson(
+    return _get(
         "stock/{}/income?period={}&last={}".format(symbol, period, last),
         token,
         version,
@@ -347,7 +347,7 @@ def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
     symbol = _quoteSymbols(symbol)
     if timeframe not in _TIMEFRAME_DIVSPLIT:
         raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
-    return _getJson("stock/" + symbol + "/splits/" + timeframe, token, version, filter)
+    return _get("stock/" + symbol + "/splits/" + timeframe, token, version, filter)
 
 
 def _splitsToDF(s):

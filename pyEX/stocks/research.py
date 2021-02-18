@@ -19,7 +19,7 @@ from ..common import (
     PyEXception,
     _checkPeriodLast,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -47,7 +47,7 @@ def advancedStats(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/advanced-stats", token, version, filter)
+    return _get("stock/" + symbol + "/advanced-stats", token, version, filter)
 
 
 @wraps(advancedStats)
@@ -76,7 +76,7 @@ def analystRecommendations(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson(
+    return _get(
         "stock/" + symbol + "/recommendation-trends", token, version, filter
     )
 
@@ -109,7 +109,7 @@ def estimates(symbol, period="quarter", last=1, token="", version="", filter="")
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     _checkPeriodLast(period, last)
-    return _getJson(
+    return _get(
         "stock/{}/estimates?period={}&last={}".format(symbol, period, last),
         token,
         version,
@@ -154,7 +154,7 @@ def fundOwnership(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/fund-ownership", token, version, filter)
+    return _get("stock/" + symbol + "/fund-ownership", token, version, filter)
 
 
 @wraps(fundOwnership)
@@ -183,7 +183,7 @@ def institutionalOwnership(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson(
+    return _get(
         "stock/" + symbol + "/institutional-ownership", token, version, filter
     )
 
@@ -248,10 +248,10 @@ def keyStats(symbol, stat="", token="", version="", filter=""):
     if stat:
         if stat not in _KEY_STATS:
             raise PyEXception("Stat must be in {}".format(_KEY_STATS))
-        return _getJson(
+        return _get(
             "stock/{}/stats/{}".format(symbol, stat), token, version, filter
         )
-    return _getJson("stock/{}/stats".format(symbol), token, version, filter)
+    return _get("stock/{}/stats".format(symbol), token, version, filter)
 
 
 def _statsToDF(s):
@@ -289,7 +289,7 @@ def priceTarget(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/price-target", token, version, filter)
+    return _get("stock/" + symbol + "/price-target", token, version, filter)
 
 
 @wraps(priceTarget)
@@ -581,7 +581,7 @@ def technicals(
         if input3:
             base_url += "&input3={}".format(input3)
 
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token, version, filter)
 
 
 @wraps(technicals)

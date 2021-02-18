@@ -23,8 +23,9 @@ from sseclient import SSEClient
 from temporalcache import expire, interval
 
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
-_URL_PREFIX2 = "https://cloud.iexapis.com/{version}/"
-_URL_PREFIX2_SANDBOX = "https://sandbox.iexapis.com/{version}/"
+_URL_PREFIX_CLOUD = "https://cloud.iexapis.com/{version}/"
+_URL_PREFIX_CLOUD_ORIG = _URL_PREFIX_CLOUD
+_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/{version}/"
 
 _SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
@@ -32,6 +33,7 @@ _SIO_PORT = 443
 _SSE_URL_PREFIX = (
     "https://cloud-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
 )
+_SSE_URL_PREFIX_ORIG = _SSE_URL_PREFIX
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
 _SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
@@ -413,102 +415,119 @@ class PyEXStopSSE(Exception):
     pass
 
 
-def _getJson(url, token="", version="", filter=""):
+def _get(url, token="", version="", filter="", format="json"):
     """for backwards compat, accepting token and version but ignoring"""
     token = token or os.environ.get("IEX_TOKEN")
     if token:
         if version == "sandbox":
-            return _getJsonIEXCloudSandbox(url, token, version, filter)
-        return _getJsonIEXCloud(url, token, version, filter)
-    return _getJsonOrig(url)
+            return _getIEXCloudSandbox(url, token, version, filter, format)
+        return _getIEXCloud(url, token, version, filter, format)
+    return _getOrig(url)
 
 
-async def _getJsonAsync(url, token="", version="", filter=""):
+async def _getAsync(url, token="", version="", filter="", format=True):
     """for backwards compat, accepting token and version but ignoring"""
     token = token or os.environ.get("IEX_TOKEN")
     if token:
         if version == "sandbox":
-            return await _getJsonIEXCloudSandboxAsync(url, token, version, filter)
-        return await _getJsonIEXCloudAsync(url, token, version, filter)
-    return _getJsonOrig(url)
+            return await _getIEXCloudSandboxAsync(url, token, version, filter, format)
+        return await _getIEXCloudAsync(url, token, version, filter, format)
+    return _getOrig(url)
 
 
-def _postJson(url, data=None, json=None, token="", version="", token_in_params=True):
+def _post(url, data=None, json=None, token="", version="", token_in_params=True, format="json"):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
-        return _postJsonIEXCloudSandbox(
-            url, data, json, token, version, token_in_params
+        return _postIEXCloudSandbox(
+            url, data, json, token, version, token_in_params, format
         )
-    return _postJsonIEXCloud(url, data, json, token, version, token_in_params)
+    return _postIEXCloud(url, data, json, token, version, token_in_params, format)
 
 
-def _deleteJson(url, token="", version=""):
+def _delete(url, token="", version="", format="json"):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
-        return _deleteJsonIEXCloudSandbox(url, token, version)
-    return _deleteJsonIEXCloud(url, token, version)
+        return _deleteIEXCloudSandbox(url, token, version, format)
+    return _deleteIEXCloud(url, token, version, format)
 
 
-def _getJsonOrig(url):
+def _getOrig(url):
     raise PyEXception(
         "Old IEX API is deprecated. For a free API token, sign up at https://iexcloud.io"
     )
 
 
-def _getJsonIEXCloudBase(base_url, url, token="", version="stable", filter=""):
+def _getIEXCloudBase(base_url, url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
     url = base_url.format(version=version) + url
+
     params = {"token": token}
+
     if filter:
-        params.update({"filter": filter})
+        params["filter"] = filter
+
+    if format != "json":
+        params["format"] = format
+
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+
     if resp.status_code == 200:
-        return resp.json()
+        if format == "json":
+            return resp.json()
+        return resp.text
     raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _getJsonIEXCloud(url, token="", version="stable", filter=""):
+def _getIEXCloud(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return _getJsonIEXCloudBase(_URL_PREFIX2, url, token, version, filter)
+    return _getIEXCloudBase(_URL_PREFIX_CLOUD, url, token, version, filter, format)
 
 
-async def _getJsonIEXCloudAsyncBase(
-    base_url, url, token="", version="stable", filter=""
+async def _getIEXCloudAsyncBase(
+    base_url, url, token="", version="stable", filter="", format="json"
 ):
     """for iex cloud"""
     import aiohttp
 
-    url = _URL_PREFIX2.format(version=version) + url
+    url = _URL_PREFIX_CLOUD.format(version=version) + url
     params = {"token": token}
+
     if filter:
-        params.update({"filter": filter})
+        params["filter"] = filter
+
+    if format != "json":
+        params["format"] = format
+
     async with aiohttp.ClientSession() as session:
         async with session.get(
             urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
         ) as resp:
+
             if resp.status == 200:
-                return await resp.json()
+                if format == "json":
+                    return await resp.json()
+                return resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _getJsonIEXCloudAsync(url, token="", version="stable", filter=""):
+async def _getIEXCloudAsync(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return await _getJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version, filter)
+    return await _getIEXCloudAsyncBase(_URL_PREFIX_CLOUD, url, token, version, filter, format)
 
 
-def _getJsonIEXCloudSandbox(url, token="", version="stable", filter=""):
+def _getIEXCloudSandbox(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return _getJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable", filter)
+    return _getIEXCloudBase(_URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", filter, format)
 
 
-async def _getJsonIEXCloudSandboxAsync(url, token="", version="stable", filter=""):
+async def _getIEXCloudSandboxAsync(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return await _getJsonIEXCloudAsyncBase(
-        _URL_PREFIX2_SANDBOX, url, token, "stable", filter
+    return await _getIEXCloudAsyncBase(
+        _URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", filter, format
     )
 
 
-def _postJsonIEXCloudBase(
+def _postIEXCloudBase(
     base_url,
     url,
     data=None,
@@ -516,13 +535,19 @@ def _postJsonIEXCloudBase(
     token="",
     version="stable",
     token_in_params=True,
+    format="json",
 ):
     """for iex cloud"""
     url = base_url.format(version=version) + url
+
     if token_in_params:
         params = {"token": token}
     else:
         params = {}
+
+    if format != "json":
+        params["format"] = format
+
     resp = requests.post(
         urlparse(url).geturl(),
         data=data,
@@ -531,20 +556,22 @@ def _postJsonIEXCloudBase(
         params=params,
     )
     if resp.status_code == 200:
-        return resp.json()
+        if format == "json":
+            return resp.json()
+        return resp.text
     raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _postJsonIEXCloud(
-    url, data=None, json=None, token="", version="stable", token_in_params=True
+def _postIEXCloud(
+    url, data=None, json=None, token="", version="stable", token_in_params=True, format="json"
 ):
     """for iex cloud"""
-    return _postJsonIEXCloudBase(
-        _URL_PREFIX2, data, json, token, version, token_in_params
+    return _postIEXCloudBase(
+        _URL_PREFIX_CLOUD, data, json, token, version, token_in_params, format
     )
 
 
-async def _postJsonIEXCloudAsyncBase(
+async def _postIEXCloudAsyncBase(
     base_url,
     url,
     data=None,
@@ -553,15 +580,20 @@ async def _postJsonIEXCloudAsyncBase(
     version="stable",
     filter="",
     token_in_params=True,
+    format="json",
 ):
     """for iex cloud"""
     import aiohttp
 
     url = base_url.format(version=version) + url
+
     if token_in_params:
         params = {"token": token}
     else:
         params = {}
+
+    if format != "json":
+        params["format"] = format
 
     async with aiohttp.ClientSession() as session:
         async with session.post(
@@ -572,11 +604,13 @@ async def _postJsonIEXCloudAsyncBase(
             params=params,
         ) as resp:
             if resp.status == 200:
-                return await resp.json()
+                if format == "json":
+                    return await resp.json()
+                return resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _postJsonIEXCloudAsync(
+async def _postIEXCloudAsync(
     url,
     data=None,
     json=None,
@@ -584,61 +618,75 @@ async def _postJsonIEXCloudAsync(
     version="stable",
     filter="",
     token_in_params=True,
+    format="json",
 ):
     """for iex cloud"""
-    return await _postJsonIEXCloudAsyncBase(
-        _URL_PREFIX2, url, data, json, token, version, filter, token_in_params
+    return await _postIEXCloudAsyncBase(
+        _URL_PREFIX_CLOUD, url, data, json, token, version, filter, token_in_params, format
     )
 
 
-def _postJsonIEXCloudSandbox(
-    url, data=None, json=None, token="", version="stable", token_in_params=True
+def _postIEXCloudSandbox(
+    url, data=None, json=None, token="", version="stable", token_in_params=True, format="json"
 ):
     """for iex cloud"""
-    return _postJsonIEXCloudBase(
-        _URL_PREFIX2_SANDBOX, url, data, json, token, "stable", token_in_params
+    return _postIEXCloudBase(
+        _URL_PREFIX_CLOUD_SANDBOX, url, data, json, token, "stable", token_in_params, format
     )
 
 
-def _deleteJsonIEXCloudBase(base_url, url, token="", version="stable"):
+def _deleteIEXCloudBase(base_url, url, token="", version="stable", format="json"):
     """for iex cloud"""
     url = base_url.format(version=version) + url
+
     params = {"token": token}
+
+    if format != "json":
+        params["format"] = format
+
     resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+
     if resp.status_code == 200:
-        return resp.json()
+        if format == "json":
+            return resp.json()
+        return resp.text
     raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
 
-def _deleteJsonIEXCloud(url, token="", version="stable"):
+def _deleteIEXCloud(url, token="", version="stable", format="json"):
     """for iex cloud"""
-    return _deleteJsonIEXCloud(_URL_PREFIX2, url, token, version)
+    return _deleteIEXCloud(_URL_PREFIX_CLOUD, url, token, version, format)
 
 
-async def _deleteJsonIEXCloudAsyncBase(url, token="", version="stable"):
+async def _deleteIEXCloudAsyncBase(url, token="", version="stable", format="json"):
     """for iex cloud"""
     import aiohttp
 
-    url = _URL_PREFIX2.format(version=version) + url
+    url = _URL_PREFIX_CLOUD.format(version=version) + url
     params = {"token": token}
+
+    if format != "json":
+        params["format"] = format
 
     async with aiohttp.ClientSession() as session:
         async with session.delete(
             urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
         ) as resp:
             if resp.status == 200:
-                return await resp.json()
+                if format == "json":
+                    return await resp.json()
+                return resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-async def _deleteJsonIEXCloudAsync(url, token="", version="stable"):
+async def _deleteIEXCloudAsync(url, token="", version="stable", format="json"):
     """for iex cloud"""
-    return await _deleteJsonIEXCloudAsyncBase(_URL_PREFIX2, url, token, version)
+    return await _deleteIEXCloudAsyncBase(_URL_PREFIX_CLOUD, url, token, version, format)
 
 
-def _deleteJsonIEXCloudSandbox(url, token="", version="stable"):
+def _deleteIEXCloudSandbox(url, token="", version="stable", format="json"):
     """for iex cloud"""
-    return _deleteJsonIEXCloudBase(_URL_PREFIX2_SANDBOX, url, token, "stable")
+    return _deleteIEXCloudBase(_URL_PREFIX_CLOUD_SANDBOX, url, token, "stable", format)
 
 
 def _wsURL(url):
@@ -835,16 +883,28 @@ def setProxy(proxies=None):
     _PYEX_PROXIES = proxies
 
 
-def overrideUrl(url):
+def overrideUrl(url="", env=""):
     """Override the default IEX Cloud url"""
-    global _URL_PREFIX2
-    _URL_PREFIX2 = url
+    global _URL_PREFIX_CLOUD
+    if env:
+        _URL_PREFIX_CLOUD = "https://cloud.{env}.iexapis.com/{{version}}/".format(env=env)
+    elif url:
+        _URL_PREFIX_CLOUD = url
+    else:
+        # reset
+        _URL_PREFIX_CLOUD = _URL_PREFIX_CLOUD_ORIG
 
 
-def overrideSSEUrl(url):
+def overrideSSEUrl(url="", env=""):
     """Override the default IEX Cloud SSE url"""
     global _SSE_URL_PREFIX
-    _SSE_URL_PREFIX = url
+    if env:
+        _SSE_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?symbols={{symbols}}&token={{token}}".format(env=env)
+    elif url:
+        _SSE_URL_PREFIX = url
+    else:
+        # reset
+        _SSE_URL_PREFIX = _SSE_URL_PREFIX_ORIG
 
 
 def _expire(**temporal_args):

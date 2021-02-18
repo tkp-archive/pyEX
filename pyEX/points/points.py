@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr, _toDatetime
+from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
 def points(symbol="market", key="", token="", version="", filter=""):
@@ -32,13 +32,13 @@ def points(symbol="market", key="", token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     if key:
-        return _getJson(
+        return _get(
             "data-points/{symbol}/{key}".format(symbol=symbol, key=key),
             token,
             version,
             filter,
         )
-    return _getJson(
+    return _get(
         "data-points/{symbol}".format(symbol=symbol), token, version, filter
     )
 

@@ -10,8 +10,8 @@ from functools import wraps
 import pandas as pd
 
 from ..common import (
-    _getJson,
-    _getJsonAsync,
+    _get,
+    _getAsync,
     _raiseIfNotStr,
     _reindex,
     _strOrDate,
@@ -37,18 +37,18 @@ def tops(symbols=None, token="", version=""):
     """
     symbols = _strToList(symbols)
     if symbols:
-        return _getJson("tops?symbols=" + ",".join(symbols) + "%2b", token, version)
-    return _getJson("tops", token, version)
+        return _get("tops?symbols=" + ",".join(symbols) + "%2b", token, version)
+    return _get("tops", token, version)
 
 
 @wraps(tops)
 async def topsAsync(symbols=None, token="", version=""):
     symbols = _strToList(symbols)
     if symbols:
-        return await _getJsonAsync(
+        return await _getAsync(
             "tops?symbols=" + ",".join(symbols) + "%2b", token, version
         )
-    return await _getJsonAsync("tops", token, version)
+    return await _getAsync("tops", token, version)
 
 
 @wraps(tops)
@@ -75,20 +75,20 @@ def last(symbols=None, token="", version=""):
     """
     symbols = _strToList(symbols)
     if symbols:
-        return _getJson(
+        return _get(
             "tops/last?symbols=" + ",".join(symbols) + "%2b", token, version
         )
-    return _getJson("tops/last", token, version)
+    return _get("tops/last", token, version)
 
 
 @wraps(last)
 async def lastAsync(symbols=None, token="", version=""):
     symbols = _strToList(symbols)
     if symbols:
-        return await _getJsonAsync(
+        return await _getAsync(
             "tops/last?symbols=" + ",".join(symbols) + "%2b", token, version
         )
-    return await _getJsonAsync("tops/last", token, version)
+    return await _getAsync("tops/last", token, version)
 
 
 @wraps(last)
@@ -119,16 +119,16 @@ def deep(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep?symbols=" + symbol, token, version)
-    return _getJson("deep", token, version)
+        return _get("deep?symbols=" + symbol, token, version)
+    return _get("deep", token, version)
 
 
 @wraps(deep)
 async def deepAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep", token, version)
+        return await _getAsync("deep?symbols=" + symbol, token, version)
+    return await _getAsync("deep", token, version)
 
 
 @wraps(deep)
@@ -154,16 +154,16 @@ def auction(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/auction?symbols=" + symbol, token, version)
-    return _getJson("deep/auction", token, version)
+        return _get("deep/auction?symbols=" + symbol, token, version)
+    return _get("deep/auction", token, version)
 
 
 @wraps(auction)
 async def auctionAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/auction?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/auction", token, version)
+        return await _getAsync("deep/auction?symbols=" + symbol, token, version)
+    return await _getAsync("deep/auction", token, version)
 
 
 @wraps(auction)
@@ -188,16 +188,16 @@ def book(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/book?symbols=" + symbol, token, version)
-    return _getJson("deep/book", token, version)
+        return _get("deep/book?symbols=" + symbol, token, version)
+    return _get("deep/book", token, version)
 
 
 @wraps(book)
 async def bookAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/book?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/book", token, version)
+        return await _getAsync("deep/book?symbols=" + symbol, token, version)
+    return await _getAsync("deep/book", token, version)
 
 
 @wraps(book)
@@ -234,18 +234,18 @@ def opHaltStatus(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/op-halt-status?symbols=" + symbol, token, version)
-    return _getJson("deep/op-halt-status", token, version)
+        return _get("deep/op-halt-status?symbols=" + symbol, token, version)
+    return _get("deep/op-halt-status", token, version)
 
 
 @wraps(opHaltStatus)
 async def opHaltStatusAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
+        return await _getAsync(
             "deep/op-halt-status?symbols=" + symbol, token, version
         )
-    return await _getJsonAsync("deep/op-halt-status", token, version)
+    return await _getAsync("deep/op-halt-status", token, version)
 
 
 @wraps(opHaltStatus)
@@ -278,18 +278,18 @@ def officialPrice(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/official-price?symbols=" + symbol, token, version)
-    return _getJson("deep/official-price", token, version)
+        return _get("deep/official-price?symbols=" + symbol, token, version)
+    return _get("deep/official-price", token, version)
 
 
 @wraps(officialPrice)
 async def officialPriceAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
+        return await _getAsync(
             "deep/official-price?symbols=" + symbol, token, version
         )
-    return await _getJsonAsync("deep/official-price", token, version)
+    return await _getAsync("deep/official-price", token, version)
 
 
 @wraps(officialPrice)
@@ -314,18 +314,18 @@ def securityEvent(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/security-event?symbols=" + symbol, token, version)
-    return _getJson("deep/security-event", token, version)
+        return _get("deep/security-event?symbols=" + symbol, token, version)
+    return _get("deep/security-event", token, version)
 
 
 @wraps(securityEvent)
 async def securityEventAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
+        return await _getAsync(
             "deep/security-event?symbols=" + symbol, token, version
         )
-    return await _getJsonAsync("deep/security-event", token, version)
+    return await _getAsync("deep/security-event", token, version)
 
 
 @wraps(securityEvent)
@@ -361,16 +361,16 @@ def ssrStatus(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/ssr-status?symbols=" + symbol, token, version)
-    return _getJson("deep/ssr-status", token, version)
+        return _get("deep/ssr-status?symbols=" + symbol, token, version)
+    return _get("deep/ssr-status", token, version)
 
 
 @wraps(ssrStatus)
 async def ssrStatusAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/ssr-status?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/ssr-status", token, version)
+        return await _getAsync("deep/ssr-status?symbols=" + symbol, token, version)
+    return await _getAsync("deep/ssr-status", token, version)
 
 
 @wraps(ssrStatus)
@@ -417,12 +417,12 @@ def systemEvent(token="", version=""):
     Returns:
         dict: result
     """
-    return _getJson("deep/system-event", token, version)
+    return _get("deep/system-event", token, version)
 
 
 @wraps(systemEvent)
 async def systemEventAsync(token="", version=""):
-    return await _getJsonAsync("deep/system-event", token, version)
+    return await _getAsync("deep/system-event", token, version)
 
 
 @wraps(systemEvent)
@@ -447,16 +447,16 @@ def trades(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trades?symbols=" + symbol, token, version)
-    return _getJson("deep/trades", token, version)
+        return _get("deep/trades?symbols=" + symbol, token, version)
+    return _get("deep/trades", token, version)
 
 
 @wraps(trades)
 async def tradesAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/trades?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/trades", token, version)
+        return await _getAsync("deep/trades?symbols=" + symbol, token, version)
+    return await _getAsync("deep/trades", token, version)
 
 
 @wraps(trades)
@@ -489,18 +489,18 @@ def tradeBreak(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trade-breaks?symbols=" + symbol, token, version)
-    return _getJson("deep/trade-breaks", token, version)
+        return _get("deep/trade-breaks?symbols=" + symbol, token, version)
+    return _get("deep/trade-breaks", token, version)
 
 
 @wraps(tradeBreak)
 async def tradeBreakAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
+        return await _getAsync(
             "deep/trade-breaks?symbols=" + symbol, token, version
         )
-    return await _getJsonAsync("deep/trade-breaks", token, version)
+    return await _getAsync("deep/trade-breaks", token, version)
 
 
 @wraps(tradeBreak)
@@ -540,18 +540,18 @@ def tradingStatus(symbol=None, token="", version=""):
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trading-status?symbols=" + symbol, token, version)
-    return _getJson("deep/trading-status", token, version)
+        return _get("deep/trading-status?symbols=" + symbol, token, version)
+    return _get("deep/trading-status", token, version)
 
 
 @wraps(tradingStatus)
 async def tradingStatusAsync(symbol=None, token="", version=""):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
+        return await _getAsync(
             "deep/trading-status?symbols=" + symbol, token, version
         )
-    return await _getJson("deep/trading-status", token, version)
+    return await _get("deep/trading-status", token, version)
 
 
 @wraps(tradingStatus)
@@ -579,19 +579,19 @@ def hist(date=None, token="", version=""):
     """
 
     if date is None:
-        return _getJson("hist", token, version)
+        return _get("hist", token, version)
     else:
         date = _strOrDate(date)
-        return _getJson("hist?date=" + date, token, version)
+        return _get("hist?date=" + date, token, version)
 
 
 @wraps(hist)
 async def histAsync(date=None, token="", version=""):
     if date is None:
-        return await _getJson("hist", token, version)
+        return await _get("hist", token, version)
     else:
         date = _strOrDate(date)
-        return await _getJsonAsync("hist?date=" + date, token, version)
+        return await _getAsync("hist?date=" + date, token, version)
 
 
 @wraps(hist)

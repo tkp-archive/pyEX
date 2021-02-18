@@ -10,7 +10,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import PyEXception, _expire, _getJson, _reindex, _strOrDate, _toDatetime
+from ..common import PyEXception, _expire, _get, _reindex, _strOrDate, _toDatetime
 
 
 def stats(token="", version="", filter=""):
@@ -24,7 +24,7 @@ def stats(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stats/intraday", token, version, filter)
+    return _get("stats/intraday", token, version, filter)
 
 
 @wraps(stats)
@@ -45,7 +45,7 @@ def recent(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stats/recent", token, version, filter)
+    return _get("stats/recent", token, version, filter)
 
 
 @wraps(recent)
@@ -67,7 +67,7 @@ def records(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("stats/records", token, version, filter)
+    return _get("stats/records", token, version, filter)
 
 
 @wraps(records)
@@ -92,16 +92,16 @@ def summary(date=None, token="", version="", filter=""):
     """
     if date:
         if isinstance(date, str):
-            return _getJson("stats/historical?date=" + date, token, version, filter)
+            return _get("stats/historical?date=" + date, token, version, filter)
         elif isinstance(date, datetime):
-            return _getJson(
+            return _get(
                 "stats/historical?date=" + date.strftime("%Y%m"), token, version, filter
             )
         else:
             raise PyEXception(
                 "Can't handle type : %s" % str(type(date)), token, version, filter
             )
-    return _getJson("stats/historical", token, version, filter)
+    return _get("stats/historical", token, version, filter)
 
 
 @wraps(summary)
@@ -127,10 +127,10 @@ def daily(date=None, last="", token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson("stats/historical/daily?date=" + date, token, version, filter)
+        return _get("stats/historical/daily?date=" + date, token, version, filter)
     elif last:
-        return _getJson("stats/historical/daily?last=" + last, token, version, filter)
-    return _getJson("stats/historical/daily", token, version, filter)
+        return _get("stats/historical/daily?last=" + last, token, version, filter)
+    return _get("stats/historical/daily", token, version, filter)
 
 
 @wraps(daily)

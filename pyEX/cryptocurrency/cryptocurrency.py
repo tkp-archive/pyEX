@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson
+from ..common import _get
 
 
 def cryptoBook(symbol, token="", version="", filter=""):
@@ -27,7 +27,7 @@ def cryptoBook(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson(
+    return _get(
         "/crypto/{symbol}/book".format(symbol=symbol), token, version, filter
     )
 
@@ -52,7 +52,7 @@ def cryptoPrice(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson(
+    return _get(
         "/crypto/{symbol}/price".format(symbol=symbol), token, version, filter
     )
 
@@ -78,7 +78,7 @@ def cryptoQuote(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson(
+    return _get(
         "/crypto/{symbol}/quote".format(symbol=symbol), token, version, filter
     )
 

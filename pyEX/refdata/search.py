@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _interval, _quoteSymbols
+from ..common import _get, _interval, _quoteSymbols
 
 
 @_interval(hours=24)  # TODO make this smaller?
@@ -28,7 +28,7 @@ def search(fragment, token="", version="", filter=""):
         dict or DataFrame: result
     """
     fragment = _quoteSymbols(fragment)
-    return _getJson("search/{}".format(fragment), token, version, filter)
+    return _get("search/{}".format(fragment), token, version, filter)
 
 
 @wraps(search)

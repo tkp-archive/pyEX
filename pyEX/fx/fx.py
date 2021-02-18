@@ -9,7 +9,7 @@ import itertools
 
 import pandas as pd
 
-from ..common import _expire, _getJson, _reindex, _strOrDate
+from ..common import _expire, _get, _reindex, _strOrDate
 
 
 def latestFX(symbols=None, token="", version="", filter=""):
@@ -29,19 +29,19 @@ def latestFX(symbols=None, token="", version="", filter=""):
     """
     if symbols:
         if isinstance(symbols, str):
-            return _getJson(
+            return _get(
                 "/fx/latest?symbols={symbols}".format(symbols=symbols),
                 token,
                 version,
                 filter,
             )
-        return _getJson(
+        return _get(
             "/fx/latest?symbols={symbols}".format(symbols=",".join(symbols)),
             token,
             version,
             filter,
         )
-    return _getJson("/fx/latest", token, version, filter)
+    return _get("/fx/latest", token, version, filter)
 
 
 def latestFXDF(symbols=None, token="", version="", filter=""):
@@ -82,7 +82,7 @@ def convertFX(symbols=None, amount=None, token="", version="", filter=""):
     amount = amount or ""
     if symbols:
         if isinstance(symbols, str):
-            return _getJson(
+            return _get(
                 "/fx/convert?symbols={symbols}&amount={amount}".format(
                     symbols=symbols, amount=amount
                 ),
@@ -90,7 +90,7 @@ def convertFX(symbols=None, amount=None, token="", version="", filter=""):
                 version,
                 filter,
             )
-        return _getJson(
+        return _get(
             "/fx/convert?symbols={symbols}&amount={amount}".format(
                 symbols=",".join(symbols), amount=amount
             ),
@@ -98,7 +98,7 @@ def convertFX(symbols=None, amount=None, token="", version="", filter=""):
             version,
             filter,
         )
-    return _getJson(
+    return _get(
         "/fx/convert?amount={amount}".format(amount=amount), token, version, filter
     )
 
@@ -174,7 +174,7 @@ def historicalFX(
         base_url += "first={}&".format(str(first))
 
     return list(
-        itertools.chain.from_iterable(_getJson(base_url, token, version, filter))
+        itertools.chain.from_iterable(_get(base_url, token, version, filter))
     )
 
 

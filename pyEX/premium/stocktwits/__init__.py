@@ -9,7 +9,7 @@ from functools import wraps
 
 from ...common import (
     PyEXception,
-    _getJson,
+    _get,
     _raiseIfNotStr,
     _strOrDate,
     _toDatetime,
@@ -42,7 +42,7 @@ def socialSentiment(symbol, type="daily", date="", token="", version="", filter=
     if date:
         date = _strOrDate(date)
         base_url += "/{}".format(date)
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token, version, filter)
 
 
 @wraps(socialSentiment)

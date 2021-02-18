@@ -14,7 +14,7 @@ from ..common import (
     _BATCH_TYPES,
     _TIMEFRAME_CHART,
     PyEXception,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _strOrDate,
@@ -91,7 +91,7 @@ def batch(symbols, fields=None, range_="1m", last=10, token="", version="", filt
             symbols, ",".join(fields), range_, last
         )
 
-    return _getJson(route, token, version, filter)
+    return _get(route, token, version, filter)
 
 
 def batchDF(

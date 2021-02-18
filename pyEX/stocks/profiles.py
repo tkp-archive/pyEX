@@ -17,7 +17,7 @@ from PIL import Image as ImageP
 from ..common import (
     _UTC,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -44,7 +44,7 @@ def company(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/company", token, version, filter)
+    return _get("stock/" + symbol + "/company", token, version, filter)
 
 
 def _companyToDF(c, token="", version="", filter=""):
@@ -80,7 +80,7 @@ def insiderRoster(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/insider-roster", token, version, filter)
+    return _get("stock/" + symbol + "/insider-roster", token, version, filter)
 
 
 @wraps(insiderRoster)
@@ -109,7 +109,7 @@ def insiderSummary(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/insider-summary", token, version, filter)
+    return _get("stock/" + symbol + "/insider-summary", token, version, filter)
 
 
 @wraps(insiderSummary)
@@ -138,7 +138,7 @@ def insiderTransactions(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/insider-transactions", token, version, filter)
+    return _get("stock/" + symbol + "/insider-transactions", token, version, filter)
 
 
 @wraps(insiderTransactions)
@@ -167,7 +167,7 @@ def logo(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/logo", token, version, filter)
+    return _get("stock/" + symbol + "/logo", token, version, filter)
 
 
 @_expire(hour=0, tz=_UTC)
@@ -232,7 +232,7 @@ def peers(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/peers", token, version, filter)
+    return _get("stock/" + symbol + "/peers", token, version, filter)
 
 
 def _peersToDF(p):
@@ -268,7 +268,7 @@ def relevant(symbol, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/relevant", token, version, filter)
+    return _get("stock/" + symbol + "/relevant", token, version, filter)
 
 
 @wraps(relevant)

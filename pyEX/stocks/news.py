@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
+from ..common import _get, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
 
 
 def news(symbol, count=10, token="", version="", filter=""):
@@ -31,7 +31,7 @@ def news(symbol, count=10, token="", version="", filter=""):
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson(
+    return _get(
         "stock/" + symbol + "/news/last/" + str(count), token, version, filter
     )
 
@@ -67,7 +67,7 @@ def marketNews(count=10, token="", version="", filter=""):
         dict or DataFrame: result
         dict: result
     """
-    return _getJson("stock/market/news/last/" + str(count), token, version, filter)
+    return _get("stock/market/news/last/" + str(count), token, version, filter)
 
 
 @wraps(marketNews)

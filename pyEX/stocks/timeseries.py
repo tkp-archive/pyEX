@@ -9,7 +9,7 @@ from functools import wraps
 
 from ..common import (
     _dateRange,
-    _getJson,
+    _get,
     _quoteSymbols,
     _strOrDate,
     _toDatetime,
@@ -22,7 +22,7 @@ def timeSeriesInventory(token="", version=""):
     Returns:
         result (dict)
     """
-    return _getJson("time-series/", token, version)
+    return _get("time-series/", token, version)
 
 
 def timeSeriesInventoryDF(token="", version=""):
@@ -161,7 +161,7 @@ def timeSeries(
     if extra_params:
         base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
 
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token, version, filter)
 
 
 @wraps(timeSeries)

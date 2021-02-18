@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _getJson
+from ..common import _expire, _get
 
 
 @_expire(hour=8)
@@ -27,7 +27,7 @@ def exchanges(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/market/us/exchanges", token, version, filter)
+    return _get("ref-data/market/us/exchanges", token, version, filter)
 
 
 @wraps(exchanges)
@@ -50,7 +50,7 @@ def internationalExchanges(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/exchanges", token, version, filter)
+    return _get("ref-data/exchanges", token, version, filter)
 
 
 @wraps(internationalExchanges)

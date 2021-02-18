@@ -7,7 +7,7 @@
 #
 from functools import wraps
 
-from ..common import PyEXception, _deleteJson, _getJson, _postJson, _raiseIfNotStr
+from ..common import PyEXception, _delete, _get, _post, _raiseIfNotStr
 from .engine import Rule  # noqa: F401
 
 
@@ -26,8 +26,8 @@ def lookup(lookup="", token="", version=""):
     """
     _raiseIfNotStr(lookup)
     if lookup:
-        return _getJson("rules/lookup/{}".format(lookup), token, version, None)
-    return _getJson("rules/schema", token, version, None)
+        return _get("rules/lookup/{}".format(lookup), token, version, None)
+    return _get("rules/schema", token, version, None)
 
 
 @wraps(lookup)
@@ -64,7 +64,7 @@ def create(rule, ruleName, ruleSet, type="any", existingId=None, token="", versi
 
     if existingId is not None:
         rule["id"] = existingId
-    return _postJson(
+    return _post(
         "rules/create", json=rule, token=token, version=version, token_in_params=False
     )
 
@@ -75,7 +75,7 @@ def pause(ruleId, token="", version=""):
     Args:
         ruleId (str): The id of an existing rule to puase
     """
-    return _postJson(
+    return _post(
         "rules/pause",
         json={"ruleId": ruleId, "token": token},
         token=token,
@@ -90,7 +90,7 @@ def resume(ruleId, token="", version=""):
     Args:
         ruleId (str): The id of an existing rule to puase
     """
-    return _postJson(
+    return _post(
         "rules/resume",
         json={"ruleId": ruleId, "token": token},
         token=token,
@@ -105,7 +105,7 @@ def delete(ruleId, token="", version=""):
     Args:
         ruleId (str): The id of an existing rule to puase
     """
-    return _deleteJson("rules/{}".format(ruleId), token=token, version=version)
+    return _delete("rules/{}".format(ruleId), token=token, version=version)
 
 
 def rule(ruleId, token="", version=""):
@@ -114,12 +114,12 @@ def rule(ruleId, token="", version=""):
     Args:
         ruleId (str): The id of an existing rule to puase
     """
-    return _getJson("rules/info/{}".format(ruleId), token=token, version=version)
+    return _get("rules/info/{}".format(ruleId), token=token, version=version)
 
 
 def rules(token="", version=""):
     """List all rules that are currently on your account. Each rule object returned will include the current rule status and execution statistics."""
-    return _getJson("rules", token=token, version=version)
+    return _get("rules", token=token, version=version)
 
 
 def output(ruleId, token="", version=""):
@@ -128,4 +128,4 @@ def output(ruleId, token="", version=""):
     Args:
         ruleId (str): The id of an existing rule to puase
     """
-    return _getJson("rules/output/{}".format(ruleId), token=token, version=version)
+    return _get("rules/output/{}".format(ruleId), token=token, version=version)

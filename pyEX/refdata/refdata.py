@@ -10,7 +10,7 @@ from functools import wraps
 import pandas as pd
 from deprecation import deprecated
 
-from ..common import _getJson, _strOrDate, _toDatetime
+from ..common import _get, _strOrDate, _toDatetime
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
@@ -28,10 +28,10 @@ def corporateActions(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "ref-data/daily-list/corporate-actions/" + date, token, version, filter
         )
-    return _getJson("ref-data/daily-list/corporate-actions", token, version, filter)
+    return _get("ref-data/daily-list/corporate-actions", token, version, filter)
 
 
 @wraps(corporateActions)
@@ -57,8 +57,8 @@ def dividends(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson("ref-data/daily-list/dividends/" + date, token, version, filter)
-    return _getJson("ref-data/daily-list/dividends", token, version, filter)
+        return _get("ref-data/daily-list/dividends/" + date, token, version, filter)
+    return _get("ref-data/daily-list/dividends", token, version, filter)
 
 
 @wraps(dividends)
@@ -84,10 +84,10 @@ def nextDayExtDate(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "ref-data/daily-list/next-day-ex-date/" + date, token, version, filter
         )
-    return _getJson("ref-data/daily-list/next-day-ex-date", token, version, filter)
+    return _get("ref-data/daily-list/next-day-ex-date", token, version, filter)
 
 
 @wraps(nextDayExtDate)
@@ -113,10 +113,10 @@ def directory(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "ref-data/daily-list/symbol-directory/" + date, token, version, filter
         )
-    return _getJson("ref-data/daily-list/symbol-directory", token, version, filter)
+    return _get("ref-data/daily-list/symbol-directory", token, version, filter)
 
 
 @wraps(directory)

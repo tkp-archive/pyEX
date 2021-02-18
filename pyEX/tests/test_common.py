@@ -11,32 +11,32 @@ from mock import MagicMock, patch
 
 
 class TestAll:
-    def test_getJson(self):
-        from pyEX.common import PyEXception, _getJson
+    def test_get(self):
+        from pyEX.common import PyEXception, _get
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            _getJson("")
+            _get("")
 
             mock.return_value.status_code = 404
             try:
-                _getJson("")
+                _get("")
                 assert False
             except PyEXception:
                 pass
 
-    def test_getJson2(self):
-        from pyEX.common import PyEXception, _getJson
+    def test_get2(self):
+        from pyEX.common import PyEXception, _get
 
         with patch("requests.get") as mock, patch("pickle.dump"):
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            _getJson("", "test", "test")
+            _get("", "test", "test")
 
             mock.return_value.status_code = 404
             try:
-                _getJson("", "test", "test")
+                _get("", "test", "test")
                 assert False
             except PyEXception:
                 pass

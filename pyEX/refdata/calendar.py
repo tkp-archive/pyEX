@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _getJson, _strOrDate, _toDatetime
+from ..common import _expire, _get, _strOrDate, _toDatetime
 
 
 @_expire(hour=8)
@@ -41,7 +41,7 @@ def calendar(
     """
     if startDate:
         startDate = _strOrDate(startDate)
-        return _getJson(
+        return _get(
             "ref-data/us/dates/{type}/{direction}/{last}/{date}".format(
                 type=type, direction=direction, last=last, date=startDate
             ),
@@ -49,7 +49,7 @@ def calendar(
             version,
             filter,
         )
-    return _getJson(
+    return _get(
         "ref-data/us/dates/" + type + "/" + direction + "/" + str(last),
         token,
         version,

@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _UTC, _expire, _getJson, _reindex, _toDatetime, json_normalize
+from ..common import _UTC, _expire, _get, _reindex, _toDatetime, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)
@@ -27,7 +27,7 @@ def symbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/symbols", token, version, filter)
+    return _get("ref-data/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -46,7 +46,7 @@ def iexSymbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/iex/symbols", token, version, filter)
+    return _get("ref-data/iex/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -64,7 +64,7 @@ def mutualFundSymbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/mutual-funds/symbols", token, version, filter)
+    return _get("ref-data/mutual-funds/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -82,7 +82,7 @@ def otcSymbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/otc/symbols", token, version, filter)
+    return _get("ref-data/otc/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -103,20 +103,20 @@ def internationalSymbols(region="", exchange="", token="", version="", filter=""
         dict or DataFrame or list: result
     """
     if region:
-        return _getJson(
+        return _get(
             "ref-data/region/{region}/symbols".format(region=region),
             token,
             version,
             filter,
         )
     elif exchange:
-        return _getJson(
+        return _get(
             "ref-data/exchange/{exchange}/symbols".format(exchange=exchange),
             token,
             version,
             filter,
         )
-    return _getJson("ref-data/region/us/symbols", token, version, filter)
+    return _get("ref-data/region/us/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -133,7 +133,7 @@ def fxSymbols(token="", version=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/fx/symbols", token, version)
+    return _get("ref-data/fx/symbols", token, version)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -151,7 +151,7 @@ def optionsSymbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/options/symbols", token, version, filter)
+    return _get("ref-data/options/symbols", token, version, filter)
 
 
 @_expire(hour=8, tz=_UTC)
@@ -169,7 +169,7 @@ def cryptoSymbols(token="", version="", filter=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/crypto/symbols", token, version, filter)
+    return _get("ref-data/crypto/symbols", token, version, filter)
 
 
 @wraps(symbols)
@@ -320,7 +320,7 @@ def isinLookup(isin, token="", version=""):
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/isin?isin={}".format(isin), token, version)
+    return _get("ref-data/isin?isin={}".format(isin), token, version)
 
 
 @wraps(isinLookup)
