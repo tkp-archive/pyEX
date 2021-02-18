@@ -18,23 +18,6 @@ class TestAlternative:
     def teardown(self):
         time.sleep(0.1)  # prevent being blocked
 
-    def test_crypto(self):
-        from pyEX import crypto
-
-        with patch("requests.get") as mock, patch("pickle.dump"):
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            crypto("test")
-
-    def test_cryptoDF(self):
-        from pyEX import cryptoDF
-
-        with patch("requests.get") as mock, patch("pickle.dump"):
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            cryptoDF("test")
-
     def test_sentiment(self):
         from pyEX import sentiment
 
