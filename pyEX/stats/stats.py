@@ -10,8 +10,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (PyEXception, _expire, _get, _reindex, _strOrDate,
-                      _toDatetime)
+from ..common import PyEXception, _expire, _get, _reindex, _strOrDate, _toDatetime
 
 
 def stats(token="", version="", filter="", format="json"):
@@ -112,9 +111,7 @@ def summary(date=None, token="", version="", filter="", format="json"):
                 format=format,
             )
         else:
-            raise PyEXception(
-                "Can't handle type : {}".format(str(type(date)))
-            )
+            raise PyEXception("Can't handle type : {}".format(str(type(date))))
     return _get(
         "stats/historical", token=token, version=version, filter=filter, format=format
     )
