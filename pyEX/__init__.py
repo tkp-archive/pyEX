@@ -15,14 +15,7 @@ except ImportError:
 
 from ._version import __version__
 from .account import *  # noqa: F403
-from .alternative import (
-    ceoCompensation,
-    ceoCompensationDF,
-    crypto,
-    cryptoDF,
-    sentiment,
-    sentimentDF,
-)
+from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
 from .commodities import CommoditiesPoints
 from .cryptocurrency import (
     cryptoBook,

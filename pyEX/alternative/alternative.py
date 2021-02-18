@@ -20,30 +20,6 @@ from ..common import (
 )
 
 
-def crypto(token="", version="", filter=""):
-    """This will return an array of quotes for all Cryptocurrencies supported by the IEX API. Each element is a standard quote object with four additional keys.
-
-    https://iexcloud.io/docs/api/#crypto
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-
-    Returns:
-        dict or DataFrame: result
-    """
-    return _getJson("stock/market/crypto/", token, version, filter)
-
-
-@wraps(crypto)
-def cryptoDF(token="", version="", filter=""):
-    df = pd.DataFrame(crypto(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
-
-
 def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 

@@ -9,14 +9,7 @@ import os
 from functools import partial, wraps
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
-from .alternative import (
-    ceoCompensation,
-    ceoCompensationDF,
-    crypto,
-    cryptoDF,
-    sentiment,
-    sentimentDF,
-)
+from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
 from .commodities import CommoditiesPoints
 from .common import PyEXception, _interval
 from .cryptocurrency import (
