@@ -21,6 +21,7 @@ def calendar(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     """This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.
 
@@ -41,42 +42,39 @@ def calendar(
         dict or DataFrame: result
     """
     if startDate:
-        startDate = _strOrDate(startDate)
         return _get(
             "ref-data/us/dates/{type}/{direction}/{last}/{date}".format(
-                type=type, direction=direction, last=last, date=startDate
+                type=type, direction=direction, last=last, date=_strOrDate(startDate)
             ),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
     return _get(
         "ref-data/us/dates/" + type + "/" + direction + "/" + str(last),
-        token,
-        version,
-        filter,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 @wraps(calendar)
-def calendarDF(
-    type="holiday",
+def calendarDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(calendar(*args, **kwargs)))
+
+
+@_expire(hour=8)
+def holidays(
     direction="next",
     last=1,
     startDate=None,
     token="",
     version="",
     filter="",
+    format="json",
 ):
-    dat = pd.DataFrame(
-        calendar(type, direction, last, startDate, token, version, filter)
-    )
-    _toDatetime(dat)
-    return dat
-
-
-@_expire(hour=8)
-def holidays(direction="next", last=1, startDate=None, token="", version="", filter=""):
     """This call allows you to fetch a number of trade dates or holidays from a given date. For example, if you want the next trading day, you would call /ref-data/us/dates/trade/next/1.
 
     https://iexcloud.io/docs/api/#u-s-exchanges
@@ -94,11 +92,18 @@ def holidays(direction="next", last=1, startDate=None, token="", version="", fil
     Returns:
         dict or DataFrame: result
     """
-    return calendar("holiday", direction, last, startDate, token, version, filter)
+    return calendar(
+        "holiday",
+        direction,
+        last,
+        startDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(holidays)
-def holidaysDF(
-    direction="next", last=1, startDate=None, token="", version="", filter=""
-):
-    return calendarDF("holiday", direction, last, startDate, token, version, filter)
+def holidaysDF(*args, **kwargs):
+    return calendarDF(*args, **kwargs)

@@ -14,7 +14,7 @@ from ..common import _get, _strOrDate, _toDatetime
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def corporateActions(date=None, token="", version="", filter=""):
+def corporateActions(date=None, token="", version="", filter="", format="json"):
     """
 
     Args:
@@ -30,21 +30,29 @@ def corporateActions(date=None, token="", version="", filter=""):
     if date:
         date = _strOrDate(date)
         return _get(
-            "ref-data/daily-list/corporate-actions/" + date, token, version, filter
+            "ref-data/daily-list/corporate-actions/" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _get("ref-data/daily-list/corporate-actions", token, version, filter)
+    return _get(
+        "ref-data/daily-list/corporate-actions",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(corporateActions)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def corporateActionsDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(corporateActions(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def corporateActionsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(corporateActions(*args, **kwargs)))
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def dividends(date=None, token="", version="", filter=""):
+def dividends(date=None, token="", version="", filter="", format="json"):
     """
 
     Args:
@@ -59,20 +67,30 @@ def dividends(date=None, token="", version="", filter=""):
     """
     if date:
         date = _strOrDate(date)
-        return _get("ref-data/daily-list/dividends/" + date, token, version, filter)
-    return _get("ref-data/daily-list/dividends", token, version, filter)
+        return _get(
+            "ref-data/daily-list/dividends/" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )
+    return _get(
+        "ref-data/daily-list/dividends",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(dividends)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def dividendsDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(dividends(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def dividendsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(dividends(*args, **kwargs)))
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def nextDayExtDate(date=None, token="", version="", filter=""):
+def nextDayExtDate(date=None, token="", version="", filter="", format="json"):
     """
 
     Args:
@@ -88,21 +106,29 @@ def nextDayExtDate(date=None, token="", version="", filter=""):
     if date:
         date = _strOrDate(date)
         return _get(
-            "ref-data/daily-list/next-day-ex-date/" + date, token, version, filter
+            "ref-data/daily-list/next-day-ex-date/" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _get("ref-data/daily-list/next-day-ex-date", token, version, filter)
+    return _get(
+        "ref-data/daily-list/next-day-ex-date",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(nextDayExtDate)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def nextDayExtDateDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(nextDayExtDate(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def nextDayExtDateDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(nextDayExtDate(*args, **kwargs)))
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def directory(date=None, token="", version="", filter=""):
+def directory(date=None, token="", version="", filter="", format="json"):
     """
 
     Args:
@@ -118,14 +144,22 @@ def directory(date=None, token="", version="", filter=""):
     if date:
         date = _strOrDate(date)
         return _get(
-            "ref-data/daily-list/symbol-directory/" + date, token, version, filter
+            "ref-data/daily-list/symbol-directory/" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _get("ref-data/daily-list/symbol-directory", token, version, filter)
+    return _get(
+        "ref-data/daily-list/symbol-directory",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(directory)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def directoryDF(date=None, token="", version="", filter=""):
-    df = pd.DataFrame(directory(date, token, version, filter))
-    _toDatetime(df)
-    return df
+def directoryDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(directory(*args, **kwargs)))

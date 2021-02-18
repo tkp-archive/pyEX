@@ -5,4 +5,15 @@
 # This file is part of the pyEX library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-from .rates import RatesPoints  # noqa: F401
+from .rates import (
+    RatesPoints,
+    fiveYear,
+    oneMonth,
+    oneYear,
+    sixMonth,
+    tenYear,
+    thirtyYear,
+    threeMonth,
+    twentyYear,
+    twoYear,
+)

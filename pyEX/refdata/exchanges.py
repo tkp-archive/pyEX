@@ -28,12 +28,18 @@ def exchanges(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("ref-data/market/us/exchanges", token, version, filter)
+    return _get(
+        "ref-data/market/us/exchanges",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(exchanges)
-def exchangesDF(token="", version="", filter=""):
-    return pd.DataFrame(exchanges(token, version, filter))
+def exchangesDF(*args, **kwargs):
+    return pd.DataFrame(exchanges(*args, **kwargs))
 
 
 @_expire(hour=8)
@@ -52,9 +58,11 @@ def internationalExchanges(token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("ref-data/exchanges", token, version, filter)
+    return _get(
+        "ref-data/exchanges", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(internationalExchanges)
-def internationalExchangesDF(token="", version="", filter=""):
-    return pd.DataFrame(internationalExchanges(token, version, filter))
+def internationalExchangesDF(*args, **kwargs):
+    return pd.DataFrame(internationalExchanges(*args, **kwargs))

@@ -8,6 +8,8 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..points import points
+
 
 class RatesPoints(Enum):
     """Rates data points
@@ -41,3 +43,39 @@ class RatesPoints(Enum):
     def options():
         """Return a list of the available rates points options"""
         return list(map(lambda c: c.value, RatesPoints))
+
+
+def thirtyYear(token="", version=""):
+    return points("DGS30", token=token, version=version)
+
+
+def twentyYear(token="", version=""):
+    return points("DGS20", token=token, version=version)
+
+
+def tenYear(token="", version=""):
+    return points("DGS10", token=token, version=version)
+
+
+def fiveYear(token="", version=""):
+    return points("DGS5", token=token, version=version)
+
+
+def twoYear(token="", version=""):
+    return points("DGS2", token=token, version=version)
+
+
+def oneYear(token="", version=""):
+    return points("DGS1", token=token, version=version)
+
+
+def sixMonth(token="", version=""):
+    return points("DGS6MO", token=token, version=version)
+
+
+def threeMonth(token="", version=""):
+    return points("DGS3MO", token=token, version=version)
+
+
+def oneMonth(token="", version=""):
+    return points("DGS1MO", token=token, version=version)
