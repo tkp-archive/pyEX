@@ -106,7 +106,7 @@ def convertFX(
 
 @wraps(convertFX)
 def convertFXDF(*args, **kwargs):
-    return pd.DataFrame(convertFX(symbols, token, version, filter))
+    return pd.DataFrame(convertFX(*args, **kwargs))
 
 
 @_expire(hour=1)

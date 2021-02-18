@@ -476,9 +476,7 @@ async def systemEventAsync(token="", version="", format="json"):
 
 @wraps(systemEvent)
 def systemEventDF(*args, **kwargs):
-    return _toDatetime(
-        json_normalize(systemEvent(token=token, version=version, format=format))
-    )
+    return _toDatetime(json_normalize(systemEvent(*args, **kwargs)))
 
 
 def trades(symbol=None, token="", version="", format="json"):
