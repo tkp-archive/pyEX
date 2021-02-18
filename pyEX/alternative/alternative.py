@@ -13,7 +13,6 @@ from ..common import (
     _expire,
     _getJson,
     _raiseIfNotStr,
-    _reindex,
     _strOrDate,
     _toDatetime,
     json_normalize,
