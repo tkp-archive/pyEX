@@ -53,9 +53,13 @@ def company(symbol, token="", version="", filter="", format="json"):
     )
 
 
+def _companyToDF(d):
+    return _reindex(_toDatetime(json_normalize(d)), "symbol")
+
+
 @wraps(company)
 def companyDF(*args, **kwargs):
-    return _reindex(_toDatetime(json_normalize(company(*args, **kwargs))), "symbol")
+    return _companyToDF(company(*args, **kwargs))
 
 
 @_expire(hour=5, tz=_UTC)
@@ -258,13 +262,15 @@ def peers(symbol, token="", version="", filter="", format="json"):
     )
 
 
-@wraps(peers)
-def peersDF(*args, **kwargs):
-    df = _reindex(
-        _toDatetime(pd.DataFrame(peers(*args, **kwargs), columns=["symbol"])), "symbol"
-    )
+def _peersToDF(d):
+    df = _reindex(_toDatetime(pd.DataFrame(d, columns=["symbol"])), "symbol")
     df["peer"] = df.index
     return df
+
+
+@wraps(peers)
+def peersDF(*args, **kwargs):
+    return _peersToDF(peers(*args, **kwargs))
 
 
 @_expire(hour=8, tz=_UTC)

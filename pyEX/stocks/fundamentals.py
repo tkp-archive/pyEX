@@ -140,9 +140,13 @@ def dividends(symbol, timeframe="ytd", token="", version="", filter="", format="
     )
 
 
+def _dividendsToDF(d):
+    return _reindex(_toDatetime(pd.DataFrame(d)), "exDate")
+
+
 @wraps(dividends)
 def dividendsDF(*args, **kwargs):
-    return _reindex(_toDatetime(pd.DataFrame(dividends(*args, **kwargs))), "exDate")
+    return _dividendsToDF(dividends(*args, **kwargs))
 
 
 @_expire(hour=9, tz=_UTC)
@@ -364,6 +368,10 @@ def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
     )
 
 
+def _splitsToDF(d):
+    return _reindex(_toDatetime(pd.DataFrame(d)), "exDate")
+
+
 @wraps(stockSplits)
 def stockSplitsDF(*args, **kwargs):
-    return _reindex(_toDatetime(pd.DataFrame(stockSplits(*args, **kwargs))), "exDate")
+    return _splitsToDF(stockSplits(*args, **kwargs))
