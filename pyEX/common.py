@@ -910,6 +910,7 @@ def _toDatetime(df, cols=None, tcols=None):
             except BaseException:
                 # skip error
                 continue
+    return df
 
 
 def setProxy(proxies=None):

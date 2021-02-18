@@ -12,7 +12,7 @@ import pandas as pd
 from ..common import _get
 
 
-def cryptoBook(symbol, token="", version="", filter=""):
+def cryptoBook(symbol, token="", version="", filter="", format="json"):
     """This returns a current snapshot of the book for a specified cryptocurrency. For REST, you will receive a current snapshot of the current book for the specific cryptocurrency. For SSE Streaming, you will get a full representation of the book updated as often as the book changes. Examples of each are below:
 
     https://iexcloud.io/docs/api/#cryptocurrency-book
@@ -28,15 +28,21 @@ def cryptoBook(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("/crypto/{symbol}/book".format(symbol=symbol), token, version, filter)
+    return _get(
+        "/crypto/{symbol}/book".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(cryptoBook)
-def cryptoBookDF(symbol, token="", version="", filter=""):
-    return pd.DataFrame(cryptoBook(symbol, token, version, filter))
+def cryptoBookDF(*args, **kwargs):
+    return pd.DataFrame(cryptoBook(*args, **kwargs))
 
 
-def cryptoPrice(symbol, token="", version="", filter=""):
+def cryptoPrice(symbol, token="", version="", filter="", format="json"):
     """This returns the price for a specified cryptocurrency.
 
     https://iexcloud.io/docs/api/#cryptocurrency-price
@@ -52,15 +58,21 @@ def cryptoPrice(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("/crypto/{symbol}/price".format(symbol=symbol), token, version, filter)
+    return _get(
+        "/crypto/{symbol}/price".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(cryptoPrice)
-def cryptoPriceDF(symbol, token="", version="", filter=""):
-    return pd.DataFrame(cryptoPrice(symbol, token, version, filter))
+def cryptoPriceDF(*args, **kwargs):
+    return pd.DataFrame(cryptoPrice(*args, **kwargs))
 
 
-def cryptoQuote(symbol, token="", version="", filter=""):
+def cryptoQuote(symbol, token="", version="", filter="", format="json"):
     """This returns the quote for a specified cryptocurrency. Quotes are available via REST and SSE Streaming.
 
 
@@ -77,9 +89,15 @@ def cryptoQuote(symbol, token="", version="", filter=""):
     Returns:
         dict or DataFrame: result
     """
-    return _get("/crypto/{symbol}/quote".format(symbol=symbol), token, version, filter)
+    return _get(
+        "/crypto/{symbol}/quote".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(cryptoQuote)
-def cryptoQuoteDF(symbol, token="", version="", filter=""):
-    return pd.DataFrame(cryptoQuote(symbol, token, version, filter))
+def cryptoQuoteDF(*args, **kwargs):
+    return pd.DataFrame(cryptoQuote(*args, **kwargs))

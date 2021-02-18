@@ -44,7 +44,9 @@ def cryptoDF(token="", version="", filter=""):
     return df
 
 
-def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
+def sentiment(
+    symbol, type="daily", date=None, token="", version="", filter="", format="json"
+):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 
     https://iexcloud.io/docs/api/#social-sentiment
@@ -69,26 +71,26 @@ def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
             "stock/{symbol}/sentiment/{type}/{date}".format(
                 symbol=symbol, type=type, date=date
             ),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
     return _get(
         "stock/{symbol}/sentiment/{type}/".format(symbol=symbol, type=type),
-        token,
-        version,
-        filter,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 @wraps(sentiment)
-def sentimentDF(symbol, type="daily", date=None, token="", version="", filter=""):
-    ret = sentiment(symbol, type, date, token, version, filter)
+def sentimentDF(*args, **kwargs):
+    ret = sentiment(*args, **kwargs)
     if type == "daily":
         ret = [ret]
-    df = pd.DataFrame(ret)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(ret))
 
 
 @_expire(hour=1)
@@ -115,8 +117,5 @@ def ceoCompensation(symbol, token="", version="", filter=""):
 
 
 @wraps(ceoCompensation)
-def ceoCompensationDF(symbol, token="", version="", filter=""):
-    ret = ceoCompensation(symbol, token, version, filter)
-    df = json_normalize(ret)
-    _toDatetime(df)
-    return df
+def ceoCompensationDF(*args, **kwargs):
+    return _toDatetime(json_normalize(ceoCompensation(*args, **kwargs)))

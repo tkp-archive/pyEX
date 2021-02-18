@@ -8,6 +8,8 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..points import points
+
 
 class CommoditiesPoints(Enum):
     """Commodities data points
@@ -43,3 +45,43 @@ class CommoditiesPoints(Enum):
     def options():
         """Return a list of the available commodities points options"""
         return list(map(lambda c: c.value, CommoditiesPoints))
+
+
+def wti(token="", version=""):
+    return points("DCOILWTICO", token=token, version=version)
+
+
+def brent(token="", version=""):
+    return points("DCOILBRENTEU", token=token, version=version)
+
+
+def natgas(token="", version=""):
+    return points("DHHNGSP", token=token, version=version)
+
+
+def heatoil(token="", version=""):
+    return points("DHOILNYH", token=token, version=version)
+
+
+def jet(token="", version=""):
+    return points("DJFUELUSGULF", token=token, version=version)
+
+
+def diesel(token="", version=""):
+    return points("GASDESW", token=token, version=version)
+
+
+def gasreg(token="", version=""):
+    return points("GASREGCOVW", token=token, version=version)
+
+
+def gasmid(token="", version=""):
+    return points("GASMIDCOVW", token=token, version=version)
+
+
+def gasprm(token="", version=""):
+    return points("GASPRMCOVW", token=token, version=version)
+
+
+def propane(token="", version=""):
+    return points("DPROPANEMBTX", token=token, version=version)

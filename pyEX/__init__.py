@@ -23,7 +23,7 @@ from .alternative import (
     sentiment,
     sentimentDF,
 )
-from .commodities import CommoditiesPoints
+from .commodities import *
 from .cryptocurrency import (
     cryptoBook,
     cryptoBookDF,
@@ -32,7 +32,7 @@ from .cryptocurrency import (
     cryptoQuote,
     cryptoQuoteDF,
 )
-from .economic import EconomicPoints
+from .economic import *
 from .fx import (
     convertFX,
     convertFXDF,
