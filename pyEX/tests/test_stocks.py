@@ -449,24 +449,6 @@ class TestAll:
 
             collectionsDF("sector", "Health Care")
 
-    def test_crypto(self):
-        from pyEX import crypto
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            crypto()
-
-    def test_cryptoDF(self):
-        from pyEX import cryptoDF
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-
-            cryptoDF()
-
     def test_stockSplits(self):
         from pyEX import stockSplits
         from pyEX.common import PyEXception
