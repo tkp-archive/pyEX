@@ -8,18 +8,14 @@
 import pandas as pd
 from deprecation import deprecated
 
-from ..common import _getJson, _toDatetime
+from ..common import _get, _toDatetime
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def markets(token="", version="", filter=""):
-    """https://iextrading.com/developer/docs/#intraday"""
-    return _getJson("market", token, version, filter)
+def markets(token="", version="", filter="", format="json"):
+    return _get("market", token=token, version=version, filter=filter, format=format)
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def marketsDF(token="", version="", filter=""):
-    """https://iextrading.com/developer/docs/#intraday"""
-    df = pd.DataFrame(markets(token, version, filter))
-    _toDatetime(df)
-    return df
+def marketsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(markets(*args, **kwargs)))

@@ -11,7 +11,7 @@ import pandas as pd
 
 from ..common import (
     _expire,
-    _getJson,
+    _get,
     _raiseIfNotStr,
     _strOrDate,
     _toDatetime,
@@ -19,7 +19,9 @@ from ..common import (
 )
 
 
-def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
+def sentiment(
+    symbol, type="daily", date=None, token="", version="", filter="", format="json"
+):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 
     https://iexcloud.io/docs/api/#social-sentiment
@@ -32,6 +34,7 @@ def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -39,30 +42,30 @@ def sentiment(symbol, type="daily", date=None, token="", version="", filter=""):
     _raiseIfNotStr(symbol)
     if date:
         date = _strOrDate(date)
-        return _getJson(
+        return _get(
             "stock/{symbol}/sentiment/{type}/{date}".format(
                 symbol=symbol, type=type, date=date
             ),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _getJson(
+    return _get(
         "stock/{symbol}/sentiment/{type}/".format(symbol=symbol, type=type),
-        token,
-        version,
-        filter,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 @wraps(sentiment)
-def sentimentDF(symbol, type="daily", date=None, token="", version="", filter=""):
-    ret = sentiment(symbol, type, date, token, version, filter)
+def sentimentDF(*args, **kwargs):
+    ret = sentiment(*args, **kwargs)
     if type == "daily":
         ret = [ret]
-    df = pd.DataFrame(ret)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(ret))
 
 
 @_expire(hour=1)
@@ -77,19 +80,17 @@ def ceoCompensation(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    return _getJson(
+    return _get(
         "stock/{symbol}/ceo-compensation".format(symbol=symbol), token, version, filter
     )
 
 
 @wraps(ceoCompensation)
-def ceoCompensationDF(symbol, token="", version="", filter=""):
-    ret = ceoCompensation(symbol, token, version, filter)
-    df = json_normalize(ret)
-    _toDatetime(df)
-    return df
+def ceoCompensationDF(*args, **kwargs):
+    return _toDatetime(json_normalize(ceoCompensation(*args, **kwargs)))

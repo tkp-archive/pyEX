@@ -8,6 +8,8 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..points import points
+
 
 class EconomicPoints(Enum):
     """Economic data points
@@ -59,3 +61,75 @@ class EconomicPoints(Enum):
     def options():
         """Return a list of the available economic points options"""
         return list(map(lambda c: c.value, EconomicPoints))
+
+
+def us30(token="", version=""):
+    return points("MORTGAGE30US", token=token, version=version)
+
+
+def us15(token="", version=""):
+    return points("MORTGAGE15US", token=token, version=version)
+
+
+def us5(token="", version=""):
+    return points("MORTGAGE5US", token=token, version=version)
+
+
+def fedfunds(token="", version=""):
+    return points("FEDFUNDS", token=token, version=version)
+
+
+def creditcard(token="", version=""):
+    return points("TERMCBCCALLNS", token=token, version=version)
+
+
+def cdnj(token="", version=""):
+    return points("MMNRNJ", token=token, version=version)
+
+
+def cdj(token="", version=""):
+    return points("MMNRJD", token=token, version=version)
+
+
+def gdp(token="", version=""):
+    return points("A191RL1Q225SBEA", token=token, version=version)
+
+
+def indpro(token="", version=""):
+    return points("INDPRO", token=token, version=version)
+
+
+def cpi(token="", version=""):
+    return points("CPIAUCSL", token=token, version=version)
+
+
+def payroll(token="", version=""):
+    return points("PAYEMS", token=token, version=version)
+
+
+def housing(token="", version=""):
+    return points("HOUST", token=token, version=version)
+
+
+def unemployment(token="", version=""):
+    return points("UNRATE", token=token, version=version)
+
+
+def vehicles(token="", version=""):
+    return points("TOTALSA", token=token, version=version)
+
+
+def recessionProb(token="", version=""):
+    return points("RECPROUSM156N", token=token, version=version)
+
+
+def initialClaims(token="", version=""):
+    return points("IC4WSA", token=token, version=version)
+
+
+def institutionalMoney(token="", version=""):
+    return points("WRMFSL", token=token, version=version)
+
+
+def retailMoney(token="", version=""):
+    return points("WIMFSL", token=token, version=version)

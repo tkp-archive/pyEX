@@ -14,7 +14,13 @@ from .timeseries import timeSeries
 
 
 def bonusIssue(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Bonus Issue Obtain up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -28,6 +34,7 @@ def bonusIssue(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -44,21 +51,24 @@ def bonusIssue(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(bonusIssue)
-def bonusIssueDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        bonusIssue(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def bonusIssueDF(*args, **kwargs):
+    return pd.DataFrame(bonusIssue(*args, **kwargs))
 
 
 def distribution(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Distribution Obtain up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -72,6 +82,7 @@ def distribution(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -88,17 +99,14 @@ def distribution(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(distribution)
-def distributionDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        distribution(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def distributionDF(*args, **kwargs):
+    return pd.DataFrame(distribution(*args, **kwargs))
 
 
 def dividends(
@@ -122,6 +130,7 @@ def dividends(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -138,21 +147,24 @@ def dividends(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(dividends)
-def dividendsDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        dividends(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def dividendsDF(*args, **kwargs):
+    return pd.DataFrame(dividends(*args, **kwargs))
 
 
 def returnOfCapital(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Return of capital up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -166,6 +178,7 @@ def returnOfCapital(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -180,17 +193,14 @@ def returnOfCapital(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(returnOfCapital)
-def returnOfCapitalDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        returnOfCapital(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def returnOfCapitalDF(*args, **kwargs):
+    return pd.DataFrame(returnOfCapital(*args, **kwargs))
 
 
 def rightsIssue(
@@ -208,6 +218,7 @@ def rightsIssue(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -224,21 +235,24 @@ def rightsIssue(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(rightsIssue)
-def rightsIssueDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        rightsIssue(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def rightsIssueDF(*args, **kwargs):
+    return pd.DataFrame(rightsIssue(*args, **kwargs))
 
 
 def rightToPurchase(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Right to purchase up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -252,6 +266,7 @@ def rightToPurchase(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -268,21 +283,24 @@ def rightToPurchase(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(rightToPurchase)
-def rightToPurchaseDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        rightToPurchase(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def rightToPurchaseDF(*args, **kwargs):
+    return pd.DataFrame(rightToPurchase(*args, **kwargs))
 
 
 def securityReclassification(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Security reclassification up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -296,6 +314,7 @@ def securityReclassification(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -312,23 +331,24 @@ def securityReclassification(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(securityReclassification)
-def securityReclassificationDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        securityReclassification(
-            symbol, refid, token, version, filter, **timeseries_kwargs
-        )
-    )
+def securityReclassificationDF(*args, **kwargs):
+    return pd.DataFrame(securityReclassification(*args, **kwargs))
 
 
 def securitySwap(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Security Swap up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -342,6 +362,7 @@ def securitySwap(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -358,20 +379,25 @@ def securitySwap(
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(securitySwap)
-def securitySwapDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+def securitySwapDF(*args, **kwargs):
+    return pd.DataFrame(securitySwap(*args, **kwargs))
+
+
+def spinoff(
+    symbol="",
+    refid="",
+    token="",
+    version="",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
-    return pd.DataFrame(
-        securitySwap(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
-
-
-def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
     """Security spinoff up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily
@@ -384,6 +410,7 @@ def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_k
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -400,17 +427,14 @@ def spinoff(symbol="", refid="", token="", version="", filter="", **timeseries_k
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(spinoff)
-def spinoffDF(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
-):
-    return pd.DataFrame(
-        spinoff(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def spinoffDF(*args, **kwargs):
+    return pd.DataFrame(spinoff(*args, **kwargs))
 
 
 def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
@@ -426,6 +450,7 @@ def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kw
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
         Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
 
@@ -442,12 +467,11 @@ def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kw
         token=token,
         version=version,
         filter=filter,
+        format=format,
         **timeseries_kwargs
     )
 
 
 @wraps(splits)
-def splitsDF(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
-    return pd.DataFrame(
-        splits(symbol, refid, token, version, filter, **timeseries_kwargs)
-    )
+def splitsDF(*args, **kwargs):
+    return pd.DataFrame(splits(*args, **kwargs))

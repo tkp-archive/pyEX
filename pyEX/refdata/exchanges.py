@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _getJson
+from ..common import _expire, _get
 
 
 @_expire(hour=8)
@@ -23,16 +23,23 @@ def exchanges(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/market/us/exchanges", token, version, filter)
+    return _get(
+        "ref-data/market/us/exchanges",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(exchanges)
-def exchangesDF(token="", version="", filter=""):
-    return pd.DataFrame(exchanges(token, version, filter))
+def exchangesDF(*args, **kwargs):
+    return pd.DataFrame(exchanges(*args, **kwargs))
 
 
 @_expire(hour=8)
@@ -46,13 +53,16 @@ def internationalExchanges(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/exchanges", token, version, filter)
+    return _get(
+        "ref-data/exchanges", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(internationalExchanges)
-def internationalExchangesDF(token="", version="", filter=""):
-    return pd.DataFrame(internationalExchanges(token, version, filter))
+def internationalExchangesDF(*args, **kwargs):
+    return pd.DataFrame(internationalExchanges(*args, **kwargs))

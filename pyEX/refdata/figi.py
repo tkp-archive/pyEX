@@ -9,10 +9,10 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr
+from ..common import _get, _raiseIfNotStr
 
 
-def figi(figi_=None, token="", version=""):
+def figi(figi_=None, token="", version="", format="json"):
     """Helper call to convert FIGI to IEX Cloud symbols. Note that due to licensing restrictions we are unable to return the FIGI.
 
     https://iexcloud.io/docs/api/#figi-mapping
@@ -21,14 +21,20 @@ def figi(figi_=None, token="", version=""):
         figi_ (str): figi to lookup
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(figi_)
-    return _getJson("ref-data/figi?figi={}".format(figi_), token, version, None)
+    return _get(
+        "ref-data/figi?figi={}".format(figi_),
+        token=token,
+        version=version,
+        format=format,
+    )
 
 
 @wraps(figi)
-def figiDF(figi_=None, token="", version=""):
-    return pd.DataFrame(figi(figi_, token, version))
+def figiDF(*args, **kwargs):
+    return pd.DataFrame(figi(*args, **kwargs))

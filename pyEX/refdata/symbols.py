@@ -9,11 +9,11 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _UTC, _expire, _getJson, _reindex, _toDatetime, json_normalize
+from ..common import _UTC, _expire, _get, _reindex, _toDatetime, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)
-def symbols(token="", version="", filter=""):
+def symbols(token="", version="", filter="", format="json"):
     """This call returns an array of symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#symbols
@@ -23,15 +23,18 @@ def symbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/symbols", token, version, filter)
+    return _get(
+        "ref-data/symbols", token=token, version=version, filter=filter, format=format
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def iexSymbols(token="", version="", filter=""):
+def iexSymbols(token="", version="", filter="", format="json"):
     """This call returns an array of symbols the Investors Exchange supports for trading.
     This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
 
@@ -42,15 +45,22 @@ def iexSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/iex/symbols", token, version, filter)
+    return _get(
+        "ref-data/iex/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def mutualFundSymbols(token="", version="", filter=""):
+def mutualFundSymbols(token="", version="", filter="", format="json"):
     """This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#mutual-fund-symbols
@@ -60,15 +70,22 @@ def mutualFundSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/mutual-funds/symbols", token, version, filter)
+    return _get(
+        "ref-data/mutual-funds/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def otcSymbols(token="", version="", filter=""):
+def otcSymbols(token="", version="", filter="", format="json"):
     """This call returns an array of OTC symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#otc-symbols
@@ -78,15 +95,24 @@ def otcSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/otc/symbols", token, version, filter)
+    return _get(
+        "ref-data/otc/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def internationalSymbols(region="", exchange="", token="", version="", filter=""):
+def internationalSymbols(
+    region="", exchange="", token="", version="", filter="", format="json"
+):
     """This call returns an array of international symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#international-symbols
@@ -98,29 +124,38 @@ def internationalSymbols(region="", exchange="", token="", version="", filter=""
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
     if region:
-        return _getJson(
+        return _get(
             "ref-data/region/{region}/symbols".format(region=region),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
     elif exchange:
-        return _getJson(
+        return _get(
             "ref-data/exchange/{exchange}/symbols".format(exchange=exchange),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _getJson("ref-data/region/us/symbols", token, version, filter)
+    return _get(
+        "ref-data/region/us/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def fxSymbols(token="", version=""):
+def fxSymbols(token="", version="", filter="", format="json"):
     """This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -129,15 +164,23 @@ def fxSymbols(token="", version=""):
     Args:
         token (str): Access token
         version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/fx/symbols", token, version)
+    return _get(
+        "ref-data/fx/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def optionsSymbols(token="", version="", filter=""):
+def optionsSymbols(token="", version="", filter="", format="json"):
     """This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
     https://iexcloud.io/docs/api/#options-symbols
@@ -147,15 +190,22 @@ def optionsSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/options/symbols", token, version, filter)
+    return _get(
+        "ref-data/options/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @_expire(hour=8, tz=_UTC)
-def cryptoSymbols(token="", version="", filter=""):
+def cryptoSymbols(token="", version="", filter="", format="json"):
     """This provides a full list of supported cryptocurrencies by IEX Cloud.
 
     https://iexcloud.io/docs/api/#cryptocurrency-symbols
@@ -165,16 +215,23 @@ def cryptoSymbols(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/crypto/symbols", token, version, filter)
+    return _get(
+        "ref-data/crypto/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(symbols)
-def symbolsDF(token="", version="", filter=""):
-    df = pd.DataFrame(symbols(token, version, filter))
+def symbolsDF(*args, **kwargs):
+    df = pd.DataFrame(symbols(*args, **kwargs))
     _toDatetime(df)
     _reindex(df, "symbol")
     df.sort_index(inplace=True)
@@ -182,37 +239,33 @@ def symbolsDF(token="", version="", filter=""):
 
 
 @wraps(iexSymbols)
-def iexSymbolsDF(token="", version="", filter=""):
-    df = pd.DataFrame(iexSymbols(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
+def iexSymbolsDF(*args, **kwargs):
+    df = _reindex(_toDatetime(pd.DataFrame(iexSymbols(*args, **kwargs))), "symbol")
     df.sort_index(inplace=True)
     return df
 
 
 @wraps(mutualFundSymbols)
-def mutualFundSymbolsDF(token="", version="", filter=""):
-    df = pd.DataFrame(mutualFundSymbols(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
+def mutualFundSymbolsDF(*args, **kwargs):
+    df = _reindex(
+        _toDatetime(pd.DataFrame(mutualFundSymbols(*args, **kwargs))), "symbol"
+    )
     df.sort_index(inplace=True)
     return df
 
 
 @wraps(otcSymbols)
-def otcSymbolsDF(token="", version="", filter=""):
-    df = pd.DataFrame(otcSymbols(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
+def otcSymbolsDF(*args, **kwargs):
+    df = _reindex(_toDatetime(pd.DataFrame(otcSymbols(*args, **kwargs))), "symbol")
     df.sort_index(inplace=True)
     return df
 
 
 @wraps(internationalSymbols)
-def internationalSymbolsDF(region="", exchange="", token="", version="", filter=""):
-    df = pd.DataFrame(internationalSymbols(region, exchange, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
+def internationalSymbolsDF(*args, **kwargs):
+    df = _reindex(
+        _toDatetime(pd.DataFrame(internationalSymbols(*args, **kwargs))), "symbol"
+    )
     df.sort_index(inplace=True)
     return df
 
@@ -229,8 +282,8 @@ def fxSymbolsDF(token="", version=""):
 
 
 @wraps(optionsSymbols)
-def optionsSymbolsDF(token="", version="", filter=""):
-    df = json_normalize(optionsSymbols(token, version, filter))
+def optionsSymbolsDF(*args, **kwargs):
+    df = json_normalize(optionsSymbols(*args, **kwargs))
     df = df.T
     df.columns = ["expirations"]
     df.sort_index(inplace=True)
@@ -238,51 +291,45 @@ def optionsSymbolsDF(token="", version="", filter=""):
 
 
 @wraps(cryptoSymbols)
-def cryptoSymbolsDF(token="", version="", filter=""):
-    df = pd.DataFrame(cryptoSymbols(token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
+def cryptoSymbolsDF(*args, **kwargs):
+    df = _reindex(_toDatetime(pd.DataFrame(cryptoSymbols(*args, **kwargs))), "symbol")
     df.sort_index(inplace=True)
     return df
 
 
 @wraps(symbols)
-def symbolsList(token="", version=""):
-    return sorted([x["symbol"] for x in symbols(token, version, filter="symbol")])
+def symbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in symbols(*args, **kwargs)])
 
 
 @wraps(iexSymbols)
-def iexSymbolsList(token="", version=""):
-    return sorted([x["symbol"] for x in iexSymbols(token, version, filter="symbol")])
+def iexSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in iexSymbols(*args, **kwargs)])
 
 
 @wraps(mutualFundSymbols)
-def mutualFundSymbolsList(token="", version=""):
-    return sorted(
-        [x["symbol"] for x in mutualFundSymbols(token, version, filter="symbol")]
-    )
+def mutualFundSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in mutualFundSymbols(*args, **kwargs)])
 
 
 @wraps(otcSymbols)
-def otcSymbolsList(token="", version=""):
-    return sorted([x["symbol"] for x in otcSymbols(token, version, filter="symbol")])
+def otcSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in otcSymbols(*args, **kwargs)])
 
 
 @wraps(internationalSymbols)
-def internationalSymbolsList(region="", exchange="", token="", version=""):
-    return sorted(
-        [
-            x["symbol"]
-            for x in internationalSymbols(
-                region, exchange, token, version, filter="symbol"
-            )
-        ]
-    )
+def internationalSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in internationalSymbols(*args, **kwargs)])
 
 
 @wraps(fxSymbols)
-def fxSymbolsList(token="", version=""):
-    fx = fxSymbols(token, version)
+def fxSymbolsList(*args, **kwargs):
+    fx = fxSymbols(*args, **kwargs)
     ret = [[], []]
     for c in fx["currencies"]:
         ret[0].append(c["code"])
@@ -292,8 +339,9 @@ def fxSymbolsList(token="", version=""):
 
 
 @wraps(optionsSymbols)
-def optionsSymbolsList(token="", version=""):
-    symbols = optionsSymbols(token, version, filter="symbol")
+def optionsSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    symbols = optionsSymbols(*args, **kwargs)
     ret = []
     for ticker, dates in symbols.items():
         for date in dates:
@@ -302,11 +350,12 @@ def optionsSymbolsList(token="", version=""):
 
 
 @wraps(cryptoSymbols)
-def cryptoSymbolsList(token="", version=""):
-    return sorted([x["symbol"] for x in cryptoSymbols(token, version, filter="symbol")])
+def cryptoSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in cryptoSymbols(*args, **kwargs)])
 
 
-def isinLookup(isin, token="", version=""):
+def isinLookup(isin, token="", version="", filter="", format="json"):
     """This call returns an array of symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#isin-mapping
@@ -316,13 +365,21 @@ def isinLookup(isin, token="", version=""):
         isin (str): isin to lookup
         token (str): Access token
         version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame or list: result
     """
-    return _getJson("ref-data/isin?isin={}".format(isin), token, version)
+    return _get(
+        "ref-data/isin?isin={}".format(isin),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(isinLookup)
-def isinLookupDF(isin, token="", version=""):
-    return pd.DataFrame(isinLookup(isin=isin, token=token, version=version))
+def isinLookupDF(*args, **kwargs):
+    return pd.DataFrame(isinLookup(*args, **kwargs))

@@ -14,7 +14,7 @@ from ..common import (
     _TIMEFRAME_CHART,
     PyEXception,
     _expire,
-    _getJson,
+    _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
@@ -24,7 +24,7 @@ from ..common import (
 )
 
 
-def book(symbol, token="", version="", filter=""):
+def book(symbol, token="", version="", filter="", format="json"):
     """Book data
 
     https://iextrading.com/developer/docs/#book
@@ -35,13 +35,20 @@ def book(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/book", token, version, filter)
+    return _get(
+        "stock/{symbol}/book".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 def _bookToDF(b):
@@ -72,13 +79,11 @@ def _bookToDF(b):
 
 
 @wraps(book)
-def bookDF(symbol, token="", version="", filter=""):
-    x = book(symbol, token, version, filter)
-    df = _bookToDF(x)
-    return df
+def bookDF(*args, **kwargs):
+    return _bookToDF(book(*args, **kwargs))
 
 
-# @_expire(hour=4, tz=_EST)
+@_expire(hour=4, tz=_EST)
 def chart(
     symbol,
     timeframe="1m",
@@ -96,6 +101,7 @@ def chart(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     """Historical price/volume data, daily and intraday
 
@@ -124,14 +130,14 @@ def chart(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
 
-    base_url = "stock/{}/chart/{}?".format(symbol, timeframe)
+    base_url = "stock/{}/chart/{}?".format(_quoteSymbols(symbol), timeframe)
 
     # exactDate takes precedence
     date = exactDate or date
@@ -188,24 +194,23 @@ def chart(
         params["includeToday"] = includeToday
 
     if date:
-        base_url = "stock/{}/chart/date/{}?".format(symbol, date)
+        base_url = "stock/{}/chart/date/{}?".format(_quoteSymbols(symbol), date)
 
         if params:
             base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
-        return _getJson(base_url, token, version, filter)
+        return _get(
+            base_url, token=token, version=version, filter=filter, format=format
+        )
 
     if params:
         base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
 
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token=token, version=version, filter=filter, format=format)
 
 
 def _chartToDF(c):
     """internal"""
-    df = pd.DataFrame(c)
-    _toDatetime(df)
-    _reindex(df, "date")
-    return df
+    return _reindex(_toDatetime(pd.DataFrame(c)), "date")
 
 
 @wraps(chart)
@@ -226,6 +231,7 @@ def chartDF(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     c = chart(
         symbol=symbol,
@@ -244,9 +250,9 @@ def chartDF(
         token=token,
         version=version,
         filter=filter,
+        format=format,
     )
-    df = pd.DataFrame(c)
-    _toDatetime(df)
+    df = _toDatetime(pd.DataFrame(c))
     if timeframe is not None and timeframe != "1d":
         _reindex(df, "date")
     else:
@@ -263,7 +269,7 @@ def chartDF(
 
 
 @_expire(second=0)
-def delayedQuote(symbol, token="", version="", filter=""):
+def delayedQuote(symbol, token="", version="", filter="", format="json"):
     """This returns the 15 minute delayed market quote.
 
     https://iexcloud.io/docs/api/#delayed-quote
@@ -275,21 +281,26 @@ def delayedQuote(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/delayed-quote", token, version, filter)
+    return _get(
+        "stock/{symbol}/delayed-quote".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(delayedQuote)
-def delayedQuoteDF(symbol, token="", version="", filter=""):
-    df = json_normalize(delayedQuote(symbol, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+def delayedQuoteDF(*args, **kwargs):
+    return _reindex(
+        _toDatetime(json_normalize(delayedQuote(*args, **kwargs))), "symbol"
+    )
 
 
 def intraday(
@@ -306,6 +317,7 @@ def intraday(
     token="",
     version="",
     filter="",
+    format="json",
 ):
     """This endpoint will return aggregated intraday prices in one minute buckets
 
@@ -327,6 +339,7 @@ def intraday(
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
@@ -370,42 +383,13 @@ def intraday(
 
     if params:
         base_url += "&".join("{}={}".format(k, v) for k, v in params.items())
-    return _getJson(base_url, token, version, filter)
+    return _get(base_url, token=token, version=version, filter=filter, format=format)
 
 
 @wraps(intraday)
-def intradayDF(
-    symbol,
-    date="",
-    exactDate="",
-    last=-1,
-    IEXOnly=False,
-    reset=False,
-    simplify=False,
-    interval=-1,
-    changeFromClose=False,
-    IEXWhenNull=False,
-    token="",
-    version="",
-    filter="",
-):
-    val = intraday(
-        symbol=symbol,
-        date=date,
-        exactDate=exactDate,
-        last=last,
-        IEXOnly=IEXOnly,
-        reset=reset,
-        simplify=simplify,
-        interval=interval,
-        changeFromClose=changeFromClose,
-        IEXWhenNull=IEXWhenNull,
-        token=token,
-        version=version,
-        filter=filter,
-    )
-    df = pd.DataFrame(val)
-    _toDatetime(df)
+def intradayDF(*args, **kwargs):
+    val = intraday(*args, **kwargs)
+    df = _toDatetime(pd.DataFrame(val))
     if not df.empty and "date" in df.columns and "minute" in df.columns:
         df.set_index(["date", "minute"], inplace=True)
     elif not df.empty and "date" in df.columns:
@@ -415,7 +399,7 @@ def intradayDF(
     return df
 
 
-def largestTrades(symbol, token="", version="", filter=""):
+def largestTrades(symbol, token="", version="", filter="", format="json"):
     """This returns 15 minute delayed, last sale eligible trades.
 
     https://iexcloud.io/docs/api/#largest-trades
@@ -426,24 +410,27 @@ def largestTrades(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/largest-trades", token, version, filter)
+    return _get(
+        "stock/{symbol}/largest-trades".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(largestTrades)
-def largestTradesDF(symbol, token="", version="", filter=""):
-    df = pd.DataFrame(largestTrades(symbol, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "time")
-    return df
+def largestTradesDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(largestTrades(*args, **kwargs))), "time")
 
 
-def ohlc(symbol, token="", version="", filter=""):
+def ohlc(symbol, token="", version="", filter="", format="json"):
     """Returns the official open and close for a give symbol.
 
     https://iexcloud.io/docs/api/#ohlc
@@ -454,18 +441,24 @@ def ohlc(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/ohlc", token, version, filter)
+    return _get(
+        "stock/{symbol}/ohlc".format(symbol=_quoteSymbols(symbol)) + symbol + "/ohlc",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(ohlc)
-def ohlcDF(symbol, token="", version="", filter=""):
-    o = ohlc(symbol, token, version, filter)
+def ohlcDF(*args, **kwargs):
+    o = ohlc(*args, **kwargs)
     if o:
         df = json_normalize(o)
         _toDatetime(df)
@@ -475,7 +468,7 @@ def ohlcDF(symbol, token="", version="", filter=""):
 
 
 @_expire(hour=4, tz=_EST)
-def yesterday(symbol, token="", version="", filter=""):
+def yesterday(symbol, token="", version="", filter="", format="json"):
     """This returns previous day adjusted price data for one or more stocks
 
     https://iexcloud.io/docs/api/#previous-day-prices
@@ -486,25 +479,29 @@ def yesterday(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/previous", token, version, filter)
+    return _get(
+        "stock/{symbol}/previous".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 previous = yesterday
 
 
 @wraps(yesterday)
-def yesterdayDF(symbol, token="", version="", filter=""):
-    y = yesterday(symbol, token, version, filter)
+def yesterdayDF(*args, **kwargs):
+    y = yesterday(*args, **kwargs)
     if y:
-        df = json_normalize(y)
-        _toDatetime(df)
-        _reindex(df, "symbol")
+        df = _reindex(_toDatetime(json_normalize(y)), "symbol")
     else:
         df = pd.DataFrame()
     return df
@@ -513,7 +510,7 @@ def yesterdayDF(symbol, token="", version="", filter=""):
 previousDF = yesterdayDF
 
 
-def price(symbol, token="", version="", filter=""):
+def price(symbol, token="", version="", filter="", format="json"):
     """Price of ticker
 
     https://iexcloud.io/docs/api/#price
@@ -524,23 +521,27 @@ def price(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/price", token, version, filter)
+    return _get(
+        "stock/{symbol}/price".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(price)
-def priceDF(symbol, token="", version="", filter=""):
-    df = json_normalize({"price": price(symbol, token, version, filter)})
-    _toDatetime(df)
-    return df
+def priceDF(*args, **kwargs):
+    return _toDatetime(json_normalize({"price": price(*args, **kwargs)}))
 
 
-def quote(symbol, token="", version="", filter=""):
+def quote(symbol, token="", version="", filter="", format="json"):
     """Get quote for ticker
 
     https://iexcloud.io/docs/api/#quote
@@ -552,29 +553,33 @@ def quote(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/quote", token, version, filter)
+    return _get(
+        "stock/{symbol}/quote".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(quote)
-def quoteDF(symbol, token="", version="", filter=""):
-    q = quote(symbol, token, version, filter)
+def quoteDF(*args, **kwargs):
+    q = quote(*args, **kwargs)
     if q:
-        df = json_normalize(q)
-        _toDatetime(df)
-        _reindex(df, "symbol")
+        df = _reindex(_toDatetime(json_normalize(q)), "symbol")
     else:
         df = pd.DataFrame()
     return df
 
 
 @_expire(hour=8, tz=_EST)
-def spread(symbol, token="", version="", filter=""):
+def spread(symbol, token="", version="", filter="", format="json"):
     """This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
     Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
     Lower effectiveSpread and higher priceImprovement values are generally considered optimal.
@@ -593,24 +598,27 @@ def spread(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/effective-spread", token, version, filter)
+    return _get(
+        "stock/{symbol}/effective-spread".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(spread)
-def spreadDF(symbol, token="", version="", filter=""):
-    df = pd.DataFrame(spread(symbol, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "venue")
-    return df
+def spreadDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(spread(*args, **kwargs))), "venue")
 
 
-def volumeByVenue(symbol, token="", version="", filter=""):
+def volumeByVenue(symbol, token="", version="", filter="", format="json"):
     """This returns 15 minute delayed and 30 day average consolidated volume percentage of a stock, by market.
     This call will always return 13 values, and will be sorted in ascending order by current day trading volume percentage.
 
@@ -623,18 +631,21 @@ def volumeByVenue(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    return _getJson("stock/" + symbol + "/volume-by-venue", token, version, filter)
+    return _get(
+        "stock/{symbol}/volume-by-venue".format(symbol=_quoteSymbols(symbol)),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(volumeByVenue)
-def volumeByVenueDF(symbol, token="", version="", filter=""):
-    df = pd.DataFrame(volumeByVenue(symbol, token, version, filter))
-    _toDatetime(df)
-    _reindex(df, "venue")
-    return df
+def volumeByVenueDF(*args, **kwargs):
+    return _reindex(_toDatetime(pd.DataFrame(volumeByVenue(*args, **kwargs))), "venue")

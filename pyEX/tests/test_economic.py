@@ -15,7 +15,7 @@ class TestEconomic:
         from pyEX import Client
 
         c = Client("test")
-        with patch("pyEX.common._getJsonIEXCloud"), patch("pickle.dump"):
+        with patch("pyEX.common._getIEXCloud"), patch("pickle.dump"):
             c.us30()
             c.us15()
             c.us5()

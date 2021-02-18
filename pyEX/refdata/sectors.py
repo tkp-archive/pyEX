@@ -9,11 +9,11 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _getJson
+from ..common import _expire, _get
 
 
 @_expire(hour=8)
-def sectors(token="", version="", filter=""):
+def sectors(token="", version="", filter="", format="json"):
     """Returns an array of sectors.
 
     https://iexcloud.io/docs/api/#sectors
@@ -22,20 +22,23 @@ def sectors(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/sectors", token, version, filter)
+    return _get(
+        "ref-data/sectors", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(sectors)
-def sectorsDF(token="", version="", filter=""):
-    return pd.DataFrame(sectors(token, version, filter))
+def sectorsDF(*args, **kwargs):
+    return pd.DataFrame(sectors(*args, **kwargs))
 
 
 @_expire(hour=8)
-def tags(token="", version="", filter=""):
+def tags(token="", version="", filter="", format="json"):
     """Returns an array of tags.
 
     https://iexcloud.io/docs/api/#tags
@@ -44,13 +47,16 @@ def tags(token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
-    return _getJson("ref-data/tags", token, version, filter)
+    return _get(
+        "ref-data/tags", token=token, version=version, filter=filter, format=format
+    )
 
 
 @wraps(tags)
-def tagsDF(token="", version="", filter=""):
-    return pd.DataFrame(tags(token, version, filter))
+def tagsDF(*args, **kwargs):
+    return pd.DataFrame(tags(*args, **kwargs))

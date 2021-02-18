@@ -9,10 +9,10 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr, _toDatetime
+from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
-def points(symbol="market", key="", token="", version="", filter=""):
+def points(symbol="market", key="", token="", version="", filter="", format="json"):
     """Data points are available per symbol and return individual plain text values.
     Retrieving individual data points is useful for Excel and Google Sheet users, and applications where a single, lightweight value is needed.
     We also provide update times for some endpoints which allow you to call an endpoint only once it has new data.
@@ -26,29 +26,40 @@ def points(symbol="market", key="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     if key:
-        return _getJson(
+        return _get(
             "data-points/{symbol}/{key}".format(symbol=symbol, key=key),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _getJson(
-        "data-points/{symbol}".format(symbol=symbol), token, version, filter
+    return _get(
+        "data-points/{symbol}".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 @wraps(points)
-def pointsDF(symbol="market", key="", token="", version="", filter=""):
+def pointsDF(symbol="market", key="", token="", version="", filter="", format="json"):
     _raiseIfNotStr(symbol)
     if key:
-        val = points(symbol, key, token, version, filter)
-        return pd.DataFrame([{"symbol": symbol, "key": key, "value": val}])
-    df = pd.DataFrame(points(symbol, key, token, version, filter))
-    _toDatetime(df)
-    return df
+        return pd.DataFrame(
+            [
+                {
+                    "symbol": symbol,
+                    "key": key,
+                    "value": points(symbol, key, token, version, filter, format),
+                }
+            ]
+        )
+    return _toDatetime(pd.DataFrame(points(symbol, key, token, version, filter)))

@@ -9,11 +9,11 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _interval, _quoteSymbols
+from ..common import _get, _interval, _quoteSymbols
 
 
 @_interval(hours=24)  # TODO make this smaller?
-def search(fragment, token="", version="", filter=""):
+def search(fragment, token="", version="", filter="", format="json"):
     """Returns an array of symbols up to the top 10 matches. Results will be sorted for relevancy. Search currently defaults to equities only, where the symbol returned is supported by endpoints listed under the Stocks category.
 
     https://iexcloud.io/docs/api/#search
@@ -23,14 +23,21 @@ def search(fragment, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     fragment = _quoteSymbols(fragment)
-    return _getJson("search/{}".format(fragment), token, version, filter)
+    return _get(
+        "search/{}".format(fragment),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(search)
-def searchDF(fragment, token="", version="", filter=""):
-    return pd.DataFrame(search(fragment, token, version, filter))
+def searchDF(*args, **kwargs):
+    return pd.DataFrame(search(*args, **kwargs))

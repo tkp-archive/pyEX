@@ -9,10 +9,10 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _getJson, _raiseIfNotStr, _toDatetime
+from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
-def optionExpirations(symbol, token="", version="", filter=""):
+def optionExpirations(symbol, token="", version="", filter="", format="json"):
     """Returns end of day options data
 
     https://iexcloud.io/docs/api/#options
@@ -23,15 +23,24 @@ def optionExpirations(symbol, token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
-    return _getJson("stock/" + symbol + "/options", token, version, filter)
+    return _get(
+        "stock/" + symbol + "/options",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
-def options(symbol, expiration, side="", token="", version="", filter=""):
+def options(
+    symbol, expiration, side="", token="", version="", filter="", format="json"
+):
     """Returns end of day options data
 
     https://iexcloud.io/docs/api/#options
@@ -44,33 +53,33 @@ def options(symbol, expiration, side="", token="", version="", filter=""):
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
 
     Returns:
         dict or DataFrame: result
     """
     _raiseIfNotStr(symbol)
     if side:
-        return _getJson(
+        return _get(
             "stock/{symbol}/options/{expiration}/{side}".format(
                 symbol=symbol, expiration=expiration, side=side
             ),
-            token,
-            version,
-            filter,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
         )
-    return _getJson(
+    return _get(
         "stock/{symbol}/options/{expiration}/".format(
             symbol=symbol, expiration=expiration
         ),
-        token,
-        version,
-        filter,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
     )
 
 
 @wraps(options)
-def optionsDF(symbol, expiration, side="", token="", version="", filter=""):
-    p = options(symbol, expiration, side, token, version, filter)
-    df = pd.DataFrame(p)
-    _toDatetime(df, tcols=["date"])
-    return df
+def optionsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(options(*args, **kwargs)), tcols=["date"])

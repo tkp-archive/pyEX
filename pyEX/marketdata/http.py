@@ -10,8 +10,8 @@ from functools import wraps
 import pandas as pd
 
 from ..common import (
-    _getJson,
-    _getJsonAsync,
+    _get,
+    _getAsync,
     _raiseIfNotStr,
     _reindex,
     _strOrDate,
@@ -21,7 +21,7 @@ from ..common import (
 )
 
 
-def tops(symbols=None, token="", version=""):
+def tops(symbols=None, token="", version="", format="json"):
     """TOPS provides IEX’s aggregated best quoted bid and offer position in near real time for all securities on IEX’s displayed limit order book.
     TOPS is ideal for developers needing both quote and trade data.
 
@@ -31,35 +31,41 @@ def tops(symbols=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     symbols = _strToList(symbols)
     if symbols:
-        return _getJson("tops?symbols=" + ",".join(symbols) + "%2b", token, version)
-    return _getJson("tops", token, version)
+        return _get(
+            "tops?symbols=" + ",".join(symbols) + "%2b",
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("tops", token=token, version=version, format=format)
 
 
 @wraps(tops)
-async def topsAsync(symbols=None, token="", version=""):
+async def topsAsync(symbols=None, token="", version="", format="json"):
     symbols = _strToList(symbols)
     if symbols:
-        return await _getJsonAsync(
-            "tops?symbols=" + ",".join(symbols) + "%2b", token, version
+        return await _getAsync(
+            "tops?symbols=" + ",".join(symbols) + "%2b",
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("tops", token, version)
+    return await _getAsync("tops", token=token, version=version, format=format)
 
 
 @wraps(tops)
-def topsDF(symbols=None, token="", version=""):
-    df = json_normalize(tops(symbols, token, version))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+def topsDF(*args, **kwargs):
+    return _reindex(_toDatetime(json_normalize(tops(*args, **kwargs))), "symbol")
 
 
-def last(symbols=None, token="", version=""):
+def last(symbols=None, token="", version="", format="json"):
     """Last provides trade data for executions on IEX. It is a near real time, intraday API that provides IEX last sale price, size and time.
     Last is ideal for developers that need a lightweight stock quote.
 
@@ -69,37 +75,41 @@ def last(symbols=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     symbols = _strToList(symbols)
     if symbols:
-        return _getJson(
-            "tops/last?symbols=" + ",".join(symbols) + "%2b", token, version
+        return _get(
+            "tops/last?symbols=" + ",".join(symbols) + "%2b",
+            token=token,
+            version=version,
+            format=format,
         )
-    return _getJson("tops/last", token, version)
+    return _get("tops/last", token=token, version=version, format=format)
 
 
 @wraps(last)
-async def lastAsync(symbols=None, token="", version=""):
+async def lastAsync(symbols=None, token="", version="", format="json"):
     symbols = _strToList(symbols)
     if symbols:
-        return await _getJsonAsync(
-            "tops/last?symbols=" + ",".join(symbols) + "%2b", token, version
+        return await _getAsync(
+            "tops/last?symbols=" + ",".join(symbols) + "%2b",
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("tops/last", token, version)
+    return await _getAsync("tops/last", token=token, version=version, format=format)
 
 
 @wraps(last)
-def lastDF(symbols=None, token="", version=""):
-    df = json_normalize(last(symbols, token, version))
-    _toDatetime(df)
-    _reindex(df, "symbol")
-    return df
+def lastDF(*args, **kwargs):
+    return _reindex(_toDatetime(json_normalize(last(*args, **kwargs))), "symbol")
 
 
-def deep(symbol=None, token="", version=""):
+def deep(symbol=None, token="", version="", format="json"):
     """DEEP is used to receive real-time depth of book quotations direct from IEX.
     The depth of book quotations received via DEEP provide an aggregated size of resting displayed orders at a price and side,
     and do not indicate the size or number of individual orders at any price level.
@@ -113,32 +123,35 @@ def deep(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep?symbols=" + symbol, token, version)
-    return _getJson("deep", token, version)
+        return _get(
+            "deep?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return _get("deep", token=token, version=version, format=format)
 
 
 @wraps(deep)
-async def deepAsync(symbol=None, token="", version=""):
+async def deepAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep", token, version)
+        return await _getAsync(
+            "deep?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return await _getAsync("deep", token=token, version=version, format=format)
 
 
 @wraps(deep)
-def deepDF(symbol=None, token="", version=""):
-    df = json_normalize(deep(symbol, token, version))
-    _toDatetime(df)
-    return df
+def deepDF(*args, **kwargs):
+    return _toDatetime(json_normalize(deep(*args, **kwargs)))
 
 
-def auction(symbol=None, token="", version=""):
+def auction(symbol=None, token="", version="", format="json"):
     """DEEP broadcasts an Auction Information Message every one second between the Lock-in Time and the auction match for Opening and Closing Auctions,
     and during the Display Only Period for IPO, Halt, and Volatility Auctions. Only IEX listed securities are eligible for IEX Auctions.
 
@@ -148,32 +161,41 @@ def auction(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/auction?symbols=" + symbol, token, version)
-    return _getJson("deep/auction", token, version)
+        return _get(
+            "deep/auction?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/auction", token=token, version=version, format=format)
 
 
 @wraps(auction)
-async def auctionAsync(symbol=None, token="", version=""):
+async def auctionAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/auction?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/auction", token, version)
+        return await _getAsync(
+            "deep/auction?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return await _getAsync("deep/auction", token=token, version=version, format=format)
 
 
 @wraps(auction)
-def auctionDF(symbol=None, token="", version=""):
-    df = json_normalize(auction(symbol, token, version))
-    _toDatetime(df)
-    return df
+def auctionDF(*args, **kwargs):
+    return _toDatetime(json_normalize(auction(*args, **kwargs)))
 
 
-def book(symbol=None, token="", version=""):
+def book(symbol=None, token="", version="", format="json"):
     """Book shows IEX’s bids and asks for given symbols.
 
     https://iexcloud.io/docs/api/#deep-book
@@ -182,38 +204,41 @@ def book(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/book?symbols=" + symbol, token, version)
-    return _getJson("deep/book", token, version)
+        return _get(
+            "deep/book?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return _get("deep/book", token=token, version=version, format=format)
 
 
 @wraps(book)
-async def bookAsync(symbol=None, token="", version=""):
+async def bookAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/book?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/book", token, version)
+        return await _getAsync(
+            "deep/book?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return await _getAsync("deep/book", token=token, version=version, format=format)
 
 
 @wraps(book)
-def bookDF(symbol=None, token="", version=""):
-    x = book(symbol, token, version)
+def bookDF(*args, **kwargs):
+    x = book(*args, **kwargs)
     data = []
     for key in x:
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = json_normalize(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(json_normalize(data))
 
 
-def opHaltStatus(symbol=None, token="", version=""):
+def opHaltStatus(symbol=None, token="", version="", format="json"):
     """The Exchange may suspend trading of one or more securities on IEX for operational reasons and indicates such operational halt using the Operational halt status message.
 
     IEX disseminates a full pre-market spin of Operational halt status messages indicating the operational halt status of all securities.
@@ -228,40 +253,49 @@ def opHaltStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/op-halt-status?symbols=" + symbol, token, version)
-    return _getJson("deep/op-halt-status", token, version)
+        return _get(
+            "deep/op-halt-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/op-halt-status", token=token, version=version, format=format)
 
 
 @wraps(opHaltStatus)
-async def opHaltStatusAsync(symbol=None, token="", version=""):
+async def opHaltStatusAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
-            "deep/op-halt-status?symbols=" + symbol, token, version
+        return await _getAsync(
+            "deep/op-halt-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("deep/op-halt-status", token, version)
+    return await _getAsync(
+        "deep/op-halt-status", token=token, version=version, format=format
+    )
 
 
 @wraps(opHaltStatus)
-def opHaltStatusDF(symbol=None, token="", version=""):
-    x = opHaltStatus(symbol, token, version)
+def opHaltStatusDF(*args, **kwargs):
+    x = opHaltStatus(*args, **kwargs)
     data = []
     for key in x:
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(data))
 
 
-def officialPrice(symbol=None, token="", version=""):
+def officialPrice(symbol=None, token="", version="", format="json"):
     """The Official Price message is used to disseminate the IEX Official Opening and Closing Prices.
 
     These messages will be provided only for IEX Listed Securities.
@@ -272,34 +306,43 @@ def officialPrice(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/official-price?symbols=" + symbol, token, version)
-    return _getJson("deep/official-price", token, version)
+        return _get(
+            "deep/official-price?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/official-price", token=token, version=version, format=format)
 
 
 @wraps(officialPrice)
-async def officialPriceAsync(symbol=None, token="", version=""):
+async def officialPriceAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
-            "deep/official-price?symbols=" + symbol, token, version
+        return await _getAsync(
+            "deep/official-price?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("deep/official-price", token, version)
+    return await _getAsync(
+        "deep/official-price", token=token, version=version, format=format
+    )
 
 
 @wraps(officialPrice)
-def officialPriceDF(symbol=None, token="", version=""):
-    df = json_normalize(officialPrice(symbol, token, version))
-    _toDatetime(df)
-    return df
+def officialPriceDF(*args, **kwargs):
+    return _toDatetime(json_normalize(officialPrice(*args, **kwargs)))
 
 
-def securityEvent(symbol=None, token="", version=""):
+def securityEvent(symbol=None, token="", version="", format="json"):
     """The Security event message is used to indicate events that apply to a security. A Security event message will be sent whenever such event occurs
 
     https://iexcloud.io/docs/api/#deep-security-event
@@ -308,40 +351,49 @@ def securityEvent(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/security-event?symbols=" + symbol, token, version)
-    return _getJson("deep/security-event", token, version)
-
-
-@wraps(securityEvent)
-async def securityEventAsync(symbol=None, token="", version=""):
-    _raiseIfNotStr(symbol)
-    if symbol:
-        return await _getJsonAsync(
-            "deep/security-event?symbols=" + symbol, token, version
+        return _get(
+            "deep/security-event?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("deep/security-event", token, version)
+    return _get("deep/security-event", token=token, version=version, format=format)
 
 
 @wraps(securityEvent)
-def securityEventDF(symbol=None, token="", version=""):
-    x = securityEvent(symbol, token, version)
+async def securityEventAsync(symbol=None, token="", version="", format="json"):
+    _raiseIfNotStr(symbol)
+    if symbol:
+        return await _getAsync(
+            "deep/security-event?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return await _getAsync(
+        "deep/security-event", token=token, version=version, format=format
+    )
+
+
+@wraps(securityEvent)
+def securityEventDF(*args, **kwargs):
+    x = securityEvent(*args, **kwargs)
     data = []
     for key in x:
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(data))
 
 
-def ssrStatus(symbol=None, token="", version=""):
+def ssrStatus(symbol=None, token="", version="", format="json"):
     """In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
     IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities.
@@ -355,55 +407,49 @@ def ssrStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/ssr-status?symbols=" + symbol, token, version)
-    return _getJson("deep/ssr-status", token, version)
+        return _get(
+            "deep/ssr-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/ssr-status", token=token, version=version, format=format)
 
 
 @wraps(ssrStatus)
-async def ssrStatusAsync(symbol=None, token="", version=""):
+async def ssrStatusAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/ssr-status?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/ssr-status", token, version)
+        return await _getAsync(
+            "deep/ssr-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return await _getAsync(
+        "deep/ssr-status", token=token, version=version, format=format
+    )
 
 
 @wraps(ssrStatus)
-def ssrStatusDF(symbol=None, token="", version=""):
-    """In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
-
-    IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities.
-     After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
-
-    The IEX Trading System will process orders based on the latest short sale price test restriction status.
-
-    https://iexcloud.io/docs/api/#deep-short-sale-price-test-status
-
-    Args:
-        symbol (str): Ticker to request
-        token (str): Access token
-        version (str): API version
-
-    Returns:
-        DataFrame: result
-    """
-    x = ssrStatus(symbol, token, version)
+def ssrStatusDF(*args, **kwargs):
+    x = ssrStatus(*args, **kwargs)
     data = []
     for key in x:
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(data))
 
 
-def systemEvent(token="", version=""):
+def systemEvent(token="", version="", format="json"):
     """The System event message is used to indicate events that apply to the market or the data feed.
 
     There will be a single message disseminated per channel for each System Event type within a given trading session.
@@ -413,26 +459,27 @@ def systemEvent(token="", version=""):
     Args:
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
-    return _getJson("deep/system-event", token, version)
+    return _get("deep/system-event", token=token, version=version, format=format)
 
 
 @wraps(systemEvent)
-async def systemEventAsync(token="", version=""):
-    return await _getJsonAsync("deep/system-event", token, version)
+async def systemEventAsync(token="", version="", format="json"):
+    return await _getAsync(
+        "deep/system-event", token=token, version=version, format=format
+    )
 
 
 @wraps(systemEvent)
-def systemEventDF(token="", version=""):
-    df = json_normalize(systemEvent(token, version))
-    _toDatetime(df)
-    return df
+def systemEventDF(*args, **kwargs):
+    return _toDatetime(json_normalize(systemEvent(*args, **kwargs)))
 
 
-def trades(symbol=None, token="", version=""):
+def trades(symbol=None, token="", version="", format="json"):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -441,39 +488,42 @@ def trades(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trades?symbols=" + symbol, token, version)
-    return _getJson("deep/trades", token, version)
+        return _get(
+            "deep/trades?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return _get("deep/trades", token=token, version=version, format=format)
 
 
 @wraps(trades)
-async def tradesAsync(symbol=None, token="", version=""):
+async def tradesAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync("deep/trades?symbols=" + symbol, token, version)
-    return await _getJsonAsync("deep/trades", token, version)
+        return await _getAsync(
+            "deep/trades?symbols=" + symbol, token=token, version=version, format=format
+        )
+    return await _getAsync("deep/trades", token=token, version=version, format=format)
 
 
 @wraps(trades)
-def tradesDF(symbol=None, token="", version=""):
-    x = trades(symbol, token, version)
+def tradesDF(*args, **kwargs):
+    x = trades(*args, **kwargs)
     data = []
     for key in x:
         dat = x[key]
         for d in dat:
             d["symbol"] = key
             data.append(d)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(data))
 
 
-def tradeBreak(symbol=None, token="", version=""):
+def tradeBreak(symbol=None, token="", version="", format="json"):
     """Trade break messages are sent when an execution on IEX is broken on that same trading day. Trade breaks are rare and only affect applications that rely upon IEX execution based data.
 
     https://iexcloud.io/docs/api/#deep-trade-break
@@ -483,34 +533,43 @@ def tradeBreak(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trade-breaks?symbols=" + symbol, token, version)
-    return _getJson("deep/trade-breaks", token, version)
+        return _get(
+            "deep/trade-breaks?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/trade-breaks", token=token, version=version, format=format)
 
 
 @wraps(tradeBreak)
-async def tradeBreakAsync(symbol=None, token="", version=""):
+async def tradeBreakAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
-            "deep/trade-breaks?symbols=" + symbol, token, version
+        return await _getAsync(
+            "deep/trade-breaks?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJsonAsync("deep/trade-breaks", token, version)
+    return await _getAsync(
+        "deep/trade-breaks", token=token, version=version, format=format
+    )
 
 
 @wraps(tradeBreak)
-def tradeBreakDF(symbol=None, token="", version=""):
-    df = json_normalize(tradeBreak(symbol, token, version))
-    _toDatetime(df)
-    return df
+def tradeBreakDF(*args, **kwargs):
+    return _toDatetime(json_normalize(tradeBreak(*args, **kwargs)))
 
 
-def tradingStatus(symbol=None, token="", version=""):
+def tradingStatus(symbol=None, token="", version="", format="json"):
     """The Trading status message is used to indicate the current trading status of a security.
      For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
      For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
@@ -534,77 +593,85 @@ def tradingStatus(symbol=None, token="", version=""):
         symbol (str): Ticker to request
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
     _raiseIfNotStr(symbol)
     if symbol:
-        return _getJson("deep/trading-status?symbols=" + symbol, token, version)
-    return _getJson("deep/trading-status", token, version)
+        return _get(
+            "deep/trading-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
+        )
+    return _get("deep/trading-status", token=token, version=version, format=format)
 
 
 @wraps(tradingStatus)
-async def tradingStatusAsync(symbol=None, token="", version=""):
+async def tradingStatusAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
-        return await _getJsonAsync(
-            "deep/trading-status?symbols=" + symbol, token, version
+        return await _getAsync(
+            "deep/trading-status?symbols=" + symbol,
+            token=token,
+            version=version,
+            format=format,
         )
-    return await _getJson("deep/trading-status", token, version)
+    return await _get(
+        "deep/trading-status", token=token, version=version, format=format
+    )
 
 
 @wraps(tradingStatus)
-def tradingStatusDF(symbol=None, token="", version=""):
-    x = tradingStatus(symbol, token, version)
+def tradingStatusDF(*args, **kwargs):
+    x = tradingStatus(*args, **kwargs)
     data = []
     for key in x:
         d = x[key]
         d["symbol"] = key
         data.append(d)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    return df
+    return _toDatetime(pd.DataFrame(data))
 
 
-def hist(date=None, token="", version=""):
+def hist(date=None, token="", version="", format="json"):
     """
     Args:
         date (datetime): Effective date
         token (str): Access token
         version (str): API version
+        format (str): return format, defaults to json
 
     Returns:
         dict: result
     """
 
     if date is None:
-        return _getJson("hist", token, version)
+        return _get("hist", token=token, version=version, format=format)
     else:
         date = _strOrDate(date)
-        return _getJson("hist?date=" + date, token, version)
+        return _get("hist?date=" + date, token=token, version=version, format=format)
 
 
 @wraps(hist)
-async def histAsync(date=None, token="", version=""):
+async def histAsync(date=None, token="", version="", format="json"):
     if date is None:
-        return await _getJson("hist", token, version)
+        return await _get("hist", token=token, version=version, format=format)
     else:
         date = _strOrDate(date)
-        return await _getJsonAsync("hist?date=" + date, token, version)
+        return await _getAsync(
+            "hist?date=" + date, token=token, version=version, format=format
+        )
 
 
 @wraps(hist)
-def histDF(date=None, token="", version=""):
-    """https://iextrading.com/developer/docs/#hist"""
-    x = hist(date, token, version)
+def histDF(*args, **kwargs):
+    x = hist(*args, **kwargs)
     data = []
     for key in x:
         dat = x[key]
         for item in dat:
             item["date"] = key
             data.append(item)
-    df = pd.DataFrame(data)
-    _toDatetime(df)
-    _reindex(df, "date")
-    return df
+    return _reindex(_toDatetime(pd.DataFrame(data)), "date")
