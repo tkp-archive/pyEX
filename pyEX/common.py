@@ -884,12 +884,20 @@ def _reindex(df, col):
     return df
 
 
-def _toDatetime(df, cols=None, tcols=None):
+def _toDatetime(df, cols=None, tcols=None, reformatcols=None):
     """internal"""
+    cols = cols or []
+    tcols = tcols or []
+    reformatcols = reformatcols or []
+
     if not isinstance(cols, list):
         cols = [cols]
+
     if not isinstance(tcols, list):
         tcols = [tcols]
+
+    if not isinstance(reformatcols, list):
+        reformatcols = [reformatcols]
 
     cols = cols + _STANDARD_DATE_FIELDS if cols is not None else _STANDARD_DATE_FIELDS
     tcols = (
@@ -908,6 +916,14 @@ def _toDatetime(df, cols=None, tcols=None):
         if tcol in df.columns:
             try:
                 df[tcol] = pd.to_datetime(df[tcol], unit="ms")
+            except BaseException:
+                # skip error
+                continue
+
+    for rcol in reformatcols:
+        if rcol in df.columns:
+            try:
+                df[rcol] = pd.to_datetime(df[rcol].astype(int), unit="ms")
             except BaseException:
                 # skip error
                 continue

@@ -37,17 +37,12 @@ def news(symbol, count=10, token="", version="", filter="", format="json"):
 
 def _newsToDF(n):
     """internal"""
-    return _reindex(
-        _toDatetime(pd.DataFrame(n), cols=[], tcols=["datetime"]), "datetime"
-    )
+    return _reindex(_toDatetime(pd.DataFrame(n), reformatcols=["datetime"]), "datetime")
 
 
 @wraps(news)
 def newsDF(*args, **kwargs):
-    return _reindex(
-        _toDatetime(pd.DataFrame(news(*args, **kwargs)), cols=[], tcols=["datetime"]),
-        "datetime",
-    )
+    return _newsToDF(news(*args, **kwargs))
 
 
 def marketNews(count=10, token="", version="", filter="", format="json"):
