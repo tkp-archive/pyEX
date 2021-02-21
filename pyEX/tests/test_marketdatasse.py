@@ -14,9 +14,9 @@ SYMBOL = "aapl"
 
 class TestAll:
     def test_other(self):
-        from pyEX.marketdata.sse import DeepChannelsSSE, _runSSE
+        from pyEX.streaming.sse import DeepChannelsSSE, _runSSE
 
-        with patch("pyEX.marketdata.sse._streamSSE"):
+        with patch("pyEX.streaming.sse._streamSSE"):
             # coverage
             _runSSE("test")
             _runSSE("test", symbols=["test"])

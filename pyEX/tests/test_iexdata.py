@@ -14,265 +14,265 @@ SYMBOL = "aapl"
 
 class TestAll:
     def test_tops(self):
-        from pyEX import tops
+        from pyEX import iexTops
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            tops()
-            tops("test")
-            tops(["test"])
+            iexTops()
+            iexTops("test")
+            iexTops(["test"])
 
     def test_topsDF(self):
-        from pyEX import topsDF
+        from pyEX import iexTopsDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            topsDF()
+            iexTopsDF()
 
     def test_last(self):
-        from pyEX import last
+        from pyEX import iexLast
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            last()
-            last("test")
+            iexLast()
+            iexLast("test")
 
     def test_lastDF(self):
-        from pyEX import lastDF
+        from pyEX import iexLastDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            lastDF()
+            iexLastDF()
 
     def test_hist(self):
         from datetime import datetime
 
-        from pyEX import hist
+        from pyEX import iexHist
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            hist()
-            hist("201505")
-            hist(datetime.today())
+            iexHist()
+            iexHist("201505")
+            iexHist(datetime.today())
 
     def test_histDF(self):
-        from pyEX import histDF
+        from pyEX import iexHistDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            histDF()
+            iexHistDF()
 
     def test_deep(self):
-        from pyEX import deep
+        from pyEX import iexDeep
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            deep()
-            deep("test")
+            iexDeep()
+            iexDeep("test")
 
     def test_deepDF(self):
-        from pyEX import deepDF
+        from pyEX import iexDeepDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            deepDF()
-            deepDF("test")
+            iexDeepDF()
+            iexDeepDF("test")
 
     def test_book(self):
-        from pyEX import deepBook
+        from pyEX import iexBook
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            deepBook()
-            deepBook("test")
+            iexBook()
+            iexBook("test")
 
     def test_bookDF(self):
-        from pyEX import deepBookDF
+        from pyEX import iexBookDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            deepBookDF()
-            deepBookDF("test")
+            iexBookDF()
+            iexBookDF("test")
 
     def test_trades(self):
-        from pyEX import trades
+        from pyEX import iexTrades
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            trades()
-            trades("test")
+            iexTrades()
+            iexTrades("test")
 
     def test_tradesDF(self):
-        from pyEX import tradesDF
+        from pyEX import iexTradesDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            tradesDF()
-            tradesDF("test")
+            iexTradesDF()
+            iexTradesDF("test")
 
     def test_systemEvent(self):
-        from pyEX import systemEvent
+        from pyEX import iexSystemEvent
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            systemEvent()
+            iexSystemEvent()
 
     def test_systemEventDF(self):
-        from pyEX import systemEventDF
+        from pyEX import iexSystemEventDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            systemEventDF()
+            iexSystemEventDF()
 
     def test_tradingStatus(self):
-        from pyEX import tradingStatus
+        from pyEX import iexTradingStatus
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            tradingStatus()
-            tradingStatus("test")
+            iexTradingStatus()
+            iexTradingStatus("test")
 
     def test_tradingStatusDF(self):
-        from pyEX import tradingStatusDF
+        from pyEX import iexTradingStatusDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            tradingStatusDF()
-            tradingStatusDF("test")
+            iexTradingStatusDF()
+            iexTradingStatusDF("test")
 
     def test_opHaltStatus(self):
-        from pyEX import opHaltStatus
+        from pyEX import iexOpHaltStatus
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            opHaltStatus()
-            opHaltStatus("test")
+            iexOpHaltStatus()
+            iexOpHaltStatus("test")
 
     def test_opHaltStatusDF(self):
-        from pyEX import opHaltStatusDF
+        from pyEX import iexOpHaltStatusDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            opHaltStatusDF()
-            opHaltStatusDF("test")
+            iexOpHaltStatusDF()
+            iexOpHaltStatusDF("test")
 
     def test_ssrStatus(self):
-        from pyEX import ssrStatus
+        from pyEX import iexSsrStatus
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            ssrStatus()
-            ssrStatus("test")
+            iexSsrStatus()
+            iexSsrStatus("test")
 
     def test_ssrStatusDF(self):
-        from pyEX import ssrStatusDF
+        from pyEX import iexSsrStatusDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            ssrStatusDF()
-            ssrStatusDF("test")
+            iexSsrStatusDF()
+            iexSsrStatusDF("test")
 
     def test_securityEvent(self):
-        from pyEX import securityEvent
+        from pyEX import iexSecurityEvent
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            securityEvent()
-            securityEvent("test")
+            iexSecurityEvent()
+            iexSecurityEvent("test")
 
     def test_securityEventDF(self):
-        from pyEX import securityEventDF
+        from pyEX import iexSecurityEventDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            securityEventDF()
-            securityEventDF("test")
+            iexSecurityEventDF()
+            iexSecurityEventDF("test")
 
     def test_tradeBreak(self):
-        from pyEX import tradeBreak
+        from pyEX import iexTradeBreak
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            tradeBreak()
-            tradeBreak("test")
+            iexTradeBreak()
+            iexTradeBreak("test")
 
     def test_tradeBreakDF(self):
-        from pyEX import tradeBreakDF
+        from pyEX import iexTradeBreakDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            tradeBreakDF()
-            tradeBreakDF("test")
+            iexTradeBreakDF()
+            iexTradeBreakDF("test")
 
     def test_auction(self):
-        from pyEX import auction
+        from pyEX import iexAuction
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            auction()
-            auction("test")
+            iexAuction()
+            iexAuction("test")
 
     def test_auctionDF(self):
-        from pyEX import auctionDF
+        from pyEX import iexAuctionDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            auctionDF()
-            auctionDF("test")
+            iexAuctionDF()
+            iexAuctionDF("test")
 
     def test_officialPrice(self):
-        from pyEX import officialPrice
+        from pyEX import iexOfficialPrice
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            officialPrice()
-            officialPrice("test")
+            iexOfficialPrice()
+            iexOfficialPrice("test")
 
     def test_officialPriceDF(self):
-        from pyEX import officialPriceDF
+        from pyEX import iexOfficialPriceDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
-            officialPriceDF()
-            officialPriceDF("test")
+            iexOfficialPriceDF()
+            iexOfficialPriceDF("test")
