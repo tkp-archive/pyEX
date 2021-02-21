@@ -6,10 +6,16 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
+import atexit
+import pickle
+
 # for Coverage
 import time
 
 from mock import MagicMock, patch
+
+atexit.register = MagicMock()
+pickle.dump = MagicMock()
 
 SYMBOL = "aapl"
 
@@ -21,7 +27,7 @@ class TestAlternative:
     def test_sentiment(self):
         from pyEX import sentiment
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             sentiment("test")
@@ -29,7 +35,7 @@ class TestAlternative:
     def test_sentimentDF(self):
         from pyEX import sentimentDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -38,7 +44,7 @@ class TestAlternative:
     def test_ceoComp(self):
         from pyEX import ceoCompensation
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             ceoCompensation("test")
@@ -46,7 +52,7 @@ class TestAlternative:
     def test_ceoCompDF(self):
         from pyEX import ceoCompensationDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])

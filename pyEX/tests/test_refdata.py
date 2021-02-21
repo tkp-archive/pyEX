@@ -6,8 +6,14 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
+import atexit
+import pickle
+
 # for Coverage
 from mock import MagicMock, patch
+
+atexit.register = MagicMock()
+pickle.dump = MagicMock()
 
 
 class TestAll:
@@ -39,7 +45,7 @@ class TestAll:
             symbols,
         )
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             symbols()
@@ -58,7 +64,7 @@ class TestAll:
         from pyEX import Client
         from pyEX.refdata import symbolsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -88,7 +94,7 @@ class TestAll:
     def test_calendar(self):
         from pyEX import Client
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -99,7 +105,7 @@ class TestAll:
     def test_calendarDF(self):
         from pyEX import Client
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -110,7 +116,7 @@ class TestAll:
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             corporateActions()
@@ -119,7 +125,7 @@ class TestAll:
     def test_corporateActionsDF(self):
         from pyEX.refdata import corporateActionsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -128,7 +134,7 @@ class TestAll:
     def test_dividends(self):
         from pyEX.refdata import refDividends
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             refDividends()
@@ -137,7 +143,7 @@ class TestAll:
     def test_dividendsDF(self):
         from pyEX.refdata import refDividendsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -146,7 +152,7 @@ class TestAll:
     def test_nextDayExtDate(self):
         from pyEX.refdata import nextDayExtDate
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             nextDayExtDate()
@@ -155,7 +161,7 @@ class TestAll:
     def test_nextDayExtDateDF(self):
         from pyEX.refdata import nextDayExtDateDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -164,7 +170,7 @@ class TestAll:
     def test_directory(self):
         from pyEX.refdata import directory
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             directory()
@@ -173,7 +179,7 @@ class TestAll:
     def test_directoryDF(self):
         from pyEX.refdata import directoryDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -182,7 +188,7 @@ class TestAll:
     def test_sectors(self):
         from pyEX.refdata import sectors
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             sectors()
@@ -190,7 +196,7 @@ class TestAll:
     def test_sectorsDF(self):
         from pyEX.refdata import sectorsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -199,7 +205,7 @@ class TestAll:
     def test_exchanges(self):
         from pyEX.refdata import exchanges, internationalExchanges
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             exchanges()
@@ -208,7 +214,7 @@ class TestAll:
     def test_exchangesDF(self):
         from pyEX.refdata import exchangesDF, internationalExchangesDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -218,7 +224,7 @@ class TestAll:
     def test_figi(self):
         from pyEX.refdata import figi
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             figi("")
@@ -226,7 +232,7 @@ class TestAll:
     def test_figiDF(self):
         from pyEX.refdata import figiDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
@@ -235,7 +241,7 @@ class TestAll:
     def test_tags(self):
         from pyEX.refdata import tags
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             tags()
@@ -243,7 +249,7 @@ class TestAll:
     def test_tagsDF(self):
         from pyEX.refdata import tagsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
