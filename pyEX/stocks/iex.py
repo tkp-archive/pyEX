@@ -9,16 +9,8 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (
-    _get,
-    _getAsync,
-    _raiseIfNotStr,
-    _reindex,
-    _strOrDate,
-    _strToList,
-    _toDatetime,
-    json_normalize,
-)
+from ..common import (_get, _getAsync, _raiseIfNotStr, _reindex, _strOrDate,
+                      _strToList, _toDatetime, json_normalize)
 
 
 def iexTops(symbols=None, token="", version="", format="json"):
@@ -270,7 +262,7 @@ def iexOpHaltStatus(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexOpHaltStatus)
-async def opHaltStatusAsync(symbol=None, token="", version="", format="json"):
+async def iexOpHaltStatusAsync(symbol=None, token="", version="", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -383,7 +375,7 @@ async def iexSecurityEventAsync(symbol=None, token="", version="", format="json"
 
 
 @wraps(iexSecurityEvent)
-def securityEventDF(*args, **kwargs):
+def iexSecurityEventDF(*args, **kwargs):
     x = iexSecurityEvent(*args, **kwargs)
     data = []
     for key in x:
