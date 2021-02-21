@@ -9,8 +9,16 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (_get, _getAsync, _raiseIfNotStr, _reindex, _strOrDate,
-                      _strToList, _toDatetime, json_normalize)
+from ..common import (
+    _get,
+    _getAsync,
+    _raiseIfNotStr,
+    _reindex,
+    _strOrDate,
+    _strToList,
+    _toDatetime,
+    json_normalize,
+)
 
 
 def iexTops(symbols=None, token="", version="", format="json"):
