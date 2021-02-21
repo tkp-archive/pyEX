@@ -16,8 +16,6 @@ atexit.register = MagicMock()
 pickle.dump = MagicMock()
 
 
-
-
 class TestAll:
     def test_stats(self):
         from pyEX.stats import stats

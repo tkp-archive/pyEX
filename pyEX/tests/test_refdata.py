@@ -36,8 +36,14 @@ class TestAll:
         # teardown_class() after any methods in this class
 
     def test_symbols(self):
-        from pyEX.refdata import (fxSymbols, iexSymbols, internationalSymbols,
-                                  mutualFundSymbols, otcSymbols, symbols)
+        from pyEX.refdata import (
+            fxSymbols,
+            iexSymbols,
+            internationalSymbols,
+            mutualFundSymbols,
+            otcSymbols,
+            symbols,
+        )
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
