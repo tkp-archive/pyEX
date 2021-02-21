@@ -7,15 +7,10 @@
 #
 from __future__ import print_function
 
-import json
-import os
-import os.path
-import tempfile
 from datetime import datetime
 from urllib.parse import quote
 
 import pandas as pd
-import pytz
 from six import string_types
 
 from .exception import PyEXception
@@ -91,10 +86,6 @@ _KEY_STATS = [
     "day5ChangePercent",
 ]
 _USAGE_TYPES = ["messages", "rules", "rule-records", "alerts", "alert-records"]
-_PYEX_PROXIES = None
-_PYEX_CACHE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), "pyEX"))
-_UTC = pytz.UTC
-_EST = pytz.timezone("EST")
 
 # Limit 10
 _BATCH_TYPES = [
@@ -429,16 +420,6 @@ def _checkPeriodLast(per, last):
     else:
         if last < 1 or last > 4:
             raise PyEXception("Last must be in [1, 4] for period 'annual'")
-
-
-def _tryJson(data, raw=True):
-    """internal"""
-    if raw:
-        return data
-    try:
-        return json.loads(data)
-    except ValueError:
-        return data
 
 
 def _reindex(df, col):
