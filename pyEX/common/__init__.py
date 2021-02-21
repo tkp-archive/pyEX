@@ -45,6 +45,7 @@ from .urls import (
     _delete,
     _get,
     _getAsync,
+    _getIEXCloud,
     _post,
     _stream,
     _streamSSE,
