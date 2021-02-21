@@ -63,7 +63,7 @@ class TestAll:
             iexHist(datetime.today())
 
     def test_histDF(self):
-        from pyEX import histDF
+        from pyEX import iexHistDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
