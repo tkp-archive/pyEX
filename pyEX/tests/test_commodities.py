@@ -7,7 +7,13 @@
 #
 
 # for Coverage
-from mock import patch
+import atexit
+import pickle
+
+from mock import MagicMock, patch
+
+atexit.register = MagicMock()
+pickle.dump = MagicMock()
 
 
 class TestCommodities:
@@ -15,7 +21,7 @@ class TestCommodities:
         from pyEX import Client
 
         c = Client("test")
-        with patch("pyEX.common._getIEXCloud"), patch("pickle.dump"):
+        with patch("pyEX.common.urls._getIEXCloud"):
             c.wti()
             c.brent()
             c.natgas()

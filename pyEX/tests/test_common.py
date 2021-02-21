@@ -65,12 +65,13 @@ class TestAll:
         assert _strCommaSeparatedString("test,test2") == "test,test2"
 
     def test_setProxy(self):
-        import pyEX.common as pc
+        import pyEX.common.urls as pu
+        from pyEX import setProxy
 
-        pc.setProxy("test")
-        print(pc._PYEX_PROXIES)
-        assert pc._PYEX_PROXIES == "test"
-        pc.setProxy(None)
+        setProxy("test")
+        print(pu._PYEX_PROXIES)
+        assert pu._PYEX_PROXIES == "test"
+        setProxy(None)
 
     def test_strOrDate(self):
         from datetime import datetime
@@ -109,12 +110,12 @@ class TestAll:
         n.on_disconnect(None)
         n.on_message(None)
 
-        with patch("pyEX.common.SocketIO"):
+        with patch("pyEX.common.urls.SocketIO"):
             ws.sendinit = "test"
             ws.run()
 
     def test_stream(self):
         from pyEX.common import _stream
 
-        with patch("pyEX.common.WSClient"):
+        with patch("pyEX.common.urls.WSClient"):
             _stream("")

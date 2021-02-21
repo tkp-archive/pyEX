@@ -14,7 +14,7 @@ class TestAll:
     def test_markets(self):
         from pyEX import markets
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             markets()
@@ -22,7 +22,7 @@ class TestAll:
     def test_marketsDF(self):
         from pyEX import marketsDF
 
-        with patch("requests.get") as mock, patch("pickle.dump"):
+        with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])

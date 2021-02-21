@@ -6,8 +6,14 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
+import atexit
+import pickle
+
 # for Coverage
-from mock import patch
+from mock import MagicMock, patch
+
+atexit.register = MagicMock()
+pickle.dump = MagicMock()
 
 
 class TestEconomic:
@@ -15,7 +21,7 @@ class TestEconomic:
         from pyEX import Client
 
         c = Client("test")
-        with patch("pyEX.common._getIEXCloud"), patch("pickle.dump"):
+        with patch("pyEX.common.urls._getIEXCloud"):
             c.us30()
             c.us15()
             c.us5()
