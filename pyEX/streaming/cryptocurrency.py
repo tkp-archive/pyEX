@@ -20,7 +20,7 @@ class CryptoSSE(Enum):
         return list(map(lambda c: c.value, CryptoSSE))
 
 
-def cryptoBookSSE(symbols=None, on_data=None, token="", version=""):
+def cryptoBookSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     """This returns a current snapshot of the book for a specified cryptocurrency. For REST, you will receive a current snapshot of the current book for the specific cryptocurrency. For SSE Streaming, you will get a full representation of the book updated as often as the book changes. Examples of each are below:
 
     https://iexcloud.io/docs/api/#cryptocurrency-book
@@ -28,28 +28,39 @@ def cryptoBookSSE(symbols=None, on_data=None, token="", version=""):
     Args:
         symbols (str): Tickers to request
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
 
     """
-    return _runSSE("cryptoBook", symbols, on_data, token, version)
+    return _runSSE(
+        "cryptoBook",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
-async def cryptoBookSSEAsync(symbols=None, token="", version=""):
+async def cryptoBookSSEAsync(symbols=None, exit=None, token="", version=""):
     """This returns a current snapshot of the book for a specified cryptocurrency. For REST, you will receive a current snapshot of the current book for the specific cryptocurrency. For SSE Streaming, you will get a full representation of the book updated as often as the book changes. Examples of each are below:
 
     https://iexcloud.io/docs/api/#cryptocurrency-book
 
     Args:
         symbols (str): Tickers to request
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    async for item in _runSSEAsync("cryptoBook", symbols, token, version):
+    async for item in _runSSEAsync(
+        "cryptoBook", symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item
 
 
-def cryptoEventsSSE(symbols=None, on_data=None, token="", version=""):
+def cryptoEventsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     """This returns a streaming list of event updates such as new and canceled orders.
 
     https://iexcloud.io/docs/api/#cryptocurrency-events
@@ -57,28 +68,39 @@ def cryptoEventsSSE(symbols=None, on_data=None, token="", version=""):
     Args:
         symbols (str): Tickers to request
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
 
     """
-    return _runSSE("cryptoEvents", symbols, on_data, token, version)
+    return _runSSE(
+        "cryptoEvents",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
-async def cryptoEventsSSEAsync(symbols=None, token="", version=""):
+async def cryptoEventsSSEAsync(symbols=None, exit=None, token="", version=""):
     """This returns a streaming list of event updates such as new and canceled orders.
 
     https://iexcloud.io/docs/api/#cryptocurrency-events
 
     Args:
         symbols (str): Tickers to request
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    async for item in _runSSEAsync("cryptoEvents", symbols, token, version):
+    async for item in _runSSEAsync(
+        "cryptoEvents", symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item
 
 
-def cryptoQuotesSSE(symbols=None, on_data=None, token="", version=""):
+def cryptoQuotesSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     """This returns the quote for a specified cryptocurrency. Quotes are available via REST and SSE Streaming.
 
     https://iexcloud.io/docs/api/#cryptocurrency-quote
@@ -86,22 +108,33 @@ def cryptoQuotesSSE(symbols=None, on_data=None, token="", version=""):
     Args:
         symbols (str): Tickers to request
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
 
     """
-    return _runSSE("cryptoQuotes", symbols, on_data, token, version)
+    return _runSSE(
+        "cryptoQuotes",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
-async def cryptoQuotesSSEAsync(symbols=None, token="", version=""):
+async def cryptoQuotesSSEAsync(symbols=None, exit=None, token="", version=""):
     """This returns the quote for a specified cryptocurrency. Quotes are available via REST and SSE Streaming.
 
     https://iexcloud.io/docs/api/#cryptocurrency-quote
 
     Args:
         symbols (str): Tickers to request
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    async for item in _runSSEAsync("cryptoQuotes", symbols, token, version):
+    async for item in _runSSEAsync(
+        "cryptoQuotes", symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item

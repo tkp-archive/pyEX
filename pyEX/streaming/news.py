@@ -8,7 +8,7 @@
 from .sse import _runSSE, _runSSEAsync
 
 
-def newsSSE(symbols=None, on_data=None, token="", version=""):
+def newsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     """Stream news
 
     https://iexcloud.io/docs/api/#sse-streaming
@@ -16,22 +16,32 @@ def newsSSE(symbols=None, on_data=None, token="", version=""):
     Args:
         symbols (str): Tickers to request
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    return _runSSE("news-stream", symbols, on_data, token, version)
+    return _runSSE(
+        "news-stream",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
-async def newsSSEAsync(symbols=None, token="", version=""):
+async def newsSSEAsync(symbols=None, exit=None, token="", version=""):
     """Stream news
 
     https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
         symbols (str): Tickers to request
-        on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    async for item in _runSSEAsync("news-stream", symbols, token, version):
+    async for item in _runSSEAsync(
+        "news-stream", symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item

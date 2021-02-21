@@ -23,83 +23,133 @@ class StockSSE(Enum):
         return list(map(lambda c: c.value, StockSSE))
 
 
-def _baseSSE(symbols=None, on_data=None, token="", version="", name=""):
+def _baseSSE(symbols=None, on_data=None, exit=None, token="", version="", name=""):
     """https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
         symbols (str): Tickers to request, if None then firehose
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
 
     """
-    return _runSSE(name, symbols, on_data, token, version)
+    return _runSSE(
+        name, symbols=symbols, on_data=on_data, exit=exit, token=token, version=version
+    )
 
 
-async def _baseSSEAsync(symbols=None, on_data=None, token="", version="", name=""):
+async def _baseSSEAsync(symbols=None, exit=None, token="", version="", name=""):
     """https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
         symbols (str): Tickers to request, if None then firehose
-        on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
 
     """
-    for item in _runSSEAsync(name, symbols, on_data, token, version):
+    for item in _runSSEAsync(
+        name, symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item
 
 
 @wraps(_baseSSE)
-def stocksUSNoUTPSSE(symbols=None, on_data=None, token="", version=""):
-    return _baseSSE(symbols, on_data, token, version, "stocksUSNoUTP")
+def stocksUSNoUTPSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+    return _baseSSE(
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+        name="stocksUSNoUTP",
+    )
 
 
 @wraps(_baseSSEAsync)
-def stocksUSNoUTPSSEAsync(symbols=None, token="", version=""):
-    for item in _baseSSEAsync(symbols, token, version, "stocksUSNoUTP"):
+def stocksUSNoUTPSSEAsync(symbols=None, exit=None, token="", version=""):
+    for item in _baseSSEAsync(
+        symbols=symbols, exit=exit, token=token, version=version, name="stocksUSNoUTP"
+    ):
         yield item
 
 
 @wraps(_baseSSE)
-def stocksUSSSE(symbols=None, on_data=None, token="", version=""):
-    return _baseSSE(symbols, on_data, token, version, "stocksUS")
+def stocksUSSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+    return _baseSSE(
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+        name="stocksUS",
+    )
 
 
 @wraps(_baseSSEAsync)
-def stocksUSSSEAsync(symbols=None, token="", version=""):
-    for item in _baseSSEAsync(symbols, token, version, "stocksUS"):
+def stocksUSSSEAsync(symbols=None, exit=None, token="", version=""):
+    for item in _baseSSEAsync(
+        symbols=symbols, exit=exit, token=token, version=version, name="stocksUS"
+    ):
         yield item
 
 
 @wraps(_baseSSE)
-def stocksUS1SecondSSE(symbols=None, on_data=None, token="", version=""):
-    return _baseSSE(symbols, on_data, token, version, "stocksUS1Second")
+def stocksUS1SecondSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+    return _baseSSE(
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+        name="stocksUS1Second",
+    )
 
 
 @wraps(_baseSSEAsync)
-def stocksUS1SecondSSEAsync(symbols=None, token="", version=""):
-    for item in _baseSSEAsync(symbols, token, version, "stocksUS1Second"):
+def stocksUS1SecondSSEAsync(symbols=None, exit=None, token="", version=""):
+    for item in _baseSSEAsync(
+        symbols=symbols, exit=exit, token=token, version=version, name="stocksUS1Second"
+    ):
         yield item
 
 
 @wraps(_baseSSE)
-def stocksUS5SecondSSE(symbols=None, on_data=None, token="", version=""):
-    return _baseSSE(symbols, on_data, token, version, "stocksUS5Second")
+def stocksUS5SecondSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+    return _baseSSE(
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+        name="stocksUS5Second",
+    )
 
 
 @wraps(_baseSSEAsync)
-def stocksUS5SecondSSEAsync(symbols=None, token="", version=""):
-    for item in _baseSSEAsync(symbols, token, version, "stocksUS5Second"):
+def stocksUS5SecondSSEAsync(symbols=None, exit=None, token="", version=""):
+    for item in _baseSSEAsync(
+        symbols=symbols, exit=exit, token=token, version=version, name="stocksUS5Second"
+    ):
         yield item
 
 
 @wraps(_baseSSE)
-def stocksUS1MinuteSSE(symbols=None, on_data=None, token="", version=""):
-    return _baseSSE(symbols, on_data, token, version, "stocksUS1Minute")
+def stocksUS1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+    return _baseSSE(
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+        name="stocksUS1Minute",
+    )
 
 
 @wraps(_baseSSEAsync)
-def stocksUS1MinuteSSEAsync(symbols=None, token="", version=""):
-    for item in _baseSSEAsync(symbols, token, version, "stocksUS1Minute"):
+def stocksUS1MinuteSSEAsync(symbols=None, exit=None, token="", version=""):
+    for item in _baseSSEAsync(
+        symbols=symbols, exit=exit, token=token, version=version, name="stocksUS1Minute"
+    ):
         yield item

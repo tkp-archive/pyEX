@@ -8,7 +8,7 @@
 from .sse import _runSSE, _runSSEAsync
 
 
-def sentimentSSE(symbols=None, on_data=None, token="", version=""):
+def sentimentSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     """Stream social sentiment
 
     https://iexcloud.io/docs/api/#sse-streaming
@@ -16,22 +16,32 @@ def sentimentSSE(symbols=None, on_data=None, token="", version=""):
     Args:
         symbols (str): Tickers to request
         on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    return _runSSE("sentiment", symbols, on_data, token, version)
+    return _runSSE(
+        "sentiment",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
-async def sentimentSSEAsync(symbols=None, token="", version=""):
+async def sentimentSSEAsync(symbols=None, exit=None, token="", version=""):
     """Stream social sentiment
 
     https://iexcloud.io/docs/api/#sse-streaming
 
     Args:
         symbols (str): Tickers to request
-        on_data (function): Callback on data
+        exit (Event): Trigger to exit
         token (str): Access token
         version (str): API version
     """
-    async for item in _runSSEAsync("sentiment", symbols, token, version):
+    async for item in _runSSEAsync(
+        "sentiment", symbols=symbols, exit=exit, token=token, version=version
+    ):
         yield item

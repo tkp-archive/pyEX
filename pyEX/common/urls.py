@@ -21,7 +21,7 @@ from .exception import PyEXception, PyEXStopSSE
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX_CLOUD = "https://cloud.iexapis.com/{version}/"
 _URL_PREFIX_CLOUD_ORIG = _URL_PREFIX_CLOUD
-_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/{version}/"
+_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/sandbox/"
 
 _SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
@@ -32,11 +32,13 @@ _SSE_URL_PREFIX = (
 _SSE_URL_PREFIX_ORIG = _SSE_URL_PREFIX
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
-_SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
-_SSE_URL_PREFIX_ALL_SANDBOX = (
-    "https://sandbox-sse.iexapis.com/{version}/{channel}?token={token}"
+_SSE_URL_PREFIX_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/stable/{channel}?symbols={symbols}&token={token}"
 )
-_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_URL_PREFIX_ALL_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/stable/{channel}?token={token}"
+)
+_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/stable/deep?symbols={symbols}&channels={channels}&token={token}"
 
 _PYEX_PROXIES = None
 
@@ -411,18 +413,15 @@ def _stream(url, sendinit=None, on_data=print):
     return cl
 
 
-def _streamSSE(url, on_data=print, accrue=False):
+def _streamSSE(url, on_data=print):
     """internal"""
     messages = SSEClient(url)
-    ret = []
 
     for msg in messages:
         data = msg.data
 
         try:
             on_data(json.loads(data))
-            if accrue:
-                ret.append(msg)
         except PyEXStopSSE:
             # stop listening and return
             return ret
@@ -430,27 +429,41 @@ def _streamSSE(url, on_data=print, accrue=False):
             raise
         except Exception:
             raise
-    return ret
+    return
 
 
-async def _streamSSEAsync(url, accrue=False):
+async def _streamSSEAsync(url, exit=None):
     """internal"""
+    from asyncio import Event
+
     from aiohttp_sse_client import client as sse_client
+    from aiostream.stream import merge
 
     async with sse_client.EventSource(url) as event_source:
-        try:
-            async for event in event_source:
-                yield json.loads(event.data)
+        if isinstance(exit, Event):
 
+            async def _waitExit():
+                yield await exit.wait()
+
+            waits = (_waitExit(), event_source)
+        else:
+            waits = (event_source,)
+
+        try:
+            async with merge(*waits).stream() as stream:
+                try:
+                    async for event in stream:
+                        if event == True:
+                            return
+                        yield json.loads(event.data)
+                except ConnectionError:
+                    raise PyEXception("Could not connect to SSE Stream")
+                except PyEXStopSSE:
+                    return
+                except BaseException:
+                    raise
         except (json.JSONDecodeError, KeyboardInterrupt):
             raise
-        except ConnectionError:
-            raise PyEXception("Could not connect to SSE Stream")
-        except PyEXStopSSE:
-            return
-        except Exception:
-            raise
-    return
 
 
 def setProxy(proxies=None):

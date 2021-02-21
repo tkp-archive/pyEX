@@ -47,6 +47,7 @@ requires = [
 requires_async = requires + [
     "aiohttp>=3.2",
     "aiohttp-sse-client>=0.2.0",
+    "aiostream>=0.3.1",
 ]
 
 requires_studies = [] if os.environ.get("READTHEDOCS") else ["TA-Lib>=0.4.17"]

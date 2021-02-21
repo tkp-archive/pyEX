@@ -35,12 +35,6 @@ from .checks import (
 from .exception import *
 from .timing import _EST, _PYEX_CACHE_FOLDER, _UTC, _expire, _interval
 from .urls import (
-    _SSE_DEEP_URL_PREFIX,
-    _SSE_DEEP_URL_PREFIX_SANDBOX,
-    _SSE_URL_PREFIX,
-    _SSE_URL_PREFIX_ALL,
-    _SSE_URL_PREFIX_ALL_SANDBOX,
-    _SSE_URL_PREFIX_SANDBOX,
     WSClient,
     _delete,
     _get,
