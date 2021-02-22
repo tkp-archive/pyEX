@@ -427,14 +427,14 @@ from .streaming.fx import (
 from .streaming.news import newsSSE, newsSSEAsync
 from .streaming.sentiment import sentimentSSE, sentimentSSEAsync
 from .streaming.sse import (
-    deepSSE,
-    deepSSEAsync,
-    lastSSE,
-    lastSSEAsync,
-    topsSSE,
-    topsSSEAsync,
-    tradesSSE,
-    tradesSSEAsync,
+    iexDeepSSE,
+    iexDeepSSEAsync,
+    iexLastSSE,
+    iexLastSSEAsync,
+    iexTopsSSE,
+    iexTopsSSEAsync,
+    iexTradesSSE,
+    iexTradesSSEAsync,
 )
 from .streaming.stock import (
     stocksUS1MinuteSSE,
@@ -1051,14 +1051,14 @@ _INCLUDE_FUNCTIONS = [
     ("volumeByVenue", volumeByVenue),
     ("volumeByVenueDF", volumeByVenueDF),
     # SSE Streaming
-    ("topsSSE", topsSSE),
-    ("topsSSEAsync", topsSSEAsync),
-    ("lastSSE", lastSSE),
-    ("lastSSEAsync", lastSSEAsync),
-    ("deepSSE", deepSSE),
-    ("deepSSEAsync", deepSSEAsync),
-    ("tradesSSE", tradesSSE),
-    ("tradesSSEAsync", tradesSSEAsync),
+    ("topsSSE", iexTopsSSE),
+    ("topsSSEAsync", iexTopsSSEAsync),
+    ("lastSSE", iexLastSSE),
+    ("lastSSEAsync", iexLastSSEAsync),
+    ("deepSSE", iexDeepSSE),
+    ("deepSSEAsync", iexDeepSSEAsync),
+    ("tradesSSE", iexTradesSSE),
+    ("tradesSSEAsync", iexTradesSSEAsync),
     # Stock SSE
     ("stocksUSNoUTPSSE", stocksUSNoUTPSSE),
     ("stocksUSNoUTPSSEAsync", stocksUSNoUTPSSEAsync),

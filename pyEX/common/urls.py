@@ -10,6 +10,7 @@ from __future__ import print_function
 import json
 import os
 import os.path
+from threading import Event, Thread
 from urllib.parse import urlparse
 
 import requests
@@ -21,7 +22,7 @@ from .exception import PyEXception, PyEXStopSSE
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX_CLOUD = "https://cloud.iexapis.com/{version}/"
 _URL_PREFIX_CLOUD_ORIG = _URL_PREFIX_CLOUD
-_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/{version}/"
+_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/stable/"
 
 _SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
@@ -32,11 +33,13 @@ _SSE_URL_PREFIX = (
 _SSE_URL_PREFIX_ORIG = _SSE_URL_PREFIX
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
-_SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/{channel}?symbols={symbols}&token={token}"
-_SSE_URL_PREFIX_ALL_SANDBOX = (
-    "https://sandbox-sse.iexapis.com/{version}/{channel}?token={token}"
+_SSE_URL_PREFIX_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/stable/{channel}?symbols={symbols}&token={token}"
 )
-_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_URL_PREFIX_ALL_SANDBOX = (
+    "https://sandbox-sse.iexapis.com/stable/{channel}?token={token}"
+)
+_SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/stable/deep?symbols={symbols}&channels={channels}&token={token}"
 
 _PYEX_PROXIES = None
 
@@ -411,46 +414,98 @@ def _stream(url, sendinit=None, on_data=print):
     return cl
 
 
-def _streamSSE(url, on_data=print, accrue=False):
+def _streamSSE(url, on_data=print, exit=None):
     """internal"""
-    messages = SSEClient(url)
-    ret = []
 
-    for msg in messages:
-        data = msg.data
+    messages = SSEClient(url, proxies=_PYEX_PROXIES, headers={"keep_alive": "false"})
 
-        try:
-            on_data(json.loads(data))
-            if accrue:
-                ret.append(msg)
-        except PyEXStopSSE:
-            # stop listening and return
-            return ret
-        except (json.JSONDecodeError, KeyboardInterrupt):
-            raise
-        except Exception:
-            raise
-    return ret
+    def _runner(messages=messages, on_data=on_data):
+        for msg in messages:
+            data = msg.data
+
+            try:
+                on_data(json.loads(data))
+            except PyEXStopSSE:
+                # stop listening and return
+                print("HERE3")
+                return
+            except (json.JSONDecodeError, KeyboardInterrupt):
+                print("HERE4")
+                raise
+            except Exception:
+                print("HERE5")
+                raise
+
+    def _exit(messages=messages, exit=exit):
+        # run runner in wrapper
+        runthread = Thread(target=_runner)
+
+        # die with parent
+        runthread.daemon = True
+
+        # start the runner
+        runthread.start()
+
+        # wait for exit event
+        exit.wait()
+
+        # kill
+        killerthread = Thread(target=lambda: messages.resp.close())
+
+        # die with parent
+        killerthread.daemon = True
+
+        # start the killer
+        killerthread.start()
+
+        return
+
+    if isinstance(exit, Event):
+        # run on thread, stop when exit set
+        exitthread = Thread(target=_exit)
+
+        # start the threads
+        exitthread.start()
+
+        # return the threads
+        return exitthread
+    else:
+        # just call and return the function
+        return _runner()
 
 
-async def _streamSSEAsync(url, accrue=False):
+async def _streamSSEAsync(url, exit=None):
     """internal"""
+    from asyncio import Event
+
     from aiohttp_sse_client import client as sse_client
+    from aiostream.stream import merge
 
     async with sse_client.EventSource(url) as event_source:
-        try:
-            async for event in event_source:
-                yield json.loads(event.data)
+        if isinstance(exit, Event):
 
+            async def _waitExit():
+                yield await exit.wait()
+
+            waits = (_waitExit(), event_source)
+        else:
+            waits = (event_source,)
+
+        try:
+            async with merge(*waits).stream() as stream:
+                try:
+                    async for event in stream:
+                        if event == True:  # noqa: E712
+                            return
+                        yield json.loads(event.data)
+                except ConnectionError:
+                    raise PyEXception("Could not connect to SSE Stream")
+                except PyEXStopSSE:
+                    return
+                except BaseException:
+                    raise
         except (json.JSONDecodeError, KeyboardInterrupt):
             raise
-        except ConnectionError:
-            raise PyEXception("Could not connect to SSE Stream")
-        except PyEXStopSSE:
-            return
-        except Exception:
-            raise
-    return
 
 
 def setProxy(proxies=None):
