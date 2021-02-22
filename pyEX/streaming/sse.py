@@ -769,7 +769,6 @@ async def iexTradingStatusSSEAsync(symbols=None, exit=None, token="", version=""
     async for item in _runSSEAsync(
         "trading-status",
         symbols=symbols,
-        on_data=on_data,
         exit=exit,
         token=token,
         version=version,

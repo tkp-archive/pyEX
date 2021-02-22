@@ -10,6 +10,7 @@ from __future__ import print_function
 import json
 import os
 import os.path
+from threading import Event, Thread
 from urllib.parse import urlparse
 
 import requests
@@ -413,23 +414,64 @@ def _stream(url, sendinit=None, on_data=print):
     return cl
 
 
-def _streamSSE(url, on_data=print):
+def _streamSSE(url, on_data=print, exit=None):
     """internal"""
-    messages = SSEClient(url)
 
-    for msg in messages:
-        data = msg.data
+    messages = SSEClient(url, proxies=_PYEX_PROXIES, headers={"keep_alive": "false"})
 
-        try:
-            on_data(json.loads(data))
-        except PyEXStopSSE:
-            # stop listening and return
-            return ret
-        except (json.JSONDecodeError, KeyboardInterrupt):
-            raise
-        except Exception:
-            raise
-    return
+    def _runner(messages=messages, on_data=on_data):
+        for msg in messages:
+            data = msg.data
+
+            try:
+                on_data(json.loads(data))
+            except PyEXStopSSE:
+                # stop listening and return
+                print("HERE3")
+                return
+            except (json.JSONDecodeError, KeyboardInterrupt):
+                print("HERE4")
+                raise
+            except Exception:
+                print("HERE5")
+                raise
+
+    def _exit(messages=messages, exit=exit):
+        # run runner in wrapper
+        runthread = Thread(target=_runner)
+
+        # die with parent
+        runthread.daemon = True
+
+        # start the runner
+        runthread.start()
+
+        # wait for exit event
+        exit.wait()
+
+        # kill
+        killerthread = Thread(target=lambda: messages.resp.close())
+
+        # die with parent
+        killerthread.daemon = True
+
+        # start the killer
+        killerthread.start()
+
+        return
+
+    if isinstance(exit, Event):
+        # run on thread, stop when exit set
+        exitthread = Thread(target=_exit)
+
+        # start the threads
+        exitthread.start()
+
+        # return the threads
+        return exitthread
+    else:
+        # just call and return the function
+        return _runner()
 
 
 async def _streamSSEAsync(url, exit=None):
@@ -453,7 +495,7 @@ async def _streamSSEAsync(url, exit=None):
             async with merge(*waits).stream() as stream:
                 try:
                     async for event in stream:
-                        if event == True:
+                        if event == True:  # noqa: E712
                             return
                         yield json.loads(event.data)
                 except ConnectionError:
