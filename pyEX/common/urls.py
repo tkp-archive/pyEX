@@ -22,7 +22,7 @@ from .exception import PyEXception, PyEXStopSSE
 _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX_CLOUD = "https://cloud.iexapis.com/{version}/"
 _URL_PREFIX_CLOUD_ORIG = _URL_PREFIX_CLOUD
-_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/sandbox/"
+_URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/stable/"
 
 _SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
