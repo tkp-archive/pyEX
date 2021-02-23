@@ -15,11 +15,11 @@ class StockSSE(Enum):
     STOCKSUSNOUTP = "stocksUSNoUTP"
     STOCKSUS = "stocksUS"
     STOCKSUS1SECOND = "stocksUS1Second"
-    STOCKSUS1SECOND = "stocksUSNoUTP1Second"
+    STOCKSUSNOUTP1SECOND = "stocksUSNoUTP1Second"
     STOCKSUS5SECOND = "stocksUS5Second"
-    STOCKSUS5SECOND = "stocksUSNoUTP5Second"
+    STOCKSUSNOUTP5SECOND = "stocksUSNoUTP5Second"
     STOCKSUS1MINUTE = "stocksUS1Minute"
-    STOCKSUS1MINUTE = "stocksUSNoUTP1Minute"
+    STOCKSUSNOUTP1MINUTE = "stocksUSNoUTP1Minute"
 
     @staticmethod
     def options():
