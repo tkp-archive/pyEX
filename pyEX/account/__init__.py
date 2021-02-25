@@ -19,7 +19,7 @@ from ..common import (
 )
 
 
-def messageBudget(totalMessages=None, token="", version="", format="json"):
+def messageBudget(totalMessages=None, token="", version="stable", format="json"):
     """Used to set an upper limit, “message budget”, on pay as you go messages where you want to make sure not to go above a certain amount. Set the total messages you wish to consume for the month, and once that limit is reached, all API calls will stop until the limit is removed or increased.
 
     https://iexcloud.io/docs/api/#message-budget
@@ -45,7 +45,7 @@ def messageBudget(totalMessages=None, token="", version="", format="json"):
     )
 
 
-def metadata(token="", version="", format="json"):
+def metadata(token="", version="stable", format="json"):
     """Used to retrieve account details such as current tier, payment status, message quote usage, etc.
 
     https://iexcloud.io/docs/api/#metadata
@@ -63,11 +63,11 @@ def metadata(token="", version="", format="json"):
 
 
 @wraps(metadata)
-def metadataDF(token="", version="", format="json"):
+def metadataDF(token="", version="stable", format="json"):
     return pd.DataFrame([metadata(token=token, version=version, format=format)])
 
 
-def payAsYouGo(allow=False, token="", version="", format="json"):
+def payAsYouGo(allow=False, token="", version="stable", format="json"):
     """Used to toggle Pay-as-you-go on your account.
 
     https://iexcloud.io/docs/api/#pay-as-you-go
@@ -89,7 +89,7 @@ def payAsYouGo(allow=False, token="", version="", format="json"):
     )
 
 
-def usage(type=None, token="", version="", format="json"):
+def usage(type=None, token="", version="stable", format="json"):
     """Used to retrieve current month usage for your account.
 
     https://iexcloud.io/docs/api/#usage
@@ -114,5 +114,26 @@ def usage(type=None, token="", version="", format="json"):
 
 
 @wraps(usage)
-def usageDF(type=None, token="", version="", format="json"):
+def usageDF(type=None, token="", version="stable", format="json"):
     return json_normalize(usage(type, token=token, version=version, format=format))
+
+
+def status(token="", version="stable", format="json"):
+    """Used to retrieve current system status.
+
+    https://iexcloud.io/docs/api/#status
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        format (str): return format, defaults to json
+
+    Returns:
+        dict or DataFrame: result
+    """
+    return _get("status", token=token, version=version, format=format)
+
+
+@wraps(status)
+def statusDF(token="", version="stable", format="json"):
+    return json_normalize(status(token=token, version=version, format=format))

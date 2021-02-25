@@ -13,7 +13,7 @@ from ..common import _get, _interval, _quoteSymbols
 
 
 @_interval(hours=24)  # TODO make this smaller?
-def search(fragment, token="", version="", filter="", format="json"):
+def search(fragment, token="", version="stable", filter="", format="json"):
     """Returns an array of symbols up to the top 10 matches. Results will be sorted for relevancy. Search currently defaults to equities only, where the symbol returned is supported by endpoints listed under the Stocks category.
 
     https://iexcloud.io/docs/api/#search

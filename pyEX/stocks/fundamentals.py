@@ -26,7 +26,13 @@ from ..common import (
 
 @_expire(hour=8, tz=_UTC)
 def balanceSheet(
-    symbol, period="quarter", last=1, token="", version="", filter="", format="json"
+    symbol,
+    period="quarter",
+    last=1,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """Pulls balance sheet data. Available quarterly (4 quarters) and annually (4 years)
 
@@ -67,7 +73,13 @@ def balanceSheetDF(*args, **kwargs):
 
 @_expire(hour=8, tz=_UTC)
 def cashFlow(
-    symbol, period="quarter", last=1, token="", version="", filter="", format="json"
+    symbol,
+    period="quarter",
+    last=1,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """Pulls cash flow data. Available quarterly (4 quarters) or annually (4 years).
 
@@ -110,7 +122,14 @@ def cashFlowDF(*args, **kwargs):
 
 
 @_expire(hour=9, tz=_UTC)
-def dividends(symbol, timeframe="ytd", token="", version="", filter="", format="json"):
+def dividends(
+    symbol,
+    timeframe="ytd",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """Dividend history
 
     https://iexcloud.io/docs/api/#dividends
@@ -156,7 +175,7 @@ def earnings(
     last=1,
     field="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -213,7 +232,9 @@ def earningsDF(*args, **kwargs):
 
 
 @_expire(hour=8, tz=_UTC)
-def financials(symbol, period="quarter", token="", version="", filter=""):
+def financials(
+    symbol, period="quarter", token="", version="stable", filter="", format="json"
+):
     """Pulls income statement, balance sheet, and cash flow data from the four most recent reported quarters.
 
     https://iexcloud.io/docs/api/#financials
@@ -257,7 +278,9 @@ def financialsDF(*args, **kwargs):
 
 
 @_expire(hour=8, tz=_UTC)
-def fundamentals(symbol, period="quarter", token="", version="", filter=""):
+def fundamentals(
+    symbol, period="quarter", token="", version="stable", filter="", format="json"
+):
     """Pulls fundamentals data.
 
     https://iexcloud.io/docs/api/#advanced-fundamentals
@@ -301,7 +324,15 @@ def fundamentalsDF(*args, **kwargs):
 
 
 @_expire(hour=8, tz=_UTC)
-def incomeStatement(symbol, period="quarter", last=1, token="", version="", filter=""):
+def incomeStatement(
+    symbol,
+    period="quarter",
+    last=1,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """Pulls income statement data. Available quarterly (4 quarters) or annually (4 years).
 
     https://iexcloud.io/docs/api/#income-statement
@@ -338,7 +369,9 @@ def incomeStatementDF(*args, **kwargs):
 
 
 @_expire(hour=9, tz=_UTC)
-def stockSplits(symbol, timeframe="ytd", token="", version="", filter=""):
+def stockSplits(
+    symbol, timeframe="ytd", token="", version="stable", filter="", format="json"
+):
     """Stock split history
 
     https://iexcloud.io/docs/api/#splits

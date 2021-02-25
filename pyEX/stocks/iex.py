@@ -21,7 +21,7 @@ from ..common import (
 )
 
 
-def iexTops(symbols=None, token="", version="", format="json"):
+def iexTops(symbols=None, token="", version="stable", format="json"):
     """TOPS provides IEX’s aggregated best quoted bid and offer position in near real time for all securities on IEX’s displayed limit order book.
     TOPS is ideal for developers needing both quote and trade data.
 
@@ -48,7 +48,7 @@ def iexTops(symbols=None, token="", version="", format="json"):
 
 
 @wraps(iexTops)
-async def iexTopsAsync(symbols=None, token="", version="", format="json"):
+async def iexTopsAsync(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return await _getAsync(
@@ -65,7 +65,7 @@ def iexTopsDF(*args, **kwargs):
     return _reindex(_toDatetime(json_normalize(iexTops(*args, **kwargs))), "symbol")
 
 
-def iexLast(symbols=None, token="", version="", format="json"):
+def iexLast(symbols=None, token="", version="stable", format="json"):
     """Last provides trade data for executions on IEX. It is a near real time, intraday API that provides IEX last sale price, size and time.
     Last is ideal for developers that need a lightweight stock quote.
 
@@ -92,7 +92,7 @@ def iexLast(symbols=None, token="", version="", format="json"):
 
 
 @wraps(iexLast)
-async def iexLastAsync(symbols=None, token="", version="", format="json"):
+async def iexLastAsync(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return await _getAsync(
@@ -109,7 +109,7 @@ def iexLastDF(*args, **kwargs):
     return _reindex(_toDatetime(json_normalize(iexLast(*args, **kwargs))), "symbol")
 
 
-def iexDeep(symbol=None, token="", version="", format="json"):
+def iexDeep(symbol=None, token="", version="stable", format="json"):
     """DEEP is used to receive real-time depth of book quotations direct from IEX.
     The depth of book quotations received via DEEP provide an aggregated size of resting displayed orders at a price and side,
     and do not indicate the size or number of individual orders at any price level.
@@ -137,7 +137,7 @@ def iexDeep(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexDeep)
-async def iexDeepAsync(symbol=None, token="", version="", format="json"):
+async def iexDeepAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -151,7 +151,7 @@ def iexDeepDF(*args, **kwargs):
     return _toDatetime(json_normalize(iexDeep(*args, **kwargs)))
 
 
-def iexAuction(symbol=None, token="", version="", format="json"):
+def iexAuction(symbol=None, token="", version="stable", format="json"):
     """DEEP broadcasts an Auction Information Message every one second between the Lock-in Time and the auction match for Opening and Closing Auctions,
     and during the Display Only Period for IPO, Halt, and Volatility Auctions. Only IEX listed securities are eligible for IEX Auctions.
 
@@ -178,7 +178,7 @@ def iexAuction(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexAuction)
-async def iexAuctionAsync(symbol=None, token="", version="", format="json"):
+async def iexAuctionAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -195,7 +195,7 @@ def iexAuctionDF(*args, **kwargs):
     return _toDatetime(json_normalize(iexAuction(*args, **kwargs)))
 
 
-def iexBook(symbol=None, token="", version="", format="json"):
+def iexBook(symbol=None, token="", version="stable", format="json"):
     """Book shows IEX’s bids and asks for given symbols.
 
     https://iexcloud.io/docs/api/#deep-book
@@ -218,7 +218,7 @@ def iexBook(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexBook)
-async def iexBookAsync(symbol=None, token="", version="", format="json"):
+async def iexBookAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -238,7 +238,7 @@ def iexBookDF(*args, **kwargs):
     return _toDatetime(json_normalize(data))
 
 
-def iexOpHaltStatus(symbol=None, token="", version="", format="json"):
+def iexOpHaltStatus(symbol=None, token="", version="stable", format="json"):
     """The Exchange may suspend trading of one or more securities on IEX for operational reasons and indicates such operational halt using the Operational halt status message.
 
     IEX disseminates a full pre-market spin of Operational halt status messages indicating the operational halt status of all securities.
@@ -270,7 +270,7 @@ def iexOpHaltStatus(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexOpHaltStatus)
-async def iexOpHaltStatusAsync(symbol=None, token="", version="", format="json"):
+async def iexOpHaltStatusAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -295,7 +295,7 @@ def iexOpHaltStatusDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(data))
 
 
-def iexOfficialPrice(symbol=None, token="", version="", format="json"):
+def iexOfficialPrice(symbol=None, token="", version="stable", format="json"):
     """The Official Price message is used to disseminate the IEX Official Opening and Closing Prices.
 
     These messages will be provided only for IEX Listed Securities.
@@ -323,7 +323,7 @@ def iexOfficialPrice(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexOfficialPrice)
-async def iexOfficialPriceAsync(symbol=None, token="", version="", format="json"):
+async def iexOfficialPriceAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -342,7 +342,7 @@ def iexOfficialPriceDF(*args, **kwargs):
     return _toDatetime(json_normalize(iexOfficialPrice(*args, **kwargs)))
 
 
-def iexSecurityEvent(symbol=None, token="", version="", format="json"):
+def iexSecurityEvent(symbol=None, token="", version="stable", format="json"):
     """The Security event message is used to indicate events that apply to a security. A Security event message will be sent whenever such event occurs
 
     https://iexcloud.io/docs/api/#deep-security-event
@@ -368,7 +368,7 @@ def iexSecurityEvent(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexSecurityEvent)
-async def iexSecurityEventAsync(symbol=None, token="", version="", format="json"):
+async def iexSecurityEventAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -393,7 +393,7 @@ def iexSecurityEventDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(data))
 
 
-def iexSsrStatus(symbol=None, token="", version="", format="json"):
+def iexSsrStatus(symbol=None, token="", version="stable", format="json"):
     """In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
     IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities.
@@ -424,7 +424,7 @@ def iexSsrStatus(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexSsrStatus)
-async def iexSsrStatusAsync(symbol=None, token="", version="", format="json"):
+async def iexSsrStatusAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -449,7 +449,7 @@ def iexSsrStatusDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(data))
 
 
-def iexSystemEvent(token="", version="", format="json"):
+def iexSystemEvent(token="", version="stable", format="json"):
     """The System event message is used to indicate events that apply to the market or the data feed.
 
     There will be a single message disseminated per channel for each System Event type within a given trading session.
@@ -468,7 +468,7 @@ def iexSystemEvent(token="", version="", format="json"):
 
 
 @wraps(iexSystemEvent)
-async def iexSystemEventAsync(token="", version="", format="json"):
+async def iexSystemEventAsync(token="", version="stable", format="json"):
     return await _getAsync(
         "deep/system-event", token=token, version=version, format=format
     )
@@ -479,7 +479,7 @@ def iexSystemEventDF(*args, **kwargs):
     return _toDatetime(json_normalize(iexSystemEvent(*args, **kwargs)))
 
 
-def iexTrades(symbol=None, token="", version="", format="json"):
+def iexTrades(symbol=None, token="", version="stable", format="json"):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -502,7 +502,7 @@ def iexTrades(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexTrades)
-async def iexTradesAsync(symbol=None, token="", version="", format="json"):
+async def iexTradesAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -523,7 +523,7 @@ def iexTradesDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(data))
 
 
-def iexTradeBreak(symbol=None, token="", version="", format="json"):
+def iexTradeBreak(symbol=None, token="", version="stable", format="json"):
     """Trade break messages are sent when an execution on IEX is broken on that same trading day. Trade breaks are rare and only affect applications that rely upon IEX execution based data.
 
     https://iexcloud.io/docs/api/#deep-trade-break
@@ -550,7 +550,7 @@ def iexTradeBreak(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexTradeBreak)
-async def iexTradeBreakAsync(symbol=None, token="", version="", format="json"):
+async def iexTradeBreakAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -569,7 +569,7 @@ def iexTradeBreakDF(*args, **kwargs):
     return _toDatetime(json_normalize(iexTradeBreak(*args, **kwargs)))
 
 
-def iexTradingStatus(symbol=None, token="", version="", format="json"):
+def iexTradingStatus(symbol=None, token="", version="stable", format="json"):
     """The Trading status message is used to indicate the current trading status of a security.
      For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
      For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
@@ -610,7 +610,7 @@ def iexTradingStatus(symbol=None, token="", version="", format="json"):
 
 
 @wraps(iexTradingStatus)
-async def iexTradingStatusAsync(symbol=None, token="", version="", format="json"):
+async def iexTradingStatusAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
@@ -635,7 +635,7 @@ def iexTradingStatusDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(data))
 
 
-def iexHist(date=None, token="", version="", format="json"):
+def iexHist(date=None, token="", version="stable", format="json"):
     """
     Args:
         date (datetime): Effective date
@@ -655,7 +655,7 @@ def iexHist(date=None, token="", version="", format="json"):
 
 
 @wraps(iexHist)
-async def iexHistAsync(date=None, token="", version="", format="json"):
+async def iexHistAsync(date=None, token="", version="stable", format="json"):
     if date is None:
         return await _get("hist", token=token, version=version, format=format)
     else:

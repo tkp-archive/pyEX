@@ -19,7 +19,7 @@ def calendar(
     last=1,
     startDate=None,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -71,7 +71,7 @@ def holidays(
     last=1,
     startDate=None,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):

@@ -47,41 +47,41 @@ class CommoditiesPoints(Enum):
         return list(map(lambda c: c.value, CommoditiesPoints))
 
 
-def wti(token="", version=""):
+def wti(token="", version="stable"):
     return points("DCOILWTICO", token=token, version=version)
 
 
-def brent(token="", version=""):
+def brent(token="", version="stable"):
     return points("DCOILBRENTEU", token=token, version=version)
 
 
-def natgas(token="", version=""):
+def natgas(token="", version="stable"):
     return points("DHHNGSP", token=token, version=version)
 
 
-def heatoil(token="", version=""):
+def heatoil(token="", version="stable"):
     return points("DHOILNYH", token=token, version=version)
 
 
-def jet(token="", version=""):
+def jet(token="", version="stable"):
     return points("DJFUELUSGULF", token=token, version=version)
 
 
-def diesel(token="", version=""):
+def diesel(token="", version="stable"):
     return points("GASDESW", token=token, version=version)
 
 
-def gasreg(token="", version=""):
+def gasreg(token="", version="stable"):
     return points("GASREGCOVW", token=token, version=version)
 
 
-def gasmid(token="", version=""):
+def gasmid(token="", version="stable"):
     return points("GASMIDCOVW", token=token, version=version)
 
 
-def gasprm(token="", version=""):
+def gasprm(token="", version="stable"):
     return points("GASPRMCOVW", token=token, version=version)
 
 
-def propane(token="", version=""):
+def propane(token="", version="stable"):
     return points("DPROPANEMBTX", token=token, version=version)

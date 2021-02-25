@@ -20,7 +20,7 @@ class CryptoSSE(Enum):
         return list(map(lambda c: c.value, CryptoSSE))
 
 
-def cryptoBookSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def cryptoBookSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """This returns a current snapshot of the book for a specified cryptocurrency. For REST, you will receive a current snapshot of the current book for the specific cryptocurrency. For SSE Streaming, you will get a full representation of the book updated as often as the book changes. Examples of each are below:
 
     https://iexcloud.io/docs/api/#cryptocurrency-book
@@ -43,7 +43,7 @@ def cryptoBookSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def cryptoBookSSEAsync(symbols=None, exit=None, token="", version=""):
+async def cryptoBookSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """This returns a current snapshot of the book for a specified cryptocurrency. For REST, you will receive a current snapshot of the current book for the specific cryptocurrency. For SSE Streaming, you will get a full representation of the book updated as often as the book changes. Examples of each are below:
 
     https://iexcloud.io/docs/api/#cryptocurrency-book
@@ -60,7 +60,7 @@ async def cryptoBookSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def cryptoEventsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def cryptoEventsSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """This returns a streaming list of event updates such as new and canceled orders.
 
     https://iexcloud.io/docs/api/#cryptocurrency-events
@@ -83,7 +83,7 @@ def cryptoEventsSSE(symbols=None, on_data=None, exit=None, token="", version="")
     )
 
 
-async def cryptoEventsSSEAsync(symbols=None, exit=None, token="", version=""):
+async def cryptoEventsSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """This returns a streaming list of event updates such as new and canceled orders.
 
     https://iexcloud.io/docs/api/#cryptocurrency-events
@@ -100,7 +100,7 @@ async def cryptoEventsSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def cryptoQuotesSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def cryptoQuotesSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """This returns the quote for a specified cryptocurrency. Quotes are available via REST and SSE Streaming.
 
     https://iexcloud.io/docs/api/#cryptocurrency-quote
@@ -123,7 +123,7 @@ def cryptoQuotesSSE(symbols=None, on_data=None, exit=None, token="", version="")
     )
 
 
-async def cryptoQuotesSSEAsync(symbols=None, exit=None, token="", version=""):
+async def cryptoQuotesSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """This returns the quote for a specified cryptocurrency. Quotes are available via REST and SSE Streaming.
 
     https://iexcloud.io/docs/api/#cryptocurrency-quote

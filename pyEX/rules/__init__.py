@@ -11,7 +11,7 @@ from ..common import PyEXception, _delete, _get, _post, _raiseIfNotStr
 from .engine import Rule  # noqa: F401
 
 
-def lookup(lookup="", token="", version="", format="json"):
+def lookup(lookup="", token="", version="stable", format="json"):
     """Pull the latest schema for data points, notification types, and operators used to construct rules.
 
     https://iexcloud.io/docs/api/#rules-schema
@@ -37,7 +37,7 @@ def lookup(lookup="", token="", version="", format="json"):
 
 
 @wraps(lookup)
-def schema(token="", version="", format="json"):
+def schema(token="", version="stable", format="json"):
     return lookup(token=token, version=version, format=format)
 
 
@@ -48,7 +48,7 @@ def create(
     type="any",
     existingId=None,
     token="",
-    version="",
+    version="stable",
     format="json",
 ):
     """This endpoint is used to both create and edit rules. Note that rules run be default after being created.
@@ -92,7 +92,7 @@ def create(
     )
 
 
-def pause(ruleId, token="", version="", format="json"):
+def pause(ruleId, token="", version="stable", format="json"):
     """You can control the output of rules by pausing and resume per rule id.
 
     Args:
@@ -111,7 +111,7 @@ def pause(ruleId, token="", version="", format="json"):
     )
 
 
-def resume(ruleId, token="", version="", format="json"):
+def resume(ruleId, token="", version="stable", format="json"):
     """You can control the output of rules by pausing and resume per rule id.
 
     Args:
@@ -130,7 +130,7 @@ def resume(ruleId, token="", version="", format="json"):
     )
 
 
-def delete(ruleId, token="", version="", format="json"):
+def delete(ruleId, token="", version="stable", format="json"):
     """You can delete a rule by using an __HTTP DELETE__ request. This will stop rule executions and delete the rule from your dashboard. If you only want to temporarily stop a rule, use the pause/resume functionality instead.
 
     Args:
@@ -144,7 +144,7 @@ def delete(ruleId, token="", version="", format="json"):
     )
 
 
-def rule(ruleId, token="", version="", format="json"):
+def rule(ruleId, token="", version="stable", format="json"):
     """Rule information such as the current rule status and execution statistics.
 
     Args:
@@ -158,12 +158,12 @@ def rule(ruleId, token="", version="", format="json"):
     )
 
 
-def rules(token="", version="", format="json"):
+def rules(token="", version="stable", format="json"):
     """List all rules that are currently on your account. Each rule object returned will include the current rule status and execution statistics."""
     return _get("rules", token=token, version=version, format=format)
 
 
-def output(ruleId, token="", version="", format="json"):
+def output(ruleId, token="", version="stable", format="json"):
     """If you choose `logs` as your rule output method, IEX Cloud will save the output objects on our server. You can use this method to retrieve those data objects.
 
     Args:

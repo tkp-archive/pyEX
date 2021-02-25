@@ -13,7 +13,7 @@ import pandas as pd
 from ..common import _expire, _get, _reindex, _strOrDate
 
 
-def latestFX(symbols=None, token="", version="", filter="", format="json"):
+def latestFX(symbols=None, token="", version="stable", filter="", format="json"):
     """This endpoint returns real-time foreign currency exchange rates data updated every 250 milliseconds.
 
     https://iexcloud.io/docs/api/#latest-currency-rates
@@ -56,7 +56,12 @@ def latestFXDF(*args, **kwargs):
 
 
 def convertFX(
-    symbols=None, amount=None, token="", version="", filter="", format="json"
+    symbols=None,
+    amount=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """This endpoint performs a conversion from one currency to another for a supplied amount of the base currency. If an amount isn’t provided, the latest exchange rate will be provided and the amount will be null.
 
@@ -118,7 +123,7 @@ def historicalFX(
     last=0,
     first=0,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):

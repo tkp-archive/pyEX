@@ -22,7 +22,9 @@ class FXSSE(Enum):
         return list(map(lambda c: c.value, FXSSE))
 
 
-def fxSSE(symbols=None, on_data=None, exit=None, token="", version="", name="forex"):
+def fxSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable", name="forex"
+):
     """This endpoint streams real-time foreign currency exchange rates.
 
     https://iexcloud.io/docs/api/#forex-currencies
@@ -40,7 +42,7 @@ def fxSSE(symbols=None, on_data=None, exit=None, token="", version="", name="for
     )
 
 
-async def fxSSEAsync(symbols=None, exit=None, token="", version="", name="forex"):
+async def fxSSEAsync(symbols=None, exit=None, token="", version="stable", name="forex"):
     """This endpoint streams real-time foreign currency exchange rates.
 
     https://iexcloud.io/docs/api/#forex-currencies
@@ -58,7 +60,7 @@ async def fxSSEAsync(symbols=None, exit=None, token="", version="", name="forex"
 
 
 @wraps(fxSSE)
-def forex1SecondSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def forex1SecondSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
@@ -70,7 +72,7 @@ def forex1SecondSSE(symbols=None, on_data=None, exit=None, token="", version="")
 
 
 @wraps(fxSSEAsync)
-def forex1SecondSSEAsync(symbols=None, exit=None, token="", version=""):
+def forex1SecondSSEAsync(symbols=None, exit=None, token="", version="stable"):
     for item in fxSSEAsync(
         symbols=symbols, exit=exit, token=token, version=version, name="forex1Second"
     ):
@@ -78,7 +80,7 @@ def forex1SecondSSEAsync(symbols=None, exit=None, token="", version=""):
 
 
 @wraps(fxSSE)
-def forex5SecondSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def forex5SecondSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
@@ -90,7 +92,7 @@ def forex5SecondSSE(symbols=None, on_data=None, exit=None, token="", version="")
 
 
 @wraps(fxSSEAsync)
-def forex5SecondSSEAsync(symbols=None, exit=None, token="", version=""):
+def forex5SecondSSEAsync(symbols=None, exit=None, token="", version="stable"):
     for item in fxSSEAsync(
         symbols=symbols, exit=exit, token=token, version=version, name="forex5Second"
     ):
@@ -98,7 +100,7 @@ def forex5SecondSSEAsync(symbols=None, exit=None, token="", version=""):
 
 
 @wraps(fxSSE)
-def forex1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def forex1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
@@ -110,7 +112,7 @@ def forex1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version="")
 
 
 @wraps(fxSSEAsync)
-def forex1MinuteSSEAsync(symbols=None, exit=None, token="", version=""):
+def forex1MinuteSSEAsync(symbols=None, exit=None, token="", version="stable"):
     for item in fxSSEAsync(
         symbols=symbols, exit=exit, token=token, version=version, name="forex1Minute"
     ):

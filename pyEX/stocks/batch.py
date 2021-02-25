@@ -47,7 +47,7 @@ def batch(
     range_="1m",
     last=10,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -110,7 +110,7 @@ def batchDF(
     range_="1m",
     last=10,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -171,7 +171,7 @@ def bulkBatch(
     range_="1m",
     last=10,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -233,7 +233,7 @@ def bulkBatchDF(
     range_="1m",
     last=10,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -279,7 +279,7 @@ def bulkBatchDF(
     return ret
 
 
-def bulkMinuteBars(symbol, dates, token="", version="", filter="", format="json"):
+def bulkMinuteBars(symbol, dates, token="", version="stable", filter="", format="json"):
     """fetch many dates worth of minute-bars for a given symbol"""
     _raiseIfNotStr(symbol)
     dates = [_strOrDate(date) for date in dates]
@@ -296,7 +296,9 @@ def bulkMinuteBars(symbol, dates, token="", version="", filter="", format="json"
     return list_orig(itertools.chain(*rets))
 
 
-def bulkMinuteBarsDF(symbol, dates, token="", version="", filter="", format="json"):
+def bulkMinuteBarsDF(
+    symbol, dates, token="", version="stable", filter="", format="json"
+):
     """fetch many dates worth of minute-bars for a given symbol"""
     data = bulkMinuteBars(
         symbol, dates, token=token, version=version, filter=filter, format=format

@@ -17,7 +17,9 @@ from ...common import (
 )
 
 
-def socialSentiment(symbol, type="daily", date="", token="", version="", filter=""):
+def socialSentiment(
+    symbol, type="daily", date="", token="", version="stable", filter="", format="json"
+):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 
     https://iexcloud.io/docs/api/#social-sentiment

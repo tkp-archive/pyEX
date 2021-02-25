@@ -13,7 +13,7 @@ import pandas as pd
 from ..common import PyEXception, _expire, _get, _reindex, _strOrDate, _toDatetime
 
 
-def stats(token="", version="", filter="", format="json"):
+def stats(token="", version="stable", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-intraday
 
     Args:
@@ -35,7 +35,7 @@ def statsDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(stats(*args, **kwargs)))
 
 
-def recent(token="", version="", filter="", format="json"):
+def recent(token="", version="stable", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-recent
 
     Args:
@@ -57,7 +57,7 @@ def recentDF(*args, **kwargs):
     return _reindex(_toDatetime(pd.DataFrame(recent(*args, **kwargs))), "date")
 
 
-def records(token="", version="", filter="", format="json"):
+def records(token="", version="stable", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-records
 
     Args:
@@ -80,7 +80,7 @@ def recordsDF(*args, **kwargs):
 
 
 @_expire(hour=0)
-def summary(date=None, token="", version="", filter="", format="json"):
+def summary(date=None, token="", version="stable", filter="", format="json"):
     """https://iexcloud.io/docs/api/#stats-historical-summary
 
     Args:
@@ -123,7 +123,14 @@ def summaryDF(*args, **kwargs):
 
 
 @_expire(hour=0)
-def daily(date=None, last="", token="", version="", filter="", format="json"):
+def daily(
+    date=None,
+    last="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """https://iexcloud.io/docs/api/#stats-historical-daily
 
     Args:

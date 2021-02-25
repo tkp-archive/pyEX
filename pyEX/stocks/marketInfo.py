@@ -27,7 +27,14 @@ from ..common import (
 
 
 @_expire(hour=0)
-def collections(tag, collectionName, token="", version="", filter="", format="json"):
+def collections(
+    tag,
+    collectionName,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
 
 
@@ -60,7 +67,7 @@ def collectionsDF(*args, **kwargs):
 
 
 @_expire(minute=0)
-def earningsToday(token="", version="", filter="", format="json"):
+def earningsToday(token="", version="stable", filter="", format="json"):
     """Returns earnings that will be reported today as two arrays: before the open bto and after market close amc.
     Each array contains an object with all keys from earnings, a quote object, and a headline key.
 
@@ -97,7 +104,7 @@ def earningsTodayDF(*args, **kwargs):
 
 
 @_expire(hour=10, tz=_UTC)
-def ipoToday(token="", version="", filter="", format="json"):
+def ipoToday(token="", version="stable", filter="", format="json"):
     """This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
 
@@ -127,7 +134,7 @@ def ipoTodayDF(*args, **kwargs):
 
 
 @_expire(hour=10)
-def ipoUpcoming(token="", version="", filter="", format="json"):
+def ipoUpcoming(token="", version="stable", filter="", format="json"):
     """This returns a list of upcoming or today IPOs scheduled for the current and next month. The response is split into two structures:
     rawData and viewData. rawData represents all available data for an IPO. viewData represents data structured for display to a user.
 
@@ -156,7 +163,13 @@ def ipoUpcomingDF(*args, **kwargs):
     return df
 
 
-def list(option="mostactive", token="", version="", filter="", format="json"):
+def list(
+    option="mostactive",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """Returns an array of quotes for the top 10 symbols in a specified list.
 
 
@@ -183,7 +196,7 @@ def listDF(*args, **kwargs):
     return _reindex(_toDatetime(pd.DataFrame(list(*args, **kwargs))), "symbol")
 
 
-def marketVolume(token="", version="", filter="", format="json"):
+def marketVolume(token="", version="stable", filter="", format="json"):
     """This endpoint returns real time traded volume on U.S. markets.
 
     https://iexcloud.io/docs/api/#market-volume-u-s
@@ -202,13 +215,13 @@ def marketVolume(token="", version="", filter="", format="json"):
 
 
 @wraps(marketVolume)
-def marketVolumeDF(token="", version="", filter=""):
+def marketVolumeDF(token="", version="stable", filter="", format="json"):
     df = pd.DataFrame(marketVolume())
     _toDatetime(df, cols=[], tcols=["lastUpdated"])
     return df
 
 
-def marketOhlc(token="", version="", filter="", format="json"):
+def marketOhlc(token="", version="stable", filter="", format="json"):
     """Returns the official open and close for whole market.
 
     https://iexcloud.io/docs/api/#news
@@ -237,7 +250,7 @@ def marketOhlcDF(*args, **kwargs):
 
 
 @_expire(hour=4, tz=_UTC)
-def marketYesterday(token="", version="", filter="", format="json"):
+def marketYesterday(token="", version="stable", filter="", format="json"):
     """This returns previous day adjusted price data for whole market
 
     https://iexcloud.io/docs/api/#previous-day-prices
@@ -271,7 +284,7 @@ def marketYesterdayDF(*args, **kwargs):
 marketPreviousDF = marketYesterdayDF
 
 
-def sectorPerformance(token="", version="", filter="", format="json"):
+def sectorPerformance(token="", version="stable", filter="", format="json"):
     """This returns an array of each sector and performance for the current trading day. Performance is based on each sector ETF.
 
     https://iexcloud.io/docs/api/#sector-performance
@@ -302,7 +315,9 @@ def sectorPerformanceDF(*args, **kwargs):
 
 
 @_expire(hour=16, tz=_EST)
-def marketShortInterest(date=None, token="", version="", filter="", format="json"):
+def marketShortInterest(
+    date=None, token="", version="stable", filter="", format="json"
+):
     """The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
 
     The report data will be published daily at 4:00pm ET.
@@ -330,7 +345,14 @@ def marketShortInterestDF(*args, **kwargs):
     return _toDatetime(pd.DataFrame(marketShortInterest(*args, **kwargs)))
 
 
-def upcomingEvents(symbol="", refid="", token="", version="", filter="", format="json"):
+def upcomingEvents(
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -367,7 +389,12 @@ def upcomingEventsDF(*args, **kwargs):
 
 
 def upcomingEarnings(
-    symbol="", refid="", token="", version="", filter="", format="json"
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
@@ -398,7 +425,12 @@ def upcomingEarningsDF(*args, **kwargs):
 
 
 def upcomingDividends(
-    symbol="", refid="", token="", version="", filter="", format="json"
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
@@ -428,7 +460,14 @@ def upcomingDividendsDF(*args, **kwargs):
     return json_normalize(upcomingDividends(*args, **kwargs))
 
 
-def upcomingSplits(symbol="", refid="", token="", version="", filter="", format="json"):
+def upcomingSplits(
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events
@@ -457,7 +496,14 @@ def upcomingSplitsDF(*args, **kwargs):
     return json_normalize(upcomingSplits(*args, **kwargs))
 
 
-def upcomingIPOs(symbol="", refid="", token="", version="", filter="", format="json"):
+def upcomingIPOs(
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """This will return all upcoming estimates, dividends, splits for a given symbol or the market. If market is passed for the symbol, IPOs will also be included.
 
     https://iexcloud.io/docs/api/#upcoming-events

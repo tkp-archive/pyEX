@@ -30,7 +30,7 @@ from .prices import _chartToDF
 
 
 @_expire(hour=4, tz=_EST)
-def advancedStats(symbol, token="", version="", filter="", format="json"):
+def advancedStats(symbol, token="", version="stable", filter="", format="json"):
     """Returns everything in key stats plus additional advanced stats such as EBITDA, ratios, key financial data, and more.
 
     https://iexcloud.io/docs/api/#advanced-stats
@@ -62,7 +62,9 @@ def advancedStatsDF(*args, **kwargs):
 
 
 @_expire(hour=9, tz=_UTC)
-def analystRecommendations(symbol, token="", version="", filter="", format="json"):
+def analystRecommendations(
+    symbol, token="", version="stable", filter="", format="json"
+):
     """Pulls data from the last four months.
 
     https://iexcloud.io/docs/api/#analyst-recommendations
@@ -94,7 +96,13 @@ def analystRecommendationsDF(*args, **kwargs):
 
 
 def estimates(
-    symbol, period="quarter", last=1, token="", version="", filter="", format="json"
+    symbol,
+    period="quarter",
+    last=1,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """Provides the latest consensus estimate for the next fiscal period
 
@@ -143,7 +151,7 @@ def estimatesDF(*args, **kwargs):
 
 
 @_expire(hour=5, tz=_EST)
-def fundOwnership(symbol, token="", version="", filter="", format="json"):
+def fundOwnership(symbol, token="", version="stable", filter="", format="json"):
     """Returns the top 10 fund holders, meaning any firm not defined as buy-side or sell-side such as mutual funds,
        pension funds, endowments, investment firms, and other large entities that manage funds on behalf of others.
 
@@ -176,7 +184,9 @@ def fundOwnershipDF(*args, **kwargs):
 
 
 @_expire(hour=5, tz=_EST)
-def institutionalOwnership(symbol, token="", version="", filter="", format="json"):
+def institutionalOwnership(
+    symbol, token="", version="stable", filter="", format="json"
+):
     """Returns the top 10 institutional holders, defined as buy-side or sell-side firms.
 
     https://iexcloud.io/docs/api/#institutional-ownership
@@ -212,7 +222,7 @@ def institutionalOwnershipDF(*args, **kwargs):
 
 
 @_expire(hour=8, tz=_EST)
-def keyStats(symbol, stat="", token="", version="", filter="", format="json"):
+def keyStats(symbol, stat="", token="", version="stable", filter="", format="json"):
     """Key Stats about company
 
     https://iexcloud.io/docs/api/#key-stats
@@ -293,7 +303,7 @@ def keyStatsDF(*args, **kwargs):
     return _statsToDF(keyStats(*args, **kwargs))
 
 
-def priceTarget(symbol, token="", version="", filter="", format="json"):
+def priceTarget(symbol, token="", version="stable", filter="", format="json"):
     """Provides the latest avg, high, and low analyst price target for a symbol.
 
     https://iexcloud.io/docs/api/#price-target
@@ -334,7 +344,7 @@ def technicals(
     input3=None,
     input4=None,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -621,7 +631,7 @@ def technicalsDF(
     input3=None,
     input4=None,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):

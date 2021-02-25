@@ -8,7 +8,7 @@
 from .sse import _runSSE, _runSSEAsync
 
 
-def sentimentSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def sentimentSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """Stream social sentiment
 
     https://iexcloud.io/docs/api/#sse-streaming
@@ -30,7 +30,7 @@ def sentimentSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def sentimentSSEAsync(symbols=None, exit=None, token="", version=""):
+async def sentimentSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Stream social sentiment
 
     https://iexcloud.io/docs/api/#sse-streaming

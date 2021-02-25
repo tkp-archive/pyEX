@@ -24,7 +24,7 @@ from ..common import (
 )
 
 
-def book(symbol, token="", version="", filter="", format="json"):
+def book(symbol, token="", version="stable", filter="", format="json"):
     """Book data
 
     https://iextrading.com/developer/docs/#book
@@ -99,7 +99,7 @@ def chart(
     sort="desc",
     includeToday=False,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -229,7 +229,7 @@ def chartDF(
     sort="desc",
     includeToday=False,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -269,7 +269,7 @@ def chartDF(
 
 
 @_expire(second=0)
-def delayedQuote(symbol, token="", version="", filter="", format="json"):
+def delayedQuote(symbol, token="", version="stable", filter="", format="json"):
     """This returns the 15 minute delayed market quote.
 
     https://iexcloud.io/docs/api/#delayed-quote
@@ -315,7 +315,7 @@ def intraday(
     changeFromClose=False,
     IEXWhenNull=False,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
 ):
@@ -399,7 +399,7 @@ def intradayDF(*args, **kwargs):
     return df
 
 
-def largestTrades(symbol, token="", version="", filter="", format="json"):
+def largestTrades(symbol, token="", version="stable", filter="", format="json"):
     """This returns 15 minute delayed, last sale eligible trades.
 
     https://iexcloud.io/docs/api/#largest-trades
@@ -430,7 +430,7 @@ def largestTradesDF(*args, **kwargs):
     return _reindex(_toDatetime(pd.DataFrame(largestTrades(*args, **kwargs))), "time")
 
 
-def ohlc(symbol, token="", version="", filter="", format="json"):
+def ohlc(symbol, token="", version="stable", filter="", format="json"):
     """Returns the official open and close for a give symbol.
 
     https://iexcloud.io/docs/api/#ohlc
@@ -468,7 +468,7 @@ def ohlcDF(*args, **kwargs):
 
 
 @_expire(hour=4, tz=_EST)
-def yesterday(symbol, token="", version="", filter="", format="json"):
+def yesterday(symbol, token="", version="stable", filter="", format="json"):
     """This returns previous day adjusted price data for one or more stocks
 
     https://iexcloud.io/docs/api/#previous-day-prices
@@ -510,7 +510,7 @@ def yesterdayDF(*args, **kwargs):
 previousDF = yesterdayDF
 
 
-def price(symbol, token="", version="", filter="", format="json"):
+def price(symbol, token="", version="stable", filter="", format="json"):
     """Price of ticker
 
     https://iexcloud.io/docs/api/#price
@@ -541,7 +541,7 @@ def priceDF(*args, **kwargs):
     return _toDatetime(json_normalize({"price": price(*args, **kwargs)}))
 
 
-def quote(symbol, token="", version="", filter="", format="json"):
+def quote(symbol, token="", version="stable", filter="", format="json"):
     """Get quote for ticker
 
     https://iexcloud.io/docs/api/#quote
@@ -579,7 +579,7 @@ def quoteDF(*args, **kwargs):
 
 
 @_expire(hour=8, tz=_EST)
-def spread(symbol, token="", version="", filter="", format="json"):
+def spread(symbol, token="", version="stable", filter="", format="json"):
     """This returns an array of effective spread, eligible volume, and price improvement of a stock, by market.
     Unlike volume-by-venue, this will only return a venue if effective spread is not ‘N/A’. Values are sorted in descending order by effectiveSpread.
     Lower effectiveSpread and higher priceImprovement values are generally considered optimal.
@@ -618,7 +618,7 @@ def spreadDF(*args, **kwargs):
     return _reindex(_toDatetime(pd.DataFrame(spread(*args, **kwargs))), "venue")
 
 
-def volumeByVenue(symbol, token="", version="", filter="", format="json"):
+def volumeByVenue(symbol, token="", version="stable", filter="", format="json"):
     """This returns 15 minute delayed and 30 day average consolidated volume percentage of a stock, by market.
     This call will always return 13 values, and will be sorted in ascending order by current day trading volume percentage.
 

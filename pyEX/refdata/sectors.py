@@ -13,7 +13,7 @@ from ..common import _expire, _get
 
 
 @_expire(hour=8)
-def sectors(token="", version="", filter="", format="json"):
+def sectors(token="", version="stable", filter="", format="json"):
     """Returns an array of sectors.
 
     https://iexcloud.io/docs/api/#sectors
@@ -38,7 +38,7 @@ def sectorsDF(*args, **kwargs):
 
 
 @_expire(hour=8)
-def tags(token="", version="", filter="", format="json"):
+def tags(token="", version="stable", filter="", format="json"):
     """Returns an array of tags.
 
     https://iexcloud.io/docs/api/#tags
