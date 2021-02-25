@@ -17,7 +17,7 @@ def bonusIssue(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -65,7 +65,7 @@ def distribution(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -110,7 +110,13 @@ def distributionDF(*args, **kwargs):
 
 
 def dividends(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Obtain up-to-date and detailed information on all new dividend announcements, as well as 12+ years of historical dividend records. This endpoint covers over 39,000 US equities, mutual funds, ADRs, and ETFs.
     You’ll be provided with:
@@ -161,7 +167,7 @@ def returnOfCapital(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -204,7 +210,13 @@ def returnOfCapitalDF(*args, **kwargs):
 
 
 def rightsIssue(
-    symbol="", refid="", token="", version="", filter="", **timeseries_kwargs
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **timeseries_kwargs
 ):
     """Rights issue up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
@@ -249,7 +261,7 @@ def rightToPurchase(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -297,7 +309,7 @@ def securityReclassification(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -345,7 +357,7 @@ def securitySwap(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -393,7 +405,7 @@ def spinoff(
     symbol="",
     refid="",
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **timeseries_kwargs
@@ -437,7 +449,15 @@ def spinoffDF(*args, **kwargs):
     return pd.DataFrame(spinoff(*args, **kwargs))
 
 
-def splits(symbol="", refid="", token="", version="", filter="", **timeseries_kwargs):
+def splits(
+    symbol="",
+    refid="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **timeseries_kwargs
+):
     """Security splits up-to-date and detailed information on all new announcements, as well as 12+ years of historical records.
 
     Updated at 5am, 10am, 8pm UTC daily

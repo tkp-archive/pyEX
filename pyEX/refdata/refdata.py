@@ -14,7 +14,7 @@ from ..common import _get, _strOrDate, _toDatetime
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def corporateActions(date=None, token="", version="", filter="", format="json"):
+def corporateActions(date=None, token="", version="stable", filter="", format="json"):
     """
 
     Args:
@@ -52,7 +52,7 @@ def corporateActionsDF(*args, **kwargs):
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def dividends(date=None, token="", version="", filter="", format="json"):
+def dividends(date=None, token="", version="stable", filter="", format="json"):
     """
 
     Args:
@@ -90,7 +90,7 @@ def dividendsDF(*args, **kwargs):
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def nextDayExtDate(date=None, token="", version="", filter="", format="json"):
+def nextDayExtDate(date=None, token="", version="stable", filter="", format="json"):
     """
 
     Args:
@@ -128,7 +128,7 @@ def nextDayExtDateDF(*args, **kwargs):
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def directory(date=None, token="", version="", filter="", format="json"):
+def directory(date=None, token="", version="stable", filter="", format="json"):
     """
 
     Args:

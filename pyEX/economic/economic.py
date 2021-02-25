@@ -63,73 +63,73 @@ class EconomicPoints(Enum):
         return list(map(lambda c: c.value, EconomicPoints))
 
 
-def us30(token="", version=""):
+def us30(token="", version="stable"):
     return points("MORTGAGE30US", token=token, version=version)
 
 
-def us15(token="", version=""):
+def us15(token="", version="stable"):
     return points("MORTGAGE15US", token=token, version=version)
 
 
-def us5(token="", version=""):
+def us5(token="", version="stable"):
     return points("MORTGAGE5US", token=token, version=version)
 
 
-def fedfunds(token="", version=""):
+def fedfunds(token="", version="stable"):
     return points("FEDFUNDS", token=token, version=version)
 
 
-def creditcard(token="", version=""):
+def creditcard(token="", version="stable"):
     return points("TERMCBCCALLNS", token=token, version=version)
 
 
-def cdnj(token="", version=""):
+def cdnj(token="", version="stable"):
     return points("MMNRNJ", token=token, version=version)
 
 
-def cdj(token="", version=""):
+def cdj(token="", version="stable"):
     return points("MMNRJD", token=token, version=version)
 
 
-def gdp(token="", version=""):
+def gdp(token="", version="stable"):
     return points("A191RL1Q225SBEA", token=token, version=version)
 
 
-def indpro(token="", version=""):
+def indpro(token="", version="stable"):
     return points("INDPRO", token=token, version=version)
 
 
-def cpi(token="", version=""):
+def cpi(token="", version="stable"):
     return points("CPIAUCSL", token=token, version=version)
 
 
-def payroll(token="", version=""):
+def payroll(token="", version="stable"):
     return points("PAYEMS", token=token, version=version)
 
 
-def housing(token="", version=""):
+def housing(token="", version="stable"):
     return points("HOUST", token=token, version=version)
 
 
-def unemployment(token="", version=""):
+def unemployment(token="", version="stable"):
     return points("UNRATE", token=token, version=version)
 
 
-def vehicles(token="", version=""):
+def vehicles(token="", version="stable"):
     return points("TOTALSA", token=token, version=version)
 
 
-def recessionProb(token="", version=""):
+def recessionProb(token="", version="stable"):
     return points("RECPROUSM156N", token=token, version=version)
 
 
-def initialClaims(token="", version=""):
+def initialClaims(token="", version="stable"):
     return points("IC4WSA", token=token, version=version)
 
 
-def institutionalMoney(token="", version=""):
+def institutionalMoney(token="", version="stable"):
     return points("WRMFSL", token=token, version=version)
 
 
-def retailMoney(token="", version=""):
+def retailMoney(token="", version="stable"):
     return points("WIMFSL", token=token, version=version)

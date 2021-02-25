@@ -12,7 +12,14 @@ import pandas as pd
 from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
-def points(symbol="market", key="", token="", version="", filter="", format="json"):
+def points(
+    symbol="market",
+    key="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """Data points are available per symbol and return individual plain text values.
     Retrieving individual data points is useful for Excel and Google Sheet users, and applications where a single, lightweight value is needed.
     We also provide update times for some endpoints which allow you to call an endpoint only once it has new data.
@@ -50,7 +57,14 @@ def points(symbol="market", key="", token="", version="", filter="", format="jso
 
 
 @wraps(points)
-def pointsDF(symbol="market", key="", token="", version="", filter="", format="json"):
+def pointsDF(
+    symbol="market",
+    key="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     _raiseIfNotStr(symbol)
     if key:
         return pd.DataFrame(

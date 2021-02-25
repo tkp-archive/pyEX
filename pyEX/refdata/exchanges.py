@@ -13,7 +13,7 @@ from ..common import _expire, _get
 
 
 @_expire(hour=8)
-def exchanges(token="", version="", filter=""):
+def exchanges(token="", version="stable", filter="", format="json"):
     """Returns an array of U.S. exchanges.
 
     https://iexcloud.io/docs/api/#u-s-exchanges
@@ -43,7 +43,7 @@ def exchangesDF(*args, **kwargs):
 
 
 @_expire(hour=8)
-def internationalExchanges(token="", version="", filter=""):
+def internationalExchanges(token="", version="stable", filter="", format="json"):
     """Returns an array of exchanges.
 
     https://iexcloud.io/docs/api/#international-exchanges

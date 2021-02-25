@@ -12,7 +12,7 @@ import pandas as pd
 from ..common import _get, _raiseIfNotStr
 
 
-def figi(figi_=None, token="", version="", format="json"):
+def figi(figi_=None, token="", version="stable", format="json"):
     """Helper call to convert FIGI to IEX Cloud symbols. Note that due to licensing restrictions we are unable to return the FIGI.
 
     https://iexcloud.io/docs/api/#figi-mapping

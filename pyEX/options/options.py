@@ -12,7 +12,7 @@ import pandas as pd
 from ..common import _get, _raiseIfNotStr, _toDatetime
 
 
-def optionExpirations(symbol, token="", version="", filter="", format="json"):
+def optionExpirations(symbol, token="", version="stable", filter="", format="json"):
     """Returns end of day options data
 
     https://iexcloud.io/docs/api/#options
@@ -39,7 +39,13 @@ def optionExpirations(symbol, token="", version="", filter="", format="json"):
 
 
 def options(
-    symbol, expiration, side="", token="", version="", filter="", format="json"
+    symbol,
+    expiration,
+    side="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """Returns end of day options data
 

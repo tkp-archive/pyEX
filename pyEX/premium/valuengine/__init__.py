@@ -9,7 +9,7 @@ from ...common import _EST, PyEXception, _expire, _get, _strOrDate
 
 
 @_expire(hour=10, tz=_EST)
-def valuEngineStockResearchReport(symbol="", date=None, token="", version=""):
+def valuEngineStockResearchReport(symbol="", date=None, token="", version="stable"):
     """ValuEngine provides research on over 5,000 stocks with stock valuations, Buy/Hold/Sell recommendations, and forecasted target prices, so that you the individual investor can make informed decisions. Every ValuEngine Valuation and Forecast model for the U.S. equities markets has been extensively back-tested. ValuEngine’s performance exceeds that of many well-known stock-picking styles. Reports available since March 19th, 2020.
     https://iexcloud.io/docs/api/#valuengine-stock-research-report
 

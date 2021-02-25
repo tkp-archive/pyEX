@@ -44,7 +44,7 @@ _SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/stable/deep?symb
 _PYEX_PROXIES = None
 
 
-def _get(url, token="", version="", filter="", format="json"):
+def _get(url, token="", version="stable", filter="", format="json"):
     """for backwards compat, accepting token and version but ignoring"""
     token = token or os.environ.get("IEX_TOKEN")
     if token:
@@ -54,7 +54,7 @@ def _get(url, token="", version="", filter="", format="json"):
     return _getOrig(url)
 
 
-async def _getAsync(url, token="", version="", filter="", format=True):
+async def _getAsync(url, token="", version="stable", filter="", format="json"):
     """for backwards compat, accepting token and version but ignoring"""
     token = token or os.environ.get("IEX_TOKEN")
     if token:
@@ -65,7 +65,13 @@ async def _getAsync(url, token="", version="", filter="", format=True):
 
 
 def _post(
-    url, data=None, json=None, token="", version="", token_in_params=True, format="json"
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
 ):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
@@ -75,7 +81,7 @@ def _post(
     return _postIEXCloud(url, data, json, token, version, token_in_params, format)
 
 
-def _delete(url, token="", version="", format="json"):
+def _delete(url, token="", version="stable", format="json"):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
         return _deleteIEXCloudSandbox(url, token, version, format)
@@ -99,7 +105,7 @@ def _getIEXCloudBase(
     if filter:
         params["filter"] = filter
 
-    if format != "json":
+    if format != "json" and isinstance(format, str):
         params["format"] = format
 
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)

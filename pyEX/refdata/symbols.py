@@ -13,7 +13,7 @@ from ..common import _UTC, _expire, _get, _reindex, _toDatetime, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)
-def symbols(token="", version="", filter="", format="json"):
+def symbols(token="", version="stable", filter="", format="json"):
     """This call returns an array of symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#symbols
@@ -34,7 +34,7 @@ def symbols(token="", version="", filter="", format="json"):
 
 
 @_expire(hour=8, tz=_UTC)
-def iexSymbols(token="", version="", filter="", format="json"):
+def iexSymbols(token="", version="stable", filter="", format="json"):
     """This call returns an array of symbols the Investors Exchange supports for trading.
     This list is updated daily as of 7:45 a.m. ET. Symbols may be added or removed by the Investors Exchange after the list was produced.
 
@@ -60,7 +60,7 @@ def iexSymbols(token="", version="", filter="", format="json"):
 
 
 @_expire(hour=8, tz=_UTC)
-def mutualFundSymbols(token="", version="", filter="", format="json"):
+def mutualFundSymbols(token="", version="stable", filter="", format="json"):
     """This call returns an array of mutual fund symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#mutual-fund-symbols
@@ -85,7 +85,7 @@ def mutualFundSymbols(token="", version="", filter="", format="json"):
 
 
 @_expire(hour=8, tz=_UTC)
-def otcSymbols(token="", version="", filter="", format="json"):
+def otcSymbols(token="", version="stable", filter="", format="json"):
     """This call returns an array of OTC symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#otc-symbols
@@ -111,7 +111,12 @@ def otcSymbols(token="", version="", filter="", format="json"):
 
 @_expire(hour=8, tz=_UTC)
 def internationalSymbols(
-    region="", exchange="", token="", version="", filter="", format="json"
+    region="",
+    exchange="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """This call returns an array of international symbols that IEX Cloud supports for API calls.
 
@@ -155,7 +160,7 @@ def internationalSymbols(
 
 
 @_expire(hour=8, tz=_UTC)
-def fxSymbols(token="", version="", filter="", format="json"):
+def fxSymbols(token="", version="stable", filter="", format="json"):
     """This call returns a list of supported currencies and currency pairs.
 
     https://iexcloud.io/docs/api/#fx-symbols
@@ -180,7 +185,7 @@ def fxSymbols(token="", version="", filter="", format="json"):
 
 
 @_expire(hour=8, tz=_UTC)
-def optionsSymbols(token="", version="", filter="", format="json"):
+def optionsSymbols(token="", version="stable", filter="", format="json"):
     """This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
     https://iexcloud.io/docs/api/#options-symbols
@@ -205,7 +210,7 @@ def optionsSymbols(token="", version="", filter="", format="json"):
 
 
 @_expire(hour=8, tz=_UTC)
-def cryptoSymbols(token="", version="", filter="", format="json"):
+def cryptoSymbols(token="", version="stable", filter="", format="json"):
     """This provides a full list of supported cryptocurrencies by IEX Cloud.
 
     https://iexcloud.io/docs/api/#cryptocurrency-symbols
@@ -271,7 +276,7 @@ def internationalSymbolsDF(*args, **kwargs):
 
 
 @wraps(fxSymbols)
-def fxSymbolsDF(token="", version=""):
+def fxSymbolsDF(token="", version="stable"):
     fx = fxSymbols(token, version)
     df1 = pd.DataFrame(fx["currencies"])
     df2 = pd.DataFrame(fx["pairs"])
@@ -355,7 +360,7 @@ def cryptoSymbolsList(*args, **kwargs):
     return sorted([x["symbol"] for x in cryptoSymbols(*args, **kwargs)])
 
 
-def isinLookup(isin, token="", version="", filter="", format="json"):
+def isinLookup(isin, token="", version="stable", filter="", format="json"):
     """This call returns an array of symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#isin-mapping

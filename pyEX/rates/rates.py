@@ -45,37 +45,37 @@ class RatesPoints(Enum):
         return list(map(lambda c: c.value, RatesPoints))
 
 
-def thirtyYear(token="", version=""):
+def thirtyYear(token="", version="stable"):
     return points("DGS30", token=token, version=version)
 
 
-def twentyYear(token="", version=""):
+def twentyYear(token="", version="stable"):
     return points("DGS20", token=token, version=version)
 
 
-def tenYear(token="", version=""):
+def tenYear(token="", version="stable"):
     return points("DGS10", token=token, version=version)
 
 
-def fiveYear(token="", version=""):
+def fiveYear(token="", version="stable"):
     return points("DGS5", token=token, version=version)
 
 
-def twoYear(token="", version=""):
+def twoYear(token="", version="stable"):
     return points("DGS2", token=token, version=version)
 
 
-def oneYear(token="", version=""):
+def oneYear(token="", version="stable"):
     return points("DGS1", token=token, version=version)
 
 
-def sixMonth(token="", version=""):
+def sixMonth(token="", version="stable"):
     return points("DGS6MO", token=token, version=version)
 
 
-def threeMonth(token="", version=""):
+def threeMonth(token="", version="stable"):
     return points("DGS3MO", token=token, version=version)
 
 
-def oneMonth(token="", version=""):
+def oneMonth(token="", version="stable"):
     return points("DGS1MO", token=token, version=version)

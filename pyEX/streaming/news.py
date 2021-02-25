@@ -8,7 +8,7 @@
 from .sse import _runSSE, _runSSEAsync
 
 
-def newsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def newsSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """Stream news
 
     https://iexcloud.io/docs/api/#sse-streaming
@@ -30,7 +30,7 @@ def newsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def newsSSEAsync(symbols=None, exit=None, token="", version=""):
+async def newsSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Stream news
 
     https://iexcloud.io/docs/api/#sse-streaming

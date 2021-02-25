@@ -12,7 +12,14 @@ import pandas as pd
 from ..common import _get, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
 
 
-def news(symbol, count=10, token="", version="", filter="", format="json"):
+def news(
+    symbol,
+    count=10,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """News about company
 
     https://iexcloud.io/docs/api/#news
@@ -45,7 +52,7 @@ def newsDF(*args, **kwargs):
     return _newsToDF(news(*args, **kwargs))
 
 
-def marketNews(count=10, token="", version="", filter="", format="json"):
+def marketNews(count=10, token="", version="stable", filter="", format="json"):
     """News about market
 
     https://iexcloud.io/docs/api/#news

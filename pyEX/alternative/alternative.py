@@ -20,7 +20,13 @@ from ..common import (
 
 
 def sentiment(
-    symbol, type="daily", date=None, token="", version="", filter="", format="json"
+    symbol,
+    type="daily",
+    date=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
 
@@ -69,7 +75,7 @@ def sentimentDF(*args, **kwargs):
 
 
 @_expire(hour=1)
-def ceoCompensation(symbol, token="", version="", filter=""):
+def ceoCompensation(symbol, token="", version="stable", filter="", format="json"):
     """This endpoint provides CEO compensation for a company by symbol.
 
     https://iexcloud.io/docs/api/#ceo-compensation

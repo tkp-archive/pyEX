@@ -17,7 +17,7 @@ from ..common import (
 )
 
 
-def timeSeriesInventory(token="", version="", filter="", format=""):
+def timeSeriesInventory(token="", version="stable", filter="", format="json"):
     """Get inventory of available time series endpoints
     Returns:
         result (dict)
@@ -47,7 +47,7 @@ def timeSeries(
     last=0,
     first=0,
     token="",
-    version="",
+    version="stable",
     filter="",
     format="json",
     **extra_params,

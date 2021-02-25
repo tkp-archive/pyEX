@@ -29,7 +29,9 @@ class DeepChannelsSSE(Enum):
         return list(map(lambda c: c.value, DeepChannelsSSE))
 
 
-def _runSSE(method="", symbols=None, on_data=None, exit=None, token="", version=""):
+def _runSSE(
+    method="", symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     if method == "":
         raise PyEXception("method cannot be blank!")
     if symbols:
@@ -66,7 +68,7 @@ def _runSSE(method="", symbols=None, on_data=None, exit=None, token="", version=
     )
 
 
-async def _runSSEAsync(method="", symbols=None, exit=None, token="", version=""):
+async def _runSSEAsync(method="", symbols=None, exit=None, token="", version="stable"):
     if method == "":
         raise PyEXception("method cannot be blank!")
     if symbols:
@@ -106,7 +108,7 @@ async def _runSSEAsync(method="", symbols=None, exit=None, token="", version="")
         yield item
 
 
-def iexTopsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexTopsSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """TOPS provides IEX’s aggregated best quoted bid and offer position in near real time for all securities on IEX’s displayed limit order book.
     TOPS is ideal for developers needing both quote and trade data.
 
@@ -122,7 +124,7 @@ def iexTopsSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     return _runSSE("tops", symbols, on_data, token, version)
 
 
-async def iexTopsSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexTopsSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """TOPS provides IEX’s aggregated best quoted bid and offer position in near real time for all securities on IEX’s displayed limit order book.
     TOPS is ideal for developers needing both quote and trade data.
 
@@ -138,7 +140,7 @@ async def iexTopsSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexLastSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexLastSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """Last provides trade data for executions on IEX. It is a near real time, intraday API that provides IEX last sale price, size and time.
     Last is ideal for developers that need a lightweight stock quote.
 
@@ -155,7 +157,7 @@ def iexLastSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     return _runSSE("last", symbols, on_data, token, version)
 
 
-async def iexLastSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexLastSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Last provides trade data for executions on IEX. It is a near real time, intraday API that provides IEX last sale price, size and time.
     Last is ideal for developers that need a lightweight stock quote.
 
@@ -173,7 +175,7 @@ async def iexLastSSEAsync(symbols=None, exit=None, token="", version=""):
 
 
 def iexDeepSSE(
-    symbols=None, channels=None, on_data=None, exit=None, token="", version=""
+    symbols=None, channels=None, on_data=None, exit=None, token="", version="stable"
 ):
     """DEEP is used to receive real-time depth of book quotations direct from IEX.
     The depth of book quotations received via DEEP provide an aggregated size of resting displayed orders at a price and side,
@@ -234,7 +236,9 @@ def iexDeepSSE(
     )
 
 
-async def iexDeepSSEAsync(symbols=None, channels=None, exit=None, token="", version=""):
+async def iexDeepSSEAsync(
+    symbols=None, channels=None, exit=None, token="", version="stable"
+):
     """DEEP is used to receive real-time depth of book quotations direct from IEX.
     The depth of book quotations received via DEEP provide an aggregated size of resting displayed orders at a price and side,
     and do not indicate the size or number of individual orders at any price level.
@@ -294,7 +298,7 @@ async def iexDeepSSEAsync(symbols=None, channels=None, exit=None, token="", vers
             yield item
 
 
-def iexTradesSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexTradesSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -323,7 +327,7 @@ def iexTradesSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def iexTradesSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexTradesSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -352,7 +356,7 @@ async def iexTradesSSEAsync(symbols=None, exit=None, token="", version=""):
             yield item
 
 
-def iexAuctionSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexAuctionSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """DEEP broadcasts an Auction Information Message every one second between the Lock-in Time and the auction match for Opening and Closing Auctions,
     and during the Display Only Period for IPO, Halt, and Volatility Auctions. Only IEX listed securities are eligible for IEX Auctions.
 
@@ -376,7 +380,7 @@ def iexAuctionSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def iexAuctionSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexAuctionSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """DEEP broadcasts an Auction Information Message every one second between the Lock-in Time and the auction match for Opening and Closing Auctions,
     and during the Display Only Period for IPO, Halt, and Volatility Auctions. Only IEX listed securities are eligible for IEX Auctions.
 
@@ -395,7 +399,7 @@ async def iexAuctionSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexBookSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexBookSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """Book shows IEX’s bids and asks for given symbols.
 
     https://iexcloud.io/docs/api/#deep-book
@@ -418,7 +422,7 @@ def iexBookSSE(symbols=None, on_data=None, exit=None, token="", version=""):
     )
 
 
-async def iexBookSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexBookSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Book shows IEX’s bids and asks for given symbols.
 
     https://iexcloud.io/docs/api/#deep-book
@@ -436,7 +440,9 @@ async def iexBookSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexOpHaltStatusSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexOpHaltStatusSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """The Exchange may suspend trading of one or more securities on IEX for operational reasons and indicates such operational halt using the Operational halt status message.
 
     IEX disseminates a full pre-market spin of Operational halt status messages indicating the operational halt status of all securities.
@@ -465,7 +471,7 @@ def iexOpHaltStatusSSE(symbols=None, on_data=None, exit=None, token="", version=
     )
 
 
-async def iexOpHaltStatusSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexOpHaltStatusSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """The Exchange may suspend trading of one or more securities on IEX for operational reasons and indicates such operational halt using the Operational halt status message.
 
     IEX disseminates a full pre-market spin of Operational halt status messages indicating the operational halt status of all securities.
@@ -489,7 +495,9 @@ async def iexOpHaltStatusSSEAsync(symbols=None, exit=None, token="", version="")
         yield item
 
 
-def iexOfficialPriceSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexOfficialPriceSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """The Official Price message is used to disseminate the IEX Official Opening and Closing Prices.
 
     These messages will be provided only for IEX Listed Securities.
@@ -514,7 +522,7 @@ def iexOfficialPriceSSE(symbols=None, on_data=None, exit=None, token="", version
     )
 
 
-async def iexOfficialPriceSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexOfficialPriceSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """The Official Price message is used to disseminate the IEX Official Opening and Closing Prices.
 
     These messages will be provided only for IEX Listed Securities.
@@ -532,7 +540,9 @@ async def iexOfficialPriceSSEAsync(symbols=None, exit=None, token="", version=""
         yield item
 
 
-def iexSecurityEventSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexSecurityEventSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """The Security event message is used to indicate events that apply to a security. A Security event message will be sent whenever such event occurs
 
     https://iexcloud.io/docs/api/#deep-security-event
@@ -555,7 +565,7 @@ def iexSecurityEventSSE(symbols=None, on_data=None, exit=None, token="", version
     )
 
 
-async def iexSecurityEventSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexSecurityEventSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """The Security event message is used to indicate events that apply to a security. A Security event message will be sent whenever such event occurs
 
     https://iexcloud.io/docs/api/#deep-security-event
@@ -572,7 +582,7 @@ async def iexSecurityEventSSEAsync(symbols=None, exit=None, token="", version=""
         yield item
 
 
-def iexSsrStatusSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexSsrStatusSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
     """In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
     IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities. After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
@@ -599,7 +609,7 @@ def iexSsrStatusSSE(symbols=None, on_data=None, exit=None, token="", version="")
     )
 
 
-async def iexSsrStatusSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexSsrStatusSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """In association with Rule 201 of Regulation SHO, the Short Sale Price Test Message is used to indicate when a short sale price test restriction is in effect for a security.
 
     IEX disseminates a full pre-market spin of Short sale price test status messages indicating the Rule 201 status of all securities. After the pre-market spin, IEX will use the Short sale price test status message in the event of an intraday status change.
@@ -620,7 +630,9 @@ async def iexSsrStatusSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexSystemEventSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexSystemEventSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """The System event message is used to indicate events that apply to the market or the data feed.
 
     There will be a single message disseminated per channel for each System Event type within a given trading session.
@@ -645,7 +657,7 @@ def iexSystemEventSSE(symbols=None, on_data=None, exit=None, token="", version="
     )
 
 
-async def iexSystemEventSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexSystemEventSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """The System event message is used to indicate events that apply to the market or the data feed.
 
     There will be a single message disseminated per channel for each System Event type within a given trading session.
@@ -664,7 +676,9 @@ async def iexSystemEventSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexTradeBreaksSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexTradeBreaksSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -687,7 +701,7 @@ def iexTradeBreaksSSE(symbols=None, on_data=None, exit=None, token="", version="
     )
 
 
-async def iexTradeBreaksSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexTradeBreaksSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """Trade report messages are sent when an order on the IEX Order Book is executed in whole or in part. DEEP sends a Trade report message for every individual fill.
 
     https://iexcloud.io/docs/api/#deep-trades
@@ -704,7 +718,9 @@ async def iexTradeBreaksSSEAsync(symbols=None, exit=None, token="", version=""):
         yield item
 
 
-def iexTradingStatusSSE(symbols=None, on_data=None, exit=None, token="", version=""):
+def iexTradingStatusSSE(
+    symbols=None, on_data=None, exit=None, token="", version="stable"
+):
     """The Trading status message is used to indicate the current trading status of a security.
     For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
     For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.
@@ -741,7 +757,7 @@ def iexTradingStatusSSE(symbols=None, on_data=None, exit=None, token="", version
     )
 
 
-async def iexTradingStatusSSEAsync(symbols=None, exit=None, token="", version=""):
+async def iexTradingStatusSSEAsync(symbols=None, exit=None, token="", version="stable"):
     """The Trading status message is used to indicate the current trading status of a security.
     For IEX-listed securities, IEX acts as the primary market and has the authority to institute a trading halt or trading pause in a security due to news dissemination or regulatory reasons.
     For non-IEX-listed securities, IEX abides by any regulatory trading halts and trading pauses instituted by the primary or listing market, as applicable.

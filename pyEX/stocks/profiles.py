@@ -27,7 +27,7 @@ from ..common import (
 
 
 @_expire(hour=4, tz=_UTC)
-def company(symbol, token="", version="", filter="", format="json"):
+def company(symbol, token="", version="stable", filter="", format="json"):
     """Company reference data
 
     https://iexcloud.io/docs/api/#company
@@ -63,7 +63,7 @@ def companyDF(*args, **kwargs):
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderRoster(symbol, token="", version="", filter="", format="json"):
+def insiderRoster(symbol, token="", version="stable", filter="", format="json"):
     """Returns the top 10 insiders, with the most recent information.
 
     https://iexcloud.io/docs/api/#insider-roster
@@ -97,7 +97,7 @@ def insiderRosterDF(*args, **kwargs):
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderSummary(symbol, token="", version="", filter="", format="json"):
+def insiderSummary(symbol, token="", version="stable", filter="", format="json"):
     """Returns aggregated insiders summary data for the last 6 months.
 
     https://iexcloud.io/docs/api/#insider-summary
@@ -129,7 +129,7 @@ def insiderSummaryDF(*args, **kwargs):
 
 
 @_expire(hour=5, tz=_UTC)
-def insiderTransactions(symbol, token="", version="", filter="", format="json"):
+def insiderTransactions(symbol, token="", version="stable", filter="", format="json"):
     """Returns insider transactions.
 
     https://iexcloud.io/docs/api/#insider-transactions
@@ -161,7 +161,7 @@ def insiderTransactionsDF(*args, **kwargs):
 
 
 @_expire(hour=0, tz=_UTC)
-def logo(symbol, token="", version="", filter="", format="json"):
+def logo(symbol, token="", version="stable", filter="", format="json"):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -188,7 +188,7 @@ def logo(symbol, token="", version="", filter="", format="json"):
 
 
 @_expire(hour=0, tz=_UTC)
-def logoPNG(symbol, token="", version=""):
+def logoPNG(symbol, token="", version="stable"):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -216,7 +216,7 @@ def logoPNG(symbol, token="", version=""):
 
 
 @_expire(hour=0, tz=_UTC)
-def logoNotebook(symbol, token="", version=""):
+def logoNotebook(symbol, token="", version="stable"):
     """This is a helper function, but the google APIs url is standardized.
 
     https://iexcloud.io/docs/api/#logo
@@ -236,7 +236,7 @@ def logoNotebook(symbol, token="", version=""):
 
 
 @_expire(hour=8, tz=_UTC)
-def peers(symbol, token="", version="", filter="", format="json"):
+def peers(symbol, token="", version="stable", filter="", format="json"):
     """Peers of ticker
 
     https://iexcloud.io/docs/api/#peers
@@ -275,7 +275,7 @@ def peersDF(*args, **kwargs):
 
 @_expire(hour=8, tz=_UTC)
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def relevant(symbol, token="", version="", filter="", format="json"):
+def relevant(symbol, token="", version="stable", filter="", format="json"):
     """Same as peers
 
     https://iexcloud.io/docs/api/#relevant

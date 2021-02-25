@@ -12,8 +12,8 @@ from ..common import _get, _toDatetime
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
-def markets(token="", version="", filter="", format="json"):
-    return _get("market", token=token, version=version, filter=filter, format=format)
+def markets(token="", version="stable", filter="", format="json"):
+    return _get("market", token=token, version=version, format=format)
 
 
 @deprecated(details="Deprecated: IEX Cloud status unkown")
