@@ -5,7 +5,8 @@
 # This file is part of the pyEX library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-from ...common import _EST, PyEXception, _expire, _get, _strOrDate
+from ...common import _EST, _expire
+from ...files import files
 
 
 @_expire(hour=10, tz=_EST)
@@ -15,13 +16,8 @@ def valuEngineStockResearchReport(symbol="", date=None, token="", version="stabl
 
     Args:
         symbol (str): symbol to use
+        date (str): date to access
     """
-    if not symbol or not date:
-        raise PyEXception("symbol and date required")
-    return _get(
-        "files/download/VALUENGINE_REPORT?symbol={}&date={}".format(
-            symbol, _strOrDate(date)
-        ),
-        token=token,
-        version=version,
+    return files(
+        id="VALUENGINE_REPORT", symbol=symbol, date=date, token=token, version=version
     )
