@@ -140,7 +140,7 @@ def timeSeries(
         range = _dateRange(range)
         base_url += "range={}&".format(range)
 
-    # TODO https://github.com/timkpaine/pyEX/issues/164
+    # TODO https://github.com/iexcloud/pyEX/issues/164
     # base_url += "calendar={}&".format(str(calendar))
     if not last:
         base_url += "limit={}&".format(str(limit))
