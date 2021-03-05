@@ -352,8 +352,6 @@ def technicals(
 
     This endpoint calls the historical or intraday price endpoints for the given range, and the associated indicator for the price range.
 
-    See https://github.com/timkpaine/pyEX-studies for local calculations using TA-lib
-
     https://iexcloud.io/docs/api/#technical-indicators
     Data Timing: On Demand
 
