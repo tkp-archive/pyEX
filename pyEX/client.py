@@ -21,7 +21,7 @@ from .cryptocurrency import (
     cryptoQuoteDF,
 )
 from .economic import EconomicPoints
-from .files import files
+from .files import download, files
 from .fx import (
     convertFX,
     convertFXDF,
@@ -1099,6 +1099,7 @@ _INCLUDE_FUNCTIONS = [
     ("pointsDF", pointsDF),
     # Files
     ("files", files),
+    ("download", download),
     # FX
     ("latestFX", latestFX),
     ("latestFXDF", latestFXDF),

@@ -9,7 +9,12 @@ Stocks
     :noindex:
     :members:
 
+    
 .. automodule:: pyEX.stocks.fundamentals
+    :noindex:
+    :members:
+    
+.. automodule:: pyEX.stocks.iex
     :noindex:
     :members:
 

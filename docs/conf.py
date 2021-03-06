@@ -13,16 +13,18 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import os
+import os.path
+import subprocess
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import sys
-import os
-import os.path
-import subprocess
+
 import sphinx_rtd_theme
 from recommonmark.transform import AutoStructify
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
@@ -223,8 +225,8 @@ API Documentation
    apisrc/commodities
    apisrc/crypto
    apisrc/econ
+   apisrc/files
    apisrc/fx
-   apisrc/mktdata
    apisrc/markets
    apisrc/options
    apisrc/points
@@ -233,6 +235,7 @@ API Documentation
    apisrc/refdata
    apisrc/stats
    apisrc/stocks
+   apisrc/streaming
    apisrc/studies
 ```
             ''')

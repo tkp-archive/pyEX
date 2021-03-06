@@ -198,6 +198,11 @@ Currently, the following methods are implemented:
 - [points](https://iexcloud.io/docs/api/#data-points)
 - [pointsDF](https://iexcloud.io/docs/api/#data-points)
 
+### Files
+
+- [files](https://iexcloud.io/docs/api/#files)
+- [download](https://iexcloud.io/docs/api/#files)
+
 ### Markets
 
 - markets
