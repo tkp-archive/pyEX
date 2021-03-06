@@ -21,6 +21,7 @@ from .cryptocurrency import (
     cryptoQuoteDF,
 )
 from .economic import EconomicPoints
+from .files import download, files
 from .fx import (
     convertFX,
     convertFXDF,
@@ -438,16 +439,16 @@ from .streaming.sse import (
 )
 from .streaming.stock import (
     stocksUS1MinuteSSE,
-    stocksUSNoUTP1MinuteSSE,
     stocksUS1MinuteSSEAsync,
-    stocksUSNoUTP1MinuteSSEAsync,
     stocksUS1SecondSSE,
-    stocksUSNoUTP1SecondSSE,
     stocksUS1SecondSSEAsync,
-    stocksUSNoUTP1SecondSSEAsync,
     stocksUS5SecondSSE,
-    stocksUSNoUTP5SecondSSE,
     stocksUS5SecondSSEAsync,
+    stocksUSNoUTP1MinuteSSE,
+    stocksUSNoUTP1MinuteSSEAsync,
+    stocksUSNoUTP1SecondSSE,
+    stocksUSNoUTP1SecondSSEAsync,
+    stocksUSNoUTP5SecondSSE,
     stocksUSNoUTP5SecondSSEAsync,
     stocksUSNoUTPSSE,
     stocksUSNoUTPSSEAsync,
@@ -1096,6 +1097,9 @@ _INCLUDE_FUNCTIONS = [
     # Data Points
     ("points", points),
     ("pointsDF", pointsDF),
+    # Files
+    ("files", files),
+    ("download", download),
     # FX
     ("latestFX", latestFX),
     ("latestFXDF", latestFXDF),

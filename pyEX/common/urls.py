@@ -105,7 +105,7 @@ def _getIEXCloudBase(
     if filter:
         params["filter"] = filter
 
-    if format != "json" and isinstance(format, str):
+    if format not in ("json", "binary") and isinstance(format, str):
         params["format"] = format
 
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
@@ -113,6 +113,8 @@ def _getIEXCloudBase(
     if resp.status_code == 200:
         if format == "json":
             return resp.json()
+        elif format == "binary":
+            return resp.content
         return resp.text
     raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
@@ -134,7 +136,7 @@ async def _getIEXCloudAsyncBase(
     if filter:
         params["filter"] = filter
 
-    if format != "json":
+    if format not in ("json", "binary"):
         params["format"] = format
 
     async with aiohttp.ClientSession() as session:
@@ -145,6 +147,8 @@ async def _getIEXCloudAsyncBase(
             if resp.status == 200:
                 if format == "json":
                     return await resp.json()
+                elif format == "binary":
+                    return await resp.read()
                 return resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 

@@ -26,6 +26,7 @@ from .cryptocurrency import (
     cryptoQuoteDF,
 )
 from .economic import *
+from .files import download, files
 from .fx import (
     convertFX,
     convertFXDF,
