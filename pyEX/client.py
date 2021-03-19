@@ -41,28 +41,6 @@ from .premium import (
     analystDaysWallStreetHorizonDF,
     boardOfDirectorsMeetingWallStreetHorizon,
     boardOfDirectorsMeetingWallStreetHorizonDF,
-    twoDayMLReturnRankingBrain,
-    twoDayMLReturnRankingBrainDF,
-    threeDayMLReturnRankingBrain,
-    threeDayMLReturnRankingBrainDF,
-    fiveDayMLReturnRankingBrain,
-    fiveDayMLReturnRankingBrainDF,
-    sevenDaySentimentBrain,
-    sevenDaySentimentBrainDF,
-    tenDayMLReturnRankingBrain,
-    tenDayMLReturnRankingBrainDF,
-    twentyOneDayMLReturnRankingBrain,
-    twentyOneDayMLReturnRankingBrainDF,
-    thirtyDaySentimentBrain,
-    thirtyDaySentimentBrainDF,
-    languageMetricsOnCompanyFilingsBrain,
-    languageMetricsOnCompanyFilingsAllBrain,
-    languageMetricsOnCompanyFilingsAllBrainDF,
-    languageMetricsOnCompanyFilingsBrainDF,
-    languageMetricsOnCompanyFilingsDifferenceBrain,
-    languageMetricsOnCompanyFilingsDifferenceAllBrain,
-    languageMetricsOnCompanyFilingsDifferenceAllBrainDF,
-    languageMetricsOnCompanyFilingsDifferenceBrainDF,
     businessUpdatesWallStreetHorizon,
     businessUpdatesWallStreetHorizonDF,
     buybacksWallStreetHorizon,
@@ -75,6 +53,8 @@ from .premium import (
     companyTravelWallStreetHorizonDF,
     directorAndOfficerChangesAuditAnalytics,
     directorAndOfficerChangesAuditAnalyticsDF,
+    downloadReportNewConstructs,
+    downloadStockResearchReportValuEngine,
     esgCFPBComplaintsExtractAlpha,
     esgCFPBComplaintsExtractAlphaDF,
     esgCPSCRecallsExtractAlpha,
@@ -103,6 +83,8 @@ from .premium import (
     filingDueDatesWallStreetHorizonDF,
     fiscalQuarterEndWallStreetHorizon,
     fiscalQuarterEndWallStreetHorizonDF,
+    fiveDayMLReturnRankingBrain,
+    fiveDayMLReturnRankingBrainDF,
     forumWallStreetHorizon,
     forumWallStreetHorizonDF,
     generalConferenceWallStreetHorizon,
@@ -113,10 +95,18 @@ from .premium import (
     indexChangesWallStreetHorizonDF,
     iposWallStreetHorizon,
     iposWallStreetHorizonDF,
-    kScoreKavout,
     kScoreChinaKavout,
     kScoreChinaKavoutDF,
+    kScoreKavout,
     kScoreKavoutDF,
+    languageMetricsOnCompanyFilingsAllBrain,
+    languageMetricsOnCompanyFilingsAllBrainDF,
+    languageMetricsOnCompanyFilingsBrain,
+    languageMetricsOnCompanyFilingsBrainDF,
+    languageMetricsOnCompanyFilingsDifferenceAllBrain,
+    languageMetricsOnCompanyFilingsDifferenceAllBrainDF,
+    languageMetricsOnCompanyFilingsDifferenceBrain,
+    languageMetricsOnCompanyFilingsDifferenceBrainDF,
     legalActionsWallStreetHorizon,
     legalActionsWallStreetHorizonDF,
     mergersAndAcquisitionsWallStreetHorizon,
@@ -127,6 +117,7 @@ from .premium import (
     priceDynamicsPrecisionAlphaDF,
     productEventsWallStreetHorizon,
     productEventsWallStreetHorizonDF,
+    reportNewConstructs,
     researchAndDevelopmentDaysWallStreetHorizon,
     researchAndDevelopmentDaysWallStreetHorizonDF,
     sameStoreSalesWallStreetHorizon,
@@ -135,26 +126,35 @@ from .premium import (
     secondaryOfferingsWallStreetHorizonDF,
     seminarsWallStreetHorizon,
     seminarsWallStreetHorizonDF,
+    sevenDaySentimentBrain,
+    sevenDaySentimentBrainDF,
     shareholderMeetingsWallStreetHorizon,
     shareholderMeetingsWallStreetHorizonDF,
     similarityIndexFraudFactors,
     similarityIndexFraudFactorsDF,
+    socialSentimentStockTwits,
+    socialSentimentStockTwitsDF,
+    stockResearchReportValuEngine,
     summitMeetingsWallStreetHorizon,
     summitMeetingsWallStreetHorizonDF,
     tacticalModel1ExtractAlpha,
     tacticalModel1ExtractAlphaDF,
+    tenDayMLReturnRankingBrain,
+    tenDayMLReturnRankingBrainDF,
+    thirtyDaySentimentBrain,
+    thirtyDaySentimentBrainDF,
+    threeDayMLReturnRankingBrain,
+    threeDayMLReturnRankingBrainDF,
     tradeShowsWallStreetHorizon,
     tradeShowsWallStreetHorizonDF,
-    stockResearchReportValuEngine,
-    downloadStockResearchReportValuEngine,
-    reportNewConstructs,
-    downloadReportNewConstructs,
+    twentyOneDayMLReturnRankingBrain,
+    twentyOneDayMLReturnRankingBrainDF,
+    twoDayMLReturnRankingBrain,
+    twoDayMLReturnRankingBrainDF,
     witchingHoursWallStreetHorizon,
     witchingHoursWallStreetHorizonDF,
     workshopsWallStreetHorizon,
     workshopsWallStreetHorizonDF,
-    socialSentimentStockTwits,
-    socialSentimentStockTwitsDF,
 )
 from .rates import RatesPoints
 from .refdata import (
@@ -1345,6 +1345,9 @@ _INCLUDE_FUNCTIONS_PREMIUM = [
     ),
     ("directorAndOfficerChanges", directorAndOfficerChangesAuditAnalytics),
     ("directorAndOfficerChangesDF", directorAndOfficerChangesAuditAnalyticsDF),
+    # Stocktwits
+    ("socialSentiment", socialSentimentStockTwits),
+    ("socialSentimentDF", socialSentimentStockTwitsDF),
 ]
 
 _INCLUDE_PREMIUM_FILES = [
@@ -1757,9 +1760,65 @@ class Client(object):
 
 #############################
 # for autodoc
-for name, method in _INCLUDE_FUNCTIONS:
+for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
     setattr(Client, name, method)
     getattr(Client, name).__doc__ = method.__doc__
+    # setattr(self.account, name, getattr(self, name))
+
+for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.alternative, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.crypto, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_FX:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.fx, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_IEX:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.iex, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_MARKET:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.market, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_POINTS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.points, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_RULES:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    # setattr(self.rules, name, getattr(self, name))
+
+for name, method in _INCLUDE_FUNCTIONS_REFDATA:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.refdata, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STATS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.stats, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STOCKS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.stocks, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STREAMING:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.streaming, name, getattr(Client, name))
 
 for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
     setattr(Client.premium, name, method)

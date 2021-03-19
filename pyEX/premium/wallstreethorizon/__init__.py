@@ -143,7 +143,7 @@ def capitalMarketsDayWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def capitalMarketsDayWallStreetHorizonDF(symmbol="", **kwargs):
+def capitalMarketsDayWallStreetHorizonDF(symbol="", **kwargs):
     """This is a meeting where company executives provide information about the company’s performance and its future prospects.
     https://iexcloud.io/docs/api/#capital-markets-day
 
@@ -167,7 +167,7 @@ def companyTravelWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def companyTravelWallStreetHorizonDF(symmbol="", **kwargs):
+def companyTravelWallStreetHorizonDF(symbol="", **kwargs):
     """This is a roadshow or bus tour event in which one or more company executives speaks to interested investors and analysts.
     https://iexcloud.io/docs/api/#company-travel
 
@@ -193,7 +193,7 @@ def filingDueDatesWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def filingDueDatesWallStreetHorizonDF(symmbol="", **kwargs):
+def filingDueDatesWallStreetHorizonDF(symbol="", **kwargs):
     """This is an estimated date, based on historical trends for this company in which a company must file the appropriate Form for the quarter/year or file for an extension.
     https://iexcloud.io/docs/api/#filing-due-dates
 
@@ -219,7 +219,7 @@ def fiscalQuarterEndWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def fiscalQuarterEndWallStreetHorizonDF(symmbol="", **kwargs):
+def fiscalQuarterEndWallStreetHorizonDF(symbol="", **kwargs):
     """This is a forecasted quarterly ending announcement date for a company. This may or may not correspond to a calendar quarter.
     https://iexcloud.io/docs/api/#fiscal-quarter-end
 
@@ -243,7 +243,7 @@ def forumWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def forumWallStreetHorizonDF(symmbol="", **kwargs):
+def forumWallStreetHorizonDF(symbol="", **kwargs):
     """This is a meeting where ideas and views of a business nature can be exchanged.
     https://iexcloud.io/docs/api/#forum
 
@@ -267,7 +267,7 @@ def generalConferenceWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def generalConferenceWallStreetHorizonDF(symmbol="", **kwargs):
+def generalConferenceWallStreetHorizonDF(symbol="", **kwargs):
     """This is a formal meeting in which representatives of many companies gather to discuss ideas or issues related to a particular topic or business, usually held for several days. This item indicates at least one representative from the company will be presenting at the conference on the specified date and time. Note: Conference details include full Conference dates.
     https://iexcloud.io/docs/api/#general-conference
 
@@ -295,7 +295,7 @@ def fdaAdvisoryCommitteeMeetingsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF(symmbol="", **kwargs):
+def fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF(symbol="", **kwargs):
     """The FDA uses 50 committees and panels to obtain independent expert advice on scientific, technical, and policy matters
     https://iexcloud.io/docs/api/#fda-advisory-committee-meetings
 
@@ -321,7 +321,7 @@ def holidaysWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def holidaysWallStreetHorizonDF(symmbol="", **kwargs):
+def holidaysWallStreetHorizonDF(symbol="", **kwargs):
     """This returns a list of market holidays.
     https://iexcloud.io/docs/api/#holidays
 
@@ -343,7 +343,7 @@ def indexChangesWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def indexChangesWallStreetHorizonDF(symmbol="", **kwargs):
+def indexChangesWallStreetHorizonDF(symbol="", **kwargs):
     """This shows additions and removals from various indexes for particular stocks.
     https://iexcloud.io/docs/api/#index-changes
 
@@ -367,7 +367,7 @@ def iposWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def iposWallStreetHorizonDF(symmbol="", **kwargs):
+def iposWallStreetHorizonDF(symbol="", **kwargs):
     """Get a list of upcoming IPOs.
     https://iexcloud.io/docs/api/#ipos
 
@@ -391,7 +391,7 @@ def legalActionsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def legalActionsWallStreetHorizonDF(symmbol="", **kwargs):
+def legalActionsWallStreetHorizonDF(symbol="", **kwargs):
     """These are legal actions where an individual represents a group in a court claim. The judgment from the suit is for all the members of the group or class.
     https://iexcloud.io/docs/api/#legal-actions
 
@@ -417,7 +417,7 @@ def mergersAndAcquisitionsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def mergersAndAcquisitionsWallStreetHorizonDF(symmbol="", **kwargs):
+def mergersAndAcquisitionsWallStreetHorizonDF(symbol="", **kwargs):
     """These are a type of corporate action in which two companies combine to form a single company, or one company is taken over by another.
     https://iexcloud.io/docs/api/#mergers-acquisitions
 
@@ -441,7 +441,7 @@ def productEventsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def productEventsWallStreetHorizonDF(symmbol="", **kwargs):
+def productEventsWallStreetHorizonDF(symbol="", **kwargs):
     """Represents movie and video releases. This is the date on which a movie distributor plans to release a movie to theaters
     https://iexcloud.io/docs/api/#product-events
 
@@ -465,7 +465,7 @@ def researchAndDevelopmentDaysWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def researchAndDevelopmentDaysWallStreetHorizonDF(symmbol="", **kwargs):
+def researchAndDevelopmentDaysWallStreetHorizonDF(symbol="", **kwargs):
     """This is a day in which investors and analysts can meet with a company’s R&D representatives to learn more about new or improved products and services.
     https://iexcloud.io/docs/api/#research-and-development-days
 
@@ -489,7 +489,7 @@ def sameStoreSalesWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def sameStoreSalesWallStreetHorizonDF(symmbol="", **kwargs):
+def sameStoreSalesWallStreetHorizonDF(symbol="", **kwargs):
     """Same-store sales, also referred to as comparable-store sales, SSS or identical-store sales, is a financial metric that companies in the retail industry use to evaluate the total dollar amount of sales in the company’s stores that have been operating for a year or more.
     https://iexcloud.io/docs/api/#same-store-sales
 
@@ -518,7 +518,7 @@ def secondaryOfferingsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def secondaryOfferingsWallStreetHorizonDF(symmbol="", **kwargs):
+def secondaryOfferingsWallStreetHorizonDF(symbol="", **kwargs):
     """Secondary Offerings are the issuance of new stock for public sale from a company that has already made its initial public offering (IPO).
     Usually, these kinds of public offerings are made by companies wishing to refinance, or raise capital for growth.
     Money raised from these kinds of secondary offerings goes to the company, through the investment bank that underwrites the offering.
@@ -545,7 +545,7 @@ def seminarsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def seminarsWallStreetHorizonDF(symmbol="", **kwargs):
+def seminarsWallStreetHorizonDF(symbol="", **kwargs):
     """This is an educational event that features one or more subject matter experts delivering information via lecture and discussion.
     https://iexcloud.io/docs/api/#seminars
 
@@ -569,7 +569,7 @@ def shareholderMeetingsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def shareholderMeetingsWallStreetHorizonDF(symmbol="", **kwargs):
+def shareholderMeetingsWallStreetHorizonDF(symbol="", **kwargs):
     """This is a meeting, held at least annually, to elect members to the board of directors and hear reports on the business’ financial situation as well as new policy initiatives from the corporation’s management.
     https://iexcloud.io/docs/api/#shareholder-meetings
 
@@ -593,7 +593,7 @@ def summitMeetingsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def summitMeetingsWallStreetHorizonDF(symmbol="", **kwargs):
+def summitMeetingsWallStreetHorizonDF(symbol="", **kwargs):
     """This is a gathering of people who are interested in the same business subject or topic.
     https://iexcloud.io/docs/api/#summit-meetings
 
@@ -617,7 +617,7 @@ def tradeShowsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def tradeShowsWallStreetHorizonDF(symmbol="", **kwargs):
+def tradeShowsWallStreetHorizonDF(symbol="", **kwargs):
     """This is a large gathering in which different companies in a particular field or industry show their products to possible customers.
     https://iexcloud.io/docs/api/#trade-shows
 
@@ -639,7 +639,7 @@ def witchingHoursWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def witchingHoursWallStreetHorizonDF(symmbol="", **kwargs):
+def witchingHoursWallStreetHorizonDF(symbol="", **kwargs):
     """This is when option contracts and futures contracts expire on the exact same day.
     https://iexcloud.io/docs/api/#witching-hours
 
@@ -663,7 +663,7 @@ def workshopsWallStreetHorizon(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def workshopsWallStreetHorizonDF(symmbol="", **kwargs):
+def workshopsWallStreetHorizonDF(symbol="", **kwargs):
     """This is a meeting or series of meetings at which a group of people engage in discussion and activity on a particular subject, product or service to gain hands-on experience.
     https://iexcloud.io/docs/api/#workshops
 
