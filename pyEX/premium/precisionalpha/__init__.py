@@ -28,7 +28,7 @@ def _baseDF(id, symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def precisionAlphaPriceDynamics(symbol="", **kwargs):
+def priceDynamicsPrecisionAlpha(symbol="", **kwargs):
     """Precision Alpha performs an unbiased non-equilibrium market analysis on six months of closing price data for all NASDAQ and NYSE listed equities, every day after market close. Precision Alpha calculates scientifically and exactly: market emotion, power, resistance, noise/efficiency, and next day probabilities
     https://iexcloud.io/docs/api/#precision-alpha-price-dynamics
 
@@ -39,7 +39,7 @@ def precisionAlphaPriceDynamics(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def precisionAlphaPriceDynamicsDF(symbol="", **kwargs):
+def priceDynamicsPrecisionAlphaDF(symbol="", **kwargs):
     """Precision Alpha performs an unbiased non-equilibrium market analysis on six months of closing price data for all NASDAQ and NYSE listed equities, every day after market close. Precision Alpha calculates scientifically and exactly: market emotion, power, resistance, noise/efficiency, and next day probabilities
     https://iexcloud.io/docs/api/#precision-alpha-price-dynamics
 
