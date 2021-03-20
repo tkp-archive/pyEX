@@ -6,7 +6,8 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from .client import *  # noqa: F403
-from .common import PyEXception, PyEXStopSSE, overrideSSEUrl, overrideUrl, setProxy
+from .common import (PyEXception, PyEXStopSSE, overrideSSEUrl, overrideUrl,
+                     setProxy)
 
 try:
     from .studies import *  # noqa: F403
@@ -40,14 +41,14 @@ from .streaming.news import *
 from .streaming.sentiment import *
 from .streaming.sse import *
 from .streaming.stock import *
-from .streaming.ws import *  # noqa: F403
+from .streaming.ws import *
 
 try:
-    from .caching import *  # noqa: F403
+    from .caching import *
 except ImportError:
     pass
 
 try:
-    from .zipline import *  # noqa: F403
+    from .zipline import *
 except ImportError:
     pass
