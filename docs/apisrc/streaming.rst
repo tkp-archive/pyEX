@@ -1,7 +1,6 @@
 Streaming
 ==================
 
-```eval_rst
 .. automodule:: pyEX.streaming.cryptocurrency
     :noindex:
     :members:
@@ -29,4 +28,3 @@ Streaming
 .. automodule:: pyEX.streaming.ws
     :noindex:
     :members:
-```

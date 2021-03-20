@@ -563,33 +563,33 @@ Currently, the following methods are implemented:
 
 ### Precision Alpha
 
-- [precisionAlphaPriceDynamics](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
-- [precisionAlphaPriceDynamicsDF](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
+- [priceDynamics](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
+- [priceDynamicsDF](https://iexcloud.io/docs/api/#precision-alpha-price-dynamics)
 
 ### BRAIN Company
 
-- [brain30DaySentiment](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
-- [brain30DaySentimentDF](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
-- [brain7DaySentiment](https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator)
-- [brain7DaySentimentDF](https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator)
-- [brain21DayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking)
-- [brain21DayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking)
-- [brain10DayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking)
-- [brain10DayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking)
-- [brain5DayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking)
-- [brain5DayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking)
-- [brain3DayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking)
-- [brain3DayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking)
-- [brain2DayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking)
-- [brain2DayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking)
-- [brainLanguageMetricsOnCompanyFilingsAll](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual)
-- [brainLanguageMetricsOnCompanyFilingsAllDF](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual)
-- [brainLanguageMetricsOnCompanyFilings](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only)
-- [brainLanguageMetricsOnCompanyFilingsDF](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only)
-- [brainLanguageMetricsOnCompanyFilingsDifferenceAll](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
-- [brainLanguageMetricsOnCompanyFilingsDifferenceAllDF](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
-- [brainLanguageMetricsOnCompanyFilingsDifference](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
-- [brainLanguageMetricsOnCompanyFilingsDifferenceDF](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
+- [thirtyDaySentiment](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
+- [thirtyDaySentimentDF](https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator)
+- [sevenDaySentiment](https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator)
+- [sevenDaySentimentDF](https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator)
+- [twentyOneDayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking)
+- [twentyOneDayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking)
+- [tenDayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking)
+- [tenDayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking)
+- [fiveDayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking)
+- [fiveDayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking)
+- [threeDayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking)
+- [threeDayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking)
+- [twoDayMLReturnRanking](https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking)
+- [twoDayMLReturnRankingDF](https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking)
+- [languageMetricsOnCompanyFilingsAll](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual)
+- [languageMetricsOnCompanyFilingsAllDF](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual)
+- [languageMetricsOnCompanyFilings](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only)
+- [languageMetricsOnCompanyFilingsDF](https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only)
+- [languageMetricsOnCompanyFilingsDifferenceAll](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
+- [languageMetricsOnCompanyFilingsDifferenceAllDF](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
+- [languageMetricsOnCompanyFilingsDifference](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
+- [languageMetricsOnCompanyFilingsDifferenceDF](https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year)
 
 ### Kavout
 
@@ -607,7 +607,13 @@ Currently, the following methods are implemented:
 
 ### ValuEngine
 
-- [valuEngineStockResearchReport](https://iexcloud.io/docs/api/#valuengine-stock-research-report)
+- [stockResearchReportValuEngine](https://iexcloud.io/docs/api/#valuengine-stock-research-report)
+- [downloadStockResearchReportValuEngine](https://iexcloud.io/docs/api/#valuengine-stock-research-report)
+
+### New Constructs
+
+- [reportNewConstructs](https://iexcloud.io/docs/api/#new-constructs-report)
+- [downloadReportNewConstructs](https://iexcloud.io/docs/api/#new-constructs-report)
 
 ### StockTwits Sentiment
 

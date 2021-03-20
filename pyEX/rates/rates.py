@@ -46,36 +46,90 @@ class RatesPoints(Enum):
 
 
 def thirtyYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    THIRTY; 30 Year constant maturity rate
+    """
     return points("DGS30", token=token, version=version)
 
 
 def twentyYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    TWENTY; 20 Year constant maturity rate
+    """
     return points("DGS20", token=token, version=version)
 
 
 def tenYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    TEN; 10 Year constant maturity rate
+    """
     return points("DGS10", token=token, version=version)
 
 
 def fiveYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    FIVE; 5 Year constant maturity rate
+    """
     return points("DGS5", token=token, version=version)
 
 
 def twoYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    TWO; 2 Year constant maturity rate
+    """
     return points("DGS2", token=token, version=version)
 
 
 def oneYear(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    ONE; 1 Year constant maturity rate
+    """
     return points("DGS1", token=token, version=version)
 
 
 def sixMonth(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    SIXMONTH; 6 Month constant maturity rate
+    """
     return points("DGS6MO", token=token, version=version)
 
 
 def threeMonth(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    THREEMONTH; 3 Month constant maturity rate
+    """
     return points("DGS3MO", token=token, version=version)
 
 
 def oneMonth(token="", version="stable"):
+    """Rates data points
+
+    https://iexcloud.io/docs/api/#treasuries
+
+    ONEMONTH; 1 Month constant maturity rate
+    """
     return points("DGS1MO", token=token, version=version)
