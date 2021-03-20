@@ -222,25 +222,25 @@ API Documentation
    :maxdepth: 2
 
    apisrc/client
+   apisrc/alternative
+   apisrc/commodities
+   apisrc/crypto
+   apisrc/econ
+   apisrc/files
+   apisrc/fx
+   apisrc/markets
+   apisrc/options
+   apisrc/points
+   apisrc/premium
+   apisrc/rates
+   apisrc/refdata
+   apisrc/stats
+   apisrc/stocks
+   apisrc/streaming
+   apisrc/studies
 
 ```''')
 
-#    apisrc/alternative
-#    apisrc/commodities
-#    apisrc/crypto
-#    apisrc/econ
-#    apisrc/files
-#    apisrc/fx
-#    apisrc/markets
-#    apisrc/options
-#    apisrc/points
-#    apisrc/premium
-#    apisrc/rates
-#    apisrc/refdata
-#    apisrc/stats
-#    apisrc/stocks
-#    apisrc/streaming
-#    apisrc/studies
 
 
 def run_apidoc(_):
