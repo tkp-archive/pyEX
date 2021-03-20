@@ -131,7 +131,7 @@ htmlhelp_basename = 'pyEXdoc'
 autodoc_mock_imports = [
     'aiohttp',
     'aiohttp_sse_client',
-    'deprecation',
+    # 'deprecation',
     'IPython',
     'numpy',
     'pandas',
@@ -140,7 +140,7 @@ autodoc_mock_imports = [
     'six',
     'socketIO_client_nexus',
     'sseclient',
-    'temporalcache',
+    # 'temporalcache',
     'talib',
 ]
 
@@ -213,6 +213,7 @@ def run_copyreadme(_):
         fp1.write('''
         
 ```eval_rst
+
 API Documentation
 ==================
 
@@ -221,24 +222,26 @@ API Documentation
    :maxdepth: 2
 
    apisrc/client
-   apisrc/alternative
-   apisrc/commodities
-   apisrc/crypto
-   apisrc/econ
-   apisrc/files
-   apisrc/fx
-   apisrc/markets
-   apisrc/options
-   apisrc/points
-   apisrc/premium
-   apisrc/rates
-   apisrc/refdata
-   apisrc/stats
-   apisrc/stocks
-   apisrc/streaming
-   apisrc/studies
-```
-            ''')
+
+```''')
+
+#    apisrc/alternative
+#    apisrc/commodities
+#    apisrc/crypto
+#    apisrc/econ
+#    apisrc/files
+#    apisrc/fx
+#    apisrc/markets
+#    apisrc/options
+#    apisrc/points
+#    apisrc/premium
+#    apisrc/rates
+#    apisrc/refdata
+#    apisrc/stats
+#    apisrc/stocks
+#    apisrc/streaming
+#    apisrc/studies
+
 
 def run_apidoc(_):
     out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'api'))
