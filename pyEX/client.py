@@ -6,6 +6,7 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 import os
+import types
 from functools import partial, wraps
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
@@ -34,121 +35,126 @@ from .markets import markets, marketsDF
 from .options import optionExpirations, options, optionsDF
 from .points import points, pointsDF
 from .premium import (
-    accountingQualityAndRiskMatrix,
-    accountingQualityAndRiskMatrixDF,
-    analystDays,
-    analystDaysDF,
-    boardOfDirectorsMeeting,
-    boardOfDirectorsMeetingDF,
-    brain2DayMLReturnRanking,
-    brain2DayMLReturnRankingDF,
-    brain3DayMLReturnRanking,
-    brain3DayMLReturnRankingDF,
-    brain5DayMLReturnRanking,
-    brain5DayMLReturnRankingDF,
-    brain7DaySentiment,
-    brain7DaySentimentDF,
-    brain10DayMLReturnRanking,
-    brain10DayMLReturnRankingDF,
-    brain21DayMLReturnRanking,
-    brain21DayMLReturnRankingDF,
-    brain30DaySentiment,
-    brain30DaySentimentDF,
-    brainLanguageMetricsOnCompanyFilings,
-    brainLanguageMetricsOnCompanyFilingsAll,
-    brainLanguageMetricsOnCompanyFilingsAllDF,
-    brainLanguageMetricsOnCompanyFilingsDF,
-    brainLanguageMetricsOnCompanyFilingsDifference,
-    brainLanguageMetricsOnCompanyFilingsDifferenceAll,
-    brainLanguageMetricsOnCompanyFilingsDifferenceAllDF,
-    brainLanguageMetricsOnCompanyFilingsDifferenceDF,
-    businessUpdates,
-    businessUpdatesDF,
-    buybacks,
-    buybacksDF,
-    cam1,
-    cam1DF,
-    capitalMarketsDay,
-    capitalMarketsDayDF,
-    companyTravel,
-    companyTravelDF,
-    directorAndOfficerChanges,
-    directorAndOfficerChangesDF,
-    esgCFPBComplaints,
-    esgCFPBComplaintsDF,
-    esgCPSCRecalls,
-    esgCPSCRecallsDF,
-    esgDOLVisaApplications,
-    esgDOLVisaApplicationsDF,
-    esgEPAEnforcements,
-    esgEPAEnforcementsDF,
-    esgEPAMilestones,
-    esgEPAMilestonesDF,
-    esgFECIndividualCampaingContributions,
-    esgFECIndividualCampaingContributionsDF,
-    esgOSHAInspections,
-    esgOSHAInspectionsDF,
-    esgSenateLobbying,
-    esgSenateLobbyingDF,
-    esgUSASpending,
-    esgUSASpendingDF,
-    esgUSPTOPatentApplications,
-    esgUSPTOPatentApplicationsDF,
-    esgUSPTOPatentGrants,
-    esgUSPTOPatentGrantsDF,
-    fdaAdvisoryCommitteeMeetings,
-    fdaAdvisoryCommitteeMeetingsDF,
-    filingDueDates,
-    filingDueDatesDF,
-    fiscalQuarterEnd,
-    fiscalQuarterEndDF,
-    forum,
-    forumDF,
-    generalConference,
-    generalConferenceDF,
-    holidaysWSH,
-    holidaysWSHDF,
-    indexChanges,
-    indexChangesDF,
-    iposWSH,
-    iposWSHDF,
-    kScore,
-    kScoreChina,
-    kScoreChinaDF,
-    kScoreDF,
-    legalActions,
-    legalActionsDF,
-    mergersAndAcquisitions,
-    mergersAndAcquisitionsDF,
-    nonTimelyFilings,
-    nonTimelyFilingsDF,
-    precisionAlphaPriceDynamics,
-    precisionAlphaPriceDynamicsDF,
-    productEvents,
-    productEventsDF,
-    researchAndDevelopmentDays,
-    researchAndDevelopmentDaysDF,
-    sameStoreSales,
-    sameStoreSalesDF,
-    secondaryOfferings,
-    secondaryOfferingsDF,
-    seminars,
-    seminarsDF,
-    shareholderMeetings,
-    shareholderMeetingsDF,
-    similarityIndex,
-    similarityIndexDF,
-    summitMeetings,
-    summitMeetingsDF,
-    tacticalModel1,
-    tacticalModel1DF,
-    tradeShows,
-    tradeShowsDF,
-    valuEngineStockResearchReport,
-    witchingHours,
-    witchingHoursDF,
-    workshops,
-    workshopsDF,
+    accountingQualityAndRiskMatrixAuditAnalytics,
+    accountingQualityAndRiskMatrixAuditAnalyticsDF,
+    analystDaysWallStreetHorizon,
+    analystDaysWallStreetHorizonDF,
+    boardOfDirectorsMeetingWallStreetHorizon,
+    boardOfDirectorsMeetingWallStreetHorizonDF,
+    businessUpdatesWallStreetHorizon,
+    businessUpdatesWallStreetHorizonDF,
+    buybacksWallStreetHorizon,
+    buybacksWallStreetHorizonDF,
+    cam1ExtractAlpha,
+    cam1ExtractAlphaDF,
+    capitalMarketsDayWallStreetHorizon,
+    capitalMarketsDayWallStreetHorizonDF,
+    companyTravelWallStreetHorizon,
+    companyTravelWallStreetHorizonDF,
+    directorAndOfficerChangesAuditAnalytics,
+    directorAndOfficerChangesAuditAnalyticsDF,
+    downloadReportNewConstructs,
+    downloadStockResearchReportValuEngine,
+    esgCFPBComplaintsExtractAlpha,
+    esgCFPBComplaintsExtractAlphaDF,
+    esgCPSCRecallsExtractAlpha,
+    esgCPSCRecallsExtractAlphaDF,
+    esgDOLVisaApplicationsExtractAlpha,
+    esgDOLVisaApplicationsExtractAlphaDF,
+    esgEPAEnforcementsExtractAlpha,
+    esgEPAEnforcementsExtractAlphaDF,
+    esgEPAMilestonesExtractAlpha,
+    esgEPAMilestonesExtractAlphaDF,
+    esgFECIndividualCampaingContributionsExtractAlpha,
+    esgFECIndividualCampaingContributionsExtractAlphaDF,
+    esgOSHAInspectionsExtractAlpha,
+    esgOSHAInspectionsExtractAlphaDF,
+    esgSenateLobbyingExtractAlpha,
+    esgSenateLobbyingExtractAlphaDF,
+    esgUSASpendingExtractAlpha,
+    esgUSASpendingExtractAlphaDF,
+    esgUSPTOPatentApplicationsExtractAlpha,
+    esgUSPTOPatentApplicationsExtractAlphaDF,
+    esgUSPTOPatentGrantsExtractAlpha,
+    esgUSPTOPatentGrantsExtractAlphaDF,
+    fdaAdvisoryCommitteeMeetingsWallStreetHorizon,
+    fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF,
+    filingDueDatesWallStreetHorizon,
+    filingDueDatesWallStreetHorizonDF,
+    fiscalQuarterEndWallStreetHorizon,
+    fiscalQuarterEndWallStreetHorizonDF,
+    fiveDayMLReturnRankingBrain,
+    fiveDayMLReturnRankingBrainDF,
+    forumWallStreetHorizon,
+    forumWallStreetHorizonDF,
+    generalConferenceWallStreetHorizon,
+    generalConferenceWallStreetHorizonDF,
+    holidaysWallStreetHorizon,
+    holidaysWallStreetHorizonDF,
+    indexChangesWallStreetHorizon,
+    indexChangesWallStreetHorizonDF,
+    iposWallStreetHorizon,
+    iposWallStreetHorizonDF,
+    kScoreChinaKavout,
+    kScoreChinaKavoutDF,
+    kScoreKavout,
+    kScoreKavoutDF,
+    languageMetricsOnCompanyFilingsAllBrain,
+    languageMetricsOnCompanyFilingsAllBrainDF,
+    languageMetricsOnCompanyFilingsBrain,
+    languageMetricsOnCompanyFilingsBrainDF,
+    languageMetricsOnCompanyFilingsDifferenceAllBrain,
+    languageMetricsOnCompanyFilingsDifferenceAllBrainDF,
+    languageMetricsOnCompanyFilingsDifferenceBrain,
+    languageMetricsOnCompanyFilingsDifferenceBrainDF,
+    legalActionsWallStreetHorizon,
+    legalActionsWallStreetHorizonDF,
+    mergersAndAcquisitionsWallStreetHorizon,
+    mergersAndAcquisitionsWallStreetHorizonDF,
+    nonTimelyFilingsFraudFactors,
+    nonTimelyFilingsFraudFactorsDF,
+    priceDynamicsPrecisionAlpha,
+    priceDynamicsPrecisionAlphaDF,
+    productEventsWallStreetHorizon,
+    productEventsWallStreetHorizonDF,
+    reportNewConstructs,
+    researchAndDevelopmentDaysWallStreetHorizon,
+    researchAndDevelopmentDaysWallStreetHorizonDF,
+    sameStoreSalesWallStreetHorizon,
+    sameStoreSalesWallStreetHorizonDF,
+    secondaryOfferingsWallStreetHorizon,
+    secondaryOfferingsWallStreetHorizonDF,
+    seminarsWallStreetHorizon,
+    seminarsWallStreetHorizonDF,
+    sevenDaySentimentBrain,
+    sevenDaySentimentBrainDF,
+    shareholderMeetingsWallStreetHorizon,
+    shareholderMeetingsWallStreetHorizonDF,
+    similarityIndexFraudFactors,
+    similarityIndexFraudFactorsDF,
+    socialSentimentStockTwits,
+    socialSentimentStockTwitsDF,
+    stockResearchReportValuEngine,
+    summitMeetingsWallStreetHorizon,
+    summitMeetingsWallStreetHorizonDF,
+    tacticalModel1ExtractAlpha,
+    tacticalModel1ExtractAlphaDF,
+    tenDayMLReturnRankingBrain,
+    tenDayMLReturnRankingBrainDF,
+    thirtyDaySentimentBrain,
+    thirtyDaySentimentBrainDF,
+    threeDayMLReturnRankingBrain,
+    threeDayMLReturnRankingBrainDF,
+    tradeShowsWallStreetHorizon,
+    tradeShowsWallStreetHorizonDF,
+    twentyOneDayMLReturnRankingBrain,
+    twentyOneDayMLReturnRankingBrainDF,
+    twoDayMLReturnRankingBrain,
+    twoDayMLReturnRankingBrainDF,
+    witchingHoursWallStreetHorizon,
+    witchingHoursWallStreetHorizonDF,
+    workshopsWallStreetHorizon,
+    workshopsWallStreetHorizonDF,
 )
 from .rates import RatesPoints
 from .refdata import (
@@ -792,7 +798,7 @@ except ImportError:
 
 DEFAULT_API_LIMIT = 5
 
-_INCLUDE_FUNCTIONS = [
+_INCLUDE_FUNCTIONS_RULES = [
     # Rules
     ("schema", schema),
     ("rules", rules),
@@ -803,6 +809,9 @@ _INCLUDE_FUNCTIONS = [
     ("deleteRule", delete),
     ("ruleInfo", ruleInfo),
     ("ruleOutput", ruleOutput),
+]
+
+_INCLUDE_FUNCTIONS_REFDATA = [
     # Refdata
     ("symbols", symbols),
     ("iexSymbols", iexSymbols),
@@ -854,9 +863,29 @@ _INCLUDE_FUNCTIONS = [
     ("searchDF", searchDF),
     ("tags", tags),
     ("tagsDF", tagsDF),
+]
+
+_INCLUDE_FUNCTIONS_MARKET = [
     # Markets
     ("markets", markets),
     ("marketsDF", marketsDF),
+    ("marketVolume", marketVolume),
+    ("marketVolumeDF", marketVolumeDF),
+    ("marketShortInterest", marketShortInterest),
+    ("marketShortInterestDF", marketShortInterestDF),
+    ("marketNews", marketNews),
+    ("marketNewsDF", marketNewsDF),
+    ("marketOhlc", marketOhlc),
+    ("marketOhlcDF", marketOhlcDF),
+    ("marketPrevious", marketPrevious),
+    ("marketPreviousDF", marketPreviousDF),
+    ("marketYesterday", marketYesterday),
+    ("marketYesterdayDF", marketYesterdayDF),
+    ("sectorPerformance", sectorPerformance),
+    ("sectorPerformanceDF", sectorPerformanceDF),
+]
+
+_INCLUDE_FUNCTIONS_STATS = [
     # Stats
     ("systemStats", stats),
     ("systemStatsDF", statsDF),
@@ -868,6 +897,9 @@ _INCLUDE_FUNCTIONS = [
     ("summaryDF", summaryDF),
     ("daily", daily),
     ("dailyDF", dailyDF),
+]
+
+_INCLUDE_FUNCTIONS_STOCKS = [
     # Stocks
     ("advancedStats", advancedStats),
     ("advancedStatsDF", advancedStatsDF),
@@ -913,6 +945,97 @@ _INCLUDE_FUNCTIONS = [
     ("fundOwnershipDF", fundOwnershipDF),
     ("fundamentals", fundamentals),
     ("fundamentalsDF", fundamentalsDF),
+    ("incomeStatement", incomeStatement),
+    ("incomeStatementDF", incomeStatementDF),
+    ("insiderRoster", insiderRoster),
+    ("insiderRosterDF", insiderRosterDF),
+    ("insiderSummary", insiderSummary),
+    ("insiderSummaryDF", insiderSummaryDF),
+    ("insiderTransactions", insiderTransactions),
+    ("insiderTransactionsDF", insiderTransactionsDF),
+    ("institutionalOwnership", institutionalOwnership),
+    ("institutionalOwnershipDF", institutionalOwnershipDF),
+    ("intraday", intraday),
+    ("intradayDF", intradayDF),
+    ("ipoToday", ipoToday),
+    ("ipoTodayDF", ipoTodayDF),
+    ("ipoUpcoming", ipoUpcoming),
+    ("ipoUpcomingDF", ipoUpcomingDF),
+    ("threshold", threshold),
+    ("thresholdDF", thresholdDF),
+    ("shortInterest", shortInterest),
+    ("shortInterestDF", shortInterestDF),
+    ("estimates", estimates),
+    ("estimatesDF", estimatesDF),
+    ("keyStats", keyStats),
+    ("keyStatsDF", keyStatsDF),
+    ("largestTrades", largestTrades),
+    ("largestTradesDF", largestTradesDF),
+    ("list", list),
+    ("listDF", listDF),
+    ("logo", logo),
+    ("logoPNG", logoPNG),
+    ("logoNotebook", logoNotebook),
+    ("news", news),
+    ("newsDF", newsDF),
+    ("ohlc", ohlc),
+    ("ohlcDF", ohlcDF),
+    ("optionExpirations", optionExpirations),
+    ("options", options),
+    ("optionsDF", optionsDF),
+    ("peers", peers),
+    ("peersDF", peersDF),
+    ("previous", previous),
+    ("previousDF", previousDF),
+    ("yesterday", yesterday),
+    ("yesterdayDF", yesterdayDF),
+    ("price", price),
+    ("priceDF", priceDF),
+    ("priceTarget", priceTarget),
+    ("priceTargetDF", priceTargetDF),
+    ("quote", quote),
+    ("quoteDF", quoteDF),
+    ("relevant", relevant),
+    ("relevantDF", relevantDF),
+    ("returnOfCapital", returnOfCapital),
+    ("returnOfCapitalDF", returnOfCapitalDF),
+    ("rightsIssue", rightsIssue),
+    ("rightsIssueDF", rightsIssueDF),
+    ("rightToPurchase", rightToPurchase),
+    ("rightToPurchaseDF", rightToPurchaseDF),
+    ("securityReclassification", securityReclassification),
+    ("securityReclassificationDF", securityReclassificationDF),
+    ("securitySwap", securitySwap),
+    ("securitySwapDF", securitySwapDF),
+    ("spinoff", spinoff),
+    ("spinoffDF", spinoffDF),
+    ("splits", splits),
+    ("splitsDF", splitsDF),
+    ("stockSplits", stockSplits),
+    ("stockSplitsDF", stockSplitsDF),
+    ("tenQ", tenQ),
+    ("tenK", tenK),
+    ("technicals", technicals),
+    ("technicalsDF", technicalsDF),
+    ("timeSeriesInventory", timeSeriesInventory),
+    ("timeSeriesInventoryDF", timeSeriesInventoryDF),
+    ("timeSeries", timeSeries),
+    ("timeSeriesDF", timeSeriesDF),
+    ("upcomingEvents", upcomingEvents),
+    ("upcomingEventsDF", upcomingEventsDF),
+    ("upcomingEarnings", upcomingEarnings),
+    ("upcomingEarningsDF", upcomingEarningsDF),
+    ("upcomingDividends", upcomingDividends),
+    ("upcomingDividendsDF", upcomingDividendsDF),
+    ("upcomingSplits", upcomingSplits),
+    ("upcomingSplitsDF", upcomingSplitsDF),
+    ("upcomingIPOs", upcomingIPOs),
+    ("upcomingIPOsDF", upcomingIPOsDF),
+    ("volumeByVenue", volumeByVenue),
+    ("volumeByVenueDF", volumeByVenueDF),
+]
+
+_INCLUDE_FUNCTIONS_IEX = [
     ("iexAuction", iexAuction),
     ("iexAuctionAsync", iexAuctionAsync),
     ("iexAuctionDF", iexAuctionDF),
@@ -955,108 +1078,9 @@ _INCLUDE_FUNCTIONS = [
     ("iexTradingStatus", iexTradingStatus),
     ("iexTradingStatusAsync", iexTradingStatusAsync),
     ("iexTradingStatusDF", iexTradingStatusDF),
-    ("incomeStatement", incomeStatement),
-    ("incomeStatementDF", incomeStatementDF),
-    ("insiderRoster", insiderRoster),
-    ("insiderRosterDF", insiderRosterDF),
-    ("insiderSummary", insiderSummary),
-    ("insiderSummaryDF", insiderSummaryDF),
-    ("insiderTransactions", insiderTransactions),
-    ("insiderTransactionsDF", insiderTransactionsDF),
-    ("institutionalOwnership", institutionalOwnership),
-    ("institutionalOwnershipDF", institutionalOwnershipDF),
-    ("intraday", intraday),
-    ("intradayDF", intradayDF),
-    ("ipoToday", ipoToday),
-    ("ipoTodayDF", ipoTodayDF),
-    ("ipoUpcoming", ipoUpcoming),
-    ("ipoUpcomingDF", ipoUpcomingDF),
-    ("threshold", threshold),
-    ("thresholdDF", thresholdDF),
-    ("shortInterest", shortInterest),
-    ("shortInterestDF", shortInterestDF),
-    ("marketVolume", marketVolume),
-    ("marketVolumeDF", marketVolumeDF),
-    ("marketShortInterest", marketShortInterest),
-    ("marketShortInterestDF", marketShortInterestDF),
-    ("estimates", estimates),
-    ("estimatesDF", estimatesDF),
-    ("keyStats", keyStats),
-    ("keyStatsDF", keyStatsDF),
-    ("largestTrades", largestTrades),
-    ("largestTradesDF", largestTradesDF),
-    ("list", list),
-    ("listDF", listDF),
-    ("logo", logo),
-    ("logoPNG", logoPNG),
-    ("logoNotebook", logoNotebook),
-    ("news", news),
-    ("newsDF", newsDF),
-    ("marketNews", marketNews),
-    ("marketNewsDF", marketNewsDF),
-    ("ohlc", ohlc),
-    ("ohlcDF", ohlcDF),
-    ("marketOhlc", marketOhlc),
-    ("marketOhlcDF", marketOhlcDF),
-    ("optionExpirations", optionExpirations),
-    ("options", options),
-    ("optionsDF", optionsDF),
-    ("peers", peers),
-    ("peersDF", peersDF),
-    ("previous", previous),
-    ("previousDF", previousDF),
-    ("yesterday", yesterday),
-    ("yesterdayDF", yesterdayDF),
-    ("marketPrevious", marketPrevious),
-    ("marketPreviousDF", marketPreviousDF),
-    ("marketYesterday", marketYesterday),
-    ("marketYesterdayDF", marketYesterdayDF),
-    ("price", price),
-    ("priceDF", priceDF),
-    ("priceTarget", priceTarget),
-    ("priceTargetDF", priceTargetDF),
-    ("quote", quote),
-    ("quoteDF", quoteDF),
-    ("relevant", relevant),
-    ("relevantDF", relevantDF),
-    ("returnOfCapital", returnOfCapital),
-    ("returnOfCapitalDF", returnOfCapitalDF),
-    ("rightsIssue", rightsIssue),
-    ("rightsIssueDF", rightsIssueDF),
-    ("rightToPurchase", rightToPurchase),
-    ("rightToPurchaseDF", rightToPurchaseDF),
-    ("sectorPerformance", sectorPerformance),
-    ("sectorPerformanceDF", sectorPerformanceDF),
-    ("securityReclassification", securityReclassification),
-    ("securityReclassificationDF", securityReclassificationDF),
-    ("securitySwap", securitySwap),
-    ("securitySwapDF", securitySwapDF),
-    ("spinoff", spinoff),
-    ("spinoffDF", spinoffDF),
-    ("splits", splits),
-    ("splitsDF", splitsDF),
-    ("stockSplits", stockSplits),
-    ("stockSplitsDF", stockSplitsDF),
-    ("tenQ", tenQ),
-    ("tenK", tenK),
-    ("technicals", technicals),
-    ("technicalsDF", technicalsDF),
-    ("timeSeriesInventory", timeSeriesInventory),
-    ("timeSeriesInventoryDF", timeSeriesInventoryDF),
-    ("timeSeries", timeSeries),
-    ("timeSeriesDF", timeSeriesDF),
-    ("upcomingEvents", upcomingEvents),
-    ("upcomingEventsDF", upcomingEventsDF),
-    ("upcomingEarnings", upcomingEarnings),
-    ("upcomingEarningsDF", upcomingEarningsDF),
-    ("upcomingDividends", upcomingDividends),
-    ("upcomingDividendsDF", upcomingDividendsDF),
-    ("upcomingSplits", upcomingSplits),
-    ("upcomingSplitsDF", upcomingSplitsDF),
-    ("upcomingIPOs", upcomingIPOs),
-    ("upcomingIPOsDF", upcomingIPOsDF),
-    ("volumeByVenue", volumeByVenue),
-    ("volumeByVenueDF", volumeByVenueDF),
+]
+
+_INCLUDE_FUNCTIONS_STREAMING = [
     # SSE Streaming
     ("topsSSE", iexTopsSSE),
     ("topsSSEAsync", iexTopsSSEAsync),
@@ -1083,30 +1107,6 @@ _INCLUDE_FUNCTIONS = [
     ("stocksUSNoUTP1MinuteSSE", stocksUSNoUTP1MinuteSSE),
     ("stocksUS1MinuteSSEAsync", stocksUS1MinuteSSEAsync),
     ("stocksUSNoUTP1MinuteSSEAsync", stocksUSNoUTP1MinuteSSEAsync),
-    # Account
-    ("messageBudget", messageBudget),
-    ("metadata", metadata),
-    ("metadataDF", metadataDF),
-    ("usage", usage),
-    ("usageDF", usageDF),
-    # Alternative
-    ("sentiment", sentiment),
-    ("sentimentDF", sentimentDF),
-    ("ceoCompensation", ceoCompensation),
-    ("ceoCompensationDF", ceoCompensationDF),
-    # Data Points
-    ("points", points),
-    ("pointsDF", pointsDF),
-    # Files
-    ("files", files),
-    ("download", download),
-    # FX
-    ("latestFX", latestFX),
-    ("latestFXDF", latestFXDF),
-    ("convertFX", convertFX),
-    ("convertFXDF", convertFXDF),
-    ("historicalFX", historicalFX),
-    ("historicalFXDF", historicalFXDF),
     # FXSSE
     ("fxSSE", fxSSE),
     ("fxSSEAsync", fxSSEAsync),
@@ -1122,13 +1122,6 @@ _INCLUDE_FUNCTIONS = [
     # SentimentSSE
     ("sentimentSSE", sentimentSSE),
     ("sentimentSSEAsync", sentimentSSEAsync),
-    # Crypto
-    ("cryptoBook", cryptoBook),
-    ("cryptoBookDF", cryptoBookDF),
-    ("cryptoQuote", cryptoQuote),
-    ("cryptoQuoteDF", cryptoQuoteDF),
-    ("cryptoPrice", cryptoPrice),
-    ("cryptoPriceDF", cryptoPriceDF),
     # CryptoSSE
     ("cryptoBookSSE", cryptoBookSSE),
     ("cryptoBookSSEAsync", cryptoBookSSEAsync),
@@ -1136,154 +1129,237 @@ _INCLUDE_FUNCTIONS = [
     ("cryptoEventsSSEAsync", cryptoEventsSSEAsync),
     ("cryptoQuotesSSE", cryptoQuotesSSE),
     ("cryptoQuotesSSEAsync", cryptoQuotesSSEAsync),
-    # Premium
-    #     Wall Street Horizon
-    ("analystDays", analystDays),
-    ("analystDaysDF", analystDaysDF),
-    ("boardOfDirectorsMeeting", boardOfDirectorsMeeting),
-    ("boardOfDirectorsMeetingDF", boardOfDirectorsMeetingDF),
-    ("businessUpdates", businessUpdates),
-    ("businessUpdatesDF", businessUpdatesDF),
-    ("buybacks", buybacks),
-    ("buybacksDF", buybacksDF),
-    ("capitalMarketsDay", capitalMarketsDay),
-    ("capitalMarketsDayDF", capitalMarketsDayDF),
-    ("companyTravel", companyTravel),
-    ("companyTravelDF", companyTravelDF),
-    ("filingDueDates", filingDueDates),
-    ("filingDueDatesDF", filingDueDatesDF),
-    ("fiscalQuarterEnd", fiscalQuarterEnd),
-    ("fiscalQuarterEndDF", fiscalQuarterEndDF),
-    ("forum", forum),
-    ("forumDF", forumDF),
-    ("generalConference", generalConference),
-    ("generalConferenceDF", generalConferenceDF),
-    ("fdaAdvisoryCommitteeMeetings", fdaAdvisoryCommitteeMeetings),
-    ("fdaAdvisoryCommitteeMeetingsDF", fdaAdvisoryCommitteeMeetingsDF),
-    ("holidaysWSH", holidaysWSH),
-    ("holidaysWSHDF", holidaysWSHDF),
-    ("indexChanges", indexChanges),
-    ("indexChangesDF", indexChangesDF),
-    ("iposWSH", iposWSH),
-    ("iposWSHDF", iposWSHDF),
-    ("legalActions", legalActions),
-    ("legalActionsDF", legalActionsDF),
-    ("mergersAndAcquisitions", mergersAndAcquisitions),
-    ("mergersAndAcquisitionsDF", mergersAndAcquisitionsDF),
-    ("productEventsDF", productEventsDF),
-    ("productEvents", productEvents),
-    ("researchAndDevelopmentDays", researchAndDevelopmentDays),
-    ("researchAndDevelopmentDaysDF", researchAndDevelopmentDaysDF),
-    ("sameStoreSales", sameStoreSales),
-    ("sameStoreSalesDF", sameStoreSalesDF),
-    ("secondaryOfferings", secondaryOfferings),
-    ("secondaryOfferingsDF", secondaryOfferingsDF),
-    ("seminars", seminars),
-    ("seminarsDF", seminarsDF),
-    ("shareholderMeetings", shareholderMeetings),
-    ("shareholderMeetingsDF", shareholderMeetingsDF),
-    ("summitMeetings", summitMeetings),
-    ("summitMeetingsDF", summitMeetingsDF),
-    ("tradeShows", tradeShows),
-    ("tradeShowsDF", tradeShowsDF),
-    ("witchingHours", witchingHours),
-    ("witchingHoursDF", witchingHoursDF),
-    ("workshops", workshops),
-    ("workshopsDF", workshopsDF),
-    #     Fraud Factors
-    ("nonTimelyFilings", nonTimelyFilings),
-    ("nonTimelyFilingsDF", nonTimelyFilingsDF),
-    ("similarityIndex", similarityIndex),
-    ("similarityIndexDF", similarityIndexDF),
-    #     Extract Alpha
-    ("cam1", cam1),
-    ("cam1DF", cam1DF),
-    ("esgCFPBComplaints", esgCFPBComplaints),
-    ("esgCFPBComplaintsDF", esgCFPBComplaintsDF),
-    ("esgCPSCRecalls", esgCPSCRecalls),
-    ("esgCPSCRecallsDF", esgCPSCRecallsDF),
-    ("esgDOLVisaApplications", esgDOLVisaApplications),
-    ("esgDOLVisaApplicationsDF", esgDOLVisaApplicationsDF),
-    ("esgEPAEnforcements", esgEPAEnforcements),
-    ("esgEPAEnforcementsDF", esgEPAEnforcementsDF),
-    ("esgEPAMilestones", esgEPAMilestones),
-    ("esgEPAMilestonesDF", esgEPAMilestonesDF),
-    ("esgFECIndividualCampaingContributions", esgFECIndividualCampaingContributions),
-    (
-        "esgFECIndividualCampaingContributionsDF",
-        esgFECIndividualCampaingContributionsDF,
-    ),
-    ("esgOSHAInspections", esgOSHAInspections),
-    ("esgOSHAInspectionsDF", esgOSHAInspectionsDF),
-    ("esgSenateLobbying", esgSenateLobbying),
-    ("esgSenateLobbyingDF", esgSenateLobbyingDF),
-    ("esgUSASpending", esgUSASpending),
-    ("esgUSASpendingDF", esgUSASpendingDF),
-    ("esgUSPTOPatentApplications", esgUSPTOPatentApplications),
-    ("esgUSPTOPatentApplicationsDF", esgUSPTOPatentApplicationsDF),
-    ("esgUSPTOPatentGrants", esgUSPTOPatentGrants),
-    ("esgUSPTOPatentGrantsDF", esgUSPTOPatentGrantsDF),
-    ("tacticalModel1", tacticalModel1),
-    ("tacticalModel1DF", tacticalModel1DF),
-    #     Precision Alpha
-    ("precisionAlphaPriceDynamics", precisionAlphaPriceDynamics),
-    ("precisionAlphaPriceDynamicsDF", precisionAlphaPriceDynamicsDF),
-    #     BRAIN Company
-    ("brain30DaySentiment", brain30DaySentiment),
-    ("brain30DaySentimentDF", brain30DaySentimentDF),
-    ("brain7DaySentiment", brain7DaySentiment),
-    ("brain7DaySentimentDF", brain7DaySentimentDF),
-    ("brain21DayMLReturnRanking", brain21DayMLReturnRanking),
-    ("brain21DayMLReturnRankingDF", brain21DayMLReturnRankingDF),
-    ("brain10DayMLReturnRanking", brain10DayMLReturnRanking),
-    ("brain10DayMLReturnRankingDF", brain10DayMLReturnRankingDF),
-    ("brain5DayMLReturnRanking", brain5DayMLReturnRanking),
-    ("brain5DayMLReturnRankingDF", brain5DayMLReturnRankingDF),
-    ("brain3DayMLReturnRanking", brain3DayMLReturnRanking),
-    ("brain3DayMLReturnRankingDF", brain3DayMLReturnRankingDF),
-    ("brain2DayMLReturnRanking", brain2DayMLReturnRanking),
-    ("brain2DayMLReturnRankingDF", brain2DayMLReturnRankingDF),
-    (
-        "brainLanguageMetricsOnCompanyFilingsAll",
-        brainLanguageMetricsOnCompanyFilingsAll,
-    ),
-    (
-        "brainLanguageMetricsOnCompanyFilingsAllDF",
-        brainLanguageMetricsOnCompanyFilingsAllDF,
-    ),
-    ("brainLanguageMetricsOnCompanyFilings", brainLanguageMetricsOnCompanyFilings),
-    ("brainLanguageMetricsOnCompanyFilingsDF", brainLanguageMetricsOnCompanyFilingsDF),
-    (
-        "brainLanguageMetricsOnCompanyFilingsDifferenceAll",
-        brainLanguageMetricsOnCompanyFilingsDifferenceAll,
-    ),
-    (
-        "brainLanguageMetricsOnCompanyFilingsDifferenceAllDF",
-        brainLanguageMetricsOnCompanyFilingsDifferenceAllDF,
-    ),
-    (
-        "brainLanguageMetricsOnCompanyFilingsDifference",
-        brainLanguageMetricsOnCompanyFilingsDifference,
-    ),
-    (
-        "brainLanguageMetricsOnCompanyFilingsDifferenceDF",
-        brainLanguageMetricsOnCompanyFilingsDifferenceDF,
-    ),
-    #     Kavout
-    ("kScore", kScore),
-    ("kScoreDF", kScoreDF),
-    ("kScoreChina", kScoreChina),
-    ("kScoreChinaDF", kScoreChinaDF),
-    #     Audit Analytics
-    ("accountingQualityAndRiskMatrix", accountingQualityAndRiskMatrix),
-    ("accountingQualityAndRiskMatrixDF", accountingQualityAndRiskMatrixDF),
-    ("directorAndOfficerChanges", directorAndOfficerChanges),
-    ("directorAndOfficerChangesDF", directorAndOfficerChangesDF),
-    #     ValuEngine
-    ("valuEngineStockResearchReport", valuEngineStockResearchReport),
 ]
 
-_INCLUDE_POINTS = [
+_INCLUDE_FUNCTIONS_ACCOUNT = [
+    # Account
+    ("messageBudget", messageBudget),
+    ("metadata", metadata),
+    ("metadataDF", metadataDF),
+    ("usage", usage),
+    ("usageDF", usageDF),
+]
+
+_INCLUDE_FUNCTIONS_ALTERNATIVE = [
+    # Alternative
+    ("sentiment", sentiment),
+    ("sentimentDF", sentimentDF),
+    ("ceoCompensation", ceoCompensation),
+    ("ceoCompensationDF", ceoCompensationDF),
+]
+
+_INCLUDE_FUNCTIONS_POINTS = [
+    # Data Points
+    ("points", points),
+    ("pointsDF", pointsDF),
+]
+
+
+_INCLUDE_FUNCTIONS_FX = [
+    # FX
+    ("latestFX", latestFX),
+    ("latestFXDF", latestFXDF),
+    ("convertFX", convertFX),
+    ("convertFXDF", convertFXDF),
+    ("historicalFX", historicalFX),
+    ("historicalFXDF", historicalFXDF),
+]
+
+_INCLUDE_FUNCTIONS_CRYPTO = [
+    # Crypto
+    ("cryptoBook", cryptoBook),
+    ("cryptoBookDF", cryptoBookDF),
+    ("cryptoQuote", cryptoQuote),
+    ("cryptoQuoteDF", cryptoQuoteDF),
+    ("cryptoPrice", cryptoPrice),
+    ("cryptoPriceDF", cryptoPriceDF),
+]
+
+_INCLUDE_FUNCTIONS = (
+    _INCLUDE_FUNCTIONS_RULES
+    + _INCLUDE_FUNCTIONS_REFDATA
+    + _INCLUDE_FUNCTIONS_MARKET
+    + _INCLUDE_FUNCTIONS_STATS
+    + _INCLUDE_FUNCTIONS_STOCKS
+    + _INCLUDE_FUNCTIONS_IEX
+    + _INCLUDE_FUNCTIONS_STREAMING
+    + _INCLUDE_FUNCTIONS_ACCOUNT
+    + _INCLUDE_FUNCTIONS_ALTERNATIVE
+    + _INCLUDE_FUNCTIONS_POINTS
+    + _INCLUDE_FUNCTIONS_FX
+    + _INCLUDE_FUNCTIONS_CRYPTO
+)
+
+_INCLUDE_FILES = [
+    # Files
+    ("files", files),
+    ("download", download),
+]
+
+_INCLUDE_FUNCTIONS_PREMIUM = [
+    # Wall Street Horizon
+    ("analystDays", analystDaysWallStreetHorizon),
+    ("analystDaysDF", analystDaysWallStreetHorizonDF),
+    ("boardOfDirectorsMeeting", boardOfDirectorsMeetingWallStreetHorizon),
+    ("boardOfDirectorsMeetingDF", boardOfDirectorsMeetingWallStreetHorizonDF),
+    ("businessUpdates", businessUpdatesWallStreetHorizon),
+    ("businessUpdatesDF", businessUpdatesWallStreetHorizonDF),
+    ("buybacks", buybacksWallStreetHorizon),
+    ("buybacksDF", buybacksWallStreetHorizonDF),
+    ("capitalMarketsDay", capitalMarketsDayWallStreetHorizon),
+    ("capitalMarketsDayDF", capitalMarketsDayWallStreetHorizonDF),
+    ("companyTravel", companyTravelWallStreetHorizon),
+    ("companyTravelDF", companyTravelWallStreetHorizonDF),
+    ("filingDueDates", filingDueDatesWallStreetHorizon),
+    ("filingDueDatesDF", filingDueDatesWallStreetHorizonDF),
+    ("fiscalQuarterEnd", fiscalQuarterEndWallStreetHorizon),
+    ("fiscalQuarterEndDF", fiscalQuarterEndWallStreetHorizonDF),
+    ("forum", forumWallStreetHorizon),
+    ("forumDF", forumWallStreetHorizonDF),
+    ("generalConference", generalConferenceWallStreetHorizon),
+    ("generalConferenceDF", generalConferenceWallStreetHorizonDF),
+    ("fdaAdvisoryCommitteeMeetings", fdaAdvisoryCommitteeMeetingsWallStreetHorizon),
+    ("fdaAdvisoryCommitteeMeetingsDF", fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF),
+    ("holidays", holidaysWallStreetHorizon),
+    ("holidaysDF", holidaysWallStreetHorizonDF),
+    ("indexChanges", indexChangesWallStreetHorizon),
+    ("indexChangesDF", indexChangesWallStreetHorizonDF),
+    ("ipos", iposWallStreetHorizon),
+    ("iposDF", iposWallStreetHorizonDF),
+    ("legalActions", legalActionsWallStreetHorizon),
+    ("legalActionsDF", legalActionsWallStreetHorizonDF),
+    ("mergersAndAcquisitions", mergersAndAcquisitionsWallStreetHorizon),
+    ("mergersAndAcquisitionsDF", mergersAndAcquisitionsWallStreetHorizonDF),
+    ("productEvents", productEventsWallStreetHorizon),
+    ("productEventsDF", productEventsWallStreetHorizonDF),
+    ("researchAndDevelopmentDays", researchAndDevelopmentDaysWallStreetHorizon),
+    ("researchAndDevelopmentDaysDF", researchAndDevelopmentDaysWallStreetHorizonDF),
+    ("sameStoreSales", sameStoreSalesWallStreetHorizon),
+    ("sameStoreSalesDF", sameStoreSalesWallStreetHorizonDF),
+    ("secondaryOfferings", secondaryOfferingsWallStreetHorizon),
+    ("secondaryOfferingsDF", secondaryOfferingsWallStreetHorizonDF),
+    ("seminars", seminarsWallStreetHorizon),
+    ("seminarsDF", seminarsWallStreetHorizonDF),
+    ("shareholderMeetings", shareholderMeetingsWallStreetHorizon),
+    ("shareholderMeetingsDF", shareholderMeetingsWallStreetHorizonDF),
+    ("summitMeetings", summitMeetingsWallStreetHorizon),
+    ("summitMeetingsDF", summitMeetingsWallStreetHorizonDF),
+    ("tradeShows", tradeShowsWallStreetHorizon),
+    ("tradeShowsDF", tradeShowsWallStreetHorizonDF),
+    ("witchingHours", witchingHoursWallStreetHorizon),
+    ("witchingHoursDF", witchingHoursWallStreetHorizonDF),
+    ("workshops", workshopsWallStreetHorizon),
+    ("workshopsDF", workshopsWallStreetHorizonDF),
+    # Fraud Factors
+    ("nonTimelyFilings", nonTimelyFilingsFraudFactors),
+    ("nonTimelyFilingsDF", nonTimelyFilingsFraudFactorsDF),
+    ("similarityIndex", similarityIndexFraudFactors),
+    ("similarityIndexDF", similarityIndexFraudFactorsDF),
+    # Extract Alpha
+    ("cam1", cam1ExtractAlpha),
+    ("cam1DF", cam1ExtractAlphaDF),
+    ("esgCFPBComplaints", esgCFPBComplaintsExtractAlpha),
+    ("esgCFPBComplaintsDF", esgCFPBComplaintsExtractAlphaDF),
+    ("esgCPSCRecalls", esgCPSCRecallsExtractAlpha),
+    ("esgCPSCRecallsDF", esgCPSCRecallsExtractAlphaDF),
+    ("esgDOLVisaApplications", esgDOLVisaApplicationsExtractAlpha),
+    ("esgDOLVisaApplicationsDF", esgDOLVisaApplicationsExtractAlphaDF),
+    ("esgEPAEnforcements", esgEPAEnforcementsExtractAlpha),
+    ("esgEPAEnforcementsDF", esgEPAEnforcementsExtractAlphaDF),
+    ("esgEPAMilestones", esgEPAMilestonesExtractAlpha),
+    ("esgEPAMilestonesDF", esgEPAMilestonesExtractAlphaDF),
+    (
+        "esgFECIndividualCampaingContributions",
+        esgFECIndividualCampaingContributionsExtractAlpha,
+    ),
+    (
+        "esgFECIndividualCampaingContributionsDF",
+        esgFECIndividualCampaingContributionsExtractAlphaDF,
+    ),
+    ("esgOSHAInspections", esgOSHAInspectionsExtractAlpha),
+    ("esgOSHAInspectionsDF", esgOSHAInspectionsExtractAlphaDF),
+    ("esgSenateLobbying", esgSenateLobbyingExtractAlpha),
+    ("esgSenateLobbyingDF", esgSenateLobbyingExtractAlphaDF),
+    ("esgUSASpending", esgUSASpendingExtractAlpha),
+    ("esgUSASpendingDF", esgUSASpendingExtractAlphaDF),
+    ("esgUSPTOPatentApplications", esgUSPTOPatentApplicationsExtractAlpha),
+    ("esgUSPTOPatentApplicationsDF", esgUSPTOPatentApplicationsExtractAlphaDF),
+    ("esgUSPTOPatentGrants", esgUSPTOPatentGrantsExtractAlpha),
+    ("esgUSPTOPatentGrantsDF", esgUSPTOPatentGrantsExtractAlphaDF),
+    ("tacticalModel1", tacticalModel1ExtractAlpha),
+    ("tacticalModel1DF", tacticalModel1ExtractAlphaDF),
+    # Precision Alpha
+    ("precisionAlphaPriceDynamics", priceDynamicsPrecisionAlpha),
+    ("precisionAlphaPriceDynamicsDF", priceDynamicsPrecisionAlphaDF),
+    # BRAIN Company
+    ("thirtyDaySentiment", thirtyDaySentimentBrain),
+    ("thirtyDaySentimentDF", thirtyDaySentimentBrainDF),
+    ("sevenDaySentiment", sevenDaySentimentBrain),
+    ("sevenDaySentimentDF", sevenDaySentimentBrainDF),
+    ("twentyOneDayMLReturnRanking", twentyOneDayMLReturnRankingBrain),
+    ("twentyOneDayMLReturnRankingDF", twentyOneDayMLReturnRankingBrainDF),
+    ("tenDayMLReturnRanking", tenDayMLReturnRankingBrain),
+    ("tenDayMLReturnRankingDF", tenDayMLReturnRankingBrainDF),
+    ("fiveDayMLReturnRanking", fiveDayMLReturnRankingBrain),
+    ("fiveDayMLReturnRankingDF", fiveDayMLReturnRankingBrainDF),
+    ("threeDayMLReturnRanking", threeDayMLReturnRankingBrain),
+    ("threeDayMLReturnRankingDF", threeDayMLReturnRankingBrainDF),
+    ("twoDayMLReturnRanking", twoDayMLReturnRankingBrain),
+    ("twoDayMLReturnRankingDF", twoDayMLReturnRankingBrainDF),
+    (
+        "languageMetricsOnCompanyFilingsAll",
+        languageMetricsOnCompanyFilingsAllBrain,
+    ),
+    (
+        "languageMetricsOnCompanyFilingsAllDF",
+        languageMetricsOnCompanyFilingsAllBrainDF,
+    ),
+    ("languageMetricsOnCompanyFilings", languageMetricsOnCompanyFilingsBrain),
+    ("languageMetricsOnCompanyFilingsDF", languageMetricsOnCompanyFilingsBrainDF),
+    (
+        "languageMetricsOnCompanyFilingsDifferenceAll",
+        languageMetricsOnCompanyFilingsDifferenceAllBrain,
+    ),
+    (
+        "languageMetricsOnCompanyFilingsDifferenceAllDF",
+        languageMetricsOnCompanyFilingsDifferenceAllBrainDF,
+    ),
+    (
+        "languageMetricsOnCompanyFilingsDifference",
+        languageMetricsOnCompanyFilingsDifferenceBrain,
+    ),
+    (
+        "languageMetricsOnCompanyFilingsDifferenceDF",
+        languageMetricsOnCompanyFilingsDifferenceBrainDF,
+    ),
+    # Kavout
+    ("kScore", kScoreKavout),
+    ("kScoreDF", kScoreKavoutDF),
+    ("kScoreChina", kScoreChinaKavout),
+    ("kScoreChinaDF", kScoreChinaKavoutDF),
+    # Audit Analytics
+    ("accountingQualityAndRiskMatrix", accountingQualityAndRiskMatrixAuditAnalytics),
+    (
+        "accountingQualityAndRiskMatrixDF",
+        accountingQualityAndRiskMatrixAuditAnalyticsDF,
+    ),
+    ("directorAndOfficerChanges", directorAndOfficerChangesAuditAnalytics),
+    ("directorAndOfficerChangesDF", directorAndOfficerChangesAuditAnalyticsDF),
+    # Stocktwits
+    ("socialSentiment", socialSentimentStockTwits),
+    ("socialSentimentDF", socialSentimentStockTwitsDF),
+]
+
+_INCLUDE_PREMIUM_FILES = [
+    # ValuEngine
+    ("valuEngine", stockResearchReportValuEngine),
+    ("valuEngineDownload", downloadStockResearchReportValuEngine),
+    # New Constructs
+    ("newConstructs", reportNewConstructs),
+    ("newConstructsDownload", downloadReportNewConstructs),
+]
+
+_INCLUDE_POINTS_RATES = [
     # Rates
     ("thirtyYear", RatesPoints.THIRTY.value),
     ("twentyYear", RatesPoints.TWENTY.value),
@@ -1294,6 +1370,9 @@ _INCLUDE_POINTS = [
     ("sixMonth", RatesPoints.SIXMONTH.value),
     ("threeMonth", RatesPoints.THREEMONTH.value),
     ("oneMonth", RatesPoints.ONEMONTH.value),
+]
+
+_INCLUDE_POINTS_COMMODITIES = [
     # Commodities
     ("wti", CommoditiesPoints.WTI.value),
     ("brent", CommoditiesPoints.BRENT.value),
@@ -1305,6 +1384,9 @@ _INCLUDE_POINTS = [
     ("gasmid", CommoditiesPoints.GASMID.value),
     ("gasprm", CommoditiesPoints.GASPRM.value),
     ("propane", CommoditiesPoints.PROPANE.value),
+]
+
+_INCLUDE_POINTS_ECONOMIC = [
     # Economic
     ("us30", EconomicPoints.US30.value),
     ("us15", EconomicPoints.US15.value),
@@ -1512,6 +1594,27 @@ class Client(object):
 
     _api_limit = DEFAULT_API_LIMIT
 
+    account = types.ModuleType("account")
+    alternative = types.ModuleType("alternative")
+    crypto = types.ModuleType("crypto")
+    fx = types.ModuleType("fx")
+    iex = types.ModuleType("iex")
+    market = types.ModuleType("market")
+    points = types.ModuleType("points")
+    refdata = types.ModuleType("refdata")
+    rules = types.ModuleType("rules")
+    stats = types.ModuleType("stats")
+    stocks = types.ModuleType("stocks")
+    streaming = types.ModuleType("streaming")
+
+    premium = types.ModuleType("premium")
+    premium.files = types.ModuleType("premium.files")
+    files = types.ModuleType("files")
+    studies = types.ModuleType("studies")
+    commodities = types.ModuleType("commodities")
+    rates = types.ModuleType("rates")
+    economic = types.ModuleType("economic")
+
     def __init__(self, api_token=None, version="v1", api_limit=DEFAULT_API_LIMIT):
         self._token = api_token or os.environ.get("IEX_TOKEN", "")
         if not self._token:
@@ -1529,19 +1632,121 @@ class Client(object):
         self._api_limit = api_limit
 
         # rebind
-        for name, method in _INCLUDE_FUNCTIONS:
+        for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
+            # setattr(self.account, name, getattr(self, name))
 
-        for name, key in _INCLUDE_POINTS:
+        for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.alternative, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.crypto, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_FX:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.fx, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_IEX:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.iex, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_MARKET:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.market, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_POINTS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.points, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_RULES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            # setattr(self.rules, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_REFDATA:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.refdata, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_STATS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.stats, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_STOCKS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.stocks, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_STREAMING:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.streaming, name, getattr(self, name))
+
+        # rebind premium data
+        for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
+            setattr(self.premium, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self.premium, name).__doc__ = method.__doc__
+
+        # rebind commodities
+        for name, key in _INCLUDE_POINTS_COMMODITIES:
             p = partial(self.bind, meth=points, key=key)
             p.__name__ = key
             setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
             getattr(self, name).__doc__ = points.__doc__
+            setattr(
+                self.commodities,
+                name,
+                wraps(points)(_interval(minutes=self._api_limit)(p)),
+            )
 
+        # rebind economic
+        for name, key in _INCLUDE_POINTS_ECONOMIC:
+            p = partial(self.bind, meth=points, key=key)
+            p.__name__ = key
+            setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
+            getattr(self, name).__doc__ = points.__doc__
+            setattr(
+                self.economic,
+                name,
+                wraps(points)(_interval(minutes=self._api_limit)(p)),
+            )
+
+        # rebind rates
+        for name, key in _INCLUDE_POINTS_RATES:
+            p = partial(self.bind, meth=points, key=key)
+            p.__name__ = key
+            setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
+            getattr(self, name).__doc__ = points.__doc__
+            setattr(
+                self.rates, name, wraps(points)(_interval(minutes=self._api_limit)(p))
+            )
+
+        # rebind files
+        for name, method in _INCLUDE_FILES:
+            setattr(self.files, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self.files, name).__doc__ = method.__doc__
+
+        # rebind premium files
+        for name, method in _INCLUDE_PREMIUM_FILES:
+            setattr(
+                self.premium.files, name, wraps(method)(partial(self.bind, meth=method))
+            )
+            getattr(self.premium.files, name).__doc__ = method.__doc__
+
+        # rebind studies
         for name, method in _INCLUDE_STUDIES:
             if method:
-                setattr(self, name, method.__get__(self, self.__class__))
+                setattr(self.studies, name, method.__get__(self, self.__class__))
 
     def bind(self, *args, **kwargs):
         meth = kwargs.pop("meth")
@@ -1555,11 +1760,81 @@ class Client(object):
 
 #############################
 # for autodoc
-for name, method in _INCLUDE_FUNCTIONS:
+for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
     setattr(Client, name, method)
     getattr(Client, name).__doc__ = method.__doc__
+    # setattr(self.account, name, getattr(self, name))
 
-for name, key in _INCLUDE_POINTS:
+for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.alternative, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.crypto, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_FX:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.fx, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_IEX:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.iex, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_MARKET:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.market, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_POINTS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.points, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_RULES:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    # setattr(self.rules, name, getattr(self, name))
+
+for name, method in _INCLUDE_FUNCTIONS_REFDATA:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.refdata, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STATS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.stats, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STOCKS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.stocks, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_STREAMING:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
+    setattr(Client.streaming, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
+    setattr(Client.premium, name, method)
+    getattr(Client.premium, name).__doc__ = method.__doc__
+
+for name, method in _INCLUDE_FILES:
+    setattr(Client.files, name, method)
+    getattr(Client.files, name).__doc__ = method.__doc__
+
+for name, method in _INCLUDE_PREMIUM_FILES:
+    setattr(Client.premium.files, name, method)
+    getattr(Client.premium.files, name).__doc__ = method.__doc__
+
+for name, key in (
+    _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
+):
     p = partial(Client.bind, meth=points, key=key)
     p.__name__ = key
     setattr(Client, name, wraps(points)(p))

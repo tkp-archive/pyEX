@@ -17,7 +17,7 @@ from ...common import (
 )
 
 
-def socialSentiment(
+def socialSentimentStockTwits(
     symbol, type="daily", date="", token="", version="stable", filter="", format="json"
 ):
     """This endpoint provides social sentiment data from StockTwits. Data can be viewed as a daily value, or by minute for a given date.
@@ -48,8 +48,8 @@ def socialSentiment(
     return _get(base_url, token, version, filter)
 
 
-@wraps(socialSentiment)
-def socialSentimentDF(*args, **kwargs):
-    df = json_normalize(socialSentiment(*args, **kwargs))
+@wraps(socialSentimentStockTwits)
+def socialSentimentStockTwitsDF(*args, **kwargs):
+    df = json_normalize(socialSentimentStockTwits(*args, **kwargs))
     _toDatetime(df)
     return df

@@ -28,7 +28,7 @@ def _baseDF(id, symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def kScore(symbol="", **kwargs):
+def kScoreKavout(symbol="", **kwargs):
     """Kavout takes in over 200 factors and signals including fundamentals, pricing, technical indicators, and alternative data, and then uses an ensemble machine learning technique to analyze and rank stocks.
     K Score is a stock rating and ranking score with values ranging from 1-to-9. A higher K Score (7-9) assigned to a stock indicates a higher probability of outperformance, whereas a lower K Score (1-3) indicates a lower probability of outperformance in the next month.
     https://iexcloud.io/docs/api/#k-score-for-us-equities
@@ -40,7 +40,7 @@ def kScore(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def kScoreDF(symbol="", **kwargs):
+def kScoreKavoutDF(symbol="", **kwargs):
     """Kavout takes in over 200 factors and signals including fundamentals, pricing, technical indicators, and alternative data, and then uses an ensemble machine learning technique to analyze and rank stocks.
     K Score is a stock rating and ranking score with values ranging from 1-to-9. A higher K Score (7-9) assigned to a stock indicates a higher probability of outperformance, whereas a lower K Score (1-3) indicates a lower probability of outperformance in the next month.
     https://iexcloud.io/docs/api/#k-score-for-us-equities
@@ -52,7 +52,7 @@ def kScoreDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def kScoreChina(symbol="", **kwargs):
+def kScoreChinaKavout(symbol="", **kwargs):
     """Kavout takes in over 200 factors and signals including fundamentals, pricing, technical indicators, and alternative data, and then uses an ensemble machine learning technique to analyze and rank stocks.
         K Score is a stock rating and ranking score with values ranging from 1-to-9. A higher K Score (7-9) assigned to a stock indicates a higher probability of outperformance, whereas a lower K Score (1-3) indicates a lower probability of outperformance in the next month.
         For quantitative users, overlay K Score as a signal in investment models. Mitigate risk in portfolio construction by avoiding stocks with low K scores (1-3).
@@ -72,7 +72,7 @@ def kScoreChina(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def kScoreChinaDF(symbol="", **kwargs):
+def kScoreChinaKavoutDF(symbol="", **kwargs):
     """Kavout takes in over 200 factors and signals including fundamentals, pricing, technical indicators, and alternative data, and then uses an ensemble machine learning technique to analyze and rank stocks.
         K Score is a stock rating and ranking score with values ranging from 1-to-9. A higher K Score (7-9) assigned to a stock indicates a higher probability of outperformance, whereas a lower K Score (1-3) indicates a lower probability of outperformance in the next month.
         For quantitative users, overlay K Score as a signal in investment models. Mitigate risk in portfolio construction by avoiding stocks with low K scores (1-3).

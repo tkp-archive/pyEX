@@ -28,7 +28,7 @@ def _baseDF(id, symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain30DaySentiment(symbol="", **kwargs):
+def thirtyDaySentimentBrain(symbol="", **kwargs):
     """Brain Company’s Sentiment Indicator monitors the stock sentiment from the last 30 days of public financial news for about 3,500 US stocks. The sentiment scoring technology is based on a combination of various natural language processing techniques. The sentiment score assigned to each stock is a value ranging from -1 (most negative) to +1 (most positive) that is updated daily.
     https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator
 
@@ -39,7 +39,7 @@ def brain30DaySentiment(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain30DaySentimentDF(symbol="", **kwargs):
+def thirtyDaySentimentBrainDF(symbol="", **kwargs):
     """Brain Company’s Sentiment Indicator monitors the stock sentiment from the last 30 days of public financial news for about 3,500 US stocks. The sentiment scoring technology is based on a combination of various natural language processing techniques. The sentiment score assigned to each stock is a value ranging from -1 (most negative) to +1 (most positive) that is updated daily.
     https://iexcloud.io/docs/api/#brain-companys-30-day-sentiment-indicator
 
@@ -50,7 +50,7 @@ def brain30DaySentimentDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain7DaySentiment(symbol="", **kwargs):
+def sevenDaySentimentBrain(symbol="", **kwargs):
     """Brain Company’s Sentiment Indicator monitors the stock sentiment from the last 7 days of public financial news for about 3,500 US stocks. The sentiment scoring technology is based on a combination of various natural language processing techniques. The sentiment score assigned to each stock is a value ranging from -1 (most negative) to +1 (most positive) that is updated daily.
     https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator
 
@@ -61,7 +61,7 @@ def brain7DaySentiment(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain7DaySentimentDF(symbol="", **kwargs):
+def sevenDaySentimentBrainDF(symbol="", **kwargs):
     """Brain Company’s Sentiment Indicator monitors the stock sentiment from the last 7 days of public financial news for about 3,500 US stocks. The sentiment scoring technology is based on a combination of various natural language processing techniques. The sentiment score assigned to each stock is a value ranging from -1 (most negative) to +1 (most positive) that is updated daily.
     https://iexcloud.io/docs/api/#brain-companys-7-day-sentiment-indicator
 
@@ -72,7 +72,7 @@ def brain7DaySentimentDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain21DayMLReturnRanking(symbol="", **kwargs):
+def twentyOneDayMLReturnRankingBrain(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 21 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking
 
@@ -83,7 +83,7 @@ def brain21DayMLReturnRanking(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain21DayMLReturnRankingDF(symbol="", **kwargs):
+def twentyOneDayMLReturnRankingBrainDF(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 21 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-21-day-machine-learning-estimated-return-ranking
 
@@ -94,7 +94,7 @@ def brain21DayMLReturnRankingDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain10DayMLReturnRanking(symbol="", **kwargs):
+def tenDayMLReturnRankingBrain(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking
 
@@ -105,7 +105,7 @@ def brain10DayMLReturnRanking(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain10DayMLReturnRankingDF(symbol="", **kwargs):
+def tenDayMLReturnRankingBrainDF(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-10-day-machine-learning-estimated-return-ranking
 
@@ -116,7 +116,7 @@ def brain10DayMLReturnRankingDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain5DayMLReturnRanking(symbol="", **kwargs):
+def fiveDayMLReturnRankingBrain(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking
 
@@ -127,7 +127,7 @@ def brain5DayMLReturnRanking(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain5DayMLReturnRankingDF(symbol="", **kwargs):
+def fiveDayMLReturnRankingBrainDF(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-5-day-machine-learning-estimated-return-ranking
 
@@ -138,7 +138,7 @@ def brain5DayMLReturnRankingDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain3DayMLReturnRanking(symbol="", **kwargs):
+def threeDayMLReturnRankingBrain(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking
 
@@ -149,7 +149,7 @@ def brain3DayMLReturnRanking(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain3DayMLReturnRankingDF(symbol="", **kwargs):
+def threeDayMLReturnRankingBrainDF(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-3-day-machine-learning-estimated-return-ranking
 
@@ -160,7 +160,7 @@ def brain3DayMLReturnRankingDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain2DayMLReturnRanking(symbol="", **kwargs):
+def twoDayMLReturnRankingBrain(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking
 
@@ -171,7 +171,7 @@ def brain2DayMLReturnRanking(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brain2DayMLReturnRankingDF(symbol="", **kwargs):
+def twoDayMLReturnRankingBrainDF(symbol="", **kwargs):
     """Brain Company’s Machine Learning proprietary platform is used to generate a daily stock ranking based on the predicted future returns of a universe of around 1,000 stocks over 10 days. The model implements a voting scheme of machine learning classifiers that non linearly combine a variety of features with a series of techniques aimed at mitigating the well-known overfitting problem for financial data with a low signal to noise ratio.
     https://iexcloud.io/docs/api/#brain-companys-2-day-machine-learning-estimated-return-ranking
 
@@ -182,7 +182,7 @@ def brain2DayMLReturnRankingDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsAll(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsAllBrain(symbol="", **kwargs):
     """Metrics about the language used in a company’s most recent annual or quarterly filings (10Ks and 10Qs). Includes metrics on the financial sentiment and the scores based on the prevalence of words in the statement categorized into four themes: constraining language, interesting language, litigious language, and language indicating uncertainty.
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual
 
@@ -193,7 +193,7 @@ def brainLanguageMetricsOnCompanyFilingsAll(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsAllDF(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsAllBrainDF(symbol="", **kwargs):
     """Metrics about the language used in a company’s most recent annual or quarterly filings (10Ks and 10Qs). Includes metrics on the financial sentiment and the scores based on the prevalence of words in the statement categorized into four themes: constraining language, interesting language, litigious language, and language indicating uncertainty.
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-quarterly-and-annual
 
@@ -204,7 +204,7 @@ def brainLanguageMetricsOnCompanyFilingsAllDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilings(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsBrain(symbol="", **kwargs):
     """Metrics about the language used in a company’s most recent annual filing (10Ks). Includes metrics on the financial sentiment and the scores based on the prevalence of words in the statement categorized into four themes: constraining language, interesting language, litigious language, and language indicating uncertainty.
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only
 
@@ -215,7 +215,7 @@ def brainLanguageMetricsOnCompanyFilings(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsDF(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsBrainDF(symbol="", **kwargs):
     """Metrics about the language used in a company’s most recent annual filing (10Ks). Includes metrics on the financial sentiment and the scores based on the prevalence of words in the statement categorized into four themes: constraining language, interesting language, litigious language, and language indicating uncertainty.
     https://iexcloud.io/docs/api/#brain-companys-language-metrics-on-company-filings-annual-only
 
@@ -226,7 +226,7 @@ def brainLanguageMetricsOnCompanyFilingsDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsDifferenceAll(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsDifferenceAllBrain(symbol="", **kwargs):
     """Compares Brain’s sentiment and language metrics from the company’s most recent repot (annual or quarterly) to the report from last year (10Ks) or the corresponding quarter the prior year (10Qs).
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-filings-quarterly-and-annual-from-prior-period
 
@@ -237,7 +237,7 @@ def brainLanguageMetricsOnCompanyFilingsDifferenceAll(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsDifferenceAllDF(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsDifferenceAllBrainDF(symbol="", **kwargs):
     """Compares Brain’s sentiment and language metrics from the company’s most recent repot (annual or quarterly) to the report from last year (10Ks) or the corresponding quarter the prior year (10Qs).
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-filings-quarterly-and-annual-from-prior-period
 
@@ -248,7 +248,7 @@ def brainLanguageMetricsOnCompanyFilingsDifferenceAllDF(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsDifference(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsDifferenceBrain(symbol="", **kwargs):
     """Compares Brain’s sentiment and language metrics from the company’s most recent annual filing (10K) to the report from last year.
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year
 
@@ -259,7 +259,7 @@ def brainLanguageMetricsOnCompanyFilingsDifference(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def brainLanguageMetricsOnCompanyFilingsDifferenceDF(symbol="", **kwargs):
+def languageMetricsOnCompanyFilingsDifferenceBrainDF(symbol="", **kwargs):
     """Compares Brain’s sentiment and language metrics from the company’s most recent annual filing (10K) to the report from last year.
     https://iexcloud.io/docs/api/#brain-companys-differences-in-language-metrics-on-company-annual-filings-from-prior-year
 
