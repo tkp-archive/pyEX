@@ -204,7 +204,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 This software is licensed under the Apache 2.0 license. See the
 [LICENSE](LICENSE) and [AUTHORS](AUTHORS) files for details.
 
-        
+
 ```eval_rst
 
 API Documentation
@@ -215,5 +215,21 @@ API Documentation
    :maxdepth: 2
 
    apisrc/client
+   apisrc/alternative
+   apisrc/commodities
+   apisrc/crypto
+   apisrc/econ
+   apisrc/files
+   apisrc/fx
+   apisrc/markets
+   apisrc/options
+   apisrc/points
+   apisrc/premium
+   apisrc/rates
+   apisrc/refdata
+   apisrc/stats
+   apisrc/stocks
+   apisrc/streaming
+   apisrc/studies
 
 ```
