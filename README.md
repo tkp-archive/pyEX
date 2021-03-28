@@ -10,7 +10,7 @@ Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
 ## Referral
 
-Please subscribe to IEX Cloud using [my referral code](https://iexcloud.io/s/6332a3c3 ).
+Please subscribe to IEX Cloud using [this referral code](https://iexcloud.io/s/6332a3c3 ).
 
 # Getting Started
 
