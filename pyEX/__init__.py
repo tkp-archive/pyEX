@@ -22,6 +22,7 @@ from .economic import *
 from .files import *
 from .fx import *
 from .markets import *
+from .metadata import *
 from .options import *
 from .points import *
 from .premium import *

@@ -107,6 +107,13 @@ class TestPyEXClientAPI:
             assert hasattr(self.c, meth)
             assert hasattr(self.c.market, meth)
 
+    def test_all_metadata(self):
+        for meth in (
+            "queryMetadata",
+            "queryMetadataDF",
+        ):
+            assert hasattr(self.c, meth)
+
     def test_all_stats(self):
         for meth in (
             "systemStats",

@@ -527,6 +527,8 @@ class TestPyEXAPI:
             "productEventsWallStreetHorizon",
             "productEventsWallStreetHorizonDF",
             "propane",
+            "queryMetadata",
+            "queryMetadataDF",
             "quote",
             "quoteDF",
             "recent",
