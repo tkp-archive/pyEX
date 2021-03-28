@@ -8,6 +8,7 @@
 import os
 import types
 from functools import partial, wraps
+import warnings
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
 from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
@@ -32,6 +33,7 @@ from .fx import (
     latestFXDF,
 )
 from .markets import markets, marketsDF
+from .metadata import queryMetadata, queryMetadataDF
 from .options import optionExpirations, options, optionsDF
 from .points import points, pointsDF
 from .premium import (
@@ -863,6 +865,10 @@ _INCLUDE_FUNCTIONS_REFDATA = [
     ("searchDF", searchDF),
     ("tags", tags),
     ("tagsDF", tagsDF),
+    # Metadata
+    # TODO move?
+    ("queryMetadata", queryMetadata),
+    ("queryMetadataDF", queryMetadataDF),
 ]
 
 _INCLUDE_FUNCTIONS_MARKET = [
@@ -1624,9 +1630,10 @@ class Client(object):
             raise PyEXception("Unrecognized api version: {}".format(version))
 
         if self._token.startswith("T") and version != "sandbox":
-            raise PyEXception(
-                "Using test key but attempting to connect to non-sandbox environment"
+            warnings.warn(
+                "Using test key but attempting to connect to non-sandbox environment. Switching to sandbox"
             )
+            version = "sandbox"
 
         self._version = version
         self._api_limit = api_limit
