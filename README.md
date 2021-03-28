@@ -187,11 +187,9 @@ or via async generators (after installing `pyEX[async]`):
 
 ### Full API
 
-Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec
+Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec. Implemented methods are provided in [CATALOG.md](CATALOG.md).
 
 ![](https://raw.githubusercontent.com/iexcloud/pyEX/main/docs/img/rtd.png)
-
-Implemented methods are provided in [CATALOG.md](CATALOG.md).
 
 All methods share a common naming convention. If the API method is called [technicals](https://iexcloud.io/docs/api/#technical-indicators), there will be `technicals` and `technicalsDF` methods on the client. Additionally, most methods are provided in a scope, e.g. [wti](https://iexcloud.io/docs/api/#oil-prices) is available as `client.wti` and `client.commodities.wti`, [analystDays](https://iexcloud.io/docs/api/#analyst-days) from Wall Street Horizon is available as `client.premium.analystDays`, etc.
 
