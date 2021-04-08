@@ -9,8 +9,17 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import (_get, _getAsync, _quoteSymbols, _raiseIfNotStr, _reindex,
-                      _strOrDate, _strToList, _toDatetime, json_normalize)
+from ..common import (
+    _get,
+    _getAsync,
+    _quoteSymbols,
+    _raiseIfNotStr,
+    _reindex,
+    _strOrDate,
+    _strToList,
+    _toDatetime,
+    json_normalize,
+)
 
 
 def iexTops(symbols=None, token="", version="stable", format="json"):
@@ -123,7 +132,10 @@ def iexDeep(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep", token=token, version=version, format=format)
 
@@ -133,7 +145,10 @@ async def iexDeepAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep", token=token, version=version, format=format)
 
@@ -204,7 +219,10 @@ def iexBook(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/book?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep/book?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep/book", token=token, version=version, format=format)
 
@@ -214,7 +232,10 @@ async def iexBookAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/book?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep/book?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep/book", token=token, version=version, format=format)
 
@@ -488,7 +509,10 @@ def iexTrades(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/trades?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep/trades?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep/trades", token=token, version=version, format=format)
 
@@ -498,7 +522,10 @@ async def iexTradesAsync(symbol=None, token="", version="stable", format="json")
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/trades?symbols=" + _quoteSymbols(symbol), token=token, version=version, format=format
+            "deep/trades?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep/trades", token=token, version=version, format=format)
 
