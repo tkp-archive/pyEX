@@ -108,3 +108,5 @@ keys.sh
 *.ipyhistory
 docs/modules.rst
 python_junit.xml
+.vscode
+docs/api.md
