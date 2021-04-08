@@ -12,6 +12,7 @@ import pandas as pd
 from ..common import (
     _get,
     _getAsync,
+    _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
     _strOrDate,
@@ -39,7 +40,7 @@ def iexTops(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return _get(
-            "tops?symbols=" + ",".join(symbols) + "%2b",
+            "tops?symbols=" + _quoteSymbols(",".join(symbols)),
             token=token,
             version=version,
             format=format,
@@ -52,7 +53,7 @@ async def iexTopsAsync(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return await _getAsync(
-            "tops?symbols=" + ",".join(symbols) + "%2b",
+            "tops?symbols=" + _quoteSymbols(",".join(symbols)),
             token=token,
             version=version,
             format=format,
@@ -83,7 +84,7 @@ def iexLast(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return _get(
-            "tops/last?symbols=" + ",".join(symbols) + "%2b",
+            "tops/last?symbols=" + _quoteSymbols(",".join(symbols)),
             token=token,
             version=version,
             format=format,
@@ -96,7 +97,7 @@ async def iexLastAsync(symbols=None, token="", version="stable", format="json"):
     symbols = _strToList(symbols)
     if symbols:
         return await _getAsync(
-            "tops/last?symbols=" + ",".join(symbols) + "%2b",
+            "tops/last?symbols=" + _quoteSymbols(",".join(symbols)),
             token=token,
             version=version,
             format=format,
@@ -131,7 +132,10 @@ def iexDeep(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep?symbols=" + symbol, token=token, version=version, format=format
+            "deep?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep", token=token, version=version, format=format)
 
@@ -141,7 +145,10 @@ async def iexDeepAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep?symbols=" + symbol, token=token, version=version, format=format
+            "deep?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep", token=token, version=version, format=format)
 
@@ -169,7 +176,7 @@ def iexAuction(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/auction?symbols=" + symbol,
+            "deep/auction?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -182,7 +189,7 @@ async def iexAuctionAsync(symbol=None, token="", version="stable", format="json"
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/auction?symbols=" + symbol,
+            "deep/auction?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -212,7 +219,10 @@ def iexBook(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/book?symbols=" + symbol, token=token, version=version, format=format
+            "deep/book?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep/book", token=token, version=version, format=format)
 
@@ -222,7 +232,10 @@ async def iexBookAsync(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/book?symbols=" + symbol, token=token, version=version, format=format
+            "deep/book?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep/book", token=token, version=version, format=format)
 
@@ -261,7 +274,7 @@ def iexOpHaltStatus(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/op-halt-status?symbols=" + symbol,
+            "deep/op-halt-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -274,7 +287,7 @@ async def iexOpHaltStatusAsync(symbol=None, token="", version="stable", format="
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/op-halt-status?symbols=" + symbol,
+            "deep/op-halt-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -314,7 +327,7 @@ def iexOfficialPrice(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/official-price?symbols=" + symbol,
+            "deep/official-price?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -327,7 +340,7 @@ async def iexOfficialPriceAsync(symbol=None, token="", version="stable", format=
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/official-price?symbols=" + symbol,
+            "deep/official-price?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -372,7 +385,7 @@ async def iexSecurityEventAsync(symbol=None, token="", version="stable", format=
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/security-event?symbols=" + symbol,
+            "deep/security-event?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -415,7 +428,7 @@ def iexSsrStatus(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/ssr-status?symbols=" + symbol,
+            "deep/ssr-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -428,7 +441,7 @@ async def iexSsrStatusAsync(symbol=None, token="", version="stable", format="jso
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/ssr-status?symbols=" + symbol,
+            "deep/ssr-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -496,7 +509,10 @@ def iexTrades(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/trades?symbols=" + symbol, token=token, version=version, format=format
+            "deep/trades?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return _get("deep/trades", token=token, version=version, format=format)
 
@@ -506,7 +522,10 @@ async def iexTradesAsync(symbol=None, token="", version="stable", format="json")
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/trades?symbols=" + symbol, token=token, version=version, format=format
+            "deep/trades?symbols=" + _quoteSymbols(symbol),
+            token=token,
+            version=version,
+            format=format,
         )
     return await _getAsync("deep/trades", token=token, version=version, format=format)
 
@@ -541,7 +560,7 @@ def iexTradeBreak(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/trade-breaks?symbols=" + symbol,
+            "deep/trade-breaks?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -554,7 +573,7 @@ async def iexTradeBreakAsync(symbol=None, token="", version="stable", format="js
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/trade-breaks?symbols=" + symbol,
+            "deep/trade-breaks?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -601,7 +620,7 @@ def iexTradingStatus(symbol=None, token="", version="stable", format="json"):
     _raiseIfNotStr(symbol)
     if symbol:
         return _get(
-            "deep/trading-status?symbols=" + symbol,
+            "deep/trading-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,
@@ -614,7 +633,7 @@ async def iexTradingStatusAsync(symbol=None, token="", version="stable", format=
     _raiseIfNotStr(symbol)
     if symbol:
         return await _getAsync(
-            "deep/trading-status?symbols=" + symbol,
+            "deep/trading-status?symbols=" + _quoteSymbols(symbol),
             token=token,
             version=version,
             format=format,

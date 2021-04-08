@@ -14,7 +14,7 @@ from ..common import _get, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
 
 def news(
     symbol,
-    count=10,
+    last=10,
     token="",
     version="stable",
     filter="",
@@ -27,7 +27,7 @@ def news(
 
     Args:
         symbol (str): Ticker to request
-        count (int): limit number of results
+        last (int): limit number of results
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -39,7 +39,7 @@ def news(
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/news/last/" + str(count), token, version, filter)
+    return _get("stock/" + symbol + "/news/last/" + str(last), token, version, filter)
 
 
 def _newsToDF(n):
@@ -52,14 +52,14 @@ def newsDF(*args, **kwargs):
     return _newsToDF(news(*args, **kwargs))
 
 
-def marketNews(count=10, token="", version="stable", filter="", format="json"):
+def marketNews(last=10, token="", version="stable", filter="", format="json"):
     """News about market
 
     https://iexcloud.io/docs/api/#news
     Continuous
 
     Args:
-        count (int): limit number of results
+        last (int): limit number of results
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -70,7 +70,7 @@ def marketNews(count=10, token="", version="stable", filter="", format="json"):
         dict: result
     """
     return _get(
-        "stock/market/news/last/" + str(count),
+        "stock/market/news/last/" + str(last),
         token=token,
         version=version,
         filter=filter,
