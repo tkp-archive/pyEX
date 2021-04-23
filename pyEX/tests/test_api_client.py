@@ -57,6 +57,8 @@ class TestPyEXClientAPI:
             "cryptoSymbolsList",
             "isinLookup",
             "isinLookupDF",
+            "ricLookup",
+            "ricLookupDF",
             "corporateActions",
             "corporateActionsDF",
             "refDividends",

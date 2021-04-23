@@ -548,6 +548,8 @@ class TestPyEXAPI:
             "returnOfCapital",
             "returnOfCapitalDF",
             "returns",
+            "ricLookup",
+            "ricLookupDF",
             "rightToPurchase",
             "rightToPurchaseDF",
             "rightsIssue",
