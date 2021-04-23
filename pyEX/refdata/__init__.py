@@ -13,16 +13,22 @@ from .exchanges import (
     internationalExchangesDF,
 )
 from .figi import figi, figiDF
+from .isin import isinLookup, isinLookupDF
 from .refdata import corporateActions, corporateActionsDF, directory, directoryDF
 from .refdata import dividends as refDividends
 from .refdata import dividendsDF as refDividendsDF
 from .refdata import nextDayExtDate, nextDayExtDateDF
+from .ric import ricLookup, ricLookupDF
+
 from .search import search, searchDF
 from .sectors import sectors, sectorsDF, tags, tagsDF
 from .symbols import (
     cryptoSymbols,
     cryptoSymbolsDF,
     cryptoSymbolsList,
+    futuresSymbols,
+    futuresSymbolsDF,
+    futuresSymbolsList,
     fxSymbols,
     fxSymbolsDF,
     fxSymbolsList,
@@ -32,8 +38,6 @@ from .symbols import (
     internationalSymbols,
     internationalSymbolsDF,
     internationalSymbolsList,
-    isinLookup,
-    isinLookupDF,
     mutualFundSymbols,
     mutualFundSymbolsDF,
     mutualFundSymbolsList,

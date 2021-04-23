@@ -234,6 +234,31 @@ def cryptoSymbols(token="", version="stable", filter="", format="json"):
     )
 
 
+@_expire(hour=8, tz=_UTC)
+def futuresSymbols(token="", version="stable", filter="", format="json"):
+    """This provides a full list of supported futures by IEX Cloud.
+
+    https://iexcloud.io/docs/api/#futures-symbols
+    8am ET Tue-Sat
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+    Returns:
+        dict or DataFrame or list: result
+    """
+    return _get(
+        "ref-data/futures/symbols",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
+
+
 @wraps(symbols)
 def symbolsDF(*args, **kwargs):
     df = pd.DataFrame(symbols(*args, **kwargs))
@@ -302,6 +327,13 @@ def cryptoSymbolsDF(*args, **kwargs):
     return df
 
 
+@wraps(futuresSymbols)
+def futuresSymbolsDF(*args, **kwargs):
+    df = _reindex(_toDatetime(pd.DataFrame(futuresSymbols(*args, **kwargs))), "symbol")
+    df.sort_index(inplace=True)
+    return df
+
+
 @wraps(symbols)
 def symbolsList(*args, **kwargs):
     kwargs["filter"] = "symbol"
@@ -360,31 +392,7 @@ def cryptoSymbolsList(*args, **kwargs):
     return sorted([x["symbol"] for x in cryptoSymbols(*args, **kwargs)])
 
 
-def isinLookup(isin, token="", version="stable", filter="", format="json"):
-    """This call returns an array of symbols that IEX Cloud supports for API calls.
-
-    https://iexcloud.io/docs/api/#isin-mapping
-    8am, 9am, 12pm, 1pm UTC daily
-
-    Args:
-        isin (str): isin to lookup
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame or list: result
-    """
-    return _get(
-        "ref-data/isin?isin={}".format(isin),
-        token=token,
-        version=version,
-        filter=filter,
-        format=format,
-    )
-
-
-@wraps(isinLookup)
-def isinLookupDF(*args, **kwargs):
-    return pd.DataFrame(isinLookup(*args, **kwargs))
+@wraps(futuresSymbols)
+def futuresSymbolsList(*args, **kwargs):
+    kwargs["filter"] = "symbol"
+    return sorted([x["symbol"] for x in futuresSymbols(*args, **kwargs)])
