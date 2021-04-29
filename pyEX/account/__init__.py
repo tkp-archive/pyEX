@@ -63,8 +63,8 @@ def metadata(token="", version="stable", format="json"):
 
 
 @wraps(metadata)
-def metadataDF(token="", version="stable", format="json"):
-    return pd.DataFrame([metadata(token=token, version=version, format=format)])
+def metadataDF(*args, **kwargs):
+    return pd.DataFrame([metadata(*args, **kwargs)])
 
 
 def payAsYouGo(allow=False, token="", version="stable", format="json"):
@@ -114,8 +114,8 @@ def usage(type=None, token="", version="stable", format="json"):
 
 
 @wraps(usage)
-def usageDF(type=None, token="", version="stable", format="json"):
-    return json_normalize(usage(type, token=token, version=version, format=format))
+def usageDF(*args, **kwargs):
+    return json_normalize(usage(*args, **kwargs))
 
 
 def status(token="", version="stable", format="json"):
@@ -135,5 +135,5 @@ def status(token="", version="stable", format="json"):
 
 
 @wraps(status)
-def statusDF(token="", version="stable", format="json"):
-    return json_normalize(status(token=token, version=version, format=format))
+def statusDF(*args, **kwargs):
+    return json_normalize(status(*args, **kwargs))

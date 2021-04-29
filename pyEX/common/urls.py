@@ -105,8 +105,11 @@ def _getIEXCloudBase(
     if filter:
         params["filter"] = filter
 
-    if format not in ("json", "binary") and isinstance(format, str):
+    if format not in ("json", "binary", "schema") and isinstance(format, str):
         params["format"] = format
+    elif format == "schema":
+        # add schema param
+        params["schema"] = True
 
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
 
@@ -115,6 +118,8 @@ def _getIEXCloudBase(
             return resp.json()
         elif format == "binary":
             return resp.content
+        elif format == "schema":
+            return _parseSchema(resp.json())
         return resp.text
     raise PyEXception("Response %d - " % resp.status_code, resp.text)
 
@@ -554,3 +559,12 @@ def overrideSSEUrl(url="", env=""):
     else:
         # reset
         _SSE_URL_PREFIX = _SSE_URL_PREFIX_ORIG
+
+
+def _parseSchema(data):
+    if isinstance(data, list) and len(data) > 0:
+        # take first value
+        data = data[0]
+    if data:
+        return data
+    return {}
