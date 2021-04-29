@@ -21,6 +21,7 @@ from .checks import (
     _USAGE_TYPES,
     _checkPeriodLast,
     _dateRange,
+    _overrideFormat,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,

@@ -503,6 +503,10 @@ def _timeseriesWrapper(kwargs, key=True, subkey=True):
             raise PyEXception("Cannot pass `subkey` kwarg to timeseries, already used")
 
 
+def _overrideFormat(kwargs):
+    kwargs["format"] = "json"
+
+
 try:
     if pd.__version__ > "1.":
         json_normalize = pd.json_normalize
