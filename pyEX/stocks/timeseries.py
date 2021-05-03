@@ -168,7 +168,9 @@ def timeSeries(
 
 @wraps(timeSeries)
 def timeSeriesDF(*args, **kwargs):
-    return _toDatetime(json_normalize(timeSeries(*args, **kwargs)), reformatcols=["datetime"])
+    return _toDatetime(
+        json_normalize(timeSeries(*args, **kwargs)), reformatcols=["datetime"]
+    )
 
 
 @wraps(timeSeries)
