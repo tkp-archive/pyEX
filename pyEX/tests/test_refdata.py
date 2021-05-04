@@ -56,7 +56,7 @@ class TestAll:
             internationalSymbols()
             internationalSymbols("GB")
             internationalSymbols(exchange="test")
-            futuresSymbols()
+            # futuresSymbols()
             mock.return_value.json = MagicMock(
                 return_value={"currencies": [], "pairs": []}
             )
@@ -78,7 +78,7 @@ class TestAll:
             c.internationalSymbolsDF()
             c.internationalSymbolsDF("GB")
             c.internationalSymbolsDF(exchange="test")
-            c.futuresSymbolsDF()
+            # c.futuresSymbolsDF()
 
             c.symbolsList()
             c.iexSymbolsList()
@@ -87,7 +87,7 @@ class TestAll:
             c.internationalSymbolsList()
             c.internationalSymbolsList("GB")
             c.internationalSymbolsList(exchange="test")
-            c.futuresSymbolsList()
+            # c.futuresSymbolsList()
 
             mock.return_value.json = MagicMock(
                 return_value={"currencies": [], "pairs": []}
