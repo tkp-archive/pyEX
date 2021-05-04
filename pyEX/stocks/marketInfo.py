@@ -347,7 +347,7 @@ def marketShortInterestDF(*args, **kwargs):
 
 def upcomingEvents(
     symbol="",
-    refid="",
+    exactDate="",
     token="",
     version="stable",
     filter="",
@@ -359,7 +359,7 @@ def upcomingEvents(
 
     Args:
         symbol (str): Symbol to look up
-        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        exactDate (str): exactDate Optional. Exact date for which to get data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -371,9 +371,15 @@ def upcomingEvents(
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
+
     if symbol:
-        return _get("stock/" + symbol + "/upcoming-events", token, version, filter)
-    return _get("stock/market/upcoming-events", token, version, filter)
+        url = "stock/{}/upcoming-events".format(symbol)
+    else:
+        url = "stock/market/upcoming-events"
+
+    if exactDate:
+        url += "?exactDate={}".format(exactDate)
+    return _get(url, token, version, filter)
 
 
 def _upcomingToDF(upcoming):
@@ -390,7 +396,7 @@ def upcomingEventsDF(*args, **kwargs):
 
 def upcomingEarnings(
     symbol="",
-    refid="",
+    exactDate="",
     token="",
     version="stable",
     filter="",
@@ -402,7 +408,7 @@ def upcomingEarnings(
 
     Args:
         symbol (str): Symbol to look up
-        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        exactDate (str): exactDate Optional. Exact date for which to get data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -415,8 +421,13 @@ def upcomingEarnings(
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get("stock/" + symbol + "/upcoming-earnings", token, version, filter)
-    return _get("stock/market/upcoming-earnings", token, version, filter)
+        url = "stock/{}/upcoming-earnings".format(symbol)
+    else:
+        url = "stock/market/upcoming-earnings"
+
+    if exactDate:
+        url += "?exactDate={}".format(exactDate)
+    return _get(url, token, version, filter)
 
 
 @wraps(upcomingEarnings)
@@ -426,7 +437,7 @@ def upcomingEarningsDF(*args, **kwargs):
 
 def upcomingDividends(
     symbol="",
-    refid="",
+    exactDate="",
     token="",
     version="stable",
     filter="",
@@ -438,7 +449,7 @@ def upcomingDividends(
 
     Args:
         symbol (str): Symbol to look up
-        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        exactDate (str): exactDate Optional. Exact date for which to get data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -451,8 +462,13 @@ def upcomingDividends(
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get("stock/" + symbol + "/upcoming-dividends", token, version, filter)
-    return _get("stock/market/upcoming-dividends", token, version, filter)
+        url = "stock/{}/upcoming-dividends".format(symbol)
+    else:
+        url = "stock/market/upcoming-dividends"
+
+    if exactDate:
+        url += "?exactDate={}".format(exactDate)
+    return _get(url, token, version, filter)
 
 
 @wraps(upcomingDividends)
@@ -462,7 +478,7 @@ def upcomingDividendsDF(*args, **kwargs):
 
 def upcomingSplits(
     symbol="",
-    refid="",
+    exactDate="",
     token="",
     version="stable",
     filter="",
@@ -474,7 +490,7 @@ def upcomingSplits(
 
     Args:
         symbol (str): Symbol to look up
-        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        exactDate (str): exactDate Optional. Exact date for which to get data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -487,8 +503,13 @@ def upcomingSplits(
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get("stock/" + symbol + "/upcoming-splits", token, version, filter)
-    return _get("stock/market/upcoming-splits", token, version, filter)
+        url = "stock/{}/upcoming-splits".format(symbol)
+    else:
+        url = "stock/market/upcoming-splits"
+
+    if exactDate:
+        url += "?exactDate={}".format(exactDate)
+    return _get(url, token, version, filter)
 
 
 @wraps(upcomingSplits)
@@ -498,7 +519,7 @@ def upcomingSplitsDF(*args, **kwargs):
 
 def upcomingIPOs(
     symbol="",
-    refid="",
+    exactDate="",
     token="",
     version="stable",
     filter="",
@@ -510,7 +531,7 @@ def upcomingIPOs(
 
     Args:
         symbol (str): Symbol to look up
-        refid (str): Optional. Id that matches the refid field returned in the response object. This allows you to pull a specific event for a symbol.
+        exactDate (str): exactDate Optional. Exact date for which to get data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -523,8 +544,13 @@ def upcomingIPOs(
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
     if symbol:
-        return _get("stock/" + symbol + "/upcoming-ipos", token, version, filter)
-    return _get("stock/market/upcoming-ipos", token, version, filter)
+        url = "stock/{}/upcoming-ipos".format(symbol)
+    else:
+        url = "stock/market/upcoming-ipos"
+
+    if exactDate:
+        url += "?exactDate={}".format(exactDate)
+    return _get(url, token, version, filter)
 
 
 @wraps(upcomingIPOs)
