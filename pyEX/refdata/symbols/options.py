@@ -7,7 +7,7 @@
 #
 from functools import wraps
 
-from ..common import _UTC, _expire, _get, json_normalize
+from ...common import _UTC, _expire, _get, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)

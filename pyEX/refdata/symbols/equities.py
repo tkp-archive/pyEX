@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _UTC, _expire, _get, _reindex, _toDatetime
+from ...common import _UTC, _expire, _get, _reindex, _toDatetime
 
 
 @_expire(hour=8, tz=_UTC)
