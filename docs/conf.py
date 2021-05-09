@@ -16,7 +16,6 @@
 import os
 import os.path
 import subprocess
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -206,8 +205,12 @@ def run_copyreadme(_):
     readme = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "README.md"))
     with open(out, "w") as fp1:
         with open(readme, "r") as fp2:
+            fp1.write("# pyEX \n\n")
             for line in fp2:
-                if "src=" in line:
+                if "src=" in line and line.startswith("#"):
+                    # <img> header
+                    fp1.write(line[1:] + "\n")
+                elif "src=" in line and "raw.githubusercontent" not in line:
                     # <img>
                     fp1.write(line.replace("docs/", ""))
                 elif "](docs/" in line:
