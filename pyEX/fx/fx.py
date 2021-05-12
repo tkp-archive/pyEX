@@ -10,7 +10,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _expire, _get, _reindex, _strOrDate
+from ..common import _expire, _get, _reindex, _strOrDate, _toDatetime
 
 
 def latestFX(symbols=None, token="", version="stable", filter="", format="json"):
@@ -52,7 +52,7 @@ def latestFX(symbols=None, token="", version="stable", filter="", format="json")
 
 @wraps(latestFX)
 def latestFXDF(*args, **kwargs):
-    return pd.DataFrame(latestFX(*args, **kwargs))
+    return _toDatetime(pd.DataFrame(latestFX(*args, **kwargs)), tcols=["timestamp"])
 
 
 def convertFX(
