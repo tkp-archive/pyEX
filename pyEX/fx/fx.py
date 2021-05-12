@@ -52,11 +52,7 @@ def latestFX(symbols=None, token="", version="stable", filter="", format="json")
 
 @wraps(latestFX)
 def latestFXDF(*args, **kwargs):
-    return _toDatetime(
-      pd.DataFrame(latestFX(*args, **kwargs)),
-      tcols=["timestamp"]
-    )
-
+    return _toDatetime(pd.DataFrame(latestFX(*args, **kwargs)), tcols=["timestamp"])
 
 
 def convertFX(
