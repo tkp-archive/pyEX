@@ -10,11 +10,13 @@ from __future__ import print_function
 from datetime import datetime
 from urllib.parse import quote
 
+import re
 import pandas as pd
 from six import string_types
 
 from .exception import PyEXception
 
+_TIMEFRAME_REGEX = "^((q|Q)[1-4]|(h|H)[1-2])?(1|2)(0|9)[0-9][0-9]"
 _TIMEFRAME_CHART = [
     "max",
     "5y",
@@ -399,7 +401,7 @@ def _strOrDate(st):
 
 def _dateRange(st):
     """internal"""
-    if st not in _DATE_RANGES:
+    if st not in _DATE_RANGES and not re.search(_TIMEFRAME_REGEX, st):
         raise PyEXception("Must be a valid date range: got {}".format(st))
     return st
 
