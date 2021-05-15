@@ -16,7 +16,8 @@ from six import string_types
 
 from .exception import PyEXception
 
-_TIMEFRAME_REGEX = "^((q|Q)[1-4]|(h|H)[1-2])?(1|2)(0|9)[0-9][0-9]"
+_TIMEFRAME_REGEX_QHY = "^((q|Q)[1-4]|(h|H)[1-2])?(1|2)(0|9)[0-9][0-9]"
+_TIMEFRAME_REGEX = "^[0-9]+(y|q|m|w|d)"
 _TIMEFRAME_CHART = [
     "max",
     "5y",
@@ -401,7 +402,7 @@ def _strOrDate(st):
 
 def _dateRange(st):
     """internal"""
-    if st not in _DATE_RANGES and not re.search(_TIMEFRAME_REGEX, st):
+    if st not in _DATE_RANGES and not re.search(_TIMEFRAME_REGEX, st) and not re.search(_TIMEFRAME_REGEX_QHY, st):
         raise PyEXception("Must be a valid date range: got {}".format(st))
     return st
 
