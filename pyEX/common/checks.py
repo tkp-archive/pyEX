@@ -402,7 +402,11 @@ def _strOrDate(st):
 
 def _dateRange(st):
     """internal"""
-    if st not in _DATE_RANGES and not re.search(_TIMEFRAME_REGEX, st) and not re.search(_TIMEFRAME_REGEX_QHY, st):
+    if (
+        st not in _DATE_RANGES
+        and not re.search(_TIMEFRAME_REGEX, st)
+        and not re.search(_TIMEFRAME_REGEX_QHY, st)
+    ):
         raise PyEXception("Must be a valid date range: got {}".format(st))
     return st
 
