@@ -8,6 +8,7 @@
 from functools import wraps
 
 from ..common import (
+    PyEXception,
     _dateRange,
     _get,
     _quoteSymbols,
@@ -46,6 +47,7 @@ def timeSeries(
     on=None,
     last=0,
     first=0,
+    sort="",
     token="",
     version="stable",
     filter="",
@@ -75,6 +77,7 @@ def timeSeries(
         on (str or datetime): Returns data on the given date. Format YYYY-MM-DD
         last (int): Returns the latest n number of records in the series
         first (int): Returns the first n number of records in the series
+        sort (str): Order of results
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -160,6 +163,14 @@ def timeSeries(
         base_url += "last={}&".format(str(last))
     if first:
         base_url += "first={}&".format(str(first))
+    if sort:
+        if sort.lower() not in (
+            "asc",
+            "desc",
+        ):
+            raise PyEXception("Sort must be in (asc, desc), got: {}".format(sort))
+        base_url += "sort={}&".format(sort)
+
     if extra_params:
         base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
 
