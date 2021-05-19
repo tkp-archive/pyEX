@@ -141,7 +141,7 @@ def timeSeries(
         base_url += "range={}&".format(range)
 
     if calendar:
-      base_url += "calendar={}&".format(str(calendar))
+        base_url += "calendar={}&".format(str(calendar))
 
     if not last and (not from_ or not to_):
         base_url += "limit={}&".format(str(limit))
