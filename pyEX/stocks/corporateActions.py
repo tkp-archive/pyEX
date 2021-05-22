@@ -10,7 +10,7 @@ from functools import wraps
 import pandas as pd
 
 from ..common import _quoteSymbols, _raiseIfNotStr, _timeseriesWrapper
-from .timeseries import timeSeries
+from ..timeseries import timeSeries
 
 
 def bonusIssue(
@@ -36,7 +36,7 @@ def bonusIssue(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -84,7 +84,7 @@ def distribution(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -138,7 +138,7 @@ def dividends(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -232,7 +232,7 @@ def rightsIssue(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -280,7 +280,7 @@ def rightToPurchase(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -328,7 +328,7 @@ def securityReclassification(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -376,7 +376,7 @@ def securitySwap(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -424,7 +424,7 @@ def spinoff(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result
@@ -472,7 +472,7 @@ def splits(
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
         format (str): return format, defaults to json
 
-        Supports all kwargs from `pyEX.stocks.timeseries.timeSeries`
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
 
     Returns:
         dict or DataFrame: result

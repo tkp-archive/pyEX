@@ -135,6 +135,16 @@ class TestPyEXClientAPI:
             assert hasattr(self.c, meth)
             assert hasattr(self.c.stats, meth)
 
+    def test_all_ts(self):
+        for meth in (
+            "timeSeriesInventory",
+            "timeSeriesInventoryDF",
+            "timeSeries",
+            "timeSeriesDF",
+        ):
+            assert hasattr(self.c, meth)
+            assert hasattr(self.c, meth)
+
     def test_all_stock(self):
         for meth in (
             "advancedStats",
@@ -177,6 +187,7 @@ class TestPyEXClientAPI:
             "spreadDF",
             "financials",
             "financialsDF",
+            "fortyF",
             "fundOwnership",
             "fundOwnershipDF",
             "fundamentals",
@@ -253,10 +264,7 @@ class TestPyEXClientAPI:
             "tenK",
             "technicals",
             "technicalsDF",
-            "timeSeriesInventory",
-            "timeSeriesInventoryDF",
-            "timeSeries",
-            "timeSeriesDF",
+            "twentyF",
             "upcomingEvents",
             "upcomingEventsDF",
             "upcomingEarnings",
@@ -420,7 +428,7 @@ class TestPyEXClientAPI:
             assert hasattr(self.c.crypto, meth)
 
     def test_all_files(self):
-        for meth in ("files", "download"):
+        for meth in ("file", "download"):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.files, meth)
 
@@ -543,7 +551,7 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c.premium, meth)
 
-    def test_all_files(self):
+    def test_all_files_premium(self):
         for meth in (
             "valuEngine",
             "valuEngineDownload",
@@ -552,7 +560,7 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c.premium.files, meth)
 
-    def test_all_rates(self):
+    def test_all_treasuries(self):
         for meth in (
             "thirtyYear",
             "twentyYear",
