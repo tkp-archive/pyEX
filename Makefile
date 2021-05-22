@@ -23,6 +23,9 @@ talib_windows_py37:  ## install talib for windows
 talib_windows_py38:  ## install talib for windows
 	python -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/TA_Lib-0.4.20-cp38-cp38-win_amd64.whl
 
+talib_windows_py39:  ## install talib for windows
+	python -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/TA_Lib-0.4.20-cp39-cp39-win_amd64.whl
+
 annotate: ## MyPy type annotation check
 	python -m mypy -s pyEX
 
