@@ -6,4 +6,9 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
-from .timeseries import timeSeries, timeSeriesDF
+from .timeseries import (
+    timeSeries,
+    timeSeriesDF,
+    timeSeriesInventory,
+    timeSeriesInventoryDF,
+)
