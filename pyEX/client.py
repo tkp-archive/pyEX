@@ -1220,7 +1220,7 @@ _INCLUDE_FUNCTIONS = (
 
 _INCLUDE_FILES = [
     # Files
-    ("files", files),
+    ("file", files),
     ("download", download),
 ]
 
@@ -1766,6 +1766,8 @@ class Client(object):
 
         # rebind files
         for name, method in _INCLUDE_FILES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
             setattr(self.files, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self.files, name).__doc__ = method.__doc__
 

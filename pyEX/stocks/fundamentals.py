@@ -413,31 +413,31 @@ def stockSplitsDF(*args, **kwargs):
 
 @wraps(timeSeries)
 def tenQ(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
+    kwargs.pop("id", None)
+    kwargs.pop("key", None)
+    kwargs.pop("subkey", None)
     return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
 
 
 @wraps(timeSeries)
 def tenK(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
+    kwargs.pop("id", None)
+    kwargs.pop("key", None)
+    kwargs.pop("subkey", None)
     return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-K", **kwargs)
 
 
 @wraps(timeSeries)
 def twentyF(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
+    kwargs.pop("id", None)
+    kwargs.pop("key", None)
+    kwargs.pop("subkey", None)
     return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="20-F", **kwargs)
 
 
 @wraps(timeSeries)
 def fortyF(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
+    kwargs.pop("id", None)
+    kwargs.pop("key", None)
+    kwargs.pop("subkey", None)
     return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="40-F", **kwargs)
