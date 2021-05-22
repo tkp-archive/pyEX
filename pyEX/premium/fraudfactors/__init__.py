@@ -8,7 +8,7 @@
 from functools import wraps
 
 from ...common import _UTC, _expire
-from ...stocks import timeSeries, timeSeriesDF
+from ...timeseries import timeSeries, timeSeriesDF
 
 
 @_expire(hour=8, tz=_UTC)

@@ -262,7 +262,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(
-                return_value=[{"financials": [{"reportDate": 1}], "symbol": "aapl"}]
+                return_value=[{"financials": [{"reportDate": 1}], "symbol": SYMBOL}]
             )
             keyStatsDF("test")
 
@@ -283,7 +283,7 @@ class TestAll:
             mock.return_value.json = MagicMock(
                 return_value={
                     "financials": [{"reportDate": 1, "b": 2}],
-                    "symbol": "aapl",
+                    "symbol": SYMBOL,
                 }
             )
             financialsDF("test")
@@ -322,7 +322,7 @@ class TestAll:
             mock.return_value.json = MagicMock(
                 return_value={
                     "earnings": [{"reportDate": 1, "b": 2}],
-                    "symbol": "aapl",
+                    "symbol": SYMBOL,
                 }
             )
             earningsDF(SYMBOL)
@@ -578,7 +578,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.json = MagicMock(return_value=[])
             mock.return_value.status_code = 200
-            largestTrades("aapl")
+            largestTrades(SYMBOL)
 
     def test_largestTradesDF(self):
         from pyEX import largestTradesDF
@@ -701,7 +701,7 @@ class TestAll:
             mock.return_value.json = MagicMock(
                 return_value={
                     "balancesheet": [{"reportDate": 1, "b": 2}],
-                    "symbol": "aapl",
+                    "symbol": SYMBOL,
                 }
             )
 
@@ -723,7 +723,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(
-                return_value={"cashflow": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
+                return_value={"cashflow": [{"reportDate": 1, "b": 2}], "symbol": SYMBOL}
             )
 
             c = Client(version="sandbox")
@@ -744,7 +744,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(
-                return_value={"income": [{"reportDate": 1, "b": 2}], "symbol": "aapl"}
+                return_value={"income": [{"reportDate": 1, "b": 2}], "symbol": SYMBOL}
             )
 
             c = Client(version="sandbox")
@@ -1078,25 +1078,34 @@ class TestAll:
             splitsDF(SYMBOL)
             splitsDF(SYMBOL, "test")
 
+    def test_reportedFinancials(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.tenK(SYMBOL)
+        c.tenQ(SYMBOL)
+        c.twentyF("BABA")
+        c.fortyF("SHOP")
+
     def test_technicals(self):
         """test this one for real since its complicated"""
         from pyEX import Client
 
         c = Client(version="sandbox")
-        c.technicals("aapl", "rsi")
-        c.technicals("aapl", "rsi", "1m")
-        c.technicals("aapl", "kvo", "1m", 2, 5)
-        c.technicals("aapl", "macd", "1m", 12, 26, 9)
+        c.technicals(SYMBOL, "rsi")
+        c.technicals(SYMBOL, "rsi", "1m")
+        c.technicals(SYMBOL, "kvo", "1m", 2, 5)
+        c.technicals(SYMBOL, "macd", "1m", 12, 26, 9)
 
     def test_technicalsDF(self):
         """test this one for real since its complicated"""
         from pyEX import Client
 
         c = Client(version="sandbox")
-        c.technicalsDF("aapl", "rsi")
-        c.technicalsDF("aapl", "rsi", "1m")
-        c.technicalsDF("aapl", "kvo", "1m", 2, 5)
-        c.technicalsDF("aapl", "macd", "1m", 12, 26, 9)
+        c.technicalsDF(SYMBOL, "rsi")
+        c.technicalsDF(SYMBOL, "rsi", "1m")
+        c.technicalsDF(SYMBOL, "kvo", "1m", 2, 5)
+        c.technicalsDF(SYMBOL, "macd", "1m", 12, 26, 9)
 
     def test_upcomingEvents(self):
         from pyEX import (
