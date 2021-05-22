@@ -35,20 +35,27 @@ from .corporateActions import (
     splits,
     splitsDF,
 )
-from .fundamentals import balanceSheet, balanceSheetDF, cashFlow, cashFlowDF
 from .fundamentals import dividends as dividendsBasic
 from .fundamentals import dividendsDF as dividendsBasicDF
 from .fundamentals import (
+    balanceSheet,
+    balanceSheetDF,
+    cashFlow,
+    cashFlowDF,
     earnings,
     earningsDF,
     financials,
     financialsDF,
+    fortyF,
     fundamentals,
     fundamentalsDF,
     incomeStatement,
     incomeStatementDF,
     stockSplits,
     stockSplitsDF,
+    tenK,
+    tenQ,
+    twentyF,
 )
 from .iex import (
     iexAuction,
@@ -192,8 +199,4 @@ from .research import (
 )
 from .stocks import shortInterest, shortInterestDF, threshold, thresholdDF
 from .timeseries import (
-    tenK,
-    tenQ,
-    twentyF,
-    fortyF,
 )
