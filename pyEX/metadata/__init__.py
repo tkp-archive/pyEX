@@ -6,7 +6,9 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from functools import wraps
+
 import pandas as pd
+
 from ..common import _get
 
 
@@ -25,6 +27,8 @@ def queryMetadata(
         format (str): output format
     """
     url = "metadata/time-series"
+    if not id and key:
+        id = "any"
     if id:
         url += "/{}".format(id)
         if key:
