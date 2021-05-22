@@ -22,6 +22,7 @@ from ..common import (
     _reindex,
     _toDatetime,
 )
+from ..timeseries import timeSeries
 
 
 @_expire(hour=8, tz=_UTC)
@@ -408,3 +409,35 @@ def _splitsToDF(d):
 @wraps(stockSplits)
 def stockSplitsDF(*args, **kwargs):
     return _splitsToDF(stockSplits(*args, **kwargs))
+
+
+@wraps(timeSeries)
+def tenQ(symbol, **kwargs):
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
+
+
+@wraps(timeSeries)
+def tenK(symbol, **kwargs):
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-K", **kwargs)
+
+
+@wraps(timeSeries)
+def twentyF(symbol, **kwargs):
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="20-F", **kwargs)
+
+
+@wraps(timeSeries)
+def fortyF(symbol, **kwargs):
+    kwargs.pop("id")
+    kwargs.pop("key")
+    kwargs.pop("subkey")
+    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="40-F", **kwargs)

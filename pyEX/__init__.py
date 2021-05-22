@@ -42,6 +42,7 @@ from .streaming.sentiment import *
 from .streaming.sse import *
 from .streaming.stock import *
 from .streaming.ws import *
+from .timeseries import *
 
 try:
     from .caching import *

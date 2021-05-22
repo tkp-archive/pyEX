@@ -274,6 +274,7 @@ from .stocks import (
     estimatesDF,
     financials,
     financialsDF,
+    fortyF,
     fundamentals,
     fundamentalsDF,
     fundOwnership,
@@ -401,10 +402,7 @@ from .stocks import (
     tenQ,
     threshold,
     thresholdDF,
-    timeSeries,
-    timeSeriesDF,
-    timeSeriesInventory,
-    timeSeriesInventoryDF,
+    twentyF,
     upcomingDividends,
     upcomingDividendsDF,
     upcomingEarnings,
@@ -467,6 +465,13 @@ from .streaming.stock import (
     stocksUSNoUTPSSEAsync,
     stocksUSSSE,
     stocksUSSSEAsync,
+)
+
+from .timeseries import (
+    timeSeries,
+    timeSeriesDF,
+    timeSeriesInventory,
+    timeSeriesInventoryDF,
 )
 
 try:
@@ -1031,12 +1036,10 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("stockSplitsDF", stockSplitsDF),
     ("tenQ", tenQ),
     ("tenK", tenK),
+    ("twentyF", twentyF),
+    ("fortyF", fortyF),
     ("technicals", technicals),
     ("technicalsDF", technicalsDF),
-    ("timeSeriesInventory", timeSeriesInventory),
-    ("timeSeriesInventoryDF", timeSeriesInventoryDF),
-    ("timeSeries", timeSeries),
-    ("timeSeriesDF", timeSeriesDF),
     ("upcomingEvents", upcomingEvents),
     ("upcomingEventsDF", upcomingEventsDF),
     ("upcomingEarnings", upcomingEarnings),
@@ -1171,6 +1174,14 @@ _INCLUDE_FUNCTIONS_POINTS = [
 ]
 
 
+_INCLUDE_FUNCTIONS_TS = [
+    ("timeSeriesInventory", timeSeriesInventory),
+    ("timeSeriesInventoryDF", timeSeriesInventoryDF),
+    ("timeSeries", timeSeries),
+    ("timeSeriesDF", timeSeriesDF),
+]
+
+
 _INCLUDE_FUNCTIONS_FX = [
     # FX
     ("latestFX", latestFX),
@@ -1202,6 +1213,7 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_ACCOUNT
     + _INCLUDE_FUNCTIONS_ALTERNATIVE
     + _INCLUDE_FUNCTIONS_POINTS
+    + _INCLUDE_FUNCTIONS_TS
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
@@ -1684,6 +1696,10 @@ class Client(object):
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.points, name, getattr(self, name))
 
+        for name, method in _INCLUDE_FUNCTIONS_TS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
@@ -1811,6 +1827,10 @@ for name, method in _INCLUDE_FUNCTIONS_POINTS:
     setattr(Client, name, method)
     getattr(Client, name).__doc__ = method.__doc__
     setattr(Client.points, name, getattr(Client, name))
+
+for name, method in _INCLUDE_FUNCTIONS_TS:
+    setattr(Client, name, method)
+    getattr(Client, name).__doc__ = method.__doc__
 
 for name, method in _INCLUDE_FUNCTIONS_RULES:
     setattr(Client, name, method)

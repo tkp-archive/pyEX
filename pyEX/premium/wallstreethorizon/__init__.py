@@ -8,7 +8,7 @@
 from functools import wraps
 
 from ...common import _interval
-from ...stocks import timeSeries, timeSeriesDF
+from ...timeseries import timeSeries, timeSeriesDF
 
 
 @_interval(hours=4)

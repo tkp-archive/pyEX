@@ -184,19 +184,3 @@ def timeSeriesDF(*args, **kwargs):
         json_normalize(timeSeries(*args, **kwargs)),
         reformatcols=["datetime", "date", "updated"],
     )
-
-
-@wraps(timeSeries)
-def tenQ(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
-    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-Q", **kwargs)
-
-
-@wraps(timeSeries)
-def tenK(symbol, **kwargs):
-    kwargs.pop("id")
-    kwargs.pop("key")
-    kwargs.pop("subkey")
-    return timeSeries(id="REPORTED_FINANCIALS", key=symbol, subkey="10-K", **kwargs)

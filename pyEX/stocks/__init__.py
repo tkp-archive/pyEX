@@ -194,6 +194,8 @@ from .stocks import shortInterest, shortInterestDF, threshold, thresholdDF
 from .timeseries import (
     tenK,
     tenQ,
+    twentyF,
+    fortyF,
     timeSeries,
     timeSeriesDF,
     timeSeriesInventory,
