@@ -57,9 +57,7 @@ from ...common import _UTC, _expire, _get, json_normalize
 #     return ret
 
 
-def optionsSymbols(
-    symbol="", token="", version="stable", filter="", format="json"
-):
+def optionsSymbols(symbol="", token="", version="stable", filter="", format="json"):
     """This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
     https://iexcloud.io/docs/api/#options-symbols
