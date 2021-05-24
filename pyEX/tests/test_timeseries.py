@@ -41,3 +41,10 @@ class TestAll:
                 return_value={"test": [4], "symbol": ["test"]}
             )
             timeSeriesDF("NEWS", last=1)
+
+    def test_timeseries_subattribute(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.timeSeries("NEWS", subattribute={"lang": "en"})
+        c.timeSeries("NEWS", subattribute=[("lang", "en")])
