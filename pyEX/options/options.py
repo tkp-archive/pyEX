@@ -9,7 +9,9 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _get, _raiseIfNotStr, _toDatetime
+from ..common import _get, _raiseIfNotStr, _toDatetime, _timeseriesWrapper
+
+from ..timeseries import timeSeries
 
 
 def optionExpirations(symbol, token="", version="stable", filter="", format="json"):
@@ -38,7 +40,7 @@ def optionExpirations(symbol, token="", version="stable", filter="", format="jso
     )
 
 
-def options(
+def optionsStock(
     symbol,
     expiration,
     side="",
@@ -86,6 +88,44 @@ def options(
     )
 
 
+@wraps(optionsStock)
+def optionsStockDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(optionsStock(*args, **kwargs)), tcols=["date"])
+
+
+def options(
+    contract, token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Options EOD prices
+    Args:
+        contract (str): Specific dated option contract, e.g. NG0Z
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _raiseIfNotStr(contract)
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id=contract,
+        key="chart",
+        token=token,
+        version=version,
+        overrideBase="options",
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
 @wraps(options)
 def optionsDF(*args, **kwargs):
-    return _toDatetime(pd.DataFrame(options(*args, **kwargs)), tcols=["date"])
+    return _toDatetime(
+        pd.DataFrame(options(*args, **kwargs)),
+        reformatcols=["datetime", "date", "updated"],
+    )

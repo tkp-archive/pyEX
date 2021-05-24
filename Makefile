@@ -5,7 +5,7 @@ lint: ## run linter
 	python -m flake8 pyEX setup.py
 
 fix:  ## run black fix
-	python -m black pyEX/ setup.py
+	python -m black pyEX/ setup.py docs/conf.py
 
 talib_nix:  ## install talib for *nix
 	wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz

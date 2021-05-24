@@ -13,13 +13,14 @@ from ...common import _UTC, _expire, _get, _reindex, _toDatetime
 
 
 @_expire(hour=8, tz=_UTC)
-def futuresSymbols(token="", version="stable", filter="", format="json"):
+def futuresSymbols(underlying="", token="", version="stable", filter="", format="json"):
     """This call returns an array of futures symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#futures-symbols
     8am, 9am, 12pm, 1pm UTC daily
 
     Args:
+        underlying (str): Underlying asset
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -29,7 +30,9 @@ def futuresSymbols(token="", version="stable", filter="", format="json"):
         dict or DataFrame or list: result
     """
     return _get(
-        "ref-data/futures/symbols",
+        "ref-data/futures/symbols{}".format(
+            "/{}".format(underlying) if underlying else ""
+        ),
         token=token,
         version=version,
         filter=filter,

@@ -251,6 +251,7 @@ API Documentation
 
 
 def run_apidoc(_):
+    os.environ["PYEX_AUTODOC"] = "1"
     out_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "api"))
     pyEX_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "pyEX"))
     cmd_path = "sphinx-apidoc"

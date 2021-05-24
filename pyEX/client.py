@@ -24,6 +24,7 @@ from .cryptocurrency import (
 )
 from .economic import EconomicPoints
 from .files import download, files
+from .futures import futures, futuresDF
 from .fx import (
     convertFX,
     convertFXDF,
@@ -34,7 +35,7 @@ from .fx import (
 )
 from .markets import markets, marketsDF
 from .metadata import queryMetadata, queryMetadataDF
-from .options import optionExpirations, options, optionsDF
+from .options import optionExpirations, options, optionsDF, optionsStock, optionsStockDF
 from .points import points, pointsDF
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
@@ -1002,8 +1003,8 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("ohlc", ohlc),
     ("ohlcDF", ohlcDF),
     ("optionExpirations", optionExpirations),
-    ("options", options),
-    ("optionsDF", optionsDF),
+    ("optionsStock", optionsStock),
+    ("optionsStockDF", optionsStockDF),
     ("peers", peers),
     ("peersDF", peersDF),
     ("previous", previous),
@@ -1181,6 +1182,15 @@ _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesDF", timeSeriesDF),
 ]
 
+_INCUDE_FUNCTIONS_FUTURES = [
+    ("futures", futures),
+    ("futuresDF", futuresDF),
+]
+
+_INCLUDE_FUNCTIONS_OPTIONS = [
+    ("options", options),
+    ("optionsDF", optionsDF),
+]
 
 _INCLUDE_FUNCTIONS_FX = [
     # FX
@@ -1215,6 +1225,8 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_POINTS
     + _INCLUDE_FUNCTIONS_TS
     + _INCLUDE_FUNCTIONS_FX
+    + _INCLUDE_FUNCTIONS_FUTURES
+    + _INCLUDE_FUNCTIONS_OPTIONS
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
 
@@ -1625,9 +1637,11 @@ class Client(object):
     account = types.ModuleType("account")
     alternative = types.ModuleType("alternative")
     crypto = types.ModuleType("crypto")
+    futures = types.ModuleType("futures")
     fx = types.ModuleType("fx")
     iex = types.ModuleType("iex")
     market = types.ModuleType("market")
+    options = types.ModuleType("options")
     points = types.ModuleType("points")
     refdata = types.ModuleType("refdata")
     rules = types.ModuleType("rules")
@@ -1680,6 +1694,16 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.fx, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_FUTURES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.futures, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_OPTIONS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.options, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_IEX:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1795,90 +1819,101 @@ class Client(object):
 
 #############################
 # for autodoc
-for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    # setattr(self.account, name, getattr(self, name))
-
-for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.alternative, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.crypto, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_FX:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.fx, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_IEX:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.iex, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_MARKET:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.market, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_POINTS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.points, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_TS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_FUNCTIONS_RULES:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    # setattr(self.rules, name, getattr(self, name))
-
-for name, method in _INCLUDE_FUNCTIONS_REFDATA:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.refdata, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STATS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.stats, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STOCKS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.stocks, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STREAMING:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.streaming, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
-    setattr(Client.premium, name, method)
-    getattr(Client.premium, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_FILES:
-    setattr(Client.files, name, method)
-    getattr(Client.files, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_PREMIUM_FILES:
-    setattr(Client.premium.files, name, method)
-    getattr(Client.premium.files, name).__doc__ = method.__doc__
-
-for name, key in (
-    _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
-):
-    p = partial(Client.bind, meth=points, key=key)
-    p.__name__ = key
-    setattr(Client, name, wraps(points)(p))
-    getattr(Client, name).__doc__ = points.__doc__
-
-for name, method in _INCLUDE_STUDIES:
-    if method:
+if os.environ.get("PYEX_AUTODOC"):
+    for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
         setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        # setattr(self.account, name, getattr(self, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.alternative, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.crypto, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_FX:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.fx, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_FUTURES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.futures, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_OPTIONS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.options, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_IEX:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.iex, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_MARKET:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.market, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_POINTS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.points, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_TS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_RULES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        # setattr(self.rules, name, getattr(self, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_REFDATA:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.refdata, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STATS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.stats, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STOCKS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.stocks, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STREAMING:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.streaming, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
+        setattr(Client.premium, name, method)
+        getattr(Client.premium, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FILES:
+        setattr(Client.files, name, method)
+        getattr(Client.files, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_PREMIUM_FILES:
+        setattr(Client.premium.files, name, method)
+        getattr(Client.premium.files, name).__doc__ = method.__doc__
+
+    for name, key in (
+        _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
+    ):
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(p))
+        getattr(Client, name).__doc__ = points.__doc__
+
+    for name, method in _INCLUDE_STUDIES:
+        if method:
+            setattr(Client, name, method)
