@@ -65,7 +65,7 @@ def timeSeries(
         range (str): Returns data for a given range. Supported ranges described below.
         calendar (bool): Used in conjunction with range to return data in the future.
         limit (int): Limits the number of results returned. Defaults to 1.
-        subattribute (str): Allows you to query time series by any field in the result set. All time series data is stored by ID, then key, then subkey. If you want to query by any other field in the data, you can use subattribute.
+        subattribute (str,list): Allows you to query time series by any field in the result set. All time series data is stored by ID, then key, then subkey. If you want to query by any other field in the data, you can use subattribute.
                             For example, news may be stored as /news/{symbol}/{newsId}, and the result data returns the keys id, symbol, date, sector, hasPaywall
                             By default you can only query by symbol or id. Maybe you want to query all news where the sector is Technology. Your query would be:
                             /time-series/news?subattribute=source|WSJ
@@ -150,6 +150,12 @@ def timeSeries(
         base_url += "limit={}&".format(str(limit))
 
     if subattribute:
+        if isinstance(subattribute, dict):
+            # dict mapping key to required equal value, e.g. {"A": 1} -> A|1
+            subattribute = ",".join("{}|{}".format(key, value) for key, value in subattribute.items())
+        elif isinstance(subattribute, list):
+            # list of tuples mapping key to required equal value, e.g. [("A", 1)] -> A|1
+            subattribute = ",".join("{}|{}".format(v1, v2) for v1, v2 in subattribute)
         base_url += "subattribute={}&".format(subattribute)
     if dateField:
         base_url += "dateField={}&".format(dateField)
