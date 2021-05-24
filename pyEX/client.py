@@ -1182,7 +1182,7 @@ _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesDF", timeSeriesDF),
 ]
 
-_INCUDE_FUNCTIONS_FUTURES = [
+_INCLUDE_FUNCTIONS_FUTURES = [
     ("futures", futures),
     ("futuresDF", futuresDF),
 ]

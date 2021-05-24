@@ -57,6 +57,7 @@ from ...common import _UTC, _expire, _get, json_normalize
 #     return ret
 
 
+@_expire(hour=8, tz=_UTC)
 def optionsSymbols(symbol="", token="", version="stable", filter="", format="json"):
     """This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
