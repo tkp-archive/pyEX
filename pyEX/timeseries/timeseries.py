@@ -152,7 +152,9 @@ def timeSeries(
     if subattribute:
         if isinstance(subattribute, dict):
             # dict mapping key to required equal value, e.g. {"A": 1} -> A|1
-            subattribute = ",".join("{}|{}".format(key, value) for key, value in subattribute.items())
+            subattribute = ",".join(
+                "{}|{}".format(key, value) for key, value in subattribute.items()
+            )
         elif isinstance(subattribute, list):
             # list of tuples mapping key to required equal value, e.g. [("A", 1)] -> A|1
             subattribute = ",".join("{}|{}".format(v1, v2) for v1, v2 in subattribute)
