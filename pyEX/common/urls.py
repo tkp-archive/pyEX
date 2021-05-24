@@ -23,6 +23,7 @@ _URL_PREFIX = "https://api.iextrading.com/1.0/"
 _URL_PREFIX_CLOUD = "https://cloud.iexapis.com/{version}/"
 _URL_PREFIX_CLOUD_ORIG = _URL_PREFIX_CLOUD
 _URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.iexapis.com/stable/"
+_URL_PREFIX_CLOUD_SANDBOX_ORIG = _URL_PREFIX_CLOUD_SANDBOX
 
 _SIO_URL_PREFIX = "https://ws-api.iextrading.com"
 _SIO_PORT = 443
@@ -42,6 +43,7 @@ _SSE_URL_PREFIX_ALL_SANDBOX = (
 _SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/stable/deep?symbols={symbols}&channels={channels}&token={token}"
 
 _PYEX_PROXIES = None
+_PYEX_DEBUG = os.environ.get("PYEX_DEBUG", "")
 
 
 def _get(url, token="", version="stable", filter="", format="json"):
@@ -110,6 +112,9 @@ def _getIEXCloudBase(
     elif format == "schema":
         # add schema param
         params["schema"] = True
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
 
@@ -545,6 +550,20 @@ def overrideUrl(url="", env=""):
     else:
         # reset
         _URL_PREFIX_CLOUD = _URL_PREFIX_CLOUD_ORIG
+
+
+def overrideSandboxUrl(url="", env=""):
+    """Override the sandbox IEX Cloud url"""
+    global _URL_PREFIX_CLOUD_SANDBOX
+    if env:
+        _URL_PREFIX_CLOUD_SANDBOX = (
+            "https://sandbox.{env}.iexapis.com/{{version}}/".format(env=env)
+        )
+    elif url:
+        _URL_PREFIX_CLOUD_SANDBOX = url
+    else:
+        # reset
+        _URL_PREFIX_CLOUD_SANDBOX = _URL_PREFIX_CLOUD_SANDBOX_ORIG
 
 
 def overrideSSEUrl(url="", env=""):
