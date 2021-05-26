@@ -560,7 +560,9 @@ def overrideUrl(url="", env=""):
         _SSE_URL_PREFIX_ALL = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?token={{token}}".format(
             env=env
         )
-        _SSE_DEEP_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/deep?symbols={{symbols}}&channels={{channels}}&token={{token}}"
+        _SSE_DEEP_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/deep?symbols={{symbols}}&channels={{channels}}&token={{token}}".format(
+            env=env
+        )
         _SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.{{env}}.iexapis.com/stable/{{channel}}?symbols={{symbols}}&token={{token}}".format(
             env=env
         )
