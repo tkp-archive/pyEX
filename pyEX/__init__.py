@@ -9,9 +9,7 @@ from .client import *  # noqa: F403
 from .common import (
     PyEXception,
     PyEXStopSSE,
-    overrideSSEUrl,
     overrideUrl,
-    overrideSandboxUrl,
     setProxy,
 )
 

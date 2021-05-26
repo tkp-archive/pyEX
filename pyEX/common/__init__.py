@@ -47,8 +47,6 @@ from .urls import (
     _streamSSEAsync,
     _tryJson,
     _wsURL,
-    overrideSandboxUrl,
-    overrideSSEUrl,
     overrideUrl,
     setProxy,
 )

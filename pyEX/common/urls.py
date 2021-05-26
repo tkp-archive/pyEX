@@ -33,14 +33,19 @@ _SSE_URL_PREFIX = (
 )
 _SSE_URL_PREFIX_ORIG = _SSE_URL_PREFIX
 _SSE_URL_PREFIX_ALL = "https://cloud-sse.iexapis.com/{version}/{channel}?token={token}"
+_SSE_URL_PREFIX_ALL_ORIG = _SSE_URL_PREFIX_ALL
 _SSE_DEEP_URL_PREFIX = "https://cloud-sse.iexapis.com/{version}/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_DEEP_URL_PREFIX_ORIG = _SSE_DEEP_URL_PREFIX
 _SSE_URL_PREFIX_SANDBOX = (
     "https://sandbox-sse.iexapis.com/stable/{channel}?symbols={symbols}&token={token}"
 )
+_SSE_URL_PREFIX_SANDBOX_ORIG = _SSE_URL_PREFIX_SANDBOX
 _SSE_URL_PREFIX_ALL_SANDBOX = (
     "https://sandbox-sse.iexapis.com/stable/{channel}?token={token}"
 )
+_SSE_URL_PREFIX_ALL_SANDBOX_ORIG = _SSE_URL_PREFIX_ALL_SANDBOX
 _SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.iexapis.com/stable/deep?symbols={symbols}&channels={channels}&token={token}"
+_SSE_DEEP_URL_PREFIX_SANDBOX_ORIG = _SSE_DEEP_URL_PREFIX_SANDBOX
 
 _PYEX_PROXIES = None
 _PYEX_DEBUG = os.environ.get("PYEX_DEBUG", "")
@@ -540,44 +545,46 @@ def setProxy(proxies=None):
 
 def overrideUrl(url="", env=""):
     """Override the default IEX Cloud url"""
-    global _URL_PREFIX_CLOUD
+    global _URL_PREFIX_CLOUD, _URL_PREFIX_CLOUD_SANDBOX, _SSE_URL_PREFIX, _SSE_URL_PREFIX_ALL, _SSE_DEEP_URL_PREFIX, _SSE_URL_PREFIX_SANDBOX, _SSE_URL_PREFIX_ALL_SANDBOX, _SSE_DEEP_URL_PREFIX_SANDBOX
+
     if env:
         _URL_PREFIX_CLOUD = "https://cloud.{env}.iexapis.com/{{version}}/".format(
             env=env
         )
-    elif url:
-        _URL_PREFIX_CLOUD = url
-    else:
-        # reset
-        _URL_PREFIX_CLOUD = _URL_PREFIX_CLOUD_ORIG
-
-
-def overrideSandboxUrl(url="", env=""):
-    """Override the sandbox IEX Cloud url"""
-    global _URL_PREFIX_CLOUD_SANDBOX
-    if env:
-        _URL_PREFIX_CLOUD_SANDBOX = (
-            "https://sandbox.{env}.iexapis.com/{{version}}/".format(env=env)
+        _URL_PREFIX_CLOUD_SANDBOX = "https://sandbox.{env}.iexapis.com/stable/".format(
+            env=env
         )
-    elif url:
-        _URL_PREFIX_CLOUD_SANDBOX = url
-    else:
-        # reset
-        _URL_PREFIX_CLOUD_SANDBOX = _URL_PREFIX_CLOUD_SANDBOX_ORIG
-
-
-def overrideSSEUrl(url="", env=""):
-    """Override the default IEX Cloud SSE url"""
-    global _SSE_URL_PREFIX
-    if env:
         _SSE_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?symbols={{symbols}}&token={{token}}".format(
             env=env
         )
+        _SSE_URL_PREFIX_ALL = "https://cloud-sse.{env}.iexapis.com/{{version}}/{{channel}}?token={{token}}".format(
+            env=env
+        )
+        _SSE_DEEP_URL_PREFIX = "https://cloud-sse.{env}.iexapis.com/{{version}}/deep?symbols={{symbols}}&channels={{channels}}&token={{token}}".format(
+            env=env
+        )
+        _SSE_URL_PREFIX_SANDBOX = "https://sandbox-sse.{env}.iexapis.com/stable/{{channel}}?symbols={{symbols}}&token={{token}}".format(
+            env=env
+        )
+        _SSE_URL_PREFIX_ALL_SANDBOX = "https://sandbox-sse.{env}.iexapis.com/stable/{{channel}}?token={{token}}".format(
+            env=env
+        )
+        _SSE_DEEP_URL_PREFIX_SANDBOX = "https://sandbox-sse.{env}.iexapis.com/stable/deep?symbols={{symbols}}&channels={{channels}}&token={{token}}".format(
+            env=env
+        )
     elif url:
-        _SSE_URL_PREFIX = url
+        _URL_PREFIX_CLOUD = url
+        _URL_PREFIX_CLOUD_SANDBOX = url
     else:
         # reset
+        _URL_PREFIX_CLOUD = _URL_PREFIX_CLOUD_ORIG
+        _URL_PREFIX_CLOUD_SANDBOX = _URL_PREFIX_CLOUD_SANDBOX_ORIG
         _SSE_URL_PREFIX = _SSE_URL_PREFIX_ORIG
+        _SSE_URL_PREFIX_ALL = _SSE_URL_PREFIX_ALL_ORIG
+        _SSE_DEEP_URL_PREFIX = _SSE_DEEP_URL_PREFIX_ORIG
+        _SSE_URL_PREFIX_SANDBOX = _SSE_URL_PREFIX_SANDBOX_ORIG
+        _SSE_URL_PREFIX_ALL_SANDBOX = _SSE_URL_PREFIX_ALL_SANDBOX_ORIG
+        _SSE_DEEP_URL_PREFIX_SANDBOX = _SSE_DEEP_URL_PREFIX_SANDBOX_ORIG
 
 
 def _parseSchema(data):
