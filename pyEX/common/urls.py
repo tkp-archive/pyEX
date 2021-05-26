@@ -452,13 +452,10 @@ def _streamSSE(url, on_data=print, exit=None):
                 on_data(json.loads(data))
             except PyEXStopSSE:
                 # stop listening and return
-                print("HERE3")
                 return
             except (json.JSONDecodeError, KeyboardInterrupt):
-                print("HERE4")
                 raise
             except Exception:
-                print("HERE5")
                 raise
 
     def _exit(messages=messages, exit=exit):
