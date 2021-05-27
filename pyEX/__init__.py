@@ -6,7 +6,12 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from .client import *  # noqa: F403
-from .common import PyEXception, PyEXStopSSE, overrideSSEUrl, overrideUrl, setProxy
+from .common import (
+    PyEXception,
+    PyEXStopSSE,
+    overrideUrl,
+    setProxy,
+)
 
 try:
     from .studies import *  # noqa: F403

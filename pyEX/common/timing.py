@@ -17,15 +17,23 @@ from temporalcache import expire, interval
 _PYEX_CACHE_FOLDER = os.path.abspath(os.path.join(tempfile.gettempdir(), "pyEX"))
 _UTC = pytz.UTC
 _EST = pytz.timezone("EST")
+_PYEX_NOCACHE = os.environ.get("PYEX_NOCACHE", "")
 
 
 def _expire(**temporal_args):
     if not os.path.exists(_PYEX_CACHE_FOLDER):
         os.makedirs(_PYEX_CACHE_FOLDER)
 
-    def _wrapper(foo):
-        temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
-        return expire(**temporal_args)(foo)
+    if _PYEX_NOCACHE:
+
+        def _wrapper(foo):
+            return foo
+
+    else:
+
+        def _wrapper(foo):
+            temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+            return expire(**temporal_args)(foo)
 
     return _wrapper
 
@@ -34,8 +42,15 @@ def _interval(**temporal_args):
     if not os.path.exists(_PYEX_CACHE_FOLDER):
         os.makedirs(_PYEX_CACHE_FOLDER)
 
-    def _wrapper(foo):
-        temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
-        return interval(**temporal_args)(foo)
+    if _PYEX_NOCACHE:
+
+        def _wrapper(foo):
+            return foo
+
+    else:
+
+        def _wrapper(foo):
+            temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+            return interval(**temporal_args)(foo)
 
     return _wrapper

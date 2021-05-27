@@ -503,7 +503,6 @@ class TestPyEXAPI:
             "otcSymbols",
             "otcSymbolsDF",
             "otcSymbolsList",
-            "overrideSSEUrl",
             "overrideUrl",
             "pause",
             "payAsYouGo",
