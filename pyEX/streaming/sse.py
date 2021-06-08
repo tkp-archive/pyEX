@@ -121,7 +121,14 @@ def iexTopsSSE(symbols=None, on_data=None, exit=None, token="", version="stable"
         token (str): Access token
         version (str): API version
     """
-    return _runSSE("tops", symbols, on_data, token, version)
+    return _runSSE(
+        "tops",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
 async def iexTopsSSEAsync(symbols=None, exit=None, token="", version="stable"):
@@ -154,7 +161,14 @@ def iexLastSSE(symbols=None, on_data=None, exit=None, token="", version="stable"
         version (str): API version
 
     """
-    return _runSSE("last", symbols, on_data, token, version)
+    return _runSSE(
+        "last",
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        token=token,
+        version=version,
+    )
 
 
 async def iexLastSSEAsync(symbols=None, exit=None, token="", version="stable"):
