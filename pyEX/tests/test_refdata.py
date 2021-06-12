@@ -17,105 +17,59 @@ pickle.dump = MagicMock()
 
 
 class TestAll:
-    def setup(self):
-        pass
-        # setup() before each test method
-
-    def teardown(self):
-        pass
-        # teardown() after each test method
-
-    @classmethod
-    def setup_class(cls):
-        pass
-        # setup_class() before any methods in this class
-
-    @classmethod
-    def teardown_class(cls):
-        pass
-        # teardown_class() after any methods in this class
-
     def test_symbols(self):
-        from pyEX.refdata import (
-            fxSymbols,
-            iexSymbols,
-            internationalSymbols,
-            mutualFundSymbols,
-            otcSymbols,
-            symbols,
-            futuresSymbols,
-        )
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            symbols()
-            iexSymbols()
-            mutualFundSymbols()
-            otcSymbols()
-            internationalSymbols()
-            internationalSymbols("GB")
-            internationalSymbols(exchange="test")
-            # futuresSymbols()
-            mock.return_value.json = MagicMock(
-                return_value={"currencies": [], "pairs": []}
-            )
-            fxSymbols()
-
-    def test_symbolsDF(self):
         from pyEX import Client
-        from pyEX.refdata import symbolsDF
+        c = Client()
+        c.symbols()
+        c.iexSymbols()
+        c.mutualFundSymbols()
+        c.otcSymbols()
+        c.internationalSymbols()
+        c.internationalSymbols("GB")
+        c.internationalSymbols(exchange="test")
+        c.optionsSymbols()
+        c.optionsSymbols("SPY")
+        c.futuresSymbols()
+        c.futuresSymbols("NG")
+        c.fxSymbols()
 
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            c = Client(version="sandbox")
-            symbolsDF()
-            c.iexSymbolsDF()
-            c.mutualFundSymbolsDF()
-            c.otcSymbolsDF()
-            c.internationalSymbolsDF()
-            c.internationalSymbolsDF("GB")
-            c.internationalSymbolsDF(exchange="test")
-            # c.futuresSymbolsDF()
+        c.symbolsDF()
+        c.iexSymbolsDF()
+        c.mutualFundSymbolsDF()
+        c.otcSymbolsDF()
+        c.internationalSymbolsDF()
+        c.internationalSymbolsDF("GB")
+        c.internationalSymbolsDF(exchange="test")
+        c.optionsSymbolsDF()
+        c.optionsSymbolsDF("SPY")
+        c.futuresSymbolsDF()
+        c.futuresSymbolsDF("NG")
+        c.fxSymbolsDF()
 
-            c.symbolsList()
-            c.iexSymbolsList()
-            c.mutualFundSymbolsList()
-            c.otcSymbolsList()
-            c.internationalSymbolsList()
-            c.internationalSymbolsList("GB")
-            c.internationalSymbolsList(exchange="test")
-            # c.futuresSymbolsList()
-
-            mock.return_value.json = MagicMock(
-                return_value={"currencies": [], "pairs": []}
-            )
-            c.fxSymbolsDF()
-            c.fxSymbolsList()
+        c.symbolsList()
+        c.iexSymbolsList()
+        c.mutualFundSymbolsList()
+        c.otcSymbolsList()
+        c.internationalSymbolsList()
+        c.internationalSymbolsList("GB")
+        c.internationalSymbolsList(exchange="test")
+        c.optionsSymbolsList()
+        c.optionsSymbolsList("SPY")
+        c.futuresSymbolsList()
+        c.futuresSymbolsList("NG")
+        c.fxSymbolsList()
 
     def test_calendar(self):
         from pyEX import Client
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            c = Client(version="sandbox")
-            c.calendar()
-            c.holidays()
+        c = Client(version="sandbox")
+        c.calendar()
+        c.holidays()
 
     def test_calendarDF(self):
         from pyEX import Client
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            c = Client(version="sandbox")
-            c.calendarDF()
-            c.holidaysDF()
+        c = Client(version="sandbox")
+        c.calendarDF()
+        c.holidaysDF()
 
     def test_corporateActions(self):
         from pyEX.refdata import corporateActions

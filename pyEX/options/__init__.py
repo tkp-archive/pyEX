@@ -9,6 +9,6 @@ from .options import (
     optionExpirations,
     options,
     optionsDF,
-    optionsStock,
-    optionsStockDF,
+    stockOptions,
+    stockOptionsDF,
 )  # noqa: F401

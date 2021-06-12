@@ -8,6 +8,7 @@
 from functools import wraps
 
 import pandas as pd
+from deprecation import deprecated
 
 from ..common import _get, _raiseIfNotStr, _toDatetime, _timeseriesWrapper
 
@@ -40,7 +41,8 @@ def optionExpirations(symbol, token="", version="stable", filter="", format="jso
     )
 
 
-def optionsStock(
+@deprecated(details="Deprecated: Migrate to `options`")
+def stockOptions(
     symbol,
     expiration,
     side="",
@@ -88,9 +90,9 @@ def optionsStock(
     )
 
 
-@wraps(optionsStock)
-def optionsStockDF(*args, **kwargs):
-    return _toDatetime(pd.DataFrame(optionsStock(*args, **kwargs)), tcols=["date"])
+@wraps(stockOptions)
+def stockOptionsDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(stockOptions(*args, **kwargs)), tcols=["date"])
 
 
 def options(

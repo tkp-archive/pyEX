@@ -35,7 +35,7 @@ from .fx import (
 )
 from .markets import markets, marketsDF
 from .metadata import queryMetadata, queryMetadataDF
-from .options import optionExpirations, options, optionsDF, optionsStock, optionsStockDF
+from .options import optionExpirations, options, optionsDF, stockOptions, stockOptionsDF
 from .points import points, pointsDF
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
@@ -1003,8 +1003,8 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("ohlc", ohlc),
     ("ohlcDF", ohlcDF),
     ("optionExpirations", optionExpirations),
-    ("optionsStock", optionsStock),
-    ("optionsStockDF", optionsStockDF),
+    ("stockOptions", stockOptions),
+    ("stockOptionsDF", stockOptionsDF),
     ("peers", peers),
     ("peersDF", peersDF),
     ("previous", previous),
