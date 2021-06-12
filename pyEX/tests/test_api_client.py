@@ -418,7 +418,7 @@ class TestPyEXClientAPI:
     def test_all_futures(self):
         for meth in (
             "futures",
-            "fturesDF",
+            "futuresDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.futures, meth)
