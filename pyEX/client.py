@@ -1805,6 +1805,8 @@ class Client(object):
         # rebind studies
         for name, method in _INCLUDE_STUDIES:
             if method:
+                setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+                getattr(self, name).__doc__ = method.__doc__
                 setattr(self.studies, name, method.__get__(self, self.__class__))
 
     def bind(self, *args, **kwargs):
