@@ -28,7 +28,7 @@ def queryMetadata(
     """
     url = "metadata/time-series"
     if not id and key:
-        id = "any"
+        id = "*"
     if id:
         url += "/{}".format(id)
         if key:
