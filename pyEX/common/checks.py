@@ -34,7 +34,7 @@ _TIMEFRAME_CHART = [
     "dynamic",
 ]
 _TIMEFRAME_DIVSPLIT = ["5y", "2y", "1y", "ytd", "6m", "3m", "1m", "next"]
-_LIST_OPTIONS = ["mostactive", "gainers", "losers", "iexvolume", "iexpercent"]
+_LIST_OPTIONS = ["mostactive", "gainers", "losers", "iexvolume", "iexpercent", "premarket_losers", "postmarket_losers", "premarket_gainers", "postmarket_gainers"]
 _COLLECTION_TAGS = ["sector", "tag", "list"]
 _DATE_RANGES = [
     "today",
