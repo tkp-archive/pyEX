@@ -728,5 +728,6 @@ class TestPyEXAPI:
             "wti",
             "yesterday",
             "yesterdayDF",
+            "yieldCurve",
         ):
             assert hasattr(p, apimethod)

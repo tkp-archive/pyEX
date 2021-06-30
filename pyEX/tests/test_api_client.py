@@ -619,6 +619,7 @@ class TestPyEXClientAPI:
         for meth in (
             "peerCorrelation",
             "peerCorrelationPlot",
+            "yieldCurve",
             "returns",
             "dailyReturns",
             "ht_dcperiod",

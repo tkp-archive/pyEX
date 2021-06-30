@@ -635,6 +635,7 @@ try:
         wclprice,
         willr,
         wma,
+        yieldCurve,
     )
 
 except ImportError:
@@ -642,6 +643,7 @@ except ImportError:
     peerCorrelationPlot = None
     returns = None
     dailyReturns = None
+    yieldCurve = None
 
     ht_dcperiod = None
     ht_dcphase = None
@@ -1441,6 +1443,7 @@ _INCLUDE_STUDIES = [
     ("peerCorrelationPlot", peerCorrelationPlot),
     ("returns", returns),
     ("dailyReturns", dailyReturns),
+    ("yieldCurve", yieldCurve),
     # Cycle
     ("ht_dcperiod", ht_dcperiod),
     ("ht_dcphase", ht_dcphase),
