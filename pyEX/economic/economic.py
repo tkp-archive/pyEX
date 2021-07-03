@@ -281,6 +281,7 @@ def us5HistoryDF(
 
 
 
+@_expire(hour=8, tz=_UTC)
 def fedfunds(token="", version="stable"):
     """Economic data points
 
@@ -289,6 +290,67 @@ def fedfunds(token="", version="stable"):
     FEDFUNDS; Effective federal funds rate
     """
     return points("FEDFUNDS", token=token, version=version)
+
+
+@_expire(hour=8, tz=_UTC)
+def fedfundsHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="FEDFUNDS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+@_expire(hour=8, tz=_UTC)
+def fedfundsHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="FEDFUNDS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
 
 
 def creditcard(token="", version="stable"):

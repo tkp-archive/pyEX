@@ -241,6 +241,8 @@ class TestPyEXAPI:
             "fdaAdvisoryCommitteeMeetingsWallStreetHorizon",
             "fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF",
             "fedfunds",
+            "fedfundsHistory",
+            "fedfundsHistoryDF",
             "figi",
             "figiDF",
             "files",

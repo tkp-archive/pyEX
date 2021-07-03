@@ -627,6 +627,8 @@ class TestPyEXClientAPI:
             "us5History",
             "us5HistoryDF",
             "fedfunds",
+            "fedfundsHistory",
+            "fedfundsHistoryDF",
             "creditcard",
             "cdnj",
             "cdj",

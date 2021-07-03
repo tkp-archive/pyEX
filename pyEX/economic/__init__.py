@@ -12,6 +12,8 @@ from .economic import (
     cpi,
     creditcard,
     fedfunds,
+    fedfundsHistory,
+    fedfundsHistoryDF,
     gdp,
     housing,
     indpro,

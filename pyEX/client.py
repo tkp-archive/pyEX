@@ -24,6 +24,8 @@ from .cryptocurrency import (
 )
 from .economic import (
     EconomicPoints,
+    fedfundsHistory,
+    fedfundsHistoryDF,
     us30History,
     us30HistoryDF,
     us15History,
@@ -1243,6 +1245,8 @@ _INCLUDE_FUNCTIONS_RATES = [
 ]
 
 _INCLUDE_FUNCTIONS_ECONOMIC = [
+    ("fedfundsHistory", fedfundsHistory),
+    ("fedfundsHistoryDF", fedfundsHistoryDF),
     ("us30History", us30History),
     ("us30HistoryDF", us30HistoryDF),
     ("us15History", us15History),

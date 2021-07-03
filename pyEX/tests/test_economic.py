@@ -32,6 +32,8 @@ class TestEconomic:
             c.us5History()
             c.us5HistoryDF()
             c.fedfunds()
+            c.fedfundsHistory()
+            c.fedfundsHistoryDF()
             c.creditcard()
             c.cdnj()
             c.cdj()
