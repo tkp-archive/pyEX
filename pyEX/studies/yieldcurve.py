@@ -8,25 +8,25 @@
 
 import pandas as pd
 from datetime import datetime, timedelta
+from pyEX.common import _expire, _UTC
 
 _curves = {
-    "DGS1MO": "1 Month",
-    "DGS3MO": "3 Month",
-    "DGS6MO": "6 Month",
-    "DGS1": "1 Year",
-    "DGS2": "2 Year",
-    "DGS3": "3 Year",
-    "DGS5": "5 Year",
-    "DGS7": "7 Year",
-    "DGS10": "10 Year",
-    "DGS20": "20 Year",
-    "DGS30": "30 Year",
+    "DGS1MO": "oneMonthHistoryDF",
+    "DGS3MO": "threeMonthHistoryDF",
+    "DGS6MO": "sixMonthHistoryDF",
+    "DGS1": "oneYearHistoryDF",
+    "DGS2": "twoYearHistoryDF",
+    "DGS3": "threeYearHistoryDF",
+    "DGS5": "fiveYearHistoryDF",
+    "DGS7": "sevenYearHistoryDF",
+    "DGS10": "tenYearHistoryDF",
+    "DGS20": "twentyYearHistoryDF",
+    "DGS30": "thirtyYearHistoryDF",
 }
 
 
-def yieldCurve(
-    client, curves=None, from_=None, to_=None, wide_or_tall="wide"
-):
+@_expire(hour=8, tz=_UTC)
+def yieldCurve(client, curves=None, from_=None, to_=None, wide_or_long="wide"):
     """This will return a dataframe of a yield curve for all treasuries over the given range.
     Note that this may cost a large number of credits
 
@@ -46,8 +46,8 @@ def yieldCurve(
                 DGS30
         from_ (str): Starting date of curve
         to_ (to): end date of curve
-        wide_or_tall (str): Build dataframe wide or tall (default: `tall`).
-                If set to `"tall"`, returned dataframe will look like:
+        wide_or_long (str): Build dataframe wide or long (default: `wide`).
+                If set to `"long"`, returned dataframe will look like:
                 ```
                 date       | key  | value
                 2020-01-01 | DGS1 |  0.05
@@ -62,22 +62,28 @@ def yieldCurve(
     Returns:
         DataFrame: result
     """
-    if wide_or_tall.lower() not in ("wide", "tall"):
+    if wide_or_long.lower() not in ("wide", "long"):
         from pyEX import PyEXception
+
         raise PyEXception(
-            "Unrecognized value for `wide_or_tall`: {}".format(wide_or_tall)
+            "Unrecognized value for `wide_or_tall`: {}".format(wide_or_long)
         )
+
+    _basecurves = curves or _curves.keys()
     to_ = to_ or datetime.today().strftime("%Y%m%d")
-    from_ = from_ or (datetime.strptime(to_, "%Y%m%d") - timedelta(days=30)).strftime("%Y%m%d")
+    from_ = from_ or (datetime.strptime(to_, "%Y%m%d") - timedelta(days=30)).strftime(
+        "%Y%m%d"
+    )
 
     # wide - columns in DF
-    if wide_or_tall == "wide":
+    if wide_or_long == "wide":
         dfs = pd.DataFrame()
         for curve in _curves.keys():
-            df = client.timeSeriesDF(
-                "TREASURY", curve, from_=from_, to_=to_, filter="date,value"
+            if curve not in _basecurves:
+                continue
+            df = getattr(client, _curves[curve])(
+                from_=from_, to_=to_, filter="date,value"
             )
-
             # TODO fix bad/missing data since can't do this
             df = df[df["value"] > 0]
             df.set_index("date", inplace=True)
@@ -88,8 +94,10 @@ def yieldCurve(
     # tall - values in rows
     dfs = []
     for curve in _curves.keys():
-        df = client.timeSeriesDF(
-            "TREASURY", curve, from_=from_, to_=to_, filter="date,value,key"
+        if curve not in _basecurves:
+            continue
+        df = getattr(client, _curves[curve])(
+            from_=from_, to_=to_, filter="date,value,key"
         )
         # TODO fix bad/missing data since can't do this
         df = df[df["value"] > 0]

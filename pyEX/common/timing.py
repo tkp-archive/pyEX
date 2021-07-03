@@ -21,8 +21,9 @@ _PYEX_NOCACHE = os.environ.get("PYEX_NOCACHE", "")
 
 
 def _expire(**temporal_args):
-    if not os.path.exists(_PYEX_CACHE_FOLDER):
-        os.makedirs(_PYEX_CACHE_FOLDER)
+    if temporal_args.get("persistent", False):
+        if not os.path.exists(_PYEX_CACHE_FOLDER):
+            os.makedirs(_PYEX_CACHE_FOLDER)
 
     if _PYEX_NOCACHE:
 
@@ -32,15 +33,19 @@ def _expire(**temporal_args):
     else:
 
         def _wrapper(foo):
-            temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+            if temporal_args.get("persistent", False):
+                temporal_args["persistent"] = os.path.join(
+                    _PYEX_CACHE_FOLDER, foo.__name__
+                )
             return expire(**temporal_args)(foo)
 
     return _wrapper
 
 
 def _interval(**temporal_args):
-    if not os.path.exists(_PYEX_CACHE_FOLDER):
-        os.makedirs(_PYEX_CACHE_FOLDER)
+    if temporal_args.get("persistent", False):
+        if not os.path.exists(_PYEX_CACHE_FOLDER):
+            os.makedirs(_PYEX_CACHE_FOLDER)
 
     if _PYEX_NOCACHE:
 
@@ -50,7 +55,10 @@ def _interval(**temporal_args):
     else:
 
         def _wrapper(foo):
-            temporal_args["persistent"] = os.path.join(_PYEX_CACHE_FOLDER, foo.__name__)
+            if temporal_args.get("persistent", False):
+                temporal_args["persistent"] = os.path.join(
+                    _PYEX_CACHE_FOLDER, foo.__name__
+                )
             return interval(**temporal_args)(foo)
 
     return _wrapper
