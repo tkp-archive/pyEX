@@ -22,7 +22,13 @@ from .economic import (
     retailMoney,
     unemployment,
     us5,
+    us5History,
+    us5HistoryDF,
     us15,
+    us15History,
+    us15HistoryDF,
     us30,
+    us30History,
+    us30HistoryDF,
     vehicles,
 )

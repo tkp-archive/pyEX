@@ -618,8 +618,14 @@ class TestPyEXClientAPI:
     def test_all_rates(self):
         for meth in (
             "us30",
+            "us30History",
+            "us30HistoryDF",
             "us15",
+            "us15History",
+            "us15HistoryDF",
             "us5",
+            "us5History",
+            "us5HistoryDF",
             "fedfunds",
             "creditcard",
             "cdnj",

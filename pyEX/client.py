@@ -22,7 +22,15 @@ from .cryptocurrency import (
     cryptoQuote,
     cryptoQuoteDF,
 )
-from .economic import EconomicPoints
+from .economic import (
+    EconomicPoints,
+    us30History,
+    us30HistoryDF,
+    us15History,
+    us15HistoryDF,
+    us5History,
+    us5HistoryDF,
+)
 from .files import download, files
 from .fx import (
     convertFX,
@@ -1234,6 +1242,15 @@ _INCLUDE_FUNCTIONS_RATES = [
     ("oneMonthHistoryDF", oneMonthHistoryDF),
 ]
 
+_INCLUDE_FUNCTIONS_ECONOMIC = [
+    ("us30History", us30History),
+    ("us30HistoryDF", us30HistoryDF),
+    ("us15History", us15History),
+    ("us15HistoryDF", us15HistoryDF),
+    ("us5History", us5History),
+    ("us5HistoryDF", us5HistoryDF),
+]
+
 _INCLUDE_FUNCTIONS_FX = [
     # FX
     ("latestFX", latestFX),
@@ -1267,6 +1284,7 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_POINTS
     + _INCLUDE_FUNCTIONS_TS
     + _INCLUDE_FUNCTIONS_RATES
+    + _INCLUDE_FUNCTIONS_ECONOMIC
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
@@ -1759,6 +1777,12 @@ class Client(object):
         for name, method in _INCLUDE_FUNCTIONS_RATES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
+            setattr(self.rates, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.economic, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1897,6 +1921,10 @@ if os.environ.get("READTHEDOCS"):
         getattr(Client, name).__doc__ = method.__doc__
 
     for name, method in _INCLUDE_FUNCTIONS_RATES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
 
