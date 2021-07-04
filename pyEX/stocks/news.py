@@ -23,6 +23,7 @@ from ..common import (
 def news(
     symbol,
     last=10,
+    language="",
     token="",
     version="stable",
     filter="",
@@ -36,6 +37,7 @@ def news(
     Args:
         symbol (str): Ticker to request
         last (int): limit number of results
+        langauge (str): filter results by language
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -47,7 +49,10 @@ def news(
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    return _get("stock/" + symbol + "/news/last/" + str(last), token, version, filter)
+    url = "/stock/{}/news/last/{}".format(symbol, last)
+    if language:
+        url += "?language={}".format(language)
+    return _get(url, token, version, filter)
 
 
 def _newsToDF(n):
@@ -60,7 +65,9 @@ def newsDF(*args, **kwargs):
     return _newsToDF(news(*args, **kwargs))
 
 
-def marketNews(last=10, token="", version="stable", filter="", format="json"):
+def marketNews(
+    last=10, language="", token="", version="stable", filter="", format="json"
+):
     """News about market
 
     https://iexcloud.io/docs/api/#news
@@ -68,6 +75,7 @@ def marketNews(last=10, token="", version="stable", filter="", format="json"):
 
     Args:
         last (int): limit number of results
+        langauge (str): filter results by language
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -77,8 +85,12 @@ def marketNews(last=10, token="", version="stable", filter="", format="json"):
         dict or DataFrame: result
         dict: result
     """
+    url = "/stock/market/news/last/{}".format(last)
+    if language:
+        url += "?language={}".format(language)
+
     return _get(
-        "stock/market/news/last/" + str(last),
+        url,
         token=token,
         version=version,
         filter=filter,
