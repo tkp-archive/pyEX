@@ -5,18 +5,12 @@
 # This file is part of the pyEX library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-from .client import *  # noqa: F403
 from .common import (
     PyEXception,
     PyEXStopSSE,
     overrideUrl,
     setProxy,
 )
-
-try:
-    from .studies import *  # noqa: F403
-except ImportError:
-    pass
 
 from ._version import __version__
 from .account import *
@@ -48,6 +42,13 @@ from .streaming.sse import *
 from .streaming.stock import *
 from .streaming.ws import *
 from .timeseries import *
+
+from .client import *  # noqa: F403
+
+try:
+    from .studies import *  # noqa: F403
+except ImportError:
+    pass
 
 try:
     from .caching import *

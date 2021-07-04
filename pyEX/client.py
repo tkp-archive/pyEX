@@ -12,7 +12,29 @@ import warnings
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
 from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
-from .commodities import CommoditiesPoints
+from .commodities import (
+    CommoditiesPoints,
+    brentHistory,
+    brentHistoryDF,
+    dieselHistory,
+    dieselHistoryDF,
+    gasmidHistory,
+    gasmidHistoryDF,
+    gasprmHistory,
+    gasprmHistoryDF,
+    gasregHistory,
+    gasregHistoryDF,
+    heatoilHistory,
+    heatoilHistoryDF,
+    jetHistory,
+    jetHistoryDF,
+    natgasHistory,
+    natgasHistoryDF,
+    propaneHistory,
+    propaneHistoryDF,
+    wtiHistory,
+    wtiHistoryDF,
+)
 from .common import PyEXception, _interval
 from .cryptocurrency import (
     cryptoBook,
@@ -22,7 +44,46 @@ from .cryptocurrency import (
     cryptoQuote,
     cryptoQuoteDF,
 )
-from .economic import EconomicPoints
+from .economic import (
+    EconomicPoints,
+    cdjHistory,
+    cdjHistoryDF,
+    cdnjHistory,
+    cdnjHistoryDF,
+    cpiHistory,
+    cpiHistoryDF,
+    creditcardHistory,
+    creditcardHistoryDF,
+    fedfundsHistory,
+    fedfundsHistoryDF,
+    gdpHistory,
+    gdpHistoryDF,
+    housingHistory,
+    housingHistoryDF,
+    indproHistory,
+    indproHistoryDF,
+    initialClaimsHistory,
+    initialClaimsHistoryDF,
+    institutionalMoneyHistory,
+    institutionalMoneyHistoryDF,
+    payrollHistory,
+    payrollHistoryDF,
+    recessionProbHistory,
+    recessionProbHistoryDF,
+    retailMoneyHistory,
+    retailMoneyHistoryDF,
+    unemploymentHistory,
+    unemploymentHistoryDF,
+    us5History,
+    us5HistoryDF,
+    us15History,
+    us15HistoryDF,
+    us30History,
+    us30HistoryDF,
+    vehiclesHistory,
+    vehiclesHistoryDF,
+)
+
 from .files import download, files
 from .fx import (
     convertFX,
@@ -158,7 +219,31 @@ from .premium import (
     workshopsWallStreetHorizon,
     workshopsWallStreetHorizonDF,
 )
-from .rates import RatesPoints
+from .rates import (
+    RatesPoints,
+    thirtyYearHistory,
+    thirtyYearHistoryDF,
+    twentyYearHistory,
+    twentyYearHistoryDF,
+    tenYearHistory,
+    tenYearHistoryDF,
+    sevenYearHistory,
+    sevenYearHistoryDF,
+    fiveYearHistory,
+    fiveYearHistoryDF,
+    threeYearHistory,
+    threeYearHistoryDF,
+    twoYearHistory,
+    twoYearHistoryDF,
+    oneYearHistory,
+    oneYearHistoryDF,
+    sixMonthHistory,
+    sixMonthHistoryDF,
+    threeMonthHistory,
+    threeMonthHistoryDF,
+    oneMonthHistory,
+    oneMonthHistoryDF,
+)
 from .refdata import (
     calendar,
     calendarDF,
@@ -475,7 +560,7 @@ from .timeseries import (
 )
 
 try:
-    from .studies import (  # Cycle; Math; Momentum; Overlap; Pattern; Price; Statistic; Volatility; Volume
+    from .studies import (
         acos,
         ad,
         add,
@@ -635,13 +720,16 @@ try:
         wclprice,
         willr,
         wma,
+        yieldCurve,
     )
 
 except ImportError:
+    raise
     peerCorrelation = None
     peerCorrelationPlot = None
     returns = None
     dailyReturns = None
+    yieldCurve = None
 
     ht_dcperiod = None
     ht_dcphase = None
@@ -1181,6 +1269,92 @@ _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesDF", timeSeriesDF),
 ]
 
+_INCLUDE_FUNCTIONS_COMMODITIES = [
+    ("brentHistory", brentHistory),
+    ("brentHistoryDF", brentHistoryDF),
+    ("dieselHistory", dieselHistory),
+    ("dieselHistoryDF", dieselHistoryDF),
+    ("gasmidHistory", gasmidHistory),
+    ("gasmidHistoryDF", gasmidHistoryDF),
+    ("gasprmHistory", gasprmHistory),
+    ("gasprmHistoryDF", gasprmHistoryDF),
+    ("gasregHistory", gasregHistory),
+    ("gasregHistoryDF", gasregHistoryDF),
+    ("heatoilHistory", heatoilHistory),
+    ("heatoilHistoryDF", heatoilHistoryDF),
+    ("jetHistory", jetHistory),
+    ("jetHistoryDF", jetHistoryDF),
+    ("natgasHistory", natgasHistory),
+    ("natgasHistoryDF", natgasHistoryDF),
+    ("propaneHistory", propaneHistory),
+    ("propaneHistoryDF", propaneHistoryDF),
+    ("wtiHistory", wtiHistory),
+    ("wtiHistoryDF", wtiHistoryDF),
+]
+
+_INCLUDE_FUNCTIONS_ECONOMIC = [
+    ("cdjHistory", cdjHistory),
+    ("cdjHistoryDF", cdjHistoryDF),
+    ("cdnjHistory", cdnjHistory),
+    ("cdnjHistoryDF", cdnjHistoryDF),
+    ("cpiHistory", cpiHistory),
+    ("cpiHistoryDF", cpiHistoryDF),
+    ("creditcardHistory", creditcardHistory),
+    ("creditcardHistoryDF", creditcardHistoryDF),
+    ("fedfundsHistory", fedfundsHistory),
+    ("fedfundsHistoryDF", fedfundsHistoryDF),
+    ("gdpHistory", gdpHistory),
+    ("gdpHistoryDF", gdpHistoryDF),
+    ("housingHistory", housingHistory),
+    ("housingHistoryDF", housingHistoryDF),
+    ("indproHistory", indproHistory),
+    ("indproHistoryDF", indproHistoryDF),
+    ("initialClaimsHistory", initialClaimsHistory),
+    ("initialClaimsHistoryDF", initialClaimsHistoryDF),
+    ("institutionalMoneyHistory", institutionalMoneyHistory),
+    ("institutionalMoneyHistoryDF", institutionalMoneyHistoryDF),
+    ("payrollHistory", payrollHistory),
+    ("payrollHistoryDF", payrollHistoryDF),
+    ("recessionProbHistory", recessionProbHistory),
+    ("recessionProbHistoryDF", recessionProbHistoryDF),
+    ("retailMoneyHistory", retailMoneyHistory),
+    ("retailMoneyHistoryDF", retailMoneyHistoryDF),
+    ("unemploymentHistory", unemploymentHistory),
+    ("unemploymentHistoryDF", unemploymentHistoryDF),
+    ("us5History", us5History),
+    ("us5HistoryDF", us5HistoryDF),
+    ("us15History", us15History),
+    ("us15HistoryDF", us15HistoryDF),
+    ("us30History", us30History),
+    ("us30HistoryDF", us30HistoryDF),
+    ("vehiclesHistory", vehiclesHistory),
+    ("vehiclesHistoryDF", vehiclesHistoryDF),
+]
+
+_INCLUDE_FUNCTIONS_RATES = [
+    ("thirtyYearHistory", thirtyYearHistory),
+    ("thirtyYearHistoryDF", thirtyYearHistoryDF),
+    ("twentyYearHistory", twentyYearHistory),
+    ("twentyYearHistoryDF", twentyYearHistoryDF),
+    ("tenYearHistory", tenYearHistory),
+    ("tenYearHistoryDF", tenYearHistoryDF),
+    ("sevenYearHistory", sevenYearHistory),
+    ("sevenYearHistoryDF", sevenYearHistoryDF),
+    ("fiveYearHistory", fiveYearHistory),
+    ("fiveYearHistoryDF", fiveYearHistoryDF),
+    ("threeYearHistory", threeYearHistory),
+    ("threeYearHistoryDF", threeYearHistoryDF),
+    ("twoYearHistory", twoYearHistory),
+    ("twoYearHistoryDF", twoYearHistoryDF),
+    ("oneYearHistory", oneYearHistory),
+    ("oneYearHistoryDF", oneYearHistoryDF),
+    ("sixMonthHistory", sixMonthHistory),
+    ("sixMonthHistoryDF", sixMonthHistoryDF),
+    ("threeMonthHistory", threeMonthHistory),
+    ("threeMonthHistoryDF", threeMonthHistoryDF),
+    ("oneMonthHistory", oneMonthHistory),
+    ("oneMonthHistoryDF", oneMonthHistoryDF),
+]
 
 _INCLUDE_FUNCTIONS_FX = [
     # FX
@@ -1214,6 +1388,9 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_ALTERNATIVE
     + _INCLUDE_FUNCTIONS_POINTS
     + _INCLUDE_FUNCTIONS_TS
+    + _INCLUDE_FUNCTIONS_COMMODITIES
+    + _INCLUDE_FUNCTIONS_ECONOMIC
+    + _INCLUDE_FUNCTIONS_RATES
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
@@ -1392,7 +1569,9 @@ _INCLUDE_POINTS_RATES = [
     ("thirtyYear", RatesPoints.THIRTY.value),
     ("twentyYear", RatesPoints.TWENTY.value),
     ("tenYear", RatesPoints.TEN.value),
+    ("sevenYear", RatesPoints.SEVEN.value),
     ("fiveYear", RatesPoints.FIVE.value),
+    ("threeYear", RatesPoints.THREE.value),
     ("twoYear", RatesPoints.TWO.value),
     ("oneYear", RatesPoints.ONE.value),
     ("sixMonth", RatesPoints.SIXMONTH.value),
@@ -1441,6 +1620,7 @@ _INCLUDE_STUDIES = [
     ("peerCorrelationPlot", peerCorrelationPlot),
     ("returns", returns),
     ("dailyReturns", dailyReturns),
+    ("yieldCurve", yieldCurve),
     # Cycle
     ("ht_dcperiod", ht_dcperiod),
     ("ht_dcphase", ht_dcphase),
@@ -1700,6 +1880,21 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
 
+        for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.commodities, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.economic, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_RATES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.rates, name, getattr(self, name))
+
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
@@ -1781,6 +1976,7 @@ class Client(object):
         # rebind studies
         for name, method in _INCLUDE_STUDIES:
             if method:
+                setattr(self, name, method.__get__(self, self.__class__))
                 setattr(self.studies, name, method.__get__(self, self.__class__))
 
     def bind(self, *args, **kwargs):
@@ -1795,90 +1991,103 @@ class Client(object):
 
 #############################
 # for autodoc
-for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    # setattr(self.account, name, getattr(self, name))
-
-for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.alternative, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.crypto, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_FX:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.fx, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_IEX:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.iex, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_MARKET:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.market, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_POINTS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.points, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_TS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_FUNCTIONS_RULES:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    # setattr(self.rules, name, getattr(self, name))
-
-for name, method in _INCLUDE_FUNCTIONS_REFDATA:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.refdata, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STATS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.stats, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STOCKS:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.stocks, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_STREAMING:
-    setattr(Client, name, method)
-    getattr(Client, name).__doc__ = method.__doc__
-    setattr(Client.streaming, name, getattr(Client, name))
-
-for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
-    setattr(Client.premium, name, method)
-    getattr(Client.premium, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_FILES:
-    setattr(Client.files, name, method)
-    getattr(Client.files, name).__doc__ = method.__doc__
-
-for name, method in _INCLUDE_PREMIUM_FILES:
-    setattr(Client.premium.files, name, method)
-    getattr(Client.premium.files, name).__doc__ = method.__doc__
-
-for name, key in (
-    _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
-):
-    p = partial(Client.bind, meth=points, key=key)
-    p.__name__ = key
-    setattr(Client, name, wraps(points)(p))
-    getattr(Client, name).__doc__ = points.__doc__
-
-for name, method in _INCLUDE_STUDIES:
-    if method:
+if os.environ.get("READTHEDOCS"):
+    for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
         setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        # setattr(self.account, name, getattr(self, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.alternative, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.crypto, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_FX:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.fx, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_IEX:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.iex, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_MARKET:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.market, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_POINTS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.points, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_TS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_RATES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_RULES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        # setattr(self.rules, name, getattr(self, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_REFDATA:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.refdata, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STATS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.stats, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STOCKS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.stocks, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_STREAMING:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.streaming, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
+        setattr(Client.premium, name, method)
+        getattr(Client.premium, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FILES:
+        setattr(Client.files, name, method)
+        getattr(Client.files, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_PREMIUM_FILES:
+        setattr(Client.premium.files, name, method)
+        getattr(Client.premium.files, name).__doc__ = method.__doc__
+
+    for name, key in (
+        _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
+    ):
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(p))
+        getattr(Client, name).__doc__ = points.__doc__
+
+    for name, method in _INCLUDE_STUDIES:
+        if method:
+            setattr(Client, name, method)

@@ -9,9 +9,17 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _get, _quoteSymbols, _raiseIfNotStr, _reindex, _toDatetime
+from ..common import (
+    _get,
+    _quoteSymbols,
+    _raiseIfNotStr,
+    _reindex,
+    _toDatetime,
+    _interval,
+)
 
 
+@_interval(minutes=5)
 def news(
     symbol,
     last=10,
