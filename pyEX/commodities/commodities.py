@@ -8,7 +8,9 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..common import _expire, _UTC, _timeseriesWrapper
 from ..points import points
+from ..timeseries import timeSeries, timeSeriesDF
 
 
 class CommoditiesPoints(Enum):
@@ -47,6 +49,7 @@ class CommoditiesPoints(Enum):
         return list(map(lambda c: c.value, CommoditiesPoints))
 
 
+@_expire(hour=8, tz=_UTC)
 def wti(token="", version="stable"):
     """Commodities data points
 
@@ -57,6 +60,69 @@ def wti(token="", version="stable"):
     return points("DCOILWTICO", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def wtiHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DCOILWTICO",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def wtiHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DCOILWTICO",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def brent(token="", version="stable"):
     """Commodities data points
 
@@ -67,6 +133,69 @@ def brent(token="", version="stable"):
     return points("DCOILBRENTEU", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def brentHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DCOILBRENTEU",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def brentHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DCOILBRENTEU",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def natgas(token="", version="stable"):
     """Commodities data points
 
@@ -77,6 +206,69 @@ def natgas(token="", version="stable"):
     return points("DHHNGSP", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def natgasHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DHHNGSP",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def natgasHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DHHNGSP",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def heatoil(token="", version="stable"):
     """Commodities data points
 
@@ -87,6 +279,69 @@ def heatoil(token="", version="stable"):
     return points("DHOILNYH", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def heatoilHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DHOILNYH",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def heatoilHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DHOILNYH",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def jet(token="", version="stable"):
     """Commodities data points
 
@@ -97,6 +352,69 @@ def jet(token="", version="stable"):
     return points("DJFUELUSGULF", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def jetHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DJFUELUSGULF",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def jetHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DJFUELUSGULF",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def diesel(token="", version="stable"):
     """Commodities data points
 
@@ -107,6 +425,69 @@ def diesel(token="", version="stable"):
     return points("GASDESW", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def dieselHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="GASDESW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def dieselHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="GASDESW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def gasreg(token="", version="stable"):
     """Commodities data points
 
@@ -117,6 +498,69 @@ def gasreg(token="", version="stable"):
     return points("GASREGCOVW", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def gasregHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="GASREGCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def gasregHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="GASREGCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def gasmid(token="", version="stable"):
     """Commodities data points
 
@@ -127,6 +571,69 @@ def gasmid(token="", version="stable"):
     return points("GASMIDCOVW", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def gasmidHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="GASMIDCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def gasmidHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="GASMIDCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def gasprm(token="", version="stable"):
     """Commodities data points
 
@@ -137,6 +644,69 @@ def gasprm(token="", version="stable"):
     return points("GASPRMCOVW", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def gasprmHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="GASPRMCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def gasprmHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="GASPRMCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def propane(token="", version="stable"):
     """Commodities data points
 
@@ -145,3 +715,65 @@ def propane(token="", version="stable"):
     PROPANE; Propane Prices Mont Belvieu Texas - in dollars per gallon, not seasonally adjusted
     """
     return points("DPROPANEMBTX", token=token, version=version)
+
+
+@_expire(hour=8, tz=_UTC)
+def propaneHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ENERGY",
+        key="DPROPANEMBTX",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def propaneHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Commodities data
+
+    https://iexcloud.io/docs/api/#commodities
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ENERGY",
+        key="DPROPANEMBTX",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )

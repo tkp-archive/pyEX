@@ -12,7 +12,29 @@ import warnings
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
 from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
-from .commodities import CommoditiesPoints
+from .commodities import (
+    CommoditiesPoints,
+    brentHistory,
+    brentHistoryDF,
+    dieselHistory,
+    dieselHistoryDF,
+    gasmidHistory,
+    gasmidHistoryDF,
+    gasprmHistory,
+    gasprmHistoryDF,
+    gasregHistory,
+    gasregHistoryDF,
+    heatoilHistory,
+    heatoilHistoryDF,
+    jetHistory,
+    jetHistoryDF,
+    natgasHistory,
+    natgasHistoryDF,
+    propaneHistory,
+    propaneHistoryDF,
+    wtiHistory,
+    wtiHistoryDF,
+)
 from .common import PyEXception, _interval
 from .cryptocurrency import (
     cryptoBook,
@@ -1247,30 +1269,27 @@ _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesDF", timeSeriesDF),
 ]
 
-
-_INCLUDE_FUNCTIONS_RATES = [
-    ("thirtyYearHistory", thirtyYearHistory),
-    ("thirtyYearHistoryDF", thirtyYearHistoryDF),
-    ("twentyYearHistory", twentyYearHistory),
-    ("twentyYearHistoryDF", twentyYearHistoryDF),
-    ("tenYearHistory", tenYearHistory),
-    ("tenYearHistoryDF", tenYearHistoryDF),
-    ("sevenYearHistory", sevenYearHistory),
-    ("sevenYearHistoryDF", sevenYearHistoryDF),
-    ("fiveYearHistory", fiveYearHistory),
-    ("fiveYearHistoryDF", fiveYearHistoryDF),
-    ("threeYearHistory", threeYearHistory),
-    ("threeYearHistoryDF", threeYearHistoryDF),
-    ("twoYearHistory", twoYearHistory),
-    ("twoYearHistoryDF", twoYearHistoryDF),
-    ("oneYearHistory", oneYearHistory),
-    ("oneYearHistoryDF", oneYearHistoryDF),
-    ("sixMonthHistory", sixMonthHistory),
-    ("sixMonthHistoryDF", sixMonthHistoryDF),
-    ("threeMonthHistory", threeMonthHistory),
-    ("threeMonthHistoryDF", threeMonthHistoryDF),
-    ("oneMonthHistory", oneMonthHistory),
-    ("oneMonthHistoryDF", oneMonthHistoryDF),
+_INCLUDE_FUNCTIONS_COMMODITIES = [
+    ("brentHistory", brentHistory),
+    ("brentHistoryDF", brentHistoryDF),
+    ("dieselHistory", dieselHistory),
+    ("dieselHistoryDF", dieselHistoryDF),
+    ("gasmidHistory", gasmidHistory),
+    ("gasmidHistoryDF", gasmidHistoryDF),
+    ("gasprmHistory", gasprmHistory),
+    ("gasprmHistoryDF", gasprmHistoryDF),
+    ("gasregHistory", gasregHistory),
+    ("gasregHistoryDF", gasregHistoryDF),
+    ("heatoilHistory", heatoilHistory),
+    ("heatoilHistoryDF", heatoilHistoryDF),
+    ("jetHistory", jetHistory),
+    ("jetHistoryDF", jetHistoryDF),
+    ("natgasHistory", natgasHistory),
+    ("natgasHistoryDF", natgasHistoryDF),
+    ("propaneHistory", propaneHistory),
+    ("propaneHistoryDF", propaneHistoryDF),
+    ("wtiHistory", wtiHistory),
+    ("wtiHistoryDF", wtiHistoryDF),
 ]
 
 _INCLUDE_FUNCTIONS_ECONOMIC = [
@@ -1312,6 +1331,31 @@ _INCLUDE_FUNCTIONS_ECONOMIC = [
     ("vehiclesHistoryDF", vehiclesHistoryDF),
 ]
 
+_INCLUDE_FUNCTIONS_RATES = [
+    ("thirtyYearHistory", thirtyYearHistory),
+    ("thirtyYearHistoryDF", thirtyYearHistoryDF),
+    ("twentyYearHistory", twentyYearHistory),
+    ("twentyYearHistoryDF", twentyYearHistoryDF),
+    ("tenYearHistory", tenYearHistory),
+    ("tenYearHistoryDF", tenYearHistoryDF),
+    ("sevenYearHistory", sevenYearHistory),
+    ("sevenYearHistoryDF", sevenYearHistoryDF),
+    ("fiveYearHistory", fiveYearHistory),
+    ("fiveYearHistoryDF", fiveYearHistoryDF),
+    ("threeYearHistory", threeYearHistory),
+    ("threeYearHistoryDF", threeYearHistoryDF),
+    ("twoYearHistory", twoYearHistory),
+    ("twoYearHistoryDF", twoYearHistoryDF),
+    ("oneYearHistory", oneYearHistory),
+    ("oneYearHistoryDF", oneYearHistoryDF),
+    ("sixMonthHistory", sixMonthHistory),
+    ("sixMonthHistoryDF", sixMonthHistoryDF),
+    ("threeMonthHistory", threeMonthHistory),
+    ("threeMonthHistoryDF", threeMonthHistoryDF),
+    ("oneMonthHistory", oneMonthHistory),
+    ("oneMonthHistoryDF", oneMonthHistoryDF),
+]
+
 _INCLUDE_FUNCTIONS_FX = [
     # FX
     ("latestFX", latestFX),
@@ -1344,8 +1388,9 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_ALTERNATIVE
     + _INCLUDE_FUNCTIONS_POINTS
     + _INCLUDE_FUNCTIONS_TS
-    + _INCLUDE_FUNCTIONS_RATES
+    + _INCLUDE_FUNCTIONS_COMMODITIES
     + _INCLUDE_FUNCTIONS_ECONOMIC
+    + _INCLUDE_FUNCTIONS_RATES
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
@@ -1835,15 +1880,20 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
 
-        for name, method in _INCLUDE_FUNCTIONS_RATES:
+        for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
-            setattr(self.rates, name, getattr(self, name))
+            setattr(self.commodities, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.economic, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_RATES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.rates, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1981,11 +2031,15 @@ if os.environ.get("READTHEDOCS"):
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
 
-    for name, method in _INCLUDE_FUNCTIONS_RATES:
+    for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
 
     for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_RATES:
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
 
