@@ -707,37 +707,6 @@ def sixMonthHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def sixMonthHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
-    """Rates data
-
-    https://iexcloud.io/docs/api/#treasuries
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
-    _timeseriesWrapper(timeseries_kwargs)
-    return timeSeriesDF(
-        id="TREASURY",
-        key="DGS6MO",
-        token=token,
-        version=version,
-        filter=filter,
-        format=format,
-        **timeseries_kwargs
-    )
-
-
-@_expire(hour=8, tz=_UTC)
 def threeMonth(token="", version="stable"):
     """Rates data points
 
