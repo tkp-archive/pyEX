@@ -100,27 +100,36 @@ _KEY_STATS = [
 ]
 _USAGE_TYPES = ["messages", "rules", "rule-records", "alerts", "alert-records"]
 
-# Limit 10
 _BATCH_TYPES = [
+    "advanced-stats",
+    "balance-sheet",
     "book",
     "chart",
     "company",
+    "delayed-quote",
     "dividends",
     "earnings",
-    "financials",
-    "stats",
-    "news",
-    "peers",
-    "splits",
-    # limit 10
-    "intraday-prices",
     "effective-spread",
-    "delayed-quote",
+    "financials",
+    "fund-ownership",
+    "income",
+    "indicator",
+    "insider-roster",
+    "insider-summary",
+    "insider-transactions",
+    "institutional-ownership",
+    "intraday-prices",
     "largest-trades",
-    "previous",
+    "logo",
+    "news",
+    "ohlc",
+    "peers",
     "price",
+    "previous",
     "quote",
     "relevant",
+    "splits",
+    "stats",
     "volume-by-venue",
 ]
 
