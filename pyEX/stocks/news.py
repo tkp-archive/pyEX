@@ -57,7 +57,9 @@ def newsDF(*args, **kwargs):
     return _newsToDF(news(*args, **kwargs))
 
 
-def marketNews(last=10, language="", token="", version="stable", filter="", format="json"):
+def marketNews(
+    last=10, language="", token="", version="stable", filter="", format="json"
+):
     """News about market
 
     https://iexcloud.io/docs/api/#news
