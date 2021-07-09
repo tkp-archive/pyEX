@@ -9,10 +9,11 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _quoteSymbols, _raiseIfNotStr, _timeseriesWrapper
+from ..common import _quoteSymbols, _raiseIfNotStr, _timeseriesWrapper, _expire, _UTC
 from ..timeseries import timeSeries
 
 
+@_expire(hour=8, tz=_UTC)
 def bonusIssue(
     symbol="",
     refid="",
@@ -61,6 +62,7 @@ def bonusIssueDF(*args, **kwargs):
     return pd.DataFrame(bonusIssue(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def distribution(
     symbol="",
     refid="",
@@ -109,6 +111,7 @@ def distributionDF(*args, **kwargs):
     return pd.DataFrame(distribution(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def dividends(
     symbol="",
     refid="",
@@ -163,6 +166,7 @@ def dividendsDF(*args, **kwargs):
     return pd.DataFrame(dividends(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def returnOfCapital(
     symbol="",
     refid="",
@@ -209,6 +213,7 @@ def returnOfCapitalDF(*args, **kwargs):
     return pd.DataFrame(returnOfCapital(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def rightsIssue(
     symbol="",
     refid="",
@@ -257,6 +262,7 @@ def rightsIssueDF(*args, **kwargs):
     return pd.DataFrame(rightsIssue(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def rightToPurchase(
     symbol="",
     refid="",
@@ -305,6 +311,7 @@ def rightToPurchaseDF(*args, **kwargs):
     return pd.DataFrame(rightToPurchase(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def securityReclassification(
     symbol="",
     refid="",
@@ -353,6 +360,7 @@ def securityReclassificationDF(*args, **kwargs):
     return pd.DataFrame(securityReclassification(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def securitySwap(
     symbol="",
     refid="",
@@ -401,6 +409,7 @@ def securitySwapDF(*args, **kwargs):
     return pd.DataFrame(securitySwap(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def spinoff(
     symbol="",
     refid="",
@@ -449,6 +458,7 @@ def spinoffDF(*args, **kwargs):
     return pd.DataFrame(spinoff(*args, **kwargs))
 
 
+@_expire(hour=8, tz=_UTC)
 def splits(
     symbol="",
     refid="",

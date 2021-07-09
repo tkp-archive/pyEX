@@ -482,6 +482,7 @@ class TestAll:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             news("test")
+            news("test", language="en")
 
     def test_newsDF(self):
         from pyEX import newsDF
@@ -492,6 +493,7 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
 
             newsDF(SYMBOL)
+            newsDF(SYMBOL, language="en")
 
     def test_marketNews(self):
         from pyEX import marketNews
