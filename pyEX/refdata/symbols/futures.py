@@ -51,5 +51,9 @@ def futuresSymbolsDF(*args, **kwargs):
 
 @wraps(futuresSymbols)
 def futuresSymbolsList(*args, **kwargs):
-    kwargs["filter"] = "symbol"
-    return sorted([x["symbol"] for x in futuresSymbols(*args, **kwargs)])
+    if args or kwargs.get("underlying"):
+        grab = "symbol"
+    else:
+        grab = "underlying"
+    kwargs["filter"] = grab
+    return sorted([x[grab] for x in futuresSymbols(*args, **kwargs)])
