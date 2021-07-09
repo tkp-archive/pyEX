@@ -48,6 +48,7 @@ def timeSeries(
     last=0,
     first=0,
     sort="",
+    interval=None,
     token="",
     version="stable",
     filter="",
@@ -69,7 +70,7 @@ def timeSeries(
                             For example, news may be stored as /news/{symbol}/{newsId}, and the result data returns the keys id, symbol, date, sector, hasPaywall
                             By default you can only query by symbol or id. Maybe you want to query all news where the sector is Technology. Your query would be:
                             /time-series/news?subattribute=source|WSJ
-                            The syntax is subattribute={keyName}|{value}. Both the key name and the value are case sensitive. A pipe symbol is used to represent ‘equal to’.
+                            The syntax is subattribute={keyName}|{value} or {keyName}~{value}. Both the key name and the value are case sensitive. A pipe symbol `|` is used to represent ‘equal to’ and the tilde `~` is used to represent "not equal to".
         dateField (str or datetime): All time series data is stored by a single date field, and that field is used for any range or date parameters. You may want to query time series data by a different date in the result set. To change the date field used by range queries, pass the case sensitive field name with this parameter.
                                      For example, corporate buy back data may be stored by announce date, but also contains an end date which you’d rather query by. To query by end date you would use dateField=endDate&range=last-week
         from_ (str or datetime): Returns data on or after the given from date. Format YYYY-MM-DD
@@ -78,6 +79,7 @@ def timeSeries(
         last (int): Returns the latest n number of records in the series
         first (int): Returns the first n number of records in the series
         sort (str): Order of results
+        interval (int): interval to use
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -156,8 +158,11 @@ def timeSeries(
                 "{}|{}".format(key, value) for key, value in subattribute.items()
             )
         elif isinstance(subattribute, list):
-            # list of tuples mapping key to required equal value, e.g. [("A", 1)] -> A|1
-            subattribute = ",".join("{}|{}".format(v1, v2) for v1, v2 in subattribute)
+            # list of tuples mapping key to required equal value, e.g. [("A", "=", 1), ("B", "!=", 2)] -> A|1,B~2
+            subattribute = ",".join(
+                "{}{}{}".format(v1, "|" if v2.upper() == "=" else "~", v3)
+                for v1, v2, v3 in subattribute
+            )
         base_url += "subattribute={}&".format(subattribute)
     if dateField:
         base_url += "dateField={}&".format(dateField)
@@ -179,6 +184,8 @@ def timeSeries(
         ):
             raise PyEXception("Sort must be in (asc, desc), got: {}".format(sort))
         base_url += "sort={}&".format(sort)
+    if interval:
+        base_url += "interval={}&".format(int(interval))
 
     if extra_params:
         base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
