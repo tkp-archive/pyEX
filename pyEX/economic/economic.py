@@ -97,7 +97,7 @@ def us30History(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE30US",
         token=token,
         version=version,
@@ -128,7 +128,7 @@ def us30HistoryDF(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE30US",
         token=token,
         version=version,
@@ -170,7 +170,7 @@ def us15History(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE15US",
         token=token,
         version=version,
@@ -201,7 +201,7 @@ def us15HistoryDF(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE15US",
         token=token,
         version=version,
@@ -243,7 +243,7 @@ def us5History(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeries(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE5US",
         token=token,
         version=version,
@@ -274,7 +274,7 @@ def us5HistoryDF(
     """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
-        id="ECONOMIC",
+        id="MORTGAGE",
         key="MORTGAGE5US",
         token=token,
         version=version,
