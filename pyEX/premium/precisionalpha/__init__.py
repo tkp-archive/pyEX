@@ -34,6 +34,7 @@ def priceDynamicsPrecisionAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_PRECISION_ALPHA_PRICE_DYNAMICS", symbol=symbol, **kwargs)
 
@@ -45,5 +46,6 @@ def priceDynamicsPrecisionAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_PRECISION_ALPHA_PRICE_DYNAMICS", symbol=symbol, **kwargs)

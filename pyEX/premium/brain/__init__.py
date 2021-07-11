@@ -34,6 +34,7 @@ def thirtyDaySentimentBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_SENTIMENT_30_DAYS", symbol=symbol, **kwargs)
 
@@ -45,6 +46,7 @@ def thirtyDaySentimentBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_SENTIMENT_30_DAYS", symbol=symbol, **kwargs)
 
@@ -56,6 +58,7 @@ def sevenDaySentimentBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_SENTIMENT_7_DAYS", symbol=symbol, **kwargs)
 
@@ -67,6 +70,7 @@ def sevenDaySentimentBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_SENTIMENT_7_DAYS", symbol=symbol, **kwargs)
 
@@ -78,6 +82,7 @@ def twentyOneDayMLReturnRankingBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_RANKING_21_DAYS", symbol=symbol, **kwargs)
 
@@ -89,6 +94,7 @@ def twentyOneDayMLReturnRankingBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_RANKING_21_DAYS", symbol=symbol, **kwargs)
 
@@ -100,6 +106,7 @@ def tenDayMLReturnRankingBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_RANKING_10_DAYS", symbol=symbol, **kwargs)
 
@@ -111,6 +118,7 @@ def tenDayMLReturnRankingBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_RANKING_10_DAYS", symbol=symbol, **kwargs)
 
@@ -122,6 +130,7 @@ def fiveDayMLReturnRankingBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_RANKING_5_DAYS", symbol=symbol, **kwargs)
 
@@ -133,6 +142,7 @@ def fiveDayMLReturnRankingBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_RANKING_5_DAYS", symbol=symbol, **kwargs)
 
@@ -144,6 +154,7 @@ def threeDayMLReturnRankingBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_RANKING_3_DAYS", symbol=symbol, **kwargs)
 
@@ -155,6 +166,7 @@ def threeDayMLReturnRankingBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_RANKING_3_DAYS", symbol=symbol, **kwargs)
 
@@ -166,6 +178,7 @@ def twoDayMLReturnRankingBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_RANKING_2_DAYS", symbol=symbol, **kwargs)
 
@@ -177,6 +190,7 @@ def twoDayMLReturnRankingBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_RANKING_2_DAYS", symbol=symbol, **kwargs)
 
@@ -188,6 +202,7 @@ def languageMetricsOnCompanyFilingsAllBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_LANGUAGE_METRICS_ALL", symbol=symbol, **kwargs)
 
@@ -199,6 +214,7 @@ def languageMetricsOnCompanyFilingsAllBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_LANGUAGE_METRICS_ALL", symbol=symbol, **kwargs)
 
@@ -210,6 +226,7 @@ def languageMetricsOnCompanyFilingsBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_LANGUAGE_METRICS_10K", symbol=symbol, **kwargs)
 
@@ -221,6 +238,7 @@ def languageMetricsOnCompanyFilingsBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_LANGUAGE_METRICS_10K", symbol=symbol, **kwargs)
 
@@ -232,6 +250,7 @@ def languageMetricsOnCompanyFilingsDifferenceAllBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_ALL", symbol=symbol, **kwargs)
 
@@ -243,6 +262,7 @@ def languageMetricsOnCompanyFilingsDifferenceAllBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_ALL", symbol=symbol, **kwargs)
 
@@ -254,6 +274,7 @@ def languageMetricsOnCompanyFilingsDifferenceBrain(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_10K", symbol=symbol, **kwargs)
 
@@ -265,5 +286,6 @@ def languageMetricsOnCompanyFilingsDifferenceBrainDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_BRAIN_LANGUAGE_DIFFERENCES_10K", symbol=symbol, **kwargs)

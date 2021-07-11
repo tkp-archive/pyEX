@@ -14,26 +14,26 @@ from .account import messageBudget, metadata, metadataDF, usage, usageDF
 from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
 from .commodities import (
     CommoditiesPoints,
-    brentHistory,
-    brentHistoryDF,
-    dieselHistory,
-    dieselHistoryDF,
-    gasmidHistory,
-    gasmidHistoryDF,
-    gasprmHistory,
-    gasprmHistoryDF,
-    gasregHistory,
-    gasregHistoryDF,
-    heatoilHistory,
-    heatoilHistoryDF,
-    jetHistory,
-    jetHistoryDF,
-    natgasHistory,
-    natgasHistoryDF,
-    propaneHistory,
-    propaneHistoryDF,
-    wtiHistory,
-    wtiHistoryDF,
+    brent,
+    brentDF,
+    diesel,
+    dieselDF,
+    gasmid,
+    gasmidDF,
+    gasprm,
+    gasprmDF,
+    gasreg,
+    gasregDF,
+    heatoil,
+    heatoilDF,
+    jet,
+    jetDF,
+    natgas,
+    natgasDF,
+    propane,
+    propaneDF,
+    wti,
+    wtiDF,
 )
 from .common import PyEXception, _interval
 from .cryptocurrency import (
@@ -46,42 +46,30 @@ from .cryptocurrency import (
 )
 from .economic import (
     EconomicPoints,
-    cdjHistory,
-    cdjHistoryDF,
-    cdnjHistory,
-    cdnjHistoryDF,
-    cpiHistory,
-    cpiHistoryDF,
-    creditcardHistory,
-    creditcardHistoryDF,
-    fedfundsHistory,
-    fedfundsHistoryDF,
-    gdpHistory,
-    gdpHistoryDF,
-    housingHistory,
-    housingHistoryDF,
-    indproHistory,
-    indproHistoryDF,
-    initialClaimsHistory,
-    initialClaimsHistoryDF,
-    institutionalMoneyHistory,
-    institutionalMoneyHistoryDF,
-    payrollHistory,
-    payrollHistoryDF,
-    recessionProbHistory,
-    recessionProbHistoryDF,
-    retailMoneyHistory,
-    retailMoneyHistoryDF,
-    unemploymentHistory,
-    unemploymentHistoryDF,
-    us5History,
-    us5HistoryDF,
-    us15History,
-    us15HistoryDF,
-    us30History,
-    us30HistoryDF,
-    vehiclesHistory,
-    vehiclesHistoryDF,
+    cpi,
+    cpiDF,
+    fedfunds,
+    fedfundsDF,
+    gdp,
+    gdpDF,
+    housing,
+    housingDF,
+    indpro,
+    indproDF,
+    initialClaims,
+    initialClaimsDF,
+    institutionalMoney,
+    institutionalMoneyDF,
+    payroll,
+    payrollDF,
+    recessionProb,
+    recessionProbDF,
+    retailMoney,
+    retailMoneyDF,
+    unemployment,
+    unemploymentDF,
+    vehicles,
+    vehiclesDF,
 )
 
 from .files import download, files
@@ -95,6 +83,15 @@ from .fx import (
 )
 from .markets import markets, marketsDF
 from .metadata import queryMetadata, queryMetadataDF
+from .mortgage import (
+    MortgagePoints,
+    us5,
+    us5DF,
+    us15,
+    us15DF,
+    us30,
+    us30DF,
+)
 from .options import optionExpirations, options, optionsDF
 from .points import points, pointsDF
 from .premium import (
@@ -102,6 +99,10 @@ from .premium import (
     accountingQualityAndRiskMatrixAuditAnalyticsDF,
     analystDaysWallStreetHorizon,
     analystDaysWallStreetHorizonDF,
+    analystRecommendationAndPriceTargetInvisage,
+    analystRecommendationAndPriceTargetInvisageDF,
+    analystRecommendationsRefinitiv,
+    analystRecommendationsRefinitivDF,
     boardOfDirectorsMeetingWallStreetHorizon,
     boardOfDirectorsMeetingWallStreetHorizonDF,
     businessUpdatesWallStreetHorizon,
@@ -118,6 +119,8 @@ from .premium import (
     directorAndOfficerChangesAuditAnalyticsDF,
     downloadReportNewConstructs,
     downloadStockResearchReportValuEngine,
+    earningsRefinitiv,
+    earningsRefinitivDF,
     esgCFPBComplaintsExtractAlpha,
     esgCFPBComplaintsExtractAlphaDF,
     esgCPSCRecallsExtractAlpha,
@@ -140,6 +143,8 @@ from .premium import (
     esgUSPTOPatentApplicationsExtractAlphaDF,
     esgUSPTOPatentGrantsExtractAlpha,
     esgUSPTOPatentGrantsExtractAlphaDF,
+    estimatesRefinitiv,
+    estimatesRefinitivDF,
     fdaAdvisoryCommitteeMeetingsWallStreetHorizon,
     fdaAdvisoryCommitteeMeetingsWallStreetHorizonDF,
     filingDueDatesWallStreetHorizon,
@@ -174,10 +179,14 @@ from .premium import (
     legalActionsWallStreetHorizonDF,
     mergersAndAcquisitionsWallStreetHorizon,
     mergersAndAcquisitionsWallStreetHorizonDF,
+    newsCityFalcon,
+    newsCityFalconDF,
     nonTimelyFilingsFraudFactors,
     nonTimelyFilingsFraudFactorsDF,
     priceDynamicsPrecisionAlpha,
     priceDynamicsPrecisionAlphaDF,
+    priceTargetRefinitiv,
+    priceTargetRefinitivDF,
     productEventsWallStreetHorizon,
     productEventsWallStreetHorizonDF,
     reportNewConstructs,
@@ -221,28 +230,37 @@ from .premium import (
 )
 from .rates import (
     RatesPoints,
-    thirtyYearHistory,
-    thirtyYearHistoryDF,
-    twentyYearHistory,
-    twentyYearHistoryDF,
-    tenYearHistory,
-    tenYearHistoryDF,
-    sevenYearHistory,
-    sevenYearHistoryDF,
-    fiveYearHistory,
-    fiveYearHistoryDF,
-    threeYearHistory,
-    threeYearHistoryDF,
-    twoYearHistory,
-    twoYearHistoryDF,
-    oneYearHistory,
-    oneYearHistoryDF,
-    sixMonthHistory,
-    sixMonthHistoryDF,
-    threeMonthHistory,
-    threeMonthHistoryDF,
-    oneMonthHistory,
-    oneMonthHistoryDF,
+    cdj,
+    cdjDF,
+    cdnj,
+    cdnjDF,
+    creditcard,
+    creditcardDF,
+)
+from .treasuries import (
+    TreasuriesPoints,
+    thirtyYear,
+    thirtyYearDF,
+    twentyYear,
+    twentyYearDF,
+    tenYear,
+    tenYearDF,
+    sevenYear,
+    sevenYearDF,
+    fiveYear,
+    fiveYearDF,
+    threeYear,
+    threeYearDF,
+    twoYear,
+    twoYearDF,
+    oneYear,
+    oneYearDF,
+    sixMonth,
+    sixMonthDF,
+    threeMonth,
+    threeMonthDF,
+    oneMonth,
+    oneMonthDF,
 )
 from .refdata import (
     calendar,
@@ -394,6 +412,8 @@ from .stocks import (
     iexSystemEvent,
     iexSystemEventAsync,
     iexSystemEventDF,
+    iexThreshold,
+    iexThresholdDF,
     iexTops,
     iexTopsAsync,
     iexTopsDF,
@@ -477,16 +497,14 @@ from .stocks import (
     spinoffDF,
     splits,
     splitsDF,
+    splitsBasic,
+    splitsBasicDF,
     spread,
     spreadDF,
-    stockSplits,
-    stockSplitsDF,
     technicals,
     technicalsDF,
     tenK,
     tenQ,
-    threshold,
-    thresholdDF,
     twentyF,
     upcomingDividends,
     upcomingDividendsDF,
@@ -896,8 +914,6 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("ipoTodayDF", ipoTodayDF),
     ("ipoUpcoming", ipoUpcoming),
     ("ipoUpcomingDF", ipoUpcomingDF),
-    ("threshold", threshold),
-    ("thresholdDF", thresholdDF),
     ("shortInterest", shortInterest),
     ("shortInterestDF", shortInterestDF),
     ("estimates", estimates),
@@ -946,8 +962,8 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("spinoffDF", spinoffDF),
     ("splits", splits),
     ("splitsDF", splitsDF),
-    ("stockSplits", stockSplits),
-    ("stockSplitsDF", stockSplitsDF),
+    ("splits", splitsBasic),
+    ("splitsDF", splitsBasicDF),
     ("tenQ", tenQ),
     ("tenK", tenK),
     ("twentyF", twentyF),
@@ -999,6 +1015,8 @@ _INCLUDE_FUNCTIONS_IEX = [
     ("iexSystemEvent", iexSystemEvent),
     ("iexSystemEventAsync", iexSystemEventAsync),
     ("iexSystemEventDF", iexSystemEventDF),
+    ("iexThreshold", iexThreshold),
+    ("iexThresholdDF", iexThresholdDF),
     ("iexTops", iexTops),
     ("iexTopsAsync", iexTopsAsync),
     ("iexTopsDF", iexTopsDF),
@@ -1096,90 +1114,96 @@ _INCLUDE_FUNCTIONS_TS = [
 ]
 
 _INCLUDE_FUNCTIONS_COMMODITIES = [
-    ("brentHistory", brentHistory),
-    ("brentHistoryDF", brentHistoryDF),
-    ("dieselHistory", dieselHistory),
-    ("dieselHistoryDF", dieselHistoryDF),
-    ("gasmidHistory", gasmidHistory),
-    ("gasmidHistoryDF", gasmidHistoryDF),
-    ("gasprmHistory", gasprmHistory),
-    ("gasprmHistoryDF", gasprmHistoryDF),
-    ("gasregHistory", gasregHistory),
-    ("gasregHistoryDF", gasregHistoryDF),
-    ("heatoilHistory", heatoilHistory),
-    ("heatoilHistoryDF", heatoilHistoryDF),
-    ("jetHistory", jetHistory),
-    ("jetHistoryDF", jetHistoryDF),
-    ("natgasHistory", natgasHistory),
-    ("natgasHistoryDF", natgasHistoryDF),
-    ("propaneHistory", propaneHistory),
-    ("propaneHistoryDF", propaneHistoryDF),
-    ("wtiHistory", wtiHistory),
-    ("wtiHistoryDF", wtiHistoryDF),
-]
-
-_INCLUDE_FUNCTIONS_ECONOMIC = [
-    ("cdjHistory", cdjHistory),
-    ("cdjHistoryDF", cdjHistoryDF),
-    ("cdnjHistory", cdnjHistory),
-    ("cdnjHistoryDF", cdnjHistoryDF),
-    ("cpiHistory", cpiHistory),
-    ("cpiHistoryDF", cpiHistoryDF),
-    ("creditcardHistory", creditcardHistory),
-    ("creditcardHistoryDF", creditcardHistoryDF),
-    ("fedfundsHistory", fedfundsHistory),
-    ("fedfundsHistoryDF", fedfundsHistoryDF),
-    ("gdpHistory", gdpHistory),
-    ("gdpHistoryDF", gdpHistoryDF),
-    ("housingHistory", housingHistory),
-    ("housingHistoryDF", housingHistoryDF),
-    ("indproHistory", indproHistory),
-    ("indproHistoryDF", indproHistoryDF),
-    ("initialClaimsHistory", initialClaimsHistory),
-    ("initialClaimsHistoryDF", initialClaimsHistoryDF),
-    ("institutionalMoneyHistory", institutionalMoneyHistory),
-    ("institutionalMoneyHistoryDF", institutionalMoneyHistoryDF),
-    ("payrollHistory", payrollHistory),
-    ("payrollHistoryDF", payrollHistoryDF),
-    ("recessionProbHistory", recessionProbHistory),
-    ("recessionProbHistoryDF", recessionProbHistoryDF),
-    ("retailMoneyHistory", retailMoneyHistory),
-    ("retailMoneyHistoryDF", retailMoneyHistoryDF),
-    ("unemploymentHistory", unemploymentHistory),
-    ("unemploymentHistoryDF", unemploymentHistoryDF),
-    ("us5History", us5History),
-    ("us5HistoryDF", us5HistoryDF),
-    ("us15History", us15History),
-    ("us15HistoryDF", us15HistoryDF),
-    ("us30History", us30History),
-    ("us30HistoryDF", us30HistoryDF),
-    ("vehiclesHistory", vehiclesHistory),
-    ("vehiclesHistoryDF", vehiclesHistoryDF),
+    ("brent", brent),
+    ("brentDF", brentDF),
+    ("diesel", diesel),
+    ("dieselDF", dieselDF),
+    ("gasmid", gasmid),
+    ("gasmidDF", gasmidDF),
+    ("gasprm", gasprm),
+    ("gasprmDF", gasprmDF),
+    ("gasreg", gasreg),
+    ("gasregDF", gasregDF),
+    ("heatoil", heatoil),
+    ("heatoilDF", heatoilDF),
+    ("jet", jet),
+    ("jetDF", jetDF),
+    ("natgas", natgas),
+    ("natgasDF", natgasDF),
+    ("propane", propane),
+    ("propaneDF", propaneDF),
+    ("wti", wti),
+    ("wtiDF", wtiDF),
 ]
 
 _INCLUDE_FUNCTIONS_RATES = [
-    ("thirtyYearHistory", thirtyYearHistory),
-    ("thirtyYearHistoryDF", thirtyYearHistoryDF),
-    ("twentyYearHistory", twentyYearHistory),
-    ("twentyYearHistoryDF", twentyYearHistoryDF),
-    ("tenYearHistory", tenYearHistory),
-    ("tenYearHistoryDF", tenYearHistoryDF),
-    ("sevenYearHistory", sevenYearHistory),
-    ("sevenYearHistoryDF", sevenYearHistoryDF),
-    ("fiveYearHistory", fiveYearHistory),
-    ("fiveYearHistoryDF", fiveYearHistoryDF),
-    ("threeYearHistory", threeYearHistory),
-    ("threeYearHistoryDF", threeYearHistoryDF),
-    ("twoYearHistory", twoYearHistory),
-    ("twoYearHistoryDF", twoYearHistoryDF),
-    ("oneYearHistory", oneYearHistory),
-    ("oneYearHistoryDF", oneYearHistoryDF),
-    ("sixMonthHistory", sixMonthHistory),
-    ("sixMonthHistoryDF", sixMonthHistoryDF),
-    ("threeMonthHistory", threeMonthHistory),
-    ("threeMonthHistoryDF", threeMonthHistoryDF),
-    ("oneMonthHistory", oneMonthHistory),
-    ("oneMonthHistoryDF", oneMonthHistoryDF),
+    ("cdj", cdj),
+    ("cdjDF", cdjDF),
+    ("cdnj", cdnj),
+    ("cdnjDF", cdnjDF),
+    ("creditcard", creditcard),
+    ("creditcardDF", creditcardDF),
+]
+
+_INCLUDE_FUNCTIONS_ECONOMIC = [
+    ("cpi", cpi),
+    ("cpiDF", cpiDF),
+    ("fedfunds", fedfunds),
+    ("fedfundsDF", fedfundsDF),
+    ("gdp", gdp),
+    ("gdpDF", gdpDF),
+    ("housing", housing),
+    ("housingDF", housingDF),
+    ("indpro", indpro),
+    ("indproDF", indproDF),
+    ("initialClaims", initialClaims),
+    ("initialClaimsDF", initialClaimsDF),
+    ("institutionalMoney", institutionalMoney),
+    ("institutionalMoneyDF", institutionalMoneyDF),
+    ("payroll", payroll),
+    ("payrollDF", payrollDF),
+    ("recessionProb", recessionProb),
+    ("recessionProbDF", recessionProbDF),
+    ("retailMoney", retailMoney),
+    ("retailMoneyDF", retailMoneyDF),
+    ("unemployment", unemployment),
+    ("unemploymentDF", unemploymentDF),
+    ("vehicles", vehicles),
+    ("vehiclesDF", vehiclesDF),
+]
+
+_INCLUDE_FUNCTIONS_MORTGAGE = [
+    ("us5", us5),
+    ("us5DF", us5DF),
+    ("us15", us15),
+    ("us15DF", us15DF),
+    ("us30", us30),
+    ("us30DF", us30DF),
+]
+
+_INCLUDE_FUNCTIONS_TREASURIES = [
+    ("thirtyYear", thirtyYear),
+    ("thirtyYearDF", thirtyYearDF),
+    ("twentyYear", twentyYear),
+    ("twentyYearDF", twentyYearDF),
+    ("tenYear", tenYear),
+    ("tenYearDF", tenYearDF),
+    ("sevenYear", sevenYear),
+    ("sevenYearDF", sevenYearDF),
+    ("fiveYear", fiveYear),
+    ("fiveYearDF", fiveYearDF),
+    ("threeYear", threeYear),
+    ("threeYearDF", threeYearDF),
+    ("twoYear", twoYear),
+    ("twoYearDF", twoYearDF),
+    ("oneYear", oneYear),
+    ("oneYearDF", oneYearDF),
+    ("sixMonth", sixMonth),
+    ("sixMonthDF", sixMonthDF),
+    ("threeMonth", threeMonth),
+    ("threeMonthDF", threeMonthDF),
+    ("oneMonth", oneMonth),
+    ("oneMonthDF", oneMonthDF),
 ]
 
 _INCLUDE_FUNCTIONS_FX = [
@@ -1216,7 +1240,9 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_TS
     + _INCLUDE_FUNCTIONS_COMMODITIES
     + _INCLUDE_FUNCTIONS_ECONOMIC
+    + _INCLUDE_FUNCTIONS_MORTGAGE
     + _INCLUDE_FUNCTIONS_RATES
+    + _INCLUDE_FUNCTIONS_TREASURIES
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
@@ -1379,6 +1405,21 @@ _INCLUDE_FUNCTIONS_PREMIUM = [
     # Stocktwits
     ("socialSentiment", socialSentimentStockTwits),
     ("socialSentimentDF", socialSentimentStockTwitsDF),
+    # Invisage
+    ("analystRecommendationAndPriceTargetInvisage", analystRecommendationAndPriceTargetInvisage),
+    ("analystRecommendationAndPriceTargetInvisageDF", analystRecommendationAndPriceTargetInvisageDF),
+    # Refinitiv
+    ("analystRecommendationsRefinitiv", analystRecommendationsRefinitiv),
+    ("analystRecommendationsRefinitivDF", analystRecommendationsRefinitivDF),
+    ("earningsRefinitiv", earningsRefinitiv),
+    ("earningsRefinitivDF", earningsRefinitivDF),
+    ("estimatesRefinitiv", estimatesRefinitiv),
+    ("estimatesRefinitivDF", estimatesRefinitivDF),
+    ("priceTargetRefinitiv", priceTargetRefinitiv),
+    ("priceTargetRefinitivDF", priceTargetRefinitivDF),
+    # CityFalcon
+    ("newsCityFalcon", newsCityFalcon),
+    ("newsCityFalconDF", newsCityFalconDF),
 ]
 
 _INCLUDE_PREMIUM_FILES = [
@@ -1391,22 +1432,12 @@ _INCLUDE_PREMIUM_FILES = [
 ]
 
 _INCLUDE_POINTS_RATES = [
-    # Rates
-    ("thirtyYear", RatesPoints.THIRTY.value),
-    ("twentyYear", RatesPoints.TWENTY.value),
-    ("tenYear", RatesPoints.TEN.value),
-    ("sevenYear", RatesPoints.SEVEN.value),
-    ("fiveYear", RatesPoints.FIVE.value),
-    ("threeYear", RatesPoints.THREE.value),
-    ("twoYear", RatesPoints.TWO.value),
-    ("oneYear", RatesPoints.ONE.value),
-    ("sixMonth", RatesPoints.SIXMONTH.value),
-    ("threeMonth", RatesPoints.THREEMONTH.value),
-    ("oneMonth", RatesPoints.ONEMONTH.value),
+    ("creditcardValue", RatesPoints.CREDITCARD.value),
+    ("cdnjValue", RatesPoints.CDNJ.value),
+    ("cdjValue", RatesPoints.CDJ.value),
 ]
 
 _INCLUDE_POINTS_COMMODITIES = [
-    # Commodities
     ("wti", CommoditiesPoints.WTI.value),
     ("brent", CommoditiesPoints.BRENT.value),
     ("natgas", CommoditiesPoints.NATGAS.value),
@@ -1419,15 +1450,9 @@ _INCLUDE_POINTS_COMMODITIES = [
     ("propane", CommoditiesPoints.PROPANE.value),
 ]
 
+
 _INCLUDE_POINTS_ECONOMIC = [
-    # Economic
-    ("us30", EconomicPoints.US30.value),
-    ("us15", EconomicPoints.US15.value),
-    ("us5", EconomicPoints.US5.value),
     ("fedfunds", EconomicPoints.FEDFUNDS.value),
-    ("creditcard", EconomicPoints.CREDITCARD.value),
-    ("cdnj", EconomicPoints.CDNJ.value),
-    ("cdj", EconomicPoints.CDJ.value),
     ("gdp", EconomicPoints.GDP.value),
     ("indpro", EconomicPoints.INDPRO.value),
     ("cpi", EconomicPoints.CPI.value),
@@ -1439,6 +1464,26 @@ _INCLUDE_POINTS_ECONOMIC = [
     ("initialClaims", EconomicPoints.INITIALCLAIMS.value),
     ("institutionalMoney", EconomicPoints.INSTITUTIONALMONEY.value),
     ("retailMoney", EconomicPoints.RETAILMONEY.value),
+]
+
+_INCLUDE_POINTS_MORTGAGE = [
+    ("us30", MortgagePoints.US30.value),
+    ("us15", MortgagePoints.US15.value),
+    ("us5", MortgagePoints.US5.value),
+]
+
+_INCLUDE_POINTS_TREASURIES = [
+    ("thirtyYearValue", TreasuriesPoints.THIRTY.value),
+    ("twentyYearValue", TreasuriesPoints.TWENTY.value),
+    ("tenYearValue", TreasuriesPoints.TEN.value),
+    ("sevenYearValue", TreasuriesPoints.SEVEN.value),
+    ("fiveYearValue", TreasuriesPoints.FIVE.value),
+    ("threeYearValue", TreasuriesPoints.THREE.value),
+    ("twoYearValue", TreasuriesPoints.TWO.value),
+    ("oneYearValue", TreasuriesPoints.ONE.value),
+    ("sixMonthValue", TreasuriesPoints.SIXMONTH.value),
+    ("threeMonthValue", TreasuriesPoints.THREEMONTH.value),
+    ("oneMonthValue", TreasuriesPoints.ONEMONTH.value),
 ]
 
 _INCLUDE_STUDIES = [
@@ -1630,24 +1675,25 @@ class Client(object):
 
     account = types.ModuleType("account")
     alternative = types.ModuleType("alternative")
+    commodities = types.ModuleType("commodities")
     crypto = types.ModuleType("crypto")
+    economic = types.ModuleType("economic")
+    files = types.ModuleType("files")
     fx = types.ModuleType("fx")
     iex = types.ModuleType("iex")
     market = types.ModuleType("market")
+    mortgage = types.ModuleType("market")
     points = types.ModuleType("points")
+    premium = types.ModuleType("premium")
+    premium.files = types.ModuleType("premium.files")
+    rates = types.ModuleType("rates")
     refdata = types.ModuleType("refdata")
     rules = types.ModuleType("rules")
     stats = types.ModuleType("stats")
     stocks = types.ModuleType("stocks")
     streaming = types.ModuleType("streaming")
-
-    premium = types.ModuleType("premium")
-    premium.files = types.ModuleType("premium.files")
-    files = types.ModuleType("files")
     studies = types.ModuleType("studies")
-    commodities = types.ModuleType("commodities")
-    rates = types.ModuleType("rates")
-    economic = types.ModuleType("economic")
+    treasuries = types.ModuleType("treasuries")
 
     def __init__(self, api_token=None, version="v1", api_limit=DEFAULT_API_LIMIT):
         self._token = api_token or os.environ.get("IEX_TOKEN", "")
@@ -1716,10 +1762,20 @@ class Client(object):
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.economic, name, getattr(self, name))
 
+        for name, method in _INCLUDE_FUNCTIONS_MORTGAGE:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.mortgage, name, getattr(self, name))
+
         for name, method in _INCLUDE_FUNCTIONS_RATES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.rates, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_TREASURIES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.treasuries, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1775,6 +1831,18 @@ class Client(object):
                 wraps(points)(_interval(minutes=self._api_limit)(p)),
             )
 
+        # rebind mortgage
+        for name, key in _INCLUDE_POINTS_MORTGAGE:
+            p = partial(self.bind, meth=points, key=key)
+            p.__name__ = key
+            setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
+            getattr(self, name).__doc__ = points.__doc__
+            setattr(
+                self.mortgage,
+                name,
+                wraps(points)(_interval(minutes=self._api_limit)(p)),
+            )
+
         # rebind rates
         for name, key in _INCLUDE_POINTS_RATES:
             p = partial(self.bind, meth=points, key=key)
@@ -1783,6 +1851,18 @@ class Client(object):
             getattr(self, name).__doc__ = points.__doc__
             setattr(
                 self.rates, name, wraps(points)(_interval(minutes=self._api_limit)(p))
+            )
+
+        # rebind treasuries
+        for name, key in _INCLUDE_POINTS_TREASURIES:
+            p = partial(self.bind, meth=points, key=key)
+            p.__name__ = key
+            setattr(self, name, wraps(points)(_interval(minutes=self._api_limit)(p)))
+            getattr(self, name).__doc__ = points.__doc__
+            setattr(
+                self.treasuries,
+                name,
+                wraps(points)(_interval(minutes=self._api_limit)(p)),
             )
 
         # rebind files
@@ -1818,102 +1898,175 @@ class Client(object):
 #############################
 # for autodoc
 if os.environ.get("READTHEDOCS"):
+    # rebind
     for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
-        # setattr(self.account, name, getattr(self, name))
+        # setattr(Client.account, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_ALTERNATIVE:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.alternative, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_CRYPTO:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.crypto, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_FX:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.fx, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_IEX:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.iex, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_MARKET:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.market, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_POINTS:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.points, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_TS:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
 
     for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.commodities, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.economic, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_MORTGAGE:
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.mortgage, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_RATES:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.rates, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_TREASURIES:
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.treasuries, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_RULES:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
-        # setattr(self.rules, name, getattr(self, name))
+        # setattr(Client.rules, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_REFDATA:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.refdata, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_STATS:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.stats, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_STOCKS:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.stocks, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_STREAMING:
-        setattr(Client, name, method)
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.streaming, name, getattr(Client, name))
 
+    # rebind premium data
     for name, method in _INCLUDE_FUNCTIONS_PREMIUM:
-        setattr(Client.premium, name, method)
+        setattr(Client.premium, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client.premium, name).__doc__ = method.__doc__
 
-    for name, method in _INCLUDE_FILES:
-        setattr(Client.files, name, method)
-        getattr(Client.files, name).__doc__ = method.__doc__
-
-    for name, method in _INCLUDE_PREMIUM_FILES:
-        setattr(Client.premium.files, name, method)
-        getattr(Client.premium.files, name).__doc__ = method.__doc__
-
-    for name, key in (
-        _INCLUDE_POINTS_COMMODITIES + _INCLUDE_POINTS_ECONOMIC + _INCLUDE_POINTS_RATES
-    ):
+    # rebind commodities
+    for name, key in _INCLUDE_POINTS_COMMODITIES:
         p = partial(Client.bind, meth=points, key=key)
         p.__name__ = key
-        setattr(Client, name, wraps(points)(p))
+        setattr(Client, name, wraps(points)(_interval(minutes=Client._api_limit)(p)))
         getattr(Client, name).__doc__ = points.__doc__
+        setattr(
+            Client.commodities,
+            name,
+            wraps(points)(_interval(minutes=Client._api_limit)(p)),
+        )
 
+    # rebind economic
+    for name, key in _INCLUDE_POINTS_ECONOMIC:
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(_interval(minutes=Client._api_limit)(p)))
+        getattr(Client, name).__doc__ = points.__doc__
+        setattr(
+            Client.economic,
+            name,
+            wraps(points)(_interval(minutes=Client._api_limit)(p)),
+        )
+
+    # rebind mortgage
+    for name, key in _INCLUDE_POINTS_MORTGAGE:
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(_interval(minutes=Client._api_limit)(p)))
+        getattr(Client, name).__doc__ = points.__doc__
+        setattr(
+            Client.mortgage,
+            name,
+            wraps(points)(_interval(minutes=Client._api_limit)(p)),
+        )
+
+    # rebind rates
+    for name, key in _INCLUDE_POINTS_RATES:
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(_interval(minutes=Client._api_limit)(p)))
+        getattr(Client, name).__doc__ = points.__doc__
+        setattr(
+            Client.rates, name, wraps(points)(_interval(minutes=Client._api_limit)(p))
+        )
+
+    # rebind treasuries
+    for name, key in _INCLUDE_POINTS_TREASURIES:
+        p = partial(Client.bind, meth=points, key=key)
+        p.__name__ = key
+        setattr(Client, name, wraps(points)(_interval(minutes=Client._api_limit)(p)))
+        getattr(Client, name).__doc__ = points.__doc__
+        setattr(
+            Client.treasuries,
+            name,
+            wraps(points)(_interval(minutes=Client._api_limit)(p)),
+        )
+
+    # rebind files
+    for name, method in _INCLUDE_FILES:
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.files, name, wraps(method)(partial(Client.bind, meth=method)))
+        getattr(Client.files, name).__doc__ = method.__doc__
+
+    # rebind premium files
+    for name, method in _INCLUDE_PREMIUM_FILES:
+        setattr(
+            Client.premium.files, name, wraps(method)(partial(Client.bind, meth=method))
+        )
+        getattr(Client.premium.files, name).__doc__ = method.__doc__
+
+    # rebind studies
     for name, method in _INCLUDE_STUDIES:
         if method:
-            setattr(Client, name, method)
+            setattr(Client, name, method.__get__(Client, Client.__class__))
+            setattr(Client.studies, name, method.__get__(Client, Client.__class__))

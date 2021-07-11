@@ -22,6 +22,45 @@ from ..common import (
 )
 
 
+def iexThreshold(date=None, token="", version="stable", filter="", format="json"):
+    """The following are IEX-listed securities that have an aggregate fail to deliver position for five consecutive settlement days at a registered clearing agency, totaling 10,000 shares or more and equal to at least 0.5% of the issuer’s total shares outstanding (i.e., “threshold securities”).
+    The report data will be published to the IEX website daily at 8:30 p.m. ET with data for that trading day.
+
+    https://iexcloud.io/docs/api/#listed-regulation-sho-threshold-securities-list-in-dev
+
+    Args:
+        date (datetime): Effective Datetime
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+    Returns:
+        dict or DataFrame: result
+    """
+    if date:
+        date = _strOrDate(date)
+        return _get(
+            "stock/market/threshold-securities/" + date,
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        )
+    return _get(
+        "stock/market/threshold-securities",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
+
+
+@wraps(iexThreshold)
+def iexThresholdDF(*args, **kwargs):
+    return _toDatetime(pd.DataFrame(iexThreshold(*args, **kwargs)))
+
+
 def iexTops(symbols=None, token="", version="stable", format="json"):
     """TOPS provides IEX’s aggregated best quoted bid and offer position in near real time for all securities on IEX’s displayed limit order book.
     TOPS is ideal for developers needing both quote and trade data.

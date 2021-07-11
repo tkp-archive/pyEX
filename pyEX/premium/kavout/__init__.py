@@ -35,6 +35,7 @@ def kScoreKavout(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_KAVOUT_KSCORE", symbol=symbol, **kwargs)
 
@@ -47,6 +48,7 @@ def kScoreKavoutDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_KAVOUT_KSCORE", symbol=symbol, **kwargs)
 
@@ -67,6 +69,7 @@ def kScoreChinaKavout(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_KAVOUT_KSCORE_A_SHARES", symbol=symbol, **kwargs)
 
@@ -87,5 +90,6 @@ def kScoreChinaKavoutDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_KAVOUT_KSCORE_A_SHARES", symbol=symbol, **kwargs)

@@ -37,6 +37,7 @@ def cam1ExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_EXTRACT_ALPHA_CAM", symbol=symbol, **kwargs)
 
@@ -51,6 +52,7 @@ def cam1ExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_CAM", symbol=symbol, **kwargs)
 
@@ -66,6 +68,7 @@ def esgCFPBComplaintsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "1"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -81,6 +84,7 @@ def esgCFPBComplaintsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "1"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -96,6 +100,7 @@ def esgCPSCRecallsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "5"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -111,6 +116,7 @@ def esgCPSCRecallsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "5"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -127,6 +133,7 @@ def esgDOLVisaApplicationsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "8"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -143,6 +150,7 @@ def esgDOLVisaApplicationsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "8"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -159,6 +167,7 @@ def esgEPAEnforcementsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "2"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -175,6 +184,7 @@ def esgEPAEnforcementsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "2"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -188,6 +198,7 @@ def esgEPAMilestonesExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "3"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -201,6 +212,7 @@ def esgEPAMilestonesExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "3"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -214,6 +226,7 @@ def esgFECIndividualCampaingContributionsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "7"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -227,6 +240,7 @@ def esgFECIndividualCampaingContributionsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "7"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -241,6 +255,7 @@ def esgOSHAInspectionsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "4"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -255,6 +270,7 @@ def esgOSHAInspectionsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "4"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -268,6 +284,7 @@ def esgSenateLobbyingExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "6"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -281,6 +298,7 @@ def esgSenateLobbyingExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "6"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -295,6 +313,7 @@ def esgUSASpendingExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "9"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -309,6 +328,7 @@ def esgUSASpendingExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "9"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -323,6 +343,7 @@ def esgUSPTOPatentApplicationsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "10"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -337,6 +358,7 @@ def esgUSPTOPatentApplicationsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "10"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -352,6 +374,7 @@ def esgUSPTOPatentGrantsExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "11"
     return _base(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -367,6 +390,7 @@ def esgUSPTOPatentGrantsExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     kwargs["subkey"] = "11"
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_ESG", symbol=symbol, **kwargs)
@@ -384,6 +408,7 @@ def tacticalModel1ExtractAlpha(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_EXTRACT_ALPHA_TM", symbol=symbol, **kwargs)
 
@@ -400,5 +425,6 @@ def tacticalModel1ExtractAlphaDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_EXTRACT_ALPHA_TM", symbol=symbol, **kwargs)

@@ -10,39 +10,39 @@ from functools import wraps
 import pandas as pd
 
 from ..common import (
-    _COLLECTION_TAGS,
-    _EST,
-    _LIST_OPTIONS,
     _UTC,
-    PyEXception,
+    _checkPeriodLast,
     _expire,
     _get,
     _quoteSymbols,
     _raiseIfNotStr,
     _reindex,
-    _strOrDate,
     _toDatetime,
     json_normalize,
 )
 
 
-@_expire(hour=0)
-def collections(
-    tag,
-    collectionName,
+@_expire(hour=9, tz=_UTC)
+def earnings(
+    symbol,
+    period="quarter",
+    last=1,
+    field="",
     token="",
     version="stable",
     filter="",
     format="json",
 ):
-    """Returns an array of quote objects for a given collection type. Currently supported collection types are sector, tag, and list
+    """Earnings data for a given company including the actual EPS, consensus, and fiscal period. Earnings are available quarterly (last 4 quarters) and annually (last 4 years).
 
-
-    https://iexcloud.io/docs/api/#collections
+    https://iexcloud.io/docs/api/#earnings
+    Updates at 9am, 11am, 12pm UTC every day
 
     Args:
-        tag (str):  Sector, Tag, or List
-        collectionName (str):  Associated name for tag
+        symbol (str): Ticker to request
+        period (str): Period, either 'annual' or 'quarter'
+        last (int): Number of records to fetch, up to 12 for 'quarter' and 4 for 'annual'
+        field (str): Subfield to fetch
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -51,19 +51,38 @@ def collections(
     Returns:
         dict or DataFrame: result
     """
-    if tag not in _COLLECTION_TAGS:
-        raise PyEXception("Tag must be in %s" % str(_COLLECTION_TAGS))
+    _raiseIfNotStr(symbol)
+    symbol = _quoteSymbols(symbol)
+    _checkPeriodLast(period, last)
+    if not field:
+        return _get(
+            "stock/{}/earnings?period={}&last={}".format(symbol, period, last),
+            token=token,
+            version=version,
+            filter=filter,
+            format=format,
+        ).get("earnings", [])
     return _get(
-        "stock/market/collection/" + tag + "?collectionName=" + collectionName,
-        token,
-        version,
-        filter,
-    )
+        "stock/{}/earnings/{}/{}?period={}".format(symbol, last, field, period),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    ).get("earnings", [])
 
 
-@wraps(collections)
-def collectionsDF(*args, **kwargs):
-    return _reindex(_toDatetime(pd.DataFrame(collections(*args, **kwargs))), "symbol")
+def _earningsToDF(e):
+    """internal"""
+    if e:
+        df = _reindex(_toDatetime(pd.DataFrame(e)), "EPSReportDate")
+    else:
+        df = pd.DataFrame()
+    return df
+
+
+@wraps(earnings)
+def earningsDF(*args, **kwargs):
+    return _earningsToDF(earnings(*args, **kwargs))
 
 
 @_expire(minute=0)
@@ -161,188 +180,6 @@ def ipoUpcomingDF(*args, **kwargs):
     else:
         df = pd.DataFrame()
     return df
-
-
-def list(
-    option="mostactive",
-    token="",
-    version="stable",
-    filter="",
-    format="json",
-):
-    """Returns an array of quotes for the top 10 symbols in a specified list.
-
-
-    https://iexcloud.io/docs/api/#list
-    Updated intraday
-
-    Args:
-        option (str): Option to query
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    if option not in _LIST_OPTIONS:
-        raise PyEXception("Option must be in %s" % str(_LIST_OPTIONS))
-    return _get("stock/market/list/" + option, token, version, filter)
-
-
-@wraps(list)
-def listDF(*args, **kwargs):
-    return _reindex(_toDatetime(pd.DataFrame(list(*args, **kwargs))), "symbol")
-
-
-def marketVolume(token="", version="stable", filter="", format="json"):
-    """This endpoint returns real time traded volume on U.S. markets.
-
-    https://iexcloud.io/docs/api/#market-volume-u-s
-    7:45am-5:15pm ET Mon-Fri
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    return _get("market/", token, version, filter)
-
-
-@wraps(marketVolume)
-def marketVolumeDF(token="", version="stable", filter="", format="json"):
-    df = pd.DataFrame(marketVolume())
-    _toDatetime(df, cols=[], tcols=["lastUpdated"])
-    return df
-
-
-def marketOhlc(token="", version="stable", filter="", format="json"):
-    """Returns the official open and close for whole market.
-
-    https://iexcloud.io/docs/api/#news
-    9:30am-5pm ET Mon-Fri
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    return _get("stock/market/ohlc", token, version, filter)
-
-
-@wraps(marketOhlc)
-def marketOhlcDF(*args, **kwargs):
-    x = marketOhlc(*args, **kwargs)
-    data = []
-    for key in x:
-        data.append(x[key])
-        data[-1]["symbol"] = key
-    return _reindex(_toDatetime(json_normalize(data)), "symbol")
-
-
-@_expire(hour=4, tz=_UTC)
-def marketYesterday(token="", version="stable", filter="", format="json"):
-    """This returns previous day adjusted price data for whole market
-
-    https://iexcloud.io/docs/api/#previous-day-prices
-    Available after 4am ET Tue-Sat
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    return _get("stock/market/previous", token, version, filter)
-
-
-marketPrevious = marketYesterday
-
-
-@wraps(marketYesterday)
-def marketYesterdayDF(*args, **kwargs):
-    x = marketYesterday(*args, **kwargs)
-    data = []
-    for key in x:
-        data.append(x[key])
-        data[-1]["symbol"] = key
-    return _reindex(_toDatetime(pd.DataFrame(data)), "symbol")
-
-
-marketPreviousDF = marketYesterdayDF
-
-
-def sectorPerformance(token="", version="stable", filter="", format="json"):
-    """This returns an array of each sector and performance for the current trading day. Performance is based on each sector ETF.
-
-    https://iexcloud.io/docs/api/#sector-performance
-    8am-5pm ET Mon-Fri
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    return _get("stock/market/sector-performance", token, version, filter)
-
-
-@wraps(sectorPerformance)
-def sectorPerformanceDF(*args, **kwargs):
-    return _reindex(
-        _toDatetime(
-            pd.DataFrame(sectorPerformance(*args, **kwargs)),
-            cols=[],
-            tcols=["lastUpdated"],
-        ),
-        "name",
-    )
-
-
-@_expire(hour=16, tz=_EST)
-def marketShortInterest(
-    date=None, token="", version="stable", filter="", format="json"
-):
-    """The consolidated market short interest positions in all IEX-listed securities are included in the IEX Short Interest Report.
-
-    The report data will be published daily at 4:00pm ET.
-
-    https://iexcloud.io/docs/api/#listed-short-interest-list-in-dev
-
-    Args:
-        date (datetime): Effective Datetime
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    if date:
-        date = _strOrDate(date)
-        return _get("stock/market/short-interest/" + date, token, version, filter)
-    return _get("stock/market/short-interest", token, version, filter)
-
-
-@wraps(marketShortInterest)
-def marketShortInterestDF(*args, **kwargs):
-    return _toDatetime(pd.DataFrame(marketShortInterest(*args, **kwargs)))
 
 
 def upcomingEvents(
