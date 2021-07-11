@@ -8,16 +8,64 @@
 
 import pyEX as p
 
+_PREEXISTING = [
+    "Enum",
+    "__annotations__",
+    "__builtins__",
+    "__cached__",
+    "__call__",
+    "__class__",
+    "__class_getitem__",
+    "__delattr__",
+    "__dict__",
+    "__dir__",
+    "__doc__",
+    "__eq__",
+    "__file__",
+    "__format__",
+    "__ge__",
+    "__getattribute__",
+    "__gt__",
+    "__hash__",
+    "__init__",
+    "__init_subclass__",
+    "__le__",
+    "__loader__",
+    "__lt__",
+    "__module__",
+    "__name__",
+    "__ne__",
+    "__new__",
+    "__package__",
+    "__path__",
+    "__qualname__",
+    "__reduce__",
+    "__reduce_ex__",
+    "__repr__",
+    "__setattr__",
+    "__setstate__",
+    "__sizeof__",
+    "__spec__",
+    "__str__",
+    "__subclasshook__",
+    "__wrapped__",
+    "args",
+    "func",
+    "keywords",
+]
+
 
 class TestPyEXClientAPI:
     def setup(self):
         self.c = p.Client("pk_123")
 
     def test_all_rules(self):
+        all = set(dir(self.c.rules))
+        found = set(_PREEXISTING)
 
         for meth in (
             "schema",
-            "rules",
+            "listRules",
             "createRule",
             "lookupRule",
             "pauseRule",
@@ -26,10 +74,14 @@ class TestPyEXClientAPI:
             "ruleInfo",
             "ruleOutput",
         ):
-            assert hasattr(self.c, meth)
-            # assert hasattr(self.c.rules, meth)
+            assert hasattr(self.c.rules, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_refdata(self):
+        all = set(dir(self.c.refdata))
+        found = set(_PREEXISTING)
+
         for meth in (
             "symbols",
             "iexSymbols",
@@ -86,11 +138,18 @@ class TestPyEXClientAPI:
             "searchDF",
             "tags",
             "tagsDF",
+            "queryMetadata",
+            "queryMetadataDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.refdata, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_markets(self):
+        all = set(dir(self.c.market))
+        found = set(_PREEXISTING)
+
         for meth in (
             "markets",
             "marketsDF",
@@ -111,15 +170,13 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.market, meth)
-
-    def test_all_metadata(self):
-        for meth in (
-            "queryMetadata",
-            "queryMetadataDF",
-        ):
-            assert hasattr(self.c, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_stats(self):
+        all = set(dir(self.c.stats))
+        found = set(_PREEXISTING)
+
         for meth in (
             "systemStats",
             "systemStatsDF",
@@ -134,6 +191,8 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.stats, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_ts(self):
         for meth in (
@@ -146,6 +205,9 @@ class TestPyEXClientAPI:
             assert hasattr(self.c, meth)
 
     def test_all_stock(self):
+        all = set(dir(self.c.stocks))
+        found = set(_PREEXISTING)
+
         for meth in (
             "advancedStats",
             "advancedStatsDF",
@@ -157,16 +219,14 @@ class TestPyEXClientAPI:
             "batchDF",
             "bonusIssue",
             "bonusIssueDF",
-            "bulkBatch",
-            "bulkBatchDF",
             "book",
             "bookDF",
             "cashFlow",
             "cashFlowDF",
             "chart",
             "chartDF",
-            "bulkMinuteBars",
-            "bulkMinuteBarsDF",
+            "ceoCompensation",
+            "ceoCompensationDF",
             "company",
             "companyDF",
             "collections",
@@ -208,8 +268,6 @@ class TestPyEXClientAPI:
             "ipoTodayDF",
             "ipoUpcoming",
             "ipoUpcomingDF",
-            "threshold",
-            "thresholdDF",
             "shortInterest",
             "shortInterestDF",
             "estimates",
@@ -258,8 +316,8 @@ class TestPyEXClientAPI:
             "spinoffDF",
             "splits",
             "splitsDF",
-            "stockSplits",
-            "stockSplitsDF",
+            "splitsBasic",
+            "splitsBasicDF",
             "tenQ",
             "tenK",
             "technicals",
@@ -280,8 +338,13 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.stocks, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_iex(self):
+        all = set(dir(self.c.iex))
+        found = set(_PREEXISTING)
+
         for meth in (
             "iexAuction",
             "iexAuctionAsync",
@@ -325,11 +388,18 @@ class TestPyEXClientAPI:
             "iexTradingStatus",
             "iexTradingStatusAsync",
             "iexTradingStatusDF",
+            "iexThreshold",
+            "iexThresholdDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.iex, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_streaming(self):
+        all = set(dir(self.c.streaming))
+        found = set(_PREEXISTING)
+
         for meth in (
             "topsSSE",
             "topsSSEAsync",
@@ -376,6 +446,8 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.streaming, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_account(self):
         for meth in (
@@ -386,24 +458,34 @@ class TestPyEXClientAPI:
             "usageDF",
         ):
             assert hasattr(self.c, meth)
-            # assert hasattr(self.c.account, meth)
 
     def test_all_alternative(self):
+        all = set(dir(self.c.alternative))
+        found = set(_PREEXISTING)
+
         for meth in (
             "sentiment",
             "sentimentDF",
-            "ceoCompensation",
-            "ceoCompensationDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.alternative, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_points(self):
+        all = set(dir(self.c.points))
+        found = set(_PREEXISTING)
+
         for meth in ("points", "pointsDF"):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.points, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_fx(self):
+        all = set(dir(self.c.fx))
+        found = set(_PREEXISTING)
+
         for meth in (
             "latestFX",
             "latestFXDF",
@@ -414,8 +496,13 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.fx, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_crypto(self):
+        all = set(dir(self.c.crypto))
+        found = set(_PREEXISTING)
+
         for meth in (
             "cryptoBook",
             "cryptoBookDF",
@@ -426,16 +513,30 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.crypto, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_files(self):
+        all = set(dir(self.c.files))
+        found = set(_PREEXISTING)
+
         for meth in ("file", "download"):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.files, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_premium(self):
+        all = set(dir(self.c.premium))
+        found = set(_PREEXISTING)
+
         for meth in (
             "analystDays",
             "analystDaysDF",
+            "analystRecommendationsAndPriceTargets",
+            "analystRecommendationsAndPriceTargetsDF",
+            "analystRecommendations",
+            "analystRecommendationsDF",
             "boardOfDirectorsMeeting",
             "boardOfDirectorsMeetingDF",
             "businessUpdates",
@@ -446,6 +547,11 @@ class TestPyEXClientAPI:
             "capitalMarketsDayDF",
             "companyTravel",
             "companyTravelDF",
+            "earnings",
+            "earningsDF",
+            "estimates",
+            "estimatesDF",
+            "files",
             "filingDueDates",
             "filingDueDatesDF",
             "fiscalQuarterEnd",
@@ -466,6 +572,10 @@ class TestPyEXClientAPI:
             "legalActionsDF",
             "mergersAndAcquisitions",
             "mergersAndAcquisitionsDF",
+            "news",
+            "newsDF",
+            "priceTarget",
+            "priceTargetDF",
             "productEvents",
             "productEventsDF",
             "researchAndDevelopmentDays",
@@ -478,6 +588,8 @@ class TestPyEXClientAPI:
             "seminarsDF",
             "shareholderMeetings",
             "shareholderMeetingsDF",
+            "socialSentiment",
+            "socialSentimentDF",
             "summitMeetings",
             "summitMeetingsDF",
             "tradeShows",
@@ -550,8 +662,13 @@ class TestPyEXClientAPI:
             "directorAndOfficerChangesDF",
         ):
             assert hasattr(self.c.premium, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_files_premium(self):
+        all = set(dir(self.c.premium.files))
+        found = set(_PREEXISTING)
+
         for meth in (
             "valuEngine",
             "valuEngineDownload",
@@ -559,143 +676,160 @@ class TestPyEXClientAPI:
             "newConstructsDownload",
         ):
             assert hasattr(self.c.premium.files, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_treasuries(self):
+        all = set(dir(self.c.treasuries))
+        found = set(_PREEXISTING)
+
         for meth in (
             "thirtyYear",
+            "thirtyYearValue",
+            "thirtyYearDF",
             "twentyYear",
+            "twentyYearValue",
+            "twentyYearDF",
             "tenYear",
+            "tenYearValue",
+            "tenYearDF",
             "sevenYear",
+            "sevenYearValue",
+            "sevenYearDF",
             "fiveYear",
+            "fiveYearValue",
+            "fiveYearDF",
             "threeYear",
+            "threeYearValue",
+            "threeYearDF",
             "twoYear",
+            "twoYearValue",
+            "twoYearDF",
             "oneYear",
+            "oneYearValue",
+            "oneYearDF",
             "sixMonth",
+            "sixMonthValue",
+            "sixMonthDF",
             "threeMonth",
+            "threeMonthValue",
+            "threeMonthDF",
             "oneMonth",
-            "thirtyYearHistory",
-            "thirtyYearHistoryDF",
-            "twentyYearHistory",
-            "twentyYearHistoryDF",
-            "tenYearHistory",
-            "tenYearHistoryDF",
-            "sevenYearHistory",
-            "sevenYearHistoryDF",
-            "fiveYearHistory",
-            "fiveYearHistoryDF",
-            "threeYearHistory",
-            "threeYearHistoryDF",
-            "twoYearHistory",
-            "twoYearHistoryDF",
-            "oneYearHistory",
-            "oneYearHistoryDF",
-            "sixMonthHistory",
-            "sixMonthHistoryDF",
-            "threeMonthHistory",
-            "threeMonthHistoryDF",
-            "oneMonthHistory",
-            "oneMonthHistoryDF",
+            "oneMonthValue",
+            "oneMonthDF",
         ):
             assert hasattr(self.c, meth)
-            assert hasattr(self.c.rates, meth)
+            assert hasattr(self.c.treasuries, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_commods(self):
+        all = set(dir(self.c.commodities))
+        found = set(_PREEXISTING)
+
         for meth in (
             "brent",
-            "brentHistory",
-            "brentHistoryDF",
+            "brentDF",
             "diesel",
-            "dieselHistory",
-            "dieselHistoryDF",
+            "dieselDF",
             "gasmid",
-            "gasmidHistory",
-            "gasmidHistoryDF",
+            "gasmidDF",
             "gasprm",
-            "gasprmHistory",
-            "gasprmHistoryDF",
+            "gasprmDF",
             "gasreg",
-            "gasregHistory",
-            "gasregHistoryDF",
+            "gasregDF",
             "heatoil",
-            "heatoilHistory",
-            "heatoilHistoryDF",
+            "heatoilDF",
             "jet",
-            "jetHistory",
-            "jetHistoryDF",
+            "jetDF",
             "natgas",
-            "natgasHistory",
-            "natgasHistoryDF",
+            "natgasDF",
             "propane",
-            "propaneHistory",
-            "propaneHistoryDF",
+            "propaneDF",
             "wti",
-            "wtiHistory",
-            "wtiHistoryDF",
+            "wtiDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.commodities, meth)
+            found.add(meth)
+        assert all - found == set()
 
-    def test_all_rates(self):
+    def test_all_economic(self):
+        all = set(dir(self.c.economic))
+        found = set(_PREEXISTING)
+
         for meth in (
-            "cdj",
-            "cdjHistory",
-            "cdjHistoryDF",
-            "cdnj",
-            "cdnjHistory",
-            "cdnjHistoryDF",
-            "creditcard",
-            "creditcardHistory",
-            "creditcardHistoryDF",
             "cpi",
-            "cpiHistory",
-            "cpiHistoryDF",
+            "cpiDF",
             "fedfunds",
-            "fedfundsHistory",
-            "fedfundsHistoryDF",
+            "fedfundsDF",
             "gdp",
-            "gdpHistory",
-            "gdpHistoryDF",
+            "gdpDF",
             "housing",
-            "housingHistory",
-            "housingHistoryDF",
+            "housingDF",
             "indpro",
-            "indproHistory",
-            "indproHistoryDF",
+            "indproDF",
             "initialClaims",
-            "initialClaimsHistory",
-            "initialClaimsHistoryDF",
+            "initialClaimsDF",
             "institutionalMoney",
-            "institutionalMoneyHistory",
-            "institutionalMoneyHistoryDF",
+            "institutionalMoneyDF",
             "payroll",
-            "payrollHistory",
-            "payrollHistoryDF",
+            "payrollDF",
             "recessionProb",
-            "recessionProbHistory",
-            "recessionProbHistoryDF",
+            "recessionProbDF",
             "retailMoney",
-            "retailMoneyHistory",
-            "retailMoneyHistoryDF",
+            "retailMoneyDF",
             "unemployment",
-            "unemploymentHistory",
-            "unemploymentHistoryDF",
-            "us15",
-            "us15History",
-            "us15HistoryDF",
-            "us30",
-            "us30History",
-            "us30HistoryDF",
-            "us5",
-            "us5History",
-            "us5HistoryDF",
+            "unemploymentDF",
             "vehicles",
-            "vehiclesHistory",
-            "vehiclesHistoryDF",
+            "vehiclesDF",
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.economic, meth)
+            found.add(meth)
+        assert all - found == set()
+
+    def test_all_rates(self):
+        all = set(dir(self.c.rates))
+        found = set(_PREEXISTING)
+
+        for meth in (
+            "cdj",
+            "cdjDF",
+            "cdjValue",
+            "cdnj",
+            "cdnjDF",
+            "cdnjValue",
+            "creditcard",
+            "creditcardDF",
+            "creditcardValue",
+        ):
+            assert hasattr(self.c, meth)
+            assert hasattr(self.c.rates, meth)
+            found.add(meth)
+        assert all - found == set()
+
+    def test_all_mortgage(self):
+        all = set(dir(self.c.mortgage))
+        found = set(_PREEXISTING)
+
+        for meth in (
+            "us15",
+            "us15DF",
+            "us30",
+            "us30DF",
+            "us5",
+            "us5DF",
+        ):
+            assert hasattr(self.c, meth)
+            assert hasattr(self.c.mortgage, meth)
+            found.add(meth)
+        assert all - found == set()
 
     def test_all_studies(self):
+        all = set(dir(self.c.studies))
+        found = set(_PREEXISTING)
+
         for meth in (
             "peerCorrelation",
             "peerCorrelationPlot",
@@ -860,3 +994,5 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.studies, meth)
+            found.add(meth)
+        assert all - found == set()

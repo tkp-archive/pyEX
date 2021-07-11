@@ -449,8 +449,8 @@ class TestAll:
 
             collectionsDF("sector", "Health Care")
 
-    def test_stockSplits(self):
-        from pyEX import stockSplits
+    def test_splitsBasic(self):
+        from pyEX import splitsBasic
         from pyEX.common import PyEXception
 
         with patch("requests.get") as mock:
@@ -458,22 +458,22 @@ class TestAll:
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            stockSplits(SYMBOL)
+            splitsBasic(SYMBOL)
             try:
-                stockSplits("test", "test")
+                splitsBasic("test", "test")
                 assert False
             except PyEXception:
                 pass
 
-    def test_stockSplitsDF(self):
-        from pyEX import stockSplitsDF
+    def test_splitsBasicDF(self):
+        from pyEX import splitsBasicDF
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
             mock.return_value.json = MagicMock(return_value=[])
 
-            stockSplitsDF(SYMBOL, "5y")
+            splitsBasicDF(SYMBOL, "5y")
 
     def test_news(self):
         from pyEX import news

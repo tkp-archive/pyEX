@@ -18,7 +18,7 @@ from ..common import (
     _quoteSymbols,
     _raiseIfNotStr,
 )
-from .prices import _chartToDF
+from .chart import _chartToDF
 
 
 @_expire(hour=4, tz=_EST)

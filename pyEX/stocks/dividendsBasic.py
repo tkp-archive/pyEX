@@ -7,14 +7,12 @@
 #
 from functools import wraps
 
-import numpy as np
 import pandas as pd
 
 from ..common import (
     _TIMEFRAME_DIVSPLIT,
     _UTC,
     PyEXception,
-    _checkPeriodLast,
     _expire,
     _get,
     _quoteSymbols,
@@ -22,11 +20,10 @@ from ..common import (
     _reindex,
     _toDatetime,
 )
-from ..timeseries import timeSeries
 
 
 @_expire(hour=9, tz=_UTC)
-def dividends(
+def dividendsBasic(
     symbol,
     timeframe="ytd",
     token="",
@@ -67,6 +64,6 @@ def _dividendsToDF(d):
     return _reindex(_toDatetime(pd.DataFrame(d)), "exDate")
 
 
-@wraps(dividends)
-def dividendsDF(*args, **kwargs):
-    return _dividendsToDF(dividends(*args, **kwargs))
+@wraps(dividendsBasic)
+def dividendsBasicDF(*args, **kwargs):
+    return _dividendsToDF(dividendsBasic(*args, **kwargs))

@@ -11,7 +11,7 @@ from functools import partial, wraps
 import warnings
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
-from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
+from .alternative import sentiment, sentimentDF
 from .commodities import (
     CommoditiesPoints,
     brent,
@@ -99,8 +99,8 @@ from .premium import (
     accountingQualityAndRiskMatrixAuditAnalyticsDF,
     analystDaysWallStreetHorizon,
     analystDaysWallStreetHorizonDF,
-    analystRecommendationAndPriceTargetInvisage,
-    analystRecommendationAndPriceTargetInvisageDF,
+    analystRecommendationsAndPriceTargetsInvisage,
+    analystRecommendationsAndPriceTargetsInvisageDF,
     analystRecommendationsRefinitiv,
     analystRecommendationsRefinitivDF,
     boardOfDirectorsMeetingWallStreetHorizon,
@@ -323,7 +323,7 @@ from .rules import create, delete, lookup
 from .rules import output as ruleOutput
 from .rules import pause, resume
 from .rules import rule as ruleInfo
-from .rules import rules, schema
+from .rules import rules
 from .stats import (
     daily,
     dailyDF,
@@ -349,12 +349,10 @@ from .stocks import (
     bonusIssueDF,
     book,
     bookDF,
-    bulkBatch,
-    bulkBatchDF,
-    bulkMinuteBars,
-    bulkMinuteBarsDF,
     cashFlow,
     cashFlowDF,
+    ceoCompensation,
+    ceoCompensationDF, 
     chart,
     chartDF,
     collections,
@@ -744,8 +742,8 @@ DEFAULT_API_LIMIT = 5
 
 _INCLUDE_FUNCTIONS_RULES = [
     # Rules
-    ("schema", schema),
-    ("rules", rules),
+    ("schema", lookup),
+    ("listRules", rules),
     ("createRule", create),
     ("lookupRule", lookup),
     ("pauseRule", pause),
@@ -864,16 +862,14 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("batchDF", batchDF),
     ("bonusIssue", bonusIssue),
     ("bonusIssueDF", bonusIssueDF),
-    ("bulkBatch", bulkBatch),
-    ("bulkBatchDF", bulkBatchDF),
     ("book", book),
     ("bookDF", bookDF),
     ("cashFlow", cashFlow),
     ("cashFlowDF", cashFlowDF),
+    ("ceoCompensation", ceoCompensation),
+    ("ceoCompensationDF", ceoCompensationDF),
     ("chart", chart),
     ("chartDF", chartDF),
-    ("bulkMinuteBars", bulkMinuteBars),
-    ("bulkMinuteBarsDF", bulkMinuteBarsDF),
     ("company", company),
     ("companyDF", companyDF),
     ("collections", collections),
@@ -962,8 +958,8 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("spinoffDF", spinoffDF),
     ("splits", splits),
     ("splitsDF", splitsDF),
-    ("splits", splitsBasic),
-    ("splitsDF", splitsBasicDF),
+    ("splitsBasic", splitsBasic),
+    ("splitsBasicDF", splitsBasicDF),
     ("tenQ", tenQ),
     ("tenK", tenK),
     ("twentyF", twentyF),
@@ -1095,8 +1091,6 @@ _INCLUDE_FUNCTIONS_ALTERNATIVE = [
     # Alternative
     ("sentiment", sentiment),
     ("sentimentDF", sentimentDF),
-    ("ceoCompensation", ceoCompensation),
-    ("ceoCompensationDF", ceoCompensationDF),
 ]
 
 _INCLUDE_FUNCTIONS_POINTS = [
@@ -1406,20 +1400,20 @@ _INCLUDE_FUNCTIONS_PREMIUM = [
     ("socialSentiment", socialSentimentStockTwits),
     ("socialSentimentDF", socialSentimentStockTwitsDF),
     # Invisage
-    ("analystRecommendationAndPriceTargetInvisage", analystRecommendationAndPriceTargetInvisage),
-    ("analystRecommendationAndPriceTargetInvisageDF", analystRecommendationAndPriceTargetInvisageDF),
+    ("analystRecommendationsAndPriceTargets", analystRecommendationsAndPriceTargetsInvisage),
+    ("analystRecommendationsAndPriceTargetsDF", analystRecommendationsAndPriceTargetsInvisageDF),
     # Refinitiv
-    ("analystRecommendationsRefinitiv", analystRecommendationsRefinitiv),
-    ("analystRecommendationsRefinitivDF", analystRecommendationsRefinitivDF),
-    ("earningsRefinitiv", earningsRefinitiv),
-    ("earningsRefinitivDF", earningsRefinitivDF),
-    ("estimatesRefinitiv", estimatesRefinitiv),
-    ("estimatesRefinitivDF", estimatesRefinitivDF),
-    ("priceTargetRefinitiv", priceTargetRefinitiv),
-    ("priceTargetRefinitivDF", priceTargetRefinitivDF),
+    ("analystRecommendations", analystRecommendationsRefinitiv),
+    ("analystRecommendationsDF", analystRecommendationsRefinitivDF),
+    ("earnings", earningsRefinitiv),
+    ("earningsDF", earningsRefinitivDF),
+    ("estimates", estimatesRefinitiv),
+    ("estimatesDF", estimatesRefinitivDF),
+    ("priceTarget", priceTargetRefinitiv),
+    ("priceTargetDF", priceTargetRefinitivDF),
     # CityFalcon
-    ("newsCityFalcon", newsCityFalcon),
-    ("newsCityFalconDF", newsCityFalconDF),
+    ("news", newsCityFalcon),
+    ("newsDF", newsCityFalconDF),
 ]
 
 _INCLUDE_PREMIUM_FILES = [
@@ -1780,7 +1774,7 @@ class Client(object):
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
-            # setattr(self.rules, name, getattr(self, name))
+            setattr(self.rules, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_REFDATA:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1966,7 +1960,7 @@ if os.environ.get("READTHEDOCS"):
     for name, method in _INCLUDE_FUNCTIONS_RULES:
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
-        # setattr(Client.rules, name, getattr(Client, name))
+        setattr(Client.rules, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_REFDATA:
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))

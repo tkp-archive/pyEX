@@ -9,15 +9,15 @@ from ...stocks.analystRecommendations import (
     analystRecommendations as analystRecommendationsRefinitiv,
     analystRecommendationsDF as analystRecommendationsRefinitivDF,
 )
-from ...stocks.events import (
+from ...stocks.earnings import (
     earnings as earningsRefinitiv,
     earningsDF as earningsRefinitivDF,
 )
 from ...stocks.estimates import (
     estimates as estimatesRefinitiv,
-    estimatesDF as estimatesRefintivDF,
+    estimatesDF as estimatesRefinitivDF,
 )
 from ...stocks.priceTarget import (
     priceTarget as priceTargetRefinitiv,
-    priceTargetDF as priceTargetDF,
+    priceTargetDF as priceTargetRefinitivDF,
 )

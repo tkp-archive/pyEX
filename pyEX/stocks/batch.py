@@ -5,9 +5,6 @@
 # This file is part of the pyEX library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-import itertools
-from multiprocessing.pool import ThreadPool
-
 import pandas as pd
 
 from ..common import (
@@ -16,16 +13,18 @@ from ..common import (
     PyEXception,
     _get,
     _quoteSymbols,
-    _raiseIfNotStr,
-    _strOrDate,
-    _toDatetime,
     json_normalize,
 )
-from .fundamentals import _dividendsToDF, _earningsToDF, _financialsToDF, _splitsToDF
+from .book import _bookToDF
+from .chart import _chartToDF
+from .company import _companyToDF
+from .dividendsBasic import _dividendsToDF
+from .earnings import _earningsToDF
+from .financials import _financialsToDF
+from .keyStats import _statsToDF
 from .news import _newsToDF
-from .prices import _bookToDF, _chartToDF, chart
-from .profiles import _companyToDF, _peersToDF
-from .research import _statsToDF
+from .peers import _peersToDF
+from .splitsBasic import _splitsToDF
 
 _MAPPING = {
     "book": _bookToDF,

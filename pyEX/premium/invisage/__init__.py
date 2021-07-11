@@ -28,7 +28,7 @@ def _baseDF(id, symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def analystRecommendationAndPriceTargetInvisage(symbol="", **kwargs):
+def analystRecommendationsAndPriceTargetsInvisage(symbol="", **kwargs):
     """Current and historical Consensus Analyst Recommendations and Price Targets. Generated with Invisage’s proprietary smart consensus methodlogy.
 
     https://iexcloud.io/docs/api/#analyst-recommendations-and-price-targets-premium
@@ -41,7 +41,7 @@ def analystRecommendationAndPriceTargetInvisage(symbol="", **kwargs):
 
 
 @wraps(timeSeries)
-def analystRecommendationAndPriceTargetInvisageDF(symbol="", **kwargs):
+def analystRecommendationsAndPriceTargetsInvisageDF(symbol="", **kwargs):
     """Current and historical Consensus Analyst Recommendations and Price Targets. Generated with Invisage’s proprietary smart consensus methodlogy.
 
     https://iexcloud.io/docs/api/#analyst-recommendations-and-price-targets-premium
