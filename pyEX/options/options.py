@@ -100,7 +100,7 @@ def options(
 ):
     """Options EOD prices
     Args:
-        contract (str): Specific dated option contract, e.g. NG0Z
+        contract (str): Specific dated option contract, e.g. SPY20210714C00475000
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
