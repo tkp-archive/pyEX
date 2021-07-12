@@ -728,8 +728,6 @@ class TestPyEXAPI:
             "stockResearchReportValuEngine",
             "stockOptions",
             "stockOptionsDF",
-            "stockSplits",
-            "stockSplitsDF",
             "stocksUS1MinuteSSE",
             "stocksUS1MinuteSSEAsync",
             "stocksUS1SecondSSE",
