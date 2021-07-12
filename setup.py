@@ -63,6 +63,7 @@ requires_dev = (
         "mock",
         "pytest>=4.3.0",
         "pytest-cov>=2.6.1",
+        "pytest-rerunfailures>=10.1",
         "recommonmark",
         "Sphinx>=1.8.4",
         "sphinx-markdown-builder>=0.5.2",
