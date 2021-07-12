@@ -665,6 +665,7 @@ class TestPyEXAPI:
             "sameStoreSalesWallStreetHorizonDF",
             "sar",
             "sarext",
+            "schema",
             "search",
             "searchDF",
             "secondaryOfferingsWallStreetHorizon",
