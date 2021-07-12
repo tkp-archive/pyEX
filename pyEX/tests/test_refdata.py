@@ -19,6 +19,7 @@ pickle.dump = MagicMock()
 class TestAll:
     def test_symbols(self):
         from pyEX import Client
+
         c = Client()
         c.symbols()
         c.iexSymbols()
@@ -61,12 +62,14 @@ class TestAll:
 
     def test_calendar(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.calendar()
         c.holidays()
 
     def test_calendarDF(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.calendarDF()
         c.holidaysDF()
