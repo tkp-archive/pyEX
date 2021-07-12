@@ -611,24 +611,6 @@ class TestAll:
     #         mock.return_value.json.return_value = {'url': 'test'}
     #         logoNotebook('test')
 
-    def test_threshold(self):
-        from pyEX import threshold
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            threshold()
-            threshold("20170707")
-
-    def test_thresholdDF(self):
-        from pyEX import thresholdDF
-
-        with patch("requests.get") as mock:
-            mock.return_value = MagicMock()
-            mock.return_value.status_code = 200
-            mock.return_value.json = MagicMock(return_value=[])
-            thresholdDF("test")
-
     def test_shortInterest(self):
         from pyEX import shortInterest
 
