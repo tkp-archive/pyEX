@@ -34,6 +34,7 @@ def directorAndOfficerChangesAuditAnalytics(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(
         id="PREMIUM_AUDIT_ANALYTICS_DIRECTOR_OFFICER_CHANGES", symbol=symbol, **kwargs
@@ -47,6 +48,7 @@ def directorAndOfficerChangesAuditAnalyticsDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(
         id="PREMIUM_AUDIT_ANALYTICS_DIRECTOR_OFFICER_CHANGES", symbol=symbol, **kwargs
@@ -60,6 +62,7 @@ def accountingQualityAndRiskMatrixAuditAnalytics(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(
         id="PREMIUM_AUDIT_ANALYTICS_ACCOUNTING_QUALITY_RISK_MATRIX",
@@ -75,6 +78,7 @@ def accountingQualityAndRiskMatrixAuditAnalyticsDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(
         id="PREMIUM_AUDIT_ANALYTICS_ACCOUNTING_QUALITY_RISK_MATRIX",

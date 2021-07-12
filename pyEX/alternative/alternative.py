@@ -10,12 +10,10 @@ from functools import wraps
 import pandas as pd
 
 from ..common import (
-    _expire,
     _get,
     _raiseIfNotStr,
     _strOrDate,
     _toDatetime,
-    json_normalize,
 )
 
 
@@ -72,31 +70,3 @@ def sentimentDF(*args, **kwargs):
     if type == "daily":
         ret = [ret]
     return _toDatetime(pd.DataFrame(ret))
-
-
-@_expire(hour=1)
-def ceoCompensation(symbol, token="", version="stable", filter="", format="json"):
-    """This endpoint provides CEO compensation for a company by symbol.
-
-    https://iexcloud.io/docs/api/#ceo-compensation
-    1am daily
-
-    Args:
-        symbol (str): Ticker to request
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-    Returns:
-        dict or DataFrame: result
-    """
-    _raiseIfNotStr(symbol)
-    return _get(
-        "stock/{symbol}/ceo-compensation".format(symbol=symbol), token, version, filter
-    )
-
-
-@wraps(ceoCompensation)
-def ceoCompensationDF(*args, **kwargs):
-    return _toDatetime(json_normalize(ceoCompensation(*args, **kwargs)))

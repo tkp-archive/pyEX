@@ -22,6 +22,7 @@ from .files import *
 from .fx import *
 from .markets import *
 from .metadata import *
+from .mortgage import *
 from .options import *
 from .points import *
 from .premium import *
@@ -42,6 +43,7 @@ from .streaming.sse import *
 from .streaming.stock import *
 from .streaming.ws import *
 from .timeseries import *
+from .treasuries import *
 
 from .client import *  # noqa: F403
 from .studies import *  # noqa: F403

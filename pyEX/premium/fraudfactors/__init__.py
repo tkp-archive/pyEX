@@ -38,6 +38,7 @@ def similarityIndexFraudFactors(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX", symbol=symbol, **kwargs)
 
@@ -53,6 +54,7 @@ def similarityIndexFraudFactorsDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(id="PREMIUM_FRAUD_FACTORS_SIMILARITY_INDEX", symbol=symbol, **kwargs)
 
@@ -66,6 +68,7 @@ def nonTimelyFilingsFraudFactors(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _base(id="PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS", symbol=symbol, **kwargs)
 
@@ -79,6 +82,7 @@ def nonTimelyFilingsFraudFactorsDF(symbol="", **kwargs):
 
     Args:
         symbol (str): symbol to use
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
     """
     return _baseDF(
         id="PREMIUM_FRAUD_FACTORS_NON_TIMELY_FILINGS", symbol=symbol, **kwargs

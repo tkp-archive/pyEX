@@ -9,7 +9,6 @@ from enum import Enum
 from functools import lru_cache
 
 from ..common import _expire, _UTC, _timeseriesWrapper
-from ..points import points
 from ..timeseries import timeSeries, timeSeriesDF
 
 
@@ -50,20 +49,7 @@ class CommoditiesPoints(Enum):
 
 
 @_expire(hour=8, tz=_UTC)
-def wti(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    WTI; Crude oil West Texas Intermediate - in dollars per barrel, not seasonally adjusted
-    """
-    return points("DCOILWTICO", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def wtiHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def wti(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -92,9 +78,7 @@ def wtiHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def wtiHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def wtiDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -123,20 +107,7 @@ def wtiHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def brent(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    BRENT; Crude oil Brent Europe - in dollars per barrel, not seasonally adjusted
-    """
-    return points("DCOILBRENTEU", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def brentHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def brent(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -165,9 +136,7 @@ def brentHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def brentHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def brentDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -196,20 +165,7 @@ def brentHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def natgas(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    NATGAS; Henry Hub Natural Gas Spot Price - in dollars per million BTU, not seasonally adjusted
-    """
-    return points("DHHNGSP", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def natgasHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def natgas(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -238,9 +194,7 @@ def natgasHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def natgasHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def natgasDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -269,20 +223,7 @@ def natgasHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def heatoil(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    HEATOIL; No. 2 Heating Oil New York Harbor - in dollars per gallon, not seasonally adjusted
-    """
-    return points("DHOILNYH", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def heatoilHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def heatoil(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -311,7 +252,7 @@ def heatoilHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def heatoilHistoryDF(
+def heatoilDF(
     token="", version="stable", filter="", format="json", **timeseries_kwargs
 ):
     """Commodities data
@@ -342,20 +283,7 @@ def heatoilHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def jet(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    JET; Kerosense Type Jet Fuel US Gulf Coast - in dollars per gallon, not seasonally adjusted
-    """
-    return points("DJFUELUSGULF", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def jetHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def jet(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -384,9 +312,7 @@ def jetHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def jetHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def jetDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -415,20 +341,7 @@ def jetHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def diesel(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    DIESEL; US Diesel Sales Price - in dollars per gallon, not seasonally adjusted
-    """
-    return points("GASDESW", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def dieselHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def diesel(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -457,9 +370,7 @@ def dieselHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def dieselHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def dieselDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -488,20 +399,7 @@ def dieselHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasreg(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    GASREG; US Regular Conventional Gas Price - in dollars per gallon, not seasonally adjusted
-    """
-    return points("GASREGCOVW", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def gasregHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasreg(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -530,9 +428,7 @@ def gasregHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasregHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasregDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -561,20 +457,7 @@ def gasregHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasmid(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    GASMID; US Midgrade Conventional Gas Price - in dollars per gallon, not seasonally adjusted
-    """
-    return points("GASMIDCOVW", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def gasmidHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasmid(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -603,9 +486,7 @@ def gasmidHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasmidHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasmidDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -634,20 +515,7 @@ def gasmidHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasprm(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    GASPRM; US Premium Conventional Gas Price - in dollars per gallon, not seasonally adjusted
-    """
-    return points("GASPRMCOVW", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def gasprmHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasprm(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -676,9 +544,7 @@ def gasprmHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasprmHistoryDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasprmDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -707,20 +573,7 @@ def gasprmHistoryDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def propane(token="", version="stable"):
-    """Commodities data points
-
-    https://iexcloud.io/docs/api/#commodities
-
-    PROPANE; Propane Prices Mont Belvieu Texas - in dollars per gallon, not seasonally adjusted
-    """
-    return points("DPROPANEMBTX", token=token, version=version)
-
-
-@_expire(hour=8, tz=_UTC)
-def propaneHistory(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def propane(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -749,7 +602,7 @@ def propaneHistory(
 
 
 @_expire(hour=8, tz=_UTC)
-def propaneHistoryDF(
+def propaneDF(
     token="", version="stable", filter="", format="json", **timeseries_kwargs
 ):
     """Commodities data

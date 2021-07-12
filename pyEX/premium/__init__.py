@@ -7,11 +7,14 @@
 #
 from .auditanalytics import *
 from .brain import *
+from .cityfalcon import *
 from .extractalpha import *
 from .fraudfactors import *
-from .newconstructs import *
+from .invisage import *
 from .kavout import *
+from .newconstructs import *
 from .precisionalpha import *
+from .refinitiv import *
 from .stocktwits import *
 from .valuengine import *
 from .wallstreethorizon import *
