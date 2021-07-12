@@ -228,8 +228,8 @@ class TestPyEXClientAPI:
             "ohlc",
             "ohlcDF",
             "optionExpirations",
-            "options",
-            "optionsDF",
+            "stockOptions",
+            "stockOptionsDF",
             "peers",
             "peersDF",
             "previous",
@@ -414,6 +414,22 @@ class TestPyEXClientAPI:
         ):
             assert hasattr(self.c, meth)
             assert hasattr(self.c.fx, meth)
+
+    def test_all_futures(self):
+        for meth in (
+            "futures",
+            "futuresDF",
+        ):
+            assert hasattr(self.c, meth)
+            assert hasattr(self.c.futures, meth)
+
+    def test_all_options(self):
+        for meth in (
+            "options",
+            "optionsDF",
+        ):
+            assert hasattr(self.c, meth)
+            assert hasattr(self.c.options, meth)
 
     def test_all_crypto(self):
         for meth in (

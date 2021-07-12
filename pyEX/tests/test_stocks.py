@@ -882,12 +882,12 @@ class TestAll:
             optionExpirations(SYMBOL)
 
     def test_options(self):
-        from pyEX import options
+        from pyEX import stockOptions
 
         with patch("requests.get") as mock:
             mock.return_value = MagicMock()
             mock.return_value.status_code = 200
-            options(SYMBOL, "test")
+            stockOptions(SYMBOL, "test")
 
     def test_optionsDF(self):
         from pyEX import Client
@@ -898,7 +898,7 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
 
             c = Client(version="sandbox")
-            c.optionsDF(SYMBOL, "test")
+            c.stockOptionsDF(SYMBOL, "test")
 
     def test_bonusIssue(self):
         from pyEX import bonusIssue

@@ -53,6 +53,7 @@ def timeSeries(
     version="stable",
     filter="",
     format="json",
+    overrideBase="",
     **extra_params,
 ):
     """Time series is the most common type of data available, and consists of a collection of data points over a period of time. Time series data is indexed by a single date field, and can be retrieved by any portion of time.
@@ -132,7 +133,7 @@ def timeSeries(
             token=token, version=version, filter=filter, format=format
         )
 
-    base_url = "time-series/{}".format(id)
+    base_url = "{}/{}".format(overrideBase or "time-series", id)
     if key:
         key = _quoteSymbols(key)
         base_url += "/{}".format(key)

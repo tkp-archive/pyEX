@@ -1,11 +1,11 @@
 tests: ## Make unit tests
-	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python -m pytest -v pyEX --cov=pyEX --junitxml=python_junit.xml --cov-report=xml --cov-branch
+	IEX_TOKEN=Tpk_ecc89ddf30a611e9958142010a80043c python -m pytest -v pyEX --cov=pyEX --junitxml=python_junit.xml --cov-report=xml --cov-branch --reruns 2 --reruns-delay 1
 
 lint: ## run linter
 	python -m flake8 pyEX setup.py
 
 fix:  ## run black fix
-	python -m black pyEX/ setup.py
+	python -m black pyEX/ setup.py docs/conf.py
 
 talib_nix:  ## install talib for *nix
 	wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
