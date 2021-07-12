@@ -673,6 +673,8 @@ class TestPyEXAPI:
             "stoch",
             "stochf",
             "stochrsi",
+            "stockOptions",
+            "stockOptionsDF",
             "stockResearchReportValuEngine",
             "stockOptions",
             "stockOptionsDF",

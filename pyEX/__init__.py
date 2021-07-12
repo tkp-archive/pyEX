@@ -44,11 +44,7 @@ from .streaming.ws import *
 from .timeseries import *
 
 from .client import *  # noqa: F403
-
-try:
-    from .studies import *  # noqa: F403
-except ImportError:
-    pass
+from .studies import *  # noqa: F403
 
 try:
     from .caching import *
