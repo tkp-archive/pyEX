@@ -47,4 +47,4 @@ class TestAll:
 
         c = Client(version="sandbox")
         c.timeSeries("NEWS", subattribute={"lang": "en"})
-        c.timeSeries("NEWS", subattribute=[("lang", "en")])
+        c.timeSeries("NEWS", subattribute=[("lang", "=", "en")])

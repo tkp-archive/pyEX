@@ -34,7 +34,17 @@ _TIMEFRAME_CHART = [
     "dynamic",
 ]
 _TIMEFRAME_DIVSPLIT = ["5y", "2y", "1y", "ytd", "6m", "3m", "1m", "next"]
-_LIST_OPTIONS = ["mostactive", "gainers", "losers", "iexvolume", "iexpercent"]
+_LIST_OPTIONS = [
+    "mostactive",
+    "gainers",
+    "losers",
+    "iexvolume",
+    "iexpercent",
+    "premarket_losers",
+    "postmarket_losers",
+    "premarket_gainers",
+    "postmarket_gainers",
+]
 _COLLECTION_TAGS = ["sector", "tag", "list"]
 _DATE_RANGES = [
     "today",
@@ -90,27 +100,36 @@ _KEY_STATS = [
 ]
 _USAGE_TYPES = ["messages", "rules", "rule-records", "alerts", "alert-records"]
 
-# Limit 10
 _BATCH_TYPES = [
+    "advanced-stats",
+    "balance-sheet",
     "book",
     "chart",
     "company",
+    "delayed-quote",
     "dividends",
     "earnings",
-    "financials",
-    "stats",
-    "news",
-    "peers",
-    "splits",
-    # limit 10
-    "intraday-prices",
     "effective-spread",
-    "delayed-quote",
+    "financials",
+    "fund-ownership",
+    "income",
+    "indicator",
+    "insider-roster",
+    "insider-summary",
+    "insider-transactions",
+    "institutional-ownership",
+    "intraday-prices",
     "largest-trades",
-    "previous",
+    "logo",
+    "news",
+    "ohlc",
+    "peers",
     "price",
+    "previous",
     "quote",
     "relevant",
+    "splits",
+    "stats",
     "volume-by-venue",
 ]
 

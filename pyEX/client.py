@@ -12,7 +12,29 @@ import warnings
 
 from .account import messageBudget, metadata, metadataDF, usage, usageDF
 from .alternative import ceoCompensation, ceoCompensationDF, sentiment, sentimentDF
-from .commodities import CommoditiesPoints
+from .commodities import (
+    CommoditiesPoints,
+    brentHistory,
+    brentHistoryDF,
+    dieselHistory,
+    dieselHistoryDF,
+    gasmidHistory,
+    gasmidHistoryDF,
+    gasprmHistory,
+    gasprmHistoryDF,
+    gasregHistory,
+    gasregHistoryDF,
+    heatoilHistory,
+    heatoilHistoryDF,
+    jetHistory,
+    jetHistoryDF,
+    natgasHistory,
+    natgasHistoryDF,
+    propaneHistory,
+    propaneHistoryDF,
+    wtiHistory,
+    wtiHistoryDF,
+)
 from .common import PyEXception, _interval
 from .cryptocurrency import (
     cryptoBook,
@@ -22,7 +44,46 @@ from .cryptocurrency import (
     cryptoQuote,
     cryptoQuoteDF,
 )
-from .economic import EconomicPoints
+from .economic import (
+    EconomicPoints,
+    cdjHistory,
+    cdjHistoryDF,
+    cdnjHistory,
+    cdnjHistoryDF,
+    cpiHistory,
+    cpiHistoryDF,
+    creditcardHistory,
+    creditcardHistoryDF,
+    fedfundsHistory,
+    fedfundsHistoryDF,
+    gdpHistory,
+    gdpHistoryDF,
+    housingHistory,
+    housingHistoryDF,
+    indproHistory,
+    indproHistoryDF,
+    initialClaimsHistory,
+    initialClaimsHistoryDF,
+    institutionalMoneyHistory,
+    institutionalMoneyHistoryDF,
+    payrollHistory,
+    payrollHistoryDF,
+    recessionProbHistory,
+    recessionProbHistoryDF,
+    retailMoneyHistory,
+    retailMoneyHistoryDF,
+    unemploymentHistory,
+    unemploymentHistoryDF,
+    us5History,
+    us5HistoryDF,
+    us15History,
+    us15HistoryDF,
+    us30History,
+    us30HistoryDF,
+    vehiclesHistory,
+    vehiclesHistoryDF,
+)
+
 from .files import download, files
 from .futures import futures, futuresDF
 from .fx import (
@@ -159,7 +220,31 @@ from .premium import (
     workshopsWallStreetHorizon,
     workshopsWallStreetHorizonDF,
 )
-from .rates import RatesPoints
+from .rates import (
+    RatesPoints,
+    thirtyYearHistory,
+    thirtyYearHistoryDF,
+    twentyYearHistory,
+    twentyYearHistoryDF,
+    tenYearHistory,
+    tenYearHistoryDF,
+    sevenYearHistory,
+    sevenYearHistoryDF,
+    fiveYearHistory,
+    fiveYearHistoryDF,
+    threeYearHistory,
+    threeYearHistoryDF,
+    twoYearHistory,
+    twoYearHistoryDF,
+    oneYearHistory,
+    oneYearHistoryDF,
+    sixMonthHistory,
+    sixMonthHistoryDF,
+    threeMonthHistory,
+    threeMonthHistoryDF,
+    oneMonthHistory,
+    oneMonthHistoryDF,
+)
 from .refdata import (
     calendar,
     calendarDF,
@@ -475,339 +560,168 @@ from .timeseries import (
     timeSeriesInventoryDF,
 )
 
-try:
-    from .studies import (  # Cycle; Math; Momentum; Overlap; Pattern; Price; Statistic; Volatility; Volume
-        acos,
-        ad,
-        add,
-        adosc,
-        adx,
-        adxr,
-        apo,
-        aroon,
-        aroonosc,
-        asin,
-        atan,
-        atr,
-        avgprice,
-        beta,
-        bollinger,
-        bop,
-        cci,
-        cdl2crows,
-        cdl3blackcrows,
-        cdl3inside,
-        cdl3linestrike,
-        cdl3outside,
-        cdl3starsinsouth,
-        cdl3whitesoldiers,
-        cdlabandonedbaby,
-        cdladvanceblock,
-        cdlbelthold,
-        cdlbreakaway,
-        cdlclosingmarubozu,
-        cdlconcealbabyswallow,
-        cdlcounterattack,
-        cdldarkcloudcover,
-        cdldoji,
-        cdldojistar,
-        cdldragonflydoji,
-        cdlengulfing,
-        cdleveningdojistar,
-        cdleveningstar,
-        cdlgapsidesidewhite,
-        cdlgravestonedoji,
-        cdlhammer,
-        cdlhangingman,
-        cdlharami,
-        cdlharamicross,
-        cdlhighwave,
-        cdlhikkake,
-        cdlhikkakemod,
-        cdlhomingpigeon,
-        cdlidentical3crows,
-        cdlinneck,
-        cdlinvertedhammer,
-        cdlkicking,
-        cdlkickingbylength,
-        cdlladderbottom,
-        cdllongleggeddoji,
-        cdllongline,
-        cdlmarubozu,
-        cdlmatchinglow,
-        cdlmathold,
-        cdlmorningdojistar,
-        cdlmorningstar,
-        cdlonneck,
-        cdlpiercing,
-        cdlrickshawman,
-        cdlrisefall3methods,
-        cdlseparatinglines,
-        cdlshootingstar,
-        cdlshortline,
-        cdlspinningtop,
-        cdlstalledpattern,
-        cdlsticksandwich,
-        cdltakuri,
-        cdltasukigap,
-        cdlthrusting,
-        cdltristar,
-        cdlunique3river,
-        cdlxsidegap3methods,
-        ceil,
-        cmo,
-        correl,
-        cos,
-        cosh,
-        dailyReturns,
-        dema,
-        div,
-        dx,
-        ema,
-        exp,
-        floor,
-        ht_dcperiod,
-        ht_dcphase,
-        ht_phasor,
-        ht_sine,
-        ht_trendline,
-        ht_trendmode,
-        kama,
-        linearreg,
-        linearreg_angle,
-        linearreg_intercept,
-        linearreg_slope,
-        ln,
-        log10,
-        macd,
-        macdext,
-        mama,
-        mavp,
-        max,
-        maxindex,
-        medprice,
-        mfi,
-        midpice,
-        midpoint,
-        min,
-        minindex,
-        minmax,
-        minmaxindex,
-        minus_di,
-        minus_dm,
-        mom,
-        mult,
-        natr,
-        obv,
-        peerCorrelation,
-        peerCorrelationPlot,
-        plus_di,
-        plus_dm,
-        ppo,
-        returns,
-        roc,
-        rocp,
-        rocr,
-        rocr100,
-        rsi,
-        sar,
-        sarext,
-        sin,
-        sinh,
-        sma,
-        sqrt,
-        stddev,
-        stoch,
-        stochf,
-        stochrsi,
-        sub,
-        sum,
-        t3,
-        tan,
-        tanh,
-        tema,
-        trange,
-        trima,
-        trix,
-        tsf,
-        typprice,
-        ultosc,
-        var,
-        wclprice,
-        willr,
-        wma,
-    )
-
-except ImportError:
-    peerCorrelation = None
-    peerCorrelationPlot = None
-    returns = None
-    dailyReturns = None
-
-    ht_dcperiod = None
-    ht_dcphase = None
-    ht_phasor = None
-    ht_sine = None
-    ht_trendmode = None
-
-    acos = None
-    asin = None
-    atan = None
-    ceil = None
-    cos = None
-    cosh = None
-    exp = None
-    floor = None
-    ln = None
-    log10 = None
-    sin = None
-    sinh = None
-    sqrt = None
-    tan = None
-    tanh = None
-    add = None
-    div = None
-    max = None
-    maxindex = None
-    min = None
-    minindex = None
-    minmax = None
-    minmaxindex = None
-    mult = None
-    sub = None
-    sum = None
-
-    adx = None
-    adxr = None
-    apo = None
-    aroon = None
-    aroonosc = None
-    bop = None
-    cci = None
-    cmo = None
-    dx = None
-    macd = None
-    macdext = None
-    mfi = None
-    minus_di = None
-    minus_dm = None
-    mom = None
-    plus_di = None
-    plus_dm = None
-    ppo = None
-    roc = None
-    rocp = None
-    rocr = None
-    rocr100 = None
-    rsi = None
-    stoch = None
-    stochf = None
-    stochrsi = None
-    trix = None
-    ultosc = None
-    willr = None
-
-    bollinger = None
-    dema = None
-    ema = None
-    ht_trendline = None
-    kama = None
-    mama = None
-    mavp = None
-    midpoint = None
-    midpice = None
-    sar = None
-    sarext = None
-    sma = None
-    t3 = None
-    tema = None
-    trima = None
-    wma = None
-
-    cdl2crows = None
-    cdl3blackcrows = None
-    cdl3inside = None
-    cdl3linestrike = None
-    cdl3outside = None
-    cdl3starsinsouth = None
-    cdl3whitesoldiers = None
-    cdlabandonedbaby = None
-    cdladvanceblock = None
-    cdlbelthold = None
-    cdlbreakaway = None
-    cdlclosingmarubozu = None
-    cdlconcealbabyswallow = None
-    cdlcounterattack = None
-    cdldarkcloudcover = None
-    cdldoji = None
-    cdldojistar = None
-    cdldragonflydoji = None
-    cdlengulfing = None
-    cdleveningdojistar = None
-    cdleveningstar = None
-    cdlgapsidesidewhite = None
-    cdlgravestonedoji = None
-    cdlhammer = None
-    cdlhangingman = None
-    cdlharami = None
-    cdlharamicross = None
-    cdlhighwave = None
-    cdlhikkake = None
-    cdlhikkakemod = None
-    cdlhomingpigeon = None
-    cdlidentical3crows = None
-    cdlinneck = None
-    cdlinvertedhammer = None
-    cdlkicking = None
-    cdlkickingbylength = None
-    cdlladderbottom = None
-    cdllongleggeddoji = None
-    cdllongline = None
-    cdlmarubozu = None
-    cdlmatchinglow = None
-    cdlmathold = None
-    cdlmorningdojistar = None
-    cdlmorningstar = None
-    cdlonneck = None
-    cdlpiercing = None
-    cdlrickshawman = None
-    cdlrisefall3methods = None
-    cdlseparatinglines = None
-    cdlshootingstar = None
-    cdlshortline = None
-    cdlspinningtop = None
-    cdlstalledpattern = None
-    cdlsticksandwich = None
-    cdltakuri = None
-    cdltasukigap = None
-    cdlthrusting = None
-    cdltristar = None
-    cdlunique3river = None
-    cdlxsidegap3methods = None
-
-    avgprice = None
-    medprice = None
-    typprice = None
-    wclprice = None
-
-    beta = None
-    correl = None
-    linearreg = None
-    linearreg_angle = None
-    linearreg_intercept = None
-    linearreg_slope = None
-    stddev = None
-    tsf = None
-    var = None
-
-    atr = None
-    natr = None
-    trange = None
-
-    ad = None
-    adosc = None
-    obv = None
-
+from .studies import (
+    acos,
+    ad,
+    add,
+    adosc,
+    adx,
+    adxr,
+    apo,
+    aroon,
+    aroonosc,
+    asin,
+    atan,
+    atr,
+    avgprice,
+    beta,
+    bollinger,
+    bop,
+    cci,
+    cdl2crows,
+    cdl3blackcrows,
+    cdl3inside,
+    cdl3linestrike,
+    cdl3outside,
+    cdl3starsinsouth,
+    cdl3whitesoldiers,
+    cdlabandonedbaby,
+    cdladvanceblock,
+    cdlbelthold,
+    cdlbreakaway,
+    cdlclosingmarubozu,
+    cdlconcealbabyswallow,
+    cdlcounterattack,
+    cdldarkcloudcover,
+    cdldoji,
+    cdldojistar,
+    cdldragonflydoji,
+    cdlengulfing,
+    cdleveningdojistar,
+    cdleveningstar,
+    cdlgapsidesidewhite,
+    cdlgravestonedoji,
+    cdlhammer,
+    cdlhangingman,
+    cdlharami,
+    cdlharamicross,
+    cdlhighwave,
+    cdlhikkake,
+    cdlhikkakemod,
+    cdlhomingpigeon,
+    cdlidentical3crows,
+    cdlinneck,
+    cdlinvertedhammer,
+    cdlkicking,
+    cdlkickingbylength,
+    cdlladderbottom,
+    cdllongleggeddoji,
+    cdllongline,
+    cdlmarubozu,
+    cdlmatchinglow,
+    cdlmathold,
+    cdlmorningdojistar,
+    cdlmorningstar,
+    cdlonneck,
+    cdlpiercing,
+    cdlrickshawman,
+    cdlrisefall3methods,
+    cdlseparatinglines,
+    cdlshootingstar,
+    cdlshortline,
+    cdlspinningtop,
+    cdlstalledpattern,
+    cdlsticksandwich,
+    cdltakuri,
+    cdltasukigap,
+    cdlthrusting,
+    cdltristar,
+    cdlunique3river,
+    cdlxsidegap3methods,
+    ceil,
+    cmo,
+    correl,
+    cos,
+    cosh,
+    dailyReturns,
+    dema,
+    div,
+    dx,
+    ema,
+    exp,
+    floor,
+    ht_dcperiod,
+    ht_dcphase,
+    ht_phasor,
+    ht_sine,
+    ht_trendline,
+    ht_trendmode,
+    kama,
+    linearreg,
+    linearreg_angle,
+    linearreg_intercept,
+    linearreg_slope,
+    ln,
+    log10,
+    macd,
+    macdext,
+    mama,
+    mavp,
+    max,
+    maxindex,
+    medprice,
+    mfi,
+    midpice,
+    midpoint,
+    min,
+    minindex,
+    minmax,
+    minmaxindex,
+    minus_di,
+    minus_dm,
+    mom,
+    mult,
+    natr,
+    obv,
+    peerCorrelation,
+    peerCorrelationPlot,
+    plus_di,
+    plus_dm,
+    ppo,
+    returns,
+    roc,
+    rocp,
+    rocr,
+    rocr100,
+    rsi,
+    sar,
+    sarext,
+    sin,
+    sinh,
+    sma,
+    sqrt,
+    stddev,
+    stoch,
+    stochf,
+    stochrsi,
+    sub,
+    sum,
+    t3,
+    tan,
+    tanh,
+    tema,
+    trange,
+    trima,
+    trix,
+    tsf,
+    typprice,
+    ultosc,
+    var,
+    wclprice,
+    willr,
+    wma,
+    yieldCurve,
+)
 
 DEFAULT_API_LIMIT = 5
 
@@ -1192,6 +1106,93 @@ _INCLUDE_FUNCTIONS_OPTIONS = [
     ("optionsDF", optionsDF),
 ]
 
+_INCLUDE_FUNCTIONS_COMMODITIES = [
+    ("brentHistory", brentHistory),
+    ("brentHistoryDF", brentHistoryDF),
+    ("dieselHistory", dieselHistory),
+    ("dieselHistoryDF", dieselHistoryDF),
+    ("gasmidHistory", gasmidHistory),
+    ("gasmidHistoryDF", gasmidHistoryDF),
+    ("gasprmHistory", gasprmHistory),
+    ("gasprmHistoryDF", gasprmHistoryDF),
+    ("gasregHistory", gasregHistory),
+    ("gasregHistoryDF", gasregHistoryDF),
+    ("heatoilHistory", heatoilHistory),
+    ("heatoilHistoryDF", heatoilHistoryDF),
+    ("jetHistory", jetHistory),
+    ("jetHistoryDF", jetHistoryDF),
+    ("natgasHistory", natgasHistory),
+    ("natgasHistoryDF", natgasHistoryDF),
+    ("propaneHistory", propaneHistory),
+    ("propaneHistoryDF", propaneHistoryDF),
+    ("wtiHistory", wtiHistory),
+    ("wtiHistoryDF", wtiHistoryDF),
+]
+
+_INCLUDE_FUNCTIONS_ECONOMIC = [
+    ("cdjHistory", cdjHistory),
+    ("cdjHistoryDF", cdjHistoryDF),
+    ("cdnjHistory", cdnjHistory),
+    ("cdnjHistoryDF", cdnjHistoryDF),
+    ("cpiHistory", cpiHistory),
+    ("cpiHistoryDF", cpiHistoryDF),
+    ("creditcardHistory", creditcardHistory),
+    ("creditcardHistoryDF", creditcardHistoryDF),
+    ("fedfundsHistory", fedfundsHistory),
+    ("fedfundsHistoryDF", fedfundsHistoryDF),
+    ("gdpHistory", gdpHistory),
+    ("gdpHistoryDF", gdpHistoryDF),
+    ("housingHistory", housingHistory),
+    ("housingHistoryDF", housingHistoryDF),
+    ("indproHistory", indproHistory),
+    ("indproHistoryDF", indproHistoryDF),
+    ("initialClaimsHistory", initialClaimsHistory),
+    ("initialClaimsHistoryDF", initialClaimsHistoryDF),
+    ("institutionalMoneyHistory", institutionalMoneyHistory),
+    ("institutionalMoneyHistoryDF", institutionalMoneyHistoryDF),
+    ("payrollHistory", payrollHistory),
+    ("payrollHistoryDF", payrollHistoryDF),
+    ("recessionProbHistory", recessionProbHistory),
+    ("recessionProbHistoryDF", recessionProbHistoryDF),
+    ("retailMoneyHistory", retailMoneyHistory),
+    ("retailMoneyHistoryDF", retailMoneyHistoryDF),
+    ("unemploymentHistory", unemploymentHistory),
+    ("unemploymentHistoryDF", unemploymentHistoryDF),
+    ("us5History", us5History),
+    ("us5HistoryDF", us5HistoryDF),
+    ("us15History", us15History),
+    ("us15HistoryDF", us15HistoryDF),
+    ("us30History", us30History),
+    ("us30HistoryDF", us30HistoryDF),
+    ("vehiclesHistory", vehiclesHistory),
+    ("vehiclesHistoryDF", vehiclesHistoryDF),
+]
+
+_INCLUDE_FUNCTIONS_RATES = [
+    ("thirtyYearHistory", thirtyYearHistory),
+    ("thirtyYearHistoryDF", thirtyYearHistoryDF),
+    ("twentyYearHistory", twentyYearHistory),
+    ("twentyYearHistoryDF", twentyYearHistoryDF),
+    ("tenYearHistory", tenYearHistory),
+    ("tenYearHistoryDF", tenYearHistoryDF),
+    ("sevenYearHistory", sevenYearHistory),
+    ("sevenYearHistoryDF", sevenYearHistoryDF),
+    ("fiveYearHistory", fiveYearHistory),
+    ("fiveYearHistoryDF", fiveYearHistoryDF),
+    ("threeYearHistory", threeYearHistory),
+    ("threeYearHistoryDF", threeYearHistoryDF),
+    ("twoYearHistory", twoYearHistory),
+    ("twoYearHistoryDF", twoYearHistoryDF),
+    ("oneYearHistory", oneYearHistory),
+    ("oneYearHistoryDF", oneYearHistoryDF),
+    ("sixMonthHistory", sixMonthHistory),
+    ("sixMonthHistoryDF", sixMonthHistoryDF),
+    ("threeMonthHistory", threeMonthHistory),
+    ("threeMonthHistoryDF", threeMonthHistoryDF),
+    ("oneMonthHistory", oneMonthHistory),
+    ("oneMonthHistoryDF", oneMonthHistoryDF),
+]
+
 _INCLUDE_FUNCTIONS_FX = [
     # FX
     ("latestFX", latestFX),
@@ -1224,6 +1225,9 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_ALTERNATIVE
     + _INCLUDE_FUNCTIONS_POINTS
     + _INCLUDE_FUNCTIONS_TS
+    + _INCLUDE_FUNCTIONS_COMMODITIES
+    + _INCLUDE_FUNCTIONS_ECONOMIC
+    + _INCLUDE_FUNCTIONS_RATES
     + _INCLUDE_FUNCTIONS_FX
     + _INCLUDE_FUNCTIONS_FUTURES
     + _INCLUDE_FUNCTIONS_OPTIONS
@@ -1404,7 +1408,9 @@ _INCLUDE_POINTS_RATES = [
     ("thirtyYear", RatesPoints.THIRTY.value),
     ("twentyYear", RatesPoints.TWENTY.value),
     ("tenYear", RatesPoints.TEN.value),
+    ("sevenYear", RatesPoints.SEVEN.value),
     ("fiveYear", RatesPoints.FIVE.value),
+    ("threeYear", RatesPoints.THREE.value),
     ("twoYear", RatesPoints.TWO.value),
     ("oneYear", RatesPoints.ONE.value),
     ("sixMonth", RatesPoints.SIXMONTH.value),
@@ -1453,6 +1459,7 @@ _INCLUDE_STUDIES = [
     ("peerCorrelationPlot", peerCorrelationPlot),
     ("returns", returns),
     ("dailyReturns", dailyReturns),
+    ("yieldCurve", yieldCurve),
     # Cycle
     ("ht_dcperiod", ht_dcperiod),
     ("ht_dcphase", ht_dcphase),
@@ -1724,6 +1731,21 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
 
+        for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.commodities, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.economic, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_RATES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.rates, name, getattr(self, name))
+
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
@@ -1821,7 +1843,7 @@ class Client(object):
 
 #############################
 # for autodoc
-if os.environ.get("PYEX_AUTODOC"):
+if os.environ.get("PYEX_AUTODOC") or os.environ.get("READTHEDOCS"):
     for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
@@ -1868,6 +1890,18 @@ if os.environ.get("PYEX_AUTODOC"):
         setattr(Client.points, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_TS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_COMMODITIES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_ECONOMIC:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+
+    for name, method in _INCLUDE_FUNCTIONS_RATES:
         setattr(Client, name, method)
         getattr(Client, name).__doc__ = method.__doc__
 

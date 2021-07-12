@@ -8,7 +8,9 @@
 from enum import Enum
 from functools import lru_cache
 
+from ..common import _expire, _UTC, _timeseriesWrapper
 from ..points import points
+from ..timeseries import timeSeries, timeSeriesDF
 
 
 class EconomicPoints(Enum):
@@ -63,6 +65,7 @@ class EconomicPoints(Enum):
         return list(map(lambda c: c.value, EconomicPoints))
 
 
+@_expire(hour=8, tz=_UTC)
 def us30(token="", version="stable"):
     """Economic data points
 
@@ -73,6 +76,69 @@ def us30(token="", version="stable"):
     return points("MORTGAGE30US", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def us30History(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="MORTGAGE",
+        key="MORTGAGE30US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def us30HistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="MORTGAGE",
+        key="MORTGAGE30US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def us15(token="", version="stable"):
     """Economic data points
 
@@ -83,6 +149,69 @@ def us15(token="", version="stable"):
     return points("MORTGAGE15US", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def us15History(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="MORTGAGE",
+        key="MORTGAGE15US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def us15HistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="MORTGAGE",
+        key="MORTGAGE15US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def us5(token="", version="stable"):
     """Economic data points
 
@@ -93,6 +222,69 @@ def us5(token="", version="stable"):
     return points("MORTGAGE5US", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def us5History(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="MORTGAGE",
+        key="MORTGAGE5US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def us5HistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="MORTGAGE",
+        key="MORTGAGE5US",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def fedfunds(token="", version="stable"):
     """Economic data points
 
@@ -103,6 +295,69 @@ def fedfunds(token="", version="stable"):
     return points("FEDFUNDS", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def fedfundsHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="FEDFUNDS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def fedfundsHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="FEDFUNDS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def creditcard(token="", version="stable"):
     """Economic data points
 
@@ -113,6 +368,69 @@ def creditcard(token="", version="stable"):
     return points("TERMCBCCALLNS", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def creditcardHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="RATES",
+        key="TERMCBCCALLNS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def creditcardHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="RATES",
+        key="TERMCBCCALLNS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def cdnj(token="", version="stable"):
     """Economic data points
 
@@ -123,6 +441,69 @@ def cdnj(token="", version="stable"):
     return points("MMNRNJ", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def cdnjHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="RATES",
+        key="MMNRNJ",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def cdnjHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="RATES",
+        key="MMNRNJ",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def cdj(token="", version="stable"):
     """Economic data points
 
@@ -133,6 +514,69 @@ def cdj(token="", version="stable"):
     return points("MMNRJD", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def cdjHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="RATES",
+        key="MMNRJD",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def cdjHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="RATES",
+        key="MMNRJD",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def gdp(token="", version="stable"):
     """Economic data points
 
@@ -143,6 +587,69 @@ def gdp(token="", version="stable"):
     return points("A191RL1Q225SBEA", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def gdpHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="A191RL1Q225SBEA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def gdpHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="A191RL1Q225SBEA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def indpro(token="", version="stable"):
     """Economic data points
 
@@ -153,6 +660,69 @@ def indpro(token="", version="stable"):
     return points("INDPRO", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def indproHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="INDPRO",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def indproHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="INDPRO",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def cpi(token="", version="stable"):
     """Economic data points
 
@@ -163,6 +733,69 @@ def cpi(token="", version="stable"):
     return points("CPIAUCSL", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def cpiHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="CPIAUCSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def cpiHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="CPIAUCSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def payroll(token="", version="stable"):
     """Economic data points
 
@@ -173,6 +806,69 @@ def payroll(token="", version="stable"):
     return points("PAYEMS", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def payrollHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="PAYEMS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def payrollHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="PAYEMS",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def housing(token="", version="stable"):
     """Economic data points
 
@@ -183,6 +879,69 @@ def housing(token="", version="stable"):
     return points("HOUST", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def housingHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="HOUST",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def housingHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="HOUST",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def unemployment(token="", version="stable"):
     """Economic data points
 
@@ -193,6 +952,69 @@ def unemployment(token="", version="stable"):
     return points("UNRATE", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def unemploymentHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="UNRATE",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def unemploymentHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="UNRATE",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def vehicles(token="", version="stable"):
     """Economic data points
 
@@ -203,6 +1025,69 @@ def vehicles(token="", version="stable"):
     return points("TOTALSA", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def vehiclesHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="TOTALSA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def vehiclesHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="TOTALSA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def recessionProb(token="", version="stable"):
     """Economic data points
 
@@ -213,6 +1098,69 @@ def recessionProb(token="", version="stable"):
     return points("RECPROUSM156N", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def recessionProbHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="RECPROUSM156N",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def recessionProbHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="RECPROUSM156N",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def initialClaims(token="", version="stable"):
     """Economic data points
 
@@ -223,6 +1171,69 @@ def initialClaims(token="", version="stable"):
     return points("IC4WSA", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def initialClaimsHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="IC4WSA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def initialClaimsHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="IC4WSA",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def institutionalMoney(token="", version="stable"):
     """Economic data points
 
@@ -233,6 +1244,69 @@ def institutionalMoney(token="", version="stable"):
     return points("WRMFSL", token=token, version=version)
 
 
+@_expire(hour=8, tz=_UTC)
+def institutionalMoneyHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="WRMFSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def institutionalMoneyHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="WRMFSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
 def retailMoney(token="", version="stable"):
     """Economic data points
 
@@ -241,3 +1315,65 @@ def retailMoney(token="", version="stable"):
     RETAILMONEY; Retail money funds returned as billions of dollars, seasonally adjusted
     """
     return points("WIMFSL", token=token, version=version)
+
+
+@_expire(hour=8, tz=_UTC)
+def retailMoneyHistory(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeries(
+        id="ECONOMIC",
+        key="WIMFSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+def retailMoneyHistoryDF(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    """Economic data
+
+    https://iexcloud.io/docs/api/#economic-data
+
+    Args:
+        token (str): Access token
+        version (str): API version
+        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
+        format (str): return format, defaults to json
+
+        Supports all kwargs from `pyEX.timeseries.timeSeries`
+
+    Returns:
+        dict or DataFrame: result
+    """
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesDF(
+        id="ECONOMIC",
+        key="WIMFSL",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )

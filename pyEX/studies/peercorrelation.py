@@ -12,9 +12,9 @@ def peerCorrelation(client, symbol, timeframe="6m"):
     the given timeframe
 
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
 
     Returns:
         DataFrame: result
@@ -31,10 +31,12 @@ def peerCorrelationPlot(client, symbol, timeframe="6m"):
     """This will plot a dataframe of peer correlations for the given symbol across
     the given timeframe
 
+    Note: this function requires the use of `seaborn.heatmap`
+
     Args:
-        client (pyEX.Client); Client
-        symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        client (pyEX.Client): Client
+        symbol (string): Ticker
+        timeframe (string): timeframe to use, for pyEX.chart
 
     Returns:
         DataFrame: result
