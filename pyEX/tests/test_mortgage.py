@@ -16,15 +16,15 @@ atexit.register = MagicMock()
 pickle.dump = MagicMock()
 
 
-class TestEconomic:
+class TestMortgage:
     def test_all(self):
         from pyEX import Client
 
         c = Client("test")
         with patch("pyEX.common.urls._getIEXCloud"):
-            c.creditcard()
-            c.creditcardDF()
-            c.cdnj()
-            c.cdnjDF()
-            c.cdj()
-            c.cdjDF()
+            c.us30()
+            c.us30DF()
+            c.us15()
+            c.us15DF()
+            c.us5()
+            c.us5DF()
