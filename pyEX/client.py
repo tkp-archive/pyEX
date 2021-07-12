@@ -73,6 +73,7 @@ from .economic import (
 )
 
 from .files import download, files
+from .futures import futures, futuresDF
 from .fx import (
     convertFX,
     convertFXDF,
@@ -92,7 +93,7 @@ from .mortgage import (
     us30,
     us30DF,
 )
-from .options import optionExpirations, options, optionsDF
+from .options import optionExpirations, options, optionsDF, stockOptions, stockOptionsDF
 from .points import points, pointsDF
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
@@ -928,8 +929,8 @@ _INCLUDE_FUNCTIONS_STOCKS = [
     ("ohlc", ohlc),
     ("ohlcDF", ohlcDF),
     ("optionExpirations", optionExpirations),
-    ("options", options),
-    ("optionsDF", optionsDF),
+    ("stockOptions", stockOptions),
+    ("stockOptionsDF", stockOptionsDF),
     ("peers", peers),
     ("peersDF", peersDF),
     ("previous", previous),
@@ -1107,6 +1108,16 @@ _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesDF", timeSeriesDF),
 ]
 
+_INCLUDE_FUNCTIONS_FUTURES = [
+    ("futures", futures),
+    ("futuresDF", futuresDF),
+]
+
+_INCLUDE_FUNCTIONS_OPTIONS = [
+    ("options", options),
+    ("optionsDF", optionsDF),
+]
+
 _INCLUDE_FUNCTIONS_COMMODITIES = [
     ("brent", brent),
     ("brentDF", brentDF),
@@ -1238,6 +1249,8 @@ _INCLUDE_FUNCTIONS = (
     + _INCLUDE_FUNCTIONS_RATES
     + _INCLUDE_FUNCTIONS_TREASURIES
     + _INCLUDE_FUNCTIONS_FX
+    + _INCLUDE_FUNCTIONS_FUTURES
+    + _INCLUDE_FUNCTIONS_OPTIONS
     + _INCLUDE_FUNCTIONS_CRYPTO
 )
 
@@ -1679,10 +1692,12 @@ class Client(object):
     crypto = types.ModuleType("crypto")
     economic = types.ModuleType("economic")
     files = types.ModuleType("files")
+    futures = types.ModuleType("futures")
     fx = types.ModuleType("fx")
     iex = types.ModuleType("iex")
     market = types.ModuleType("market")
     mortgage = types.ModuleType("market")
+    options = types.ModuleType("options")
     points = types.ModuleType("points")
     premium = types.ModuleType("premium")
     premium.files = types.ModuleType("premium.files")
@@ -1732,6 +1747,16 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.fx, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_FUTURES:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.futures, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_OPTIONS:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.options, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_IEX:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -1882,7 +1907,8 @@ class Client(object):
         # rebind studies
         for name, method in _INCLUDE_STUDIES:
             if method:
-                setattr(self, name, method.__get__(self, self.__class__))
+                setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+                getattr(self, name).__doc__ = method.__doc__
                 setattr(self.studies, name, method.__get__(self, self.__class__))
 
     def bind(self, *args, **kwargs):
@@ -1897,7 +1923,7 @@ class Client(object):
 
 #############################
 # for autodoc
-if os.environ.get("READTHEDOCS"):
+if os.environ.get("PYEX_AUTODOC") or os.environ.get("READTHEDOCS"):
     # rebind
     for name, method in _INCLUDE_FUNCTIONS_ACCOUNT:
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
@@ -1918,6 +1944,16 @@ if os.environ.get("READTHEDOCS"):
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.fx, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_FUTURES:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.futures, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_OPTIONS:
+        setattr(Client, name, method)
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.options, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_IEX:
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
