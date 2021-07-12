@@ -9,7 +9,6 @@ from enum import Enum
 from functools import lru_cache
 
 from ..common import _expire, _UTC, _timeseriesWrapper
-from ..points import points
 from ..timeseries import timeSeries, timeSeriesDF
 
 
@@ -50,9 +49,7 @@ class CommoditiesPoints(Enum):
 
 
 @_expire(hour=8, tz=_UTC)
-def wti(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def wti(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -81,9 +78,7 @@ def wti(
 
 
 @_expire(hour=8, tz=_UTC)
-def wtiDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def wtiDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -112,9 +107,7 @@ def wtiDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def brent(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def brent(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -143,9 +136,7 @@ def brent(
 
 
 @_expire(hour=8, tz=_UTC)
-def brentDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def brentDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -174,9 +165,7 @@ def brentDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def natgas(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def natgas(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -205,9 +194,7 @@ def natgas(
 
 
 @_expire(hour=8, tz=_UTC)
-def natgasDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def natgasDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -236,9 +223,7 @@ def natgasDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def heatoil(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def heatoil(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -298,9 +283,7 @@ def heatoilDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def jet(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def jet(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -329,9 +312,7 @@ def jet(
 
 
 @_expire(hour=8, tz=_UTC)
-def jetDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def jetDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -360,9 +341,7 @@ def jetDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def diesel(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def diesel(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -391,9 +370,7 @@ def diesel(
 
 
 @_expire(hour=8, tz=_UTC)
-def dieselDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def dieselDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -422,9 +399,7 @@ def dieselDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasreg(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasreg(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -453,9 +428,7 @@ def gasreg(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasregDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasregDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -484,9 +457,7 @@ def gasregDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasmid(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasmid(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -515,9 +486,7 @@ def gasmid(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasmidDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasmidDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -546,9 +515,7 @@ def gasmidDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasprm(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasprm(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -577,9 +544,7 @@ def gasprm(
 
 
 @_expire(hour=8, tz=_UTC)
-def gasprmDF(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def gasprmDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities
@@ -608,9 +573,7 @@ def gasprmDF(
 
 
 @_expire(hour=8, tz=_UTC)
-def propane(
-    token="", version="stable", filter="", format="json", **timeseries_kwargs
-):
+def propane(token="", version="stable", filter="", format="json", **timeseries_kwargs):
     """Commodities data
 
     https://iexcloud.io/docs/api/#commodities

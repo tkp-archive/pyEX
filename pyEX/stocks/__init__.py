@@ -109,7 +109,16 @@ from .marketVolume import marketVolume, marketVolumeDF
 from .news import news, newsDF, marketNews, marketNewsDF
 from .ohlc import ohlc, ohlcDF, marketOhlc, marketOhlcDF
 from .peers import peers, peersDF
-from .previous import previous, previousDF, yesterday, yesterdayDF, marketPrevious, marketPreviousDF, marketYesterday, marketYesterdayDF
+from .previous import (
+    previous,
+    previousDF,
+    yesterday,
+    yesterdayDF,
+    marketPrevious,
+    marketPreviousDF,
+    marketYesterday,
+    marketYesterdayDF,
+)
 from .price import price, priceDF
 from .priceTarget import priceTarget, priceTargetDF
 from .quote import quote, quoteDF

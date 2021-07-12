@@ -352,7 +352,7 @@ from .stocks import (
     cashFlow,
     cashFlowDF,
     ceoCompensation,
-    ceoCompensationDF, 
+    ceoCompensationDF,
     chart,
     chartDF,
     collections,
@@ -1400,8 +1400,14 @@ _INCLUDE_FUNCTIONS_PREMIUM = [
     ("socialSentiment", socialSentimentStockTwits),
     ("socialSentimentDF", socialSentimentStockTwitsDF),
     # Invisage
-    ("analystRecommendationsAndPriceTargets", analystRecommendationsAndPriceTargetsInvisage),
-    ("analystRecommendationsAndPriceTargetsDF", analystRecommendationsAndPriceTargetsInvisageDF),
+    (
+        "analystRecommendationsAndPriceTargets",
+        analystRecommendationsAndPriceTargetsInvisage,
+    ),
+    (
+        "analystRecommendationsAndPriceTargetsDF",
+        analystRecommendationsAndPriceTargetsInvisageDF,
+    ),
     # Refinitiv
     ("analystRecommendations", analystRecommendationsRefinitiv),
     ("analystRecommendationsDF", analystRecommendationsRefinitivDF),
