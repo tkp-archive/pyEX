@@ -307,21 +307,25 @@ class TestAll:
 
     def test_fundamentals(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.fundamentals(SYMBOL)
 
     def test_fundamentalsDF(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.fundamentalsDF(SYMBOL)
 
     def test_fundamentalValuations(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.fundamentalValuations(SYMBOL)
 
     def test_fundamentalValuationsDF(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.fundamentalValuationsDF(SYMBOL)
 
@@ -446,11 +450,13 @@ class TestAll:
 
     def test_dividendsForecast(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.dividendsForecast(SYMBOL)
 
     def test_dividendsForecastDF(self):
         from pyEX import Client
+
         c = Client(version="sandbox")
         c.dividendsForecastDF(SYMBOL)
 
