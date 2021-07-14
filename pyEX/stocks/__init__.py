@@ -20,6 +20,7 @@ from .delayedQuote import delayedQuote, delayedQuoteDF
 from .distribution import distribution, distributionDF
 from .dividends import dividends, dividendsDF
 from .dividendsBasic import dividendsBasic, dividendsBasicDF
+from .dividendsForecast import dividendsForecast, dividendsForecastDF
 from .estimates import estimates, estimatesDF
 from .earnings import (
     earnings,
@@ -42,6 +43,7 @@ from .events import (
 from .financials import financials, financialsDF
 from .financialsAsReported import tenQ, tenK, twentyF, fortyF
 from .fundamentals import fundamentals, fundamentalsDF
+from .fundamentalValuations import fundamentalValuations, fundamentalValuationsDF
 from .fundOwnership import fundOwnership, fundOwnershipDF
 from .iex import (
     iexThreshold,

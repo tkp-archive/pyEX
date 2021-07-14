@@ -305,6 +305,30 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
             fundOwnershipDF("test")
 
+    def test_fundamentals(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.fundamentals(SYMBOL)
+
+    def test_fundamentalsDF(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.fundamentalsDF(SYMBOL)
+
+    def test_fundamentalValuations(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.fundamentalValuations(SYMBOL)
+
+    def test_fundamentalValuationsDF(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.fundamentalValuationsDF(SYMBOL)
+
     def test_earnings(self):
         from pyEX import earnings
 
@@ -423,6 +447,18 @@ class TestAll:
             mock.return_value.json = MagicMock(return_value=[])
 
             dividendsDF(SYMBOL)
+
+    def test_dividendsForecast(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.dividendsForecast(SYMBOL)
+
+    def test_dividendsForecastDF(self):
+        from pyEX import Client
+
+        c = Client(version="sandbox")
+        c.dividendsForecastDF(SYMBOL)
 
     def test_collections(self):
         from pyEX import collections
