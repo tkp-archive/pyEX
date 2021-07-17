@@ -40,17 +40,17 @@ jobs:
     - name: Install system dependencies
       run: |
         make talib_windows_py37
-      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.7 && (github.event_name == matrix.event-name || matrix.os == 'ubuntu-latest') }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.7 }}
 
     - name: Install system dependencies
       run: |
         make talib_windows_py38
-      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.8 && (github.event_name == matrix.event-name || matrix.os == 'ubuntu-latest') }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.8 }}
 
     - name: Install system dependencies
       run: |
         make talib_windows_py39
-      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.9 && (github.event_name == matrix.event-name || matrix.os == 'ubuntu-latest') }}
+      if: ${{ matrix.os == 'windows-latest' && matrix.python-version == 3.9 }}
 
     - name: Install dependencies
       run: |
