@@ -14,6 +14,7 @@ import time
 from mock import MagicMock, patch
 
 SYMBOL = "aapl"
+SYMBOLS = "wmt, msft"
 
 atexit.register = MagicMock()
 pickle.dump = MagicMock()
@@ -1145,10 +1146,15 @@ class TestAll:
             upcomingSplits()
             upcomingIPOs()
             upcomingEvents(SYMBOL)
+            upcomingEvents(SYMBOLS)
             upcomingEarnings(SYMBOL)
+            upcomingEarnings(SYMBOLS)
             upcomingDividends(SYMBOL)
+            upcomingDividends(SYMBOLS)
             upcomingSplits(SYMBOL)
+            upcomingSplits(SYMBOLS)
             upcomingIPOs(SYMBOL)
+            upcomingIPOs(SYMBOLS)
 
     def test_upcomingEventsDF(self):
         from pyEX import (
@@ -1170,5 +1176,6 @@ class TestAll:
             upcomingEventsDF(SYMBOL)
             upcomingEarningsDF(SYMBOL)
             upcomingDividendsDF(SYMBOL)
+            upcomingDividendsDF(SYMBOLS)
             upcomingSplitsDF(SYMBOL)
             upcomingIPOsDF(SYMBOL)
