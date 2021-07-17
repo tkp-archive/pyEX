@@ -400,8 +400,11 @@ _INDICATOR_RETURNS = {
 
 def _strToList(st):
     """internal"""
-    if isinstance(st, string_types):
+    st = st.strip()
+    if st and isinstance(st, string_types):
         return st.split(",")
+    elif st is None or isinstance(st, string_types):
+        return []
     return st
 
 

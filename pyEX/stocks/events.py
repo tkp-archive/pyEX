@@ -11,11 +11,41 @@ import pandas as pd
 
 from ..common import (
     _get,
+    _strToList,
     _quoteSymbols,
     _raiseIfNotStr,
     _toDatetime,
     json_normalize,
 )
+
+
+def _baseEvent(
+    event="events",
+    symbol="",
+    exactDate="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
+    symbol = _strToList(symbol)
+
+    if len(symbol) == 0:
+        # full market
+        url = "stock/market/upcoming-{}".format(event)
+    elif len(symbol) == 1:
+        # just 1 symbol
+        url = "stock/{}/upcoming-{}".format(_quoteSymbols(symbol), event)
+    else:
+        # many symbols
+        url = "stock/market/upcoming-{}?symbols={}".format(event, _quoteSymbols(symbol))
+
+    if exactDate and len(symbol) > 1:
+        url += "&exactDate={}".format(exactDate)
+    elif exactDate:
+        url += "?exactDate={}".format(exactDate)
+
+    return _get(url, token, version, filter)
 
 
 def upcomingEvents(
@@ -42,17 +72,15 @@ def upcomingEvents(
         dict or DataFrame: result
 
     """
-    _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-
-    if symbol:
-        url = "stock/{}/upcoming-events".format(symbol)
-    else:
-        url = "stock/market/upcoming-events"
-
-    if exactDate:
-        url += "?exactDate={}".format(exactDate)
-    return _get(url, token, version, filter)
+    return _baseEvent(
+        "events",
+        symbol=symbol,
+        exactDate=exactDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 def _upcomingToDF(upcoming):
@@ -91,16 +119,15 @@ def upcomingEarnings(
         dict or DataFrame: result
 
     """
-    _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    if symbol:
-        url = "stock/{}/upcoming-earnings".format(symbol)
-    else:
-        url = "stock/market/upcoming-earnings"
-
-    if exactDate:
-        url += "?exactDate={}".format(exactDate)
-    return _get(url, token, version, filter)
+    return _baseEvent(
+        "earnings",
+        symbol=symbol,
+        exactDate=exactDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(upcomingEarnings)
@@ -132,18 +159,15 @@ def upcomingDividends(
         dict or DataFrame: result
 
     """
-    _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    if symbol and "," in symbol:
-        url = "stock/market/upcoming-dividends?symbols={}".format(symbol)
-    elif symbol:
-        url = "stock/{}/upcoming-dividends".format(symbol)
-    else:
-        url = "stock/market/upcoming-dividends"
-
-    if exactDate:
-        url += "?exactDate={}".format(exactDate)
-    return _get(url, token, version, filter)
+    return _baseEvent(
+        "dividends",
+        symbol=symbol,
+        exactDate=exactDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(upcomingDividends)
@@ -175,16 +199,15 @@ def upcomingSplits(
         dict or DataFrame: result
 
     """
-    _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    if symbol:
-        url = "stock/{}/upcoming-splits".format(symbol)
-    else:
-        url = "stock/market/upcoming-splits"
-
-    if exactDate:
-        url += "?exactDate={}".format(exactDate)
-    return _get(url, token, version, filter)
+    return _baseEvent(
+        "splits",
+        symbol=symbol,
+        exactDate=exactDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(upcomingSplits)
@@ -216,16 +239,15 @@ def upcomingIPOs(
         dict or DataFrame: result
 
     """
-    _raiseIfNotStr(symbol)
-    symbol = _quoteSymbols(symbol)
-    if symbol:
-        url = "stock/{}/upcoming-ipos".format(symbol)
-    else:
-        url = "stock/market/upcoming-ipos"
-
-    if exactDate:
-        url += "?exactDate={}".format(exactDate)
-    return _get(url, token, version, filter)
+    return _baseEvent(
+        "ipos",
+        symbol=symbol,
+        exactDate=exactDate,
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 @wraps(upcomingIPOs)

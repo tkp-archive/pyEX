@@ -1146,11 +1146,15 @@ class TestAll:
             upcomingSplits()
             upcomingIPOs()
             upcomingEvents(SYMBOL)
+            upcomingEvents(SYMBOLS)
             upcomingEarnings(SYMBOL)
+            upcomingEarnings(SYMBOLS)
             upcomingDividends(SYMBOL)
             upcomingDividends(SYMBOLS)
             upcomingSplits(SYMBOL)
+            upcomingSplits(SYMBOLS)
             upcomingIPOs(SYMBOL)
+            upcomingIPOs(SYMBOLS)
 
     def test_upcomingEventsDF(self):
         from pyEX import (
