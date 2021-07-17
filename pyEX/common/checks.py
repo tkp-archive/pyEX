@@ -518,7 +518,7 @@ def _quoteSymbols(symbols):
     """urlquote a potentially comma-separate list of symbols"""
     if isinstance(symbols, list):
         # comma separated, quote separately
-        return ",".join(quote(symbol, safe="") for symbol in symbols)
+        return ",".join(quote(symbol.strip(), safe="") for symbol in symbols)
     # not comma separated, just quote
     return quote(symbols, safe=",")
 
