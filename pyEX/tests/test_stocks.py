@@ -14,6 +14,7 @@ import time
 from mock import MagicMock, patch
 
 SYMBOL = "aapl"
+SYMBOLS = "wmt, msft"
 
 atexit.register = MagicMock()
 pickle.dump = MagicMock()
@@ -1147,6 +1148,7 @@ class TestAll:
             upcomingEvents(SYMBOL)
             upcomingEarnings(SYMBOL)
             upcomingDividends(SYMBOL)
+            upcomingDividends(SYMBOLS)
             upcomingSplits(SYMBOL)
             upcomingIPOs(SYMBOL)
 
@@ -1170,5 +1172,6 @@ class TestAll:
             upcomingEventsDF(SYMBOL)
             upcomingEarningsDF(SYMBOL)
             upcomingDividendsDF(SYMBOL)
+            upcomingDividendsDF(SYMBOLS)
             upcomingSplitsDF(SYMBOL)
             upcomingIPOsDF(SYMBOL)

@@ -134,7 +134,9 @@ def upcomingDividends(
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if symbol:
+    if symbol and "," in symbol:
+        url = "stock/market/upcoming-dividends?symbols={}".format(symbol)
+    elif symbol:
         url = "stock/{}/upcoming-dividends".format(symbol)
     else:
         url = "stock/market/upcoming-dividends"
