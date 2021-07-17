@@ -13,7 +13,6 @@ from ..common import (
     _get,
     _strToList,
     _quoteSymbols,
-    _raiseIfNotStr,
     _toDatetime,
     json_normalize,
 )
