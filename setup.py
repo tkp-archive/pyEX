@@ -87,7 +87,6 @@ setup(
     install_requires=requires,
     extras_require={
         "dev": requires_dev,
-        "async": requires_async,
         "studies": requires_studies,
     },
 )
