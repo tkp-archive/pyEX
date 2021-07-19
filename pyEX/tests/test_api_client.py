@@ -197,8 +197,10 @@ class TestPyEXClientAPI:
     def test_all_ts(self):
         for meth in (
             "timeSeriesInventory",
+            "timeSeriesInventoryAsync",
             "timeSeriesInventoryDF",
             "timeSeries",
+            "timeSeriesAsync",
             "timeSeriesDF",
         ):
             assert hasattr(self.c, meth)
