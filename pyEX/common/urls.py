@@ -7,12 +7,15 @@
 #
 from __future__ import print_function
 
+import aiohttp
+import asyncio
 import json
 import os
 import os.path
+import time
+from random import random
 from threading import Event, Thread
 from urllib.parse import urlparse
-
 import requests
 from socketIO_client_nexus import BaseNamespace, SocketIO
 from sseclient import SSEClient
@@ -121,7 +124,15 @@ def _getIEXCloudBase(
     if _PYEX_DEBUG:
         print(urlparse(url).geturl())
 
+    tries = 1
     resp = requests.get(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
+
+    while resp.status_code == 429:
+        resp = requests.get(
+            urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params
+        )
+        time.sleep(random() * 0.5 * tries)
+        tries += 1
 
     if resp.status_code == 200:
         if format == "json":
@@ -143,8 +154,6 @@ async def _getIEXCloudAsyncBase(
     base_url, url, token="", version="stable", filter="", format="json"
 ):
     """for iex cloud"""
-    import aiohttp
-
     url = _URL_PREFIX_CLOUD.format(version=version) + url
     params = {"token": token}
 
@@ -154,18 +163,32 @@ async def _getIEXCloudAsyncBase(
     if format not in ("json", "binary"):
         params["format"] = format
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
-            urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
-        ) as resp:
+    tries = 1
 
-            if resp.status == 200:
-                if format == "json":
-                    return await resp.json()
-                elif format == "binary":
-                    return await resp.read()
-                return resp.text()
-            raise PyEXception("Response %d - " % resp.status, await resp.text())
+    while tries < 5:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
+            ) as resp:
+
+                resp = requests.get(
+                    urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params
+                )
+
+                if resp.status_code == 429:
+                    tries += 1
+                    await asyncio.sleep(random() * 0.5 * tries)
+
+                elif resp.status == 200:
+                    if format == "json":
+                        return await resp.json()
+                    elif format == "binary":
+                        return await resp.read()
+                    return resp.text()
+                else:
+                    # break and hit the exception case
+                    break
+    raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
 async def _getIEXCloudAsync(url, token="", version="stable", filter="", format="json"):

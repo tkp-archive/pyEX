@@ -8,7 +8,9 @@
 
 from .timeseries import (
     timeSeries,
+    timeSeriesAsync,
     timeSeriesDF,
     timeSeriesInventory,
+    timeSeriesInventoryAsync,
     timeSeriesInventoryDF,
 )
