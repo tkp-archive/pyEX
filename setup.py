@@ -32,6 +32,9 @@ with open(pjoin(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read().replace("\r\n", "\n")
 
 requires = [
+    "aiohttp>=3.2",
+    "aiohttp-sse-client>=0.2.0",
+    "aiostream>=0.3.1",
     "deprecation>=2.0.6",
     "ipython>=7.2.0",
     "Pillow>=5.3.0",
@@ -44,32 +47,22 @@ requires = [
     "temporal-cache>=0.1.1",
 ]
 
-requires_async = requires + [
-    "aiohttp>=3.2",
-    "aiohttp-sse-client>=0.2.0",
-    "aiostream>=0.3.1",
-]
-
 requires_studies = [] if os.environ.get("READTHEDOCS") else ["TA-Lib>=0.4.17"]
 
-requires_dev = (
-    requires_async
-    + requires_studies
-    + [
-        "black>=20.",
-        "bump2version>=1.0.0",
-        "flake8>=3.7.8",
-        "flake8-black>=0.2.1",
-        "mock",
-        "pytest>=4.3.0",
-        "pytest-cov>=2.6.1",
-        "pytest-rerunfailures>=10.1",
-        "recommonmark",
-        "Sphinx>=1.8.4",
-        "sphinx-markdown-builder>=0.5.2",
-        "sphinx-rtd-theme",
-    ]
-)
+requires_dev = requires_studies + [
+    "black>=20.",
+    "bump2version>=1.0.0",
+    "flake8>=3.7.8",
+    "flake8-black>=0.2.1",
+    "mock",
+    "pytest>=4.3.0",
+    "pytest-cov>=2.6.1",
+    "pytest-rerunfailures>=10.1",
+    "recommonmark",
+    "Sphinx>=1.8.4",
+    "sphinx-markdown-builder>=0.5.2",
+    "sphinx-rtd-theme",
+]
 
 setup(
     name=name,
@@ -94,7 +87,6 @@ setup(
     install_requires=requires,
     extras_require={
         "dev": requires_dev,
-        "async": requires_async,
         "studies": requires_studies,
     },
 )

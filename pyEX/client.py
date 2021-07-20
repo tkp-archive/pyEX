@@ -575,8 +575,10 @@ from .streaming.stock import (
 
 from .timeseries import (
     timeSeries,
+    timeSeriesAsync,
     timeSeriesDF,
     timeSeriesInventory,
+    timeSeriesInventoryAsync,
     timeSeriesInventoryDF,
 )
 
@@ -1111,8 +1113,10 @@ _INCLUDE_FUNCTIONS_POINTS = [
 
 _INCLUDE_FUNCTIONS_TS = [
     ("timeSeriesInventory", timeSeriesInventory),
+    ("timeSeriesInventoryAsync", timeSeriesInventoryAsync),
     ("timeSeriesInventoryDF", timeSeriesInventoryDF),
     ("timeSeries", timeSeries),
+    ("timeSeriesAsync", timeSeriesAsync),
     ("timeSeriesDF", timeSeriesDF),
 ]
 
