@@ -462,8 +462,11 @@ def _stream(url, sendinit=None, on_data=print):
     return cl
 
 
-def _streamSSE(url, on_data=print, exit=None):
+def _streamSSE(url, on_data=print, exit=None, nosnapshot=False):
     """internal"""
+
+    if nosnapshot:
+        url += "&nosnapshot=true"
 
     messages = SSEClient(url, proxies=_PYEX_PROXIES, headers={"keep_alive": "false"})
 
@@ -476,7 +479,9 @@ def _streamSSE(url, on_data=print, exit=None):
             except PyEXStopSSE:
                 # stop listening and return
                 return
-            except (json.JSONDecodeError, KeyboardInterrupt):
+            except (json.JSONDecodeError,):
+                continue
+            except (KeyboardInterrupt,):
                 raise
             except Exception:
                 raise
@@ -595,6 +600,24 @@ def overrideUrl(url="", env=""):
     elif url:
         _URL_PREFIX_CLOUD = url
         _URL_PREFIX_CLOUD_SANDBOX = url
+        _SSE_URL_PREFIX = "{}{{channel}}?symbols={{symbols}}&token={{token}}".format(
+            url
+        )
+        _SSE_URL_PREFIX_ALL = "{}{{channel}}?token={{token}}".format(url)
+        _SSE_DEEP_URL_PREFIX = (
+            "{}deep?symbols={{symbols}}&channels={{channels}}&token={{token}}".format(
+                url
+            )
+        )
+        _SSE_URL_PREFIX_SANDBOX = (
+            "{}{{channel}}?symbols={{symbols}}&token={{token}}".format(url)
+        )
+        _SSE_URL_PREFIX_ALL_SANDBOX = "{}{{channel}}?token={{token}}".format(url)
+        _SSE_DEEP_URL_PREFIX_SANDBOX = (
+            "{}deep?symbols={{symbols}}&channels={{channels}}&token={{token}}".format(
+                url
+            )
+        )
     else:
         # reset
         _URL_PREFIX_CLOUD = _URL_PREFIX_CLOUD_ORIG
