@@ -23,7 +23,13 @@ class FXSSE(Enum):
 
 
 def fxSSE(
-    symbols=None, on_data=None, exit=None, token="", version="stable", name="forex"
+    symbols=None,
+    on_data=None,
+    exit=None,
+    nosnapshot=False,
+    token="",
+    version="stable",
+    name="forex",
 ):
     """This endpoint streams real-time foreign currency exchange rates.
 
@@ -38,11 +44,19 @@ def fxSSE(
 
     """
     return _runSSE(
-        name, symbols=symbols, on_data=on_data, exit=exit, token=token, version=version
+        name,
+        symbols=symbols,
+        on_data=on_data,
+        exit=exit,
+        nosnapshot=nosnapshot,
+        token=token,
+        version=version,
     )
 
 
-async def fxSSEAsync(symbols=None, exit=None, token="", version="stable", name="forex"):
+async def fxSSEAsync(
+    symbols=None, exit=None, nosnapshot=False, token="", version="stable", name="forex"
+):
     """This endpoint streams real-time foreign currency exchange rates.
 
     https://iexcloud.io/docs/api/#forex-currencies
@@ -54,17 +68,25 @@ async def fxSSEAsync(symbols=None, exit=None, token="", version="stable", name="
         version (str): API version
     """
     async for item in _runSSEAsync(
-        name, symbols=symbols, exit=exit, token=token, version=version
+        name,
+        symbols=symbols,
+        exit=exit,
+        nosnapshot=nosnapshot,
+        token=token,
+        version=version,
     ):
         yield item
 
 
 @wraps(fxSSE)
-def forex1SecondSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
+def forex1SecondSSE(
+    symbols=None, on_data=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
         exit=exit,
+        nosnapshot=nosnapshot,
         token=token,
         version=version,
         name="forex1Second",
@@ -72,19 +94,29 @@ def forex1SecondSSE(symbols=None, on_data=None, exit=None, token="", version="st
 
 
 @wraps(fxSSEAsync)
-def forex1SecondSSEAsync(symbols=None, exit=None, token="", version="stable"):
+def forex1SecondSSEAsync(
+    symbols=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     for item in fxSSEAsync(
-        symbols=symbols, exit=exit, token=token, version=version, name="forex1Second"
+        symbols=symbols,
+        exit=exit,
+        nosnapshot=nosnapshot,
+        token=token,
+        version=version,
+        name="forex1Second",
     ):
         yield item
 
 
 @wraps(fxSSE)
-def forex5SecondSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
+def forex5SecondSSE(
+    symbols=None, on_data=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
         exit=exit,
+        nosnapshot=nosnapshot,
         token=token,
         version=version,
         name="forex5Second",
@@ -92,19 +124,29 @@ def forex5SecondSSE(symbols=None, on_data=None, exit=None, token="", version="st
 
 
 @wraps(fxSSEAsync)
-def forex5SecondSSEAsync(symbols=None, exit=None, token="", version="stable"):
+def forex5SecondSSEAsync(
+    symbols=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     for item in fxSSEAsync(
-        symbols=symbols, exit=exit, token=token, version=version, name="forex5Second"
+        symbols=symbols,
+        exit=exit,
+        nosnapshot=nosnapshot,
+        token=token,
+        version=version,
+        name="forex5Second",
     ):
         yield item
 
 
 @wraps(fxSSE)
-def forex1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version="stable"):
+def forex1MinuteSSE(
+    symbols=None, on_data=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     return fxSSE(
         symbols=symbols,
         on_data=on_data,
         exit=exit,
+        nosnapshot=nosnapshot,
         token=token,
         version=version,
         name="forex1Minute",
@@ -112,8 +154,15 @@ def forex1MinuteSSE(symbols=None, on_data=None, exit=None, token="", version="st
 
 
 @wraps(fxSSEAsync)
-def forex1MinuteSSEAsync(symbols=None, exit=None, token="", version="stable"):
+def forex1MinuteSSEAsync(
+    symbols=None, exit=None, nosnapshot=False, token="", version="stable"
+):
     for item in fxSSEAsync(
-        symbols=symbols, exit=exit, token=token, version=version, name="forex1Minute"
+        symbols=symbols,
+        exit=exit,
+        nosnapshot=nosnapshot,
+        token=token,
+        version=version,
+        name="forex1Minute",
     ):
         yield item
