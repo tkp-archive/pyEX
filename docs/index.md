@@ -1,4 +1,4 @@
-# <a href="https://pyEX.readthedocs.io"><img src="https://raw.githubusercontent.com/iexcloud/pyEX/main/img/icon.png" width="300"></a>
+# <a href="https://pyEX.readthedocs.io"><img src="https://raw.githubusercontent.com/iexcloud/pyEX/main/docs/img/icon.png" width="300"></a>
 
 Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
