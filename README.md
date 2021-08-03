@@ -20,7 +20,7 @@ Install from pip
 
 `pip install pyEX`
 
-of from source
+or from source
 
 `python setup.py install`
 
