@@ -13,7 +13,14 @@ from ...common import _UTC, _expire, _get, _reindex, _toDatetime
 
 
 @_expire(hour=8, tz=_UTC)
-def futuresSymbols(underlying="", token="", version="stable", filter="", format="json"):
+def futuresSymbols(
+    underlying="",
+    includeExpired=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """This call returns an array of futures symbols that IEX Cloud supports for API calls.
 
     https://iexcloud.io/docs/api/#futures-symbols
@@ -21,6 +28,7 @@ def futuresSymbols(underlying="", token="", version="stable", filter="", format=
 
     Args:
         underlying (str): Underlying asset
+        includeExpired (bool): Include expired contracts in result
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -29,10 +37,14 @@ def futuresSymbols(underlying="", token="", version="stable", filter="", format=
     Returns:
         dict or DataFrame or list: result
     """
+    url = "ref-data/futures/symbols{}".format(
+        "/{}".format(underlying) if underlying else ""
+    )
+    if includeExpired is not None:
+        url += "?includeExpired={}".format(includeExpired)
+
     return _get(
-        "ref-data/futures/symbols{}".format(
-            "/{}".format(underlying) if underlying else ""
-        ),
+        url,
         token=token,
         version=version,
         filter=filter,
