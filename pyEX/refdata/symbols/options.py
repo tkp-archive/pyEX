@@ -13,7 +13,15 @@ from ...common import _UTC, _expire, _get, json_normalize
 
 
 @_expire(hour=8, tz=_UTC)
-def optionsSymbols(symbol="", token="", version="stable", filter="", format="json"):
+def optionsSymbols(
+    symbol="",
+    expiration="",
+    includeExpired=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     """This call returns an object keyed by symbol with the value of each symbol being an array of available contract dates.
 
     https://iexcloud.io/docs/api/#options-symbols
@@ -21,6 +29,8 @@ def optionsSymbols(symbol="", token="", version="stable", filter="", format="jso
 
     Args:
         symbol (str): underlying symbol
+        expiration (str): expiration date
+        includeExpired (bool): Include expired contracts in result
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -30,15 +40,18 @@ def optionsSymbols(symbol="", token="", version="stable", filter="", format="jso
         dict or DataFrame or list: result
     """
     if symbol:
-        return _get(
-            "ref-data/options/symbols/{}".format(symbol),
-            token=token,
-            version=version,
-            filter=filter,
-            format=format,
-        )
+        url = "ref-data/options/symbols/{}".format(symbol)
+
+        if expiration:
+            url += "/{}".format(expiration)
+
+        if includeExpired is not None:
+            url += "?includeExpired={}".format(includeExpired)
+    else:
+        url = "ref-data/options/symbols"
+
     return _get(
-        "ref-data/options/symbols",
+        url,
         token=token,
         version=version,
         filter=filter,
