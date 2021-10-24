@@ -11,7 +11,7 @@ from ..common import (
     _EST,
     _INDICATOR_RETURNS,
     _INDICATORS,
-    _TIMEFRAME_CHART,
+    _RANGE_CHART,
     PyEXception,
     _expire,
     _get,
@@ -171,8 +171,8 @@ def technicals(
         raise PyEXception("indicator must be in {}".format(_INDICATORS))
 
     if range != "1d":
-        if range not in _TIMEFRAME_CHART:
-            raise PyEXception("Range must be in {}".format(_TIMEFRAME_CHART))
+        if range not in _RANGE_CHART:
+            raise PyEXception("Range must be in {}".format(_RANGE_CHART))
 
     base_url = "stock/{}/indicator/{}?range={}".format(symbol, indicator, range)
 
