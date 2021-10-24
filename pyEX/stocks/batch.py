@@ -9,7 +9,7 @@ import pandas as pd
 
 from ..common import (
     _BATCH_TYPES,
-    _TIMEFRAME_CHART,
+    _RANGE_CHART,
     PyEXception,
     _get,
     _quoteSymbols,
@@ -84,8 +84,8 @@ def batch(
         if field not in _BATCH_TYPES:
             raise PyEXception("Unrecognized batch request field: {}".format(field))
 
-    if range_ not in _TIMEFRAME_CHART:
-        raise PyEXception("Range must be in %s" % str(_TIMEFRAME_CHART))
+    if range_ not in _RANGE_CHART:
+        raise PyEXception("Range must be in %s" % str(_RANGE_CHART))
 
     symbols = _quoteSymbols(symbols)
     if len(symbols.split(",")) > 100:

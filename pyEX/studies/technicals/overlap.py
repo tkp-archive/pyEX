@@ -11,35 +11,35 @@ import talib as t
 from ..utils import tolist
 
 
-def bollinger(client, symbol, timeframe="6m", col="close", period=2):
+def bollinger(client, symbol, range="6m", col="close", period=2):
     """This will return a dataframe of bollinger bands for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         period (int); period for the bollinger bands
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     bb = t.BBANDS(df[col].values.astype(float), period)
     return pd.DataFrame(
         {col: df[col].values, "upper": bb[0], "middle": bb[1], "lower": bb[2]}
     )
 
 
-def dema(client, symbol, timeframe="6m", col="close", periods=None):
+def dema(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of double exponential moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -50,7 +50,7 @@ def dema(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -58,14 +58,14 @@ def dema(client, symbol, timeframe="6m", col="close", periods=None):
     return pd.DataFrame(build)
 
 
-def ema(client, symbol, timeframe="6m", col="close", periods=None):
+def ema(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of exponential moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -76,7 +76,7 @@ def ema(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -84,62 +84,62 @@ def ema(client, symbol, timeframe="6m", col="close", periods=None):
     return pd.DataFrame(build)
 
 
-def ht_trendline(client, symbol, timeframe="6m", col="close"):
+def ht_trendline(client, symbol, range="6m", col="close"):
     """This will return a dataframe of hilbert trendline
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     build["ht-{}".format(col)] = t.HT_TRENDLINE(df[col].values.astype(float))
     return pd.DataFrame(build)
 
 
-def kama(client, symbol, timeframe="6m", col="close", period=30):
+def kama(client, symbol, range="6m", col="close", period=30):
     """This will return a dataframe of kaufman adaptive moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         period (int); time period for kama
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     build["kama-{}".format(col)] = t.KAMA(df[col].values.astype(float), period)
     return pd.DataFrame(build)
 
 
-def mama(client, symbol, timeframe="6m", col="close", fastlimit=0, slowlimit=0):
+def mama(client, symbol, range="6m", col="close", fastlimit=0, slowlimit=0):
     """This will return a dataframe of mesa adaptive moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         fastlimit (int); fastlimit for mama
         slowlimit (int); slowlimit for mama
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     build["mama-{}".format(col)], build["fama-{}".format(col)] = t.MAMA(
@@ -151,7 +151,7 @@ def mama(client, symbol, timeframe="6m", col="close", fastlimit=0, slowlimit=0):
 def mavp(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     col="close",
     periods=None,
     minperiod=2,
@@ -159,12 +159,12 @@ def mavp(
     matype=0,
 ):
     """This will return a dataframe of moving average with variable period
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
         minperiod (int); minperiod
@@ -173,12 +173,12 @@ def mavp(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     if periods is None:
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -192,42 +192,42 @@ def mavp(
     return pd.DataFrame(build)
 
 
-def midpoint(client, symbol, timeframe="6m", col="close", period=14):
+def midpoint(client, symbol, range="6m", col="close", period=14):
     """This will return a dataframe of midpoint over period
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         period (int); time period for kama
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     build["kama-{}".format(col)] = t.MIDPOINT(df[col].values.astype(float), period)
     return pd.DataFrame(build)
 
 
-def midpice(client, symbol, timeframe="6m", col="close", period=14):
+def midpice(client, symbol, range="6m", col="close", period=14):
     """This will return a dataframe of midprice over period
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         period (int); time period for kama
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     build["kama-{}".format(col)] = t.MIDPRICE(df[col].values.astype(float), period)
@@ -237,19 +237,19 @@ def midpice(client, symbol, timeframe="6m", col="close", period=14):
 def sar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     acceleration=0,
     maximum=0,
 ):
     """This will return a dataframe of parabolic sar
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         highcol (string); high column to use
         lowcol (string); low column to use
         acceleration (int); acceleration
@@ -258,7 +258,7 @@ def sar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     sar = t.SAR(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -273,7 +273,7 @@ def sar(
 def sarext(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     startvalue=0,
@@ -286,12 +286,12 @@ def sarext(
     accelerationmaxshort=0,
 ):
     """This will return a dataframe of parabolic sar extended
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         highcol (string); high column to use
         lowcol (string); low column to use
         startvalue (int); startvalue
@@ -306,7 +306,7 @@ def sarext(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     sar = t.SAREXT(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -324,14 +324,14 @@ def sarext(
     )
 
 
-def sma(client, symbol, timeframe="6m", col="close", periods=None):
+def sma(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of exponential moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -342,7 +342,7 @@ def sma(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -350,14 +350,14 @@ def sma(client, symbol, timeframe="6m", col="close", periods=None):
     return pd.DataFrame(build)
 
 
-def t3(client, symbol, timeframe="6m", col="close", periods=None, vfactor=0):
+def t3(client, symbol, range="6m", col="close", periods=None, vfactor=0):
     """This will return a dataframe of tripple exponential moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
         vfactor (int); vfactor
@@ -369,7 +369,7 @@ def t3(client, symbol, timeframe="6m", col="close", periods=None, vfactor=0):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -379,14 +379,14 @@ def t3(client, symbol, timeframe="6m", col="close", periods=None, vfactor=0):
     return pd.DataFrame(build)
 
 
-def tema(client, symbol, timeframe="6m", col="close", periods=None):
+def tema(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of triple exponential moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -397,7 +397,7 @@ def tema(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -405,14 +405,14 @@ def tema(client, symbol, timeframe="6m", col="close", periods=None):
     return pd.DataFrame(build)
 
 
-def trima(client, symbol, timeframe="6m", col="close", periods=None):
+def trima(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of triangular moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -423,7 +423,7 @@ def trima(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:
@@ -431,14 +431,14 @@ def trima(client, symbol, timeframe="6m", col="close", periods=None):
     return pd.DataFrame(build)
 
 
-def wma(client, symbol, timeframe="6m", col="close", periods=None):
+def wma(client, symbol, range="6m", col="close", periods=None):
     """This will return a dataframe of weighted moving average
-     for the given symbol across the given timeframe
+     for the given symbol across the given range
 
     Args:
         client (pyEX.Client); Client
         symbol (string); Ticker
-        timeframe (string); timeframe to use, for pyEX.chart
+        range (string); range to use, for pyEX.chart
         col (string); column to use to calculate
         periods (int); periods
 
@@ -449,7 +449,7 @@ def wma(client, symbol, timeframe="6m", col="close", periods=None):
         periods = [30]
     periods = tolist(periods)
 
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
 
     build = {col: df[col].values}
     for per in periods:

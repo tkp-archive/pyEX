@@ -12,19 +12,19 @@ import talib as t
 def ad(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     closecol="close",
     volumecol="volume",
 ):
     """This will return a dataframe of Chaikin A/D Line for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
@@ -33,7 +33,7 @@ def ad(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     ad = t.AD(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -54,7 +54,7 @@ def ad(
 def adosc(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     closecol="close",
@@ -63,12 +63,12 @@ def adosc(
     slowperiod=10,
 ):
     """This will return a dataframe of Chaikin A/D Oscillator for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
@@ -78,7 +78,7 @@ def adosc(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     adosc = t.ADOSC(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -98,20 +98,20 @@ def adosc(
     )
 
 
-def obv(client, symbol, timeframe="6m", closecol="close", volumecol="volume"):
+def obv(client, symbol, range="6m", closecol="close", volumecol="volume"):
     """This will return a dataframe of On Balance Volume for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         volumecol (string): column to use to calculate
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     obv = t.OBV(df[closecol].values.astype(float), df[volumecol].values.astype(float))
     return pd.DataFrame(
         {closecol: df[closecol].values, volumecol: df[volumecol].values, "obv": obv}

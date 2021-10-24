@@ -7,36 +7,36 @@
 #
 
 
-def peerCorrelation(client, symbol, timeframe="6m"):
+def peerCorrelation(client, symbol, range="6m"):
     """This will return a dataframe of peer correlations for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
 
     Returns:
         DataFrame: result
     """
     peers = client.peers(symbol)
-    rets = client.batchDF(peers + [symbol], "chart", timeframe)["chart"]
+    rets = client.batchDF(peers + [symbol], "chart", range)["chart"]
     ret = rets.pivot(columns="symbol", values="changePercent").corr()
     ret.index.name = "symbol"
     ret.columns = ret.columns.tolist()
     return ret
 
 
-def peerCorrelationPlot(client, symbol, timeframe="6m"):
+def peerCorrelationPlot(client, symbol, range="6m"):
     """This will plot a dataframe of peer correlations for the given symbol across
-    the given timeframe
+    the given range
 
     Note: this function requires the use of `seaborn.heatmap`
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
 
     Returns:
         DataFrame: result
