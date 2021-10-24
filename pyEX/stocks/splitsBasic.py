@@ -10,7 +10,7 @@ from functools import wraps
 import pandas as pd
 
 from ..common import (
-    _TIMEFRAME_DIVSPLIT,
+    _RANGE_DIVSPLIT,
     _UTC,
     PyEXception,
     _expire,
@@ -24,7 +24,7 @@ from ..common import (
 
 @_expire(hour=9, tz=_UTC)
 def splitsBasic(
-    symbol, timeframe="ytd", token="", version="stable", filter="", format="json"
+    symbol, range="ytd", token="", version="stable", filter="", format="json"
 ):
     """Stock split history
 
@@ -33,7 +33,7 @@ def splitsBasic(
 
     Args:
         symbol (str): Ticker to request
-        timeframe (str): timeframe for data
+        range (str): range for data
         token (str): Access token
         version (str): API version
         filter (str): filters: https://iexcloud.io/docs/api/#filter-results
@@ -44,10 +44,10 @@ def splitsBasic(
     """
     _raiseIfNotStr(symbol)
     symbol = _quoteSymbols(symbol)
-    if timeframe not in _TIMEFRAME_DIVSPLIT:
-        raise PyEXception("Range must be in %s" % str(_TIMEFRAME_DIVSPLIT))
+    if range not in _RANGE_DIVSPLIT:
+        raise PyEXception("Range must be in %s" % str(_RANGE_DIVSPLIT))
     return _get(
-        "stock/" + symbol + "/splits/" + timeframe,
+        "stock/" + symbol + "/splits/" + range,
         token=token,
         version=version,
         filter=filter,

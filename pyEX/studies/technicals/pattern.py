@@ -12,19 +12,19 @@ import talib as t
 def cdl2crows(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of Two crows for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -33,7 +33,7 @@ def cdl2crows(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL2CROWS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -54,19 +54,19 @@ def cdl2crows(
 def cdl3blackcrows(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 black crows for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -75,7 +75,7 @@ def cdl3blackcrows(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3BLACKCROWS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -96,19 +96,19 @@ def cdl3blackcrows(
 def cdl3inside(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 inside up/down for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -117,7 +117,7 @@ def cdl3inside(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3INSIDE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -138,19 +138,19 @@ def cdl3inside(
 def cdl3linestrike(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 line strike for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -159,7 +159,7 @@ def cdl3linestrike(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3LINESTRIKE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -180,19 +180,19 @@ def cdl3linestrike(
 def cdl3outside(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 outside for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -201,7 +201,7 @@ def cdl3outside(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3OUTSIDE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -222,19 +222,19 @@ def cdl3outside(
 def cdl3starsinsouth(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 stars in south for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -243,7 +243,7 @@ def cdl3starsinsouth(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3STARSINSOUTH(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -264,19 +264,19 @@ def cdl3starsinsouth(
 def cdl3whitesoldiers(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of 3 white soldiers for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -285,7 +285,7 @@ def cdl3whitesoldiers(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDL3WHITESOLDIERS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -306,19 +306,19 @@ def cdl3whitesoldiers(
 def cdlabandonedbaby(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of abandoned baby for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -327,7 +327,7 @@ def cdlabandonedbaby(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLABANDONEDBABY(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -348,19 +348,19 @@ def cdlabandonedbaby(
 def cdladvanceblock(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of advance block for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -369,7 +369,7 @@ def cdladvanceblock(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLADVANCEBLOCK(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -390,19 +390,19 @@ def cdladvanceblock(
 def cdlbelthold(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of belt hold for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -411,7 +411,7 @@ def cdlbelthold(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLBELTHOLD(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -432,19 +432,19 @@ def cdlbelthold(
 def cdlbreakaway(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of breakaway for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -453,7 +453,7 @@ def cdlbreakaway(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLBREAKAWAY(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -474,19 +474,19 @@ def cdlbreakaway(
 def cdlclosingmarubozu(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of closing maru bozu for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -495,7 +495,7 @@ def cdlclosingmarubozu(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLCLOSINGMARUBOZU(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -516,19 +516,19 @@ def cdlclosingmarubozu(
 def cdlconcealbabyswallow(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of conceal baby swallow for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -537,7 +537,7 @@ def cdlconcealbabyswallow(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLCONCEALBABYSWALL(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -558,19 +558,19 @@ def cdlconcealbabyswallow(
 def cdlcounterattack(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of counterattack for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -579,7 +579,7 @@ def cdlcounterattack(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLCOUNTERATTACK(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -600,7 +600,7 @@ def cdlcounterattack(
 def cdldarkcloudcover(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -608,12 +608,12 @@ def cdldarkcloudcover(
     penetration=0,
 ):
     """This will return a dataframe of dark cloud cover for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -623,7 +623,7 @@ def cdldarkcloudcover(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLDARKCLOUDCOVER(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -645,19 +645,19 @@ def cdldarkcloudcover(
 def cdldoji(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of doji for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -666,7 +666,7 @@ def cdldoji(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLDOJI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -687,19 +687,19 @@ def cdldoji(
 def cdldojistar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of doji star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -708,7 +708,7 @@ def cdldojistar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLDOJISTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -729,19 +729,19 @@ def cdldojistar(
 def cdldragonflydoji(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of dragonfly doji for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -750,7 +750,7 @@ def cdldragonflydoji(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLDRAGONFLYDOJI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -771,19 +771,19 @@ def cdldragonflydoji(
 def cdlengulfing(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of engulfing for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -792,7 +792,7 @@ def cdlengulfing(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLENGULFING(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -813,7 +813,7 @@ def cdlengulfing(
 def cdleveningdojistar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -821,12 +821,12 @@ def cdleveningdojistar(
     penetration=0,
 ):
     """This will return a dataframe of evening doji star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -836,7 +836,7 @@ def cdleveningdojistar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLEVENINGDOJISTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -858,7 +858,7 @@ def cdleveningdojistar(
 def cdleveningstar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -866,12 +866,12 @@ def cdleveningstar(
     penetration=0,
 ):
     """This will return a dataframe of evening star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -881,7 +881,7 @@ def cdleveningstar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLEVENINGSTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -903,19 +903,19 @@ def cdleveningstar(
 def cdlgapsidesidewhite(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of up.down-gap side-by-side white lines for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -924,7 +924,7 @@ def cdlgapsidesidewhite(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLGAPSIDESIDEWHITE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -945,19 +945,19 @@ def cdlgapsidesidewhite(
 def cdlgravestonedoji(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of gravestone doji for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -966,7 +966,7 @@ def cdlgravestonedoji(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLGRAVESTONEDOJI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -987,19 +987,19 @@ def cdlgravestonedoji(
 def cdlhammer(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of hammer for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1008,7 +1008,7 @@ def cdlhammer(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHAMMER(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1029,19 +1029,19 @@ def cdlhammer(
 def cdlhangingman(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of hanging man for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1050,7 +1050,7 @@ def cdlhangingman(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHANGINGMAN(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1071,19 +1071,19 @@ def cdlhangingman(
 def cdlharami(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of harami for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1092,7 +1092,7 @@ def cdlharami(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHARAMI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1113,19 +1113,19 @@ def cdlharami(
 def cdlharamicross(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of harami cross for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1134,7 +1134,7 @@ def cdlharamicross(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHARAMICROSS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1155,19 +1155,19 @@ def cdlharamicross(
 def cdlhighwave(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of high-wave candle for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1176,7 +1176,7 @@ def cdlhighwave(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHIGHWAVE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1197,19 +1197,19 @@ def cdlhighwave(
 def cdlhikkake(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of hikkake pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1218,7 +1218,7 @@ def cdlhikkake(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHIKKAKE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1239,19 +1239,19 @@ def cdlhikkake(
 def cdlhikkakemod(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of modified hikkake pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1260,7 +1260,7 @@ def cdlhikkakemod(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHIKKAKEMOD(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1281,19 +1281,19 @@ def cdlhikkakemod(
 def cdlhomingpigeon(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of homing pigeon for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1302,7 +1302,7 @@ def cdlhomingpigeon(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLHOMINGPIGEON(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1323,19 +1323,19 @@ def cdlhomingpigeon(
 def cdlidentical3crows(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of identical three crows for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1344,7 +1344,7 @@ def cdlidentical3crows(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLIDENTICAL3CROWS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1365,19 +1365,19 @@ def cdlidentical3crows(
 def cdlinneck(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of in-neck pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1386,7 +1386,7 @@ def cdlinneck(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLINNECK(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1407,19 +1407,19 @@ def cdlinneck(
 def cdlinvertedhammer(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of inverted hammer for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1428,7 +1428,7 @@ def cdlinvertedhammer(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLINVERTEDHAMMER(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1449,19 +1449,19 @@ def cdlinvertedhammer(
 def cdlkicking(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of kicking for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1470,7 +1470,7 @@ def cdlkicking(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLKICKING(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1491,19 +1491,19 @@ def cdlkicking(
 def cdlkickingbylength(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of kicking bull/bear determing by the longer marubozu for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1512,7 +1512,7 @@ def cdlkickingbylength(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLKICKINGBYLENGTH(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1533,19 +1533,19 @@ def cdlkickingbylength(
 def cdlladderbottom(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of ladder bottom for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1554,7 +1554,7 @@ def cdlladderbottom(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLLADDERBOTTOM(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1575,19 +1575,19 @@ def cdlladderbottom(
 def cdllongleggeddoji(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of long legged doji for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1596,7 +1596,7 @@ def cdllongleggeddoji(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLLONGLEGGEDDOJI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1617,19 +1617,19 @@ def cdllongleggeddoji(
 def cdllongline(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of long line candle for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1638,7 +1638,7 @@ def cdllongline(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLLONGLINE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1659,19 +1659,19 @@ def cdllongline(
 def cdlmarubozu(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of marubozu for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1680,7 +1680,7 @@ def cdlmarubozu(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLMARUBOZU(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1701,19 +1701,19 @@ def cdlmarubozu(
 def cdlmatchinglow(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of matching low for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1722,7 +1722,7 @@ def cdlmatchinglow(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLMATCHINGLOW(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1743,7 +1743,7 @@ def cdlmatchinglow(
 def cdlmathold(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -1751,12 +1751,12 @@ def cdlmathold(
     penetration=0,
 ):
     """This will return a dataframe of mat hold for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1766,7 +1766,7 @@ def cdlmathold(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLMATHOLD(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1788,7 +1788,7 @@ def cdlmathold(
 def cdlmorningdojistar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -1796,12 +1796,12 @@ def cdlmorningdojistar(
     penetration=0,
 ):
     """This will return a dataframe of morning doji star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1811,7 +1811,7 @@ def cdlmorningdojistar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLMORNINGDOJISTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1833,7 +1833,7 @@ def cdlmorningdojistar(
 def cdlmorningstar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
@@ -1841,12 +1841,12 @@ def cdlmorningstar(
     penetration=0,
 ):
     """This will return a dataframe of morning star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1856,7 +1856,7 @@ def cdlmorningstar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLMORNINGSTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1878,19 +1878,19 @@ def cdlmorningstar(
 def cdlonneck(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of on-neck pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1899,7 +1899,7 @@ def cdlonneck(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLONNECK(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1920,19 +1920,19 @@ def cdlonneck(
 def cdlpiercing(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of piercing pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1941,7 +1941,7 @@ def cdlpiercing(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLPIERCING(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -1962,19 +1962,19 @@ def cdlpiercing(
 def cdlrickshawman(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of rickshaw man for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -1983,7 +1983,7 @@ def cdlrickshawman(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLRICKSHAWMAN(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2004,19 +2004,19 @@ def cdlrickshawman(
 def cdlrisefall3methods(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of rising/falling three methods for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2025,7 +2025,7 @@ def cdlrisefall3methods(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLRISEFALL3METHODS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2046,19 +2046,19 @@ def cdlrisefall3methods(
 def cdlseparatinglines(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of separating lines for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2067,7 +2067,7 @@ def cdlseparatinglines(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSEPARATINGLINES(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2088,19 +2088,19 @@ def cdlseparatinglines(
 def cdlshootingstar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of shooting star for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2109,7 +2109,7 @@ def cdlshootingstar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSHOOTINGSTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2130,19 +2130,19 @@ def cdlshootingstar(
 def cdlshortline(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of short line candle for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2151,7 +2151,7 @@ def cdlshortline(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSHORTLINE(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2172,19 +2172,19 @@ def cdlshortline(
 def cdlspinningtop(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of spinning top for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2193,7 +2193,7 @@ def cdlspinningtop(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSPINNINGTOP(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2214,19 +2214,19 @@ def cdlspinningtop(
 def cdlstalledpattern(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of stalled pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2235,7 +2235,7 @@ def cdlstalledpattern(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSTALLEDPATTERN(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2256,19 +2256,19 @@ def cdlstalledpattern(
 def cdlsticksandwich(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of stick sandwich for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2277,7 +2277,7 @@ def cdlsticksandwich(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLSTICKSANDWICH(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2298,19 +2298,19 @@ def cdlsticksandwich(
 def cdltakuri(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of takuri dragonfly doji with very long lower shadow for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2319,7 +2319,7 @@ def cdltakuri(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLTAKURI(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2340,19 +2340,19 @@ def cdltakuri(
 def cdltasukigap(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of tasuki gap for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2361,7 +2361,7 @@ def cdltasukigap(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLTASUKIGAP(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2382,19 +2382,19 @@ def cdltasukigap(
 def cdlthrusting(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of thrusting pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2403,7 +2403,7 @@ def cdlthrusting(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLTHRUSTING(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2424,19 +2424,19 @@ def cdlthrusting(
 def cdltristar(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of tristar pattern for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2445,7 +2445,7 @@ def cdltristar(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLTRISTAR(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2466,19 +2466,19 @@ def cdltristar(
 def cdlunique3river(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of unique 3 river for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2487,7 +2487,7 @@ def cdlunique3river(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLUNIQUE3RIVER(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2508,19 +2508,19 @@ def cdlunique3river(
 def cdlupsidegap2crows(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of upside gap two crows for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2529,7 +2529,7 @@ def cdlupsidegap2crows(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLUPSIDEGAP2CROWS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),
@@ -2550,19 +2550,19 @@ def cdlupsidegap2crows(
 def cdlxsidegap3methods(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     opencol="open",
     highcol="high",
     lowcol="low",
     closecol="close",
 ):
     """This will return a dataframe of upside/downside gap three methods for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         opencol (string): column to use to calculate
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
@@ -2571,7 +2571,7 @@ def cdlxsidegap3methods(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     val = t.CDLXSIDEGAP3METHODS(
         df[opencol].values.astype(float),
         df[highcol].values.astype(float),

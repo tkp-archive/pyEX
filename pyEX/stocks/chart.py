@@ -11,7 +11,7 @@ import pandas as pd
 
 from ..common import (
     _EST,
-    _TIMEFRAME_CHART,
+    _RANGE_CHART,
     PyEXception,
     _expire,
     _get,
@@ -26,7 +26,7 @@ from ..common import (
 @_expire(hour=4, tz=_EST)
 def chart(
     symbol,
-    timeframe="1m",
+    range="1m",
     date=None,
     exactDate=None,
     last=-1,
@@ -54,7 +54,7 @@ def chart(
 
     Args:
         symbol (str): Ticker to request
-        timeframe (str): Timeframe to request e.g. 1m
+        range (str): Range to request e.g. 1m
         date (datetime): date, if requesting intraday
         exactDate (str): Same as `date`, takes precedence
         last (int): If passed, chart data will return the last N elements from the time period defined by the range parameter
@@ -77,16 +77,16 @@ def chart(
     """
     _raiseIfNotStr(symbol)
 
-    base_url = "stock/{}/chart/{}?".format(_quoteSymbols(symbol), timeframe)
+    base_url = "stock/{}/chart/{}?".format(_quoteSymbols(symbol), range)
 
     # exactDate takes precedence
     date = exactDate or date
     if date:
         date = _strOrDate(date)
 
-    if timeframe is not None and timeframe != "1d":
-        if timeframe not in _TIMEFRAME_CHART:
-            raise PyEXception("Range must be in {}".format(_TIMEFRAME_CHART))
+    if range is not None and range != "1d":
+        if range not in _RANGE_CHART:
+            raise PyEXception("Range must be in {}".format(_RANGE_CHART))
 
     # Assemble params
     params = {}
@@ -156,7 +156,7 @@ def _chartToDF(c):
 @wraps(chart)
 def chartDF(
     symbol,
-    timeframe="1m",
+    range="1m",
     date=None,
     exactDate=None,
     last=-1,
@@ -175,7 +175,7 @@ def chartDF(
 ):
     c = chart(
         symbol=symbol,
-        timeframe=timeframe,
+        range=range,
         date=date,
         exactDate=exactDate,
         last=last,
@@ -193,7 +193,7 @@ def chartDF(
         format=format,
     )
     df = _toDatetime(pd.DataFrame(c))
-    if timeframe is not None and timeframe != "1d":
+    if range is not None and range != "1d":
         _reindex(df, "date")
     else:
         if not df.empty and "date" in df.columns and "minute" in df.columns:

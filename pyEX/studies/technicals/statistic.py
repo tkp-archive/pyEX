@@ -9,14 +9,14 @@ import pandas as pd
 import talib as t
 
 
-def beta(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
+def beta(client, symbol, range="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of beta for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         period (int): period to calculate adx across
@@ -24,7 +24,7 @@ def beta(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     beta = t.BETA(
         df[highcol].values.astype(float), df[lowcol].values.astype(float), period
     )
@@ -33,14 +33,14 @@ def beta(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14
     )
 
 
-def correl(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=14):
+def correl(client, symbol, range="6m", highcol="high", lowcol="low", period=14):
     """This will return a dataframe of Pearson's Correlation Coefficient(r) for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         period (int): period to calculate adx across
@@ -48,7 +48,7 @@ def correl(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     correl = t.CORREL(
         df[highcol].values.astype(float), df[lowcol].values.astype(float), period
     )
@@ -57,92 +57,92 @@ def correl(client, symbol, timeframe="6m", highcol="high", lowcol="low", period=
     )
 
 
-def linearreg(client, symbol, timeframe="6m", closecol="close", period=14):
+def linearreg(client, symbol, range="6m", closecol="close", period=14):
     """This will return a dataframe of linear regression for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     linearreg = t.LINEARREG(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg": linearreg})
 
 
-def linearreg_angle(client, symbol, timeframe="6m", closecol="close", period=14):
+def linearreg_angle(client, symbol, range="6m", closecol="close", period=14):
     """This will return a dataframe of linear regression angle for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     linearreg = t.LINEARREG_ANGLE(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg_angle": linearreg})
 
 
-def linearreg_intercept(client, symbol, timeframe="6m", closecol="close", period=14):
+def linearreg_intercept(client, symbol, range="6m", closecol="close", period=14):
     """This will return a dataframe of linear regression intercept for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     linearreg = t.LINEARREG_INTERCEPT(df[closecol].values.astype(float), period)
     return pd.DataFrame(
         {closecol: df[closecol].values, "lineearreg_intercept": linearreg}
     )
 
 
-def linearreg_slope(client, symbol, timeframe="6m", closecol="close", period=14):
+def linearreg_slope(client, symbol, range="6m", closecol="close", period=14):
     """This will return a dataframe of linear regression slope for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     linearreg = t.LINEARREG_SLOPE(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "lineearreg_slope": linearreg})
 
 
-def stddev(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
+def stddev(client, symbol, range="6m", closecol="close", period=14, nbdev=1):
     """This will return a dataframe of standard deviation for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
         nbdev (int):
@@ -150,38 +150,38 @@ def stddev(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1)
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     stddev = t.STDDEV(df[closecol].values.astype(float), period, nbdev)
     return pd.DataFrame({closecol: df[closecol].values, "stddev": stddev})
 
 
-def tsf(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
+def tsf(client, symbol, range="6m", closecol="close", period=14, nbdev=1):
     """This will return a dataframe of standard deviation for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
 
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     tsf = t.TSF(df[closecol].values.astype(float), period)
     return pd.DataFrame({closecol: df[closecol].values, "tsf": tsf})
 
 
-def var(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
+def var(client, symbol, range="6m", closecol="close", period=14, nbdev=1):
     """This will return a dataframe of var for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         closecol (string): column to use to calculate
         period (int): period to calculate adx across
         nbdev (int):
@@ -189,6 +189,6 @@ def var(client, symbol, timeframe="6m", closecol="close", period=14, nbdev=1):
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     var = t.VAR(df[closecol].values.astype(float), period, nbdev)
     return pd.DataFrame({closecol: df[closecol].values, "var": var})

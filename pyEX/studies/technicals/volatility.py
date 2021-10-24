@@ -12,19 +12,19 @@ import talib as t
 def atr(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     closecol="close",
     period=14,
 ):
     """This will return a dataframe of average true range for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
@@ -33,7 +33,7 @@ def atr(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     atr = t.ATR(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -53,19 +53,19 @@ def atr(
 def natr(
     client,
     symbol,
-    timeframe="6m",
+    range="6m",
     highcol="high",
     lowcol="low",
     closecol="close",
     period=14,
 ):
     """This will return a dataframe of normalized average true range for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
@@ -74,7 +74,7 @@ def natr(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     natr = t.NATR(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
@@ -91,16 +91,14 @@ def natr(
     )
 
 
-def trange(
-    client, symbol, timeframe="6m", highcol="high", lowcol="low", closecol="close"
-):
+def trange(client, symbol, range="6m", highcol="high", lowcol="low", closecol="close"):
     """This will return a dataframe of true range for the given symbol across
-    the given timeframe
+    the given range
 
     Args:
         client (pyEX.Client): Client
         symbol (string): Ticker
-        timeframe (string): timeframe to use, for pyEX.chart
+        range (string): range to use, for pyEX.chart
         highcol (string): column to use to calculate
         lowcol (string): column to use to calculate
         closecol (string): column to use to calculate
@@ -108,7 +106,7 @@ def trange(
     Returns:
         DataFrame: result
     """
-    df = client.chartDF(symbol, timeframe)
+    df = client.chartDF(symbol, range)
     trange = t.TRANGE(
         df[highcol].values.astype(float),
         df[lowcol].values.astype(float),
