@@ -6,7 +6,7 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from enum import Enum
-from functools import lru_cache
+from functools import lru_cache, wraps
 
 from ..common import _expire, _UTC, _timeseriesWrapper
 from ..timeseries import timeSeries, timeSeriesDF, timeSeriesAsync
