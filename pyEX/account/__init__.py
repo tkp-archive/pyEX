@@ -48,7 +48,9 @@ def messageBudget(totalMessages=None, token="", version="stable", format="json")
 
 
 @wraps(messageBudget)
-def messageBudgetAsync(totalMessages=None, token="", version="stable", format="json"):
+async def messageBudgetAsync(
+    totalMessages=None, token="", version="stable", format="json"
+):
     _requireSecret(token)
     if not isinstance(totalMessages, int):
         raise PyEXception(
@@ -56,7 +58,7 @@ def messageBudgetAsync(totalMessages=None, token="", version="stable", format="j
                 type(totalMessages), totalMessages
             )
         )
-    return _postAsync(
+    return await _postAsync(
         "account/messagebudget?totalMessages={}".format(totalMessages),
         token=token,
         version=version,
@@ -82,9 +84,11 @@ def metadata(token="", version="stable", format="json"):
 
 
 @wraps(metadata)
-def metadataAsync(token="", version="stable", format="json"):
+async def metadataAsync(token="", version="stable", format="json"):
     _requireSecret(token)
-    return _getAsync("account/metadata", token=token, version=version, format=format)
+    return await _getAsync(
+        "account/metadata", token=token, version=version, format=format
+    )
 
 
 @wraps(metadata)
@@ -115,11 +119,11 @@ def payAsYouGo(allow=False, token="", version="stable", format="json"):
 
 
 @wraps(payAsYouGo)
-def payAsYouGoAsync(allow=False, token="", version="stable", format="json"):
+async def payAsYouGoAsync(allow=False, token="", version="stable", format="json"):
     _requireSecret(token)
     if not isinstance(allow, bool):
         raise PyEXception("`allow` must be bool, got {}({})".format(type(allow), allow))
-    return _postAsync(
+    return await _postAsync(
         "account/messagebudget?allow={}".format(allow),
         token=token,
         version=version,
@@ -152,7 +156,7 @@ def usage(type=None, token="", version="stable", format="json"):
 
 
 @wraps(usage)
-def usageAsync(type=None, token="", version="stable", format="json"):
+async def usageAsync(type=None, token="", version="stable", format="json"):
     _requireSecret(token)
     if type is not None and type and type not in _USAGE_TYPES:
         raise PyEXception("Type must be in (None, '') or {}".format(_USAGE_TYPES))
@@ -160,7 +164,7 @@ def usageAsync(type=None, token="", version="stable", format="json"):
         return _getAsync(
             "account/usage/{}".format(type), token=token, version=version, format=format
         )
-    return _getAsync("account/usage", token=token, version=version, format=format)
+    return await _getAsync("account/usage", token=token, version=version, format=format)
 
 
 @wraps(usage)
@@ -185,8 +189,8 @@ def status(token="", version="stable", format="json"):
 
 
 @wraps(status)
-def statusAsync(token="", version="stable", format="json"):
-    return _getAsync("status", token=token, version=version, format=format)
+async def statusAsync(token="", version="stable", format="json"):
+    return await _getAsync("status", token=token, version=version, format=format)
 
 
 @wraps(status)
