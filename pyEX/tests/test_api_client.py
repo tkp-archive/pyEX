@@ -476,6 +476,7 @@ class TestPyEXClientAPI:
 
         for meth in (
             "sentiment",
+            "sentimentAsync",
             "sentimentDF",
         ):
             assert hasattr(self.c, meth)
@@ -754,24 +755,34 @@ class TestPyEXClientAPI:
 
         for meth in (
             "brent",
+            "brentAsync",
             "brentDF",
             "diesel",
+            "dieselAsync",
             "dieselDF",
             "gasmid",
+            "gasmidAsync",
             "gasmidDF",
             "gasprm",
+            "gasprmAsync",
             "gasprmDF",
             "gasreg",
+            "gasregAsync",
             "gasregDF",
             "heatoil",
+            "heatoilAsync",
             "heatoilDF",
             "jet",
+            "jetAsync",
             "jetDF",
             "natgas",
+            "natgasAsync",
             "natgasDF",
             "propane",
+            "propaneAsync",
             "propaneDF",
             "wti",
+            "wtiAsync",
             "wtiDF",
         ):
             assert hasattr(self.c, meth)
