@@ -527,8 +527,6 @@ Currently, the following methods are implemented:
 
 ### Fraud Factors
 
-- [similarityIndex](https://iexcloud.io/docs/api/#similiarity-index)
-- [similarityIndexDF](https://iexcloud.io/docs/api/#similiarity-index)
 - [nonTimelyFilings](https://iexcloud.io/docs/api/#non-timely-filings)
 - [nonTimelyFilingsDF](https://iexcloud.io/docs/api/#non-timely-filings)
 

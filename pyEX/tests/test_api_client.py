@@ -622,8 +622,6 @@ class TestPyEXClientAPI:
             "workshopsDF",
             "nonTimelyFilings",
             "nonTimelyFilingsDF",
-            "similarityIndex",
-            "similarityIndexDF",
             "cam1",
             "cam1DF",
             "esgCFPBComplaints",

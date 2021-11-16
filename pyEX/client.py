@@ -203,8 +203,6 @@ from .premium import (
     sevenDaySentimentBrainDF,
     shareholderMeetingsWallStreetHorizon,
     shareholderMeetingsWallStreetHorizonDF,
-    similarityIndexFraudFactors,
-    similarityIndexFraudFactorsDF,
     socialSentimentStockTwits,
     socialSentimentStockTwitsDF,
     stockResearchReportValuEngine,
@@ -1329,8 +1327,6 @@ _INCLUDE_FUNCTIONS_PREMIUM = [
     # Fraud Factors
     ("nonTimelyFilings", nonTimelyFilingsFraudFactors),
     ("nonTimelyFilingsDF", nonTimelyFilingsFraudFactorsDF),
-    ("similarityIndex", similarityIndexFraudFactors),
-    ("similarityIndexDF", similarityIndexFraudFactorsDF),
     # Extract Alpha
     ("cam1", cam1ExtractAlpha),
     ("cam1DF", cam1ExtractAlphaDF),

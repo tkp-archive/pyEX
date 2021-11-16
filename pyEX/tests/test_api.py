@@ -700,8 +700,6 @@ class TestPyEXAPI:
             "shareholderMeetingsWallStreetHorizonDF",
             "shortInterest",
             "shortInterestDF",
-            "similarityIndexFraudFactors",
-            "similarityIndexFraudFactorsDF",
             "sin",
             "sinh",
             "sixMonth",
