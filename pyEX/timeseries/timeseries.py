@@ -50,6 +50,7 @@ def _timeSeriesURL(
     range=None,
     calendar=False,
     limit=1,
+    offset=0,
     subattribute="",
     dateField=None,
     from_=None,
@@ -81,6 +82,9 @@ def _timeSeriesURL(
     if not last and (not from_ or not to_):
         base_url += "limit={}&".format(str(limit))
 
+    if offset > 0:
+        base_url += "offset={}&".format(offset)
+
     if subattribute:
         if isinstance(subattribute, dict):
             # dict mapping key to required equal value, e.g. {"A": 1} -> A|1
@@ -94,19 +98,25 @@ def _timeSeriesURL(
                 for v1, v2, v3 in subattribute
             )
         base_url += "subattribute={}&".format(subattribute)
+
     if dateField:
         base_url += "dateField={}&".format(dateField)
 
     if from_:
         base_url += "from={}&".format(_strOrDate(from_))
+
     if to_:
         base_url += "to={}&".format(_strOrDate(to_))
+
     if on:
         base_url += "on={}&".format(_strOrDate(on))
+
     if last:
         base_url += "last={}&".format(str(last))
+
     if first:
         base_url += "first={}&".format(str(first))
+
     if sort:
         if sort.lower() not in (
             "asc",
@@ -114,6 +124,7 @@ def _timeSeriesURL(
         ):
             raise PyEXception("Sort must be in (asc, desc), got: {}".format(sort))
         base_url += "sort={}&".format(sort)
+
     if interval:
         base_url += "interval={}&".format(int(interval))
 
