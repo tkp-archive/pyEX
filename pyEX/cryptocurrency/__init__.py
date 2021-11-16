@@ -7,9 +7,12 @@
 #
 from .cryptocurrency import (
     cryptoBook,
+    cryptoBookAsync,
     cryptoBookDF,
     cryptoPrice,
+    cryptoPriceAsync,
     cryptoPriceDF,
     cryptoQuote,
+    cryptoQuoteAsync,
     cryptoQuoteDF,
 )
