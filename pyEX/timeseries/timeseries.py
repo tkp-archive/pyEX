@@ -65,16 +65,13 @@ def _timeSeriesURL(
 ):
     base_url = "{}/{}".format(overrideBase or "time-series", id)
     if key:
-        key = _quoteSymbols(key)
-        base_url += "/{}".format(key)
+        base_url += "/{}".format(_quoteSymbols(key))
     if subkey:
-        subkey = _quoteSymbols(subkey)
-        base_url += "/{}".format(subkey)
+        base_url += "/{}".format(_quoteSymbols(subkey))
     base_url += "?"
 
     if range:
-        range = _dateRange(range)
-        base_url += "range={}&".format(range)
+        base_url += "range={}&".format(_dateRange(range))
 
     if calendar:
         base_url += "calendar={}&".format(str(calendar))

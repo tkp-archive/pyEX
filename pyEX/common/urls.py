@@ -91,6 +91,40 @@ def _post(
     return _postIEXCloud(url, data, json, token, version, token_in_params, format)
 
 
+def _put(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _putIEXCloudSandbox(
+            url, data, json, token, version, token_in_params, format
+        )
+    return _putIEXCloud(url, data, json, token, version, token_in_params, format)
+
+
+def _patch(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _patchIEXCloudSandbox(
+            url, data, json, token, version, token_in_params, format
+        )
+    return _patchIEXCloud(url, data, json, token, version, token_in_params, format)
+
+
 def _postAsync(
     url,
     data=None,
@@ -106,6 +140,40 @@ def _postAsync(
             url, data, json, token, version, token_in_params, format
         )
     return _postIEXCloudAsync(url, data, json, token, version, token_in_params, format)
+
+
+def _putAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _putIEXCloudSandboxAsync(
+            url, data, json, token, version, token_in_params, format
+        )
+    return _putIEXCloudAsync(url, data, json, token, version, token_in_params, format)
+
+
+def _patchAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _patchIEXCloudSandboxAsync(
+            url, data, json, token, version, token_in_params, format
+        )
+    return _patchIEXCloudAsync(url, data, json, token, version, token_in_params, format)
 
 
 def _delete(url, token="", version="stable", format="json"):
@@ -401,6 +469,54 @@ async def _postIEXCloudAsync(
         token_in_params,
         format,
         "post",
+    )
+
+
+async def _putIEXCloudAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    filter="",
+    token_in_params=True,
+    format="json",
+):
+    return await _pppIEXCloudBaseAsync(
+        _URL_PREFIX_CLOUD,
+        url,
+        data,
+        json,
+        token,
+        version,
+        filter,
+        token_in_params,
+        format,
+        "put",
+    )
+
+
+async def _patchIEXCloudAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    filter="",
+    token_in_params=True,
+    format="json",
+):
+    return await _pppIEXCloudBaseAsync(
+        _URL_PREFIX_CLOUD,
+        url,
+        data,
+        json,
+        token,
+        version,
+        filter,
+        token_in_params,
+        format,
+        "patch",
     )
 
 
