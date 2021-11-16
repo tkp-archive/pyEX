@@ -458,10 +458,15 @@ class TestPyEXClientAPI:
     def test_all_account(self):
         for meth in (
             "messageBudget",
+            "messageBudgetAsync",
             "metadata",
+            "metadataAsync",
             "metadataDF",
             "usage",
+            "usageAsync",
             "usageDF",
+            "payAsYouGo",
+            "payAsYouGoAsync",
         ):
             assert hasattr(self.c, meth)
 

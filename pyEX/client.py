@@ -10,7 +10,20 @@ import types
 from functools import partial, wraps
 import warnings
 
-from .account import messageBudget, metadata, metadataDF, usage, usageDF
+from .account import (
+    messageBudget,
+    messageBudgetAsync,
+    metadata,
+    metadataAsync,
+    metadataDF,
+    usage,
+    usageAsync,
+    usageDF,
+    status,
+    statusAsync,
+    payAsYouGo,
+    payAsYouGoAsync,
+)
 from .alternative import sentiment, sentimentDF
 from .commodities import (
     CommoditiesPoints,
@@ -1090,10 +1103,17 @@ _INCLUDE_FUNCTIONS_STREAMING = [
 _INCLUDE_FUNCTIONS_ACCOUNT = [
     # Account
     ("messageBudget", messageBudget),
+    ("messageBudgetAsync", messageBudgetAsync),
     ("metadata", metadata),
+    ("metadataAsync", metadataAsync),
     ("metadataDF", metadataDF),
     ("usage", usage),
+    ("usageAsync", usageAsync),
     ("usageDF", usageDF),
+    ("payAsYouGo", payAsYouGo),
+    ("payAsYouGoAsync", payAsYouGoAsync),
+    ("status", status),
+    ("statusAsync", statusAsync),
 ]
 
 _INCLUDE_FUNCTIONS_ALTERNATIVE = [
