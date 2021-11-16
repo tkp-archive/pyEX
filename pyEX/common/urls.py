@@ -90,6 +90,7 @@ def _post(
         )
     return _postIEXCloud(url, data, json, token, version, token_in_params, format)
 
+
 def _postAsync(
     url,
     data=None,
@@ -363,6 +364,7 @@ def _postIEXCloudSandbox(
         token_in_params,
         format,
     )
+
 
 def _postIEXCloudSandboxAsync(
     url,
