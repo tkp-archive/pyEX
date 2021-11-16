@@ -14,6 +14,8 @@ from ..common import (
     PyEXception,
     _get,
     _post,
+    _getAsync,
+    _postAsync,
     _requireSecret,
     json_normalize,
 )
@@ -45,6 +47,23 @@ def messageBudget(totalMessages=None, token="", version="stable", format="json")
     )
 
 
+@wraps(messageBudget)
+def messageBudgetAsync(totalMessages=None, token="", version="stable", format="json"):
+    _requireSecret(token)
+    if not isinstance(totalMessages, int):
+        raise PyEXception(
+            "`totalMessages` must be integer, got {}({})".format(
+                type(totalMessages), totalMessages
+            )
+        )
+    return _postAsync(
+        "account/messagebudget?totalMessages={}".format(totalMessages),
+        token=token,
+        version=version,
+        format=format,
+    )
+
+
 def metadata(token="", version="stable", format="json"):
     """Used to retrieve account details such as current tier, payment status, message quote usage, etc.
 
@@ -60,6 +79,12 @@ def metadata(token="", version="stable", format="json"):
     """
     _requireSecret(token)
     return _get("account/metadata", token=token, version=version, format=format)
+
+
+@wraps(metadata)
+def metadataAsync(token="", version="stable", format="json"):
+    _requireSecret(token)
+    return _getAsync("account/metadata", token=token, version=version, format=format)
 
 
 @wraps(metadata)
@@ -82,6 +107,19 @@ def payAsYouGo(allow=False, token="", version="stable", format="json"):
     if not isinstance(allow, bool):
         raise PyEXception("`allow` must be bool, got {}({})".format(type(allow), allow))
     return _post(
+        "account/messagebudget?allow={}".format(allow),
+        token=token,
+        version=version,
+        format=format,
+    )
+
+
+@wraps(payAsYouGo)
+def payAsYouGoAsync(allow=False, token="", version="stable", format="json"):
+    _requireSecret(token)
+    if not isinstance(allow, bool):
+        raise PyEXception("`allow` must be bool, got {}({})".format(type(allow), allow))
+    return _postAsync(
         "account/messagebudget?allow={}".format(allow),
         token=token,
         version=version,
@@ -114,6 +152,18 @@ def usage(type=None, token="", version="stable", format="json"):
 
 
 @wraps(usage)
+def usageAsync(type=None, token="", version="stable", format="json"):
+    _requireSecret(token)
+    if type is not None and type and type not in _USAGE_TYPES:
+        raise PyEXception("Type must be in (None, '') or {}".format(_USAGE_TYPES))
+    if type:
+        return _getAsync(
+            "account/usage/{}".format(type), token=token, version=version, format=format
+        )
+    return _getAsync("account/usage", token=token, version=version, format=format)
+
+
+@wraps(usage)
 def usageDF(*args, **kwargs):
     return json_normalize(usage(*args, **kwargs))
 
@@ -132,6 +182,11 @@ def status(token="", version="stable", format="json"):
         dict or DataFrame: result
     """
     return _get("status", token=token, version=version, format=format)
+
+
+@wraps(status)
+def statusAsync(token="", version="stable", format="json"):
+    return _getAsync("status", token=token, version=version, format=format)
 
 
 @wraps(status)

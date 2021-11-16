@@ -90,6 +90,22 @@ def _post(
         )
     return _postIEXCloud(url, data, json, token, version, token_in_params, format)
 
+def _postAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    token = token or os.environ.get("IEX_TOKEN")
+    if version == "sandbox":
+        return _postIEXCloudSandboxAsync(
+            url, data, json, token, version, token_in_params, format
+        )
+    return _postIEXCloudAsync(url, data, json, token, version, token_in_params, format)
+
 
 def _delete(url, token="", version="stable", format="json"):
     token = token or os.environ.get("IEX_TOKEN")
@@ -338,6 +354,27 @@ def _postIEXCloudSandbox(
 ):
     """for iex cloud"""
     return _postIEXCloudBase(
+        _URL_PREFIX_CLOUD_SANDBOX,
+        url,
+        data,
+        json,
+        token,
+        "stable",
+        token_in_params,
+        format,
+    )
+
+def _postIEXCloudSandboxAsync(
+    url,
+    data=None,
+    json=None,
+    token="",
+    version="stable",
+    token_in_params=True,
+    format="json",
+):
+    """for iex cloud"""
+    return _postIEXCloudAsyncBase(
         _URL_PREFIX_CLOUD_SANDBOX,
         url,
         data,

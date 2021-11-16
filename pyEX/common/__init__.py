@@ -42,6 +42,7 @@ from .urls import (
     _getAsync,
     _getIEXCloud,
     _post,
+    _postAsync,
     _stream,
     _streamSSE,
     _streamSSEAsync,
