@@ -533,10 +533,13 @@ class TestPyEXClientAPI:
 
         for meth in (
             "cryptoBook",
+            "cryptoBookAsync",
             "cryptoBookDF",
             "cryptoQuote",
+            "cryptoQuoteAsync",
             "cryptoQuoteDF",
             "cryptoPrice",
+            "cryptoPriceAsync",
             "cryptoPriceDF",
         ):
             assert hasattr(self.c, meth)

@@ -9,7 +9,7 @@ from functools import wraps
 
 import pandas as pd
 
-from ..common import _get
+from ..common import _get, _getAsync
 
 
 def cryptoBook(symbol, token="", version="stable", filter="", format="json"):
@@ -42,6 +42,17 @@ def cryptoBookDF(*args, **kwargs):
     return pd.DataFrame(cryptoBook(*args, **kwargs))
 
 
+@wraps(cryptoBook)
+async def cryptoBookAsync(symbol, token="", version="stable", filter="", format="json"):
+    return _getAsync(
+        "/crypto/{symbol}/book".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
+
+
 def cryptoPrice(symbol, token="", version="stable", filter="", format="json"):
     """This returns the price for a specified cryptocurrency.
 
@@ -70,6 +81,19 @@ def cryptoPrice(symbol, token="", version="stable", filter="", format="json"):
 @wraps(cryptoPrice)
 def cryptoPriceDF(*args, **kwargs):
     return pd.DataFrame(cryptoPrice(*args, **kwargs))
+
+
+@wraps(cryptoPrice)
+async def cryptoPriceAsync(
+    symbol, token="", version="stable", filter="", format="json"
+):
+    return await _getAsync(
+        "/crypto/{symbol}/price".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
 
 
 def cryptoQuote(symbol, token="", version="stable", filter="", format="json"):
@@ -101,3 +125,16 @@ def cryptoQuote(symbol, token="", version="stable", filter="", format="json"):
 @wraps(cryptoQuote)
 def cryptoQuoteDF(*args, **kwargs):
     return pd.DataFrame(cryptoQuote(*args, **kwargs))
+
+
+@wraps(cryptoQuote)
+async def cryptoQuoteAsync(
+    symbol, token="", version="stable", filter="", format="json"
+):
+    return await _getAsync(
+        "/crypto/{symbol}/quote".format(symbol=symbol),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
