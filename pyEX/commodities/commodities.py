@@ -6,10 +6,10 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from enum import Enum
-from functools import lru_cache
+from functools import lru_cache, wraps
 
 from ..common import _expire, _UTC, _timeseriesWrapper
-from ..timeseries import timeSeries, timeSeriesDF
+from ..timeseries import timeSeries, timeSeriesDF, timeSeriesAsync
 
 
 class CommoditiesPoints(Enum):
@@ -78,24 +78,27 @@ def wti(token="", version="stable", filter="", format="json", **timeseries_kwarg
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(wti)
 def wtiDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DCOILWTICO",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(wti)
+async def wtiAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DCOILWTICO",
         token=token,
@@ -136,24 +139,27 @@ def brent(token="", version="stable", filter="", format="json", **timeseries_kwa
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(brent)
 def brentDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DCOILBRENTEU",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(brent)
+async def brentAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DCOILBRENTEU",
         token=token,
@@ -194,24 +200,27 @@ def natgas(token="", version="stable", filter="", format="json", **timeseries_kw
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(natgas)
 def natgasDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DHHNGSP",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(natgas)
+async def natgasAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DHHNGSP",
         token=token,
@@ -252,26 +261,29 @@ def heatoil(token="", version="stable", filter="", format="json", **timeseries_k
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(heatoil)
 def heatoilDF(
     token="", version="stable", filter="", format="json", **timeseries_kwargs
 ):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DHOILNYH",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(heatoil)
+async def heatoilAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DHOILNYH",
         token=token,
@@ -312,24 +324,27 @@ def jet(token="", version="stable", filter="", format="json", **timeseries_kwarg
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(jet)
 def jetDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DJFUELUSGULF",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(jet)
+async def jetAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DJFUELUSGULF",
         token=token,
@@ -370,24 +385,27 @@ def diesel(token="", version="stable", filter="", format="json", **timeseries_kw
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(diesel)
 def dieselDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="GASDESW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(diesel)
+async def dieselAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="GASDESW",
         token=token,
@@ -428,24 +446,27 @@ def gasreg(token="", version="stable", filter="", format="json", **timeseries_kw
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(gasreg)
 def gasregDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="GASREGCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(gasreg)
+async def gasregAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="GASREGCOVW",
         token=token,
@@ -486,24 +507,27 @@ def gasmid(token="", version="stable", filter="", format="json", **timeseries_kw
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(gasmid)
 def gasmidDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="GASMIDCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(gasmid)
+async def gasmidAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return timeSeriesAsync(
         id="ENERGY",
         key="GASMIDCOVW",
         token=token,
@@ -544,24 +568,27 @@ def gasprm(token="", version="stable", filter="", format="json", **timeseries_kw
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(gasprm)
 def gasprmDF(token="", version="stable", filter="", format="json", **timeseries_kwargs):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="GASPRMCOVW",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(gasprm)
+async def gasprmAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="GASPRMCOVW",
         token=token,
@@ -602,26 +629,29 @@ def propane(token="", version="stable", filter="", format="json", **timeseries_k
 
 
 @_expire(hour=8, tz=_UTC)
+@wraps(propane)
 def propaneDF(
     token="", version="stable", filter="", format="json", **timeseries_kwargs
 ):
-    """Commodities data
-
-    https://iexcloud.io/docs/api/#commodities
-
-    Args:
-        token (str): Access token
-        version (str): API version
-        filter (str): filters: https://iexcloud.io/docs/api/#filter-results
-        format (str): return format, defaults to json
-
-        Supports all kwargs from `pyEX.timeseries.timeSeries`
-
-    Returns:
-        dict or DataFrame: result
-    """
     _timeseriesWrapper(timeseries_kwargs)
     return timeSeriesDF(
+        id="ENERGY",
+        key="DPROPANEMBTX",
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+        **timeseries_kwargs
+    )
+
+
+@_expire(hour=8, tz=_UTC)
+@wraps(propane)
+async def propaneAsync(
+    token="", version="stable", filter="", format="json", **timeseries_kwargs
+):
+    _timeseriesWrapper(timeseries_kwargs)
+    return await timeSeriesAsync(
         id="ENERGY",
         key="DPROPANEMBTX",
         token=token,

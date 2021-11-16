@@ -24,28 +24,38 @@ from .account import (
     payAsYouGo,
     payAsYouGoAsync,
 )
-from .alternative import sentiment, sentimentDF
+from .alternative import sentiment, sentimentDF, sentimentAsync
 from .commodities import (
     CommoditiesPoints,
     brent,
+    brentAsync,
     brentDF,
     diesel,
+    dieselAsync,
     dieselDF,
     gasmid,
+    gasmidAsync,
     gasmidDF,
     gasprm,
+    gasprmAsync,
     gasprmDF,
     gasreg,
+    gasregAsync,
     gasregDF,
     heatoil,
+    heatoilAsync,
     heatoilDF,
     jet,
+    jetAsync,
     jetDF,
     natgas,
+    natgasAsync,
     natgasDF,
     propane,
+    propaneAsync,
     propaneDF,
     wti,
+    wtiAsync,
     wtiDF,
 )
 from .common import PyEXception, _interval
@@ -1119,6 +1129,7 @@ _INCLUDE_FUNCTIONS_ACCOUNT = [
 _INCLUDE_FUNCTIONS_ALTERNATIVE = [
     # Alternative
     ("sentiment", sentiment),
+    ("sentimentAsync", sentimentAsync),
     ("sentimentDF", sentimentDF),
 ]
 
@@ -1150,24 +1161,34 @@ _INCLUDE_FUNCTIONS_OPTIONS = [
 
 _INCLUDE_FUNCTIONS_COMMODITIES = [
     ("brent", brent),
+    ("brentAsync", brentAsync),
     ("brentDF", brentDF),
     ("diesel", diesel),
+    ("dieselAsync", dieselAsync),
     ("dieselDF", dieselDF),
     ("gasmid", gasmid),
+    ("gasmidAsync", gasmidAsync),
     ("gasmidDF", gasmidDF),
     ("gasprm", gasprm),
+    ("gasprmAsync", gasprmAsync),
     ("gasprmDF", gasprmDF),
     ("gasreg", gasreg),
+    ("gasregAsync", gasregAsync),
     ("gasregDF", gasregDF),
     ("heatoil", heatoil),
+    ("heatoilAsync", heatoilAsync),
     ("heatoilDF", heatoilDF),
     ("jet", jet),
+    ("jetAsync", jetAsync),
     ("jetDF", jetDF),
     ("natgas", natgas),
+    ("natgasAsync", natgasAsync),
     ("natgasDF", natgasDF),
     ("propane", propane),
+    ("propaneAsync", propaneAsync),
     ("propaneDF", propaneDF),
     ("wti", wti),
+    ("wtiAsync", wtiAsync),
     ("wtiDF", wtiDF),
 ]
 
