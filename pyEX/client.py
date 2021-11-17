@@ -133,6 +133,14 @@ from .mortgage import (
 )
 from .options import optionExpirations, options, optionsDF, stockOptions, stockOptionsDF
 from .points import points, pointsDF
+from .platform import (
+    query,
+    alter,
+    create,
+    upload,
+    modify,
+    delete,
+)
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
     accountingQualityAndRiskMatrixAuditAnalyticsDF,
@@ -1778,6 +1786,7 @@ class Client(object):
     mortgage = types.ModuleType("market")
     options = types.ModuleType("options")
     points = types.ModuleType("points")
+    platform = types.ModuleType("platform")
     premium = types.ModuleType("premium")
     premium.files = types.ModuleType("premium.files")
     rates = types.ModuleType("rates")

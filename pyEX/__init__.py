@@ -25,6 +25,7 @@ from .metadata import *
 from .mortgage import *
 from .options import *
 from .points import *
+from .platform import *
 from .premium import *
 from .rates import *
 from .refdata import *
