@@ -1047,3 +1047,16 @@ class TestPyEXClientAPI:
             assert hasattr(self.c.studies, meth)
             found.add(meth)
         assert all - found == set()
+
+    def test_all_watchlist(self):
+        all = set(dir(self.c.watchlist))
+        found = set(_PREEXISTING)
+
+        for meth in (
+            "get",
+            "getDF",
+        ):
+            assert hasattr(self.c.watchlist, meth)
+            found.add(meth)
+        assert all - found == set()
+

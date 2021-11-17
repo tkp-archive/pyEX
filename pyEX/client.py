@@ -23,6 +23,8 @@ from .account import (
     statusAsync,
     payAsYouGo,
     payAsYouGoAsync,
+    getWatchlist,
+    getWatchlistDF,
 )
 from .alternative import sentiment, sentimentDF, sentimentAsync
 from .commodities import (
@@ -1141,6 +1143,12 @@ _INCLUDE_FUNCTIONS_ACCOUNT = [
     ("statusAsync", statusAsync),
 ]
 
+_INCLUDE_FUNCTIONS_ACCOUNT_WATCHLIST = [
+    # Account - Watchlist
+    ("get", getWatchlist),
+    ("getDF", getWatchlistDF),
+]
+
 _INCLUDE_FUNCTIONS_ALTERNATIVE = [
     # Alternative
     ("sentiment", sentiment),
@@ -1788,6 +1796,7 @@ class Client(object):
     streaming = types.ModuleType("streaming")
     studies = types.ModuleType("studies")
     treasuries = types.ModuleType("treasuries")
+    watchlist = types.ModuleType("watchlist")
 
     def __init__(self, api_token=None, version="v1", api_limit=DEFAULT_API_LIMIT):
         self._token = api_token or os.environ.get("IEX_TOKEN", "")
@@ -1990,6 +1999,13 @@ class Client(object):
                 getattr(self, name).__doc__ = method.__doc__
                 setattr(self.studies, name, method.__get__(self, self.__class__))
 
+        # rebind watchlists
+        for name, method in _INCLUDE_FUNCTIONS_ACCOUNT_WATCHLIST:
+            setattr(
+                self.watchlist, name, wraps(method)(partial(self.bind, meth=method))
+            )
+            getattr(self.watchlist, name).__doc__ = method.__doc__
+
     def bind(self, *args, **kwargs):
         meth = kwargs.pop("meth")
         if not meth:
@@ -2185,3 +2201,10 @@ if os.environ.get("PYEX_AUTODOC") or os.environ.get("READTHEDOCS"):
         if method:
             setattr(Client, name, method.__get__(Client, Client.__class__))
             setattr(Client.studies, name, method.__get__(Client, Client.__class__))
+
+    # rebind watchlist
+    for name, method in _INCLUDE_FUNCTIONS_ACCOUNT_WATCHLIST:
+        setattr(
+            Client.watchlist, name, wraps(method)(partial(Client.bind, meth=method))
+        )
+        getattr(Client.watchlist, name).__doc__ = method.__doc__
