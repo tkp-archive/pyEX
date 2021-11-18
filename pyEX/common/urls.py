@@ -783,7 +783,9 @@ async def _patchIEXCloudSandboxAsync(
     )
 
 
-def _deleteIEXCloudBase(base_url, url, token="", version="stable", format="json"):
+def _deleteIEXCloudBase(
+    base_url, url, token="", version="stable", filter="", format="json"
+):
     """for iex cloud"""
     url = base_url.format(version=version) + url
 
@@ -802,7 +804,7 @@ def _deleteIEXCloudBase(base_url, url, token="", version="stable", format="json"
 
 
 async def _deleteIEXCloudBaseAsync(
-    base_url, url, token="", version="stable", format="json"
+    base_url, url, token="", version="stable", filter="", format="json"
 ):
     """for iex cloud"""
     import aiohttp
@@ -827,14 +829,16 @@ async def _deleteIEXCloudBaseAsync(
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
-def _deleteIEXCloud(url, token="", version="stable", format="json"):
+def _deleteIEXCloud(url, token="", version="stable", filter="", format="json"):
     """for iex cloud"""
-    return _deleteIEXCloud(
+    return _deleteIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD, url=url, token=token, version=version, format=format
     )
 
 
-async def _deleteIEXCloudAsync(url, token="", version="stable", format="json"):
+async def _deleteIEXCloudAsync(
+    url, token="", version="stable", filter="", format="json"
+):
     """for iex cloud"""
     return await _deleteIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD, url=url, token=token, version=version, format=format
