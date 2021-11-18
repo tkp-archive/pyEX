@@ -6,6 +6,8 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 from functools import wraps
+import json
+import pandas as pd
 
 from ..common import (
     PyEXception,
@@ -22,8 +24,6 @@ from ..common import (
     _deleteAsync,
     _quoteSymbols,
     _strOrDate,
-    _toDatetime,
-    json_normalize,
 )
 
 
@@ -45,14 +45,14 @@ def _queryURL(
     first=0,
     sort="",
     interval=None,
-    overrideBase="",
+    transforms=None,
     **extra_params,
 ):
 
     base_url = "query"
-    
-    if (provider):
-      base_url += "/{}".format(provider)
+
+    if provider:
+        base_url += "/{}".format(provider)
 
     if provider and id:
         base_url += "/{}".format(_quoteSymbols(id))
@@ -119,6 +119,9 @@ def _queryURL(
         if interval:
             base_url += "interval={}&".format(int(interval))
 
+        if transforms:
+            base_url += "transforms={}&".format(json.dumps(transforms or []))
+
         if extra_params:
             base_url += "&".join("{}={}".format(k, v) for k, v in extra_params.items())
 
@@ -146,7 +149,7 @@ def query(
     version="stable",
     filter="",
     format="json",
-    overrideBase="",
+    transforms=None,
     **extra_params,
 ):
     base_url = _queryURL(
@@ -166,35 +169,179 @@ def query(
         first=first,
         sort=sort,
         interval=interval,
-        overrideBase=overrideBase,
+        transforms=transforms,
         **extra_params,
     )
     return _get(base_url, token=token, version=version, filter=filter, format=format)
 
 
-def list(provider="CORE", id="", token="", version="stable", filter="", format="json"):
+@wraps(query)
+def queryDF(*args, **kwargs):
+    return pd.DataFrame(query(*args, **kwargs))
+
+
+async def queryAsync(
+    provider="CORE",
+    id="",
+    key="",
+    subkey="",
+    range=None,
+    calendar=False,
+    limit=1,
+    subattribute="",
+    dateField=None,
+    from_=None,
+    to_=None,
+    on=None,
+    last=0,
+    first=0,
+    sort="",
+    interval=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    transforms=None,
+    **extra_params,
+):
+    base_url = _queryURL(
+        provider=provider,
+        id=id,
+        key=key,
+        subkey=subkey,
+        range=range,
+        calendar=calendar,
+        limit=limit,
+        subattribute=subattribute,
+        dateField=dateField,
+        from_=from_,
+        to_=to_,
+        on=on,
+        last=last,
+        first=first,
+        sort=sort,
+        interval=interval,
+        transforms=transforms,
+        **extra_params,
+    )
+    return await _getAsync(
+        base_url, token=token, version=version, filter=filter, format=format
+    )
+
+
+def listDatasets(
+    provider="CORE", id="", token="", version="stable", filter="", format="json"
+):
     base_url = _queryURL(provider=provider, id=id)
-    return _get(base_url, token=token, version=version, filter=filter, format=format)
+    return _get(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )
 
 
-def create(
+@wraps(listDatasets)
+def listDatasetsDF(*args, **kwargs):
+    return pd.DataFrame(listDatasets(*args, **kwargs))
+
+
+async def listDatasetsAsync(
+    provider="CORE", id="", token="", version="stable", filter="", format="json"
+):
+    base_url = _queryURL(provider=provider, id=id)
+    return await _getAsync(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )
+
+
+def createDataset(
     provider, id="", schema=None, token="", version="stable", filter="", format="json"
 ):
     base_url = _queryURL(provider=provider, id=id)
-    raise NotImplementedError
+
+    # TODO schema validation
+    return _post(
+        url=base_url,
+        json=schema,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
 
 
-def upload(provider, id, data, token="", version="stable", filter="", format="json"):
+async def createDatasetAsync(
+    provider, id="", schema=None, token="", version="stable", filter="", format="json"
+):
     base_url = _queryURL(provider=provider, id=id)
-    raise NotImplementedError
+
+    # TODO schema validation
+    return await _postAsync(
+        url=base_url,
+        json=schema,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
 
 
-def alter(provider, id, schema, token="", version="stable", filter="", format="json"):
+def loadData(provider, id, data, token="", version="stable", filter="", format="json"):
     base_url = _queryURL(provider=provider, id=id)
-    raise NotImplementedError
+    # TODO schema validation
+    return _put(
+        url=base_url,
+        data=data,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
 
 
-def modify(
+async def loadDataAsync(
+    provider, id, data, token="", version="stable", filter="", format="json"
+):
+    base_url = _queryURL(provider=provider, id=id)
+    # TODO schema validation
+    return await _putAsync(
+        url=base_url,
+        data=data,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
+
+
+def modifyDataset(
+    provider, id, schema, token="", version="stable", filter="", format="json"
+):
+    base_url = _queryURL(provider=provider, id=id)
+    return _patch(
+        url=base_url,
+        json=schema,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
+
+
+async def modifyDatasetAsync(
+    provider, id, schema, token="", version="stable", filter="", format="json"
+):
+    base_url = _queryURL(provider=provider, id=id)
+    return await _patchAsync(
+        url=base_url,
+        json=schema,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
+
+
+def modifyData(
+    transforms=None,
     provider="CORE",
     id="",
     key="",
@@ -215,7 +362,6 @@ def modify(
     version="stable",
     filter="",
     format="json",
-    overrideBase="",
     **extra_params,
 ):
     base_url = _queryURL(
@@ -235,13 +381,20 @@ def modify(
         first=first,
         sort=sort,
         interval=interval,
-        overrideBase=overrideBase,
         **extra_params,
     )
-    raise NotImplementedError
+    return _patch(
+        url=base_url,
+        json=transforms,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
 
 
-def delete(
+async def modifyDataAsync(
+    transforms=None,
     provider="CORE",
     id="",
     key="",
@@ -262,7 +415,6 @@ def delete(
     version="stable",
     filter="",
     format="json",
-    overrideBase="",
     **extra_params,
 ):
     base_url = _queryURL(
@@ -282,7 +434,143 @@ def delete(
         first=first,
         sort=sort,
         interval=interval,
-        overrideBase=overrideBase,
         **extra_params,
     )
-    return _delete(base_url, token=token, version=version, filter=filter, format=format)
+    return await _patchAsync(
+        url=base_url,
+        json=transforms,
+        token=token,
+        version=version,
+        token_in_params=True,
+        format=format,
+    )
+
+
+def deleteData(
+    provider="CORE",
+    id="",
+    key="",
+    subkey="",
+    range=None,
+    calendar=False,
+    limit=1,
+    subattribute="",
+    dateField=None,
+    from_=None,
+    to_=None,
+    on=None,
+    last=0,
+    first=0,
+    sort="",
+    interval=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **extra_params,
+):
+    base_url = _queryURL(
+        provider=provider,
+        id=id,
+        key=key,
+        subkey=subkey,
+        range=range,
+        calendar=calendar,
+        limit=limit,
+        subattribute=subattribute,
+        dateField=dateField,
+        from_=from_,
+        to_=to_,
+        on=on,
+        last=last,
+        first=first,
+        sort=sort,
+        interval=interval,
+        **extra_params,
+    )
+    return _delete(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )
+
+
+async def deleteDataAsync(
+    provider="CORE",
+    id="",
+    key="",
+    subkey="",
+    range=None,
+    calendar=False,
+    limit=1,
+    subattribute="",
+    dateField=None,
+    from_=None,
+    to_=None,
+    on=None,
+    last=0,
+    first=0,
+    sort="",
+    interval=None,
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **extra_params,
+):
+    base_url = _queryURL(
+        provider=provider,
+        id=id,
+        key=key,
+        subkey=subkey,
+        range=range,
+        calendar=calendar,
+        limit=limit,
+        subattribute=subattribute,
+        dateField=dateField,
+        from_=from_,
+        to_=to_,
+        on=on,
+        last=last,
+        first=first,
+        sort=sort,
+        interval=interval,
+        **extra_params,
+    )
+    return await _deleteAsync(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )
+
+
+def deleteDataset(
+    provider="CORE",
+    id="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **extra_params,
+):
+    base_url = _queryURL(
+        provider=provider,
+        id=id,
+    )
+    return _delete(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )
+
+
+async def deleteDatasetAsync(
+    provider="CORE",
+    id="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+    **extra_params,
+):
+    base_url = _queryURL(
+        provider=provider,
+        id=id,
+    )
+    return await _deleteAsync(
+        url=base_url, token=token, version=version, filter=filter, format=format
+    )

@@ -78,6 +78,36 @@ class TestPyEXClientAPI:
             found.add(meth)
         assert all - found == set()
 
+    def test_all_platform(self):
+        all = set(dir(self.c.platform))
+        found = set(_PREEXISTING)
+
+        for meth in (
+            "queryMetadata",
+            "queryMetadataDF",
+            "createDataset",
+            "createDatasetAsync",
+            "deleteData",
+            "deleteDataAsync",
+            "deleteDataset",
+            "deleteDatasetAsync",
+            "listDatasets",
+            "listDatasetsAsync",
+            "listDatasetsDF",
+            "loadData",
+            "loadDataAsync",
+            "modifyDataset",
+            "modifyDatasetAsync",
+            "modifyData",
+            "modifyDataAsync",
+            "query",
+            "queryAsync",
+            "queryDF",
+        ):
+            assert hasattr(self.c.platform, meth)
+            found.add(meth)
+        assert all - found == set()
+
     def test_all_refdata(self):
         all = set(dir(self.c.refdata))
         found = set(_PREEXISTING)

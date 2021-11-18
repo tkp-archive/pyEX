@@ -38,6 +38,7 @@ from .timing import _EST, _PYEX_CACHE_FOLDER, _UTC, _expire, _interval
 from .urls import (
     WSClient,
     _delete,
+    _deleteAsync,
     _get,
     _getAsync,
     _getIEXCloud,

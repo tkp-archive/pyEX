@@ -7,10 +7,22 @@
 #
 
 from .platform import (
+    createDataset,
+    createDatasetAsync,
+    deleteData,
+    deleteDataset,
+    deleteDataAsync,
+    deleteDatasetAsync,
+    listDatasets,
+    listDatasetsAsync,
+    listDatasetsDF,
+    loadData,
+    loadDataAsync,
+    modifyDataset,
+    modifyDatasetAsync,
+    modifyData,
+    modifyDataAsync,
     query,
-    alter,
-    create,
-    upload,
-    modify,
-    delete,
+    queryAsync,
+    queryDF,
 )
