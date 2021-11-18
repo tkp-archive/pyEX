@@ -20,4 +20,11 @@ from .account import (
     statusAsync,
     statusDF,
 )
-from .watchlist import getWatchlist, getWatchlistDF
+from .watchlist import (
+    deleteFromWatchlist,
+    deleteWatchlist,
+    getWatchlist,
+    getWatchlistDF,
+    createWatchlist,
+    addToWatchlist,
+)

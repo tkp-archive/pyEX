@@ -1090,4 +1090,3 @@ class TestPyEXClientAPI:
             assert hasattr(self.c.watchlist, meth)
             found.add(meth)
         assert all - found == set()
-

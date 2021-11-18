@@ -10,6 +10,8 @@ import types
 from functools import partial, wraps
 import warnings
 
+from pyEX.account.watchlist import deleteFromWatchlist, deleteWatchlist
+
 from .account import (
     messageBudget,
     messageBudgetAsync,
@@ -25,6 +27,10 @@ from .account import (
     payAsYouGoAsync,
     getWatchlist,
     getWatchlistDF,
+    createWatchlist,
+    addToWatchlist,
+    deleteFromWatchlist,
+    deleteWatchlist,
 )
 from .alternative import sentiment, sentimentDF, sentimentAsync
 from .commodities import (
@@ -1200,6 +1206,10 @@ _INCLUDE_FUNCTIONS_ACCOUNT_WATCHLIST = [
     # Account - Watchlist
     ("get", getWatchlist),
     ("getDF", getWatchlistDF),
+    ("create", createWatchlist),
+    ("add", add),
+    ("remove", deleteFromWatchlist),
+    ("delete", deleteWatchlist),
 ]
 
 _INCLUDE_FUNCTIONS_ALTERNATIVE = [
