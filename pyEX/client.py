@@ -133,6 +133,29 @@ from .mortgage import (
 )
 from .options import optionExpirations, options, optionsDF, stockOptions, stockOptionsDF
 from .points import points, pointsDF
+from .platform import (
+    createDataset,
+    createDatasetAsync,
+    deleteData,
+    deleteDataAsync,
+    deleteDataset,
+    deleteDatasetAsync,
+    listDatasets,
+    listDatasetsAsync,
+    listDatasetsDF,
+    loadData,
+    loadDataAsync,
+    modifyDataset,
+    modifyDatasetAsync,
+    modifyData,
+    modifyDataAsync,
+    query,
+    queryAsync,
+    queryDF,
+    queryMeta,
+    queryMetaAsync,
+    queryMetaDF,
+)
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
     accountingQualityAndRiskMatrixAuditAnalyticsDF,
@@ -356,11 +379,16 @@ from .refdata import (
     tags,
     tagsDF,
 )
-from .rules import create, delete, lookup
-from .rules import output as ruleOutput
-from .rules import pause, resume
-from .rules import rule as ruleInfo
-from .rules import rules
+from .rules import (
+    createRule,
+    deleteRule,
+    lookupRule,
+    ruleOutput,
+    pauseRule,
+    resumeRule,
+    ruleInfo,
+    rules,
+)
 from .stats import (
     daily,
     dailyDF,
@@ -783,15 +811,40 @@ from .studies import (
 
 DEFAULT_API_LIMIT = 5
 
+_INCLUDE_FUNCTIONS_PLATFORM = [
+    # Platform
+    ("createDataset", createDataset),
+    ("createDatasetAsync", createDatasetAsync),
+    ("deleteData", deleteData),
+    ("deleteDataAsync", deleteDataAsync),
+    ("deleteDataset", deleteDataset),
+    ("deleteDatasetAsync", deleteDatasetAsync),
+    ("listDatasets", listDatasets),
+    ("listDatasetsAsync", listDatasetsAsync),
+    ("listDatasetsDF", listDatasetsDF),
+    ("loadData", loadData),
+    ("loadDataAsync", loadDataAsync),
+    ("modifyDataset", modifyDataset),
+    ("modifyDatasetAsync", modifyDatasetAsync),
+    ("modifyData", modifyData),
+    ("modifyDataAsync", modifyDataAsync),
+    ("query", query),
+    ("queryAsync", queryAsync),
+    ("queryDF", queryDF),
+    ("queryMeta", queryMeta),
+    ("queryMetaAsync", queryMetaAsync),
+    ("queryMetaDF", queryMetaDF),
+]
+
 _INCLUDE_FUNCTIONS_RULES = [
     # Rules
-    ("schema", lookup),
+    ("schema", lookupRule),
     ("listRules", rules),
-    ("createRule", create),
-    ("lookupRule", lookup),
-    ("pauseRule", pause),
-    ("resumeRule", resume),
-    ("deleteRule", delete),
+    ("createRule", createRule),
+    ("lookupRule", lookupRule),
+    ("pauseRule", pauseRule),
+    ("resumeRule", resumeRule),
+    ("deleteRule", deleteRule),
     ("ruleInfo", ruleInfo),
     ("ruleOutput", ruleOutput),
 ]
@@ -1778,6 +1831,7 @@ class Client(object):
     mortgage = types.ModuleType("market")
     options = types.ModuleType("options")
     points = types.ModuleType("points")
+    platform = types.ModuleType("platform")
     premium = types.ModuleType("premium")
     premium.files = types.ModuleType("premium.files")
     rates = types.ModuleType("rates")
@@ -1880,6 +1934,11 @@ class Client(object):
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
             getattr(self, name).__doc__ = method.__doc__
             setattr(self.treasuries, name, getattr(self, name))
+
+        for name, method in _INCLUDE_FUNCTIONS_PLATFORM:
+            setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
+            getattr(self, name).__doc__ = method.__doc__
+            setattr(self.platform, name, getattr(self, name))
 
         for name, method in _INCLUDE_FUNCTIONS_RULES:
             setattr(self, name, wraps(method)(partial(self.bind, meth=method)))
@@ -2077,6 +2136,11 @@ if os.environ.get("PYEX_AUTODOC") or os.environ.get("READTHEDOCS"):
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
         getattr(Client, name).__doc__ = method.__doc__
         setattr(Client.treasuries, name, getattr(Client, name))
+
+    for name, method in _INCLUDE_FUNCTIONS_PLATFORM:
+        setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
+        getattr(Client, name).__doc__ = method.__doc__
+        setattr(Client.platform, name, getattr(Client, name))
 
     for name, method in _INCLUDE_FUNCTIONS_RULES:
         setattr(Client, name, wraps(method)(partial(Client.bind, meth=method)))
