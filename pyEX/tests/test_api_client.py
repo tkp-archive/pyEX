@@ -83,8 +83,6 @@ class TestPyEXClientAPI:
         found = set(_PREEXISTING)
 
         for meth in (
-            "queryMetadata",
-            "queryMetadataDF",
             "createDataset",
             "createDatasetAsync",
             "deleteData",
@@ -103,6 +101,9 @@ class TestPyEXClientAPI:
             "query",
             "queryAsync",
             "queryDF",
+            "queryMeta",
+            "queryMetaAsync",
+            "queryMetaDF",
         ):
             assert hasattr(self.c.platform, meth)
             found.add(meth)

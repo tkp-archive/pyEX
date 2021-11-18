@@ -5,8 +5,6 @@
 # This file is part of the pyEX library, distributed under the terms of
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
-from functools import wraps
-
 from ..common import PyEXception, _delete, _get, _post, _raiseIfNotStr
 from .engine import Rule  # noqa: F401
 

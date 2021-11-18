@@ -13,7 +13,14 @@ from ..common import _get
 
 
 def queryMetadata(
-    id="", key="", subkey="", token="", version="stable", filter="", format="json"
+    id="",
+    key="",
+    subkey="",
+    provider="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",  # TODO move provider up
 ):
     """Get inventory of available time series endpoints
 
@@ -21,12 +28,16 @@ def queryMetadata(
         id (str): Timeseries ID
         key (str): Timeseries Key
         subkey (str): Timeseries Subkey
+        provider (str): Timeseries Data Provider
         token (str): Access token
         version (str): API version
         filter (str): https://iexcloud.io/docs/api/#filter-results
         format (str): output format
     """
-    url = "metadata/time-series"
+    if provider:
+        url = "metadata/meta"
+    else:
+        url = "metadata/time-series"
     if not id and key:
         id = "*"
     if id:

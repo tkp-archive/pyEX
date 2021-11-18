@@ -128,6 +128,64 @@ def _queryURL(
     return base_url
 
 
+def _queryMetaUrl(provider="", id="", key="", subkey=""):
+    url = "meta"
+    if provider:
+        url += "/{}".format(provider)
+        if not id and key:
+            id = "*"
+        if id:
+            url += "/{}".format(id)
+            if key:
+                url += "/{}".format(key)
+                if subkey:
+                    url += "/{}".format(subkey)
+    return url
+
+
+def queryMeta(
+    provider="",
+    id="",
+    key="",
+    subkey="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
+    return _get(
+        _queryMetaUrl(provider=provider, id=id, key=key, subkey=subkey),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
+
+
+async def queryMetaAsync(
+    provider="",
+    id="",
+    key="",
+    subkey="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
+    return await _getAsync(
+        _queryMetaUrl(provider=provider, id=id, key=key, subkey=subkey),
+        token=token,
+        version=version,
+        filter=filter,
+        format=format,
+    )
+
+
+@wraps(queryMeta)
+def queryMetaDF(*args, **kwargs):
+    return pd.DataFrame(queryMeta(*args, **kwargs))
+
+
 def query(
     provider="CORE",
     id="",

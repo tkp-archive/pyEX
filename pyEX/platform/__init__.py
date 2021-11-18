@@ -25,4 +25,7 @@ from .platform import (
     query,
     queryAsync,
     queryDF,
+    queryMeta,
+    queryMetaAsync,
+    queryMetaDF,
 )

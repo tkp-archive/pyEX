@@ -152,6 +152,9 @@ from .platform import (
     query,
     queryAsync,
     queryDF,
+    queryMeta,
+    queryMetaAsync,
+    queryMetaDF,
 )
 from .premium import (
     accountingQualityAndRiskMatrixAuditAnalytics,
@@ -810,8 +813,6 @@ DEFAULT_API_LIMIT = 5
 
 _INCLUDE_FUNCTIONS_PLATFORM = [
     # Platform
-    ("queryMetadata", queryMetadata),
-    ("queryMetadataDF", queryMetadataDF),
     ("createDataset", createDataset),
     ("createDatasetAsync", createDatasetAsync),
     ("deleteData", deleteData),
@@ -830,6 +831,9 @@ _INCLUDE_FUNCTIONS_PLATFORM = [
     ("query", query),
     ("queryAsync", queryAsync),
     ("queryDF", queryDF),
+    ("queryMeta", queryMeta),
+    ("queryMetaAsync", queryMetaAsync),
+    ("queryMetaDF", queryMetaDF),
 ]
 
 _INCLUDE_FUNCTIONS_RULES = [
