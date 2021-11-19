@@ -10,8 +10,6 @@ import types
 from functools import partial, wraps
 import warnings
 
-from pyEX.account.watchlist import deleteFromWatchlist, deleteWatchlist
-
 from .account import (
     messageBudget,
     messageBudgetAsync,
@@ -1207,7 +1205,7 @@ _INCLUDE_FUNCTIONS_ACCOUNT_WATCHLIST = [
     ("get", getWatchlist),
     ("getDF", getWatchlistDF),
     ("create", createWatchlist),
-    ("add", add),
+    ("add", addToWatchlist),
     ("remove", deleteFromWatchlist),
     ("delete", deleteWatchlist),
 ]
