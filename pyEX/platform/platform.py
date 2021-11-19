@@ -46,10 +46,11 @@ def _queryURL(
     sort="",
     interval=None,
     transforms=None,
+    basePath="query",
     **extra_params,
 ):
 
-    base_url = "query"
+    base_url = basePath
 
     if provider:
         base_url += "/{}".format(provider)
@@ -70,7 +71,7 @@ def _queryURL(
         if calendar:
             base_url += "calendar={}&".format(str(calendar))
 
-        if not last and (not from_ or not to_):
+        if limit and not last and (not from_ or not to_):
             base_url += "limit={}&".format(str(limit))
 
         if offset > 0:
@@ -313,7 +314,8 @@ async def listDatasetsAsync(
 def createDataset(
     provider, id="", schema=None, token="", version="stable", filter="", format="json"
 ):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, limit=None, basePath="datasets")
+    base_url += "id={}".format(id)
 
     # TODO schema validation
     return _post(
@@ -329,7 +331,7 @@ def createDataset(
 async def createDatasetAsync(
     provider, id="", schema=None, token="", version="stable", filter="", format="json"
 ):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
 
     # TODO schema validation
     return await _postAsync(
@@ -343,7 +345,7 @@ async def createDatasetAsync(
 
 
 def loadData(provider, id, data, token="", version="stable", filter="", format="json"):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
     # TODO schema validation
     return _put(
         url=base_url,
@@ -358,7 +360,7 @@ def loadData(provider, id, data, token="", version="stable", filter="", format="
 async def loadDataAsync(
     provider, id, data, token="", version="stable", filter="", format="json"
 ):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
     # TODO schema validation
     return await _putAsync(
         url=base_url,
@@ -373,7 +375,7 @@ async def loadDataAsync(
 def modifyDataset(
     provider, id, schema, token="", version="stable", filter="", format="json"
 ):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
     return _patch(
         url=base_url,
         json=schema,
@@ -387,7 +389,7 @@ def modifyDataset(
 async def modifyDatasetAsync(
     provider, id, schema, token="", version="stable", filter="", format="json"
 ):
-    base_url = _queryURL(provider=provider, id=id)
+    base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
     return await _patchAsync(
         url=base_url,
         json=schema,
@@ -439,6 +441,7 @@ def modifyData(
         first=first,
         sort=sort,
         interval=interval,
+        basePath="datasets",
         **extra_params,
     )
     return _patch(
@@ -492,6 +495,7 @@ async def modifyDataAsync(
         first=first,
         sort=sort,
         interval=interval,
+        basePath="datasets",
         **extra_params,
     )
     return await _patchAsync(
@@ -544,6 +548,7 @@ def deleteData(
         first=first,
         sort=sort,
         interval=interval,
+        basePath="datasets",
         **extra_params,
     )
     return _delete(
@@ -591,6 +596,7 @@ async def deleteDataAsync(
         first=first,
         sort=sort,
         interval=interval,
+        basePath="datasets",
         **extra_params,
     )
     return await _deleteAsync(
@@ -610,6 +616,8 @@ def deleteDataset(
     base_url = _queryURL(
         provider=provider,
         id=id,
+        limit=None,
+        basePath="datasets",
     )
     return _delete(
         url=base_url, token=token, version=version, filter=filter, format=format
@@ -628,6 +636,8 @@ async def deleteDatasetAsync(
     base_url = _queryURL(
         provider=provider,
         id=id,
+        limit=None,
+        basePath="datasets",
     )
     return await _deleteAsync(
         url=base_url, token=token, version=version, filter=filter, format=format

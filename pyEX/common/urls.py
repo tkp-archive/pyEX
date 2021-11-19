@@ -368,6 +368,9 @@ async def _getIEXCloudBaseAsync(
     if format not in ("json", "binary"):
         params["format"] = format
 
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
+
     tries = 1
 
     while tries < 5:
@@ -455,6 +458,9 @@ def _pppIEXCloudBase(
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     resp = getattr(requests, verb)(
         urlparse(url).geturl(),
@@ -560,6 +566,9 @@ async def _pppIEXCloudBaseAsync(
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     async with aiohttp.ClientSession() as session:
         async with getattr(session, verb)(
@@ -793,6 +802,9 @@ def _deleteIEXCloudBase(
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
 
