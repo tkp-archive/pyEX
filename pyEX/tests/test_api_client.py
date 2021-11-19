@@ -1084,8 +1084,12 @@ class TestPyEXClientAPI:
         found = set(_PREEXISTING)
 
         for meth in (
+            "add",
+            "create",
+            "delete",
             "get",
             "getDF",
+            "remove",
         ):
             assert hasattr(self.c.watchlist, meth)
             found.add(meth)
