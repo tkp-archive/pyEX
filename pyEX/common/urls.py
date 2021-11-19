@@ -176,7 +176,7 @@ def _patchAsync(
     return _patchIEXCloudAsync(url, data, json, token, version, token_in_params, format)
 
 
-def _delete(url, token="", version="stable", format="json"):
+def _delete(url, token="", version="stable", filter="", format="json"):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
         return _deleteIEXCloudSandbox(url, token, version, format)
@@ -255,6 +255,9 @@ async def _getIEXCloudBaseAsync(
     if format not in ("json", "binary"):
         params["format"] = format
 
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
+
     tries = 1
 
     while tries < 5:
@@ -327,6 +330,9 @@ def _pppIEXCloudBase(
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     resp = getattr(requests, verb)(
         urlparse(url).geturl(),
@@ -432,6 +438,9 @@ async def _pppIEXCloudBaseAsync(
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     async with aiohttp.ClientSession() as session:
         async with getattr(session, verb)(
@@ -663,6 +672,9 @@ def _deleteIEXCloudBase(base_url, url, token="", version="stable", format="json"
 
     if format != "json":
         params["format"] = format
+
+    if _PYEX_DEBUG:
+        print(urlparse(url).geturl())
 
     resp = requests.delete(urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params)
 
