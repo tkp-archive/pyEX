@@ -616,6 +616,8 @@ def deleteDataset(
     base_url = _queryURL(
         provider=provider,
         id=id,
+        limit=None,
+        basePath="datasets",
     )
     return _delete(
         url=base_url, token=token, version=version, filter=filter, format=format
