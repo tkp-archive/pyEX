@@ -287,6 +287,8 @@ async def queryAsync(
         base_url, token=token, version=version, filter=filter, format=format
     )
 
+def listJobs(token="", version="stable", filter="", format="json"):
+    return _get(url="jobs", token=token, version=version, filter=filter, format=format)
 
 def listDatasets(
     provider="CORE", id="", token="", version="stable", filter="", format="json"

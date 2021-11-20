@@ -16,6 +16,7 @@ from .platform import (
     listDatasets,
     listDatasetsAsync,
     listDatasetsDF,
+    listJobs,
     loadData,
     loadDataAsync,
     modifyDataset,

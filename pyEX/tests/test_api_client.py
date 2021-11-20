@@ -92,6 +92,7 @@ class TestPyEXClientAPI:
             "listDatasets",
             "listDatasetsAsync",
             "listDatasetsDF",
+            "listJobs",
             "loadData",
             "loadDataAsync",
             "modifyDataset",
