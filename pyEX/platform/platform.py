@@ -288,6 +288,13 @@ async def queryAsync(
     )
 
 
+def listJobs(
+    provider, type="ingest", token="", version="stable", filter="", format="json"
+):
+    url = "jobs/{}/{}".format(provider, type)
+    return _get(url=url, token=token, version=version, filter=filter, format=format)
+
+
 def listDatasets(
     provider="CORE", id="", token="", version="stable", filter="", format="json"
 ):

@@ -550,6 +550,7 @@ class TestPyEXAPI:
             "listDatasets",
             "listDatasetsAsync",
             "listDatasetsDF",
+            "listJobs",
             "ln",
             "loadData",
             "loadDataAsync",
