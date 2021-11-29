@@ -535,6 +535,11 @@ def _overrideFormat(kwargs):
     kwargs["format"] = "json"
 
 
+def _interpolateDatatype(data):
+    """Attempt to determine the data type from the data"""
+    ...
+
+
 try:
     if pd.__version__ > "1.":
         json_normalize = pd.json_normalize

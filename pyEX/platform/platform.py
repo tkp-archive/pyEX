@@ -11,6 +11,7 @@ import pandas as pd
 
 from ..common import (
     PyEXception,
+    _interpolateDatatype,
     _dateRange,
     _get,
     _getAsync,
@@ -362,6 +363,10 @@ async def createDatasetAsync(
 
 def loadData(provider, id, data, token="", version="stable", filter="", format="json"):
     base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
+
+    # data interpolation
+    headers = _interpolateDatatype(data)
+
     # TODO schema validation
     return _put(
         url=base_url,
@@ -370,6 +375,7 @@ def loadData(provider, id, data, token="", version="stable", filter="", format="
         version=version,
         token_in_params=True,
         format=format,
+        headers=headers,
     )
 
 

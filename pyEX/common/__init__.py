@@ -32,6 +32,7 @@ from .checks import (
     _timeseriesWrapper,
     _toDatetime,
     json_normalize,
+    _interpolateDatatype,
 )
 from .exception import *
 from .timing import _EST, _PYEX_CACHE_FOLDER, _UTC, _expire, _interval
