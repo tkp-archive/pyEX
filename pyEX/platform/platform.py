@@ -289,9 +289,19 @@ async def queryAsync(
 
 
 def listJobs(
-    provider, type="ingest", token="", version="stable", filter="", format="json"
+    provider,
+    type="ingest",
+    jobId="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
 ):
     url = "jobs/{}/{}".format(provider, type)
+
+    if jobId:
+        url += "/{}".format(jobId)
+
     return _get(url=url, token=token, version=version, filter=filter, format=format)
 
 
@@ -322,7 +332,6 @@ def createDataset(
     provider, id="", schema=None, token="", version="stable", filter="", format="json"
 ):
     base_url = _queryURL(provider=provider, limit=None, basePath="datasets")
-    base_url += "id={}".format(id)
 
     # TODO schema validation
     return _post(
