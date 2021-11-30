@@ -361,11 +361,23 @@ async def createDatasetAsync(
     )
 
 
-def loadData(provider, id, data, token="", version="stable", filter="", format="json"):
+def loadData(
+    provider,
+    id,
+    data,
+    dataType="",
+    token="",
+    version="stable",
+    filter="",
+    format="json",
+):
     base_url = _queryURL(provider=provider, id=id, limit=None, basePath="datasets")
 
     # data interpolation
-    headers = _interpolateDatatype(data)
+    if not dataType:
+        data, headers = _interpolateDatatype(data)
+    else:
+        headers = {"content-type": dataType}
 
     # TODO schema validation
     return _put(
@@ -373,8 +385,9 @@ def loadData(provider, id, data, token="", version="stable", filter="", format="
         data=data,
         token=token,
         version=version,
-        token_in_params=True,
+        filter=filter,
         format=format,
+        token_in_params=True,
         headers=headers,
     )
 
