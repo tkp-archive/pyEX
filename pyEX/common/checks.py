@@ -12,6 +12,7 @@ from urllib.parse import quote
 
 import re
 import pandas as pd
+import json
 from six import string_types
 
 from .exception import PyEXception
@@ -533,6 +534,25 @@ def _timeseriesWrapper(kwargs, key=True, subkey=True):
 
 def _overrideFormat(kwargs):
     kwargs["format"] = "json"
+
+
+def _interpolateDatatype(data):
+    """Attempt to determine the data type from the data"""
+    if isinstance(data, str):
+        # check if json or else default to csv
+        try:
+            if data.strip().startswith("[{") or data.strip().startswith("{"):
+                return data, {"content-type": "application/json"}
+            return data, {"content-type": "text/csv"}
+
+        except ValueError:
+            return data, {"content-type": "text/csv"}
+
+    if isinstance(data, list):
+        if data and isinstance(data[0], dict):
+            # json
+            return json.dumps(data), {"content-type": "application/json"}
+    raise PyEXception("Could not determine data type")
 
 
 try:

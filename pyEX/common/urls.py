@@ -86,6 +86,7 @@ def _post(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -98,19 +99,23 @@ def _post(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _postIEXCloud(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -118,6 +123,7 @@ def _put(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -130,19 +136,23 @@ def _put(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _putIEXCloud(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -150,6 +160,7 @@ def _patch(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -162,19 +173,23 @@ def _patch(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _patchIEXCloud(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -182,6 +197,7 @@ def _postAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -194,19 +210,23 @@ def _postAsync(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _postIEXCloudAsync(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -214,6 +234,7 @@ def _putAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -226,19 +247,23 @@ def _putAsync(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _putIEXCloudAsync(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -246,6 +271,7 @@ def _patchAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     token_in_params=True,
@@ -258,19 +284,23 @@ def _patchAsync(
             url=url,
             data=data,
             json=json,
+            headers=headers,
             token=token,
             version=version,
             token_in_params=token_in_params,
             format=format,
+            filter=filter,
         )
     return _patchIEXCloudAsync(
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         token_in_params=token_in_params,
         format=format,
+        filter=filter,
     )
 
 
@@ -442,10 +472,12 @@ def _pppIEXCloudBase(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter=None,
     format="json",
+    token_in_params=True,
     verb="post",
 ):
     """for iex cloud"""
@@ -459,6 +491,9 @@ def _pppIEXCloudBase(
     if format != "json":
         params["format"] = format
 
+    if filter:
+        params["filter"] = filter
+
     if _PYEX_DEBUG:
         print(urlparse(url).geturl())
 
@@ -466,6 +501,7 @@ def _pppIEXCloudBase(
         urlparse(url).geturl(),
         data=data,
         json=json,
+        headers=headers,
         proxies=_PYEX_PROXIES,
         params=params,
     )
@@ -480,20 +516,24 @@ def _postIEXCloud(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="post",
     )
 
@@ -502,20 +542,24 @@ def _putIEXCloud(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
+        headers=headers,
         json=json,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="put",
     )
 
@@ -524,20 +568,24 @@ def _patchIEXCloud(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="patch",
     )
 
@@ -547,11 +595,12 @@ async def _pppIEXCloudBaseAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     filter="",
-    token_in_params=True,
     format="json",
+    token_in_params=True,
     verb="post",
 ):
     """for iex cloud"""
@@ -567,10 +616,13 @@ async def _pppIEXCloudBaseAsync(
     if format != "json":
         params["format"] = format
 
+    if filter:
+        params["filter"] = filter
+
     if _PYEX_DEBUG:
         print(urlparse(url).geturl())
 
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(headers=headers) as session:
         async with getattr(session, verb)(
             urlparse(url).geturl(),
             data=data,
@@ -589,22 +641,24 @@ async def _postIEXCloudAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     filter="",
-    token_in_params=True,
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
-        token_in_params=token_in_params,
         format=format,
+        token_in_params=token_in_params,
         verb="post",
     )
 
@@ -613,22 +667,24 @@ async def _putIEXCloudAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     filter="",
-    token_in_params=True,
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
-        token_in_params=token_in_params,
         format=format,
+        token_in_params=token_in_params,
         verb="put",
     )
 
@@ -637,22 +693,24 @@ async def _patchIEXCloudAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
     filter="",
-    token_in_params=True,
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
-        token_in_params=token_in_params,
         format=format,
+        token_in_params=token_in_params,
         verb="patch",
     )
 
@@ -661,20 +719,24 @@ def _postIEXCloudSandbox(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="post",
     )
 
@@ -683,20 +745,24 @@ def _putIEXCloudSandbox(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="put",
     )
 
@@ -705,20 +771,24 @@ def _patchIEXCloudSandbox(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
-        token_in_params=token_in_params,
+        filter=filter,
         format=format,
+        token_in_params=token_in_params,
         verb="patch",
     )
 
@@ -727,16 +797,19 @@ async def _postIEXCloudSandboxAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
@@ -750,16 +823,19 @@ async def _putIEXCloudSandboxAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
@@ -773,16 +849,19 @@ async def _patchIEXCloudSandboxAsync(
     url,
     data=None,
     json=None,
+    headers=None,
     token="",
     version="stable",
-    token_in_params=True,
+    filter="",
     format="json",
+    token_in_params=True,
 ):
     return await _pppIEXCloudBaseAsync(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
         url=url,
         data=data,
         json=json,
+        headers=headers,
         token=token,
         version=version,
         filter=filter,
