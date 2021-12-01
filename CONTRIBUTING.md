@@ -2,11 +2,6 @@
 
 Thank you for your interest in contributing to pyEX!
 
-We invite you to contribute enhancements. Upon review you will be required to complete the [Contributor License Agreement (CLA)](https://github.com/iex/cla) before we are able to merge.
-
-If you have any questions about the contribution process, please feel free to send an email to [community@iexcloud.io](mailto:community@iexcloud.io).
-
-
 ## Reporting bugs, feature requests, etc.
 
 To report bugs, request new features or similar, please open an issue on the Github
