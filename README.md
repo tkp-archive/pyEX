@@ -1,10 +1,10 @@
-# <a href="https://pyEX.readthedocs.io"><img src="https://raw.githubusercontent.com/iexcloud/pyEX/main/docs/img/icon.png" width="300"></a>
+# <a href="https://pyEX.readthedocs.io"><img src="https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/icon.png" width="300"></a>
 
 Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 
-[![Build Status](https://github.com/iexcloud/pyEX/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/iexcloud/pyEX/actions?query=workflow%3A%22Build+Status%22)
-[![Coverage](https://codecov.io/gh/iexcloud/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/iexcloud/pyEX)
-[![License](https://img.shields.io/github/license/iexcloud/pyEX.svg)](https://github.com/iexcloud/pyEX)
+[![Build Status](https://github.com/timkpaine/pyEX/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/timkpaine/pyEX/actions?query=workflow%3A%22Build+Status%22)
+[![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/timkpaine/pyEX)
+[![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://github.com/timkpaine/pyEX)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
@@ -31,8 +31,8 @@ or from source
 
 ## Demos + Docs
 
-- [Demo Notebook - IEX Cloud](https://github.com/iexcloud/pyEX/blob/main/examples/all.ipynb)
-- [Streaming Notebook - IEX Cloud](https://github.com/iexcloud/pyEX/blob/main/examples/sse.ipynb)
+- [Demo Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/all.ipynb)
+- [Streaming Notebook - IEX Cloud](https://github.com/timkpaine/pyEX/blob/main/examples/sse.ipynb)
 - [Read The Docs!](https://pyEX.readthedocs.io)
 
 ## Overview
@@ -125,13 +125,13 @@ date
 
 ## Other enhancements
 
-- [pyEX-studies](https://github.com/iexcloud/pyEX/tree/main/pyEX/studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
+- [pyEX-studies](https://github.com/timkpaine/pyEX/tree/main/pyEX/studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
 - [pyEX-caching](https://github.com/timkpaine/pyEX-caching): persistent, queryable caching for pyEX function calls. Minimize your spend and maximize your performance
 - [pyEX-zipline](https://github.com/timkpaine/pyEX-zipline): [Zipline](https://github.com/quantopian/zipline) integration for IEX data
 
 ## Demo
 
-![](https://raw.githubusercontent.com/iexcloud/pyEX/main/docs/img/example1.gif)
+![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/example1.gif)
 
 ## Rules Engine
 
@@ -189,7 +189,7 @@ or via async generators (after installing `pyEX[async]`):
 
 Please see the [readthedocs](https://pyEX.readthedocs.io) for a full API spec. Implemented methods are provided in [CATALOG.md](CATALOG.md).
 
-![](https://raw.githubusercontent.com/iexcloud/pyEX/main/docs/img/rtd.png)
+![](https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/rtd.png)
 
 All methods share a common naming convention. If the API method is called [technicals](https://iexcloud.io/docs/api/#technical-indicators), there will be `technicals` and `technicalsDF` methods on the client. Additionally, most methods are provided in a scope, e.g. [wti](https://iexcloud.io/docs/api/#oil-prices) is available as `client.wti` and `client.commodities.wti`, [analystDays](https://iexcloud.io/docs/api/#analyst-days) from Wall Street Horizon is available as `client.premium.analystDays`, etc.
 
