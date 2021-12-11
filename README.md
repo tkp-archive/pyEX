@@ -8,10 +8,6 @@ Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
 [![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
-## Referral
-
-Please subscribe to IEX Cloud using [this referral code](https://iexcloud.io/s/6332a3c3 ).
-
 # Getting Started
 
 ## Install
@@ -122,12 +118,6 @@ date
 
 - pyEX will **transparently cache requests** according to the refresh interval as defined on the IEX Cloud website (and in the docstrings), to avoid wasting credits. It can also cache to disk, or integrate with your own custom caching scheme.
 - pyEX fully implements the streaming APIs
-
-## Other enhancements
-
-- [pyEX-studies](https://github.com/timkpaine/pyEX/tree/main/pyEX/studies): pyEX integration with TA-Lib and other libraries, for technical analysis and other metrics on top of the IEX data
-- [pyEX-caching](https://github.com/timkpaine/pyEX-caching): persistent, queryable caching for pyEX function calls. Minimize your spend and maximize your performance
-- [pyEX-zipline](https://github.com/timkpaine/pyEX-zipline): [Zipline](https://github.com/quantopian/zipline) integration for IEX data
 
 ## Demo
 
