@@ -409,10 +409,6 @@ async def _getIEXCloudBaseAsync(
                 urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
             ) as resp:
 
-                resp = requests.get(
-                    urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params
-                )
-
                 if resp.status_code == 429:
                     tries += 1
                     await asyncio.sleep(random() * 0.5 * tries)
