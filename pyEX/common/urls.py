@@ -7,7 +7,6 @@
 #
 from __future__ import print_function
 
-import aiohttp
 import asyncio
 import json
 import os
@@ -16,6 +15,8 @@ import time
 from random import random
 from threading import Event, Thread
 from urllib.parse import urlparse
+
+import aiohttp
 import requests
 from socketIO_client_nexus import BaseNamespace, SocketIO
 from sseclient import SSEClient
@@ -409,7 +410,7 @@ async def _getIEXCloudBaseAsync(
                 urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
             ) as resp:
 
-                if resp.status_code == 429:
+                if resp.status == 429:
                     tries += 1
                     await asyncio.sleep(random() * 0.5 * tries)
 
