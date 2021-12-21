@@ -419,7 +419,7 @@ async def _getIEXCloudBaseAsync(
                         return await resp.json()
                     elif format == "binary":
                         return await resp.read()
-                    return resp.text()
+                    return await resp.text()
                 else:
                     # break and hit the exception case
                     break
@@ -630,7 +630,7 @@ async def _pppIEXCloudBaseAsync(
             if resp.status == 200:
                 if format == "json":
                     return await resp.json()
-                return resp.text()
+                return await resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
