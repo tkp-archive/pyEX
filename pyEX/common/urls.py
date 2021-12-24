@@ -7,7 +7,6 @@
 #
 from __future__ import print_function
 
-import aiohttp
 import asyncio
 import json
 import os
@@ -16,6 +15,8 @@ import time
 from random import random
 from threading import Event, Thread
 from urllib.parse import urlparse
+
+import aiohttp
 import requests
 from socketIO_client_nexus import BaseNamespace, SocketIO
 from sseclient import SSEClient
@@ -409,11 +410,7 @@ async def _getIEXCloudBaseAsync(
                 urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
             ) as resp:
 
-                resp = requests.get(
-                    urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params
-                )
-
-                if resp.status_code == 429:
+                if resp.status == 429:
                     tries += 1
                     await asyncio.sleep(random() * 0.5 * tries)
 
@@ -422,7 +419,7 @@ async def _getIEXCloudBaseAsync(
                         return await resp.json()
                     elif format == "binary":
                         return await resp.read()
-                    return resp.text()
+                    return await resp.text()
                 else:
                     # break and hit the exception case
                     break
@@ -633,7 +630,7 @@ async def _pppIEXCloudBaseAsync(
             if resp.status == 200:
                 if format == "json":
                     return await resp.json()
-                return resp.text()
+                return await resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
