@@ -1,3 +1,5 @@
+# 🚨 This library is no longer actively maintained 🚨
+
 # <a href="https://pyEX.readthedocs.io"><img src="https://raw.githubusercontent.com/timkpaine/pyEX/main/docs/img/icon.png" width="300"></a>
 
 Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
