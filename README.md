@@ -8,7 +8,6 @@ Python interface to [IEX Cloud](https://iexcloud.io/docs/api/)
 [![Coverage](https://codecov.io/gh/timkpaine/pyEX/branch/main/graph/badge.svg?token=ag2j2TV2wE)](https://codecov.io/gh/timkpaine/pyEX)
 [![License](https://img.shields.io/github/license/timkpaine/pyEX.svg)](https://github.com/timkpaine/pyEX)
 [![PyPI](https://img.shields.io/pypi/v/pyEX.svg)](https://pypi.python.org/pypi/pyEX/)
-[![Docs](https://readthedocs.org/projects/pyex/badge/?version=latest)](https://pyex.readthedocs.io/en/latest/?badge=latest)
 
 # Getting Started
 
