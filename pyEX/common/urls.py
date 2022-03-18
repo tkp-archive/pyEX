@@ -92,6 +92,7 @@ def _post(
     token_in_params=True,
     filter="",
     format="json",
+    maximumValidationErrors=None,
 ):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
@@ -105,6 +106,7 @@ def _post(
             token_in_params=token_in_params,
             format=format,
             filter=filter,
+            maximumValidationErrors=maximumValidationErrors,
         )
     return _postIEXCloud(
         url=url,
@@ -116,6 +118,7 @@ def _post(
         token_in_params=token_in_params,
         format=format,
         filter=filter,
+        maximumValidationErrors=maximumValidationErrors,
     )
 
 
@@ -129,6 +132,7 @@ def _put(
     token_in_params=True,
     filter="",
     format="json",
+    maximumValidationErrors=None,
 ):
     token = token or os.environ.get("IEX_TOKEN")
     if version == "sandbox":
@@ -142,6 +146,7 @@ def _put(
             token_in_params=token_in_params,
             format=format,
             filter=filter,
+            maximumValidationErrors=maximumValidationErrors,
         )
     return _putIEXCloud(
         url=url,
@@ -153,6 +158,7 @@ def _put(
         token_in_params=token_in_params,
         format=format,
         filter=filter,
+        maximumValidationErrors=maximumValidationErrors,
     )
 
 
@@ -409,11 +415,7 @@ async def _getIEXCloudBaseAsync(
                 urlparse(url).geturl(), proxy=_PYEX_PROXIES, params=params
             ) as resp:
 
-                resp = requests.get(
-                    urlparse(url).geturl(), proxies=_PYEX_PROXIES, params=params
-                )
-
-                if resp.status_code == 429:
+                if resp.status == 429:
                     tries += 1
                     await asyncio.sleep(random() * 0.5 * tries)
 
@@ -422,7 +424,7 @@ async def _getIEXCloudBaseAsync(
                         return await resp.json()
                     elif format == "binary":
                         return await resp.read()
-                    return resp.text()
+                    return await resp.text()
                 else:
                     # break and hit the exception case
                     break
@@ -479,6 +481,7 @@ def _pppIEXCloudBase(
     format="json",
     token_in_params=True,
     verb="post",
+    maximumValidationErrors=None,
 ):
     """for iex cloud"""
     url = base_url.format(version=version) + url
@@ -493,6 +496,9 @@ def _pppIEXCloudBase(
 
     if filter:
         params["filter"] = filter
+
+    if maximumValidationErrors:
+        params["maximumValidationErrors"] = maximumValidationErrors
 
     if _PYEX_DEBUG:
         print(urlparse(url).geturl())
@@ -522,6 +528,7 @@ def _postIEXCloud(
     filter="",
     format="json",
     token_in_params=True,
+    maximumValidationErrors=None,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD,
@@ -534,6 +541,7 @@ def _postIEXCloud(
         filter=filter,
         format=format,
         token_in_params=token_in_params,
+        maximumValidationErrors=maximumValidationErrors,
         verb="post",
     )
 
@@ -548,6 +556,7 @@ def _putIEXCloud(
     filter="",
     format="json",
     token_in_params=True,
+    maximumValidationErrors=None,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD,
@@ -560,6 +569,7 @@ def _putIEXCloud(
         filter=filter,
         format=format,
         token_in_params=token_in_params,
+        maximumValidationErrors=maximumValidationErrors,
         verb="put",
     )
 
@@ -633,7 +643,7 @@ async def _pppIEXCloudBaseAsync(
             if resp.status == 200:
                 if format == "json":
                     return await resp.json()
-                return resp.text()
+                return await resp.text()
             raise PyEXception("Response %d - " % resp.status, await resp.text())
 
 
@@ -725,6 +735,7 @@ def _postIEXCloudSandbox(
     filter="",
     format="json",
     token_in_params=True,
+    maximumValidationErrors=None,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
@@ -737,6 +748,7 @@ def _postIEXCloudSandbox(
         filter=filter,
         format=format,
         token_in_params=token_in_params,
+        maximumValidationErrors=maximumValidationErrors,
         verb="post",
     )
 
@@ -751,6 +763,7 @@ def _putIEXCloudSandbox(
     filter="",
     format="json",
     token_in_params=True,
+    maximumValidationErrors=None,
 ):
     return _pppIEXCloudBase(
         base_url=_URL_PREFIX_CLOUD_SANDBOX,
@@ -763,6 +776,7 @@ def _putIEXCloudSandbox(
         filter=filter,
         format=format,
         token_in_params=token_in_params,
+        maximumValidationErrors=maximumValidationErrors,
         verb="put",
     )
 
